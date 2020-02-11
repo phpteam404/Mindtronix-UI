@@ -34,10 +34,10 @@ export class HttpInterceptorService implements HttpInterceptor {
     map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
             console.log('event--->>>', event);
-            this.toastr.success('Hello world!', 'Toastr fun!');
+           // this.toastr.success('Hello world!', 'Toastr fun!');
            // this.toaster.success(event.body.message, 'Success', { positionClass: 'toast-bottom-center' });
            //console.log('event.body-->>',this.decryptionResponse(event.body));
-           event = event.clone({ body: this.decryptionResponse(event.body) });
+          // event = event.clone({ body: this.decryptionResponse(event.body) });
         }
         return event;
     }));
