@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { NavigationError, NavigationCancel, NavigationEnd, NavigationStart, RouterEvent, Router } from '@angular/router';
+import { AuthenticationService } from './services/authentication.service';
+import { LocalStorageService } from './utils/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -7,15 +9,37 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'Mibntronix-UI';
-  constructor(private toastr: ToastrService) {}
-  showSuccess() {
-    this.toastr.success('Hello world!', 'Toastr fun!',
-    {timeOut: 2000});;
-  }
-  showError() {
-    this.toastr.error('everything is broken', 'Major Error', {
-      timeOut: 3000
-  });
+  title = 'mindtronics';
+  loading = true;
+  currentUser: any;
+  constructor(private router:Router, private ls: LocalStorageService,private authService: AuthenticationService){
+    // loader.onLoadingChanged.delay(0).subscribe(res => {
+    //   this.loading = res;
+    // });
+    // for router interception
+    router.events.subscribe((event: RouterEvent) => {
+      this.navigationInterceptor(event);
+    });
+    this.currentUser = this.ls.getItem('user');
+  }  
+
+logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
 }
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart) {
+      this.loading = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.loading = false;
+    }
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.loading = false;
+    }
+    if (event instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
 }

@@ -20,16 +20,16 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it(`should have as title 'Mibntronix-UI'`, () => {
+  it(`should have as title 'mindtronics-scss'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.debugElement.componentInstance;
-    expect(app.title).toEqual('Mibntronix-UI');
+    expect(app.title).toEqual('mindtronics-scss');
   });
 
   it('should render title', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
     const compiled = fixture.debugElement.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('Mibntronix-UI app is running!');
+    expect(compiled.querySelector('.content span').textContent).toContain('mindtronics-scss app is running!');
   });
 });
