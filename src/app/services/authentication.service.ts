@@ -16,14 +16,12 @@ export class AuthenticationService {
     login(params) {
       return this.http.post('Signup/login', params)
           .pipe(map(user => {
-              // store user details and jwt token in local storage to keep user logged in between page refreshes
-             // this.ls.setItem('user', JSON.stringify(user));
               return user;
           }));
     }
 
     logout() {
       // remove user from local storage to log user out
-      this.ls.removeItem('currentUser');
+      this.ls.removeItem('user');
     }
 }

@@ -8,20 +8,18 @@ import { environment } from 'src/environments/environment';
 import { Http, HttpModule } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
-// import { ToastrService } from 'ngx-toastr';
 import { ToasterService } from './toaster.service';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpInterceptorService implements HttpInterceptor {
 
-  constructor(private injector: Injector,public toastr: ToastrService ,public toaster: ToasterService, private localStorage: LocalStorageService) { }
+  constructor(private injector: Injector, private toast: ToasterService, private localStorage: LocalStorageService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('intercept',localStorage);
-    
+    console.log('HttpInterceptorService---' );
     let currentUser = localStorage.getItem('sessionUser_user');
     if (currentUser && JSON.parse(currentUser).access_token) {
         request = request.clone({
@@ -33,11 +31,7 @@ export class HttpInterceptorService implements HttpInterceptor {
     return next.handle(request).pipe(
     map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
-            console.log('event--->>>', event);
-           // this.toastr.success('Hello world!', 'Toastr fun!');
-           // this.toaster.success(event.body.message, 'Success', { positionClass: 'toast-bottom-center' });
-           //console.log('event.body-->>',this.decryptionResponse(event.body));
-          // event = event.clone({ body: this.decryptionResponse(event.body) });
+           event = event.clone({ body: this.decryptionResponse(event.body) });
         }
         return event;
     }));
@@ -54,10 +48,10 @@ export class HttpInterceptorService implements HttpInterceptor {
     const resJson = res;
     if (resJson.status) {
       if (resJson.message) {
-        this.toastr.success('success', resJson.message);
+        this.toast.show('success',resJson.message);
       }
     } else {
-      this.toastr.warning('error', resJson.error.message);
+      this.toast.show('error',resJson.error.message);
     }
     return resJson;
   }

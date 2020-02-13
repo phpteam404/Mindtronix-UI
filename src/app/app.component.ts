@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { NavigationError, NavigationCancel, NavigationEnd, NavigationStart, RouterEvent, Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { LocalStorageService } from './utils/local-storage.service';
@@ -13,9 +13,13 @@ export class AppComponent {
   loading = true;
   currentUser: any;
   constructor(private router:Router, private ls: LocalStorageService,private authService: AuthenticationService){
-    // loader.onLoadingChanged.delay(0).subscribe(res => {
-    //   this.loading = res;
-    // });
+    console.log('AppComponent----' );
+
+    if (this.ls.getItem('user')) {
+    } else {
+      this.logout();
+    }
+
     // for router interception
     router.events.subscribe((event: RouterEvent) => {
       this.navigationInterceptor(event);
@@ -42,4 +46,9 @@ logout() {
       this.loading = false;
     }
   }
+
+  @HostListener("window:onbeforeunload",["$event"])
+    clearLocalStorage(event){
+        localStorage.clear();
+    }
 }

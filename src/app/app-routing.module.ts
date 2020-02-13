@@ -5,11 +5,11 @@ import { AuthGuard } from './guards/auth.guard';
 import { BasicComponent } from './basic/basic.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 
-
+console.log('AppRoutingModule--');
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'learning_center',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   }, {
     path: '',
@@ -33,4 +33,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+ 
+}

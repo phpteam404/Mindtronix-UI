@@ -5,9 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS, HttpClient } from '@angular/common/http';
-import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -17,23 +15,26 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon';
 import { LoginComponent } from './login/login.component';
-import { BasicComponent } from './basic/basic.component';
 import { HttpInterceptorService } from './utils/http-interceptor.service';
 import { AppHttpClientService, AppHttpClientCreator } from './utils/app-http-client.service';
 import { ErrorHandlerService } from './utils/error-handler.service';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { ComponentsModule } from './components/components.module';
-import { UserComponent } from './user/user.component';
-import { FeeComponent } from './fee/fee.component';
-import { LearningCenterComponent } from './learning-center/learning-center.component';
-import { ToasterService } from './utils/toaster.service';
-
+import { ToastrModule } from 'ngx-toastr';
+import { MatMenuModule } from '@angular/material/menu';
+import {TableModule,} from 'primeng/table';
+import {ButtonModule} from 'primeng/button';
+import {AccordionModule} from 'primeng/accordion';
+import {PanelModule} from 'primeng/panel';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import {InputTextModule} from 'primeng/inputtext';
+import {CalendarModule} from 'primeng/calendar';
+import {DropdownModule} from 'primeng/dropdown';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    //BasicComponent, 
-    AdminLayoutComponent
+    AdminLayoutComponent   
   ],
   imports: [
     BrowserModule,
@@ -42,10 +43,7 @@ import { ToasterService } from './utils/toaster.service';
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    // HttpClient,
-    ToastrModule.forRoot({
-      toastClass: 'toast toast-bootstrap-compatibility-fix'
-    }),
+    ToastrModule.forRoot(),
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
@@ -55,13 +53,23 @@ import { ToasterService } from './utils/toaster.service';
     MatSlideToggleModule,
     MatTooltipModule,
     MatMenuModule,
-    MatIconModule
+    MatIconModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    FormsModule,
+    AccordionModule,
+    PanelModule,
+    ButtonModule,
+    RadioButtonModule,
+    TableModule,
+    InputTextModule,
+    CalendarModule,
+    DropdownModule
   ],
   providers: [
     { 
       provide: HTTP_INTERCEPTORS,
       useClass: HttpInterceptorService,
-      deps: [ToasterService, ToastrModule],
       multi: true
     },
     {

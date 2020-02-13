@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
+import { ToastrService, ToastrModule } from 'ngx-toastr';
 @Injectable({
   providedIn: 'root'
 })
@@ -21,7 +21,8 @@ export class ToasterService {
         if (type === 'error') {
          this.toastr.error(title, message);
         } else if (type === 'success') {
-          this.toastr.success(title, message);
+          if(title == 'Success' || title == 'success'){}
+          else this.toastr.success(title, message);
         } else {
           this.toastr.warning(title, message);
         }

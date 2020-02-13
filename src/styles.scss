@@ -2,5 +2,109 @@
 // @import "theme/toaster";
 
 .toast-bootstrap-compatibility-fix {
-    opacity:1;
+  opacity:1;
+}
+
+
+.custom-form{
+  background-color: #fff;
+  border: 1px solid #ccc;;
+  .custom-form-heading{
+     font-size: 18px;
+     font-weight: 600;
+     margin: 0;
+     padding: 10px 15px;
+     border-bottom: 1px solid #ccc;;
   }
+  .custom-form-content{
+    padding: 15px;
+  }
+  label{
+    display: block;
+    font-size: 14px;
+    margin-bottom: 2px;
+  }
+  input{
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    height: 36px;
+    padding: 8px;
+    font-size: 14px;
+    width: 100%;
+    &:focus{
+      border-color: #007ad9;
+    }
+  }
+  p-dropdown{
+    .ui-dropdown{
+      border: 1px solid #ccc;
+      height: 36px;
+      padding: 1px 8px;
+      font-size: 14px !important;
+      width: 100% !important;
+      &:hover{
+        border-color: #ccc !important;
+      }
+      .pi-chevron-down:before{
+        content: '\72';
+        font-family: 'tssfont' !important;
+        line-height: 1px;
+      }
+      .pi-times:before {
+        content: '\e027';
+        font-family: 'tssfont' !important;
+    }
+    }
+  }
+  .ui-inputtext{
+    width: 100%;
+    border: 1px solid #ccc;
+  }
+  p-calendar{
+    .ui-calendar{
+      display: flex;
+      align-items: center;
+    }
+    .pi-calendar:before{
+      content: '\e216';
+      font-family: 'tssfont' !important;
+    }
+    .pi-chevron-left:before {
+      content: '\e1d5';
+      font-family: 'tssfont' !important;
+    }
+      .pi-chevron-right:before {
+        content: '\e1d6';
+        font-family: 'tssfont' !important;
+    }
+    .ui-button{
+      color: #303030;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-left: none;
+      font-size: 14px;
+      padding: 0px 2px 3px;
+      line-height: 20px;
+      &:enabled:hover{
+        background-color: #fff;
+        color: #303030;
+        border-color: #ccc;
+      }
+    }
+  }
+  p-checkbox{
+    display: flex;
+    align-items: center;
+    .ui-chkbox-icon{
+      font-size: 12px !important;
+      line-height: 18px;
+    }
+    .pi-check:before {
+        content: '\e14e';
+        font-family: 'tssfont' !important;
+    }
+  }
+} 
+body .ui-inputtext:enabled:hover:not(.ui-state-error){
+  border-color:#ccc !important;
+}

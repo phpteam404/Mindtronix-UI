@@ -41,8 +41,9 @@ export class LoginComponent implements OnInit {
       this.authService.login(params).subscribe(res => {
         if (res.status) {
           res.data.access_token = res.access_token;
+          res.data.menu = res.menu;
           this.ls.setItem('user', res.data, true);
-          this.router.navigate(['/learning_center']);
+          this.router.navigate(['/dashboard']);
         }
       });
     }
