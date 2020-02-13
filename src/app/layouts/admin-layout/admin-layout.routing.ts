@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { LearningCenterComponent } from 'src/app/learning-center/learning-center.component';
 import { FranchiseComponent } from 'src/app/Modules/franchise/franchise.component';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
 import { UserComponent } from 'src/app/Modules/user/user.component';
@@ -12,7 +11,7 @@ import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-u
 
 
 export const AdminLayoutRoutes: Routes = [   
-    { path: '', component: LearningCenterComponent, canActivate: [AuthGuard]  },
+    { path: '', component: BasicComponent, canActivate: [AuthGuard]  },
     { path: 'dashboard', component: BasicComponent, canActivate: [AuthGuard]  },
     { path: 'user-management', component: UserComponent, canActivate: [AuthGuard]  },
     { path: 'franchise', component: FranchiseComponent, canActivate: [AuthGuard]  },

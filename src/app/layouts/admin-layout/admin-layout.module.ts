@@ -26,8 +26,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { BasicComponent } from 'src/app/basic/basic.component';
-import { FeeComponent } from 'src/app/fee/fee.component';
-import { LearningCenterComponent } from 'src/app/learning-center/learning-center.component';
 import { UserComponent } from 'src/app/Modules/user/user.component';
 import { FranchiseComponent } from 'src/app/Modules/franchise/franchise.component';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
@@ -64,9 +62,7 @@ import { PaymentManagementComponent } from 'src/app/Modules/payment-management/p
   declarations: [
     BasicComponent,
     UserComponent,
-    FeeComponent,
     FranchiseComponent,
-    LearningCenterComponent,
     PortalManagementComponent,
     ProfilesManagementComponent,
     SchoolsComponent,

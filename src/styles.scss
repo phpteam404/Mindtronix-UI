@@ -5,7 +5,7 @@
   opacity:1;
 }
 
-
+//form styles start here
 .custom-form{
   background-color: #fff;
   border: 1px solid #ccc;;
@@ -45,15 +45,6 @@
       &:hover{
         border-color: #ccc !important;
       }
-      .pi-chevron-down:before{
-        content: '\72';
-        font-family: 'tssfont' !important;
-        line-height: 1px;
-      }
-      .pi-times:before {
-        content: '\e027';
-        font-family: 'tssfont' !important;
-    }
     }
   }
   .ui-inputtext{
@@ -69,14 +60,7 @@
       content: '\e216';
       font-family: 'tssfont' !important;
     }
-    .pi-chevron-left:before {
-      content: '\e1d5';
-      font-family: 'tssfont' !important;
-    }
-      .pi-chevron-right:before {
-        content: '\e1d6';
-        font-family: 'tssfont' !important;
-    }
+   
     .ui-button{
       color: #303030;
       background-color: #fff;
@@ -99,12 +83,73 @@
       font-size: 12px !important;
       line-height: 18px;
     }
-    .pi-check:before {
-        content: '\e14e';
-        font-family: 'tssfont' !important;
-    }
+  
   }
 } 
 body .ui-inputtext:enabled:hover:not(.ui-state-error){
   border-color:#ccc !important;
 }
+//form styles end here  
+//table styles start here
+.custom-table{
+p-table{
+  .ui-table{
+    .ui-table-caption{
+      background-color: transparent !important;
+      border: 0px solid #c8c8c8 !important;
+    }
+    .ui-table-thead {
+      th{
+        padding: 10px 5px;
+        border: 0px solid #c8c8c8;
+        font-weight: 600;
+        border-top: 1px solid #dee2e6;
+        color: #333333;
+        background-color: #e1e1e1;
+        font-size: 14px;
+      }
+    } 
+    .ui-table-tbody{
+      tr{
+        background-color: transparent;
+    
+      &:first-child{
+        border-top: 1px solid #ccc;
+      }
+      &:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+    }
+      td{
+        padding: 10px 5px;
+        border: 0px solid #c8c8c8;
+        border-bottom: 1px solid #dee2e6;
+     
+      }
+    }
+    .ui-paginator {
+      background-color: transparent;
+      border: 0px solid #c8c8c8;
+      padding: 0;
+      margin-top: 10px;
+      .ui-paginator-page,
+      .ui-paginator-prev,
+      .ui-paginator-next,
+      .ui-paginator-last,
+      .ui-paginator-first{
+        height: 25px;
+        min-width: 25px;
+        border-radius: 4px;
+        line-height: 26px;
+        // &:focus{
+        //   border: none;
+        // }
+      }
+  }
+  }
+
+}
+
+}
+
+//table styles end here

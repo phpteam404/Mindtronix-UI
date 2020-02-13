@@ -1,1 +1,205 @@
-<p>franchise works!</p>
+<div class="main-content">
+
+
+
+    <!-- <div class="col-12">
+        <h4>Form</h4>
+    </div> -->
+    <!-- <div class="row m-0">
+            <div class="col-md-12 custom-form">
+                     
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <label>Company (disabled)</label>
+                                        <input type="text" class="form-control" disabled placeholder="Company" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label>Username</label>
+                                        <input type="text" class="form-control" placeholder="Username" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Email address</label>
+                                        <input type="email" class="form-control" placeholder="Email">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" placeholder="Company" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label>Last Name</label>
+                                        <input type="text" class="form-control" placeholder="Last Name" value="">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>Address</label>
+                                        <input type="text" class="form-control" placeholder="Home Address" value="">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>City</label>
+                                        <input type="text" class="form-control" placeholder="City" value="">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label for="sel1">Select list:</label>
+                                        <select class="form-control" id="sel1">
+                                          <option>1</option>
+                                          <option>2</option>
+                                          <option>3</option>
+                                          <option>4</option>
+                                        </select>
+                                      </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label>Postal Code</label>
+                                        <input type="number" class="form-control" placeholder="ZIP Code">
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label>About Me</label>
+                                        <textarea rows="5" class="form-control" placeholder="Here can be your description" value="Mike"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <div class="clearfix"></div>
+                     
+                </div>
+         
+        </div>
+    <div class="col-12">
+        <h4>Button</h4>
+    </div>
+    <div class="row m-0">
+     <div class="col-12">
+        <button type="button" class="btn btn-warning mr-3">Update</button>
+        <button type="button" class="btn btn-default">Cancel</button>
+     </div>
+    
+    </div> -->
+
+    <div class="custom-form">
+        <h4 class="custom-form-heading">Forms</h4>
+        <div class="custom-form-content">
+
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input pinputtext type="text">
+                    </div>
+                </div>
+                <!-- <div class="col-md-4 col-12">
+                <h3>Icon</h3>
+                <p-calendar formControlName="date"></p-calendar>
+    
+            </div> -->
+
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Dropdown</label>
+                        <p-dropdown [options]="cities" itemSize="30"></p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Textarea</label>
+                        <textarea pInputTextarea></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" pPassword />
+                    </div>
+                </div>
+                <!-- <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Textarea</label>
+                    <p-calendar formControlName="date"></p-calendar>
+                </div>
+            </div> -->
+                <div class="col-md-4 col-12">
+                    <label>Calender</label>
+                    <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
+                </div>
+                <div class="col-md-4 col-12">
+                    <label>Number</label>
+                    <input type="text" pKeyFilter="int">
+                </div>
+                <div class="col-md-4 col-12">
+                    <label>FileUpload</label>
+                    <!-- <p-fileUpload name="myfile[]" url="./upload.php"></p-fileUpload> -->
+                    <p-fileUpload name="myfile[]" url="./upload.php" customUpload="true" accept="image/*"
+                        maxFileSize="1000000">
+
+                    </p-fileUpload>
+                    <!-- <p-fileUpload mode="basic" (onChange)="upload($event)" name="demo[]" customUpload="true" accept="image/*" maxFileSize="1000000"  (upload)="test($event)"></p-fileUpload> -->
+                </div>
+                <div class="col-md-4 col-12">
+                    <label>Multiple FileUpload</label>
+                    <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload>
+                </div>
+                <div class="col-md-4 col-12">
+                    <label>Checkbox</label>
+                    <p-checkbox name="group1" value="New York" label="New York" [(ngModel)]="selectedCities"
+                        inputId="ny"></p-checkbox>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <div class="custom-table">
+        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+                <div style="text-align: right">
+                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Global Filter"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr [pSelectableRow]="rowData">
+                    <td *ngFor="let col of columns">
+                        {{rowData[col.field]}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
