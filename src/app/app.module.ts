@@ -34,7 +34,7 @@ import {DropdownModule} from 'primeng/dropdown';
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminLayoutComponent   
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

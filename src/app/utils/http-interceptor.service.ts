@@ -24,7 +24,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     if (currentUser && JSON.parse(currentUser).access_token) {
         request = request.clone({
             setHeaders: {
-                Authorization: `${JSON.parse(currentUser).access_token}`
+                Authorization: `${JSON.parse(currentUser).access_token}`,
+                User: `${JSON.parse(currentUser).data.id_user}`
             }
         });
     }

@@ -8,13 +8,41 @@ import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-upload/digital-content-upload.component';
+import { AddUpdateFranchiseComponent } from 'src/app/Modules/franchise/add-update-franchise/add-update-franchise.component';
 
 
 export const AdminLayoutRoutes: Routes = [   
-    { path: '', component: BasicComponent, canActivate: [AuthGuard]  },
-    { path: 'dashboard', component: BasicComponent, canActivate: [AuthGuard]  },
-    { path: 'user-management', component: UserComponent, canActivate: [AuthGuard]  },
-    { path: 'franchise', component: FranchiseComponent, canActivate: [AuthGuard]  },
+    { 
+        path: '',
+        component: BasicComponent,
+        canActivate: [AuthGuard] 
+    },
+    { 
+        path: 'dashboard',
+        component: BasicComponent,
+        canActivate: [AuthGuard]
+    },
+    { 
+        path: 'user-management',
+        component: UserComponent,
+        canActivate: [AuthGuard]
+    },
+    { 
+        path: 'franchise',
+        component: FranchiseComponent,
+        canActivate: [AuthGuard],
+        children: [
+            {
+                path: 'add-update',
+                component: AddUpdateFranchiseComponent
+            },
+        ]
+    },
+    { 
+        path: 'add-update/franchise',
+        component: AddUpdateFranchiseComponent,
+        canActivate: [AuthGuard]
+    },
     { path: 'profile-management', component: ProfilesManagementComponent, canActivate: [AuthGuard]  },
     { path: 'schools', component: SchoolsComponent, canActivate: [AuthGuard] },
     { path: 'payment-management', component: PaymentManagementComponent, canActivate: [AuthGuard] },

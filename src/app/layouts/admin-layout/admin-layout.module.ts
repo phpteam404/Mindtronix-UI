@@ -32,6 +32,7 @@ import { PortalManagementComponent } from 'src/app/Modules/portal-management/por
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
+import { AddUpdateFranchiseComponent } from 'src/app/Modules/franchise/add-update-franchise/add-update-franchise.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -66,7 +67,8 @@ import { PaymentManagementComponent } from 'src/app/Modules/payment-management/p
     PortalManagementComponent,
     ProfilesManagementComponent,
     SchoolsComponent,
-    PaymentManagementComponent
+    PaymentManagementComponent,
+    AddUpdateFranchiseComponent
   ]
 })
 

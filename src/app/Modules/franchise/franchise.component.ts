@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-franchise',
@@ -10,7 +11,7 @@ export class FranchiseComponent implements OnInit {
   cities: any;
   cars: any;
   cols:any;
-  constructor(private franchise: FranchiseService) {
+  constructor(private franchise: FranchiseService,private router: Router) {
 
     this.cities = [
       {label:'Select City', value:null},
@@ -49,7 +50,7 @@ this.cols = [
    }
 
   ngOnInit(): void {
-    //this.getList();
+    this.getList();
   }
 
   getList(){
@@ -60,4 +61,7 @@ this.cols = [
     })
   }
 
+  AddNewFranchise(event: Event){
+    this.router.navigate(['/add-update/franchise']);
+  }
 }
