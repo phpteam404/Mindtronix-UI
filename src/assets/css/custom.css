@@ -269,7 +269,7 @@ input:focus {
   overflow: auto;
   width: 230px;
   z-index: 4;
-  padding-bottom: 85px;
+  padding-bottom: 20px;
   overflow-x: hidden;
 }
 .sidebar .sidebar-wrapper .dropdown .dropdown-backdrop,
@@ -350,6 +350,7 @@ input:focus {
 }
 .sidebar .nav li{
   width: 100%;
+  position: relative;
 }
 .sidebar .nav li > a,
 .bootstrap-navbar .nav li > a {
@@ -362,6 +363,12 @@ input:focus {
   min-height: 35px;
   padding: 2px 5px 2px 15px;
   border-bottom: 1px solid #bbbbbb;
+}
+.show-menu .sidebar-wrapper{
+   overflow: visible;
+}
+.show-menu .sidebar .nav li:hover .sub-menu li a p{
+  display: block;
 }
 .sidebar .nav li:hover > a,
 .bootstrap-navbar .nav li:hover > a {
@@ -3179,6 +3186,46 @@ border: 1px solid #aaa !important;
   top: 0 !important;
   transform: translateY(0px);
   bottom: auto;
+}
+.sub-menu{
+  padding: 0;
+}
+.sub-menu{
+  background-color: #ece9e9;
+  list-style: none;
+}
+.sub-menu li a {
+  padding-left: 35px !important;
+}
+.show-menu .sub-menu li a{
+  padding-left: 15px !important;
+}
+.sidebar .nav li.active .sub-menu li a i,
+.sidebar .nav li.active .sub-menu li a p{
+  color: #000000 !important;
+
+}
+.sidebar .nav li.active .sub-menu li.active a i,
+.sidebar .nav li.active .sub-menu li.active a p,
+.sidebar .nav li.active .sub-menu li:hover a i,
+.sidebar .nav li.active .sub-menu li:hover a p{
+  color: #ffffff !important;
+
+}
+.show-menu li .sub-menu{
+  display: none;
+}
+.show-menu li:hover .sub-menu{
+  display: block;
+}
+.show-menu .navbar-collapse {
+  position: absolute;
+  width: 200px;
+  left: 55px;
+  top: 0;
+  background: #f00;
+  display: block;
+  z-index: 9999;
 }
 @media (min-width: 992px) {
   .navbar-form {

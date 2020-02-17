@@ -339,29 +339,26 @@ p-table{
   width: 100%;
   
   .copyright-text{
-    position: fixed;
-    bottom: 0;
-    padding: 8px 15px;
-    width: 230px;
-    overflow: hidden;
+    padding: 10px 15px;
+    width: 100%;
     background: #d2d2d2;
-    border-top: 1px solid #bbbbbb;
     p{
       font-size: 14px;
       margin: 0;
       color: #303030;
+      text-align: center;
     }
   }
   
 }
-.show-menu {
-  .copyright-text{
-    display: none;
-  }
-  .custom-side-menu{
-    border-bottom: 0px solid #bbbbbb;
-  }
-}
+// .show-menu {
+//   .copyright-text{
+//     display: none;
+//   }
+//   .custom-side-menu{
+//     border-bottom: 0px solid #bbbbbb;
+//   }
+// }
 .custom-side-menu{
   // height: calc(100vh - 130px);
   // border-bottom: 1px solid #bbbbbb;
