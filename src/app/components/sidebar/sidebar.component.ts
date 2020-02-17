@@ -22,24 +22,41 @@ export const ROUTES: RouteInfo[] =[];/* [
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
-
+ public menuItems: any[];
+  breadcrumbList: Array<any> = [];
+  name: string;
+  menu:any=[];
+  public expandedIndex=-1;
   constructor(private ls: LocalStorageService,private router: Router) { }
-
   ngOnInit() {
-    
-    var menu = JSON.parse(this.ls.getItem('user')).menu;
-    if(menu){
+    this.menu = JSON.parse(this.ls.getItem('user')).menu;
+    if(this.menu){
       this.menuItems=[];
-      menu.forEach(item => { 
+      this.menu.forEach(item => { 
         var obj={
           path : item.module_url,
           title : item.module_name,
           icon : '',
           class:item.module_icon,
-          child:item.childs
+          childs:item.sub_menus
         };
         this.menuItems.push(obj);
+      });
+      this.menuItems.forEach(item=> {
+        if(item.childs){
+          var childs=[];
+          childs = item.childs;
+          item.childs =[];
+          childs.forEach(ch => { 
+            var obj={
+              path : ch.module_url,
+              title : ch.module_name,
+              icon : '',
+              class:ch.module_icon
+            };
+            item.childs.push(obj);
+          });
+        }
       });
       //this.menuItems = ROUTES.filter(menuItem => menuItem);
       console.log('menuItems--',  this.menuItems );
@@ -55,4 +72,8 @@ export class SidebarComponent implements OnInit {
       //}
       return true;
   };
+
+  Collaps(index: number) {  
+    this.expandedIndex = index === this.expandedIndex ? -1 : index;  
+  }
 }

@@ -264,12 +264,12 @@ input:focus {
 .sidebar .sidebar-wrapper,
 .bootstrap-navbar .sidebar-wrapper {
   position: relative;
-  max-height: calc(100vh - 50px);
+  max-height: calc(100vh - 130px);
   min-height: 100%;
   overflow: auto;
   width: 230px;
   z-index: 4;
-  padding-bottom: 50px;
+  padding-bottom: 85px;
   overflow-x: hidden;
 }
 .sidebar .sidebar-wrapper .dropdown .dropdown-backdrop,
@@ -359,8 +359,9 @@ input:focus {
   border-radius: 0px;
      display: flex;
   align-items: center;
-  min-height: 40px;
-  padding: 6px 10px 6px 15px;
+  min-height: 35px;
+  padding: 2px 5px 2px 15px;
+  border-bottom: 1px solid #bbbbbb;
 }
 .sidebar .nav li:hover > a,
 .bootstrap-navbar .nav li:hover > a {
@@ -417,12 +418,12 @@ input:focus {
 }
 .sidebar .nav i,
 .bootstrap-navbar .nav i {
-  font-size: 20px;
+  font-size: 18px;
   display: flex;
   align-items: center;
   margin-right: 5px;
   line-height: 30px;
-  width: 22px;
+  width: 20px;
   text-align: center;
   color: #000;
 }
@@ -3168,6 +3169,16 @@ opacity: 1;
 background-color: #aaa !important;
 color: #fff !important;
 border: 1px solid #aaa !important;
+}
+.custom-side-menu .dropdown-menu.show{
+  position: relative !important;
+  width: 230px !important;
+  background: rgb(238, 238, 238);
+  left: 0px;
+  right: auto;
+  top: 0 !important;
+  transform: translateY(0px);
+  bottom: auto;
 }
 @media (min-width: 992px) {
   .navbar-form {
