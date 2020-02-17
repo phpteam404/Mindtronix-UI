@@ -30,6 +30,8 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
+import {BreadcrumbsModule} from "ng6-breadcrumbs";
+import { BasicModule } from './Modules/basic/basic.module';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +46,7 @@ import {DropdownModule} from 'primeng/dropdown';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
+    BasicModule,
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
@@ -64,7 +67,8 @@ import {DropdownModule} from 'primeng/dropdown';
     TableModule,
     InputTextModule,
     CalendarModule,
-    DropdownModule
+    DropdownModule,
+    // BreadcrumbsModule
   ],
   providers: [
     { 

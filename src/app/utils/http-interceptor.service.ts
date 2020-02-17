@@ -22,6 +22,8 @@ export class HttpInterceptorService implements HttpInterceptor {
     console.log('HttpInterceptorService---' );
     let currentUser = localStorage.getItem('sessionUser_user');
     if (currentUser && JSON.parse(currentUser).access_token) {
+      console.log('currentUser--', JSON.parse(currentUser));
+      console.log('currentUser--', this.localStorage.getItem('sessionUser_user'));
         request = request.clone({
             setHeaders: {
                 Authorization: `${JSON.parse(currentUser).access_token}`,

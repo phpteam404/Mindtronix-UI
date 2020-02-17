@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, NavigationEnd, Router } from '@angular/router';
+import { NavigationStart, NavigationEnd, Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
+import { filter, map, mergeMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
 import * as $ from "jquery";
@@ -13,11 +14,48 @@ import { Location } from '@angular/common';
 export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
+  public breadCrumb: string;
+  public breadCrumbD: string;
 
-  constructor( public location: Location, private router: Router) {}
+  parentRoute: string = '';
+  staticBreadCrumb = false;
+
+  page:string;
+  constructor( public location: Location, private router: Router, private _ar: ActivatedRoute) {
+    this.staticBreadCrumb = false;
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => _ar),
+      map(route => {
+        while (route.firstChild) route = route.firstChild
+        return route
+      }),
+      filter(route => route.outlet === 'primary'),
+      mergeMap(route => route.data)
+    ).subscribe(data =>{
+      console.log('this.breadCrumb 1', data['breadcrumbs']);
+      console.log('current route', this.router.url);
+      console.log('current _ar', this._ar);
+      this.breadCrumb = data['breadcrumbs']
+
+      if(this.router.url === '/franchise/add'){
+        this.breadCrumb = ' Add Franchise';
+        this.staticBreadCrumb = true;
+        this.parentRoute = '/franchise';
+      }
+      else {
+        this.breadCrumb = data['breadcrumbs']
+        this.parentRoute = '';
+        this.staticBreadCrumb = false;
+      } 
+    });
+  }
+  go(){
+    this.router.navigate(['/franchise']);
+  }
 
   ngOnInit() {
-    console.log(this.router)
+    this.staticBreadCrumb = false;
      // const isWindows = navigator.platform.indexOf('Win') > -1 ? true : false;
 
       //if (isWindows) {
@@ -48,6 +86,7 @@ export class AdminLayoutComponent implements OnInit {
       //     let ps = new PerfectScrollbar(elemMainPanel);
       //     ps = new PerfectScrollbar(elemSidebar);
       // }
+
   }
   ngAfterViewInit() {
     this.runOnRouteChange();

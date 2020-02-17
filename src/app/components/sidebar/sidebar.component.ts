@@ -36,7 +36,8 @@ export class SidebarComponent implements OnInit {
           path : item.module_url,
           title : item.module_name,
           icon : '',
-          class:item.module_icon
+          class:item.module_icon,
+          child:item.childs
         };
         this.menuItems.push(obj);
       });

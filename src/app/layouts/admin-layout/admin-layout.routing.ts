@@ -1,51 +1,85 @@
 import { Routes } from '@angular/router';
 import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { FranchiseComponent } from 'src/app/Modules/franchise/franchise.component';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
 import { UserComponent } from 'src/app/Modules/user/user.component';
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-upload/digital-content-upload.component';
-import { AddUpdateFranchiseComponent } from 'src/app/Modules/franchise/add-update-franchise/add-update-franchise.component';
 
 
-export const AdminLayoutRoutes: Routes = [   
-    { 
+export const AdminLayoutRoutes: Routes = [
+    {
         path: '',
         component: BasicComponent,
-        canActivate: [AuthGuard] 
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Dashboard'
+        }
     },
-    { 
+    {
         path: 'dashboard',
         component: BasicComponent,
-        canActivate: [AuthGuard]
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Dashboard'
+        }
     },
-    { 
+    {
         path: 'user-management',
         component: UserComponent,
-        canActivate: [AuthGuard]
-    },
-    { 
-        path: 'franchise',
-        component: FranchiseComponent,
         canActivate: [AuthGuard],
-        children: [
-            {
-                path: 'add-update',
-                component: AddUpdateFranchiseComponent
-            },
-        ]
+        data: {
+            breadcrumbs: 'User Management'
+        }
+    },
+    {
+        path: 'franchise',
+        loadChildren: () => import('../../Modules/franchise/franchise.module').then(m => m.FranchiseModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Franchise'
+        }
     },
     { 
-        path: 'add-update/franchise',
-        component: AddUpdateFranchiseComponent,
-        canActivate: [AuthGuard]
+        path: 'profile-management',
+        component: ProfilesManagementComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Profiles Management'
+        }
     },
-    { path: 'profile-management', component: ProfilesManagementComponent, canActivate: [AuthGuard]  },
-    { path: 'schools', component: SchoolsComponent, canActivate: [AuthGuard] },
-    { path: 'payment-management', component: PaymentManagementComponent, canActivate: [AuthGuard] },
-    { path: 'digital-content-upload', component: DigitalContentUploadComponent, canActivate: [AuthGuard] },
-    { path: 'portal-management', component: PortalManagementComponent, canActivate: [AuthGuard] }
+    { 
+        path: 'schools',
+        component: SchoolsComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Schools'
+        }
+    },
+    { 
+        path: 'payment-management',
+        component: PaymentManagementComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Payment Management'
+        }
+    },
+    { 
+        path: 'digital-content-upload',
+        component: DigitalContentUploadComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Digital Content Upload'
+        }
+    },
+    { 
+        path: 'portal-management',
+        component: PortalManagementComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Portal Management'
+        }
+    }
 ];

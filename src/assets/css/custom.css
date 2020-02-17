@@ -14,6 +14,7 @@
 
  */
 /*      light colors         */
+
 @keyframes spin {
   from {
     transform: rotate(0deg);
@@ -62,10 +63,12 @@ p,
 a,
 .td-name,
 td,
-button.close {
+button.close,
+body .ui-widget {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
-  font-family: "Roboto","Helvetica Neue",Arial,sans-serif;
+  /* font-family: "Roboto","Helvetica Neue",Arial,sans-serif; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   font-weight: 400;
 }
 
@@ -261,12 +264,13 @@ input:focus {
 .sidebar .sidebar-wrapper,
 .bootstrap-navbar .sidebar-wrapper {
   position: relative;
-  max-height: calc(100vh - 75px);
+  max-height: calc(100vh - 50px);
   min-height: 100%;
   overflow: auto;
   width: 230px;
   z-index: 4;
-  padding-bottom: 75px;
+  padding-bottom: 50px;
+  overflow-x: hidden;
 }
 .sidebar .sidebar-wrapper .dropdown .dropdown-backdrop,
 .bootstrap-navbar .sidebar-wrapper .dropdown .dropdown-backdrop {
@@ -355,8 +359,8 @@ input:focus {
   border-radius: 0px;
      display: flex;
   align-items: center;
-  min-height: 45px;
-  padding: 6px 10px;
+  min-height: 40px;
+  padding: 6px 10px 6px 15px;
 }
 .sidebar .nav li:hover > a,
 .bootstrap-navbar .nav li:hover > a {
@@ -396,8 +400,8 @@ input:focus {
 .bootstrap-navbar .nav li a p {
   margin: 0;
   line-height: 30px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 400;
   text-transform: inherit;
   color: #000;
 }
@@ -413,12 +417,12 @@ input:focus {
 }
 .sidebar .nav i,
 .bootstrap-navbar .nav i {
-  font-size: 28px;
+  font-size: 20px;
   display: flex;
   align-items: center;
-  margin-right: 15px;
+  margin-right: 5px;
   line-height: 30px;
-  width: 30px;
+  width: 22px;
   text-align: center;
   color: #000;
 }
@@ -589,7 +593,7 @@ input:focus {
 .main-panel .main-content {
   padding: 20px 15px;
   min-height: calc(100% - 123px);
-  margin-top: 60px;
+  margin-top: 110px;
 }
 .main-panel > .footer {
   border-top: 1px solid #e7e7e7;
@@ -1101,7 +1105,8 @@ input:focus {
   z-index: 3;
 }
 .navbar:not(.navbar-transparent) .alert {
-  top: 70px;
+  top: -20px;
+  left: 25%;
 }
 .alert span[data-notify="icon"] {
   font-size: 30px;
@@ -1124,13 +1129,14 @@ input:focus {
   display: block;
   border-radius: 50%;
   opacity: .4;
-  line-height: 11px;
-  width: 25px;
-  height: 25px;
+  line-height: 3px;
+  width: 20px;
+  height: 20px;
   outline: 0 !important;
   text-align: center;
-  padding: 3px;
+  padding: 0px 3px;
   font-weight: 300;
+  font-size: 22px;
 }
 .alert button.close:hover {
   opacity: .55;
@@ -1818,7 +1824,7 @@ input:focus {
 
 .navbar-default {
   background-color: rgba(255, 255, 255, 0.96);
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid #e87a26 ;
 }
 .navbar-default .navbar-nav > li > a:not(.btn) {
   color: #9A9A9A;
@@ -2013,10 +2019,13 @@ input:focus {
   position: absolute;
   opacity: 0;
   filter: alpha(opacity=0);
-  min-width: 235px;
-  top: 53px;
+  min-width: 230px;
+  top: 46px;
   -webkit-box-shadow: none;
   box-shadow: none;
+}
+.header-right-block .dropdown-menu{
+  top: 53px;
 }
 .show .dropdown-menu {
   opacity: 1;
@@ -3055,13 +3064,13 @@ input:focus {
     font-weight: 600;
 }
 .menu-icon{
-  margin-left: 30px;
+  margin-left: 10px;
   font-size: 24px;
-  color: #303030;
+  color: #303030 !important;
   line-height: 20px;
 }
 .menu-icon:hover{
-    color: #000;
+    color: #000 !important;
 }
 .notification{
   position: absolute;
@@ -3079,6 +3088,8 @@ input:focus {
 .navbar-left a i{
   color: #303030;
   font-size: 30px;
+  display: flex;
+  align-items: center;
 }
 .navbar-left .dropdown-toggle::after{
    display: none;
@@ -3127,7 +3138,7 @@ padding-left: 20px;
 font-size: 14px;
 }
 .custom-form label {
-margin-bottom: 0rem;
+margin-bottom: 3px;
 font-size: 14px;
 }
 .btn-warning{

@@ -5,6 +5,19 @@
     </div>
     <div class="main-panel">
         <navbar-cmp></navbar-cmp>
+        <!-- <mc-breadcrumbs></mc-breadcrumbs> -->
+        <!-- <div>{{breadCrumb}}</div> -->
+        <div class="page-title-card">
+            <h4 class="">
+                <span *ngIf="staticBreadCrumb" 
+                    style="color: #e87a26;margin: 0;font-weight: bold;font-size: 16px !important;cursor: pointer;"
+                    (click)="go()">Franchise <span style="color: #979797;">/</span>
+                </span>{{breadCrumb}}
+               <!-- <a *ngIf="staticBreadCrumb" [routerLink]="parentRoute" href="parentRoute">Franchise /</a> -->
+                
+                 <!-- <breadcrumb [allowBootstrap]="true"></breadcrumb> -->
+            </h4>
+         </div>
         <router-outlet></router-outlet>
     </div>
-  </div>  
+</div>  

@@ -55,12 +55,21 @@
           </li>
       </ul>
     </div>
-      <ul class="nav">
-          <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="nav-item" [title]="menuItem.title">
-              <a class="nav-link" [routerLink]="[menuItem.path]">
-                  <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
-                  <p>{{menuItem.title}}</p>
-              </a>
-          </li>
-      </ul>
+    <div class="custom-side-menu">
+        <ul class="nav">
+            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="nav-item" [title]="menuItem.title">
+                <a class="nav-link" [routerLink]="[menuItem.path]">
+                    <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+            </li>
+        </ul>
+    </div>
+     
+      <div class="copyright-block">
+        <div class="copyright-text">
+            <p>@Copyright 2020 <br> Version : 1.0.0</p>
+        </div>
+      </div>
+    
   </div>
