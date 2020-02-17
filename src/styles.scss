@@ -344,6 +344,8 @@ p-table{
     padding: 15px;
     width: 230px;
     overflow: hidden;
+    background: #d2d2d2;
+    border-top: 1px solid #bbbbbb;
     p{
       font-size: 14px;
       margin: 0;
@@ -361,6 +363,26 @@ p-table{
   }
 }
 .custom-side-menu{
-  height: calc(100vh - 130px);
-  border-bottom: 1px solid #bbbbbb;
+  // height: calc(100vh - 130px);
+  // border-bottom: 1px solid #bbbbbb;
+  // overflow-y: scroll;
+}
+
+
+
+/* Scrollbar Styling */
+.sidebar-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-track {
+  background-color: #ebebeb;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  background: #6d6d6d; 
 }

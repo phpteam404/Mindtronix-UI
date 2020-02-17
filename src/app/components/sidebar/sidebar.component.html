@@ -62,6 +62,14 @@
                     <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
                 </a>
+                <ul *ngIf="menuItem.childs">
+                    <li routerLinkActive="active" *ngFor="let child of menuItem.childs"  [title]="menuItem.title">
+                        <a class="nav-link" [routerLink]="[child.path]">
+                            <i class="{{child.class}}">{{child.icon}}</i>
+                            <p>{{child.title}}</p>
+                        </a>
+                    </li>
+                </ul>
             </li>
         </ul>
     </div>
