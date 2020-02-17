@@ -27,13 +27,12 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { BasicComponent } from 'src/app/basic/basic.component';
-import { UserComponent } from 'src/app/Modules/user/user.component';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
-
+import {BreadcrumbModule} from 'primeng/breadcrumb';
 @NgModule({
   imports: [
     CommonModule,
@@ -60,11 +59,11 @@ import { BasicModule } from 'src/app/Modules/basic/basic.module';
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule,
+    BreadcrumbModule,
     BasicModule.forRoot()
   ],
   declarations: [
     BasicComponent,
-    UserComponent,
     PortalManagementComponent,
     ProfilesManagementComponent,
     SchoolsComponent,

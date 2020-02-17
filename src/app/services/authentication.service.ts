@@ -19,7 +19,10 @@ export class AuthenticationService {
               return user;
           }));
     }
-
+    isTokenExpired(params){
+      console.log('isTokenExpired params', params);
+      return this,this.http.get('User/access',params);
+    }
     logout() {
       // remove user from local storage to log user out
       this.ls.removeItem('user');

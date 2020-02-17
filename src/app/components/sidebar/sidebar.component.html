@@ -57,27 +57,60 @@
     </div>
     <div class="custom-side-menu">
         <ul class="nav">
-            <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="nav-item" [title]="menuItem.title">
-                <a class="nav-link" [routerLink]="[menuItem.path]">
+            <li routerLinkActive="active" 
+                *ngFor="let menuItem of menuItems; let i = index"
+                (click)="Collaps(i)" 
+                id="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
+                class="nav-item" 
+                [title]="menuItem.title" 
+                name="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
+                [ngClass]="{nav_icon: menuItem.childs.length>0}">
+
+                <a class="nav-link icon-down" *ngIf="menuItem.childs.length>0" href="javascript:;" >
                     <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
                 </a>
-                <ul *ngIf="menuItem.childs">
-                    <li routerLinkActive="active" *ngFor="let child of menuItem.childs"  [title]="menuItem.title">
+                <a class="nav-link icon-down" *ngIf="menuItem.childs.length==0" [routerLink]="[menuItem.path]">
+                    <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
+                    <p>{{menuItem.title}}</p>
+                </a>
+                <div class="navbar-collapse" [ngClass]="{'collapse': isMenuCollapse}" *ngIf="i === expandedIndex && menuItem.childs.length>0"
+                    id="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
+                    (click)="expandedIndex = -1" >
+                    <ul >
+                        <li routerLinkActive="active"  *ngFor="let child of menuItem.childs"  [title]="child.title">
+                            <a class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
+                                <i class="{{child.class}}">{{child.icon}}</i>
+                                <p>{{child.title}}</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li routerLinkActive="active" *ngFor="let child of menuItem.childs"  [title]="child.title">
                         <a class="nav-link" [routerLink]="[child.path]">
                             <i class="{{child.class}}">{{child.icon}}</i>
                             <p>{{child.title}}</p>
                         </a>
                     </li>
-                </ul>
-            </li>
+                </ul> -->
+            </li>            
         </ul>
-    </div>
-     
+        <!-- <div *ngFor="let data of menuItems; let i=index;">  
+            <div (click)="Collaps(i)">Item{{i + 1}}</div>  
+            <div *ngIf="i === expandedIndex">  
+                <div *ngFor="let sub of data.childs;let s=index">  
+                    <div class="row" style="margin-left:0px;margin-right:0px">  
+                        <div class="col-sm-1">Sub-Item{{i + 1}}</div>  
+                        <div class="col-sm-6" style="width: 80%;"></div>  
+                    </div>  
+                </div>  
+            </div>  
+        </div> -->       
+    </div>     
       <div class="copyright-block">
         <div class="copyright-text">
             <p>@Copyright 2020 <br> Version : 1.0.0</p>
         </div>
-      </div>
-    
+      </div>    
   </div>

@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
-import { UserComponent } from 'src/app/Modules/user/user.component';
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
@@ -27,11 +26,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     {
-        path: 'user-management',
-        component: UserComponent,
+        path: 'users',
+        loadChildren: () => import('../../Modules/user/user.module').then(m => m.UserModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'User Management'
+            breadcrumbs: 'Users'
         }
     },
     {
