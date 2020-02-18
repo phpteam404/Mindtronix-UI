@@ -6,6 +6,7 @@ import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management
 import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-upload/digital-content-upload.component';
+import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -43,10 +44,18 @@ export const AdminLayoutRoutes: Routes = [
     },
     {
         path: 'fee_structure',
-        loadChildren: () => import('../../Modules/fee-structure/fee-structure.module').then(m => m.FeeStructureModule),
+        loadChildren: () => import('../../Modules/fee/fee.module').then(m => m.FeeModule),
         canActivate: [AuthGuard],
         data: {
             breadcrumbs: 'Fee Structure'
+        }
+    },
+    { 
+        path: 'role_access',
+        component: RoleManagementComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Role Access'
         }
     },
     { 

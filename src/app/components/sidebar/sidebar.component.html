@@ -1,12 +1,4 @@
 
-<!-- <div class="logo">
-    <a href="javascript:;" class="simple-text">
-        <div class="logo-img">
-            <img src="/assets/img/white-logo.png"/>
-        </div>
-         MINDTRONIX
-    </a>
-</div> -->
 <div class="sidebar-wrapper">
     <div *ngIf="isMobileMenu()">
       <form class="navbar-form">
@@ -38,8 +30,8 @@
                   </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
+                  <a class="dropdown-item" href="#">Mike John responded to your ticket</a>
+                  <a class="dropdown-item" href="#">You have 5 new tickets</a>
                   <a class="dropdown-item" href="#">You're now friend with Andrew</a>
                   <a class="dropdown-item" href="#">Another Notification</a>
                   <a class="dropdown-item" href="#">Another One</a>
@@ -80,7 +72,7 @@
                     <ul class="sub-menu">
                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" *ngFor="let child of menuItem.childs"  [title]="child.title">
                             <a class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
-                                <i class="{{child.class}}">{{child.icon}}</i>
+                                <!-- <i class="{{child.class}}">{{child.icon}}</i> -->
                                 <p>{{child.title}}</p>
                             </a>
                         </li>
@@ -107,10 +99,5 @@
                 </div>  
             </div>  
         </div> -->       
-    </div>     
-      <!-- <div class="copyright-block">
-        <div class="copyright-text">
-            <p>@Copyright 2020 <br> Version : 1.0.0</p>
-        </div>
-      </div>     -->
+    </div>
   </div>

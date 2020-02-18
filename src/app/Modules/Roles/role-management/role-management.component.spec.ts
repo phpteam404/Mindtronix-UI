@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FeeStructureListComponent } from './fee-structure-list.component';
+import { RoleManagementComponent } from './role-management.component';
 
-describe('FeeStructureListComponent', () => {
-  let component: FeeStructureListComponent;
-  let fixture: ComponentFixture<FeeStructureListComponent>;
+describe('RoleManagementComponent', () => {
+  let component: RoleManagementComponent;
+  let fixture: ComponentFixture<RoleManagementComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FeeStructureListComponent ]
+      declarations: [ RoleManagementComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FeeStructureListComponent);
+    fixture = TestBed.createComponent(RoleManagementComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

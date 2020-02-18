@@ -1,48 +1,35 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AddStudentComponent } from './Students/add-student/add-student.component';
-import { StudentListComponent } from './Students/student-list/student-list.component';
 import { UpdateStudentComponent } from './Students/update-student/update-student.component';
 import { TrainerListComponent } from './Trainers/trainer-list/trainer-list.component';
 import { AddTrainerComponent } from './Trainers/add-trainer/add-trainer.component';
 import { UpdateTrainerComponent } from './Trainers/update-trainer/update-trainer.component';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
- 
+  {
+    path: '',
+    loadChildren: () => import('../../Modules/user/Students/student.module').then(m => m.StudentModule),
+    canActivate: [AuthGuard],
+    data: {
+        breadcrumbs: 'Students'
+    }
+  },  
   {
     path: 'students',
-    component: StudentListComponent
-  },
-  {
-    path: 'add-student',
-    component: AddStudentComponent,
+    loadChildren: () => import('../../Modules/user/Students/student.module').then(m => m.StudentModule),
+    canActivate: [AuthGuard],
     data: {
-      braedcrumbs: 'Add Student'
-    }
-  },
-  {
-    path: 'update-student',
-    component: UpdateStudentComponent,
-    data: {
-      braedcrumbs: 'Update Student'
+        breadcrumbs: 'Students'
     }
   },
   {
     path: 'trainers',
-    component: TrainerListComponent
-  },
-  {
-    path: 'add-trainer',
-    component: AddTrainerComponent,
+    loadChildren: () => import('../../Modules/user/Trainers/trainer.module').then(m => m.TrainerModule),
+    canActivate: [AuthGuard],
     data: {
-      braedcrumbs: 'Add Trainer'
-    }
-  },
-  {
-    path: 'update-trainer',
-    component: UpdateTrainerComponent,
-    data: {
-      braedcrumbs: 'Update Trainer'
+        breadcrumbs: 'Trainers'
     }
   }
 ];

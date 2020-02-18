@@ -56,6 +56,6 @@ export class StudentListComponent implements OnInit {
 
 
   AddNewStudent(event: Event){
-    this.router.navigate(['add-student'], {relativeTo: this._route});
+    this.router.navigate(['add'], {relativeTo: this._route});
   }
 }

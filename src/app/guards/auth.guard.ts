@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../utils/local-storage.service';
 import { AuthenticationService } from '../services/authentication.service';
@@ -23,9 +23,9 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('AuthGuard---',JSON.parse(this.ls.getItem('user')).data['user_role_id']);
+      console.log('AuthGuard---',location.pathname);
      if (this.ls.getItem('user')) {
-        this.service.isTokenExpired({'module_url':this.router.url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
+        this.service.isTokenExpired({'module_url':location.pathname,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           console.log('isTokenExpired--', res);
           if(res.status){
             return true;
