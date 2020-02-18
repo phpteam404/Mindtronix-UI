@@ -7,6 +7,11 @@ import { UpdateStudentComponent } from './Students/update-student/update-student
 import { AddTrainerComponent } from './Trainers/add-trainer/add-trainer.component';
 import { AddStudentComponent } from './Students/add-student/add-student.component';
 import { UserRoutingModule } from './user-routing.module';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { InputTextModule } from 'primeng/inputtext';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 
@@ -21,7 +26,12 @@ import { UserRoutingModule } from './user-routing.module';
   ],
   imports: [
     CommonModule,
-    UserRoutingModule
+    UserRoutingModule,
+    TableModule,
+    ButtonModule,
+    KeyFilterModule,
+    InputTextModule,
+    InputTextareaModule
   ]
 })
 export class UserModule { }

@@ -1,0 +1,67 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">Add Fee</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="feeForm" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Fee Name <span>*</span></label>
+                            <input pinputtext placeholder="Name" formControlName="name" name="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required">Fee Name is required</div>
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="col-md-4 col-12">
+                        <label>Phone <span>*</span></label>
+                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                            <div *ngIf="f.phone.errors.required">Phone is required</div>
+                        </div>
+                    </div>   
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Price <span>*</span></label>
+                            <input type="text" placeholder="Price" pKeyFilter="int" formControlName="price" name="price" 
+                                [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
+                                <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                                    <div *ngIf="f.price.errors.required">Price is required</div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Offer Type</label>
+                        <input type="text" placeholder="Offer Type" formControlName="offer_type" name="offer_type">
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Offer Details</label>
+                        <input pinputtext type="text" placeholder="Offer Details" formControlName="offer_details" name="offer_details">
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Discount</label>
+                        <input type="text" pKeyFilter="int" placeholder="Discount" formControlName="discount" name="discount">
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Discount Details</label>
+                        <input pinputtext type="text" placeholder="Discount Details" formControlName="discount_details" name="discount_details">
+                    </div>                                     
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label>Description <span>*</span></label>
+                            <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description" 
+                                [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>                            
+                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Description is required</div>
+                            </div>
+                        </div>
+                    </div>                    
+                    <div class="col-12 text-right">
+                        <button pButton type="submit" icon="pi pi-check" label="Save" class="btn-warning mr-2"></button>
+                        <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
