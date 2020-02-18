@@ -32,16 +32,11 @@ import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {BreadcrumbsModule} from "ng6-breadcrumbs";
 import { BasicModule } from './Modules/basic/basic.module';
-import { FeeListComponent } from './Modules/fee/fee-list/fee-list.component';
-import { AddFeeComponent } from './Modules/fee/add-fee/add-fee.component';
-import { UpdateFeeComponent } from './Modules/fee/update-fee/update-fee.component';
-import { RoleManagementComponent } from './Modules/Roles/role-management/role-management.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminLayoutComponent,
-    RoleManagementComponent
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,

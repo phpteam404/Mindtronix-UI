@@ -33,6 +33,7 @@ import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
+import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -67,7 +68,8 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
     PortalManagementComponent,
     ProfilesManagementComponent,
     SchoolsComponent,
-    PaymentManagementComponent
+    PaymentManagementComponent,
+    RoleManagementComponent
   ]
 })
 
