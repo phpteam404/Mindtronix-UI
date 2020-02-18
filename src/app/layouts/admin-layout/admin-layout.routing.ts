@@ -41,6 +41,14 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumbs: 'Franchise'
         }
     },
+    {
+        path: 'fee_structure',
+        loadChildren: () => import('../../Modules/fee-structure/fee-structure.module').then(m => m.FeeStructureModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Fee Structure'
+        }
+    },
     { 
         path: 'profile-management',
         component: ProfilesManagementComponent,

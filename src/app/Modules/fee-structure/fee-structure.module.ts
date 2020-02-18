@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FeeStructureListComponent } from './fee-structure-list/fee-structure-list.component';
 import { AddFeeComponent } from './add-fee/add-fee.component';
 import { UpdateFeeComponent } from './update-fee/update-fee.component';
+import { FeeRoutingModule } from './fee-routing.module';
 
 
 
@@ -12,7 +13,9 @@ import { UpdateFeeComponent } from './update-fee/update-fee.component';
     UpdateFeeComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    FeeRoutingModule
+    
   ]
 })
 export class FeeStructureModule { }

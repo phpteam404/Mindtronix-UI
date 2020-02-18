@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { FeeStructureListComponent } from './fee-structure-list/fee-structure-list.component';
-import { AddFeeComponent } from './add-Fee/add-Fee.component';
-import { UpdateFeeComponent } from './update-Fee/update-Fee.component';
+import { AddFeeComponent } from './add-Fee/add-fee.component';
+import { UpdateFeeComponent } from './update-Fee/update-fee.component';
 
 const routes: Routes = [
   {
