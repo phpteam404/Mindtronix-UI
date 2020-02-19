@@ -52,6 +52,7 @@ export class FranchiseListComponent implements OnInit {
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
       { field: 'website_address', header :'Website Address'},
+      { field: 'website_address', header :'website Address'},
       { field: 'status', header:'Status'},
       { field: 'actions', header: 'Actions'}
     ];

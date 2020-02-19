@@ -1,0 +1,36 @@
+<div class="main-content">
+    <div class="custom-table">
+        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                    <!-- <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewStudent($event)"></button> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i != 5">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 5">
+                            <span class="icon icon-edit-pencil mr-2"></span>
+                            <span class="icon icon-settings mr-2"></span>
+                            <span class="icon icon-delete"></span>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>
