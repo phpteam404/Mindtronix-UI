@@ -35,6 +35,7 @@ import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import {TabViewModule} from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   imports: [
@@ -65,6 +66,7 @@ import { DialogModule } from 'primeng/dialog';
     BreadcrumbModule,
     TabViewModule,
     DialogModule,
+    MatIconModule,
     BasicModule.forRoot()
   ],
   declarations: [

@@ -37,7 +37,7 @@ export class FranchiseListComponent implements OnInit {
       city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731', 
       city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
-     {franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
+      {franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
       city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', 
       city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
@@ -51,7 +51,7 @@ export class FranchiseListComponent implements OnInit {
       { field: 'email', header: 'Email' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
-      { field: 'website_address', header :'website Address'},
+      { field: 'website_address', header :'Website Address'},
       { field: 'status', header:'Status'},
       { field: 'actions', header: 'Actions'}
     ];

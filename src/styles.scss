@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "theme/toaster";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .toast-bootstrap-compatibility-fix {
   opacity:1;
@@ -8,7 +9,13 @@
 //form styles start here
 .custom-form{
   background-color: #fff;
-  border: 1px solid #ccc;;
+  border: 1px solid #ccc;
+  .btn-warning,
+  .btn-default{
+    padding: 4px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+  }
   .custom-form-heading{
     font-size: 16px;
     font-weight: 500;
@@ -89,6 +96,27 @@
       line-height: 18px;
     }
   
+  }
+  .mat-step-header:hover{
+     background-color: transparent !important;
+     .mat-step-header{
+      .mat-step-icon{
+        background-color: #e87a26 !important;
+      }
+      .mat-step-label{
+        color: #e87a26 !important;
+      }
+     } 
+  
+  }
+  .mat-step-header .mat-step-icon-selected,
+   .mat-step-header .mat-step-icon-state-done,
+    .mat-step-header .mat-step-icon-state-edit {
+    background-color: #e87a26 !important;
+  }
+  .cdk-focused,
+  .cdk-mouse-focused{
+    background-color: #ffffff !important;
   }
 } 
 body .ui-inputtext:enabled:hover:not(.ui-state-error){
@@ -393,7 +421,11 @@ p-table{
 .nav_icon:hover .icon-down::after{
   color: #ffffff;
 }
-.nav_icon.open .icon-down::after{
+.nav_icon.active .icon-down::after{
+  transform: rotate(180deg);
+}
+.nav_icon.open .icon-down::after,
+.toggledParent .icon-down::after{
   transform: rotate(180deg);
   color: #ffffff;
 }
@@ -482,11 +514,15 @@ p-table{
       font-weight: 500;
       line-height: 18px;
     }
-    .ui-chkbox-box{
-      width: 18px;
+    .ui-chkbox {
+      width: 15px;
       height: 18px;
+     }
+    .ui-chkbox-box{
+      width: 15px;
+      height: 15px;
       .ui-chkbox-icon {
-        font-size: 16px;
+        font-size: 14px;
     }
     }
     .ui-state-focus{

@@ -1,14 +1,13 @@
 <div class="main-content">
     <div class="custom-table">
-        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="userInvoices" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="Search..."
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <!-- <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewStudent($event)"></button> -->
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>

@@ -14,7 +14,9 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { ReactiveFormsModule } from '@angular/forms';
 import { UpdateFranchiseComponent } from './update-franchise/update-franchise.component';
-
+import {CdkStepperModule} from '@angular/cdk/stepper';
+import {MatStepperModule} from '@angular/material/stepper';
+import {MatIconModule} from '@angular/material/icon';
 @NgModule({
   declarations: [
     FranchiseListComponent,
@@ -31,6 +33,9 @@ import { UpdateFranchiseComponent } from './update-franchise/update-franchise.co
     DropdownModule,
     KeyFilterModule,
     FranchiseRoutingModule,
+    CdkStepperModule,
+    MatStepperModule,
+    MatIconModule,
     BasicModule.forRoot()
   ]
 })

@@ -1,18 +1,22 @@
 <div class="main-content">
-    <div class="custom-form">
+    <!-- <div class="custom-form">
         <h4 class="custom-form-heading">Add Franchise</h4>
         <div class="custom-form-content">
             <form [formGroup]="form" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Name <span>*</span></label>
+                            <label>Franchise Name <span>*</span></label>
                             <input pinputtext placeholder="Name" formControlName="name" name="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
                             <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
                                 <div *ngIf="f.name.errors.required">Name is required</div>
                             </div>
                         </div>
-                    </div>    
+                    </div>  
+                    <div class="col-md-4 col-12">
+                        <label>Manager</label>
+                        <input pinputtext type="text" placeholder="Manager" formControlName="manager" name="manager">
+                    </div>  
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Email <span>*</span></label>
@@ -23,6 +27,7 @@
                             </div>
                         </div>
                     </div>
+                    
                     <div class="col-md-4 col-12">
                         <label>Phone <span>*</span></label>
                         <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
@@ -30,10 +35,7 @@
                             <div *ngIf="f.phone.errors.required">Phone is required</div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
-                        <label>Manager</label>
-                        <input pinputtext type="text" placeholder="Manager" formControlName="manager" name="manager">
-                    </div>
+                  
                     <div class="col-md-4 col-12">
                         <label>Fee Structures</label>
                         <input pinputtext type="text" placeholder="Fee Structures" formControlName="fee_structures" name="fee_structures">
@@ -44,48 +46,14 @@
                             <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
                         </div>
                     </div>    
-                    <!-- <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Dropdown</label>
-                            <p-dropdown [options]="cities" itemSize="30"></p-dropdown>
-                        </div>
-                    </div>                     -->
-                    <!-- <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" pPassword />
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-md-4 col-12">
-                        <label>Calender</label>
-                        <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
-                    </div> -->                
-                    <!-- <div class="col-md-4 col-12">
-                        <label>Discount Details</label>
-                        <input pinputtext type="text">
-                    </div> -->                    
+                                    
                     <div class="col-md-12 col-12">
                         <div class="form-group">
                             <label>Address</label>
                             <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
                         </div>
                     </div>
-                    <!-- <div class="col-md-4 col-12">
-                        <label>FileUpload</label>
-                        <p-fileUpload name="myfile[]" url="./upload.php" customUpload="true" accept="image/*"
-                            maxFileSize="1000000">
-    
-                        </p-fileUpload>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Multiple FileUpload</label>
-                        <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Checkbox</label>
-                        <p-checkbox name="group1" value="New York" label="New York" [(ngModel)]="selectedCities"
-                            inputId="ny"></p-checkbox>
-                    </div> -->
+                  
                     <div class="col-12 text-right">
                         <button pButton type="submit" icon="pi pi-check" label="Save" class="btn-warning mr-2"></button>
                         <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="goToList()" class="btn-default"></button>
@@ -93,5 +61,228 @@
                 </div>
             </form>
         </div>
+    </div> -->
+    <div class="custom-form">
+        <mat-horizontal-stepper>
+            <mat-step label="Franchise Creation">
+                <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()">
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Franchise Name <span>*</span></label>
+                                <input pinputtext placeholder="Name" formControlName="name" name="name" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.name.errors }">
+                                <div *ngIf="submitted1 && f.name.errors" class="invalid-feedback">
+                                    <div *ngIf="f.name.errors.required">Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Manager <span>*</span></label>
+                                <p-dropdown [options]="manager" name="manager" itemSize="30" formControlName="manager" placeholder="Select Manager"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.manager.errors }"></p-dropdown>
+                                    <div *ngIf="submitted1 && f.manager.errors" class="invalid-feedback">
+                                        <div *ngIf="f.manager.errors.required">Manager is required</div>
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <label>Phone <span>*</span></label>
+                            <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone"
+                                [ngClass]="{ 'is-invalid': submitted1 && f.phone.errors }">
+                            <div *ngIf="submitted1 && f.phone.errors" class="invalid-feedback">
+                                <div *ngIf="f.phone.errors.required">Phone is required</div>
+                                <div *ngIf="f.phone.errors.minlength"> Phone number must be 10 digits</div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Website Address</label>
+                                <input pinputtext placeholder="www.xxxxx.com" formControlName="website_address" name="website_address" type="text">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Landmark</label>
+                                <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Email <span>*</span></label>
+                                <input pinputtext placeholder="email" formControlName="email" name="email" type="email"
+                                    email [ngClass]="{ 'is-invalid': submitted1 && f.email.errors }">
+                                <div *ngIf="submitted1 && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required">Email is required</div>
+                                    <div *ngIf="f.email.errors.invalid">Email is Invalid</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <label>Pincode</label>
+                            <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Country <span>*</span></label>
+                                <input pinputtext placeholder="Country" formControlName="country" name="country" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.country.errors }">
+                                <div *ngIf="submitted1 && f.country.errors" class="invalid-feedback">
+                                    <div *ngIf="f.country.errors.required">Country is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>State <span>*</span></label>
+                                <input pinputtext placeholder="State" formControlName="state" name="state" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.state.errors }">
+                                <div *ngIf="submitted1 && f.state.errors" class="invalid-feedback">
+                                    <div *ngIf="f.state.errors.required">State is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>City <span>*</span></label>
+                                <input pinputtext placeholder="City" formControlName="city" name="city" type="text"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.city.errors }">
+                                <div *ngIf="submitted1 && f.city.errors" class="invalid-feedback">
+                                    <div *ngIf="f.city.errors.required">City is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Status </label>
+                                <p-dropdown [options]="status" itemSize="30" formControlName="status" name="status"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button matStepperNext class="btn-warning" type="submit">Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step label="Contact Information">
+                <form [formGroup]="stepTwoForm" (ngSubmit)="stepTwoFormSubmit()">
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Contact Title <span>*</span></label>
+                                <p-dropdown [options]="title" itemSize="30" formControlname="contact_title" name="contact_title"
+                                    [ngClass]="{ 'is-invalid': submitted2 && f2.contact_title.errors }"></p-dropdown>
+                                <div *ngIf="submitted2 && f2.contact_title.errors" class="invalid-feedback">
+                                    <div *ngIf="f2.contact_title.errors.required">Contact Title is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Name <span>*</span></label>
+                                <input pinputtext placeholder="Contact Name" name="contact_name" type="text"
+                                    formControlname="contact_name" [ngClass]="{ 'is-invalid': submitted2 && f2.contact_name.errors }">
+                                <div *ngIf="submitted2 && f2.contact_name.errors" class="invalid-feedback">
+                                    <div *ngIf="f2.contact_name.errors.required">Contact Name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Contact Email <span>*</span></label>
+                                <input pinputtext placeholder="Contact Email" name="contact_email" type="email" email
+                                    formControlname="contact_email" [ngClass]="{ 'is-invalid': submitted2 && f2.contact_email.errors }">
+                                <div *ngIf="submitted2 && f2.contact_email.errors" class="invalid-feedback">
+                                    <div *ngIf="f2.contact_email.errors.required">Contact Email is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <label>Contact Phone <span>*</span></label>
+                            <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="contact_phone"
+                                name="contact_phone" [ngClass]="{ 'is-invalid': submitted2 && f2.contact_phone.errors }">
+                            <div *ngIf="submitted2 && f2.contact_phone.errors" class="invalid-feedback">
+                                <div *ngIf="f2.contact_phone.errors.required">Contact Phone is required</div>
+                                <div *ngIf="f2.contact_phone.errors.minlength || f2.contact_phone.errors.maxlength"> Phone Number Must Be 10 digits</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                        <button mat-button matStepperNext class="btn-warning" type="submit">Next</button>
+                    </div>
+                </form>
+            </mat-step>
+            <mat-step label="Fee Management">
+                <form [formGroup]="stepThreeForm" (ngSubmit)="stepThreeFormSubmit()">
+                    <div class="row">
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Fee Name <span>*</span></label>
+                                <input pinputtext placeholder="Fee Name" name="fee_name" type="text" formControlname="fee_name"
+                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_name.errors }">
+                                <div *ngIf="submitted3 && f3.fee_name.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.fee_name.errors.required">Fee Name is required</div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Fee Price <span>*</span></label>
+                                <input pinputtext placeholder="Price" name="fee_price" formControlname="fee_price"
+                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_price.errors }">
+                                <div *ngIf="submitted3 && f3.fee_price.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.fee_price.errors.required"> Fee Price required</div>
+                                </div>
+                            </div>
+                        </div>                        
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Offer Type</label>
+                                <input pinputtext placeholder="Offer Type" name="offer_type" formControlname="offer_type">                              
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Offer Details</label>
+                                <input pinputtext placeholder="Offer Details" name="offer_details" formControlname="offer_details">                               
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <label>Discount</label>
+                            <input type="text" placeholder="Discount" pKeyFilter="int" name="discount" formControlname="discount">
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Discount Details</label>
+                                <input pinputtext placeholder="Discount Details" name="discount_details" formControlname="discount_details">
+                            </div>
+                        </div>
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label>Fee Description</label>
+                                <textarea pInputTextarea placeholder="Fee Description" formControlName="fee_description" name="fee_description" 
+                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_description.errors }"></textarea>
+                                <div *ngIf="submitted3 && f3.fee_description.errors" class="invalid-feedback">
+                                    <div *ngIf="f3.fee_description.errors.required">Fee Description required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <button mat-button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                        <button mat-button matStepperNext class="btn-warning" type="submit">Save</button>
+                    </div>
+                </form>
+            </mat-step>
+        </mat-horizontal-stepper>
     </div>
 </div>
