@@ -1,0 +1,39 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">Add Fee</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="feeForm" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Title <span>*</span></label>
+                            <input pinputtext placeholder="Title" formControlName="title" name="title" type="text" [ngClass]="{ 'is-invalid': submitted && f.title.errors }">
+                            <div *ngIf="submitted && f.title.errors" class="invalid-feedback">
+                                <div *ngIf="f.title.errors.required">Ticket Title is Required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class="form-group">
+                            <label>Description <span>*</span></label>
+                            <input pinputtext placeholder="description" formControlName="description" name="description" type="text" [ngClass]="{ 'is-invalid': submitted && f.description.errors }">
+                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                                <div *ngIf="f.description.errors.required">Ticket description is required</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="row">
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label>Attachments</label>
+                            <mat-file-upload
+                                name="file_upload">
+                            </mat-file-upload>
+                        </div>
+                    </div>
+                </div> -->
+            </form>
+        </div>
+    </div>
+</div>

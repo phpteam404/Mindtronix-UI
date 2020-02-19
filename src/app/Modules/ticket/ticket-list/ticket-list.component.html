@@ -1,0 +1,17 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">All Tickets</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="feeForm" (ngSubmit)="submit()">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewTicket($event)"></button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

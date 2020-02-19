@@ -50,6 +50,14 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumbs: 'Fee Structure'
         }
     },
+    {
+        path: 'ticket',
+        loadChildren: () => import('../../Modules/ticket/ticket.module').then(m => m.TicketModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Tickets'
+        }
+    },
     { 
         path: 'role_access',
         component: RoleManagementComponent,
