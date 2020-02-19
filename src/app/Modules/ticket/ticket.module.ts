@@ -4,6 +4,9 @@ import { FeeRoutingModule } from './ticket-routing.module';
 import { TicketInfoComponent } from './ticket-info/ticket-info.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
 import { FileUploadModule } from 'primeng/fileupload';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 
 @NgModule({
@@ -15,6 +18,9 @@ import { FileUploadModule } from 'primeng/fileupload';
     CommonModule,
     FeeRoutingModule,
     FileUploadModule,
+    TableModule,
+    ButtonModule,
+    KeyFilterModule
   ]
 })
 export class TicketModule { }
