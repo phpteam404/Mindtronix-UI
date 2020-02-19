@@ -11,6 +11,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { CalendarModule } from 'primeng/calendar';
+import { PasswordModule } from 'primeng/password';
+import { MatIconModule } from '@angular/material/icon';
 
 
 @NgModule({
@@ -26,7 +29,10 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     ButtonModule,
     KeyFilterModule,
     InputTextModule,
+    MatIconModule,
     InputTextareaModule,
+    CalendarModule,
+    PasswordModule,
     ReactiveFormsModule
   ]
 })
