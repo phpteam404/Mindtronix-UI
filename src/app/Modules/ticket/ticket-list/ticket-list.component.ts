@@ -41,7 +41,7 @@ export class TicketListComponent implements OnInit {
     ];
     this.cols = [
       { field: 'date', header: 'Date' },
-      { field: 'title', header: 'Title' },
+      { field: 'title', header: 'Issue' },
       { field: 'created_by', header: 'Created By' },
       { field: 'status', header: 'Status' },
       { field: 'last_update', header: 'Last Update' }
