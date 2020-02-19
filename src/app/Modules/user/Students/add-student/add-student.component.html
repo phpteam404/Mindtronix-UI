@@ -1,22 +1,89 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Add Franchise</h4>
+        <h4 class="custom-form-heading">Add Student</h4>
         <div class="custom-form-content">
             <form [formGroup]="form" (ngSubmit)="submit()">
                 <div class="row">
+                    <div class="col-12">
+                        <h4>Student Information
+                            <mat-icon>done</mat-icon>
+                        </h4>
+                    </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Name <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="name" name="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                                <div *ngIf="f.name.errors.required">Name is required</div>
+                            <label>First Name <span>*</span></label>
+                            <input pinputtext placeholder="Name" formControlName="first_name" name="first_name" type="text"
+                                [ngClass]="{ 'is-invalid': submitted && f.first_name.errors }">
+                            <div *ngIf="submitted && f.first_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.first_name.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input pinputtext placeholder="Name" formControlName="last_name" name="last_name" type="text">
+                        </div>
+                    </div>                    
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Date of Birth <span>*</span></label>
+                            <p-calendar formControlName="date_of_birth" name="last_name" [showIcon]="true"
+                                [ngClass]="{ 'is-invalid': submitted && f.date_of_birth.errors }"></p-calendar>
+                            <div *ngIf="submitted && f.date_of_birth.errors" class="invalid-feedback">
+                                <div *ngIf="f.date_of_birth.errors.required">Name is required</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Nationality</label>
+                            <input pinputtext placeholder="Nationality" formControlName="nationality" name="nationality" type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Place of Birth</label>
+                            <input pinputtext placeholder="Place of Birth" formControlName="place_of_birth" name="place_of_birth" type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Mother Tongue</label>
+                            <input pinputtext placeholder="Mother Tongue" formControlName="mother_tongue" name="mother_tongue" type="text">
+                        </div>
+                    </div>                    
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Fee Structures</label>
+                            <input pinputtext type="text" placeholder="Fee Structures" formControlName="agency_fee_student_id" name="agency_fee_student_id">
+                        </div>
+                    </div>            
+                    <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label>Address</label>
+                            <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Parent Information</h4>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Name of parent/Guardian <span>*</span></label>
+                            <input pinputtext placeholder="Name" formControlName="parent_name" name="parent_name" type="text" 
+                                [ngClass]="{ 'is-invalid': submitted && f.parent_name.errors }">
+                            <div *ngIf="submitted && f.parent_name.errors" class="invalid-feedback">
+                                <div *ngIf="f.parent_name.errors.required">Name is required</div>
                             </div>
                         </div>
                     </div>    
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Email <span>*</span></label>
-                            <input pinputtext placeholder="Email" formControlName="email" name="email" type="email" email
+                            <input pinputtext placeholder="Parent Email" formControlName="email" name="email" type="email" email
                                 [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
                             <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
                                 <div *ngIf="f.email.errors.required">Email is required</div>
@@ -24,68 +91,99 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Phone <span>*</span></label>
-                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
-                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                            <div *ngIf="f.phone.errors.required">Phone is required</div>
+                        <div class="form-group">
+                            <label>Password <span>*</span></label>
+                            <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" 
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Manager</label>
-                        <input pinputtext type="text" placeholder="Manager" formControlName="manager" name="manager">
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Fee Structures</label>
-                        <input pinputtext type="text" placeholder="Fee Structures" formControlName="fee_structures" name="fee_structures">
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Landmark</label>
-                            <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
+                            <label>Confirm Password <span>*</span></label>
+                            <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" 
+                                [ngClass]="{ 'is-invalid': submitted && f.cpassword.errors }">
+                            <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
+                                <div *ngIf="f.cpassword.errors.required">Password is required</div>
+                            </div>
                         </div>
-                    </div>    
-                    <!-- <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Dropdown</label>
-                            <p-dropdown [options]="cities" itemSize="30"></p-dropdown>
-                        </div>
-                    </div>                     -->
-                    <!-- <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" pPassword />
-                        </div>
-                    </div> -->
-                    <!-- <div class="col-md-4 col-12">
-                        <label>Calender</label>
-                        <p-calendar [(ngModel)]="date3" [showIcon]="true"></p-calendar>
-                    </div> -->                
-                    <!-- <div class="col-md-4 col-12">
-                        <label>Discount Details</label>
-                        <input pinputtext type="text">
-                    </div> -->                    
-                    <div class="col-md-12 col-12">
-                        <div class="form-group">
-                            <label>Address</label>
-                            <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-4 col-12">
-                        <label>FileUpload</label>
-                        <p-fileUpload name="myfile[]" url="./upload.php" customUpload="true" accept="image/*"
-                            maxFileSize="1000000">
-    
-                        </p-fileUpload>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Multiple FileUpload</label>
-                        <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload>
+                        <label>Home Phone <span>*</span></label>
+                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no"
+                            [ngClass]="{ 'is-invalid': submitted && f.phone_no.errors }">
+                        <div *ngIf="submitted && f.phone_no.errors" class="invalid-feedback">
+                            <div *ngIf="f.phone_no.errors.required">Phone is required</div>
+                        </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Checkbox</label>
-                        <p-checkbox name="group1" value="New York" label="New York" [(ngModel)]="selectedCities"
-                            inputId="ny"></p-checkbox>
-                    </div> -->
+                        <label>Mobile Phone1 </label>
+                        <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1"
+                            [ngClass]="{ 'is-invalid': submitted && f.mobile_phone1.errors }">
+                        <div *ngIf="submitted && f.mobile_phone1.errors" class="invalid-feedback">
+                            <div *ngIf="f.mobile_phone1.errors.required">Phone is required</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Mobile Phone2 </label>
+                            <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2"
+                                [ngClass]="{ 'is-invalid': submitted && f.mobile_phone2.errors }">
+                            <div *ngIf="submitted && f.mobile_phone2.errors" class="invalid-feedback">
+                                <div *ngIf="f.mobile_phone2.errors.required">Phone is required</div>
+                            </div>
+                        </div>                        
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Relation</label>
+                        <input pinputtext type="text" placeholder="Relation" formControlName="relation" name="relation">
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>Occupation</label>
+                        <input pinputtext type="text" placeholder="Occupation" formControlName="occupation" name="occupation">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Education Details</h4>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Name of the school <span>*</span></label>
+                            <input pinputtext type="text" placeholder="Name of the school*" formControlName="school_id" name="school_id">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Class/Grade <span>*</span></label>
+                            <input pinputtext type="text" placeholder="Class/Grade" formControlName="grade" name="grade">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Agency Id</label>
+                            <input pinputtext type="text" placeholder="Agency Id from locatorage" formControlName="agency_id" name="agency_id">
+                        </div>
+                    </div> 
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Medical Information</h4>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Blood Group</label>
+                            <input pinputtext type="text" placeholder="Blood Group" formControlName="blood_group" name="blood_group">
+                        </div>
+                    </div>          
+                    <div class="col-md-8 col-12">
+                        <div class="form-group">
+                            <label>History of any Illness</label>
+                            <textarea pInputTextarea placeholder="History of any Illness If any" formControlName="history_of_illness"  name="history_of_illness"></textarea>
+                        </div>
+                    </div>
                     <div class="col-12 text-right">
                         <button pButton type="submit" icon="pi pi-check" label="Save" class="btn-warning mr-2"></button>
                         <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="goToList()" class="btn-default"></button>

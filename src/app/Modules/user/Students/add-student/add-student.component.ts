@@ -24,21 +24,35 @@ export class AddStudentComponent implements OnInit {
       ];
   }
   form = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    manager: new FormControl(''),
-    phone: new FormControl('', [Validators.required]),
+    first_name: new FormControl('', [Validators.required]),
+    last_name: new FormControl(''),
+    date_of_birth: new FormControl('', [Validators.required]),
+    nationality: new FormControl('', [Validators.required]),
+    password: new FormControl('',[ Validators.required,
+                                   Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+    ]),
+    cpassword: new FormControl('',[ Validators.required,
+                                    Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+    ]),
+    place_of_birth: new FormControl(''),
+    mother_tongue: new FormControl(''),
     address: new FormControl(''),
-    landmark: new FormControl(''),
-    fee_structures: new FormControl(''),  
+    agency_fee_student_id: new FormControl(''),
+    parent_name: new FormControl('', [Validators.required]),
+    phone_no: new FormControl(''),
+    relation: new FormControl(''),
+    email: new FormControl('',[Validators.required,Validators.email]),
+    occupation: new FormControl(''),
+    mobile_phone1: new FormControl(''),
+    mobile_phone2: new FormControl(''),
+    school_id: new FormControl(''),
+    grade: new FormControl(''),
+    agency_id: new FormControl(''),
+    languages: new FormControl(''),
+    home_language: new FormControl(''),
+    blood_group: new FormControl(''),
+    history_of_illness: new FormControl('')
   });
-  get getname(): any { return this.form.get('name'); }
-  get getemail(): any { return this.form.get('email'); }
-  get getmanager(): any { return this.form.get('manager'); }
-  get getphone(): any { return this.form.get('phone'); }
-  get getaddress(): any { return this.form.get('address'); }
-  get getlandmark(): any { return this.form.get('landmark'); }
-  get getfeeStructures(): any { return this.form.get('fee_structures'); }
 
   ngOnInit(): void {
   }
@@ -48,6 +62,14 @@ export class AddStudentComponent implements OnInit {
   submit(): any{
     this.submitted = true;
     if (this.form.valid) {
+
+      let pass = this.form.get('password').value;
+      let confirmPass = this.form.get('cpassword').value;    
+      if(pass === confirmPass){
+      }else{
+        this._toast.show('warning','Password and Confirm Password must match');
+        return false;
+      }  
       this._toast.show('success','Successfully Added');
       this._router.navigate(['franchise']);
     }else{
