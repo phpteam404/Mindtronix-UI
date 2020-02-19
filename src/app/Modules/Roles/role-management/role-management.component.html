@@ -1,3 +1,39 @@
 <div class="main-content">
-    <p>role-management works!</p>
+    <div class="roll-tabs-heading">
+        <div class="tabs-heading-leftblock">
+           <h4>Application Roles</h4>
+        </div>
+        <div class="tabs-heading-rightblock">
+           <h4>Module Access</h4>
+           <button pButton type="submit" label="Save" class="btn-warning"></button>
+        </div>
+    </div>
+    <div class="roll-tabs">
+        <p-tabView>
+            <p-tabPanel header="Godfather I" leftIcon="pi pi-caret-right">
+              
+                <div class="roletab-content">
+                    <h4>Dashboard</h4>
+                    <div>
+                        <p-checkbox name="group1" value="one" label="" [(ngModel)]="selectedCities"
+                        inputId="one"></p-checkbox>
+                    </div>
+                </div>
+                <div class="roletab-content">
+                    <h4>Franchise</h4>
+                    <div>
+                        <p-checkbox name="group1" value="2" label="" [(ngModel)]="selectedCities"
+                        inputId="2"></p-checkbox>
+                    </div>
+                </div>
+            </p-tabPanel>
+            <p-tabPanel header="Godfather II" leftIcon="pi pi-caret-right">
+                Francis
+            </p-tabPanel>
+            <p-tabPanel header="Godfather III" leftIcon="pi pi-caret-right">
+                After a break of more than  15 years
+            </p-tabPanel>
+        </p-tabView>
+    </div>
+   
 </div>

@@ -57,6 +57,13 @@ export const AdminLayoutRoutes: Routes = [
         data: {
             breadcrumbs: 'Tickets'
         }
+    },{
+        path: 'master',
+        loadChildren: () => import('../../Modules/Masters/master.module').then(m => m.MasterModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Masters'
+        }
     },
     { 
         path: 'role_access',
