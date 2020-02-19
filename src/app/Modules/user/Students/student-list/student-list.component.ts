@@ -42,9 +42,9 @@ export class StudentListComponent implements OnInit {
     ];
     this.cols = [
       { field: 'name', header: 'Name' },
+      { field: 'manager', header: 'Parent' },
       { field: 'email', header: 'Email' },
       { field: 'phone', header: 'Phone' },
-      { field: 'manager', header: 'Manager' },
       { field: 'actions', header: 'Actions' }
     ];
   }

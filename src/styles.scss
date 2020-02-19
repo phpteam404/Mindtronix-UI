@@ -414,3 +414,117 @@ p-table{
   border-radius: 5px;
   background: #6d6d6d; 
 }
+
+// roll-tabs styles
+.roll-tabs{
+  .ui-tabview{
+    display: flex;
+    padding: 0;
+    ul{
+      width: 250px;
+      margin-bottom: 0px !important;
+      min-height: 100% !important;
+      background: #e4e4e4 !important;
+      border-radius: 0 !important;
+      li{
+        margin-right: 0px !important;
+        border: 0px solid #c8c8c8 !important;
+        background-color: #e4e4e4 !important;
+        top: 0px !important;
+        width: 100%;
+        border-radius: 0px !important;
+        border-bottom: 1px solid #c4c4c4!important;
+        &:focus{
+          outline: none;
+        }
+        &:hover{
+          background-color: #ffffff !important;
+        
+        }
+        &.ui-state-active{
+          background-color: #ffffff !important;
+          a{
+            color: #303030 !important;
+          }
+          &:hover{
+            .ui-tabview-left-icon{
+              color: #303030 !important;
+            }
+          }
+        
+        }
+        a{
+          font-weight: 400 !important;
+          padding: 6px 10px !important;
+          .ui-tabview-left-icon{
+            font-size: 15px;
+          }
+        }
+      }
+    }
+    .ui-tabview-panels{
+      height: calc( 100vh - 200px );
+      border: none !important;
+      width: calc(100% - 250px );
+      padding: 15px !important;
+    }
+  }
+  .roletab-content{
+    background: #eeeeee;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3px 10px;
+    h4{
+      font-size: 14px;
+      margin: 0;
+      font-weight: 500;
+      line-height: 18px;
+    }
+    .ui-chkbox-box{
+      width: 18px;
+      height: 18px;
+      .ui-chkbox-icon {
+        font-size: 16px;
+    }
+    }
+    .ui-state-focus{
+      box-shadow: none !important;
+    }
+  }
+}
+.roll-tabs-heading{
+   display: flex;
+   .tabs-heading-leftblock{
+    width: 250px;
+    padding: 10px;
+    background: #d2d1d1;
+    h4{
+      font-size: 15px;
+      line-height: 20px;
+      margin: 0;
+      font-weight: 500;
+    }
+   }
+   .tabs-heading-rightblock{
+    padding: 7px 10px;
+    width: calc( 100% - 250px );
+    background: #c1c1c1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    h4{
+      font-size: 15px;
+      line-height: 20px;
+      margin: 0;
+      font-weight: 500;
+    }
+    .btn-warning{
+      .ui-button-text{
+        padding: 3px 10px !important;
+      }
+    
+    }
+   }
+}
