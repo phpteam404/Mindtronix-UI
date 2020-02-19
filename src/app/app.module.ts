@@ -32,11 +32,21 @@ import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
 import {BreadcrumbsModule} from "ng6-breadcrumbs";
 import { BasicModule } from './Modules/basic/basic.module';
+import { CategoriesComponent } from './Modules/Masters/categories/categories.component';
+import { ContentLevelsComponent } from './Modules/Masters/content-levels/content-levels.component';
+import { TagsComponent } from './Modules/Masters/tags/tags.component';
+import { GradeComponent } from './Modules/Masters/grade/grade.component';
+import { SubCategoriesComponent } from './Modules/Masters/sub-categories/sub-categories.component';
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    CategoriesComponent,
+    ContentLevelsComponent,
+    TagsComponent,
+    GradeComponent,
+    SubCategoriesComponent
   ],
   imports: [
     BrowserModule,

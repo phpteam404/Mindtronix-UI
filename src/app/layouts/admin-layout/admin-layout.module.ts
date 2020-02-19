@@ -34,6 +34,9 @@ import { PaymentManagementComponent } from 'src/app/Modules/payment-management/p
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
+import {TabViewModule} from 'primeng/tabview';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -61,6 +64,8 @@ import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/r
     CheckboxModule,
     KeyFilterModule,
     BreadcrumbModule,
+    TabViewModule,
+    DialogModule,
     BasicModule.forRoot()
   ],
   declarations: [

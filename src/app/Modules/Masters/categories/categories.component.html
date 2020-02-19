@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-table">
-        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
@@ -8,7 +8,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewTrainer($event)"></button>
+                    <button pButton type="button" label="Add" class="btn-warning" (click)="addNewCategory()"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -33,4 +33,7 @@
             </ng-template>
         </p-table>
     </div>
+    <p-dialog header="Title" [(visible)]="display">
+        Content
+    </p-dialog>
 </div>
