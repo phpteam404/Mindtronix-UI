@@ -37,6 +37,8 @@ import { ContentLevelsComponent } from './Modules/Masters/content-levels/content
 import { TagsComponent } from './Modules/Masters/tags/tags.component';
 import { GradeComponent } from './Modules/Masters/grade/grade.component';
 import { SubCategoriesComponent } from './Modules/Masters/sub-categories/sub-categories.component';
+import { DialogModule } from 'primeng/dialog';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -78,6 +80,7 @@ import { SubCategoriesComponent } from './Modules/Masters/sub-categories/sub-cat
     InputTextModule,
     CalendarModule,
     DropdownModule,
+    DialogModule
     // BreadcrumbsModule
   ],
   providers: [

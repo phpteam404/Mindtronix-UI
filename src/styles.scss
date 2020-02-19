@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 // @import "theme/toaster";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 .toast-bootstrap-compatibility-fix {
   opacity:1;
@@ -393,7 +394,11 @@ p-table{
 .nav_icon:hover .icon-down::after{
   color: #ffffff;
 }
-.nav_icon.open .icon-down::after{
+.nav_icon.active .icon-down::after{
+  transform: rotate(180deg);
+}
+.nav_icon.open .icon-down::after,
+.toggledParent .icon-down::after{
   transform: rotate(180deg);
   color: #ffffff;
 }
@@ -482,11 +487,15 @@ p-table{
       font-weight: 500;
       line-height: 18px;
     }
-    .ui-chkbox-box{
-      width: 18px;
+    .ui-chkbox {
+      width: 15px;
       height: 18px;
+     }
+    .ui-chkbox-box{
+      width: 15px;
+      height: 15px;
       .ui-chkbox-icon {
-        font-size: 16px;
+        font-size: 14px;
     }
     }
     .ui-state-focus{

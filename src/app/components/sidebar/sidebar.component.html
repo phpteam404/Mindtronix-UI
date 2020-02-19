@@ -56,7 +56,7 @@
                 class="nav-item" 
                 [title]="menuItem.title" 
                 name="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
-                [ngClass]="{nav_icon: menuItem.childs.length>0}">
+                [ngClass]="{nav_icon: menuItem.childs.length>0, toggledParent: (i === expandedIndex && menuItem.childs.length>0)}">
 
                 <a class="nav-link icon-down" *ngIf="menuItem.childs.length>0" href="javascript:;" >
                     <i class="{{menuItem.class}}">{{menuItem.icon}}</i>

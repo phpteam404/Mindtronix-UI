@@ -1,17 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
+import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 
 @Component({
   selector: 'app-add-franchise',
   templateUrl: './add-franchise.component.html',
-  styleUrls: ['./add-franchise.component.scss']
+  styleUrls: ['./add-franchise.component.scss'],
+  providers: [{
+    provide: STEPPER_GLOBAL_OPTIONS, useValue: {displayDefaultIndicatorType: false}
+  }]
 })
 export class AddFranchiseComponent implements OnInit {
   cities:any;
   submitted = false;
-  constructor(private _router: Router, private _toast: ToasterService) {     
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+
+  constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
       this.cities = [
         {label:'Select City', value:null},
         {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
@@ -39,6 +46,12 @@ export class AddFranchiseComponent implements OnInit {
   get getfeeStructures(): any { return this.form.get('fee_structures'); }
 
   ngOnInit(): void {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
   // convenience getter for easy access to form fields
   get f() { return this.form.controls; }
