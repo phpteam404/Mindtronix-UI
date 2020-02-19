@@ -35,6 +35,14 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     {
+        path: 'invoices',
+        loadChildren: () => import('../../Modules/invoice/invoice.module').then(m => m.InvoiceModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Invoices'
+        }   
+    },
+    {
         path: 'franchise',
         loadChildren: () => import('../../Modules/franchise/franchise.module').then(m => m.FranchiseModule),
         canActivate: [AuthGuard],
@@ -97,5 +105,6 @@ export const AdminLayoutRoutes: Routes = [
         data: {
             breadcrumbs: 'Portal Management'
         }
-    }
+    },
+   
 ];

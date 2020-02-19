@@ -21,31 +21,39 @@ export class FranchiseListComponent implements OnInit {
         {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
     ];
     this.cars = [
-      {name:'Grab Kit', email:'grabKit@mindtronics.com', phone:'7894564556', manager:'Mike',actions:''},
-      {name:'Tech Point', email:'tech_point@mindtronics.com', phone:'7418523654', manager:'Peter',actions:''},
-      {name:'Mindex', email:'mindex@mindtronics.com', phone:'9632587412', manager:'Jenny',actions:''},
-      {name:'Grade Power', email:'grade_power@mindtronics.com', phone:'6987452541', manager:'Lisa',actions:''},
-      {name:'Tera Soft', email:'teraSoft@mindtronics.com', phone:'8965412547', manager:'John II',actions:''},
-      {name:'Brain Balance', email:'brain-blnc@mindtronics.com', phone:'7588965415', manager:'John',actions:''},
-      {name:'Learning Horizon', email:'lhorizon@mindtronics.com', phone:'9658745896', manager:'Peter',actions:''},
-      {name:'Lesson Up', email:'lessonUp@mindtronics.com', phone:'9658745896', manager:'Karen',actions:''},
-      {name:'Brain Gym', email:'gym-brain@mindtronics.com', phone:'8569745896', manager:'Dominique',actions:''},
-      {name:'Robo Soft', email:'robosoft@mindtronics.com', phone:'7545896552', manager:'Christian',actions:''},
-      {name:'Simply Brilliant', email:'sbrilliant@mindtronics.com', phone:'9632568745', manager:'Jimmy',actions:''},
-      {name:'Inquistive', email:'inquistive@mindtronics.com', phone:'7895874568', manager:'Trump',actions:''},
-      {name:'People Tech', email:'people_tech@mindtronics.com', phone:'9658523645', manager:'Donald',actions:''},
-      {name:'Bulb', email:'bulb@mindtronics.com', phone:'7845258963', manager:'Modi',actions:''},
-      {name:'Newton', email:'newton@mindtronics.com', phone:'8547896541', manager:'Jack',actions:''},
-      {name:'Study Point', email:'spoint@mindtronics.com', phone:'7458963521', manager:'Bill Gates',actions:''},
-      {name:'Robo Tech', email:'robo-tech@mindtronics.com', phone:'6985236545', manager:'Obama',actions:''},
-      {name:'Tutor Pedia', email:'tpedia@mindtronics.com', phone:'8569874589', manager:'Laura',actions:''}
+      {franchise_name:'Mindtronix Learning Centre', email:'mindtronixlc@mindtronics.com', contact_number:'7997666616', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+     {franchise_name:'Mindtronix Learning Centre Vidyaranyarapura', email:'mindtronixlcvdp@mindtronics.com', contact_number:'076187 11378', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre-Kempapura', email:'mindtronixkmp@mindtronics.com', contact_number:'9876512345', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre Yelahanka', email:'mindtronixyel@mindtronics.com', contact_number:'9867538952', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre JP Nagar', email:'mindtronixjp@mindtronics.com', contact_number:'07207676333', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre Jaya Nagar', email:'mindtronixjy@mindtronics.com', contact_number:'9010208050', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning centre, BTM Layout', email:'mindtronixbtm@mindtronics.com', contact_number:'9870564328', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+     {franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre, Banneraghatta', email:'mindtronixbng@mindtronics.com', contact_number:'9542794144', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      {franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', 
+      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''}
     ];
     this.cols = [
-      { field: 'name', header: 'Name' },
+      { field: 'franchise_name', header: 'Franchise Name' },
       { field: 'email', header: 'Email' },
-      { field: 'phone', header: 'Phone' },
-      { field: 'manager', header: 'Manager' },
-      { field: 'actions', header: 'Actions' }
+      { field: 'contact_number', header: 'Contact Number' },
+      { field: 'city', header: 'City' },
+      { field: 'website_address', header :'website Address'},
+      { field: 'status', header:'Status'},
+      { field: 'actions', header: 'Actions'}
     ];
   }
 

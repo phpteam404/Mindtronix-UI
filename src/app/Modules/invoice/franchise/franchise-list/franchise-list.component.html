@@ -2,19 +2,13 @@
     <div class="custom-table">
         <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
-                <!-- <div style="text-align: right">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input type="text" pInputText size="50" placeholder="Global Filter" class="mr-2"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewFranchise($event)"></button>
-                </div> -->
                 <div class="custom-search">
                     <div class="input-search">
                         <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewFranchise($event)"></button>
+                    <!-- <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewStudent($event)"></button> -->
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -28,8 +22,8 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 6">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 6">
+                        <span *ngIf="i != 5">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 5">
                             <span class="icon icon-edit-pencil mr-2"></span>
                             <span class="icon icon-settings mr-2"></span>
                             <span class="icon icon-delete"></span>
