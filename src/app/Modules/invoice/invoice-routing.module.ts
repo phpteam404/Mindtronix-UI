@@ -1,10 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { FranchiseInvoiceComponent } from './franchise/franchise-invoice/franchise-invoice.component';
+import { OnlineUsersInvoiceComponent } from './online/online-users-invoice/online-users-invoice.component';
+import { StudentInvoiceComponent } from './students/student-invoice/student-invoice.component';
 const routes: Routes = [
     {
       path: '',
-      loadChildren: () => import('../../Modules/invoice/students/student-invoice.module').then(m => m.StudentInvoiceModule),
+      component: StudentInvoiceComponent,
       canActivate: [AuthGuard],
       data: {
           breadcrumbs: 'Students'
@@ -12,7 +15,7 @@ const routes: Routes = [
     },  
     {
       path: 'students_invoice',
-      loadChildren: () => import('../../Modules/invoice/students/student-invoice.module').then(m => m.StudentInvoiceModule),
+      component: StudentInvoiceComponent,
       canActivate: [AuthGuard],
       data: {
           breadcrumbs: 'Students'
@@ -20,7 +23,7 @@ const routes: Routes = [
     },
     {
         path: 'franchise_invoice',
-        loadChildren: () => import('../../Modules/invoice/franchise/franchise-invoice.module').then(m => m.FranchiseInvoiceModule),
+        component: FranchiseInvoiceComponent,
         canActivate: [AuthGuard],
         data: {
             breadcrumbs: 'Franchise'
@@ -28,7 +31,7 @@ const routes: Routes = [
     },
     {
         path: 'online_users_invoice',
-        loadChildren: () => import('../../Modules/invoice/online/online-invoice.module').then(m => m.onlineInvoiceModule),
+        component: OnlineUsersInvoiceComponent,
         canActivate: [AuthGuard],
         data: {
             breadcrumbs: 'Online Users'
