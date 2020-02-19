@@ -51,6 +51,13 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     {
+        path: 'ticket',
+        loadChildren: () => import('../../Modules/ticket/ticket.module').then(m => m.TicketModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumbs: 'Tickets'
+        }
+    },{
         path: 'master',
         loadChildren: () => import('../../Modules/Masters/master.module').then(m => m.MasterModule),
         canActivate: [AuthGuard],
