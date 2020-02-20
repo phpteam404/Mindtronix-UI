@@ -1136,18 +1136,18 @@ input:focus {
   background-color: #FFFFFF;
   display: block;
   border-radius: 50%;
-  opacity: .4;
+  opacity: .8;
   line-height: 3px;
   width: 20px;
   height: 20px;
   outline: 0 !important;
   text-align: center;
-  padding: 0px 3px;
+  padding: 0px 3px 2px;
   font-weight: 300;
   font-size: 22px;
 }
 .alert button.close:hover {
-  opacity: .55;
+  opacity: 1;
 }
 .alert .close ~ span {
   display: block;
@@ -1170,7 +1170,7 @@ input:focus {
 }
 
 .alert-warning {
-  background-color: #ffbc67;
+  background-color: #e87a26;
 }
 
 .alert-danger {
@@ -3300,6 +3300,21 @@ border: 1px solid #aaa !important;
 }
 .bg-gold{
    color: #f00;
+}
+.invalid-feedback {
+  margin-top: 0 !important;
+  font-size: 11px !important;
+  color: #dc3545;
+  position: absolute;
+}
+.ui-placeholder{
+  color: #aaaaaa !important;
+}
+textarea::placeholder {
+  color: #aaaaaa !important;
+}
+.custom-form label span{
+  color: #ff0000;
 }
 @media (min-width: 992px) {
   .navbar-form {

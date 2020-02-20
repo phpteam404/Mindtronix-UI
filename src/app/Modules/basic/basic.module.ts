@@ -23,10 +23,8 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule } from '@angular/forms';
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
+const BasicModuleImports = [
+  CommonModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -47,6 +45,15 @@ import { FormsModule } from '@angular/forms';
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule
+]
+
+@NgModule({
+  declarations: [],
+  imports: [
+    BasicModuleImports
+  ],
+  exports:[
+    BasicModuleImports
   ]
 })
 export class BasicModule { 
