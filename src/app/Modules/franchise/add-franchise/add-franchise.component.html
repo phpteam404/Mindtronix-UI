@@ -64,7 +64,7 @@
     </div> -->
     <div class="custom-form">
         <mat-horizontal-stepper>
-            <mat-step label="Franchise Creation">
+            <mat-step label="Franchise Details">
                 <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()">
                     <div class="row">
                         <div class="col-md-4 col-12">
@@ -80,8 +80,8 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Manager <span>*</span></label>
-                                <p-dropdown [options]="manager" name="manager" itemSize="30" formControlName="manager" placeholder="Select Manager"
-                                    [ngClass]="{ 'is-invalid': submitted1 && f.manager.errors }"></p-dropdown>
+                                <p-dropdown [options]="title" itemSize="30" placeholder="Select Manager" formControlname="manager" name="manager"
+                                    [ngClass]="{ 'is-invalid': submitted1 && f.manager.errors }" [showClear]="true"></p-dropdown>
                                     <div *ngIf="submitted1 && f.manager.errors" class="invalid-feedback">
                                         <div *ngIf="f.manager.errors.required">Manager is required</div>
                                     </div>
@@ -102,7 +102,6 @@
                                 <input pinputtext placeholder="www.xxxxx.com" formControlName="website_address" name="website_address" type="text">
                             </div>
                         </div>
-
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Landmark</label>
@@ -112,7 +111,7 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Email <span>*</span></label>
-                                <input pinputtext placeholder="email" formControlName="email" name="email" type="email"
+                                <input pinputtext placeholder="Email" formControlName="email" name="email" type="email"
                                     email [ngClass]="{ 'is-invalid': submitted1 && f.email.errors }">
                                 <div *ngIf="submitted1 && f.email.errors" class="invalid-feedback">
                                     <div *ngIf="f.email.errors.required">Email is required</div>
@@ -156,8 +155,13 @@
                         </div>
                         <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label>Status </label>
-                                <p-dropdown [options]="status" itemSize="30" formControlName="status" name="status"></p-dropdown>
+                                <label>Status <span>*</span></label>
+                                <p-dropdown [options]="status" itemSize="30" placeholder="Select Status" formControlname="status" 
+                                    name="status" [showClear]="true" [ngClass]="{ 'is-invalid': submitted1 && f.status.errors }">
+                                </p-dropdown>
+                                <div *ngIf="submitted1 && f.status.errors" class="invalid-feedback">
+                                    <div *ngIf="f.status.errors.required">Status is required</div>
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-12 col-12">
@@ -168,7 +172,7 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button mat-button matStepperNext class="btn-warning" type="submit">Next</button>
+                        <button mat-button [matStepperNext]="false" class="btn-warning" type="submit">Next</button>
                     </div>
                 </form>
             </mat-step>
@@ -178,8 +182,8 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Contact Title <span>*</span></label>
-                                <p-dropdown [options]="title" itemSize="30" formControlname="contact_title" name="contact_title"
-                                    [ngClass]="{ 'is-invalid': submitted2 && f2.contact_title.errors }"></p-dropdown>
+                                <p-dropdown [options]="title" itemSize="30" placeholder="Select Title" formControlname="contact_title" name="contact_title"
+                                    [ngClass]="{ 'is-invalid': submitted2 && f2.contact_title.errors }" [showClear]="true"></p-dropdown>
                                 <div *ngIf="submitted2 && f2.contact_title.errors" class="invalid-feedback">
                                     <div *ngIf="f2.contact_title.errors.required">Contact Title is required</div>
                                 </div>
@@ -240,7 +244,7 @@
                                 <input pinputtext placeholder="Price" name="fee_price" formControlname="fee_price"
                                     [ngClass]="{ 'is-invalid': submitted3 && f3.fee_price.errors }">
                                 <div *ngIf="submitted3 && f3.fee_price.errors" class="invalid-feedback">
-                                    <div *ngIf="f3.fee_price.errors.required"> Fee Price required</div>
+                                    <div *ngIf="f3.fee_price.errors.required"> Fee Price is required</div>
                                 </div>
                             </div>
                         </div>                        
@@ -272,7 +276,7 @@
                                 <textarea pInputTextarea placeholder="Fee Description" formControlName="fee_description" name="fee_description" 
                                     [ngClass]="{ 'is-invalid': submitted3 && f3.fee_description.errors }"></textarea>
                                 <div *ngIf="submitted3 && f3.fee_description.errors" class="invalid-feedback">
-                                    <div *ngIf="f3.fee_description.errors.required">Fee Description required</div>
+                                    <div *ngIf="f3.fee_description.errors.required">Fee Description is required</div>
                                 </div>
                             </div>
                         </div>

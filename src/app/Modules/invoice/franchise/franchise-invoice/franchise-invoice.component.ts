@@ -36,10 +36,10 @@ export class FranchiseInvoiceComponent implements OnInit {
     ];
     this.cols = [
       { field: 'name', header: 'Name' },
-    { field: 'phone', header: 'Phone' },
-    { field: 'month', header: 'Month' },
-    { field: 'bill', header: 'Bill' },
-    { field: 'status', header: 'Status' }
+      { field: 'phone', header: 'Phone' },
+      { field: 'month', header: 'Month' },
+      { field: 'bill', header: 'Bill' },
+      { field: 'status', header: 'Status' }
     ]
   }
 

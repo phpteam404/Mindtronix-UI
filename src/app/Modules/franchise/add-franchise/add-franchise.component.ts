@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material/stepper';
 
 @Component({
   selector: 'app-add-franchise',
@@ -34,12 +35,10 @@ export class AddFranchiseComponent implements OnInit {
           {label:'Naresh', value:{id:5, name: 'Naresh', code: 'NRS'}}
         ];
         this.status =[
-          {label:'Select Status',value:''},
           {label:'Active',value:{id:1,name:'Active'}},
           {label:'InActive',value:{id:2,name:'InActive'}}
         ]
         this.title =[
-          {label:'Select Title',value:null},
           {label:'Admin',value:{id:1,name:'Admin'}},
           {label:'Site Admin',value:{id:2,name:'Site Admin'}},
           {label:'Super Admin',value:{id:3,name:'Super Admin'}}
@@ -93,7 +92,6 @@ export class AddFranchiseComponent implements OnInit {
     this.submitted1 = true;
     if (this.stepOneForm.valid) {
       this._toast.show('success','Successfully Added');
-      this._router.navigate(['franchise']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
       return false;
@@ -103,7 +101,6 @@ export class AddFranchiseComponent implements OnInit {
     this.submitted2 = true;
     if (this.stepTwoForm.valid) {
       this._toast.show('success','Successfully Added');
-      this._router.navigate(['franchise']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
