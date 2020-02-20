@@ -4,7 +4,12 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
+import {SelectItem} from 'primeng/api';
 
+interface City {
+    name: string,
+    code: string
+}
 @Component({
   selector: 'app-add-franchise',
   templateUrl: './add-franchise.component.html',
@@ -22,27 +27,41 @@ export class AddFranchiseComponent implements OnInit {
   submitted3 = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  ///    
+  cities1: SelectItem[];
+  cities2: City[];
+  selectedCities1: City[];
+  selectedCities2: City[];
+  ///
 
   fullObject:any={}
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
-    
-      this.manager = [
-          {label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},
-          {label:'Swetha', value:{id:2, name: 'Swetha', code: 'SW'}},
-          {label:'Parvathi', value:{id:3, name: 'parvathi', code: 'PRT'}},
-          {label:'Sravani', value:{id:4, name: 'Sravani', code: 'SR'}},
-          {label:'Naresh', value:{id:5, name: 'Naresh', code: 'NRS'}}
-        ];
-        this.status =[
-          {label:'Active',value:{id:1,name:'Active'}},
-          {label:'InActive',value:{id:2,name:'InActive'}}
-        ]
-        this.title =[
-          {label:'Admin',value:{id:1,name:'Admin'}},
-          {label:'Site Admin',value:{id:2,name:'Site Admin'}},
-          {label:'Super Admin',value:{id:3,name:'Super Admin'}}
-        ]
+    ///
+    this.cities1 = [
+      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    ];
+  
+    this.manager = [
+        {label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},
+        {label:'Swetha', value:{id:2, name: 'Swetha', code: 'SW'}},
+        {label:'Parvathi', value:{id:3, name: 'parvathi', code: 'PRT'}},
+        {label:'Sravani', value:{id:4, name: 'Sravani', code: 'SR'}},
+        {label:'Naresh', value:{id:5, name: 'Naresh', code: 'NRS'}}
+      ];
+      this.status =[
+        {label:'Active',value:{id:1,name:'Active'}},
+        {label:'InActive',value:{id:2,name:'InActive'}}
+      ]
+      this.title =[
+        {label:'Admin',value:{id:1,name:'Admin'}},
+        {label:'Site Admin',value:{id:2,name:'Site Admin'}},
+        {label:'Super Admin',value:{id:3,name:'Super Admin'}}
+      ]
   }
   stepOneForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

@@ -20,6 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ViewFranchiseComponent } from './view-franchise/view-franchise.component';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ViewFranchiseComponent } from './view-franchise/view-franchise.componen
     MatIconModule,
     FormsModule,
     BsDropdownModule.forRoot(),
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    MultiSelectModule
   ]
 })
 export class FranchiseModule { }

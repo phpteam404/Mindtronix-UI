@@ -226,8 +226,8 @@
                 </form>
             </mat-step>
             <mat-step label="Fee Management">
-                <form [formGroup]="stepThreeForm" (ngSubmit)="stepThreeFormSubmit()">
-                    <div class="row">
+                <!-- <form [formGroup]="stepThreeForm" (ngSubmit)="stepThreeFormSubmit()"> -->
+                    <!-- <div class="row">
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Fee Name <span>*</span></label>
@@ -280,12 +280,14 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
+                    <p-multiSelect [options]="cities1" [(ngModel)]="selectedCities1"></p-multiSelect>
+
                     <div class="text-center">
                         <button mat-button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
                         <button mat-button matStepperNext class="btn-warning" type="submit">Save</button>
                     </div>
-                </form>
+                <!-- </form> -->
             </mat-step>
         </mat-horizontal-stepper>
     </div>
