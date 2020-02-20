@@ -17,6 +17,9 @@ import { UpdateFranchiseComponent } from './update-franchise/update-franchise.co
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { FormsModule } from '@angular/forms';
+
 @NgModule({
   declarations: [
     FranchiseListComponent,
@@ -36,6 +39,8 @@ import {MatIconModule} from '@angular/material/icon';
     CdkStepperModule,
     MatStepperModule,
     MatIconModule,
+    FormsModule,
+    BsDropdownModule.forRoot(),
     BasicModule.forRoot()
   ]
 })

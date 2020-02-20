@@ -36,6 +36,8 @@ import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/r
 import {TabViewModule} from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
+// import { BreadcrumbsModule } from '@exalif/ngx-breadcrumbs';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   imports: [
@@ -67,7 +69,9 @@ import { MatIconModule } from '@angular/material/icon';
     TabViewModule,
     DialogModule,
     MatIconModule,
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    // BreadcrumbsModule.forRoot()
   ],
   declarations: [
     BasicComponent,

@@ -38,6 +38,7 @@ import { TagsComponent } from './Modules/Masters/tags/tags.component';
 import { GradeComponent } from './Modules/Masters/grade/grade.component';
 import { SubCategoriesComponent } from './Modules/Masters/sub-categories/sub-categories.component';
 import { DialogModule } from 'primeng/dialog';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 
 @NgModule({
   declarations: [
@@ -80,7 +81,8 @@ import { DialogModule } from 'primeng/dialog';
     InputTextModule,
     CalendarModule,
     DropdownModule,
-    DialogModule
+    DialogModule,
+    BsDropdownModule.forRoot()
     // BreadcrumbsModule
   ],
   providers: [

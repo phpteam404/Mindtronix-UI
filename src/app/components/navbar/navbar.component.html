@@ -33,8 +33,8 @@
                         <p class="hidden-lg hidden-md">{{getTitle()}}</p>
                     </a>
                 </li> -->
-                <li class="dropdown">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+                <li dropdown class="header-left-block">
+                    <a href="javascript:;" dropdownToggle>
                         <i class="icon icon-bell-o"></i>
                         <!-- <b class="caret"></b> -->
                         <span class="notification hidden-sm hidden-xs">5</span>
@@ -43,23 +43,26 @@
                             <b class="caret"></b>
                         </p> -->
                     </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="#">Notification 1</a></li>
-                        <li><a href="#">Notification 2</a></li>
-                        <li><a href="#">Notification 3</a></li>
-                        <li><a href="#">Notification 4</a></li>
-                        <li><a href="#">Another notification</a></li>
+                 
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 1</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 2</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 3</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 4</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 5</a></li>
+                       
                     </ul>
                 </li>
-                <li class="dropdown header-right-block">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown">
+              
+                <li class="header-right-block" dropdown>
+                    <a href="javascript:;" dropdownToggle>
                        <div class="user-logo"><img src="/assets/img/default-img.png"></div>
                        <div>
                            <h4>Administrator</h4>
                            <p>Admin</p>
                        </div>
                     </a>
-                    <ul class="dropdown-menu">
+                    <ul *dropdownMenu class="dropdown-menu" role="menu">
                         <li><a href="#">Profile</a></li>
                         <li><a href="javascript:void(0);" (click)="logout()">Logout</a></li>
                     </ul>

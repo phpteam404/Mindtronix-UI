@@ -168,6 +168,9 @@ p-table{
         &:focus{
           outline: none;
         }
+        &:last-child{
+            width: 85px;
+        }
       }
     } 
     .ui-table-tbody{
@@ -188,7 +191,15 @@ p-table{
         padding: 0.45rem;
         border: 0px solid #c8c8c8;
         border-bottom: 1px solid #dee2e6;
-     
+        span{
+          display: block;
+          width: 99%;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          word-wrap: break-word;
+         
+        }
       }
     }
     .ui-paginator {
@@ -232,7 +243,20 @@ p-table{
 }
 
 }
-
+.franchise-list{
+  thead{
+    th{
+      &:nth-child(3){
+        width: 150px;
+      }
+      &:nth-child(4),
+      &:nth-child(6){
+        width: 100px;
+      }
+    }
+  }
+ 
+}
 //table styles end here
 
 .login-page {
