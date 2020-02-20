@@ -22,11 +22,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CheckboxModule } from 'primeng/checkbox';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule } from '@angular/forms';
+// import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
-@NgModule({
-  declarations: [],
-  imports: [
-    CommonModule,
+const BasicModuleImports = [
+  CommonModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,
@@ -46,7 +45,17 @@ import { FormsModule } from '@angular/forms';
     PasswordModule,
     FileUploadModule,
     CheckboxModule,
-    KeyFilterModule
+    KeyFilterModule,
+    // DatexPipe
+]
+
+@NgModule({
+  declarations: [],
+  imports: [
+    BasicModuleImports
+  ],
+  exports:[
+    BasicModuleImports
   ]
 })
 export class BasicModule { 

@@ -14,7 +14,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewFranchise($event)"></button>
+                    <button pButton type="button" label="Create Franchise" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -27,8 +27,9 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && viewFranchise(rowData.franchise_name)">
+                        <span *ngIf="i != 6 && i != 5 && i!= 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 6 && i != 5 && i== 4" title="{{rowData[col.field] }}">{{rowData[col.field] }}</span>
                         <span *ngIf="i == 6" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
                             <a href="javascript:;"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
@@ -47,10 +48,13 @@
                             <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
                                 Button dropdown <span class="caret"></span>
                               </button> -->
-                             
+                        </span>
+                        <span *ngIf="i == 5">
+                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
+                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                     </td>
-                   
                 </tr>
             </ng-template>
         </p-table>

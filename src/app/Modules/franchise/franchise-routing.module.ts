@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { FranchiseListComponent } from './franchise-list/franchise.component';
 import { AddFranchiseComponent } from './add-franchise/add-franchise.component';
 import { UpdateFranchiseComponent } from './update-franchise/update-franchise.component';
+import { ViewFranchiseComponent } from './view-franchise/view-franchise.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,13 @@ const routes: Routes = [
     component: UpdateFranchiseComponent,
     data: {
       braedcrumbs: 'Update'
+    }
+  },
+  {
+    path: 'view/:id',
+    component: ViewFranchiseComponent,
+    data: {
+      braedcrumbs: 'View'
     }
   }
 ];

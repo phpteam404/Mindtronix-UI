@@ -23,10 +23,10 @@
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i != 4">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 4">
-                            <span class="icon icon-edit-pencil mr-2"></span>
-                            <span class="icon icon-settings mr-2"></span>
-                            <span class="icon icon-delete"></span>
+                        <span *ngIf="i == 4" class="d-flex action-color">
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;"><span class="icon icon-settings mr-2" title="Manage Users"></span> </a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>
                         </span>
                     </td>
                 </tr>

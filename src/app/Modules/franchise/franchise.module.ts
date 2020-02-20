@@ -19,12 +19,14 @@ import {MatStepperModule} from '@angular/material/stepper';
 import {MatIconModule} from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
+import { ViewFranchiseComponent } from './view-franchise/view-franchise.component';
 
 @NgModule({
   declarations: [
     FranchiseListComponent,
     AddFranchiseComponent,
-    UpdateFranchiseComponent
+    UpdateFranchiseComponent,
+    ViewFranchiseComponent
   ],
   imports: [
     CommonModule,
