@@ -3,7 +3,6 @@ import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
-import { SchoolsComponent } from 'src/app/Modules/schools/schools.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-upload/digital-content-upload.component';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
@@ -91,7 +90,7 @@ export const AdminLayoutRoutes: Routes = [
     },
     { 
         path: 'schools',
-        component: SchoolsComponent,
+        loadChildren: () => import('../../Modules/schools/school.module').then(m => m.SchoolModule),
         canActivate: [AuthGuard],
         data: {
             breadcrumbs: 'Schools'
