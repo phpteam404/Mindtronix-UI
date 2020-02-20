@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import {DatexPipe} from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 @Component({
   selector: 'app-franchise',
   templateUrl: './franchise.component.html',
@@ -22,36 +22,36 @@ export class FranchiseListComponent implements OnInit {
     ];
     this.cars = [
       {franchise_name:'Mindtronix Learning Centre', email:'mindtronixlc@mindtronics.com', contact_number:'7997666616', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'02-12-2019',status:'Active',actions:''},
      {franchise_name:'Mindtronix Learning Centre Vidyaranyarapura', email:'mindtronixlcvdp@mindtronics.com', contact_number:'076187 11378', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Inactive',actions:''},
+      city:'Bengaluru',created_on:'02-11-2019',status:'Inactive',actions:''},
       {franchise_name:'Mindtronix Learning Centre-Kempapura', email:'mindtronixkmp@mindtronics.com', contact_number:'9876512345', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'02-12-2018',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre Yelahanka', email:'mindtronixyel@mindtronics.com', contact_number:'9867538952', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'20-10-2019',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre JP Nagar', email:'mindtronixjp@mindtronics.com', contact_number:'07207676333', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Inactive',actions:''},
+      city:'Bengaluru',created_on:'26-08-2019',status:'Inactive',actions:''},
       {franchise_name:'Mindtronix Learning Centre Jaya Nagar', email:'mindtronixjy@mindtronics.com', contact_number:'9010208050', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Inactive',actions:''},
+      city:'Bengaluru',created_on:'25-06-2019',status:'Inactive',actions:''},
       {franchise_name:'Mindtronix Learning centre, BTM Layout', email:'mindtronixbtm@mindtronics.com', contact_number:'9870564328', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'20-07-2019',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'11-03-2018',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'10-03-2019',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Inactive',actions:''},
+      city:'Bengaluru',created_on:'05-08-2019',status:'Inactive',actions:''},
       {franchise_name:'Mindtronix Learning Centre, Banneraghatta', email:'mindtronixbng@mindtronics.com', contact_number:'9542794144', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Active',actions:''},
+      city:'Bengaluru',created_on:'13-02-2020',status:'Active',actions:''},
       {franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', 
-      city:'Bengaluru',website_address:'www.mindtronix.com',status:'Inactive',actions:''}
+      city:'Bengaluru',created_on:'11-03-2018',status:'Inactive',actions:''}
     ];
     this.cols = [
       { field: 'franchise_name', header: 'Franchise Name' },
       { field: 'email', header: 'Email' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
-      { field: 'website_address', header :'Website Address'},
+      { field: 'created_on', header :'Created On'},
       { field: 'status', header:'Status'},
       { field: 'actions', header: 'Actions'}
     ];
@@ -76,7 +76,6 @@ export class FranchiseListComponent implements OnInit {
 
   viewFranchise(data){
     console.log('view===', data);
-    // this.router.navigate((['/view', data]), { relativeTo: this._route});
-    this.router.navigate(['view'], { relativeTo: this._route});
+    this.router.navigate(['view/'+data],{ relativeTo: this._route});
   }
 }

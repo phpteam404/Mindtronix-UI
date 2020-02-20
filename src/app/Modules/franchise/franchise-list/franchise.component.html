@@ -14,7 +14,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add Franchise" class="btn-warning" (click)="AddNewFranchise($event)"></button>
+                    <button pButton type="button" label="Create Franchise" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -26,9 +26,10 @@
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
-                <tr (click)="viewFranchise(rowData)">
-                    <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 6 && i != 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && viewFranchise(rowData.franchise_name)">
+                        <span *ngIf="i != 6 && i != 5 && i!= 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 6 && i != 5 && i== 4" title="{{rowData[col.field] }}">{{rowData[col.field] }}</span>
                         <span *ngIf="i == 6" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
                             <a href="javascript:;"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>

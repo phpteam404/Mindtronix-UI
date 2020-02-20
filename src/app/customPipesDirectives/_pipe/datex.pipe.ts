@@ -14,7 +14,7 @@ export class DatexPipe implements PipeTransform {
         } else if (format === 'time' || format === 'Time') {
             format = 'hh:mm A';
         } else if (format === 'date' || format === 'Date') {
-            format = 'DD-MM-YYYY';
+            format = 'DD MMM,YYYY';
         } else if (format === 'datetime_DTC') {
             format = 'DD-MM-YYYY hh:mm:ss A';
         } else {
