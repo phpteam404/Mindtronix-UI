@@ -28,7 +28,11 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="1!=4">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=4">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 4" class="d-flex action-color">
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="AddNewSchool($event)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-trash mr-2" title="Edit"></span></a>
+                        </span>
                     </td>
                 </tr>
             </ng-template>
