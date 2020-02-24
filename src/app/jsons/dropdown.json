@@ -162,5 +162,35 @@
       "name": "X",
       "id": 10
     }
+  ],
+  "state":[
+    {
+      "name": "Telangana",
+      "id": 1
+    },
+    {
+      "name": "Andra Pradesh",
+      "id": 2
+    }
+  ],
+  "city":[
+    {
+      "name": "Hyderabad",
+      "id": 1
+    },
+    {
+      "name": "Tirupathi",
+      "id": 2
+    }
+  ],
+  "country":[
+    {
+      "name": "India",
+      "id": 1
+    },
+    {
+      "name": "Other",
+      "id": 2
+    }
   ]
 }
