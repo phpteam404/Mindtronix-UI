@@ -17,6 +17,7 @@ export class AddUserComponent implements OnInit {
   status: any;
 
   formObj: any = {};
+  pageTitle:string = "Create User";
 
   constructor(private _router: Router, private _toast: ToasterService) { 
     this.roles = [
@@ -71,11 +72,13 @@ export class AddUserComponent implements OnInit {
       }  
       this._toast.show('success','Successfully Added');
       this.submitted = true;
-      this._router.navigate(['all-users']);
+      this._router.navigate(['users/all-users']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
 
-
+  Cancel(){
+    this._router.navigate(['users/all-users']);
+  }
 }

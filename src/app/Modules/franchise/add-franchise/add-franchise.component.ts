@@ -22,7 +22,7 @@ export class AddFranchiseComponent implements OnInit {
   status:any;
   manager:any;
   title:any;
-  submitted1 = false;
+  submitted1 = null;
   submitted2 = false;
   submitted3 = false;
   firstFormGroup: FormGroup;
@@ -35,7 +35,7 @@ export class AddFranchiseComponent implements OnInit {
   ///
 
   fullObject:any={}
-
+  pageTitle:string = "Create Franchise";
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
     this.cities1 = [
       {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
@@ -83,11 +83,7 @@ export class AddFranchiseComponent implements OnInit {
     contact_phone :new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
   });
   stepThreeForm = new FormGroup({  
-    fee_structure :new FormControl('',[Validators.required]),
-    offer_details :new FormControl(''),
-    discount:new FormControl(''),
-    discount_details :new FormControl(''),
-    offer_type :new FormControl('')
+    fee_structure :new FormControl('',[Validators.required])
   });
 
   ngOnInit(): void {
@@ -104,16 +100,18 @@ export class AddFranchiseComponent implements OnInit {
   get f3() { return this.stepThreeForm.controls; }
 
   stepOneFormSubmit(): any{
+    console.log('this.stepOneForm---', this.stepOneForm.value);
     this.submitted1 = false;
     if (this.stepOneForm.valid) {
       this._toast.show('success','Successfully Added');
       this.submitted1 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
-      return false;
     }
   }
   stepTwoFormSubmit(): any{
+    console.log('this.stepTwoForm---', this.stepTwoForm.value);
+
     this.submitted2 = false;
     if (this.stepTwoForm.valid) {
       this._toast.show('success','Successfully Added');
@@ -123,6 +121,8 @@ export class AddFranchiseComponent implements OnInit {
     }
   }
   stepThreeFormSubmit(): any{
+    console.log('this.stepThreeForm---', this.stepThreeForm.value);
+
     this.submitted3 = false;
     if (this.stepThreeForm.valid) {
       this._toast.show('success','Successfully Added');

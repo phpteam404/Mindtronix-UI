@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Add User</h4>
+        <h4 class="custom-form-heading">{{pageTitle}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="addUserForm" role="form" (ngSubmit)="submit()" novalidate>
                 <div class="row">
@@ -112,7 +112,7 @@
                 </div>
                 <div class="text-right">
                     <button class="btn-warning mr-2" type="submit">Save</button>
-                    <button class="btn-default" type="reset">Cancel</button>
+                    <button class="btn-default" type="reset" (click)="Cancel()">Cancel</button>
                 </div>
             </form>
         </div>

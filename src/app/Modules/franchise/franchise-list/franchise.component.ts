@@ -88,6 +88,6 @@ export class FranchiseListComponent implements OnInit {
   editFranchise(data){
     console.log('edit===', btoa(data));
     console.log('edit===', window.atob(btoa(data)));
-   // this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
+   this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
   }
 }

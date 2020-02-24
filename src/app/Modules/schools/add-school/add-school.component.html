@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Add Fee</h4>
+        <h4 class="custom-form-heading">Create School</h4>
         <div class="custom-form-content">
             <form [formGroup]="feeForm" (ngSubmit)="submit()">
                 <div class="row">
@@ -32,15 +32,15 @@
                                 <div *ngIf="f.email.errors.required">Email is required</div>
                             </div>
                         </div>
-                    </div>                    
-                </div>
-                <div class="row">
-                    <div class="col-md-4 col-12">
+                    </div>     
+                    <!-- <div class="col-md-12 col-12">
                         <div class="form-group">
-                            <Label>Address:</Label>
+                            <label>Address</label>
+                            <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
                         </div>
-                    </div>  
+                    </div>                 -->
                 </div>
+               
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">

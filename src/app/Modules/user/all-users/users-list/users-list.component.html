@@ -3,19 +3,22 @@
         <p-table #dt [columns]="cols" [value]="allUsersList" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 
-                <div class="custom-search">
-                    <div class="input-search">
+                <div class="custom-search justify-content-between">
+                    <div class="input-dropdown">
                         <p-dropdown [options]="roles" placeholder="Select a Role" 
                             styleClass="ui-column-filter"
                             (onChange)="onChange($event)"
                             optionLabel="label" [showClear]="true"></p-dropdown>
                     </div>
-                    <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                        <i class="fa fa-search"></i> 
+                    <div class="d-flex">
+                        <div class="input-search">
+                            <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                        <button pButton type="button" label="Create User" class="btn-warning" (click)="AddNewUser($event)"></button>
                     </div>
-                    <button pButton type="button" label="Create User" class="btn-warning" (click)="AddNewUser($event)"></button>
+                  
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>

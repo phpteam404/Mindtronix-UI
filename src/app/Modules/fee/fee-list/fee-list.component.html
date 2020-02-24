@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="custom-table">
+    <div class="custom-table fee-list">
         <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
@@ -8,7 +8,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="addNewFee($event)"></button>
+                    <button pButton type="button" label="Create Fee" class="btn-warning" (click)="addNewFee($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -23,10 +23,10 @@
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i != 4">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 4">
-                            <span class="icon icon-edit-pencil mr-2"></span>
-                            <span class="icon icon-settings mr-2"></span>
-                            <span class="icon icon-delete"></span>
+                        <span *ngIf="i == 4"  class="d-flex action-color">
+                            <span class="icon icon-edit-pencil wd-30"></span>
+                            <!-- <span class="icon icon-settings mr-2"></span> -->
+                            <span class="icon icon-delete wd-30"></span>
                         </span>
                     </td>
                 </tr>

@@ -13,6 +13,7 @@ export class AddSchoolComponent implements OnInit {
   constructor(private _router: Router, private _toast: ToasterService) { }
   feeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
+    address: new FormControl(''),
     price: new FormControl('', [Validators.required]),
     description: new FormControl('', [Validators.required]),
     offer_type: new FormControl(''),

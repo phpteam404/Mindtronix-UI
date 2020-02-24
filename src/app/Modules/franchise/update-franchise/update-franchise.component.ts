@@ -22,6 +22,7 @@ export class UpdateFranchiseComponent implements OnInit {
   stepThreeForm: FormGroup;
 
   fullObject:any={}
+  pageTitle:string = "Update Franchise";
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder,private _ar: ActivatedRoute) {     
     
@@ -80,7 +81,7 @@ export class UpdateFranchiseComponent implements OnInit {
     });
     this.stepOneForm = new FormGroup({
       name: new FormControl(this.fullObject.franchise_name, [Validators.required]),
-      manager: new FormControl({id:1, name: 'prasad', code: 'PR'},[Validators.required]),
+      manager: new FormControl({label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},[Validators.required]),
       phone: new FormControl(this.fullObject.contact_number, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
       website_address :new FormControl(''),
       landmark: new FormControl('Charminar'),
@@ -89,7 +90,7 @@ export class UpdateFranchiseComponent implements OnInit {
       country :new FormControl('India',[Validators.required]),
       state:new FormControl('Telangana',[Validators.required]),
       city:new FormControl(this.fullObject.city,[Validators.required]),
-      status :new FormControl({id:1,name:'Active'},[Validators.required]),
+      status :new FormControl({label:'Active',value:{id:1,name:'Active'}},[Validators.required]),
       address: new FormControl('',[Validators.required]),
     });
   

@@ -19,10 +19,10 @@ export class UsersListComponent implements OnInit {
     ];    
     this.cols = [
       { field: 'name', header: 'Name' },
-      { field: 'role', header: 'Role' },
-      { field: 'manager', header: 'Franchise' },
       { field: 'email', header: 'Email' },
       { field: 'phone', header: 'Phone' },
+      { field: 'role', header: 'Role' },
+      { field: 'manager', header: 'Franchise' },
       { field: 'status', header: 'Status' },
       { field: 'actions', header: 'Actions' }
     ];

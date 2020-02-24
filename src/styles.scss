@@ -131,6 +131,15 @@ p-table{
       background-color: transparent !important;
       border: 0px solid #c8c8c8 !important;
       padding: 0 0px 8px 0px;
+      .input-dropdown{
+        .ui-dropdown{
+          border: 1px solid #ccc;
+          text-align: left;
+        }
+        .ui-inputtext{
+          border: 0px solid #ccc;
+        }
+      }
       .ui-inputtext{
           border: 1px solid #ccc;
           height: 30px;
@@ -170,6 +179,7 @@ p-table{
         }
         &:last-child{
             width: 85px;
+            text-align: right;
         }
       }
     } 
@@ -198,6 +208,12 @@ p-table{
           overflow: hidden;
           white-space: nowrap;
           word-wrap: break-word;
+         
+        }
+        &:last-child{
+          span{
+            justify-content: flex-end !important;
+          }
          
         }
       }
@@ -427,7 +443,7 @@ p-table{
   .input-search{
     i{
       position: absolute;
-      z-index: 1;
+      z-index: 0;
       margin: 8px 0px 0px;
       right: 65px;
     }
@@ -638,3 +654,64 @@ p-table{
     }
    }
 }
+.student-form{
+  h4{
+    font-size: 16px;
+    margin: 0 0 5px;
+    font-weight: 500;
+  }
+  .btn-warning{
+    padding: 0px;
+  }
+  .btn-default{
+    padding: 0px;
+  }
+}
+.custom-btn{
+  .btn-warning{
+    padding: 0px;
+  }
+  .btn-default{
+    padding: 0px;
+  }
+}
+.wd-30{
+  width: 30px !important;
+  text-align: right;
+}
+.school-list{
+  thead{
+    th{
+      &:nth-child(3){
+        text-align: center;
+      }
+    }
+  }
+  td{
+    &:nth-child(3){
+      text-align: center;
+    }
+  }
+}
+// .fee-list{
+//   thead{
+//     th{
+//       &:nth-child(2){
+//         text-align: right;
+//         width: 100px;
+//       }
+//       &:nth-child(4){
+//         text-align: right;
+//         width: 170px;
+//       }
+//     }
+//   }
+//   td{
+//     &:nth-child(2){
+//       text-align: right;
+//     }
+//     &:nth-child(4){
+//       text-align: right;
+//     }
+//   }
+// }

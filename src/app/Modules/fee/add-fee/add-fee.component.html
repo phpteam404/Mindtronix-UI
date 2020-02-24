@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Add Fee</h4>
+        <h4 class="custom-form-heading">Create Fee</h4>
         <div class="custom-form-content">
             <form [formGroup]="feeForm" (ngSubmit)="submit()">
                 <div class="row">
@@ -48,9 +48,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 text-right">
-                        <button pButton type="submit" icon="pi pi-check" label="Save" class="btn-warning mr-2"></button>
-                        <button pButton type="button" icon="pi pi-times" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                    <div class="col-12 text-right custom-btn">
+                        <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>
             </form>

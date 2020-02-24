@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="custom-table">
+    <div class="custom-table school-list">
         <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <!-- <div style="text-align: right">
@@ -22,7 +22,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewSchool($event)"></button>
+                    <button pButton type="button" label="Create School" class="btn-warning" (click)="AddNewSchool($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
