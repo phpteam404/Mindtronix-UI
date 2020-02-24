@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-table franchise-list">
-        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <!-- <div style="text-align: right">
                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -27,28 +27,18 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && viewFranchise(rowData.franchise_name)">
+                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && viewFranchise(rowData.id)">
+                        
                         <span *ngIf="i != 6 && i != 5 && i!= 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        
                         <span *ngIf="i != 6 && i != 5 && i== 4" title="{{rowData[col.field] }}">{{rowData[col.field] }}</span>
+                        
                         <span *ngIf="i == 6" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;" (click)="editFranchise(rowData.id)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
                             <a href="javascript:;"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
-                            <!-- <div dropdown>
-                                <a href="javascript:;" dropdownToggle class="icon icon-admin-2 mr-2" title="Manage Users"> </a>
-                                 <ul *dropdownMenu class="dropdown-menu" role="menu">
-                                    <li role="menuitem"><a class="dropdown-item" href="#">Admin</a></li>
-                                    <li role="menuitem"><a class="dropdown-item" href="#">Trainer</a></li>
-                                    <li role="menuitem"><a class="dropdown-item" href="#">Student</a></li>
-                                   
-                                   
-                                  </ul>
-                            </div>
-                            -->
                             <a href="javascript:;"><span class="icon icon-address" title="Manage Schools"></span></a>
-                            <!-- <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
-                                Button dropdown <span class="caret"></span>
-                              </button> -->
                         </span>
+
                         <span *ngIf="i == 5">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"

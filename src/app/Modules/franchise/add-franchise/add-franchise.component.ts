@@ -5,6 +5,10 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 
+interface City {
+  name: string,
+  code: string
+}
 @Component({
   selector: 'app-add-franchise',
   templateUrl: './add-franchise.component.html',
@@ -25,8 +29,17 @@ export class AddFranchiseComponent implements OnInit {
 
   fullObject:any={}
 
+  cities1: SelectItem[];
+  selectedCities1: City[];
+
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
-    
+    this.cities1 = [
+      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
+      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
+      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
+      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
+      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+    ];
       this.manager = [
           {label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},
           {label:'Swetha', value:{id:2, name: 'Swetha', code: 'SW'}},

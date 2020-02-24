@@ -1,0 +1,110 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">Add User</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="addUserForm" role="form" (ngSubmit)="submit()" novalidate>
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>First Name <span>*</span></label>
+                            <input type="text" pinputtext class="form-control" placeholder="Name" formControlName="firstName" required>
+                            <div class="invalid-feedback"
+                                *ngIf="addUserForm.controls.firstName.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">Name is required!</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Last Name</label>
+                            <input pinputtext placeholder="Last Name" formControlName="last_name" name="last_name">                            
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Role <span>*</span></label>
+                            <p-dropdown [options]="roles" itemSize="30" placeholder="Select Role" required formControlname="role" 
+                                name="role" [showClear]="true"></p-dropdown>
+                            <div class="invalid-feedback"
+                                *ngIf="addUserForm.controls.role.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">Role is required!</div>                          
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Franchise <span>*</span></label>
+                             <!-- <p-dropdown [options]="franchise" placeholder="Select Franchise" formControlname="franchise" name="franchise"
+                                 [showClear]="true" optionLabel="label" itemSize="30" ></p-dropdown> -->
+                            <!--<div *ngIf="submitted && f.franchise.errors" class="invalid-feedback">
+                                <div *ngIf="f.franchise.errors.required">Franchise is required</div>
+                            </div> -->
+                            <p-dropdown [options]="franchise" formControlName="franchise" placeholder="Select Franchise" itemSize="30"
+                                name="franchise" optionLabel="label" required></p-dropdown>
+                            <!-- <select id="franchise" formControlName="franchise" required>
+                                <option value="null" disabled selected>Choose Franchise</option>
+                                <option *ngFor="let val of franchise" [value]="val.value"> {{ val.label }}
+                            </select> -->
+                            <div class="invalid-feedback"
+                                *ngIf="addUserForm.controls.franchise.invalid && submitted!=null && !submitted "
+                                [ngClass]=" 'error'">Franchise is required!</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Email <span>*</span></label>
+                            <input type="email" pinputtext class="form-control" placeholder="Email" formControlName="email" required>
+                                <div class="invalid-feedback"
+                                    *ngIf="addUserForm.controls.email.invalid && submitted!=null && !submitted"
+                                    [ngClass]=" 'error'"> Email is required and should be proper formate!
+                                </div>
+                        </div>
+                    </div>                    
+                    <div class="col-md-4 col-12">
+                        <label>Phone <span>*</span></label>
+                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone"
+                            name="contact_phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                            <div *ngIf="f.phone.errors.required">Phone is required</div>
+                            <div *ngIf="f.phone.errors.minlength || f.phone.errors.maxlength"> Phone Number Must Be 10 digits</div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Status <span>*</span></label>
+                            <p-dropdown [options]="status" itemSize="30" placeholder="Select Status" formControlname="status" name="status"
+                                [ngClass]="{ 'is-invalid': submitted && f.status.errors }"></p-dropdown>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required">Status is required</div>
+                            </div>                           
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Password <span>*</span></label>
+                            <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" 
+                                [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                            <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                                <div *ngIf="f.password.errors.required">Password is required</div>
+                                <div *ngIf="f.password.errors.Invalid">Password is Invalid</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Confirm Password <span>*</span></label>
+                            <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" 
+                                [ngClass]="{ 'is-invalid': submitted && f.cpassword.errors }">
+                            <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
+                                <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>
+                                <div *ngIf="f.cpassword.errors.Invalid">Confirm Password is Invalid</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <button class="btn-warning mr-2" type="submit">Save</button>
+                    <button class="btn-default" type="reset">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -246,15 +246,20 @@ p-table{
 .franchise-list{
   thead{
     th{
-      &:nth-child(3){
-        width: 150px;
+      &:nth-child(1){
+        width: 135px;
+      }
+      &:nth-child(4){
+        width: 145px;
       }
       &:nth-child(5){
-        width: 120px;
-      }
-      &:nth-child(4),
-      &:nth-child(6){
         width: 100px;
+      }
+      &:nth-child(6){
+        width: 110px;
+      }
+      &:nth-child(7){
+        width: 90px;
       }
     }
   }
@@ -350,6 +355,7 @@ p-table{
           }
        }
     }
+   
     }
   .login-logo{
     width: 70px;

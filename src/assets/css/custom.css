@@ -3316,6 +3316,9 @@ textarea::placeholder {
 .custom-form label span{
   color: #ff0000;
 }
+.mat-button{
+  line-height: 23px !important;
+}
 @media (min-width: 992px) {
   .navbar-form {
     margin-top: 21px;
