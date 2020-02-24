@@ -50,7 +50,6 @@ export class FranchiseListComponent implements OnInit {
       { field: 'code', header: 'Franchise Code' },
       { field: 'franchise_name', header: 'Franchise Name' },
       { field: 'email', header: 'Email' },
-      { field: 'code', header: 'Franchise Code' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
       { field: 'created_on', header :'Created On'},
@@ -78,6 +77,9 @@ export class FranchiseListComponent implements OnInit {
   GoToSchools(event: Event){
     this.router.navigate(['schools'], {});
   }
+  GoToUsers(event: Event){
+    this.router.navigate(['users'], {});
+  }
 
   viewFranchise(data){
     console.log('view===', data);
@@ -86,6 +88,6 @@ export class FranchiseListComponent implements OnInit {
   editFranchise(data){
     console.log('edit===', btoa(data));
     console.log('edit===', window.atob(btoa(data)));
-    this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
+   // this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
   }
 }

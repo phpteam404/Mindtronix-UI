@@ -43,12 +43,12 @@ export class AddUserComponent implements OnInit {
       email: new FormControl('',[Validators.required, Validators.email]),
       phone: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
       status: new FormControl('',[Validators.required]),
-      password: new FormControl('',[ Validators.required,
-        Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      ]),
-      cpassword: new FormControl('',[ Validators.required,
-         Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      ])
+      password: new FormControl('',[ Validators.required]),
+        // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      // ]),
+      cpassword: new FormControl('',[ Validators.required])
+        //  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+      // ])
     });
   }
 
@@ -61,6 +61,7 @@ export class AddUserComponent implements OnInit {
   submit(): any{
     this.submitted = false;
     console.log('this.addUserForm---', this.addUserForm.value);
+    console.log('this.addUserForm errors---', this.addUserForm);
     if (this.addUserForm.valid) {
       let pass = this.addUserForm.get('password').value;
       let confirmPass = this.addUserForm.get('cpassword').value;    
@@ -70,7 +71,7 @@ export class AddUserComponent implements OnInit {
       }  
       this._toast.show('success','Successfully Added');
       this.submitted = true;
-      this._router.navigate(['franchise']);
+      this._router.navigate(['all-users']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
