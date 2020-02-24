@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="custom-table">
+        <p-table #dt [columns]="cols" [value]="allUsersList" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="d-flex">
+                        <div class="input-search">
+                            <input type="text" pInputText size="50" placeholder="Search..."
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i!=6 && i!=7">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 6">
+                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
+                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
+                        </span>
+                        <span *ngIf="i == 7" class="d-flex action-color">
+                            <a href="javascript:;"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

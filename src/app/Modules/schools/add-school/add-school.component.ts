@@ -9,43 +9,37 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-school.component.scss']
 })
 export class AddSchoolComponent implements OnInit {
-  submitted = false;
+  submitted = null;
+  pageTitle:string = "Create School";
   constructor(private _router: Router, private _toast: ToasterService) { }
-  feeForm = new FormGroup({
+  schoolForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
+    code: new FormControl('', [Validators.required]),
+    contact_person: new FormControl(''),
+    phone_no: new FormControl('', [Validators.required]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     address: new FormControl(''),
-    price: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    offer_type: new FormControl(''),
-    offer_details: new FormControl(''),
-    discount: new FormControl(''),
-    discount_details: new FormControl(''),  
+    state: new FormControl('', [Validators.required]),
+    city: new FormControl('', [Validators.required]),
+    pincode: new FormControl('')
   });
-  get getname(): any { return this.feeForm.get('name'); }
-  get getprice(): any { return this.feeForm.get('price'); }
-  get getdescription(): any { return this.feeForm.get('description'); }
-  get getoffertype(): any { return this.feeForm.get('offer_type'); }
-  get getofferdetails(): any { return this.feeForm.get('offer_details'); }
-  get getdiscount(): any { return this.feeForm.get('discount'); }
-  get getdiscountdetails(): any { return this.feeForm.get('discount_details'); }
 
   ngOnInit(): void {
   }
-  // convenience getter for easy access to form fields
-  get f() { return this.feeForm.controls; }
 
   submit(): any{
-    this.submitted = true;
-    if (this.feeForm.valid) {
+    this.submitted = false;
+    if (this.schoolForm.valid) {
       this._toast.show('success','Successfully Added');
-      this._router.navigate(['fee_structure']);
+      this.submitted = true;
+      this._router.navigate(['schools_management']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
 
   goToList(){
-    this._router.navigate(['schools']);
+    this._router.navigate(['schools_management']);
   }
 
 }

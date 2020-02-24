@@ -292,8 +292,8 @@ p-table{
 //table styles end here
 .custom-view{
   background-color: #fff;
-  border: 1px solid #ccc;
-  margin-bottom: 15px;
+  // border: 1px solid #ccc;
+  // margin-bottom: 15px;
   .btn-warning,
   .btn-default{
     padding: 4px 15px;
@@ -310,13 +310,14 @@ p-table{
   }
  
   .custom-view-content{
-    padding: 15px;
+    padding: 15px 0px;
   }
   label{
     display: block;
     font-size: 14px;
     margin-bottom: 0px;
-    font-weight: 500;
+    font-weight: 400;
+    color: #979797;
   }
  p{
    font-size: 14px;
@@ -517,7 +518,7 @@ p-table{
 .nav_icon.open .icon-down::after,
 .toggledParent .icon-down::after{
   transform: rotate(180deg);
-  color: #ffffff;
+  color: #616263;
 }
 
 /* Scrollbar Styling */
@@ -715,3 +716,132 @@ p-table{
 //     }
 //   }
 // }
+.view-page{
+  .custom-view-list{
+    background-color: #ffffff;
+    border: 1px solid #c4c4c4;
+    padding: 15px;
+    width: 100%;
+    float: left;
+    display: table-cell;
+    margin-bottom: 15px;
+    span{
+      display: block;
+    }
+    
+    .custom-view-div{
+      display: table-cell;
+      width: 1%;
+      font-size: 14px;
+      margin-bottom: 0px;
+      color: #979797;
+    }
+    .franchise-name{
+      width: 2%;
+      border-right: 1px solid #cccccc;
+     
+      span{
+        color: #303030;
+      }
+    }
+    .schools-text,
+    .students-text{
+      border-right: 1px solid #cccccc;
+      padding-left: 10px;
+    }
+    .trainers-text{
+      padding-left: 10px;
+    }
+    .schools-text{
+      span{
+        font-size: 20px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+      }
+    }
+    .trainers-text{
+      span{
+        font-size: 20px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+      }
+    }
+    .students-text{
+      span{
+        font-size: 20px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+      }
+    }
+   
+  }
+}
+.clearfix{
+  clear: both;
+}
+.custom-tabs{
+  .ui-tabview{
+    padding: 0;
+    .ui-tabview-nav{
+      li{
+        margin-bottom: 0px;
+        margin-right: -1px !important;
+        border-radius: 0px !important;
+        a{
+          font-weight: 400 !important;
+          outline: none !important;
+        }
+        &:focus{
+          box-shadow: none !important;
+          outline: none !important;
+        }
+        &:hover{
+          background-color: #ffffff !important;
+          a{
+            color: #e87a26 !important;
+          }
+        
+        }
+      }
+      li.ui-state-active{
+        border: 1px solid #c8c8c8 !important;
+        border-bottom: 0px solid #c8c8c8 !important;
+        background-color: #ffffff !important;
+        a{
+          color: #e87a26 !important;
+          font-weight: 500 !important;
+        
+        }
+      }
+    } 
+  }
+}
+.custom-veiw-rightside{
+  background-color: #fff;
+    padding: 5px 12px;
+    border: 1px solid #c4c4c4;
+    margin-bottom: 15px;
+  div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 14px;
+    color: #979797;
+    span{
+      display: block;
+      color: #303030;
+    }
+  }
+}
+.custom-static-view{
+  background-color: #fff;
+  padding: 10px 12px;
+  border: 1px solid #c4c4c4;
+  div{
+    font-size: 14px;
+    min-height: 100px;
+  }
+}

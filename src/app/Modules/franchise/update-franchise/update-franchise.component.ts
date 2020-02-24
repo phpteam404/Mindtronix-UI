@@ -11,7 +11,6 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 export class UpdateFranchiseComponent implements OnInit {
 
   status:any;
-  manager:any;
   title:any;
   list:any;
   submitted1 = false;
@@ -25,51 +24,42 @@ export class UpdateFranchiseComponent implements OnInit {
   pageTitle:string = "Update Franchise";
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder,private _ar: ActivatedRoute) {     
-    
-      this.manager = [
-          {label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},
-          {label:'Swetha', value:{id:2, name: 'Swetha', code: 'SW'}},
-          {label:'Parvathi', value:{id:3, name: 'parvathi', code: 'PRT'}},
-          {label:'Sravani', value:{id:4, name: 'Sravani', code: 'SR'}},
-          {label:'Naresh', value:{id:5, name: 'Naresh', code: 'NRS'}}
-        ];
-        this.status =[
-          {label:'Active',value:{id:1,name:'Active'}},
-          {label:'InActive',value:{id:2,name:'InActive'}}
-        ]
-        this.title =[
-          {label:'Admin',value:{id:1,name:'Admin'}},
-          {label:'Site Admin',value:{id:2,name:'Site Admin'}},
-          {label:'Super Admin',value:{id:3,name:'Super Admin'}}
-        ]
-        this.list = [
-          {id:1,franchise_name:'Mindtronix Learning Centre', email:'mindtronixlc@mindtronics.com', contact_number:'7997666616', 
-            city:'Bengaluru',created_on:'02-12-2019',status:'Active',actions:''},
-          {id:2,franchise_name:'Mindtronix Learning Centre Vidyaranyarapura', email:'mindtronixlcvdp@mindtronics.com', contact_number:'076187 11378', 
-            city:'Bengaluru',created_on:'02-11-2019',status:'Inactive',actions:''},
-          {id:3,franchise_name:'Mindtronix Learning Centre-Kempapura', email:'mindtronixkmp@mindtronics.com', contact_number:'9876512345', 
-            city:'Bengaluru',created_on:'02-12-2018',status:'Active',actions:''},
-          {id:4,franchise_name:'Mindtronix Learning Centre Yelahanka', email:'mindtronixyel@mindtronics.com', contact_number:'9867538952', 
-            city:'Bengaluru',created_on:'20-10-2019',status:'Active',actions:''},
-          {id:5,franchise_name:'Mindtronix Learning Centre JP Nagar', email:'mindtronixjp@mindtronics.com', contact_number:'07207676333', 
-            city:'Bengaluru',created_on:'26-08-2019',status:'Inactive',actions:''},
-          {id:6,franchise_name:'Mindtronix Learning Centre Jaya Nagar', email:'mindtronixjy@mindtronics.com', contact_number:'9010208050', 
-            city:'Bengaluru',created_on:'25-06-2019',status:'Inactive',actions:''},
-          {id:7,franchise_name:'Mindtronix Learning centre, BTM Layout', email:'mindtronixbtm@mindtronics.com', contact_number:'9870564328', 
-            city:'Bengaluru',created_on:'20-07-2019',status:'Active',actions:''},
-          {id:8,franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731', 
-            city:'Bengaluru',created_on:'11-03-2018',status:'Active',actions:''},
-          {id:9,franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
-            city:'Bengaluru',created_on:'10-03-2019',status:'Active',actions:''},
-          {id:10,franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', 
-            city:'Bengaluru',created_on:'05-08-2019',status:'Inactive',actions:''},
-          {id:11,franchise_name:'Mindtronix Learning Centre, Banneraghatta', email:'mindtronixbng@mindtronics.com', contact_number:'9542794144', 
-            city:'Bengaluru',created_on:'13-02-2020',status:'Active',actions:''},
-          {id:12,franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', 
-            city:'Bengaluru',created_on:'11-03-2018',status:'Inactive',actions:''}
-        ];
-  }
-  
+    this.status =[
+      {label:'Active',value:{id:1,name:'Active'}},
+      {label:'InActive',value:{id:2,name:'InActive'}}
+    ]
+    this.title =[
+      {label:'Admin',value:{id:1,name:'Admin'}},
+      {label:'Site Admin',value:{id:2,name:'Site Admin'}},
+      {label:'Super Admin',value:{id:3,name:'Super Admin'}}
+    ]
+    this.list = [
+      {id:1,franchise_name:'Mindtronix Learning Centre', email:'mindtronixlc@mindtronics.com', contact_number:'7997666616', 
+        city:'Bengaluru',created_on:'02-12-2019',status:'Active',actions:''},
+      {id:2,franchise_name:'Mindtronix Learning Centre Vidyaranyarapura', email:'mindtronixlcvdp@mindtronics.com', contact_number:'076187 11378', 
+        city:'Bengaluru',created_on:'02-11-2019',status:'Inactive',actions:''},
+      {id:3,franchise_name:'Mindtronix Learning Centre-Kempapura', email:'mindtronixkmp@mindtronics.com', contact_number:'9876512345', 
+        city:'Bengaluru',created_on:'02-12-2018',status:'Active',actions:''},
+      {id:4,franchise_name:'Mindtronix Learning Centre Yelahanka', email:'mindtronixyel@mindtronics.com', contact_number:'9867538952', 
+        city:'Bengaluru',created_on:'20-10-2019',status:'Active',actions:''},
+      {id:5,franchise_name:'Mindtronix Learning Centre JP Nagar', email:'mindtronixjp@mindtronics.com', contact_number:'07207676333', 
+        city:'Bengaluru',created_on:'26-08-2019',status:'Inactive',actions:''},
+      {id:6,franchise_name:'Mindtronix Learning Centre Jaya Nagar', email:'mindtronixjy@mindtronics.com', contact_number:'9010208050', 
+        city:'Bengaluru',created_on:'25-06-2019',status:'Inactive',actions:''},
+      {id:7,franchise_name:'Mindtronix Learning centre, BTM Layout', email:'mindtronixbtm@mindtronics.com', contact_number:'9870564328', 
+        city:'Bengaluru',created_on:'20-07-2019',status:'Active',actions:''},
+      {id:8,franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731', 
+        city:'Bengaluru',created_on:'11-03-2018',status:'Active',actions:''},
+      {id:9,franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', 
+        city:'Bengaluru',created_on:'10-03-2019',status:'Active',actions:''},
+      {id:10,franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', 
+        city:'Bengaluru',created_on:'05-08-2019',status:'Inactive',actions:''},
+      {id:11,franchise_name:'Mindtronix Learning Centre, Banneraghatta', email:'mindtronixbng@mindtronics.com', contact_number:'9542794144', 
+        city:'Bengaluru',created_on:'13-02-2020',status:'Active',actions:''},
+      {id:12,franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', 
+        city:'Bengaluru',created_on:'11-03-2018',status:'Inactive',actions:''}
+    ];
+  } 
 
   ngOnInit(): void {
     var id;
@@ -81,8 +71,9 @@ export class UpdateFranchiseComponent implements OnInit {
     });
     this.stepOneForm = new FormGroup({
       name: new FormControl(this.fullObject.franchise_name, [Validators.required]),
-      manager: new FormControl({label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},[Validators.required]),
-      phone: new FormControl(this.fullObject.contact_number, [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+      code: new FormControl('', [Validators.required]),
+      contact_person: new FormControl(this.fullObject.contact_person,[Validators.required]),
+      phone: new FormControl(this.fullObject.contact_number, [Validators.required]),
       website_address :new FormControl(''),
       landmark: new FormControl('Charminar'),
       email: new FormControl(this.fullObject.email, [Validators.required, Validators.email]),

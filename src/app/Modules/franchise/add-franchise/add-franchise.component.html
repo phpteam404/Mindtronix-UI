@@ -73,40 +73,37 @@
                                 <input pinputtext type="text" placeholder="Name" name="name" formControlName="name" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.name.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">Franchise Name is required!
+                                    [ngClass]=" 'error'">Franchise Name is required
                                 </div> 
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label>Manager <span>*</span></label>
-                                <p-dropdown [options]="manager" formControlName="manager" placeholder="Select Manager" itemSize="30"
-                                name="manager" optionLabel="label" required></p-dropdown>
+                                <label>Franchise Code <span>*</span></label>
+                                <input pinputtext type="text" placeholder="Code" name="code" formControlName="code" required>
                                 <div class="invalid-feedback"
-                                    *ngIf="stepOneForm.controls.manager.invalid && submitted1!=null && !submitted1"
-                                   [ngClass]=" 'error'"> Manager is required!
+                                     *ngIf="stepOneForm.controls.code.invalid && submitted1!=null && !submitted1"
+                                    [ngClass]=" 'error'">Franchise Code is required
+                                </div> 
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Owner Name <span>*</span></label>
+                                <input pinputtext type="text" placeholder="Contact Person" name="contact_person" formControlName="contact_person" required>
+                                <div class="invalid-feedback"
+                                    *ngIf="stepOneForm.controls.contact_person.invalid && submitted1!=null && !submitted1"
+                                   [ngClass]=" 'error'">Owner Name is required
                                </div>
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
-                            <label>Phone <span>*</span></label>
+                            <label>Contact Number <span>*</span></label>
                             <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
                             <div class="invalid-feedback"
                                     *ngIf="stepOneForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                                [ngClass]=" 'error'">Phone number must be 10 digits
+                                [ngClass]=" 'error'">Contact number is required
                             </div> 
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Website Address</label>
-                                <input pinputtext placeholder="www.xxxxx.com" formControlName="website_address" name="website_address" type="text">
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Landmark</label>
-                                <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
-                            </div>
                         </div>
                         <div class="col-md-4 col-12">
                             <div class="form-group">
@@ -114,21 +111,35 @@
                                 <input pinputtext placeholder="Email" formControlName="email" name="email" type="email" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.email.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">Email is required!
+                                    [ngClass]=" 'error'">Email is required
                                 </div> 
                             </div>
                         </div>
                         <div class="col-md-4 col-12">
-                            <label>Pincode</label>
-                            <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+                            <div class="form-group">
+                                <label>Website Address</label>
+                                <input pinputtext placeholder="www.mindtronix.com" formControlName="website_address" name="website_address" type="text">
+                            </div>
                         </div>
+                        <div class="col-md-12 col-12">
+                            <div class="form-group">
+                                <label>Address</label>
+                                <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-4 col-12">
+                            <div class="form-group">
+                                <label>Landmark</label>
+                                <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
+                            </div>
+                        </div>                        
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Country <span>*</span></label>
                                 <input pinputtext placeholder="Country" formControlName="country" name="country" type="text" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.country.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">Country is required!
+                                    [ngClass]=" 'error'">Country is required
                                 </div> 
                             </div>
                         </div>
@@ -138,7 +149,7 @@
                                 <input pinputtext placeholder="State" formControlName="state" name="state" type="text" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.state.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">State is required!
+                                    [ngClass]=" 'error'">State is required
                                 </div>
                             </div>
                         </div>
@@ -148,10 +159,14 @@
                                 <input pinputtext placeholder="City" formControlName="city" name="city" type="text" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.city.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">City is required!
+                                    [ngClass]=" 'error'">City is required
                                 </div>
                             </div>
-                        </div>
+                        </div> 
+                        <div class="col-md-4 col-12">
+                            <label>Pincode</label>
+                            <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+                        </div>                       
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Status <span>*</span></label>
@@ -159,14 +174,8 @@
                                 name="status" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                     *ngIf="stepOneForm.controls.status.invalid && submitted1!=null && !submitted1"
-                                   [ngClass]=" 'error'"> Status is required!
+                                   [ngClass]=" 'error'"> Status is required
                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-12">
-                            <div class="form-group">
-                                <label>Address</label>
-                                <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
                             </div>
                         </div>
                     </div>
@@ -186,7 +195,7 @@
                                 name="contact_title" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_title.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Title is required!
+                                   [ngClass]=" 'error'"> Contact Title is required
                                </div>
                             </div>
                         </div>
@@ -197,7 +206,7 @@
                                     formControlname="contact_name" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_name.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Name is required!
+                                   [ngClass]=" 'error'"> Contact Name is required
                                </div>
                             </div>
                         </div>
@@ -208,7 +217,7 @@
                                     formControlname="contact_email" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Email is required!
+                                   [ngClass]=" 'error'"> Contact Email is required
                                </div>
                             </div>
                         </div>
@@ -238,7 +247,7 @@
                                 name="fee_structure" optionLabel="label" required></p-multiSelect>
                             <div class="invalid-feedback"
                                 *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
-                                [ngClass]=" 'error'">Fee Structure is required!</div>
+                                [ngClass]=" 'error'">Fee Structure is required</div>
                         </div>
                         <!-- <div class="col-md-4 col-12">
 

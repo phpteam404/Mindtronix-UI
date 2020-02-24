@@ -30,9 +30,7 @@
                   </p>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Mike John responded to your ticket</a>
                   <a class="dropdown-item" href="#">You have 5 new tickets</a>
-                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
                   <a class="dropdown-item" href="#">Another Notification</a>
                   <a class="dropdown-item" href="#">Another One</a>
               </div>
@@ -49,7 +47,7 @@
     </div>
     <div class="custom-side-menu">
         <ul class="nav">
-            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}"
+            <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"
                 *ngFor="let menuItem of menuItems; let i = index"
                 (click)="Collaps(i)" 
                 id="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
@@ -70,7 +68,7 @@
                     id="{{menuItem.title | applyUnderScore:'_':' ' | lowercase}}"
                     (click)="expandedIndex = -1" >
                     <ul class="sub-menu">
-                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" *ngFor="let child of menuItem.childs"  [title]="child.title">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" *ngFor="let child of menuItem.childs"  [title]="child.title">
                             <a class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
                                 <!-- <i class="{{child.class}}">{{child.icon}}</i> -->
                                 <p>{{child.title}}</p>

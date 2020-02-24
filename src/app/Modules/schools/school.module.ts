@@ -9,21 +9,28 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+import { BasicModule } from '../basic/basic.module';
 
 @NgModule({
   declarations: [
-    SchoolListComponent
+    SchoolListComponent,
+    AddSchoolComponent,
+    UpdateSchoolComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     SchoolRoutingModule,
     FileUploadModule,
     TableModule,
     ButtonModule,
     KeyFilterModule,
     FormsModule,
-    InputTextModule
+    InputTextModule,
+    InputTextareaModule,
+    BasicModule.forRoot(),
   ]
 })
 export class SchoolModule { }

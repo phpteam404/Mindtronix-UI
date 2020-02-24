@@ -3328,7 +3328,9 @@ body .ui-multiselect{
 body .ui-multiselect:not(.ui-state-disabled):hover {
   border-color: #cccccc;
 }
-
+body .ui-inputgroup .ui-inputgroup-addon {
+  padding: 5px !important;
+}
 @media (min-width: 992px) {
   .navbar-form {
     margin-top: 21px;

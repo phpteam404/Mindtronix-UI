@@ -50,11 +50,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     {
-        path: 'fee_structure',
+        path: 'fee_management',
         loadChildren: () => import('../../Modules/fee/fee.module').then(m => m.FeeModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Fee Structure'
+            breadcrumbs: 'Fee Management'
         }
     },
     {
@@ -89,11 +89,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     { 
-        path: 'schools',
+        path: 'schools_management',
         loadChildren: () => import('../../Modules/schools/school.module').then(m => m.SchoolModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Schools'
+            breadcrumbs: 'School Management'
         }
     },
     { 

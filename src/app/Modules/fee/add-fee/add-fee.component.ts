@@ -10,22 +10,34 @@ import { Router } from '@angular/router';
 })
 export class AddFeeComponent implements OnInit {
 
-  submitted = false;
-  constructor(private _router: Router, private _toast: ToasterService) { }
+  submitted = null;
+  term:any =[];
+  status:any =[];
+
+  pageTitle:string="Create Fee Structure";
+  constructor(private _router: Router, private _toast: ToasterService) {
+    this.term= [
+      {label: "Monthly", value:"monthly"},
+      {label: "Quarterly", value:"quarterly"},
+      {label: "Half Yearly", value:"half_yearly"},
+      {label: "Yearly", value:"yearly"},
+    ];
+    this.status =[
+      {label:'Active',value:'active'},
+      {label:'InActive',value:'Inactive'}
+    ];
+   }
   feeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    price: new FormControl('', [Validators.required]),
-    description: new FormControl('', [Validators.required]),
-    offer_type: new FormControl(''),
-    offer_details: new FormControl(''),
+    amount: new FormControl('', [Validators.required]),
+    term: new FormControl('', [Validators.required]),
     discount: new FormControl(''),
     discount_details: new FormControl(''),  
+    status: new FormControl({label:'Active',value:'active'}, [Validators.required]),  
   });
   get getname(): any { return this.feeForm.get('name'); }
-  get getprice(): any { return this.feeForm.get('price'); }
-  get getdescription(): any { return this.feeForm.get('description'); }
-  get getoffertype(): any { return this.feeForm.get('offer_type'); }
-  get getofferdetails(): any { return this.feeForm.get('offer_details'); }
+  get getamount(): any { return this.feeForm.get('amount'); }
+  get getterm(): any { return this.feeForm.get('term'); }
   get getdiscount(): any { return this.feeForm.get('discount'); }
   get getdiscountdetails(): any { return this.feeForm.get('discount_details'); }
 
@@ -35,15 +47,16 @@ export class AddFeeComponent implements OnInit {
   get f() { return this.feeForm.controls; }
 
   submit(): any{
-    this.submitted = true;
+    this.submitted = false;
     if (this.feeForm.valid) {
       this._toast.show('success','Successfully Added');
-      this._router.navigate(['fee_structure']);
+      this.submitted = true;
+      this._router.navigate(['fee_management']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   goToList(){
-    this._router.navigate(['fee_structure']);
+    this._router.navigate(['fee_management']);
   }
 }

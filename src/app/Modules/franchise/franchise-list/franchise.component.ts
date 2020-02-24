@@ -75,10 +75,10 @@ export class FranchiseListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this._route});
   }
   GoToSchools(event: Event){
-    this.router.navigate(['schools'], {});
+    this.router.navigate(['schools_management'], {});
   }
   GoToUsers(event: Event){
-    this.router.navigate(['users'], {});
+    this.router.navigate(['users/all-users'], {});
   }
 
   viewFranchise(data){

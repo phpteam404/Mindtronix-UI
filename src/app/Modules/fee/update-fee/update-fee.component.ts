@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpdateFeeComponent implements OnInit {
 
+  pageTitle:string="Update Fee Structure";
   constructor() { }
 
   ngOnInit(): void {

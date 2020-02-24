@@ -3,16 +3,16 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 
 const routes: Routes = [
-  /*{
-    path: '',
-    loadChildren: () => import('../../Modules/user/Students/student.module').then(m => m.StudentModule),
-    canActivate: [AuthGuard],
-    data: {
-        breadcrumbs: 'Students'
-    }
-  }, */
   {
     path: '',
+    loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
+    canActivate: [AuthGuard],
+    data: {
+        breadcrumbs: 'All Users'
+    }
+  },
+  {
+    path: 'all-users',
     loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
     canActivate: [AuthGuard],
     data: {
@@ -36,11 +36,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'all-users',
-    loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
+    path: 'online-users',
+    loadChildren: () => import('../../Modules/user/OnlineUsers/online-users.module').then(m => m.OnlineUsersModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'All Users'
+        breadcrumbs: 'Online Users'
     }
   }
 ];

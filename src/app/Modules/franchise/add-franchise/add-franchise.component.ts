@@ -20,7 +20,6 @@ interface City {
 })
 export class AddFranchiseComponent implements OnInit {
   status:any;
-  manager:any;
   title:any;
   submitted1 = null;
   submitted2 = false;
@@ -44,13 +43,6 @@ export class AddFranchiseComponent implements OnInit {
       {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
       {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
     ];
-    this.manager = [
-          {label:'Prasad', value:{id:1, name: 'prasad', code: 'PR'}},
-          {label:'Swetha', value:{id:2, name: 'Swetha', code: 'SW'}},
-          {label:'Parvathi', value:{id:3, name: 'parvathi', code: 'PRT'}},
-          {label:'Sravani', value:{id:4, name: 'Sravani', code: 'SR'}},
-          {label:'Naresh', value:{id:5, name: 'Naresh', code: 'NRS'}}
-    ];
     this.status =[
           {label:'Active',value:{id:1,name:'Active'}},
           {label:'InActive',value:{id:2,name:'InActive'}}
@@ -63,8 +55,9 @@ export class AddFranchiseComponent implements OnInit {
   }
   stepOneForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
-    manager: new FormControl('',[Validators.required]),
-    phone: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
+    code: new FormControl('', [Validators.required]),
+    contact_person: new FormControl('',[Validators.required]),
+    phone: new FormControl('', [Validators.required]),
     website_address :new FormControl(''),
     landmark: new FormControl(''),
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -72,7 +65,7 @@ export class AddFranchiseComponent implements OnInit {
     country :new FormControl('',[Validators.required]),
     state:new FormControl('',[Validators.required]),
     city:new FormControl('',[Validators.required]),
-    status :new FormControl('',[Validators.required]),
+    status :new FormControl({label:'Active',value:{id:1,name:'Active'}},[Validators.required]),
     address: new FormControl('',[Validators.required]),
   });
 

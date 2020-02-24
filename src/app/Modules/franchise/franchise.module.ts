@@ -21,6 +21,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { FormsModule } from '@angular/forms';
 import { ViewFranchiseComponent } from './view-franchise/view-franchise.component';
 import {MultiSelectModule} from 'primeng/multiselect';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {MultiSelectModule} from 'primeng/multiselect';
     FormsModule,
     BsDropdownModule.forRoot(),
     BasicModule.forRoot(),
-    MultiSelectModule
+    MultiSelectModule,
+    TabViewModule
   ]
 })
 export class FranchiseModule { }

@@ -14,6 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { PasswordModule } from 'primeng/password';
 import { MatIconModule } from '@angular/material/icon';
+import { BasicModule } from '../../basic/basic.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { MatIconModule } from '@angular/material/icon';
     InputTextareaModule,
     CalendarModule,
     PasswordModule,
+    BasicModule.forRoot(),
     ReactiveFormsModule
   ]
 })

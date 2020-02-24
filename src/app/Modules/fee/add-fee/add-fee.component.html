@@ -1,51 +1,59 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Create Fee</h4>
+        <h4 class="custom-form-heading">{{pageTitle}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="feeForm" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Fee Name <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="name" name="name" type="text" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
-                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
-                                <div *ngIf="f.name.errors.required">Fee Name is required</div>
+                            <label>Fee Title <span>*</span></label>
+                            <input pinputtext placeholder="Fee Title" formControlName="name" name="name" type="text" required>
+                            <div class="invalid-feedback"
+                                *ngIf="feeForm.controls.name.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> Fee Title is required
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Price <span>*</span></label>
-                        <input type="text" placeholder="Price" pKeyFilter="int" formControlName="price" name="price" [ngClass]="{ 'is-invalid': submitted && f.price.errors }">
-                        <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
-                            <div *ngIf="f.price.errors.required">Price is required</div>
+                        <label>Fee Amount(₹)<span>*</span></label>
+                        <div class="ui-inputgroup">
+                            <span class="ui-inputgroup-addon">₹</span>
+                            <input type="text" placeholder="Amount" pKeyFilter="int" formControlName="amount" name="amount" required>
+                        </div>
+                        <div class="invalid-feedback"
+                            *ngIf="feeForm.controls.amount.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Amount is required
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Offer Type</label>
-                        <input pinputtext type="text" placeholder="Offer Type" formControlName="offer_type" name="offer_type">
+                        <label>Term <span>*</span></label>
+                        <p-dropdown [options]="term" formControlName="term" placeholder="Select Term" itemSize="30"
+                            name="term" optionLabel="label" required></p-dropdown>
+                        <div class="invalid-feedback"
+                            *ngIf="feeForm.controls.term.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Term is required
+                        </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Offer Details</label>
-                            <input pinputtext type="text" placeholder="Offer Details" formControlName="offer_details" name="offer_details">
+                            <label>Discount (%)</label>
+                            <div class="ui-inputgroup">
+                                <input pinputtext type="text" pKeyFilter="int" placeholder="Discount" formControlName="discount" name="discount">
+                                <span class="ui-inputgroup-addon">%</span> 
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Discount</label>
-                        <input pinputtext type="text" placeholder="Discount" formControlName="discount" name="discount">
                     </div>
                     <div class="col-md-4 col-12">
                         <label>Discount Details</label>
                         <input pinputtext type="text" placeholder="Discount Details" formControlName="discount_details" name="discount_details">
                     </div>
-                    <div class="col-md-12 col-12">
-                        <div class="form-group">
-                            <label>Description <span>*</span></label>
-                            <textarea pInputTextarea placeholder="Description" formControlName="description"  
-                                name="description" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"> </textarea>
-                            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                                <div *ngIf="f.description.errors.required">Description is required</div>
-                            </div>
+                    <div class="col-md-4 col-12">
+                        <label>Status <span>*</span></label>
+                        <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                            name="status" optionLabel="label" required></p-dropdown>
+                        <div class="invalid-feedback"
+                            *ngIf="feeForm.controls.status.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Status is required
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">

@@ -1,0 +1,166 @@
+{
+  "nationality": [
+    {
+      "name": "Australian",
+      "id": "1"
+    },
+    {
+      "name": "Bangladeshi",
+      "id": "2"
+    },
+    {
+      "name": "Canadian",
+      "id": "3"
+    },
+    {
+      "name": "Dutch",
+      "id": "4"
+    },
+    {
+      "name": "Ethiopian",
+      "id": "5"
+    },
+    {
+      "name": "Indian",
+      "id": "6"
+    },
+    {
+      "name": "North Korean",
+      "id": "7"
+    }
+  ],
+  "mother_tongue": [
+    {
+      "name": "Telugu",
+      "id": 1
+    },
+    {
+      "name": "Hindi",
+      "id": 2
+    },
+    {
+      "name": "English",
+      "id": 3
+    },
+    {
+      "name": "kanada",
+      "id": 4
+    },
+    {
+      "name": "Orissa",
+      "id": 5
+    }
+  ],
+  "blood_group": [
+    {
+      "name": "O+",
+      "id": 1
+    },
+    {
+      "name": "O-",
+      "id": 2
+    },
+    {
+      "name": "A+",
+      "id": 3
+    },
+    {
+      "name": "A-",
+      "id": 4
+    },
+    {
+      "name": "B+",
+      "id": 5
+    },
+    {
+      "name": "B-",
+      "id": 6
+    },
+    {
+      "name": "AB+",
+      "id": 7
+    },
+    {
+      "name": "AB-",
+      "id": 8
+    }
+  ],
+  "fee_structure": [
+    {
+      "name": "Monthly",
+      "id": 1
+    },
+    {
+      "name": "Quarterly",
+      "id": 2
+    },
+    {
+      "name": "Half-Yearly",
+      "id": 3
+    },
+    {
+      "name": "Yearly",
+      "id": 4
+    }
+  ],
+  "relation": [
+    {
+      "name": "Father",
+      "id": 1
+    },
+    {
+      "name": "Mother",
+      "id": 2
+    },
+    {
+      "name": "Brother",
+      "id": 3
+    },
+    {
+      "name": "sister",
+      "id": 4
+    }
+  ],
+  "classes": [
+    {
+      "name": "I",
+      "id": 1
+    },
+    {
+      "name": "II",
+      "id": 2
+    },
+    {
+      "name": "III",
+      "id": 3
+    },
+    {
+      "name": "IV",
+      "id": 4
+    },
+    {
+      "name": "V",
+      "id": 5
+    },
+    {
+      "name": "VI",
+      "id": 6
+    },
+    {
+      "name": "VII",
+      "id": 7
+    },
+    {
+      "name": "VIII",
+      "id": 8
+    },
+    {
+      "name": "IX",
+      "id": 9
+    },
+    {
+      "name": "X",
+      "id": 10
+    }
+  ]
+}
