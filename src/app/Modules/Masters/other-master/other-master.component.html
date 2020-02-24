@@ -4,7 +4,7 @@
                 <ng-template pTemplate="caption">
                     <div class="row">
                         <div class="col-md-4 col-12">
-                            <p-dropdown  [options]="cities2" [(ngModel)]="selectedCities2" optionLabel="name"></p-dropdown >
+                            <p-dropdown  [options]="cities2" [(ngModel)]="selectedCities2" (onChange)="ChangeModelLable($event)" optionLabel="name"></p-dropdown >
                         </div>
                         <div class="col-md-8 col-12">
                             <div class="custom-search">
@@ -31,7 +31,7 @@
                         <td *ngFor="let col of columns ; let i = index">
                             <span *ngIf="i!=2">{{rowData[col.field]}}</span>
                             <span *ngIf="i == 2" class="d-flex action-color">
-                                <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                                <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog()" title="Edit"></span></a>
                                 <a href="javascript:;" ><span class="icon icon-trash mr-2" title="Delete"></span></a>
                             </span>
                         </td>
@@ -47,7 +47,7 @@
             <div class="row">
                 <div class="col-md-4 col-12">
                     <div class="form-group">
-                        <label>Master Name <span>*</span></label>
+                        <label>{{name}} Name <span>*</span></label>
                         <input  placeholder="Name"  name="name" type="text">
                         <div *ngIf="submitted1 && f.name.errors" class="invalid-feedback">
                             <div *ngIf="f.name.errors.required">Name is required</div>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="col-md-4 col-12">
                     <div class="form-group input-search">
-                        <label>Description&nbsp; <span>*</span></label>
+                        <label>{{description}} Description&nbsp; <span>*</span></label>
                         <input  placeholder="Description"  name="description" type="text">
                         <div *ngIf="submitted1 && f.description.errors" class="invalid-feedback">
                             <div *ngIf="f.description.errors.required">Name is required</div>

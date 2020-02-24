@@ -16,7 +16,8 @@ export class OtherMasterComponent implements OnInit {
   cities2: City[];
   selectedCities2: City[];
   displayBasic: boolean;
-
+  name = 'Grade';
+  description = 'Grade';
   constructor(private router: Router, private _route: ActivatedRoute) { 
     
     this.cars = [
@@ -35,12 +36,17 @@ export class OtherMasterComponent implements OnInit {
       {name: 'Grade', code: 'GRD'},
       {name: 'Category', code: 'CT'},
       {name: 'Sub-Category', code: 'SCT'},
-      {name: 'Tags', code: 'Tg'},
+      {name: 'Tag', code: 'Tg'},
       {name: 'Content-Level', code: 'CL'}
   ];
   }
   showBasicDialog() {
     this.displayBasic = true;
+  }
+  ChangeModelLable(event) {
+    this.name = event.value.name;
+    this.description = event.value.name;
+    // console.log('event.value', event.value);
   }
   AddMaster(event: Event){
     console.log('Adding Master');
