@@ -33,12 +33,12 @@ import { PaymentManagementComponent } from 'src/app/Modules/payment-management/p
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
 import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
+import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 import {TabViewModule} from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
 // import { BreadcrumbsModule } from '@exalif/ngx-breadcrumbs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-
 @NgModule({
   imports: [
     CommonModule,
@@ -78,7 +78,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     PortalManagementComponent,
     ProfilesManagementComponent,
     PaymentManagementComponent,
-    RoleManagementComponent
+    RoleManagementComponent,
+    MasterComponent
   ]
 })
 

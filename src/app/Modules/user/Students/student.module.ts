@@ -14,6 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { CalendarModule } from 'primeng/calendar';
 import { PasswordModule } from 'primeng/password';
 import { MatIconModule } from '@angular/material/icon';
+import {DropdownModule} from 'primeng/dropdown';
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import { MatIconModule } from '@angular/material/icon';
     InputTextareaModule,
     CalendarModule,
     PasswordModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule
   ]
 })
 export class StudentModule { }
