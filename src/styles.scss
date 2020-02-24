@@ -824,16 +824,39 @@ p-table{
     padding: 5px 12px;
     border: 1px solid #c4c4c4;
     margin-bottom: 15px;
-  div{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 14px;
-    color: #979797;
+    .revenue-text{
+      font-size: 16px;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #979797;
+      padding-bottom: 4px;
+    }
+    .student-text{
+      font-size: 14px;
+      color: #979797;
+      font-weight: 500;
+      border-top: 1px solid #eeeeee;
+      padding: 4px 0px 6px;
+    }
+ 
     span{
       display: block;
       color: #303030;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 18px;
     }
+  .custom-flex{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .amount-text{
+    font-size: 16px;
+    font-weight: 500;
+    color: #e87a26;
   }
 }
 .custom-static-view{
@@ -844,4 +867,5 @@ p-table{
     font-size: 14px;
     min-height: 100px;
   }
+ 
 }
