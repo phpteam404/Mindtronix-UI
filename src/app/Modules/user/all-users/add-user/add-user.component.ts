@@ -43,7 +43,7 @@ export class AddUserComponent implements OnInit {
       franchise: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required, Validators.email]),
       phone: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
-      status: new FormControl('',[Validators.required]),
+      status: new FormControl({label:'Active',value:{id:1,name:'active'}},[Validators.required]),
       password: new FormControl('',[ Validators.required]),
         // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
       // ]),

@@ -8,23 +8,28 @@ import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BasicModule } from '../basic/basic.module';
+import { InputTextareaModule } from 'primeng/inputtextarea';
 
 
 @NgModule({
   declarations: [
     TicketListComponent,
-    TicketListComponent
+    TicketInfoComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     FeeRoutingModule,
     FileUploadModule,
     TableModule,
     ButtonModule,
     KeyFilterModule,
     InputTextModule,
-    FormsModule
+    InputTextareaModule,
+    FormsModule,
+    BasicModule.forRoot()
   ]
 })
 export class TicketModule { }

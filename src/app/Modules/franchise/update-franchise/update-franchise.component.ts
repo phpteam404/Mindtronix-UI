@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
+import  dropdown  from 'src/app/jsons/dropdown.json';
 
 @Component({
   selector: 'app-update-franchise',
@@ -20,8 +21,15 @@ export class UpdateFranchiseComponent implements OnInit {
   stepTwoForm: FormGroup;
   stepThreeForm: FormGroup;
 
+  FeeStructureMaster:any=[];
+  contactsList:any=[];
+  contactsListCols:any=[];
+  FeeList:any=[];
+  FeeStructureCols:any=[];
+
   fullObject:any={}
   pageTitle:string = "Update Franchise";
+  FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder,private _ar: ActivatedRoute) {     
     this.status =[
@@ -58,6 +66,33 @@ export class UpdateFranchiseComponent implements OnInit {
         city:'Bengaluru',created_on:'13-02-2020',status:'Active',actions:''},
       {id:12,franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', 
         city:'Bengaluru',created_on:'11-03-2018',status:'Inactive',actions:''}
+    ];
+
+    this.contactsList = [
+      {contact_name:'Tom Smith', contact_phone:'9789456556',contact_title:'Technical',actions:''},
+      {contact_name:'Mike', contact_phone:'7774564556',contact_title:'Finance',actions:''},
+      {contact_name:'Andrew', contact_phone:'7894555556',contact_title:'Accountant',actions:''},
+      {contact_name:'Tulip', contact_phone:'7894444556',contact_title:'Finance',actions:''},
+      {contact_name:'James', contact_phone:'7894563336',contact_title:'Franchise Admin',actions:''},
+      
+    ];
+    this.contactsListCols = [
+      { field: 'contact_title', header: 'Contact Title' },
+      { field: 'contact_name', header: 'Contact Name' },
+      { field: 'contact_phone', header: 'Contact Phone' },
+      { field: 'actions', header: 'Actions' }
+    ]
+    this.FeeList = [
+      {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10,action:''},
+      {id:2,name:'3 (Three Months)', amount:6000, term:'Quarterly',discount:15,action:''}
+    ];
+    this.FeeStructureCols = [
+      { field: 'name', header: 'Fee Title' },
+      { field: 'amount', header: 'Fee Amount (₹)' },
+      { field: 'term', header: 'Term' },
+      { field: 'discount', header: 'Discount (%)' },
+      { field: 'action', header: 'Actions' }
+
     ];
   } 
 

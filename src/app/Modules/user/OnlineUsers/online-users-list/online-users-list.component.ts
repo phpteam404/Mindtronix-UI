@@ -25,24 +25,24 @@ export class OnlineUsersListComponent implements OnInit {
   }
   getUsersList(){
     this.allUsersList = [
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Grab Kit', email:'grabKit@mindtronics.com', phone:'7894564556', manager:'Mike',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Tech Point', email:'tech_point@mindtronics.com', phone:'7418523654', manager:'Peter',actions:''},
-      {status:'Inactive', grade:'IV', city:'Hyderabad', name:'Mindex', email:'mindex@mindtronics.com', phone:'9632587412', manager:'Jenny',actions:''},
-      {status:'Active', grade:'VIII', city:'Tirupathi', name:'Grade Power', email:'grade_power@mindtronics.com', phone:'6987452541', manager:'Lisa',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Tera Soft', email:'teraSoft@mindtronics.com', phone:'8965412547', manager:'John II',actions:''},
-      {status:'Inactive', grade:'IX', city:'Banglore', name:'Brain Balance', email:'brain-blnc@mindtronics.com', phone:'7588965415', manager:'John',actions:''},
-      {status:'Active', grade:'VIII', city:'Tirupathi', name:'Learning Horizon', email:'lhorizon@mindtronics.com', phone:'9658745896', manager:'Peter',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Lesson Up', email:'lessonUp@mindtronics.com', phone:'9658745896', manager:'Karen',actions:''},
-      {status:'Active', grade:'V', city:'Hyderabad', name:'Brain Gym', email:'gym-brain@mindtronics.com', phone:'8569745896', manager:'Dominique',actions:''},
-      {status:'Inactive', grade:'VII', city:'Tirupathi', name:'Robo Soft', email:'robosoft@mindtronics.com', phone:'7545896552', manager:'Christian',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Simply Brilliant', email:'sbrilliant@mindtronics.com', phone:'9632568745', manager:'Jimmy',actions:''},
-      {status:'Inactive', grade:'VIII', city:'Tirupathi', name:'Inquistive', email:'inquistive@mindtronics.com', phone:'7895874568', manager:'Trump',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'People Tech', email:'people_tech@mindtronics.com', phone:'9658523645', manager:'Donald',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Bulb', email:'bulb@mindtronics.com', phone:'7845258963', manager:'Modi',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Newton', email:'newton@mindtronics.com', phone:'8547896541', manager:'Jack',actions:''},
-      {status:'Active', grade:'VI', city:'Tirupathi', name:'Study Point', email:'spoint@mindtronics.com', phone:'7458963521', manager:'Bill Gates',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Robo Tech', email:'robo-tech@mindtronics.com', phone:'6985236545', manager:'Obama',actions:''},
-      {status:'Active', grade:'VII', city:'Tirupathi', name:'Tutor Pedia', email:'tpedia@mindtronics.com', phone:'8569874589', manager:'Laura',actions:''}
+      {status:'Active', grade:'VI', city:'Vijayawada', name:'John', email:'john@mindtronics.com', phone:'8185884731', manager:'mickey',actions:''},
+      {status:'Active', grade:'IX', city:'Hyderabad', name:'Jith', email:'jith@mindtronics.com', phone:'9676526363', manager:'johnson',actions:''},
+      {status:'Inactive', grade:'IV', city:'Hyderabad', name:'Mindex', email:'mindex@mindtronics.com', phone:'9533518785', manager:'Jenny',actions:''},
+      {status:'Active', grade:'X', city:'Warangal', name:'Samuel', email:'samuel@mindtronics.com', phone:'6987452541', manager:'Lisa',actions:''},
+      {status:'Active', grade:'VII', city:'Tirupathi', name:'Dev', email:'teraSoft@mindtronics.com', phone:'8965412547', manager:'John II',actions:''},
+      {status:'Inactive', grade:'IX', city:'Banglore', name:'Likith', email:'likith@mindtronics.com', phone:'7588965415', manager:'John',actions:''},
+      {status:'Active', grade:'VIII', city:'Khanmmam', name:'johnson', email:'johnson@mindtronics.com', phone:'9658745896', manager:'Peter',actions:''},
+      {status:'Active', grade:'VII', city:'Vizag', name:'Mohith', email:'mohith@mindtronics.com', phone:'9658745896', manager:'Karen',actions:''},
+      {status:'Active', grade:'V', city:'Hyderabad', name:'Mathew', email:'mathew@mindtronics.com', phone:'8569745896', manager:'Dominique',actions:''},
+      {status:'Inactive', grade:'VII', city:'Tirupathi', name:'Johith', email:'johith@mindtronics.com', phone:'7545896552', manager:'Christian',actions:''},
+      {status:'Active', grade:'VII', city:'vijayawada', name:'Saleem', email:'saleem@mindtronics.com', phone:'9632568745', manager:'Jimmy',actions:''},
+      {status:'Inactive', grade:'VIII', city:'Tirupathi', name:'sampath', email:'sampath@mindtronics.com', phone:'7895874568', manager:'Trump',actions:''},
+      {status:'Active', grade:'VII', city:'Ongole', name:'Hendrick', email:'hendrick@mindtronics.com', phone:'9658523645', manager:'Donald',actions:''},
+      {status:'Active', grade:'VII', city:'Tirupathi', name:'smith', email:'smith@mindtronics.com', phone:'9876572152', manager:'Modi',actions:''},
+      {status:'Active', grade:'VII', city:'Nirmal', name:'Koen', email:'koen@mindtronics.com', phone:'8547896541', manager:'Jack',actions:''},
+      {status:'Active', grade:'VI', city:'Tirupathi', name:'Kindt', email:'kindt@mindtronics.com', phone:'7458963521', manager:'Bill Gates',actions:''},
+      {status:'Active', grade:'VII', city:'machilipatnam', name:'johan', email:'johan@mindtronics.com', phone:'6985236545', manager:'Obama',actions:''},
+      {status:'Active', grade:'VII', city:'Tirupathi', name:'Verdans', email:'verdans@mindtronics.com', phone:'8569874589', manager:'Laura',actions:''}
     ];
   }
 

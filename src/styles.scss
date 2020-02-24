@@ -869,3 +869,26 @@ p-table{
   }
  
 }
+p-dialog{
+  .custom-form{
+    border: none !important;
+  }
+  .ui-dialog .ui-dialog-content{
+    overflow:  hidden !important;
+  }
+}
+.custom-lastchild-list{
+  thead{
+    th{
+      &:last-child{
+        width: auto !important;
+        text-align: left !important;
+      }
+    }
+  }
+  td{
+    &:last-child{
+      text-align: left !important;
+    }
+  }
+}

@@ -68,18 +68,7 @@
                             <div *ngIf="f.phone.errors.required">Phone is required</div>
                             <div *ngIf="f.phone.errors.minlength || f.phone.errors.maxlength"> Phone Number Must Be 10 digits</div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Status <span>*</span></label>
-                            <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
-                                name="status" optionLabel="label" required></p-dropdown>
-                            <div class="invalid-feedback"
-                                *ngIf="addUserForm.controls.status.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'"> Status is required!
-                            </div>                        
-                        </div>
-                    </div>
+                    </div>                    
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Password <span>*</span></label>
@@ -107,6 +96,17 @@
                                 <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>
                                 <div *ngIf="f.cpassword.errors.Invalid">Confirm Password is Invalid</div>
                             </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Status <span>*</span></label>
+                            <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                                name="status" optionLabel="label" required></p-dropdown>
+                            <div class="invalid-feedback"
+                                *ngIf="addUserForm.controls.status.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> Status is required!
+                            </div>                        
                         </div>
                     </div>
                 </div>

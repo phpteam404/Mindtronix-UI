@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="custom-table">
+    <div class="custom-table custom-lastchild-list">
         <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
@@ -21,11 +21,13 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 5">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 5">
-                            <span class="icon icon-edit-pencil mr-2"></span>
-                            <span class="icon icon-settings mr-2"></span>
-                            <span class="icon icon-delete"></span>
+                        <span *ngIf="i != 4">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 4">
+                            <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
+                            (rowData[col.field]==='Pending')? 'bg-gold' : '',
+                            (rowData[col.field]==='paid') ? 'bg-blue' : '',
+                            (rowData[col.field]==='pending') ? 'bg-green' : '']"
+                            class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                     </td>
                 </tr>
