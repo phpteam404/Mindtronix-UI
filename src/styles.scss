@@ -869,3 +869,11 @@ p-table{
   }
  
 }
+p-dialog{
+  .custom-form{
+    border: none !important;
+  }
+  .ui-dialog .ui-dialog-content{
+    overflow:  hidden !important;
+  }
+}

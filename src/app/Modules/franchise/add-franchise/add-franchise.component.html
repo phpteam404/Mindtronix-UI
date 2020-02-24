@@ -188,7 +188,7 @@
             <mat-step label="Contact Information">
                 <form [formGroup]="stepTwoForm" (ngSubmit)="stepTwoFormSubmit()">
                     <div class="row">
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-3 col-12">
                             <div class="form-group">
                                 <label>Contact Title <span>*</span></label>
                                 <p-dropdown [options]="title" formControlName="contact_title" placeholder="Select Title" itemSize="30"
@@ -202,52 +202,88 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Name <span>*</span></label>
-                                <input pinputtext placeholder="Contact Name" name="contact_name" type="text"
-                                    formControlname="contact_name" required>
+                                <input pinputtext placeholder="Contact Name" type="text" formControlName="contact_name" name="contact_name" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_name.invalid && submitted2!=null && !submitted2"
                                    [ngClass]=" 'error'"> Contact Name is required
                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-12">
+                        <!-- <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Contact Email <span>*</span></label>
-                                <input pinputtext placeholder="Contact Email" name="contact_email" type="email" email
-                                    formControlname="contact_email" required>
+                                <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
                                    [ngClass]=" 'error'"> Contact Email is required
                                </div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="col-md-4 col-12">
-                            <label>Contact Phone <span>*</span></label>
+                            <label>Contact Number <span>*</span></label>
                             <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="contact_phone"
                                 name="contact_phone" required>                           
                             <div class="invalid-feedback"
                                 *ngIf="stepTwoForm.controls.contact_phone.invalid && submitted2!=null && !submitted2"
-                                [ngClass]=" 'error'"> Phone Number Must Be 10 digits
+                                [ngClass]=" 'error'"> Contact number is required
                             </div>
                         </div>
+                        <div class="col-md-1 col-12 mt-4">
+                            <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
+                        </div>
                     </div>
-                    <div class="text-center">
-                        <button mat-button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
-                        <button mat-button matStepperNext class="btn-warning mr-2" type="submit">Next</button>
-                        <button class="btn-default" type="reset" (click)="goToList()">Cancel</button>
+                    <div class="text-center col-12">
+                        <button  matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                        <button  matStepperNext class="btn-warning" type="button">Next</button>
                     </div>
                 </form>
+                <div class="custom-table mt-3">
+                    <p-table #dt [columns]="contactsListCols" [value]="contactsList" [paginator]="false" [rows]="10">
+                        <!-- <ng-template pTemplate="caption">
+                            <div class="custom-search">
+                                <div class="input-search">
+                                    <input type="text" pInputText size="50" placeholder="Search..."
+                                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                                    <i class="fa fa-search"></i> 
+                                </div>
+                            </div>
+                        </ng-template> -->
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                                    {{col.header}}
+                                    <p-sortIcon *ngIf="i != 3" [field]="col.field"></p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns ; let i = index">
+                                    <span *ngIf="i != 3">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i == 3" class="text-right">
+                                        <a href="javascript:;" (click)="deleteContact(i)">
+                                            <span class="icon icon-delete" title="Delete"></span>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </mat-step>
             <mat-step label="Fee Management">
                 <form [formGroup]="stepThreeForm" (ngSubmit)="stepThreeFormSubmit()">
                     <div class="row">
                         <div class="col-md-4 col-12 mb-5">
                             <label>Fee Structure <span>*</span></label>
-                            <p-multiSelect [options]="cities1" placeholder="Select Fee Structure" formControlname="fee_structure" 
-                                name="fee_structure" optionLabel="label" required></p-multiSelect>
+                            <p-multiSelect [options]="FeeStructureList" formControlName="fee_structure" optionLabel="name" 
+                                name="fee_structure" required></p-multiSelect>
                             <div class="invalid-feedback"
                                 *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
                                 [ngClass]=" 'error'">Fee Structure is required</div>
+                        </div>
+                        <div class="col-md-1 col-12 mb-5 mt-4">
+                            <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
                         </div>
                         <!-- <div class="col-md-4 col-12">
 
@@ -305,11 +341,43 @@
                         </div> -->
                     </div>
                     <div class="text-center">
-                        <button mat-button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
-                        <button class="btn-warning mr-2" type="submit">Save</button>
-                        <button class="btn-default" type="reset" (click)="goToList()">Cancel</button>
+                        <button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                        <button class="btn-warning" (click)="goToList()" type="button">Save</button>
                     </div>
                 </form>
+                <div class="custom-table mt-3">
+                    <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
+                        <!-- <ng-template pTemplate="caption">
+                            <div class="custom-search">
+                                <div class="input-search">
+                                    <input type="text" pInputText size="50" placeholder="Search..."
+                                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                                    <i class="fa fa-search"></i> 
+                                </div>
+                            </div>
+                        </ng-template> -->
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                                    {{col.header}}
+                                    <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns ; let i = index">
+                                    <span *ngIf="i != 4">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i == 4" class="text-right">
+                                        <a href="javascript:;" (click)="deleteFee(i)">
+                                            <span class="icon icon-delete" title="Delete"></span>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
             </mat-step>
         </mat-horizontal-stepper>
     </div>

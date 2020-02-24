@@ -3331,6 +3331,25 @@ body .ui-multiselect:not(.ui-state-disabled):hover {
 body .ui-inputgroup .ui-inputgroup-addon {
   padding: 5px !important;
 }
+.add-icon-btn{
+  padding: 6px 10px !important;
+  border-radius: 4px;
+  font-size: 24px !important;
+  line-height: 22px;
+}
+body .ui-inputgroup .ui-inputgroup-addon {
+  border: 1px solid #ccc;
+}
+.input-addon-iconleft input{
+  border-left: 0px solid #cccccc !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+.input-addon-iconright input{
+  border-right: 0px solid #cccccc !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
 @media (min-width: 992px) {
   .navbar-form {
     margin-top: 21px;

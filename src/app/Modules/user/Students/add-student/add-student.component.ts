@@ -88,13 +88,13 @@ export class AddStudentComponent implements OnInit {
       }  
       this.submitted = true;
       this._toast.show('success','Successfully Added');
-      this._router.navigate(['franchise']);
+      this._router.navigate(['users/students']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   goToList(){
-    this._router.navigate(['franchise']);
+    this._router.navigate(['users/students']);
   }
 
 }
