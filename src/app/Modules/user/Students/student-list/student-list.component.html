@@ -2,33 +2,40 @@
     <div class="custom-table">
         <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
-                <div class="custom-search">
-                    <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                        <i class="fa fa-search"></i> 
+                <div class="row">
+                    <div class="col-md-4 col-12 ">
+                        <!-- <p-dropdown  [options]="schools" [(ngModel)]="selectedSchool" optionLabel="label"></p-dropdown > -->
                     </div>
-                    <button pButton type="button" label="Create Student" class="btn-warning" (click)="AddNewStudent($event)"></button>
+                    <div class="col-md-8 col-12">
+                        <div class="custom-search">
+                            <div class="input-search">
+                                <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                                <i class="fa fa-search"></i> 
+                            </div>
+                            <button pButton type="button" label="Create Student" class="btn-warning" (click)="AddNewStudent($event)"></button>
+                        </div>
+                    </div>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
                         {{col.header}}
-                        <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
+                        <p-sortIcon *ngIf="i != 8" [field]="col.field"></p-sortIcon>
                     </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 7 && i != 6">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 6">
+                        <span *ngIf="i != 8 && i != 7">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 7">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                                 (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
-                        <span *ngIf="i == 7" class="d-flex action-color">
+                        <span *ngIf="i == 8" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
                             <!-- <a href="javascript:;"><span class="icon icon-settings mr-2" title="Manage Users"></span> </a> -->
                             <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>

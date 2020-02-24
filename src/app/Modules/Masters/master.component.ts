@@ -6,10 +6,10 @@ interface City {
 }
 @Component({
   selector: 'app-other-master',
-  templateUrl: './other-master.component.html',
-  styleUrls: ['./other-master.component.scss']
+  templateUrl: './master.component.html',
+  styleUrls: ['./master.component.scss']
 })
-export class OtherMasterComponent implements OnInit {
+export class MasterComponent implements OnInit {
   cities: any;
   cars: any;
   cols:any;

@@ -15,6 +15,7 @@ import { CalendarModule } from 'primeng/calendar';
 import { PasswordModule } from 'primeng/password';
 import { MatIconModule } from '@angular/material/icon';
 import { BasicModule } from '../../basic/basic.module';
+import { DropdownModule } from 'primeng/dropdown';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { BasicModule } from '../../basic/basic.module';
     CalendarModule,
     PasswordModule,
     BasicModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DropdownModule
   ]
 })
 export class StudentModule { }
