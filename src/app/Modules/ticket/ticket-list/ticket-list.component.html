@@ -27,8 +27,13 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
+                   
                     <td *ngFor="let col of columns ; let i = index">
-                        <span >{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=5">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 5" class="d-flex action-color justify-content-center">
+                            <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>
+                            
+                        </span>
                     </td>
                 </tr>
             </ng-template>

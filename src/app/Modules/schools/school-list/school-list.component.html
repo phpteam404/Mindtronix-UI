@@ -8,6 +8,14 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                     <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div> -->
+                <!-- <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewSchool($event)"></button>
+                </div> -->
                 <div class="custom-search">
                     <div class="input-search">
                         <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
@@ -31,8 +39,8 @@
                         <span *ngIf="i!=5">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 5" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="AddNewSchool($event)"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-trash mr-2" title="Edit"></span></a>
-                            <a href="javascript:;"><span class="icon icon-user" (click)="GoToStudent($event)" title="Manage Students"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete mr-2" title="Edit"></span></a>
+                            <a href="javascript:;"><span class="icon icon-users" (click)="GoToStudent($event)" title="Manage Students"></span></a>
                         </span>
                     </td>
                 </tr>

@@ -44,7 +44,8 @@ export class TicketListComponent implements OnInit {
       { field: 'title', header: 'Issue' },
       { field: 'created_by', header: 'Created By' },
       { field: 'status', header: 'Status' },
-      { field: 'last_update', header: 'Last Update' }
+      { field: 'last_update', header: 'Last Update' },
+      { field: 'actions', header: 'Actions' }
     ];
   }
   ngOnInit(): void {

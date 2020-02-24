@@ -3319,6 +3319,16 @@ textarea::placeholder {
 .mat-button{
   line-height: 23px !important;
 }
+body .ui-multiselect{
+  width: 100% !important;
+}
+.mat-horizontal-content-container{
+  min-height: 300px;
+}
+body .ui-multiselect:not(.ui-state-disabled):hover {
+  border-color: #cccccc;
+}
+
 @media (min-width: 992px) {
   .navbar-form {
     margin-top: 21px;
@@ -3959,6 +3969,7 @@ textarea::placeholder {
     opacity: 1;
   }
 }
+
 @media (min-width: 992px) {
   .table-full-width {
     margin-left: -15px;

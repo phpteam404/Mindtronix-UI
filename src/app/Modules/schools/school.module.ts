@@ -8,7 +8,8 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { TableModule } from 'primeng/table';
 import { ButtonModule } from 'primeng/button';
 import { KeyFilterModule } from 'primeng/keyfilter';
-
+import { InputTextModule } from 'primeng/inputtext';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,9 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     FileUploadModule,
     TableModule,
     ButtonModule,
-    KeyFilterModule
+    KeyFilterModule,
+    FormsModule,
+    InputTextModule
   ]
 })
 export class SchoolModule { }
