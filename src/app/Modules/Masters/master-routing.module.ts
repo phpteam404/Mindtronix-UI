@@ -5,7 +5,7 @@ import { ContentLevelsComponent } from './content-levels/content-levels.componen
 import { TagsComponent } from './tags/tags.component';
 import { GradeComponent } from './grade/grade.component';
 import { SubCategoriesComponent } from './sub-categories/sub-categories.component';
-
+import { OtherMasterComponent } from './other-master/other-master.component'
 
 const routes: Routes = [
   {
@@ -31,6 +31,10 @@ const routes: Routes = [
   {
     path:'sub_categories',
     component: SubCategoriesComponent
+  },
+  {
+    path:'others',
+    component: OtherMasterComponent
   }
 ];
 

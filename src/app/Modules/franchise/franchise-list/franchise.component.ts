@@ -50,6 +50,7 @@ export class FranchiseListComponent implements OnInit {
       { field: 'code', header: 'Franchise Code' },
       { field: 'franchise_name', header: 'Franchise Name' },
       { field: 'email', header: 'Email' },
+      { field: 'code', header: 'Franchise Code' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
       { field: 'created_on', header :'Created On'},
@@ -73,6 +74,9 @@ export class FranchiseListComponent implements OnInit {
 
   AddNewFranchise(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
+  }
+  GoToSchools(event: Event){
+    this.router.navigate(['schools'], {});
   }
 
   viewFranchise(data){

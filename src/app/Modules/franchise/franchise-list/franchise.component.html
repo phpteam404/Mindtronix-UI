@@ -21,7 +21,7 @@
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
                         {{col.header}}
-                        <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                        <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
                     </th>
                 </tr>
             </ng-template>
@@ -44,6 +44,19 @@
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
+                    <!-- <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && viewFranchise(rowData.franchise_name)">
+                        <span *ngIf="i != 7 && i != 6 && i!= 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 7 && i != 6 && i== 5" title="{{rowData[col.field] }}">{{rowData[col.field] }}</span>
+                        <span *ngIf="i == 7" class="d-flex action-color">
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
+                            <a href="javascript:;"><span class="icon icon-address" (click)="GoToSchools($event)" title="Manage Schools"></span></a>
+                        </span>
+                        <span *ngIf="i == 6">
+                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
+                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
+                        </span> -->
                     </td>
                 </tr>
             </ng-template>
