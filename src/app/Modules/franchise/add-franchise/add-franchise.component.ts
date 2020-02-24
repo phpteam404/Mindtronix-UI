@@ -83,9 +83,7 @@ export class AddFranchiseComponent implements OnInit {
     contact_phone :new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
   });
   stepThreeForm = new FormGroup({  
-    fee_name :new FormControl('',[Validators.required]),
-    fee_description :new FormControl('',[Validators.required]),
-    fee_price :new FormControl('',[Validators.required]),
+    fee_structure :new FormControl('',[Validators.required]),
     offer_details :new FormControl(''),
     discount:new FormControl(''),
     discount_details :new FormControl(''),
@@ -106,26 +104,29 @@ export class AddFranchiseComponent implements OnInit {
   get f3() { return this.stepThreeForm.controls; }
 
   stepOneFormSubmit(): any{
-    this.submitted1 = true;
+    this.submitted1 = false;
     if (this.stepOneForm.valid) {
       this._toast.show('success','Successfully Added');
+      this.submitted1 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
       return false;
     }
   }
   stepTwoFormSubmit(): any{
-    this.submitted2 = true;
+    this.submitted2 = false;
     if (this.stepTwoForm.valid) {
       this._toast.show('success','Successfully Added');
+      this.submitted2 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   stepThreeFormSubmit(): any{
-    this.submitted3 = true;
+    this.submitted3 = false;
     if (this.stepThreeForm.valid) {
       this._toast.show('success','Successfully Added');
+      this.submitted3 = true;
       this._router.navigate(['franchise']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');

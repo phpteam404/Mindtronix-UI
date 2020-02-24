@@ -230,7 +230,11 @@
                     <div class="row">
                         <div class="col-md-4 col-12 mb-5">
                             <label>Fee Structure <span>*</span></label>
-                            <p-multiSelect [options]="cities1" [(ngModel)]="selectedCities1"></p-multiSelect>
+                            <p-multiSelect [options]="cities1" placeholder="Select Fee Structure" formControlname="fee_structure" 
+                                name="fee_structure" optionLabel="label" required></p-multiSelect>
+                            <div class="invalid-feedback"
+                                *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
+                                [ngClass]=" 'error'">Fee Structure is required!</div>
                         </div>
                         <!-- <div class="col-md-4 col-12">
 

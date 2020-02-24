@@ -100,13 +100,7 @@ export class UpdateFranchiseComponent implements OnInit {
       contact_phone :new FormControl('',[Validators.required, Validators.minLength(10), Validators.maxLength(10)]),
     });
     this.stepThreeForm = new FormGroup({  
-      fee_name :new FormControl('',[Validators.required]),
-      fee_description :new FormControl('',[Validators.required]),
-      fee_price :new FormControl('',[Validators.required]),
-      offer_details :new FormControl(''),
-      discount:new FormControl(''),
-      discount_details :new FormControl(''),
-      offer_type :new FormControl('')
+      fee_structure :new FormControl('',[Validators.required])
     });
   }
   // convenience getter for easy access to form fields
