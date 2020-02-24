@@ -877,3 +877,18 @@ p-dialog{
     overflow:  hidden !important;
   }
 }
+.custom-lastchild-list{
+  thead{
+    th{
+      &:last-child{
+        width: auto !important;
+        text-align: left !important;
+      }
+    }
+  }
+  td{
+    &:last-child{
+      text-align: left !important;
+    }
+  }
+}
