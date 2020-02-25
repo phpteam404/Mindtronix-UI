@@ -892,3 +892,12 @@ p-dialog{
     }
   }
 }
+.custom-student-list{
+  th{
+    &:nth-child(2),
+    &:nth-child(8){
+      width: 100px;
+    }
+
+  }
+}
