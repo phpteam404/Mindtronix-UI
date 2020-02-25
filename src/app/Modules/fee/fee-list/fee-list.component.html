@@ -22,16 +22,19 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 5 && i != 4 ">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 5 && i != 4 " title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 4">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 5"  class="d-flex action-color">
-                            <span class="icon icon-edit-pencil wd-30" title="Edit"></span>
-                            <!-- <span class="icon icon-settings mr-2"></span> -->
-                            <span class="icon icon-delete wd-30" title="Delete"></span>
+                            <a href="javascript:;" (click)="UpdateFee(rowData)" title="Edit">
+                                <span class="icon icon-edit-pencil wd-30"></span>
+                            </a>
+                            <a href="javascript:;" (click)="DeleteFee(rowData)" title="Delete">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
                         </span>
                     </td>
                 </tr>

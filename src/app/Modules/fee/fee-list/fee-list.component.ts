@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { FeeService } from 'src/app/services/fee.service';
+import { ToasterService } from 'src/app/utils/toaster.service';
 
 @Component({
   selector: 'app-fee-list',
@@ -10,7 +12,10 @@ export class FeeListComponent implements OnInit {
 
   list: any;
   cols:any;
-  constructor(private router: Router, private _route: ActivatedRoute) {
+  constructor(private router: Router,
+             private _route: ActivatedRoute,
+             private _serice: FeeService,
+             private _toast: ToasterService) {
    
     this.list = [
       {name:'1 (One Month)', amount:2500, term:'Monthly',discount:10, status:'Active',actions:''},
@@ -28,6 +33,17 @@ export class FeeListComponent implements OnInit {
     ];
   }
   ngOnInit(): void {
+    this.getList();
+  }
+
+  getList(){
+    this._serice.getList({}).subscribe(res=>{
+      if(res.status){
+        this.list=res.data;
+      }else{
+       this._toast.show('error',res.error);
+      }
+    });
   }
 
   addNewFee(event: Event){
