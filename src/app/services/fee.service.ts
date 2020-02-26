@@ -12,9 +12,9 @@ export class FeeService {
     return this.clientHttp.post('Fee/addFeeUpdate', params);
   }
   getList(params){
-    if(params.id)
+      return this.clientHttp.get('Fee/feeStructure?'+params);
+  }
+  getById(params){
       return this.clientHttp.get('Fee/feeStructure?fee_master_id='+params.id);
-    else
-      return this.clientHttp.get('Fee/feeStructure');
   }
 }

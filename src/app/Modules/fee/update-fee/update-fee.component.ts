@@ -34,7 +34,7 @@ export class UpdateFeeComponent implements OnInit {
       id = atob(params['params'].id);
       console.log('params===>>>', id);
       //this.fullObject = this.list.filter(t=>t.id == id)[0];
-      _service.getList({'id':id}).subscribe(res=>{
+      _service.getById({'id':id}).subscribe(res=>{
         if(res.status){
           console.log('data---', res.data);
           this.formObj = res.data[0];
