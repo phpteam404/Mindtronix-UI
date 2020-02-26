@@ -1,63 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import {DatexPipe} from 'src/app/customPipesDirectives/_pipe/datex.pipe';
+import { LazyLoadEvent } from 'primeng/api';
+import { HttpParams } from '@angular/common/http';
 @Component({
   selector: 'app-franchise',
   templateUrl: './franchise.component.html',
   styleUrls: ['./franchise.component.scss']
 })
 export class FranchiseListComponent implements OnInit {
-  cities: any;
-  list: any;
-  cols:any;
+  paginationObj: any;
+  list: any[];
+  totalRecords: number;
+  cols: any[];
+  loading: boolean;
+
   constructor(private _service: FranchiseService,private router: Router, private _route: ActivatedRoute) {
-    this.cities = [
-        {label:'Select City', value:null},
-        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
-    this.list = [
-      {id:1,code:'MTX_MLCP',franchise_name:'Mindtronix Learning Centre', email:'mindtronixlc@mindtronics.com', contact_number:'7997666616', city:'Bengaluru',created_on:'02-12-2019',status:'Active',actions:''},
-      {id:2,code:'MTX_MLCV',franchise_name:'Mindtronix Learning Centre Vidyaranyarapura', email:'mindtronixlcvdp@mindtronics.com', contact_number:'076187 11378', city:'Bengaluru',created_on:'02-11-2019',status:'Inactive',actions:''},
-      {id:3,code:'MTX_MLCK',franchise_name:'Mindtronix Learning Centre-Kempapura', email:'mindtronixkmp@mindtronics.com', contact_number:'9876512345', city:'Bengaluru',created_on:'02-12-2018',status:'Active',actions:''},
-      {id:4,code:'MTX_MLCY',franchise_name:'Mindtronix Learning Centre Yelahanka', email:'mindtronixyel@mindtronics.com', contact_number:'9867538952', city:'Bengaluru',created_on:'20-10-2019',status:'Active',actions:''},
-      {id:5,code:'MTX_MLCJ',franchise_name:'Mindtronix Learning Centre JP Nagar', email:'mindtronixjp@mindtronics.com', contact_number:'07207676333', city:'Bengaluru',created_on:'26-08-2019',status:'Inactive',actions:''},
-      {id:6,code:'MTX_MLCJN',franchise_name:'Mindtronix Learning Centre Jaya Nagar', email:'mindtronixjy@mindtronics.com', contact_number:'9010208050',city:'Bengaluru',created_on:'25-06-2019',status:'Inactive',actions:''},
-      {id:7,code:'MTX_MLCBL',franchise_name:'Mindtronix Learning centre, BTM Layout', email:'mindtronixbtm@mindtronics.com', contact_number:'9870564328', city:'Bengaluru',created_on:'20-07-2019',status:'Active',actions:''},
-      {id:8,code:'MTX_MLCM',franchise_name:'Mindtronix Learning Centre, BEML Layout', email:'mindtronixbeml@mindtronics.com', contact_number:'8185884731',city:'Bengaluru',created_on:'11-03-2018',status:'Active',actions:''},
-      {id:9,code:'MTX_MLCE',franchise_name:'Mindtronix Learning Centre Malleshwaram', email:'mindtronixmaleswaram@mindtronics.com', contact_number:'07997666623', city:'Bengaluru',created_on:'10-03-2019',status:'Active',actions:''},
-      {id:10,code:'MTX_MLCB',franchise_name:'Mindtronix Learning Centre E-City', email:'mindtronixecity@mindtronics.com', contact_number:'9676526363', city:'Bengaluru',created_on:'05-08-2019',status:'Inactive',actions:''},
-      {id:11,code:'MTX_MLCS',franchise_name:'Mindtronix Learning Centre, Banneraghatta', email:'mindtronixbng@mindtronics.com', contact_number:'9542794144', city:'Bengaluru',created_on:'13-02-2020',status:'Active',actions:''},
-      {id:12,code:'MTX_MLCR',franchise_name:'Mindtronix Learning Centre Sarjapur', email:'mindtronixsrp@mindtronics.com', contact_number:'9394791766', city:'Bengaluru',created_on:'11-03-2018',status:'Inactive',actions:''}
-    ];
-    this.cols =  [
-      { field: 'code', header: 'Franchise Code' },
-      { field: 'franchise_name', header: 'Franchise Name' },
-      { field: 'email', header: 'Contact Email' },
-      { field: 'contact_number', header: 'Contact Number' },
-      { field: 'city', header: 'City' },
-      { field: 'created_on', header :'Created On'},
-      { field: 'status', header:'Status'},
-      { field: 'actions', header: 'Actions'}
-    ];
+   
   }
 
-  ngOnInit(): void {
-    this.getList();
-   console.log('getList');
-  }
-
-  getList(){
-    this._service.getList({}).subscribe(res=>{
-      if(res.status){
-        console.log('res====>>>>', res);
-      }
-    })
-  }
+  ngOnInit(): void {}
 
   AddNewFranchise(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
@@ -70,12 +32,48 @@ export class FranchiseListComponent implements OnInit {
   }
 
   viewFranchise(data){
-    console.log('view===', data);
+    console.log('view===');
     this.router.navigate(['view/'+btoa(data)],{ relativeTo: this._route});
   }
   editFranchise(data){
-    console.log('edit===', btoa(data));
-    console.log('edit===', window.atob(btoa(data)));
+    console.log('edit===');
    this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
+  }
+ 
+  loadCarsLazy(event: LazyLoadEvent) {
+    this.loading = true;
+    console.log('event--', event);
+    console.log('event.first--', event.first);
+    console.log('event.rows--', event.rows);
+    console.log('event.sortField--', event.sortField);
+    console.log('event.sortOrder--', event.sortOrder);
+    //in a real application, make a remote request to load data using state metadata from event
+    //event.first = First row offset
+    //event.rows = Number of rows per page
+    //event.sortField = Field name to sort with
+    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
+    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
+    //imitate db connection over a network
+    
+    var sortOrder= (event.sortOrder==1)?"ASC":"DESC";
+    var params = new HttpParams()
+        .set('start', event.first+'')
+        .set('number', event.rows+'');
+    if (event.sortField) {
+        params = params.set('sort', event.sortField);
+        params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+        params = params.set('search', event.globalFilter);
+    }
+
+    this._service.getList(params).subscribe(res=>{
+      if(res.status){
+        this.list = res.data;
+        this.cols = res.table_headers;
+        this.totalRecords = res.total_records;
+        this.loading = false;
+      }
+    });
   }
 }

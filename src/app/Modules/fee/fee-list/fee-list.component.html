@@ -1,6 +1,7 @@
 <div class="main-content">
     <div class="custom-table fee-list">
-        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
+            [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
