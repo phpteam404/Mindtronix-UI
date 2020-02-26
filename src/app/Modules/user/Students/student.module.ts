@@ -16,13 +16,15 @@ import { PasswordModule } from 'primeng/password';
 import { MatIconModule } from '@angular/material/icon';
 import { BasicModule } from '../../basic/basic.module';
 import { DropdownModule } from 'primeng/dropdown';
-
+import { ViewStudentComponent } from './view-student/view-student.component';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
     StudentListComponent,
     AddStudentComponent,
-    UpdateStudentComponent
+    UpdateStudentComponent,
+    ViewStudentComponent
   ],
   imports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { DropdownModule } from 'primeng/dropdown';
     PasswordModule,
     BasicModule.forRoot(),
     ReactiveFormsModule,
-    DropdownModule
+    DropdownModule,
+    TabViewModule
   ]
 })
 export class StudentModule { }

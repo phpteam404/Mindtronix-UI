@@ -43,8 +43,8 @@ export class SchoolListComponent implements OnInit {
       { field: 'code', header: 'School code' },
       { field: 'school_name', header: 'School Name' },
       { field: 'no_of_students', header: 'Number of Students' },
-      { field: 'phone_no', header: 'Phone no' },
-      { field: 'email', header: 'Email' },
+      { field: 'phone_no', header: 'Contact Number' },
+      { field: 'email', header: 'Contact Email' },
       { field: 'addres', header: 'Actions' }
     ];
   }

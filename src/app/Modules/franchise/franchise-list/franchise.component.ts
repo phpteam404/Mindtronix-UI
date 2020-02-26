@@ -11,7 +11,7 @@ export class FranchiseListComponent implements OnInit {
   cities: any;
   list: any;
   cols:any;
-  constructor(private franchise: FranchiseService,private router: Router, private _route: ActivatedRoute) {
+  constructor(private _service: FranchiseService,private router: Router, private _route: ActivatedRoute) {
     this.cities = [
         {label:'Select City', value:null},
         {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
@@ -37,7 +37,7 @@ export class FranchiseListComponent implements OnInit {
     this.cols =  [
       { field: 'code', header: 'Franchise Code' },
       { field: 'franchise_name', header: 'Franchise Name' },
-      { field: 'email', header: 'Email' },
+      { field: 'email', header: 'Contact Email' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'city', header: 'City' },
       { field: 'created_on', header :'Created On'},
@@ -52,7 +52,7 @@ export class FranchiseListComponent implements OnInit {
   }
 
   getList(){
-    this.franchise.getList({}).subscribe(res=>{
+    this._service.getList({}).subscribe(res=>{
       if(res.status){
         console.log('res====>>>>', res);
       }

@@ -113,7 +113,7 @@
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text"># Schools
-                        <span>100</span>
+                        <span>10</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
@@ -123,7 +123,7 @@
                 </div>
                 <div class="custom-view-div">
                     <div class="trainers-text"># Trainers
-                        <span>30</span>
+                        <span>10</span>
                     </div>
                 </div>
             </div>
@@ -133,6 +133,9 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
+                                    <div class="col-12 btn-edit">
+                                      <a href="javascript:;" class="btn" (click)="showBasicDialog()"><i class="icon icon-edit-pencil"></i></a>
+                                    </div>
                                     <div class="col-md-4 col-12">
                                         <label>Franchise Name</label>
                                         <p>Mindtronix Learning Centre</p>
@@ -150,7 +153,7 @@
                                         <p>7997666616</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Email</label>
+                                        <label>Contact Email</label>
                                         <p>mindtronixlc@mindtronics.com</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
@@ -194,7 +197,11 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
+                                    <div class="col-12 custom-btn-edit">
+                                        <button type="button" class="btn" (click)="showBasicDialog1()"><i class="icon icon-edit-pencil"></i></button>
+                                     </div>
                                     <div class="col-12">
+
                                         <div class="custom-table custom-lastchild-list">
                                             <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
                                                 <!-- <ng-template pTemplate="caption">
@@ -217,7 +224,7 @@
                                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                                     <tr>
                                                         <td *ngFor="let col of columns ; let i = index">
-                                                            <span *ngIf="i != 5">{{rowData[col.field]}}</span>
+                                                            <span *ngIf="i != 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 5">
                                                                 <span class="icon icon-edit-pencil mr-2"></span>
                                                                 <span class="icon icon-settings mr-2"></span>
@@ -234,30 +241,325 @@
                         </div>
                     </p-tabPanel>
                     <p-tabPanel header="Fee Management">
-                        Fee Management
+                        <div class="custom-view">
+                            <div class="custom-view-content">
+                                <div class="row">
+                                    <div class="col-12 custom-btn-edit">
+                                        <button type="button" class="btn" (click)="showBasicDialog2()"><i class="icon icon-edit-pencil"></i></button>
+                                     </div>
+                                    <div class="col-12">
+                                        <div class="custom-table custom-lastchild-list">
+                                            <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
+                                                <!-- <ng-template pTemplate="caption">
+                                                    <div class="custom-search">
+                                                        <div class="input-search">
+                                                            <input type="text" pInputText size="50" placeholder="Search..."
+                                                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                                                            <i class="fa fa-search"></i> 
+                                                        </div>
+                                                    </div>
+                                                </ng-template> -->
+                                                <ng-template pTemplate="header" let-columns>
+                                                    <tr>
+                                                        <th *ngFor="let col of columns; let i = index">
+                                                            {{col.header}}
+                                                            <!-- <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon> -->
+                                                        </th>
+                                                    </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                                    <tr>
+                                                        <td *ngFor="let col of columns ; let i = index">
+                                                            <span title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                                            <!-- <span *ngIf="i == 4" class="text-right">
+                                                                <a href="javascript:;" (click)="deleteFee(i)">
+                                                                    <span class="icon icon-delete" title="Delete"></span>
+                                                                </a>
+                                                            </span> -->
+                                                        </td>
+                                                    </tr>
+                                                </ng-template>
+                                            </p-table>
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                     
                     </p-tabPanel>
                 </p-tabView>
             </div>
         </div>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-veiw-rightside">
-                <div class="revenue-text">Revenue<span>(Feb 20)</span></div>
-                <div class="student-text">Student
-                    <div class="custom-flex"> <span> Invoiced Amount<span class="amount-text">₹
-                                100</span></span><span>Collected Amount<span class="amount-text text-right">₹
-                                200</span></span>
+                <div class="revenue-text revenue-month-dropdown">Revenue
+                        <p-dropdown [options]="revenueMonth" placeholder="Feb 2020" itemSize="30"
+                        name="contact_title" optionLabel="label" required></p-dropdown>
+                      
+                </div>
+                <div class="student-text">For Students
+                    <div class="custom-flex"> <span> Invoiced<a href="javascript:;" class="green-text">₹
+                                10,000</a></span><span>Collected<a href="javascript:;" class="green-text text-right">₹
+                                5,000</a><a href="javascript:;" class="red-text text-right">- ₹
+                                    5,000</a><span class="due-text">Due</span></span>
                     </div>
                 </div>
-                <div class="student-text">Mindtronix
+                <div class="student-text">For Mindtronix
                     <div class="custom-flex">
-                        <span>Invoiced Amount<span class="amount-text">₹ 100</span></span><span>Paid Amount<span
-                                class="amount-text text-right">₹ 200</span></span>
+                        <span>Invoiced<a href="javascript:;" class="green-text">₹ 10,000</a></span><span>Paid<a href="javascript:;"
+                                class="red-text text-right">₹ 5,000</a></span>
+                                <!-- <span class="due-text">Due</span> -->
                     </div>
                 </div>
             </div>
             <div class="custom-static-view">
-                <div>Statistics</div>
+                <h4>Statistics</h4>
+                <div [chart]="chart" width="200%" height="auto"></div>
             </div>
         </div>
     </div>
 </div>
+  <!-- franchise details popup -->
+<p-dialog header="Edit Franchise Details" [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
+    
+ 
+        <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"> -->
+            <div class="row custom-form">
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Franchise Name <span>*</span></label>
+                        <input pinputtext type="text" placeholder="Name" name="name" required>
+                      
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Franchise Code <span>*</span></label>
+                        <input pinputtext type="text" placeholder="Code" name="code" required>
+                      
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Owner Name <span>*</span></label>
+                        <input pinputtext type="text" placeholder="Contact Person" name="contact_person" required>
+                       
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <label>Contact Number <span>*</span></label>
+                    <input type="text" placeholder="Phone" pKeyFilter="int" name="phone" required>
+                  
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Contact Email <span>*</span></label>
+                        <input pinputtext placeholder="Conatct Email" name="email" type="email" required>
+                      
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Website Address</label>
+                        <input pinputtext placeholder="www.mindtronix.com" name="website_address" type="text">
+                    </div>
+                </div>
+                <div class="col-md-12 col-12">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea pInputTextarea placeholder="Address" name="address"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Landmark</label>
+                        <input pinputtext type="text" placeholder="Landmark" name="landmark">
+                    </div>
+                </div>                        
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Country <span>*</span></label>
+                        <input pinputtext placeholder="Country" name="country" type="text" required>
+                        
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>State <span>*</span></label>
+                        <input pinputtext placeholder="State" name="state" type="text" required>
+                       
+                    </div>
+                </div>
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>City <span>*</span></label>
+                        <input pinputtext placeholder="City" name="city" type="text" required>
+                     
+                    </div>
+                </div> 
+                <div class="col-md-4 col-12">
+                    <label>Pincode</label>
+                    <input type="text" placeholder="Pincode" pKeyFilter="int" name="pincode">
+                </div>                       
+                <div class="col-md-4 col-12">
+                    <div class="form-group">
+                        <label>Status <span>*</span></label>
+                        <p-dropdown [options]="status" placeholder="Select Status" itemSize="30"
+                        name="status" optionLabel="label" required></p-dropdown>
+                       
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mb-2">
+                <button pButton class="btn-warning mr-2" label="Update" type="submit"></button>
+                <button pButton class="btn-default" type="button" label="Cancel" (click)="goToList()"></button>
+            </div>
+   
+    <!-- </form> -->
+<!-- <p-footer>
+    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
+    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
+</p-footer> -->
+</p-dialog>
+  <!-- contact information popup -->
+<p-dialog header="Edit Contact Information" [(visible)]="displayBasic1" [style]="{width: '65vw'}" [baseZIndex]="10000">
+    
+    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+    <div class="row custom-form">
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Contact Title <span>*</span></label>
+                <p-dropdown [options]="title" placeholder="Select Title" itemSize="30"
+                name="contact_title" optionLabel="label" required></p-dropdown>
+               
+            </div>
+        </div>
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Name <span>*</span></label>
+                <input pinputtext placeholder="Contact Name" type="text" name="contact_name" required>
+               
+            </div>
+        </div>
+       
+        <div class="col-md-2 col-12">
+            <label>Contact Number <span>*</span></label>
+            <input type="text" placeholder="Contact Number" pKeyFilter="int"
+                name="contact_phone" required>                           
+            
+        </div>
+        <div class="col-md-3 col-12">
+            <div class="form-group">
+                <label>Contact Email <span>*</span></label>
+                <input pinputtext placeholder="Contact Email" type="email" name="contact_email" required>
+              
+            </div>
+        </div>
+        <div class="col-md-1 col-12 mt-4">
+            <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
+        </div>
+    </div>
+    <div class="text-center col-12 mb-2">
+        <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
+        <button pButton class="btn-default" type="button" label="Cancel"></button>
+    </div>
+   
+    <!-- </form> -->
+    <div class="custom-table custom-lastchild-list">
+        <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
+            <!-- <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..."
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                </div>
+            </ng-template> -->
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <!-- <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon> -->
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i != 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 5">
+                            <span class="icon icon-edit-pencil mr-2"></span>
+                            <span class="icon icon-settings mr-2"></span>
+                            <span class="icon icon-delete"></span>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+<!-- <p-footer>
+    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
+    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
+</p-footer> -->
+</p-dialog>
+
+<!-- fee management popup -->
+<p-dialog header="Edit Fee Management" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">
+    
+    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+    <div class="row custom-form">
+        <div class="col-md-6 col-12 mb-3">
+            <label>Fee Structure <span>*</span></label>
+            <p-multiSelect [options]="FeeStructureList" optionLabel="name" 
+                name="fee_structure" required></p-multiSelect>
+           
+        </div>
+        <div class="col-md-1 col-12 mb-3 mt-4">
+            <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
+        </div>
+        
+    </div>
+    <div class="text-center mb-2">
+        <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
+        <button pButton class="btn-default" (click)="goToList()" type="button" label="Cancel"></button>
+    </div>
+    <!-- </form> -->
+    <div class="custom-table custom-lastchild-list mt-3">
+        <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
+            <!-- <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..."
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                </div>
+            </ng-template> -->
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 4" class="text-right">
+                            <a href="javascript:;" (click)="deleteFee(i)">
+                                <span class="icon icon-delete" title="Delete"></span>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+<!-- <p-footer>
+    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
+    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
+</p-footer> -->
+</p-dialog>

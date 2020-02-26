@@ -22,7 +22,7 @@ export class AddStudentComponent implements OnInit {
   FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
   RelationList:{name:string,id:string}[]=dropdown.relation;
   ClassesList :{name:string,id:string}[]=dropdown.classes;
-
+  pageTitle = "Create Student";
   constructor(private _router: Router, private _toast: ToasterService) {     
     console.log('AddStudentComponent---' );
     this.status =[

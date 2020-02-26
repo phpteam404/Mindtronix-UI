@@ -22,7 +22,7 @@
     margin: 0;
     padding: 5px 15px;
     border-bottom: 1px solid #ccc;
-    background: #f1f1f6;
+    background: #e4e4e8;
   }
  
   .custom-form-content{
@@ -213,6 +213,9 @@ p-table{
         &:last-child{
           span{
             justify-content: flex-end !important;
+          }
+          a{
+            color: #303030 !important;
           }
          
         }
@@ -830,7 +833,7 @@ p-table{
       display: flex;
       align-items: center;
       justify-content: space-between;
-      color: #979797;
+      color: #303030;
       padding-bottom: 4px;
     }
     .student-text{
@@ -850,22 +853,36 @@ p-table{
     }
   .custom-flex{
     display: flex;
-    align-items: center;
     justify-content: space-between;
   }
-  .amount-text{
+  .red-text{
     font-size: 16px;
     font-weight: 500;
+    color: #ff0000;
+    display: block;
+  }
+  .green-text{
+    font-size: 16px;
+    font-weight: 500;
+    color: #30ad07;
+    display: block;
+  }
+  .due-text{
+    font-size: 13px;
     color: #e87a26;
+    text-align: right;
   }
 }
 .custom-static-view{
   background-color: #fff;
   padding: 10px 12px;
   border: 1px solid #c4c4c4;
-  div{
+  h4{
     font-size: 14px;
-    min-height: 100px;
+    font-weight: 500;
+    margin: 0px 0px 10px;
+    color: #303030;
+    line-height: 14px;
   }
  
 }
@@ -898,6 +915,43 @@ p-dialog{
     &:nth-child(8){
       width: 100px;
     }
+    &:nth-child(6){
+      width: 150px;
+    }
+  }
+}
+.revenue-month-dropdown{
+  .ui-dropdown {
+    min-width: 50px;
+    border: 0px solid #eee !important;
+    padding: 0 !important;
+    line-height: 4px;
+    .ui-dropdown-trigger{
+       top: -2px;
+    }
+  }
+  .ui-inputtext{
+    &::placeholder {
+      color: #303039;
+    }
+}
+input{
+  &::placeholder {
+    color: #303039;
+  }
+}
 
+}
+.users-list{
+  thead{
+    th{
+      &:nth-child(4),
+      &:nth-child(6){
+        width: 100px;
+      }
+      &:nth-child(3){
+         width: 150px;
+      }
+    }
   }
 }

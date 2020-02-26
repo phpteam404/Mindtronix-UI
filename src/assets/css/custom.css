@@ -271,6 +271,8 @@ input:focus {
   z-index: 4;
   padding-bottom: 20px;
   overflow-x: hidden;
+  border-right: 1px solid #bbbbbb;
+  background-color: #ececec !important;
 }
 .sidebar .sidebar-wrapper .dropdown .dropdown-backdrop,
 .bootstrap-navbar .sidebar-wrapper .dropdown .dropdown-backdrop {
@@ -412,6 +414,7 @@ input:focus {
   font-weight: 400;
   text-transform: inherit;
   color: #000;
+  white-space: nowrap;
 }
 .show-menu .sidebar .nav li a p,
 .show-menu .bootstrap-navbar .nav li a p {
@@ -3310,6 +3313,9 @@ border: 1px solid #aaa !important;
 .ui-placeholder{
   color: #aaaaaa !important;
 }
+.revenue-month-dropdown .ui-placeholder{
+  color: #303030 !important;
+}
 textarea::placeholder {
   color: #aaaaaa !important;
 }
@@ -3349,6 +3355,42 @@ body .ui-inputgroup .ui-inputgroup-addon {
   border-right: 0px solid #cccccc !important;
   border-top-right-radius: 0px !important;
   border-bottom-right-radius: 0px !important;
+}
+.btn-edit{
+  text-align: right;
+  margin-bottom: -20px;
+  z-index: 1;
+}
+.custom-btn-edit{
+  text-align: right;
+  margin-bottom: 10px;
+}
+.btn-edit .btn,
+.custom-btn-edit .btn{
+  border: none;
+  background: #3472F7;
+  color: #ffffff;
+  font-size: 18px;
+  padding: 4px 6px;
+  line-height: 14px;
+}
+p-dialog .ui-dialog .ui-dialog-content{
+  overflow-y: auto !important;
+}
+.highcharts-legend-item text{
+  font-weight: 500 !important;
+}
+.highcharts-legend-item .highcharts-point{
+  width: 10px !important;
+  height: 10px !important;
+}
+.form-bg{
+  background: #f9f9f9;
+  margin: 0 0 10px !important;
+  padding: 10px 0px 0px;
+}
+.custom-minheight{
+  min-height: 120px;
 }
 @media (min-width: 992px) {
   .navbar-form {

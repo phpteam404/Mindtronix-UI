@@ -22,7 +22,8 @@ import { FormsModule } from '@angular/forms';
 import { ViewFranchiseComponent } from './view-franchise/view-franchise.component';
 import {MultiSelectModule} from 'primeng/multiselect';
 import { TabViewModule } from 'primeng/tabview';
-
+import { ChartModule } from 'angular-highcharts';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     FranchiseListComponent,
@@ -47,7 +48,9 @@ import { TabViewModule } from 'primeng/tabview';
     BsDropdownModule.forRoot(),
     BasicModule.forRoot(),
     MultiSelectModule,
-    TabViewModule
+    TabViewModule,
+    DialogModule,
+    ChartModule
   ]
 })
 export class FranchiseModule { }

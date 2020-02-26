@@ -1,12 +1,14 @@
 <div class="main-content">
     <div class="custom-form student-form">
-        <h4 class="custom-form-heading">Create Student</h4>
+        <h4 class="custom-form-heading">{{pageTitle}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="studentForm" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-12">
                         <h4>Student Information</h4>
                     </div>
+                    <div class="col-12">
+                    <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name <span>*</span></label>
@@ -69,11 +71,15 @@
                             <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
                         </div>
                     </div>
+                </div>   
+                </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
                         <h4>Parent Information</h4>
                     </div>
+                    <div class="col-12">
+                        <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name of Parent/Guardian <span>*</span></label>
@@ -86,7 +92,7 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Email <span>*</span></label>
+                            <label>Contact Email <span>*</span></label>
                             <input pinputtext placeholder="Parent Email" formControlName="email" name="email" type="email" required>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.email.invalid && submitted!=null && !submitted "
@@ -144,10 +150,14 @@
                         <input pinputtext type="text" placeholder="Occupation" formControlName="occupation" name="occupation">
                     </div>
                 </div>
+                </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <h4>Education Details</h4>
                     </div>
+                    <div class="col-12">
+                        <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name of the school <span>*</span></label>
@@ -172,10 +182,14 @@
                         </div>
                     </div> -->
                 </div>
+                </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <h4>Medical Information</h4>
                     </div>
+                    <div class="col-12">
+                        <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Blood Group <span>*</span></label>
@@ -203,6 +217,8 @@
                                 [ngClass]=" 'error'">Status is required
                             </div>
                         </div>
+                    </div>
+                    </div>
                     </div>
                     <div class="col-12 text-right">
                         <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>

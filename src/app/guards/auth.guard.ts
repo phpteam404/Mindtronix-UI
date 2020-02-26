@@ -8,7 +8,7 @@ import { AuthenticationService } from '../services/authentication.service';
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private ls: LocalStorageService, private router: Router, private service: AuthenticationService) {
+  constructor(private ls: LocalStorageService, private router: Router,private _ar: ActivatedRoute, private service: AuthenticationService) {
 
   } 
 
@@ -24,6 +24,8 @@ export class AuthGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       console.log('AuthGuard---',location.pathname);
+      console.log('router---',this.router.url);
+      console.log('_ar---',this._ar.snapshot.url);
      if (this.ls.getItem('user')) {
         this.service.isTokenExpired({'module_url':location.pathname,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           console.log('isTokenExpired--', res);

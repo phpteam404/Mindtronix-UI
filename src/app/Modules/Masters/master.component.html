@@ -29,7 +29,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i!=2">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog()" title="Edit"></span></a>
                             <a href="javascript:;" ><span class="icon icon-delete" title="Delete"></span></a>

@@ -36,7 +36,7 @@ export class OnlineUsersInvoiceComponent implements OnInit {
     ];
     this.cols = [
       { field: 'name', header: 'Name' },
-      { field: 'phone', header: 'Phone' },
+      { field: 'phone', header: 'Contact Number' },
       { field: 'month', header: 'Month' },
       { field: 'bill', header: 'Bill' },
       { field: 'status', header: 'Status' }

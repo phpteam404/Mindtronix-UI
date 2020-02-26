@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="custom-table">
+    <div class="custom-table users-list">
         <p-table #dt [columns]="cols" [value]="allUsersList" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 
@@ -32,7 +32,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i!=5 && i!=6">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=5 && i!=6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 5">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"

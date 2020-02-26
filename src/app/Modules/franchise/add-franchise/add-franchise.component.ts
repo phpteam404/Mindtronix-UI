@@ -79,17 +79,18 @@ export class AddFranchiseComponent implements OnInit {
     ];
 
     this.contactsList = [
-      {contact_name:'Tom Smith', contact_phone:'9789456556',contact_title:'Technical',actions:''},
-      {contact_name:'Mike', contact_phone:'7774564556',contact_title:'Finance',actions:''},
-      {contact_name:'Andrew', contact_phone:'7894555556',contact_title:'Accountant',actions:''},
-      {contact_name:'Tulip', contact_phone:'7894444556',contact_title:'Finance',actions:''},
-      {contact_name:'James', contact_phone:'7894563336',contact_title:'Franchise Admin',actions:''},
+      {contact_name:'Tom Smith', contact_phone:'9789456556',contact_title:'Technical',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
+      {contact_name:'Mike', contact_phone:'7774564556',contact_title:'Finance',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
+      {contact_name:'Andrew', contact_phone:'7894555556',contact_title:'Accountant',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
+      {contact_name:'Tulip', contact_phone:'7894444556',contact_title:'Finance',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
+      {contact_name:'James', contact_phone:'7894563336',contact_title:'Franchise Admin',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
       
     ];
     this.contactsListCols = [
       { field: 'contact_title', header: 'Contact Title' },
       { field: 'contact_name', header: 'Contact Name' },
-      { field: 'contact_phone', header: 'Contact Phone' },
+      { field: 'contact_phone', header: 'Contact Number' },
+      { field: 'contact_email', header: 'Contact Email' },
       { field: 'actions', header: 'Actions' }
     ]
   }
@@ -112,7 +113,7 @@ export class AddFranchiseComponent implements OnInit {
   stepTwoForm = new FormGroup({  
     contact_title :new FormControl('',[Validators.required]),
     contact_name:new FormControl('',[Validators.required]),
-    // contact_email: new FormControl('',[Validators.required, Validators.email]),
+    contact_email: new FormControl('',[Validators.required, Validators.email]),
     contact_phone :new FormControl('',[Validators.required]),
   });
   stepThreeForm = new FormGroup({  

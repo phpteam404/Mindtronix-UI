@@ -107,8 +107,8 @@
                         </div>
                         <div class="col-md-4 col-12">
                             <div class="form-group">
-                                <label>Email <span>*</span></label>
-                                <input pinputtext placeholder="Email" formControlName="email" name="email" type="email" required>
+                                <label>Contact Email <span>*</span></label>
+                                <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.email.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">Email is required
@@ -199,7 +199,7 @@
                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4 col-12">
+                        <div class="col-md-3 col-12">
                             <div class="form-group">
                                 <label>Name <span>*</span></label>
                                 <input pinputtext placeholder="Contact Name" type="text" formControlName="contact_name" name="contact_name" required>
@@ -209,7 +209,17 @@
                                </div>
                             </div>
                         </div>
-                        <!-- <div class="col-md-4 col-12">
+                       
+                        <div class="col-md-2 col-12">
+                            <label>Contact Number <span>*</span></label>
+                            <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_phone"
+                                name="contact_phone" required>                           
+                            <div class="invalid-feedback"
+                                *ngIf="stepTwoForm.controls.contact_phone.invalid && submitted2!=null && !submitted2"
+                                [ngClass]=" 'error'"> Contact number is required
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-12">
                             <div class="form-group">
                                 <label>Contact Email <span>*</span></label>
                                 <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
@@ -217,15 +227,6 @@
                                     *ngIf="stepTwoForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
                                    [ngClass]=" 'error'"> Contact Email is required
                                </div>
-                            </div>
-                        </div> -->
-                        <div class="col-md-4 col-12">
-                            <label>Contact Number <span>*</span></label>
-                            <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="contact_phone"
-                                name="contact_phone" required>                           
-                            <div class="invalid-feedback"
-                                *ngIf="stepTwoForm.controls.contact_phone.invalid && submitted2!=null && !submitted2"
-                                [ngClass]=" 'error'"> Contact number is required
                             </div>
                         </div>
                         <div class="col-md-1 col-12 mt-4">
@@ -252,15 +253,15 @@
                             <tr>
                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
                                     {{col.header}}
-                                    <p-sortIcon *ngIf="i != 3" [field]="col.field"></p-sortIcon>
+                                    <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
                                 </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
                                 <td *ngFor="let col of columns ; let i = index">
-                                    <span *ngIf="i != 3">{{rowData[col.field]}}</span>
-                                    <span *ngIf="i == 3" class="text-right">
+                                    <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i == 4" class="text-right">
                                         <a href="javascript:;" (click)="deleteContact(i)">
                                             <span class="icon icon-delete" title="Delete"></span>
                                         </a>
@@ -367,7 +368,7 @@
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
                                 <td *ngFor="let col of columns ; let i = index">
-                                    <span *ngIf="i != 4">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                     <span *ngIf="i == 4" class="text-right">
                                         <a href="javascript:;" (click)="deleteFee(i)">
                                             <span class="icon icon-delete" title="Delete"></span>

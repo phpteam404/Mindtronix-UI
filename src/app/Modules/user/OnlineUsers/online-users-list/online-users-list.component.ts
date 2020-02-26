@@ -16,8 +16,8 @@ export class OnlineUsersListComponent implements OnInit {
       { field: 'manager', header: 'Parent Name' },
       { field: 'grade', header: 'Grade' },
       { field: 'city', header: 'City' },
-      { field: 'email', header: 'Email' },
-      { field: 'phone', header: 'Phone' },
+      { field: 'email', header: 'Contact Email' },
+      { field: 'phone', header: 'Contact Number' },
       { field: 'status', header: 'Status' },
       { field: 'actions', header: 'Actions' }
     ];
