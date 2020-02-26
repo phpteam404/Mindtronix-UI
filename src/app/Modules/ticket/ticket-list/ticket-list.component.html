@@ -1,4 +1,4 @@
-<div class="main-content">
+<div class="main-content custom-lastchild-list">
     <div class="custom-table">
         <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
@@ -28,7 +28,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                    
-                    <td *ngFor="let col of columns ; let i = index">
+                    <td *ngFor="let col of columns ; let i = index" (click)="viewTicket(rowData)">
                         <span *ngIf="i != 6">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
                             <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>

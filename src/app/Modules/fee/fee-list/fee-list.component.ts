@@ -49,4 +49,8 @@ export class FeeListComponent implements OnInit {
   addNewFee(event: Event){
     this.router.navigate(['add'],{relativeTo: this._route});
   }
+
+  UpdateFee(data:any){
+    this.router.navigate(['update/'+ btoa(data.fee_master_id)],{relativeTo: this._route})
+  }
 }

@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Title <span>*</span></label>
+                            <label>Ticket Title <span>*</span></label>
                             <input pinputtext placeholder="Title" formControlName="title" name="title" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="ticketForm.controls.title.invalid && submitted!=null && !submitted"
@@ -14,14 +14,39 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Issue Type <span>*</span></label>
+                            <p-dropdown [options]="issue" placeholder="Select Issue Type" itemSize="30"
+                                name="issue" optionLabel="label" required></p-dropdown>
+                                              
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Attach issue screenshot</label>
+                            <!-- <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload> -->
+                            <mat-file-upload
+                                [labelText]="''"
+                                [selectButtonText]="'Choose File(s)'"
+                                [selectFilesButtonType]="file"
+                                [allowMultipleFiles]="true"
+                                [showUploadButton]="true"
+                                [acceptedTypes]="'.png, .jpg, .jpeg'"
+                                (uploadClicked)="onUploadClicked($event)"
+                                (selectedFilesChanged)="onSelectedFilesChanged($event)"
+                                >
+                            </mat-file-upload>
+                        </div>
+                    </div>
                     <div class="col-md-8 col-12">
                         <div class="form-group">
-                            <label>Description</label>
+                            <label>Issue Description</label>
                             <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">
-                        <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="Create" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>

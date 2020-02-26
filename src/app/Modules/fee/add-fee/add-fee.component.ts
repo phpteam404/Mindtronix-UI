@@ -24,8 +24,8 @@ export class AddFeeComponent implements OnInit {
       {label: "Yearly", value:"yearly"},
     ];
     this.status =[
-      {label:'Active',value:'1'},
-      {label:'InActive',value:'0'}
+      {label:'Active',value:1},
+      {label:'InActive',value:0}
     ];
    }
   feeForm = new FormGroup({

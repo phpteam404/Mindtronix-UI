@@ -9,9 +9,16 @@ import { ToasterService } from 'src/app/utils/toaster.service';
   styleUrls: ['./ticket-info.component.scss']
 })
 export class TicketInfoComponent implements OnInit {
-
+  issue: any;
   submitted=null;
-  constructor(private _router: Router, private _toast: ToasterService) { }
+  constructor(private _router: Router, private _toast: ToasterService) {
+
+    this.issue = [
+      {label:'Kit Related',value:{id:1,name:'Kit Related'}},
+      {label:'Software Related',value:{id:2,name:'Software Related'}},
+      {label:'Others',value:{id:1,name:'Others'}}
+    ]; 
+   }
 
   ngOnInit(): void {
   }
@@ -32,5 +39,11 @@ export class TicketInfoComponent implements OnInit {
   }
   goToList(){
     this._router.navigate(['ticket']);
+  }
+  onUploadClicked(event: Event){
+    console.log('event--', event);
+  }
+  onSelectedFilesChanged(event: Event){
+    console.log('event--', event);
   }
 }

@@ -17,7 +17,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'update/:name',
+    path: 'update/:id',
     component: UpdateSchoolComponent,
     data: {
       braedcrumbs: 'Update'

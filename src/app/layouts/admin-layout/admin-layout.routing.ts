@@ -4,7 +4,6 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
-import { DigitalContentUploadComponent } from 'src/app/Modules/digital-content-upload/digital-content-upload.component';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 
@@ -106,11 +105,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     { 
-        path: 'digital-content-upload',
-        component: DigitalContentUploadComponent,
+        path: 'digital_content',
+        loadChildren: () => import('../../Modules/digital-content/digital-content.module').then(m => m.DigitalContentModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Digital Content Upload'
+            breadcrumbs: 'Digital Content'
         }
     },
     { 

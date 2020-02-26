@@ -11,12 +11,14 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasicModule } from '../basic/basic.module';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-
+import { MatFileUploadModule } from 'mat-file-upload';
+import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 
 @NgModule({
   declarations: [
     TicketListComponent,
-    TicketInfoComponent
+    TicketInfoComponent,
+    ViewTicketComponent
   ],
   imports: [
     CommonModule,
@@ -28,6 +30,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     KeyFilterModule,
     InputTextModule,
     InputTextareaModule,
+    MatFileUploadModule,
     FormsModule,
     BasicModule.forRoot()
   ]
