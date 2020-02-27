@@ -8,15 +8,16 @@
         <!-- <mc-breadcrumbs></mc-breadcrumbs> -->
         <!-- <div>{{breadCrumb}}</div> -->
         <div class="page-title-card">
-            <h4 class="">
-                <span *ngIf="staticBreadCrumb" 
-                    style="color: #e87a26;margin: 0;font-weight: bold;font-size: 16px !important;cursor: pointer;"
-                    (click)="go()">Franchise <span style="color: #979797;">/</span>
-                </span>{{breadCrumb}}
-               <!-- <a *ngIf="staticBreadCrumb" [routerLink]="parentRoute" href="parentRoute">Franchise /</a> -->
-                
-                 <!-- <breadcrumb [allowBootstrap]="true"></breadcrumb> -->
+            <h5 *ngIf="currentRouteParam">
+                <span>{{pageTitle}} - </span>
+                <span>{{currentRouteParam}}</span>
+            </h5>
+            <h4 class="" *ngIf="childBreadCrumb">
+                <a [routerLink]="parentRoute" href="parentRoute">{{breadCrumb}}</a>
+                <span *ngIf="childBreadCrumb"> / </span>
+                <span>{{childBreadCrumb}}</span>
             </h4>
+            <h4 *ngIf="!childBreadCrumb">{{breadCrumb}}</h4>
          </div>
         <router-outlet></router-outlet>
         <app-footer></app-footer>

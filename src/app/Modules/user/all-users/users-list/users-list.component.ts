@@ -59,8 +59,8 @@ export class UsersListComponent implements OnInit {
   AddNewUser(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
   }
-  editUser(id){
-    this.router.navigate(['update/'+id], {relativeTo: this._route});
+  editUser(data:any){
+    this.router.navigate(['update/'+data.name+'/'+btoa(data.id)], {relativeTo: this._route});
   }
 
   onChange(event){

@@ -8,20 +8,21 @@ import { UpdateFeeComponent } from './update-fee/update-fee.component';
 const routes: Routes = [
   {
     path:'',
-    component: FeeListComponent
+    component: FeeListComponent,
   },
   {
     path: 'add',
     component: AddFeeComponent,
     data: {
-      braedcrumbs: 'Add'
+      breadcrumbs: 'Create'
     }
   },
   {
-    path: 'update/:id',
+    path: 'update/:name/:id',
     component: UpdateFeeComponent,
     data: {
-      braedcrumbs: 'Update'
+      breadcrumbs: 'Update',
+      title: 'Fee Structure'
     }
   }
 ];

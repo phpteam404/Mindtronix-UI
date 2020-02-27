@@ -33,7 +33,7 @@ export class FranchiseListComponent implements OnInit {
 
   viewFranchise(data){
     console.log('view===');
-    this.router.navigate(['view/'+btoa(data)],{ relativeTo: this._route});
+    this.router.navigate(['view/'+(data.agency_name)+'/'+btoa(data.agency_id)],{ relativeTo: this._route});
   }
   editFranchise(data){
     console.log('edit===');

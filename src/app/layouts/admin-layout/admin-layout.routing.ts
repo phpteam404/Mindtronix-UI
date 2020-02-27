@@ -6,6 +6,7 @@ import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
+import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -14,7 +15,7 @@ export const AdminLayoutRoutes: Routes = [
         component: BasicComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Dashboard'
+            breadcrumb: 'Dashboard'
         }
     },
     {
@@ -22,7 +23,7 @@ export const AdminLayoutRoutes: Routes = [
         component: BasicComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Dashboard'
+            breadcrumb: 'Dashboard'
         }
     },
     {
@@ -30,7 +31,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/user/user.module').then(m => m.UserModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Users'
+            breadcrumb: 'Users'
         }
     },
     {
@@ -38,7 +39,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/invoice/invoice.module').then(m => m.InvoiceModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Invoices'
+            breadcrumb: 'Invoices'
         }   
     },
     {
@@ -46,7 +47,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/franchise/franchise.module').then(m => m.FranchiseModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Franchise'
+            breadcrumb: 'Franchise'
         }
     },
     {
@@ -54,7 +55,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/fee/fee.module').then(m => m.FeeModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Fee Management'
+            breadcrumb: 'Fee Management'
         }
     },
     {
@@ -62,14 +63,14 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/ticket/ticket.module').then(m => m.TicketModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Tickets'
+            breadcrumb: 'Tickets'
         }
     },{
         path: 'masters',
         component: MasterComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Masters'
+            breadcrumb: 'Masters'
         }
     },
     { 
@@ -77,15 +78,15 @@ export const AdminLayoutRoutes: Routes = [
         component: RoleManagementComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Role Access'
+            breadcrumb: 'Role Access'
         }
     },
     { 
-        path: 'profile-management',
-        component: ProfilesManagementComponent,
+        path: 'profile',
+        component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Profiles Management'
+            breadcrumb: 'Profile'
         }
     },
     { 
@@ -93,7 +94,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/schools/school.module').then(m => m.SchoolModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'School Management'
+            breadcrumb: 'School Management'
         }
     },
     { 
@@ -101,7 +102,7 @@ export const AdminLayoutRoutes: Routes = [
         component: PaymentManagementComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Payment Management'
+            breadcrumb: 'Payment Management'
         }
     },
     { 
@@ -109,7 +110,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/digital-content/digital-content.module').then(m => m.DigitalContentModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Digital Content'
+            breadcrumb: 'Digital Content'
         }
     },
     { 
@@ -117,7 +118,15 @@ export const AdminLayoutRoutes: Routes = [
         component: PortalManagementComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Portal Management'
+            breadcrumb: 'Portal Management'
+        }
+    },
+    {
+        path: 'trainer-schedule',
+        loadChildren: () => import('../../Modules/trainer-schedule/trainer-schedule.module').then(m => m.TrainerScheduleModule ),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Trainer Schedule'
         }
     },
    

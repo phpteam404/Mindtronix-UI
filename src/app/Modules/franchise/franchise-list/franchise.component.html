@@ -61,7 +61,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && i != 7 && viewFranchise(rowData.id)">
+                    <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && i != 7 && viewFranchise(rowData)">
                         
                         <span *ngIf="i != 6 && i != 7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>  
                         <span *ngIf="i == 6">

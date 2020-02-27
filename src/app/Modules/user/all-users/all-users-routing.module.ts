@@ -12,11 +12,20 @@ const routes: Routes = [
   },
   {
     path:'add',
-    component: AddUserComponent
+    component: AddUserComponent,
+    data: {
+      breadcrumbs: 'Create',
+      superParentPath: 'users'
+    }
   },
   {
-    path: 'update/:id',
-    component: UpdateUserComponent
+    path: 'update/:name/:id',
+    component: UpdateUserComponent,
+    data: {
+      breadcrumbs: 'Update User',
+      superParentPath: 'users',
+      title: 'User'
+    }
   }
 ];
 

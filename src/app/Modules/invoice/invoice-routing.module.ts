@@ -10,7 +10,7 @@ const routes: Routes = [
       component: StudentInvoiceComponent,
       canActivate: [AuthGuard],
       data: {
-          breadcrumbs: 'Students'
+          breadcrumb: 'Students'
       }
     },  
     {
@@ -18,7 +18,7 @@ const routes: Routes = [
       component: StudentInvoiceComponent,
       canActivate: [AuthGuard],
       data: {
-          breadcrumbs: 'Students Invoice'
+          breadcrumb: 'Students Invoice'
       }
     },
     {
@@ -26,7 +26,7 @@ const routes: Routes = [
         component: FranchiseInvoiceComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Franchise Invoice'
+            breadcrumb: 'Franchise Invoice'
         }
     },
     {
@@ -34,7 +34,7 @@ const routes: Routes = [
         component: OnlineUsersInvoiceComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumbs: 'Online Users Invoice'
+            breadcrumb: 'Online Users Invoice'
         }
     }
   ];

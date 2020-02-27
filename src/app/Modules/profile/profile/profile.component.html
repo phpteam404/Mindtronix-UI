@@ -1,0 +1,241 @@
+<div class="main-content">
+    <!-- <div class="custom-view">
+        <h4 class="custom-view-heading">Franchise Details</h4>
+        <div class="custom-view-content">
+          <div class="row">
+              <div class="col-md-4 col-12">
+                  <label>Franchise Name</label>
+                  <p>Mindtronix Learning Centre</p>
+              </div>
+              <div class="col-md-4 col-12">
+                <label>Email</label>
+                <p>mindtronixlc@mindtronics.com</p>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>Contact Number</label>
+                <p>7997666616</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>Created On</label>
+                <p>20-02-2020</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>Status </label>
+                <p>Active</p>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    <div class="custom-view">
+        <h4 class="custom-view-heading">Schools Information</h4>
+        <div class="custom-view-content">
+          <div class="row">
+              <div class="col-md-4 col-12">
+                  <label>No.of Schools</label>
+                  <p>100</p>
+              </div>
+              <div class="col-md-4 col-12">
+                <label>No.of Students / Parent</label>
+                <p>100</p>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>No.of Trainers</label>
+                <p>20</p>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="custom-view">
+        <h4 class="custom-view-heading">Fee Structure</h4>
+        <div class="custom-view-content">
+          <div class="row">
+              <div class="col-md-4 col-12">
+                  <label>--</label>
+                  <p>--</p>
+              </div>
+              <div class="col-md-4 col-12">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>-- </label>
+                <p>--</p>
+            </div>
+            
+          </div>
+        </div>
+    </div>
+    <div class="custom-view">
+        <h4 class="custom-view-heading">Revenue</h4>
+        <div class="custom-view-content">
+          <div class="row">
+              <div class="col-md-4 col-12">
+                  <label>--</label>
+                  <p>--</p>
+              </div>
+              <div class="col-md-4 col-12">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>--</label>
+                <p>--</p>
+            </div>
+            <div class="col-md-4 col-12 mt-2">
+                <label>-- </label>
+                <p>--</p>
+            </div>
+            
+          </div>
+        </div>
+    </div> -->
+    <div class="row view-page">
+
+        <div class="col-md-12 col-12">
+           
+            <div class="custom-tabs clearfix">
+                <p-tabView>
+                    <p-tabPanel header="Basic Information">
+                        <div class="custom-form">
+                            <div class="custom-view-content">
+                                <!-- <form [formGroup]="basicInformationForm" (ngSubmit)="submit()"> -->
+                                <div class="row">
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Full Name</label>
+                                        <input pinputtext placeholder="Full Name" name="name" type="text" required>
+                                   </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Contact Email</label>
+                                        <input pinputtext placeholder="Contact Email" name="email" type="email" required>
+                                   </div>
+                                </div>
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label>Contact Number</label>
+                                        <input type="text" placeholder="Contact Number" pKeyFilter="int"
+                                        name="contact_number" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                                    <!-- <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
+                                        <div *ngIf="f.phone.errors.required">Phone is required</div>
+                                        <div *ngIf="f.phone.errors.minlength || f.phone.errors.maxlength"> Phone Number Must Be 10 digits</div>
+                                    </div> -->
+                                   </div>
+                                </div>
+                                <div class="col-12 text-right custom-btn">
+                                    <button pButton type="submit" label="Update" class="btn-warning mr-2"></button>
+                                    <button pButton type="button" label="Cancel" class="btn-default"></button>
+                                </div>
+                            </div>
+                            <!-- </form> -->
+                        </div>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Change Password">
+                        <div class="custom-form">
+                            <div class="custom-view-content">
+                                <!-- <form [formGroup]="changePasswordForm" (ngSubmit)="submit()"> -->
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Old Password</label>
+                                            <input pPassword  placeholder="Old Password" name="password" type="password" required>
+                
+                                            <!-- <div class="invalid-feedback"
+                                                *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
+                                                [ngClass]=" 'error'">Invalid Password
+                                            </div> -->
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>New Password</label>
+                                            <input pPassword  placeholder="New Password" name="password" type="password" required>
+                
+                                            <!-- <div class="invalid-feedback"
+                                                *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
+                                                [ngClass]=" 'error'">Invalid Password
+                                            </div> -->
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Confirm Password</label>
+                                            <input pPassword  placeholder="Confirm Password" name="password" type="password" required>
+                
+                                            <!-- <div class="invalid-feedback"
+                                                *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
+                                                [ngClass]=" 'error'">Invalid Password
+                                            </div> -->
+                                          
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-12 text-right custom-btn">
+                                        <button pButton type="submit" label="Update" class="btn-warning mr-2"></button>
+                                        <button pButton type="button" label="Cancel" class="btn-default"></button>
+                                    </div>
+                                </div>
+                                <!-- </form> -->
+                            </div>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="Others">
+                        <div class="custom-form">
+                            <div class="custom-view-content">
+                                <!-- <form [formGroup]="othersForm" (ngSubmit)="submit()"> -->
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>I'm a </label>
+                                            <p-dropdown [options]="designation" itemSize="30"
+                                                name="designation" optionLabel="label" required></p-dropdown>
+                                                              
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>Grade</label>
+                                            <p-dropdown [options]="grade" placeholder="Grade" itemSize="30"
+                                                name="grade" optionLabel="label" required></p-dropdown>
+                                       </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label>School Name</label>
+                                            <input pinputtext placeholder="School Name" name="schoolName" type="text" required>
+                                       </div>
+                                    </div>
+                                    <div class="col-12 text-right custom-btn">
+                                        <button pButton type="submit" label="Update" class="btn-warning mr-2"></button>
+                                        <button pButton type="button" label="Cancel" class="btn-default"></button>
+                                    </div>
+                                </div>
+                                <!-- </form> -->
+                                
+                            </div>
+                        </div>
+                     
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+       
+    </div>
+</div>

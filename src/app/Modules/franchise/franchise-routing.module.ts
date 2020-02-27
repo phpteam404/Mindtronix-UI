@@ -14,21 +14,23 @@ const routes: Routes = [
     path: 'add',
     component: AddFranchiseComponent,
     data: {
-      braedcrumbs: 'Add'
+      breadcrumbs: 'Create'
     }
   },
   {
     path: 'update/:id',
     component: UpdateFranchiseComponent,
     data: {
-      braedcrumbs: 'Update'
+      breadcrumbs: 'Update',
+      title: 'Franchise'
     }
   },
   {
-    path: 'view/:id',
+    path: 'view/:name/:id',
     component: ViewFranchiseComponent,
     data: {
-      braedcrumbs: 'View'
+      breadcrumbs: 'View',
+      title: 'Franchise'
     }
   }
 ];

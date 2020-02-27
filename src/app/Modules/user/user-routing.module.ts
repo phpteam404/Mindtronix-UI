@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'All Users'
+      breadcrumb: 'All Users'
     }
   },
   {
@@ -16,7 +16,7 @@ const routes: Routes = [
     loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'All Users'
+      breadcrumb: 'All Users'
     }
   }, 
   {
@@ -24,7 +24,7 @@ const routes: Routes = [
     loadChildren: () => import('../../Modules/user/Students/student.module').then(m => m.StudentModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'Students'
+      breadcrumb: 'Students'
     }
   },
   {
@@ -32,7 +32,7 @@ const routes: Routes = [
     loadChildren: () => import('../../Modules/user/Trainers/trainer.module').then(m => m.TrainerModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'Trainers'
+      breadcrumb: 'Trainers'
     }
   },
   {
@@ -40,7 +40,7 @@ const routes: Routes = [
     loadChildren: () => import('../../Modules/user/OnlineUsers/online-users.module').then(m => m.OnlineUsersModule),
     canActivate: [AuthGuard],
     data: {
-        breadcrumbs: 'Online Users'
+      breadcrumb: 'Online Users'
     }
   }
 ];

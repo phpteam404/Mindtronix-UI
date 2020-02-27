@@ -1,1 +1,44 @@
-<p>digital-content-list works!</p>
+<div class="main-content">
+    <div class="custom-table fee-list">
+        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
+            <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                    <button pButton type="button" label="Create Content" class="btn-warning" (click)="addNewContent($event)"></button>
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i != 6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <!-- <span *ngIf="i == 5">
+                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
+                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
+                        </span> -->
+                        <span *ngIf="i == 6"  class="d-flex action-color">
+                            <a href="javascript:;" (click)="viewContent()" title="Edit">
+                                <span class="icon icon-edit-pencil wd-30"></span>
+                            </a>
+                            <a href="javascript:;" (click)="DeleteFee(rowData)" title="Delete">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
+                        </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
+</div>

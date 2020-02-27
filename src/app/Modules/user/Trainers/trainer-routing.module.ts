@@ -14,14 +14,14 @@ const routes: Routes = [
     path: 'add',
     component: AddTrainerComponent,
     data: {
-      braedcrumbs: 'Add Trainer'
+      breadcrumbs: 'Add Trainer'
     }
   },
   {
     path: 'update',
     component: UpdateTrainerComponent,
     data: {
-      braedcrumbs: 'Update Trainer'
+      breadcrumbs: 'Update Trainer'
     }
   }
 ];

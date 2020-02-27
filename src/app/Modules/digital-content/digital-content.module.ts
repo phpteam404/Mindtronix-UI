@@ -8,8 +8,9 @@ import { UpdateDigitalContentComponent } from './update-digital-content/update-d
 import { ViewDigitalContentComponent } from './view-digital-content/view-digital-content.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BasicModule } from '../basic/basic.module';
-
-
+import { MatFileUploadModule } from 'mat-file-upload';
+import { ChartModule } from 'angular-highcharts';
+import { DialogModule } from 'primeng/dialog';
 @NgModule({
   declarations: [
     DigitalContentListComponent,
@@ -22,7 +23,10 @@ import { BasicModule } from '../basic/basic.module';
     DigitalContentRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    MatFileUploadModule,
+    ChartModule,
+    DialogModule
   ]
 })
 export class DigitalContentModule { }

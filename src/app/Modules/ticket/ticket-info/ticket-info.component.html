@@ -4,7 +4,7 @@
         <div class="custom-form-content">
             <form [formGroup]="ticketForm" (ngSubmit)="submit()">
                 <div class="row">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label>Ticket Title <span>*</span></label>
                             <input pinputtext placeholder="Title" formControlName="title" name="title" type="text" required>
@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label>Issue Type <span>*</span></label>
                             <p-dropdown [options]="issue" placeholder="Select Issue Type" itemSize="30"
@@ -22,7 +22,13 @@
                                               
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label>Issue Description</label>
+                            <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-12">
                         <div class="form-group">
                             <label>Attach issue screenshot</label>
                             <!-- <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload> -->
@@ -31,7 +37,7 @@
                                 [selectButtonText]="'Choose File(s)'"
                                 [selectFilesButtonType]="file"
                                 [allowMultipleFiles]="true"
-                                [showUploadButton]="true"
+                                [showUploadButton]="false"
                                 [acceptedTypes]="'.png, .jpg, .jpeg'"
                                 (uploadClicked)="onUploadClicked($event)"
                                 (selectedFilesChanged)="onSelectedFilesChanged($event)"
@@ -39,12 +45,7 @@
                             </mat-file-upload>
                         </div>
                     </div>
-                    <div class="col-md-8 col-12">
-                        <div class="form-group">
-                            <label>Issue Description</label>
-                            <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
-                        </div>
-                    </div>
+                   
                     <div class="col-12 text-right custom-btn">
                         <button pButton type="submit" label="Create" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>

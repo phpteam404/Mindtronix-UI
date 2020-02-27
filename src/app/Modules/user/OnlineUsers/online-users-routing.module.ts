@@ -10,8 +10,13 @@ const routes: Routes = [
     component: OnlineUsersListComponent
   },
   {
-    path: 'update/:id',
-    component: UpdateOnlineUsersComponent
+    path: 'update/:name/:id',
+    component: UpdateOnlineUsersComponent,
+    data: {
+      breadcrumbs: 'Update',
+      superParentPath: 'users',
+      title: 'Online User'
+    }
   }
 ];
 

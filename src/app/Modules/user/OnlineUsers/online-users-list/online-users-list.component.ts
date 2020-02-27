@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-online-users-list',
@@ -10,7 +11,7 @@ export class OnlineUsersListComponent implements OnInit {
   allUsersList:any=[];
   cols:any=[];
 
-  constructor() { 
+  constructor(private _router: Router, private _ar: ActivatedRoute) { 
     this.cols = [
       { field: 'name', header: 'Student Name' },
       { field: 'manager', header: 'Parent Name' },
@@ -48,5 +49,7 @@ export class OnlineUsersListComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  updateOnlineUser(data: any){
+    this._router.navigate(['update/'+data.name+'/'+1],{relativeTo:this._ar});
+  }
 }

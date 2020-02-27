@@ -14,14 +14,15 @@ const routes: Routes = [
     path: 'info',
     component: TicketInfoComponent,
     data: {
-      braedcrumbs: 'Create Ticket'
+      breadcrumbs: 'Create Ticket'
     }
   },
   {
-    path: 'view/:id',
+    path: 'view/:name/:id',
     component: ViewTicketComponent,
     data: {
-      braedcrumbs: 'View Ticket History'
+      breadcrumbs: 'History',
+      title: 'Ticket'
     }
   }
 ];

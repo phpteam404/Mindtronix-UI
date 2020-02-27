@@ -91,4 +91,7 @@ export class NavbarComponent implements OnInit{
       this.authService.logout();
       this.router.navigate(['/login']);
     }
+    profile(){
+      this.router.navigate(['/profile']);
+    }
 }
