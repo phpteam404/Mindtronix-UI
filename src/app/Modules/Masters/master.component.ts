@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ToasterService } from '../../utils/toaster.service';
+import { HttpParams } from '@angular/common/http'
+
 interface Master {
   master_name: string,
   master_id: string,
@@ -18,9 +20,9 @@ export class MasterComponent implements OnInit {
   Masterslist: any;//For List service 
   FirstMaster: any;
   MasterChilds: any;//For Master Childs List Service
-  master_child_name: string;
-  master_child_description: string;
-  master_child_id: Number;
+  masterChildName: string;
+  masterChildDescription: string;
+  masterChildId: Number;
   masterArray: any;
   Add: boolean;
   loading: boolean = false;
@@ -52,21 +54,21 @@ export class MasterComponent implements OnInit {
     // console.log('selectedMaster rowData', rowData);
     this.Add = bool;
     if(bool){
-      this.master_child_name = '';
-      this.master_child_description = '';
+      this.masterChildName = '';
+      this.masterChildDescription = '';
     }else{
-      this.master_child_name = rowData.child_name;
-      this.master_child_description = rowData.description;
-      this.master_child_id = rowData.master_child_id;
+      this.masterChildName = rowData.child_name;
+      this.masterChildDescription = rowData.description;
+      this.masterChildId = rowData.master_child_id;
     }
   }
   postMaster(Add){
     this.loading = true;
     // console.log('postMaster add', Add);
     if(Add){
-      this.masterArray = {master_id:this.selectedMaster['master_id'],child_name:this.master_child_name,description:this.master_child_description};
+      this.masterArray = {master_id:this.selectedMaster['master_id'],child_name:this.masterChildName,description:this.masterChildDescription};
     }else{
-      this.masterArray = {master_id:this.selectedMaster['master_id'],child_id:this.master_child_id,child_name:this.master_child_name,description:this.master_child_description};
+      this.masterArray = {master_id:this.selectedMaster['master_id'],child_id:this.masterChildId,child_name:this.masterChildName,description:this.masterChildDescription};
     }
     this._service.postMasterChild(this.masterArray).subscribe(res=>{
       if(res.status){
@@ -83,10 +85,10 @@ export class MasterComponent implements OnInit {
     this.selectedMaster = event.value;
   }
   onChangeMaster(input){
-      this.master_child_name = input;
+      this.masterChildName = input;
   }
   onChangeMasterDesc(input){
-      this.master_child_description = input;
+      this.masterChildDescription = input;
   }
   AddMaster(event: Event){
     console.log('Adding Master');
@@ -114,8 +116,9 @@ export class MasterComponent implements OnInit {
 
   //This service is to Get Master childs Based on Selected Master
   getMasterChilds(FirstMaster){
+    var params = new HttpParams().set('master_key',FirstMaster);
     this.loading = true;
-    this._service.getMasterChilds(FirstMaster).subscribe(res=>{
+    this._service.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         this.MasterChilds = res.data.data;
         this.cols = res.data.table_headers;
@@ -129,7 +132,7 @@ export class MasterComponent implements OnInit {
   deleteMasterChild(rowData){
     this.loading = true;
     // console.log('deleteMasterChild rowData', rowData);    
-    this._common_service.delete('master_child',rowData.master_child_id).subscribe(res=>{
+    this._common_service.delete('master_child',rowData.masterChildId).subscribe(res=>{
       if(res.status){
         this.getMasterChilds(this.selectedMaster['master_key']);
       }else{

@@ -4,7 +4,7 @@
             <ng-template pTemplate="caption">
                 <div class="row">
                     <div class="col-md-4 col-12 text-left input-dropdown">
-                        <p-dropdown  [options]="Masterslist" [(ngModel)]="selectedMaster" (onChange)="ChangeMasterParent($event)" optionLabel="master_name"></p-dropdown >
+                        <p-dropdown [options]="Masterslist" [filter]="true" [(ngModel)]="selectedMaster" (onChange)="ChangeMasterParent($event)" optionLabel="master_name"></p-dropdown >
                     </div>
                     <div class="col-md-8 col-12">
                         <div class="custom-search">
@@ -48,7 +48,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{name}} Name <span>*</span></label>
-                    <input  placeholder="Name"  name="name" type="text" value="{{master_child_name}}" (input)="onChangeMaster($event.target.value)">
+                    <input  placeholder="Name"  name="name" type="text" value="{{masterChildName}}" (input)="onChangeMaster($event.target.value)">
                     <div *ngIf="submitted1 && f.name.errors" class="invalid-feedback">
                         <div *ngIf="f.name.errors.required">Name is required</div>
                     </div>
@@ -57,7 +57,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group input-search">
                     <label>{{description}} Description&nbsp; <span>*</span></label>
-                    <input  placeholder="Description"  name="description" type="text" value="{{master_child_description}}" (input)="onChangeMasterDesc($event.target.value)">
+                    <input  placeholder="Description"  name="description" type="text" value="{{masterChildDescription}}" (input)="onChangeMasterDesc($event.target.value)">
                     <div *ngIf="submitted1 && f.description.errors" class="invalid-feedback">
                         <div *ngIf="f.description.errors.required">Name is required</div>
                     </div>
