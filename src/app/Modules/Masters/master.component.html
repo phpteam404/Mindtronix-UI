@@ -1,10 +1,10 @@
 <div class="main-content">
     <div class="custom-table">
-        <p-table #dt [columns]="cols" [value]="MasterChilds" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="MasterChilds" [paginator]="true" [rows]="10" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="row">
                     <div class="col-md-4 col-12 text-left input-dropdown">
-                        <p-dropdown  [options]="Masterslist" [(ngModel)]="selectedMaster" (onChange)="ChangeModelLable($event)" optionLabel="master_name"></p-dropdown >
+                        <p-dropdown  [options]="Masterslist" [(ngModel)]="selectedMaster" (onChange)="ChangeMasterParent($event)" optionLabel="master_name"></p-dropdown >
                     </div>
                     <div class="col-md-8 col-12">
                         <div class="custom-search">
@@ -13,7 +13,7 @@
                                 (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                                 <i class="fa fa-search"></i> 
                             </div>
-                            <button pButton type="button" label="+" class="btn-warning" (click)="showBasicDialog()"></button>
+                            <button pButton type="button" label="+" class="btn-warning" (click)="showBasicDialog({},true)"></button>
                         </div>
                     </div>
                 </div>
@@ -31,8 +31,8 @@
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog()" title="Edit"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete" title="Delete"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="Edit"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete" title="Delete" (click)="deleteMasterChild(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -48,7 +48,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{name}} Name <span>*</span></label>
-                    <input  placeholder="Name"  name="name" type="text">
+                    <input  placeholder="Name"  name="name" type="text" value="{{master_child_name}}" (input)="onChangeMaster($event.target.value)">
                     <div *ngIf="submitted1 && f.name.errors" class="invalid-feedback">
                         <div *ngIf="f.name.errors.required">Name is required</div>
                     </div>
@@ -57,7 +57,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group input-search">
                     <label>{{description}} Description&nbsp; <span>*</span></label>
-                    <input  placeholder="Description"  name="description" type="text">
+                    <input  placeholder="Description"  name="description" type="text" value="{{master_child_description}}" (input)="onChangeMasterDesc($event.target.value)">
                     <div *ngIf="submitted1 && f.description.errors" class="invalid-feedback">
                         <div *ngIf="f.description.errors.required">Name is required</div>
                     </div>
@@ -66,7 +66,8 @@
         </div>
     <!-- </form> -->
 <p-footer>
-    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
+    <button type="button" pButton class="btn-warning" (click)="postMaster(Add)" label="Yes"></button>
     <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
 </p-footer>
 </p-dialog>
+<!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
