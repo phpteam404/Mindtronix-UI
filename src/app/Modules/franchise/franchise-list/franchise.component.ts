@@ -69,9 +69,9 @@ export class FranchiseListComponent implements OnInit {
 
     this._service.getList(params).subscribe(res=>{
       if(res.status){
-        this.list = res.data;
-        this.cols = res.table_headers;
-        this.totalRecords = res.total_records;
+        this.list = res.data.data;
+        this.cols = res.data.table_headers;
+        this.totalRecords = res.data.total_records;
         this.loading = false;
       }
     });

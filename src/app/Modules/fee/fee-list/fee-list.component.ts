@@ -20,14 +20,14 @@ export class FeeListComponent implements OnInit {
   constructor(private router: Router, private _route: ActivatedRoute,
              private _service: FeeService, private _toast: ToasterService) {
    
-    this.cols = [
-      { field: 'name', header: 'Fee Title' },
-      { field: 'amount', header: 'Fee Amount (₹)' },
-      { field: 'term', header: 'Term' },
-      { field: 'discount', header: 'Discount (%)' },
-      { field: 'status', header: 'Status' },
-      { field: 'actions', header: 'Actions' }
-    ];
+    // this.cols = [
+    //   { field: 'name', header: 'Fee Title' },
+    //   { field: 'amount', header: 'Fee Amount (₹)' },
+    //   { field: 'term', header: 'Term' },
+    //   { field: 'discount', header: 'Discount (%)' },
+    //   { field: 'status', header: 'Status' },
+    //   { field: 'actions', header: 'Actions' }
+    // ];
   }
   ngOnInit(): void {}
 
@@ -67,8 +67,9 @@ export class FeeListComponent implements OnInit {
     console.log('params---', params);
     this._service.getList(params).subscribe(res=>{
       if(res.status){
-        this.list = res.data;
-        this.totalRecords = res.total_records;
+        this.list = res.data.data;
+        this.totalRecords = res.data.total_records;
+        this.cols = res.data.table_headers;
         this.loading = false;
       }
     });

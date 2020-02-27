@@ -47,9 +47,9 @@ export class MasterComponent implements OnInit {
   }
   showBasicDialog(rowData,bool) {
     this.displayBasic = true;
-    console.log('showBasicDialog bool', !bool);
-    console.log('selectedMaster ', this.selectedMaster);
-    console.log('selectedMaster rowData', rowData);
+    // console.log('showBasicDialog bool', !bool);
+    // console.log('selectedMaster ', this.selectedMaster);
+    // console.log('selectedMaster rowData', rowData);
     this.Add = bool;
     if(bool){
       this.master_child_name = '';
@@ -62,7 +62,7 @@ export class MasterComponent implements OnInit {
   }
   postMaster(Add){
     this.loading = true;
-    console.log('postMaster add', Add);
+    // console.log('postMaster add', Add);
     if(Add){
       this.masterArray = {master_id:this.selectedMaster['master_id'],child_name:this.master_child_name,description:this.master_child_description};
     }else{
@@ -100,10 +100,10 @@ export class MasterComponent implements OnInit {
     this.loading = true;
     this._service.getAllMaster().subscribe(res=>{
       if(res.status){
-        this.Masterslist = res.data;
-        if(res.data[0].master_key != undefined){
-          this.getMasterChilds(res.data[0].master_key);
-          this.selectedMaster = res.data[0];
+        this.Masterslist = res.data.data;
+        if(res.data.data[0].master_key != undefined){
+          this.getMasterChilds(res.data.data[0].master_key);
+          this.selectedMaster = res.data.data[0];
         }
       }else{
         this._toast.show('error',res.error);
@@ -118,6 +118,7 @@ export class MasterComponent implements OnInit {
     this._service.getMasterChilds(FirstMaster).subscribe(res=>{
       if(res.status){
         this.MasterChilds = res.data.data;
+        this.cols = res.data.table_headers;
       }else{
         this._toast.show('error',res.error);
       }
@@ -127,7 +128,7 @@ export class MasterComponent implements OnInit {
   
   deleteMasterChild(rowData){
     this.loading = true;
-    console.log('deleteMasterChild rowData', rowData);    
+    // console.log('deleteMasterChild rowData', rowData);    
     this._common_service.delete('master_child',rowData.master_child_id).subscribe(res=>{
       if(res.status){
         this.getMasterChilds(this.selectedMaster['master_key']);

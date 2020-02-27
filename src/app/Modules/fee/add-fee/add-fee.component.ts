@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { Router } from '@angular/router';
 import { FeeService } from 'src/app/services/fee.service';
+import { MasterService } from 'src/app/services/master.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-add-fee',
@@ -16,17 +18,21 @@ export class AddFeeComponent implements OnInit {
   status:any =[];
 
   pageTitle:string="Create Fee Structure";
-  constructor(private _router: Router, private _toast: ToasterService, private _service: FeeService) {
-    this.term= [
-      {label: "Monthly", value:"monthly"},
-      {label: "Quarterly", value:"quarterly"},
-      {label: "Half Yearly", value:"half_yearly"},
-      {label: "Yearly", value:"yearly"},
-    ];
-    this.status =[
-      {label:'Active',value:1},
-      {label:'InActive',value:0}
-    ];
+  constructor(private _router: Router, 
+              private _toast: ToasterService, 
+              private _masterService: MasterService, 
+              private _commonService: CommonService, 
+              private _service: FeeService) {
+    // this.term= [
+    //   {label: "Monthly", value:"monthly"},
+    //   {label: "Quarterly", value:"quarterly"},
+    //   {label: "Half Yearly", value:"half_yearly"},
+    //   {label: "Yearly", value:"yearly"},
+    // ];
+    // this.status =[
+    //   {label:'Active',value:1},
+    //   {label:'InActive',value:0}
+    // ];
    }
   feeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -38,10 +44,13 @@ export class AddFeeComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.getMasterChilds('fee_term');
+    this.getMasterChilds('status');
   }
   // convenience getter for easy access to form fields
   get f() { return this.feeForm.controls; }
 
+  
   submit(): any {
     this.submitted = false;
     if (this.feeForm.valid) {
@@ -64,5 +73,19 @@ export class AddFeeComponent implements OnInit {
   }
   goToList(){
     this._router.navigate(['fee_management']);
+  }
+
+  //This service is to Get Master childs Based on Selected Master
+  getMasterChilds(Master_key): any{
+    return this._masterService.getMasterChilds(Master_key).subscribe(res=>{
+      if(res.status){
+        if(Master_key == 'fee_term')
+          this.term =  res.data.data;
+        if(Master_key == 'status')
+          this.status =  res.data.data;
+      }else{
+        this._toast.show('error',res.error);
+      }
+    });
   }
 }
