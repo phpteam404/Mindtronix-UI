@@ -14,14 +14,15 @@ const routes: Routes = [
     path: 'add',
     component: AddFeeComponent,
     data: {
-      breadcrumbs: 'Add'
+      breadcrumbs: 'Create'
     }
   },
   {
-    path: 'update/:id',
+    path: 'update/:name/:id',
     component: UpdateFeeComponent,
     data: {
-      breadcrumbs: 'Update'
+      breadcrumbs: 'Update',
+      title: 'Fee Structure'
     }
   }
 ];

@@ -30,7 +30,7 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 7" class="d-flex action-color">
-                            <a href="javascript:;"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;" (click)="updateOnlineUser(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
                             <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>
                         </span>
                     </td>

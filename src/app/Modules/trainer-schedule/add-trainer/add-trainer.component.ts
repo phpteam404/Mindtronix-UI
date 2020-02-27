@@ -19,6 +19,7 @@ export class AddTrainerComponent implements OnInit {
     description: new FormControl(''),
     schedule_date: new FormControl('', [Validators.required]),
     schedule_time: new FormControl('', [Validators.required]),
+    to_time: new FormControl('', [Validators.required]),
   });
 
   get f() { return this.scheduleForm.controls; }

@@ -14,14 +14,17 @@ const routes: Routes = [
     path:'add',
     component: AddUserComponent,
     data: {
-      breadcrumbs: 'Add User'
+      breadcrumbs: 'Create',
+      superParentPath: 'users'
     }
   },
   {
-    path: 'update/:id',
+    path: 'update/:name/:id',
     component: UpdateUserComponent,
     data: {
-      breadcrumbs: 'Update User'
+      breadcrumbs: 'Update User',
+      superParentPath: 'users',
+      title: 'User'
     }
   }
 ];

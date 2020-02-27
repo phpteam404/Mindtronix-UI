@@ -13,7 +13,9 @@ const routes: Routes = [
     path: 'add',
     component: AddTrainerComponent,
     data: {
-      braedcrumbs: 'Create Schedule'
+      braedcrumbs: 'Create Schedule',
+      superParentPath: 'users',
+      title: 'User'
     }
   },
   {

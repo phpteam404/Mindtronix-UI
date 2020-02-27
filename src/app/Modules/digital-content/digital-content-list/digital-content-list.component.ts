@@ -32,5 +32,7 @@ export class DigitalContentListComponent implements OnInit {
   addNewContent(event: Event){
     this._router.navigate(['add'],{relativeTo:this._ar});
   }
-
+  viewContent(event: Event){
+    this._router.navigate(['digital_content/view/1']);
+  }
 }

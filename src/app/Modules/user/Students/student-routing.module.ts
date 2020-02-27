@@ -16,21 +16,26 @@ const routes: Routes = [
     path: 'add',
     component: AddStudentComponent,
     data: {
-      breadcrumbs: 'Add Student'
+      breadcrumbs: 'Create',
+      superParentPath: 'users'
     }
   },
   {
-    path: 'update/:id',
+    path: 'update/:name/:id',
     component: UpdateStudentComponent,
     data: {
-      breadcrumbs: 'Update Student'
+      breadcrumbs: 'Update',
+      superParentPath: 'users',
+      title: 'Student'
     }
   },
   {
-    path: 'view/:id',
+    path: 'view/:name/:id',
     component: ViewStudentComponent,
     data: {
-      breadcrumbs: 'view Student'
+      breadcrumbs: 'View',
+      superParentPath: 'users',
+      title: 'Student'
     }
   },
 ];

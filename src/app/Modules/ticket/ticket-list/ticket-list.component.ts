@@ -59,6 +59,6 @@ export class TicketListComponent implements OnInit {
   }
 
   viewTicket(data:any){
-    this.router.navigate(['view/'+btoa(data.issueId)], {relativeTo: this._route});
+    this.router.navigate(['view/'+data.title+'/'+btoa(data.issueId)], {relativeTo: this._route});
   }
 }

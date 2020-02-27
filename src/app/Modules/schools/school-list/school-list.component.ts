@@ -57,7 +57,7 @@ export class SchoolListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this._route});
   }
   EditSchool(data:any){
-    this.router.navigate(['update/'+btoa(data.id)],{ relativeTo: this._route});
+    this.router.navigate(['update/'+data.school_name+'/'+btoa(data.id)],{ relativeTo: this._route});
   }
   GoToStudent(event: Event){
     this.router.navigate(['users/students'], {});

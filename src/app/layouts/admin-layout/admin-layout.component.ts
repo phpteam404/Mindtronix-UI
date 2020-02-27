@@ -17,7 +17,9 @@ export class AdminLayoutComponent implements OnInit {
   public childBreadCrumb: string;
   public currentRouteParam: string;
 
-  parentRoute: string = '';
+  parentRoute: string;
+  pageTitle: string;
+
   staticBreadCrumb = false;
 
   page: string;
@@ -38,27 +40,36 @@ export class AdminLayoutComponent implements OnInit {
       map(() => _ar),
       map(route => {
         while (route.firstChild) route = route.firstChild
+
         /*console.log('route===', route.routeConfig['data']); // path, component, data{breadcrumb:''}
         console.log('route---', route.parent.url['_value']);
         console.log('route***', route);
         console.log('route url params***', route.snapshot.params);
-        console.log('route routeConfig---', route.routeConfig);
-        this.currentRouteParam = route.snapshot.params.name;*/
+        console.log('route routeConfig---', route.routeConfig);*/
 
+        this.currentRouteParam = route.snapshot.params.name;
         route.parent.url['_value'].forEach(item => { 
-          console.log('item*-*-*-', item.path);
+         // console.log('item*-*-*-', item.path);
           this.parentRoute = '/'+item.path;
         });
+
         return route
       }),
       filter(route => route.outlet === 'primary'),
       mergeMap(route => route.data)
     ).subscribe(data => {
-      console.log('route++++', data['breadcrumbs']);
+      //console.log('route++++', data['breadcrumbs']);
+      //console.log('route+**+', data);
       // console.log('current route', this.router.url);
       // console.log('current _ar', this._ar);
       this.breadCrumb = data['breadcrumb']
       this.childBreadCrumb = data['breadcrumbs']
+      if(data['superParentPath']){
+        this.parentRoute = '/'+data['superParentPath']+this.parentRoute;
+      }
+      if(data['title']){
+        this.pageTitle = data['title'];
+      }
     });
   }
   ngOnInit() {

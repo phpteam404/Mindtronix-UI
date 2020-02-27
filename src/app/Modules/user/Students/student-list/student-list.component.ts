@@ -110,9 +110,9 @@ export class StudentListComponent implements OnInit {
     else this.getStudentsList();
   }
   EditStudent(data:any){
-    this.router.navigate(['update/'+btoa(data.id)],{ relativeTo: this._route});
+    this.router.navigate(['update/'+data.name+'/'+btoa(data.id)],{ relativeTo: this._route});
   }
   viewStudent(data:any){
-    this.router.navigate(['view/'+btoa(data.id)],{ relativeTo: this._route});
+    this.router.navigate(['view/'+data.name+'/'+btoa(data.id)],{ relativeTo: this._route});
   }
 }

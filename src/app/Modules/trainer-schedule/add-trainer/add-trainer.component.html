@@ -32,16 +32,26 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Time <span>*</span></label>
-                            <p-calendar name="schedule_time" formControlName="schedule_time" [timeOnly]="true"></p-calendar>
+                            <label>From Time <span>*</span></label>
+                            <p-calendar name="schedule_time" formControlName="schedule_time" [timeOnly]="true" hourFormat="12"></p-calendar>
                             <div class="invalid-feedback"
                             *ngIf="scheduleForm.controls.schedule_time.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'"> Time is required
+                            [ngClass]=" 'error'"> From Time is required
                         </div>                 
                         </div>
                     </div>
                  
-                    
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>To Time <span>*</span></label>
+                            <p-calendar name="to_time" formControlName="to_time" [timeOnly]="true" hourFormat="12"></p-calendar>
+                            <div class="invalid-feedback"
+                            *ngIf="scheduleForm.controls.to_time.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> To Time is required
+                        </div>                 
+                        </div>
+                    </div>
+                 
                    
                     <div class="col-12 text-right custom-btn">
                         <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>

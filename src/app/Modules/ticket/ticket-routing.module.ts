@@ -18,10 +18,11 @@ const routes: Routes = [
     }
   },
   {
-    path: 'view/:id',
+    path: 'view/:name/:id',
     component: ViewTicketComponent,
     data: {
-      breadcrumbs: 'View Ticket History'
+      breadcrumbs: 'History',
+      title: 'Ticket'
     }
   }
 ];

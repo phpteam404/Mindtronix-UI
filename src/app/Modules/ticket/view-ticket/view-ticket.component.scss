@@ -16,6 +16,7 @@
     }
 }
 .franchise-name{
+    width: 1% !important;
     span {
         font-weight: bold;
         color: #e87a26;
@@ -161,4 +162,7 @@
             width: 100%;
         }
     }
+}
+.status-div{
+   width: 0.4% !important;
 }
