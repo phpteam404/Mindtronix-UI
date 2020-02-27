@@ -120,5 +120,13 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumb: 'Portal Management'
         }
     },
+    {
+        path: 'trainer-schedule',
+        loadChildren: () => import('../../Modules/trainer-schedule/trainer-schedule.module').then(m => m.TrainerScheduleModule ),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Trainer Schedule'
+        }
+    },
    
 ];
