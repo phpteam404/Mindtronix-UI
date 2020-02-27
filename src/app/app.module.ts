@@ -30,7 +30,6 @@ import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputTextModule} from 'primeng/inputtext';
 import {CalendarModule} from 'primeng/calendar';
 import {DropdownModule} from 'primeng/dropdown';
-import {BreadcrumbsModule} from "ng6-breadcrumbs";
 import { BasicModule } from './Modules/basic/basic.module';
 import { DialogModule } from 'primeng/dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -73,7 +72,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     DropdownModule,
     DialogModule,
     BsDropdownModule.forRoot()
-    // BreadcrumbsModule
   ],
   providers: [
     { 

@@ -27,9 +27,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 
 import { AdminLayoutRoutes } from './admin-layout.routing';
 import { BasicComponent } from 'src/app/basic/basic.component';
-import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
-import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
-import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
@@ -38,6 +35,8 @@ import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
+import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -73,12 +72,10 @@ import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.compon
   ],
   declarations: [
     BasicComponent,
-    PortalManagementComponent,
-    ProfilesManagementComponent,
-    PaymentManagementComponent,
     RoleManagementComponent,
     MasterComponent,
-    ProfileComponent
+    ProfileComponent,
+    OnlineSubscriptionComponent
   ]
 })
 
