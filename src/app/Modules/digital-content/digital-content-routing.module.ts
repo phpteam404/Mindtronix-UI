@@ -10,23 +10,19 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 const routes: Routes = [
   {
     path:'',
-    component: DigitalContentListComponent,
-    canActivate: [AuthGuard]
+    component: DigitalContentListComponent
   },
   {
     path:'add',
-    component: AddDigitalContentComponent,
-    canActivate: [AuthGuard]
+    component: AddDigitalContentComponent
   },
   {
     path:'view/:id',
-    component: ViewDigitalContentComponent,
-    canActivate: [AuthGuard]
+    component: ViewDigitalContentComponent
   },
   {
     path: 'update/:id',
-    component: UpdateDigitalContentComponent,
-    canActivate: [AuthGuard]
+    component: UpdateDigitalContentComponent
   }
 ];
 

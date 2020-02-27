@@ -32,10 +32,10 @@ export class AdminLayoutComponent implements OnInit {
       filter(route => route.outlet === 'primary'),
       mergeMap(route => route.data)
     ).subscribe(data => {
-      console.log('this.breadCrumb 1', data['breadcrumbs']);
+      console.log('this.breadCrumb 1', data['breadcrumb']);
       console.log('current route', this.router.url);
       console.log('current _ar', this._ar);
-      this.breadCrumb = data['breadcrumbs']
+      this.breadCrumb = data['breadcrumb']
 
       if (this.router.url === '/franchise/add') {
         this.breadCrumb = ' Add Franchise';
@@ -43,7 +43,7 @@ export class AdminLayoutComponent implements OnInit {
         this.parentRoute = '/franchise';
       }
       else {
-        this.breadCrumb = data['breadcrumbs']
+        this.breadCrumb = data['breadcrumb']
         this.parentRoute = '';
         this.staticBreadCrumb = false;
       }

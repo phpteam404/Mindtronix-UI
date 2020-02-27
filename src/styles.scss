@@ -292,6 +292,16 @@ p-table{
   }
  
 }
+.ticket-list{
+  tbody{
+    tr{
+      cursor: pointer;
+      &:hover{
+        background-color: #e4e4e4 !important;
+      }
+    }
+  }
+}
 //table styles end here
 .custom-view{
   background-color: #fff;
@@ -955,3 +965,4 @@ input{
     }
   }
 }
+

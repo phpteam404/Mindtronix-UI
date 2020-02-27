@@ -18,7 +18,7 @@ export class ViewFranchiseComponent implements OnInit {
   displayBasic2: boolean;
   status:any;
   title:any;
-  revenueMonth:any;  
+  revenueMonth:any;
   chart:Chart;
 
   constructor(private route: ActivatedRoute) {
@@ -53,18 +53,18 @@ export class ViewFranchiseComponent implements OnInit {
     this.status =[
       {label:'Active',value:'active'},
       {label:'InActive',value:'Inactive'}
-];
-this.title =[
-      {label:'Franchise Admin',value:'Franchise Admin'},
-      {label:'Accountant',value:'Accountant'},
-      {label:'Finance',value:'Finance'},
-      {label:'Technical',value:'Technical'}
-];
-this.revenueMonth = [
-   {label:'Feb 2020', value:'Feb 2020'},
-   {label:'Jan 2020', value:'Jan 2020'},
-   {label:'Dec 2019', value:'Dec 2019'},
-];
+    ];
+    this.title =[
+          {label:'Franchise Admin',value:'Franchise Admin'},
+          {label:'Accountant',value:'Accountant'},
+          {label:'Finance',value:'Finance'},
+          {label:'Technical',value:'Technical'}
+    ];
+    this.revenueMonth = [
+      {label:'Feb 2020', value:'Feb 2020'},
+      {label:'Jan 2020', value:'Jan 2020'},
+      {label:'Dec 2019', value:'Dec 2019'},
+    ];
    }
    showBasicDialog() {
     this.displayBasic = true;
@@ -75,7 +75,6 @@ this.revenueMonth = [
   showBasicDialog2() {
     this.displayBasic2 = true;
   }
-
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
