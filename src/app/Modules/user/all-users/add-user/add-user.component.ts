@@ -15,6 +15,7 @@ export class AddUserComponent implements OnInit {
   roles: any;
   franchise: any;
   status: any;
+  isUpdate:boolean=false;
 
   formObj: any = {};
   pageTitle:string = "Create User";

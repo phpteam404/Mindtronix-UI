@@ -26,7 +26,7 @@ export class UpdateFranchiseComponent implements OnInit {
   contactsListCols:any=[];
   FeeList:any=[];
   FeeStructureCols:any=[];
-
+  isUpdate:boolean = true;
   fullObject:any={}
   pageTitle:string = "Update Franchise";
   FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;

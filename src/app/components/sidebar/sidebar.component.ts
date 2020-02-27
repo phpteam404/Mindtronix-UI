@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
-import { Router } from '@angular/router';
-
+import { NavigationEnd, Router, ActivatedRoute} from '@angular/router';
+import { filter, map, mergeMap } from 'rxjs/operators'
 declare const $: any;
 declare interface RouteInfo {
     path: string;
@@ -27,7 +27,33 @@ export class SidebarComponent implements OnInit {
   name: string;
   menu:any=[];
   public expandedIndex=-1;
-  constructor(private ls: LocalStorageService,private router: Router) { }
+  constructor(private ls: LocalStorageService,private router: Router, private _ar: ActivatedRoute) { 
+    router.events.pipe(
+      filter(event => event instanceof NavigationEnd),
+      map(() => _ar),
+      map(route => {
+        while (route.firstChild) route = route.firstChild
+
+        console.log('route===', route.routeConfig['data']); // path, component, data{breadcrumb:''}
+        console.log('route---', route.parent.url['_value']);
+        console.log('route***', route);
+        console.log('route url ***', route.snapshot.root['_routerState'].url);
+        console.log('route routeConfig---', route.routeConfig.path);
+        var arr = route.snapshot.root['_routerState'].url.trim().split('/');
+        console.log('arr*-*', arr);
+        var menuURL = route.snapshot.url;
+        route.parent.url['_value'].forEach(item => { 
+          console.log('item*-*-*-', item.path);
+        });
+
+        return route
+      }),
+      filter(route => route.outlet === 'primary'),
+      mergeMap(route => route.data)
+    ).subscribe(data => {
+      console.log('route+**+', data);      
+    });
+  }
   ngOnInit() {
     this.menu = JSON.parse(this.ls.getItem('user')).menu;
     if(this.menu){

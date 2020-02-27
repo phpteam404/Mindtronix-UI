@@ -17,6 +17,7 @@ export class UpdateFeeComponent implements OnInit {
   formObj:any={};
   pageTitle:string="Update Fee Structure";
   feeForm: FormGroup;
+  isUpdate:boolean = true;
 
   constructor(private _router: Router, private _toast: ToasterService, private _ar: ActivatedRoute, private _service: FeeService) {
     this.term= [

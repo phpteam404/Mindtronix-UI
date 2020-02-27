@@ -11,7 +11,7 @@ import  dropdown  from 'src/app/jsons/dropdown.json';
 })
 export class UpdateStudentComponent implements OnInit {
 
- 
+  isUpdate:boolean=true; 
   cities:any;
   status:any;
   submitted = null;

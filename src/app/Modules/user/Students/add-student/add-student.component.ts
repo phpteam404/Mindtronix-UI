@@ -15,6 +15,7 @@ export class AddStudentComponent implements OnInit {
   status:any;
   submitted = null;
   maxDate: Date;
+  isUpdate:boolean=false;
 
   NationalityList:{name:string,id:string}[] = dropdown.nationality;
   BloodGroupList :{name:string,id:string}[] =dropdown.blood_group;

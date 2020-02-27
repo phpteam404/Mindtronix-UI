@@ -12,6 +12,8 @@ export class UpdateSchoolComponent implements OnInit {
   pageTitle:string = "Update School";
   fullObject:any={};
   list:any=[];
+  isUpdate:boolean = true;
+
   constructor(private _router: Router,private _ar: ActivatedRoute, private _toast: ToasterService) { 
     this.list = [
       {id:1,code:'AAH', no_of_students:'10', school_name:'About Academic Heights Public School - AHPS', address:'Plot No. 153, Air By Pass Road, Near M.R. Palli Circle', phone_no:'9000867321', email:'academicheights@gmail.com',last_update:'01-02-2020'},

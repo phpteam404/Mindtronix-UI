@@ -7,8 +7,8 @@
         <navbar-cmp></navbar-cmp>
         <!-- <mc-breadcrumbs></mc-breadcrumbs> -->
         <!-- <div>{{breadCrumb}}</div> -->
-        <div class="page-title-card">
-            <h5 *ngIf="currentRouteParam">
+        <div class="page-title-card" [ngClass]="{breadCrumb_title: currentRouteParam}">
+            <h5 *ngIf="currentRouteParam" >
                 <span>{{pageTitle}} - </span>
                 <span>{{currentRouteParam}}</span>
             </h5>
