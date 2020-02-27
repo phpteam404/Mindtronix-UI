@@ -33,8 +33,8 @@ export class UpdateFranchiseComponent implements OnInit {
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder,private _ar: ActivatedRoute) {     
     this.status =[
-      {label:'Active',value:{id:1,name:'Active'}},
-      {label:'InActive',value:{id:2,name:'InActive'}}
+      {label:'Active',value:1},
+      {label:'InActive',value:0}
     ]
     this.title =[
       {label:'Admin',value:{id:1,name:'Admin'}},
@@ -105,7 +105,7 @@ export class UpdateFranchiseComponent implements OnInit {
       console.log('obj===>>>', this.fullObject);
     });
     this.stepOneForm = new FormGroup({
-      name: new FormControl(this.fullObject.franchise_name, [Validators.required]),
+      name: new FormControl(this.fullObject.agency_name, [Validators.required]),
       code: new FormControl('', [Validators.required]),
       contact_person: new FormControl(this.fullObject.contact_person,[Validators.required]),
       phone: new FormControl(this.fullObject.contact_number, [Validators.required]),

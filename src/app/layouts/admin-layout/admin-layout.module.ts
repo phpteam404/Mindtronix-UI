@@ -31,14 +31,13 @@ import { PortalManagementComponent } from 'src/app/Modules/portal-management/por
 import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { BasicModule } from 'src/app/Modules/basic/basic.module';
-import {BreadcrumbModule} from 'primeng/breadcrumb';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 import {TabViewModule} from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
-// import { BreadcrumbsModule } from '@exalif/ngx-breadcrumbs';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -65,7 +64,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule,
-    BreadcrumbModule,
     TabViewModule,
     DialogModule,
     MatIconModule,
@@ -79,7 +77,8 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
     ProfilesManagementComponent,
     PaymentManagementComponent,
     RoleManagementComponent,
-    MasterComponent
+    MasterComponent,
+    ProfileComponent
   ]
 })
 

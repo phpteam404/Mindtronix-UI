@@ -6,6 +6,7 @@ import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management
 import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
+import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -81,11 +82,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     { 
-        path: 'profile-management',
-        component: ProfilesManagementComponent,
+        path: 'profile',
+        component: ProfileComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Profiles Management'
+            breadcrumb: 'Profile'
         }
     },
     { 
