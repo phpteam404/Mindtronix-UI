@@ -10,6 +10,7 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 export class AddTrainerComponent implements OnInit {
   submitted = null;
   pageTitle:string = "Create Schedule";
+  isUpdate:boolean=false;
   constructor(private _router: Router, private _toast: ToasterService) { }
 
   ngOnInit(): void {

@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
 import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { PortalManagementComponent } from 'src/app/Modules/portal-management/portal-management.component';
-import { ProfilesManagementComponent } from 'src/app/Modules/profiles-management/profiles-management.component';
-import { PaymentManagementComponent } from 'src/app/Modules/payment-management/payment-management.component';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
+import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -97,14 +95,7 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumb: 'School Management'
         }
     },
-    { 
-        path: 'payment-management',
-        component: PaymentManagementComponent,
-        canActivate: [AuthGuard],
-        data: {
-            breadcrumb: 'Payment Management'
-        }
-    },
+   
     { 
         path: 'digital_content',
         loadChildren: () => import('../../Modules/digital-content/digital-content.module').then(m => m.DigitalContentModule),
@@ -114,11 +105,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     { 
-        path: 'portal-management',
-        component: PortalManagementComponent,
+        path: 'online-subscription',
+        component: OnlineSubscriptionComponent,
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Portal Management'
+            breadcrumb: 'Online Subscription'
         }
     },
     {

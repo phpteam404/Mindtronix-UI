@@ -15,6 +15,7 @@ export class UpdateUserComponent implements OnInit {
   franchise: any;
   status: any;
   pageTitle:string = "Update User";
+  isUpdate:boolean=true;
 
   constructor(private _router: Router, private _toast: ToasterService) { 
     this.roles = [

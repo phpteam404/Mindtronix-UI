@@ -11,6 +11,8 @@ export class UpdateTrainerComponent implements OnInit {
   submitted = null;
   fullObject:any={};
   pageTitle:string="Update Schedule";
+  isUpdate:boolean=true;
+
   // scheduleForm: FormGroup;
   trainers:any;
   constructor(private _router: Router,private _ar: ActivatedRoute, private _toast: ToasterService) { 

@@ -11,6 +11,8 @@ import { Router } from '@angular/router';
 export class AddSchoolComponent implements OnInit {
   submitted = null;
   pageTitle:string = "Create School";
+  isUpdate:boolean = false;
+
   constructor(private _router: Router, private _toast: ToasterService) { }
   schoolForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

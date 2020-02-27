@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PortalManagementComponent } from './portal-management.component';
+import { OnlineSubscriptionComponent } from './online-subscription.component';
 
-describe('PortalManagementComponent', () => {
-  let component: PortalManagementComponent;
-  let fixture: ComponentFixture<PortalManagementComponent>;
+describe('OnlineSubscriptionComponent', () => {
+  let component: OnlineSubscriptionComponent;
+  let fixture: ComponentFixture<OnlineSubscriptionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PortalManagementComponent ]
+      declarations: [ OnlineSubscriptionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PortalManagementComponent);
+    fixture = TestBed.createComponent(OnlineSubscriptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

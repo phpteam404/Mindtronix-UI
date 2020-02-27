@@ -39,6 +39,7 @@ export class AddFranchiseComponent implements OnInit {
   selectedCities1: City[];
   selectedCities2: City[];
   ///
+  isUpdate:boolean;
 
   fullObject:any={}
   pageTitle:string = "Create Franchise";
@@ -46,6 +47,7 @@ export class AddFranchiseComponent implements OnInit {
   FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
+    this.isUpdate=false;
     this.cities1 = [
       {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
       {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},

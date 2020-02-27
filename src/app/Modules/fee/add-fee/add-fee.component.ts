@@ -16,6 +16,7 @@ export class AddFeeComponent implements OnInit {
   submitted = null;
   term:any =[];
   status:any =[];
+  isUpdate:boolean = false;
 
   pageTitle:string="Create Fee Structure";
   constructor(private _router: Router, 

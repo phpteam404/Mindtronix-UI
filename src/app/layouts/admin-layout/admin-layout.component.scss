@@ -1,0 +1,19 @@
+.breadCrumb_title{
+  h5{
+    font-size: 15px;
+    margin: 0 0 3px;
+    font-weight: 500;
+    span{
+        &:first-child{
+            color: #979797 !important;
+        }
+       &:last-child{
+           color: #e87a26 !important;
+       }
+    }
+ 
+  }
+  h4{
+       line-height: 20px; 
+  }
+}
