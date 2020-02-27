@@ -9,18 +9,11 @@ import { Observable, throwError } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class MasterService {
+export class CommonService {
 
-  constructor(private clientHttp : AppHttpClientService) { 
-  
-  }
-  getAllMaster () {
-    return this.clientHttp.get('Master/masterList');
-  }
-  getMasterChilds (master_key) {
-    return this.clientHttp.get('Master/getMsaterData?master_key='+master_key);
-  }
-  postMasterChild (params) {
-    return this.clientHttp.post('Master/addMasterChild',params);
+  constructor(private clientHttp : AppHttpClientService) { }
+
+  delete (table,id) {
+    return this.clientHttp.delete('User/Delete/'+table+'/'+id);
   }
 }
