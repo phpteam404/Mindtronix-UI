@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FeeService } from 'src/app/services/fee.service';
 import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-fee',
@@ -24,16 +25,6 @@ export class AddFeeComponent implements OnInit {
               private _masterService: MasterService, 
               private _commonService: CommonService, 
               private _service: FeeService) {
-    // this.term= [
-    //   {label: "Monthly", value:"monthly"},
-    //   {label: "Quarterly", value:"quarterly"},
-    //   {label: "Half Yearly", value:"half_yearly"},
-    //   {label: "Yearly", value:"yearly"},
-    // ];
-    // this.status =[
-    //   {label:'Active',value:1},
-    //   {label:'InActive',value:0}
-    // ];
    }
   feeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -45,11 +36,9 @@ export class AddFeeComponent implements OnInit {
   });
 
   ngOnInit(): void {
-    this.getMasterChilds('fee_term');
-    this.getMasterChilds('status');
+    this.getMasterData('fee_term');
+    this.getMasterData('status');
   }
-  // convenience getter for easy access to form fields
-  get f() { return this.feeForm.controls; }
 
   
   submit(): any {
@@ -77,12 +66,15 @@ export class AddFeeComponent implements OnInit {
   }
 
   //This service is to Get Master childs Based on Selected Master
-  getMasterChilds(Master_key): any{
-    return this._masterService.getMasterChilds(Master_key).subscribe(res=>{
+  getMasterData(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this._masterService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
-        if(Master_key == 'fee_term')
+        if(masterKey == 'fee_term')
           this.term =  res.data.data;
-        if(Master_key == 'status')
+        if(masterKey == 'status')
           this.status =  res.data.data;
       }else{
         this._toast.show('error',res.error);

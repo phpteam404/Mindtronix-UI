@@ -21,4 +21,12 @@ export class UserService {
   getUsersList () {
     return this.clientHttp.get('user/getUserList');
   }
+
+  getRolesList(params){
+    return this.clientHttp.get('User/rolesManagementList?'+params);
+  }
+
+  saveUser(params){
+    return this.clientHttp.post('User/addUser',params);
+  }
 }

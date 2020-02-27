@@ -35,7 +35,7 @@ export class UpdateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.addUserForm = new FormGroup({
-      firstName: new FormControl('ABCD',[Validators.required]),
+      first_name: new FormControl('ABCD',[Validators.required]),
       last_name: new FormControl('EFGH'),
       role: new FormControl({label:'Trainer', value:'Trainer'},[Validators.required]),
       franchise: new FormControl({label:'Mindtronix Learning Centre', value:'Mindtronix Learning Centre'},[Validators.required]),

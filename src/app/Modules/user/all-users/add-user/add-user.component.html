@@ -7,9 +7,9 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>First Name <span>*</span></label>
-                            <input type="text" pinputtext class="form-control" placeholder="Name" formControlName="firstName" required>
+                            <input type="text" pinputtext class="form-control" placeholder="Name" formControlName="first_name" required>
                             <div class="invalid-feedback"
-                                *ngIf="addUserForm.controls.firstName.invalid && submitted!=null && !submitted"
+                                *ngIf="addUserForm.controls.first_name.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">Name is required!</div>
                         </div>
                     </div>
@@ -28,10 +28,10 @@
                                 *ngIf="addUserForm.controls.role.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">Role is required!</div>     -->
                                 
-                            <p-dropdown [options]="roles" formControlName="role" placeholder="Select Role" itemSize="30"
+                            <p-dropdown [options]="roles" formControlName="user_role_id" placeholder="Select Role" itemSize="30"
                                 name="role" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="addUserForm.controls.role.invalid && submitted!=null && !submitted "
+                                *ngIf="addUserForm.controls.user_role_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Role is required!</div>
                         </div>
                     </div>
@@ -43,10 +43,10 @@
                             <!--<div *ngIf="submitted && f.franchise.errors" class="invalid-feedback">
                                 <div *ngIf="f.franchise.errors.required">Franchise is required</div>
                             </div> -->
-                            <p-dropdown [options]="franchise" formControlName="franchise" placeholder="Select Franchise" itemSize="30"
+                            <p-dropdown [options]="franchise" formControlName="agency_id" placeholder="Select Franchise" itemSize="30"
                                 name="franchise" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="addUserForm.controls.franchise.invalid && submitted!=null && !submitted "
+                                *ngIf="addUserForm.controls.agency_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Franchise is required!</div>
                         </div>
                     </div>
@@ -62,11 +62,11 @@
                     </div>                    
                     <div class="col-md-4 col-12">
                         <label>Contact Number <span>*</span></label>
-                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone"
-                            name="contact_phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
-                        <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
-                            <div *ngIf="f.phone.errors.required">Phone is required</div>
-                            <div *ngIf="f.phone.errors.minlength || f.phone.errors.maxlength"> Phone Number Must Be 10 digits</div>
+                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no"
+                            name="contact_phone" required>
+                        <div class="invalid-feedback"
+                            *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Phone is required
                         </div>
                     </div>                    
                     <div class="col-md-4 col-12">

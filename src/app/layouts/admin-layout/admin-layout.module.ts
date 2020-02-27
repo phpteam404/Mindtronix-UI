@@ -34,7 +34,7 @@ import {TabViewModule} from 'primeng/tabview';
 import { DialogModule } from 'primeng/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
-import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
+import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
 import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 
 @NgModule({

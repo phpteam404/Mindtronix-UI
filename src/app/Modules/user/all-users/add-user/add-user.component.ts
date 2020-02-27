@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators,ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
+import { UserService } from 'src/app/services/user.service';
+import { HttpParams } from '@angular/common/http';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
+import { MasterService } from 'src/app/services/master.service';
 
 @Component({
   selector: 'app-add-user',
@@ -20,30 +24,34 @@ export class AddUserComponent implements OnInit {
   formObj: any = {};
   pageTitle:string = "Create User";
 
-  constructor(private _router: Router, private _toast: ToasterService) { 
-    this.roles = [
-      {label:'Trainer', value:'Trainer'},
-      {label:'Site Admin', value:'Site Admin'},
-      {label:'Learning Center Admin', value:'Learning Center Admin'}
-    ]; 
-    this.franchise = [
+  constructor(private _router: Router,
+              private _toast: ToasterService,
+              private _service: UserService,
+              private _master: MasterService,
+              private _ls: LocalStorageService) { 
+  
+    /*this.franchise = [
       {label:'Mindtronix Learning Centre', value:'Mindtronix Learning Centre'},
       {label:'Mindtronix Learning Centre Vidyaranyarapura', value:'Mindtronix Learning Centre Vidyaranyarapura'}
     ]; 
     this.status = [
       {label:'Active',value:{id:1,name:'active'}},
       {label:'InActive',value:{id:2,name:'inactive'}}
-    ]; 
+    ]; */
   }
 
   ngOnInit(): void {
+    this.getRolesList();
+    this.getMasterList('status');
+    this.getMasterList('franchise');
+    console.log('this.status--', this.status);
     this.addUserForm = new FormGroup({
-      firstName: new FormControl('',[Validators.required]),
+      first_name: new FormControl('',[Validators.required]),
       last_name: new FormControl(''),
-      role: new FormControl('',[Validators.required]),
-      franchise: new FormControl('',[Validators.required]),
+      user_role_id: new FormControl('',[Validators.required]),
+      agency_id: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required, Validators.email]),
-      phone: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
+      phone_no: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
       status: new FormControl({label:'Active',value:{id:1,name:'active'}},[Validators.required]),
       password: new FormControl('',[ Validators.required]),
         // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
@@ -52,12 +60,6 @@ export class AddUserComponent implements OnInit {
         //  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
       // ])
     });
-  }
-
-  
-
-  get f(){    
-    return this.addUserForm.controls;
   }
 
   submit(): any{
@@ -71,15 +73,48 @@ export class AddUserComponent implements OnInit {
         this._toast.show('warning','Password and Confirm Password must match');
         return false;
       }  
-      this._toast.show('success','Successfully Added');
-      this.submitted = true;
-      this._router.navigate(['users/all-users']);
+      var params={};
+      params = this.addUserForm.value;
+      params['status'] = this.addUserForm.value.status.value;
+      params['agency_id'] = this.addUserForm.value.agency_id.value;
+      params['user_role_id'] = this.addUserForm.value.user_role_id.value;
+      this._service.saveUser(params).subscribe(res => {
+        if (res.status) {
+          this.submitted = true;
+          this._toast.show('success',res.message);
+          this._router.navigate(['users/all-users']);
+        }else{
+          this._toast.show('error',JSON.parse(res.error));
+        }
+      });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
 
-  Cancel(){
+  getRolesList(){
+    var params=new HttpParams().set("dropdown","true");
+    this._service.getRolesList(params).subscribe(res=>{
+      if(res.status){
+        this.roles = res.data.user_roles;
+      }
+    });
+  }
+  getMasterList(masterKey): any{
+    var params=new HttpParams()
+                  .set('master_key',masterKey)
+                  .set("dropdown","true");
+    this._master.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'franchise')
+          this.franchise =  res.data.data;
+        if(masterKey == 'status')
+          this.status =  res.data.data;
+      }
+    });
+  }
+  cancel(){
     this._router.navigate(['users/all-users']);
   }
+
 }

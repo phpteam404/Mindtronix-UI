@@ -35,7 +35,7 @@ export class FeeListComponent implements OnInit {
     this.router.navigate(['add'],{relativeTo: this._route});
   }
 
-  UpdateFee(data:any){
+  updateFee(data:any){
     this.router.navigate(['update/'+ data.name + '/' +btoa(data.fee_master_id)],{relativeTo: this._route})
   }
   loadCarsLazy(event: LazyLoadEvent) {
@@ -74,5 +74,7 @@ export class FeeListComponent implements OnInit {
       }
     });
   }
+  deleteFee(data:any){
 
+  }
 }

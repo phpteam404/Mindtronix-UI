@@ -3,7 +3,7 @@ import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
-import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
+import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
 import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 
 
@@ -63,7 +63,8 @@ export const AdminLayoutRoutes: Routes = [
         data: {
             breadcrumb: 'Tickets'
         }
-    },{
+    },
+    {
         path: 'masters',
         component: MasterComponent,
         canActivate: [AuthGuard],
@@ -95,7 +96,6 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumb: 'School Management'
         }
     },
-   
     { 
         path: 'digital_content',
         loadChildren: () => import('../../Modules/digital-content/digital-content.module').then(m => m.DigitalContentModule),
@@ -119,6 +119,5 @@ export const AdminLayoutRoutes: Routes = [
         data: {
             breadcrumb: 'Trainer Schedule'
         }
-    },
-   
+    }   
 ];
