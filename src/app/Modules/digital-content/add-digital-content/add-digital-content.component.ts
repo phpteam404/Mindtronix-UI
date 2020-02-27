@@ -77,4 +77,7 @@ export class AddDigitalContentComponent implements OnInit {
   onSelectedFilesChanged(event: Event){
     console.log('event--', event);
   }
+  goToList(){
+    this._router.navigate(['digital_content']);
+  }
 }

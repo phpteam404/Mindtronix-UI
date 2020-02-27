@@ -11,7 +11,10 @@ const routes: Routes = [
   },
   {
     path: 'update/:id',
-    component: UpdateOnlineUsersComponent
+    component: UpdateOnlineUsersComponent,
+    data: {
+      breadcrumbs: 'Add User'
+    }
   }
 ];
 

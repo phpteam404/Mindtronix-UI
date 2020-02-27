@@ -16,21 +16,21 @@ const routes: Routes = [
     path: 'add',
     component: AddStudentComponent,
     data: {
-      braedcrumbs: 'Add Student'
+      breadcrumbs: 'Add Student'
     }
   },
   {
     path: 'update/:id',
     component: UpdateStudentComponent,
     data: {
-      braedcrumbs: 'Update Student'
+      breadcrumbs: 'Update Student'
     }
   },
   {
     path: 'view/:id',
     component: ViewStudentComponent,
     data: {
-      braedcrumbs: 'view Student'
+      breadcrumbs: 'view Student'
     }
   },
 ];

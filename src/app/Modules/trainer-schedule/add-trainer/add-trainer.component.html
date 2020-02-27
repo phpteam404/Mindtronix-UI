@@ -1,0 +1,55 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">{{pageTitle}}</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="scheduleForm" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Topic <span>*</span></label>
+                            <input pinputtext placeholder="Topic" formControlName="topic" name="topic" type="text" required>
+                            <div class="invalid-feedback"
+                                *ngIf="scheduleForm.controls.topic.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> Topic is required
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Date <span>*</span></label>
+                            <p-calendar name="schedule_date" formControlName="schedule_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
+                            <div class="invalid-feedback"
+                            *ngIf="scheduleForm.controls.schedule_date.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Date is required
+                        </div>                
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>Time <span>*</span></label>
+                            <p-calendar name="schedule_time" formControlName="schedule_time" [timeOnly]="true"></p-calendar>
+                            <div class="invalid-feedback"
+                            *ngIf="scheduleForm.controls.schedule_time.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> Time is required
+                        </div>                 
+                        </div>
+                    </div>
+                 
+                    
+                   
+                    <div class="col-12 text-right custom-btn">
+                        <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                    </div>
+                </div>
+              
+            </form>
+        </div>
+    </div>
+</div>

@@ -14,15 +14,24 @@ const routes: Routes = [
   },
   {
     path:'add',
-    component: AddDigitalContentComponent
+    component: AddDigitalContentComponent,
+    data: {
+      breadcrumbs: 'Add'
+    }
   },
   {
     path:'view/:id',
-    component: ViewDigitalContentComponent
+    component: ViewDigitalContentComponent,
+    data: {
+      breadcrumbs: 'View'
+    }
   },
   {
     path: 'update/:id',
-    component: UpdateDigitalContentComponent
+    component: UpdateDigitalContentComponent,
+    data: {
+      breadcrumbs: 'Update'
+    }
   }
 ];
 

@@ -14,7 +14,8 @@ export class AdminLayoutComponent implements OnInit {
   private lastPoppedUrl: string;
   private yScrollStack: number[] = [];
   public breadCrumb: string;
-  public breadCrumbD: string;
+  public childBreadCrumb: string;
+  public currentRouteParam: string;
 
   parentRoute: string = '';
   staticBreadCrumb = false;
@@ -22,35 +23,43 @@ export class AdminLayoutComponent implements OnInit {
   page: string;
   constructor(public location: Location, private router: Router, private _ar: ActivatedRoute) {
     this.staticBreadCrumb = false;
+    /*console.log('_ar.data---', _ar.data);
+    console.log('_ar.Snapshot ---', _ar.snapshot);
+    console.log('_ar.URL ---', _ar.url);
+    console.log('_ar.Fragment ---', _ar.fragment );
+    console.log('_ar.Root ---', _ar.root );
+    console.log('_ar.parent ---', _ar.parent );
+    console.log('_ar.params---', _ar.params);
+    console.log('_ar.firstChild ---', _ar.firstChild  );
+    console.log('_ar.queryParams---', _ar.queryParams );
+    console.log('_ar.children ---', _ar.children );*/
     router.events.pipe(
       filter(event => event instanceof NavigationEnd),
       map(() => _ar),
       map(route => {
         while (route.firstChild) route = route.firstChild
+        /*console.log('route===', route.routeConfig['data']); // path, component, data{breadcrumb:''}
+        console.log('route---', route.parent.url['_value']);
+        console.log('route***', route);
+        console.log('route url params***', route.snapshot.params);
+        console.log('route routeConfig---', route.routeConfig);
+        this.currentRouteParam = route.snapshot.params.name;*/
+
+        route.parent.url['_value'].forEach(item => { 
+          console.log('item*-*-*-', item.path);
+          this.parentRoute = '/'+item.path;
+        });
         return route
       }),
       filter(route => route.outlet === 'primary'),
       mergeMap(route => route.data)
     ).subscribe(data => {
-      console.log('this.breadCrumb 1', data['breadcrumb']);
-      console.log('current route', this.router.url);
-      console.log('current _ar', this._ar);
+      console.log('route++++', data['breadcrumbs']);
+      // console.log('current route', this.router.url);
+      // console.log('current _ar', this._ar);
       this.breadCrumb = data['breadcrumb']
-
-      if (this.router.url === '/franchise/add') {
-        this.breadCrumb = ' Add Franchise';
-        this.staticBreadCrumb = true;
-        this.parentRoute = '/franchise';
-      }
-      else {
-        this.breadCrumb = data['breadcrumb']
-        this.parentRoute = '';
-        this.staticBreadCrumb = false;
-      }
+      this.childBreadCrumb = data['breadcrumbs']
     });
-  }
-  go() {
-    this.router.navigate(['/franchise']);
   }
   ngOnInit() {
     this.staticBreadCrumb = false;

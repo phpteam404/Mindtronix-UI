@@ -23,12 +23,12 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      console.log('AuthGuard---',location.pathname);
-      console.log('router---',this.router.url);
-      console.log('_ar---',this._ar.snapshot.url);
+      // console.log('AuthGuard---',location.pathname);
+      // console.log('router---',this.router.url);
+      // console.log('_ar---',this._ar.snapshot.url);
      if (this.ls.getItem('user')) {
         this.service.isTokenExpired({'module_url':location.pathname,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
-          console.log('isTokenExpired--', res);
+          // console.log('isTokenExpired--', res);
           if(res.status){
             return true;
           }else {

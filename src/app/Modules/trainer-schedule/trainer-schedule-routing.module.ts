@@ -1,27 +1,26 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { UpdateTrainerComponent } from './update-trainer/update-trainer.component';
 import { AddTrainerComponent } from './add-trainer/add-trainer.component';
 import { TrainerListComponent } from './trainer-list/trainer-list.component';
-
+import { UpdateTrainerComponent } from './update-trainer/update-trainer.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path:'',
     component: TrainerListComponent
   },
   {
     path: 'add',
     component: AddTrainerComponent,
     data: {
-      breadcrumbs: 'Add Trainer'
+      braedcrumbs: 'Create Schedule'
     }
   },
   {
-    path: 'update',
+    path: 'update/:id',
     component: UpdateTrainerComponent,
     data: {
-      breadcrumbs: 'Update Trainer'
+      braedcrumbs: 'Update Schedule'
     }
   }
 ];
@@ -30,4 +29,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TrainerRoutingModule { }
+export class TrainerScheduleRoutingModule { }
