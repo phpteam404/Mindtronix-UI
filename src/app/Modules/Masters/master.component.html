@@ -1,10 +1,10 @@
 <div class="main-content">
     <div class="custom-table">
-        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="MasterChilds" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="row">
                     <div class="col-md-4 col-12 text-left input-dropdown">
-                        <p-dropdown  [options]="cities2" [(ngModel)]="selectedCities2" (onChange)="ChangeModelLable($event)" optionLabel="name"></p-dropdown >
+                        <p-dropdown  [options]="Masterslist" [(ngModel)]="selectedMaster" (onChange)="ChangeModelLable($event)" optionLabel="master_name"></p-dropdown >
                     </div>
                     <div class="col-md-8 col-12">
                         <div class="custom-search">
