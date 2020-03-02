@@ -1,42 +1,73 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { FranchiseInvoiceComponent } from './franchise/franchise-invoice/franchise-invoice.component';
-import { OnlineUsersInvoiceComponent } from './online/online-users-invoice/online-users-invoice.component';
-import { StudentInvoiceComponent } from './students/student-invoice/student-invoice.component';
+
 const routes: Routes = [
+    // {
+    //   path: '',
+    //   component: StudentInvoiceComponent,
+    //   canActivate: [AuthGuard],
+    //   data: {
+    //       breadcrumb: 'Students'
+    //   }
+    // },  
+    // {
+    //   path: 'students_invoice',
+    //   component: StudentInvoiceComponent,
+    //   canActivate: [AuthGuard],
+    //   data: {
+    //       breadcrumb: 'Students Invoice'
+    //   }
+    // },
+    // {
+    //     path: 'franchise_invoice',
+    //     component: FranchiseInvoiceComponent,
+    //     canActivate: [AuthGuard],
+    //     data: {
+    //         breadcrumb: 'Franchise Invoice'
+    //     }
+    // },
+    // {
+    //     path: 'online_users_invoice',
+    //     component: OnlineUsersInvoiceComponent,
+    //     canActivate: [AuthGuard],
+    //     data: {
+    //         breadcrumb: 'Online Users Invoice'
+    //     }
+    // },
+
+    // {
+    //     path: '',
+    //     loadChildren: () => import('../../Modules/invoice/students/students.module').then(m => m.StudentsModule),
+    //     canActivate: [AuthGuard],
+    //     data: {
+    //       breadcrumb: 'Students Invoice'
+    //     }
+    //   },
     {
-      path: '',
-      component: StudentInvoiceComponent,
-      canActivate: [AuthGuard],
-      data: {
-          breadcrumb: 'Students'
-      }
-    },  
-    {
-      path: 'students_invoice',
-      component: StudentInvoiceComponent,
-      canActivate: [AuthGuard],
-      data: {
+        path: 'students_invoice',
+        loadChildren: ()=> import('../../Modules/invoice/students/students.module').then(m=> m.StudentsModule),
+        canActivate: [AuthGuard],
+        data: {
           breadcrumb: 'Students Invoice'
-      }
-    },
-    {
+        }
+      },
+      {
         path: 'franchise_invoice',
-        component: FranchiseInvoiceComponent,
+        loadChildren: () => import('../../Modules/invoice/franchise/franchise.module').then(m => m.FranchiseModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Franchise Invoice'
+          breadcrumb: 'Franchise Invoice'
         }
-    },
-    {
+      }, 
+      {
         path: 'online_users_invoice',
-        component: OnlineUsersInvoiceComponent,
+        loadChildren: () => import('../../Modules/invoice/online/online.module').then(m => m.OnlineModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Online Users Invoice'
+          breadcrumb: 'Online Users Invoice'
         }
-    }
+      }
   ];
 
 @NgModule({

@@ -28,7 +28,7 @@
                     <div class="col-md-4 col-12">
                         <label>Term <span>*</span></label>
                         <p-dropdown [options]="term" formControlName="term" placeholder="Select Term" itemSize="30"
-                            name="term" optionLabel="child_name" required></p-dropdown>
+                            name="term" optionLabel="label" required></p-dropdown>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.term.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> Term is required
@@ -50,7 +50,7 @@
                     <div class="col-md-4 col-12">
                         <label>Status <span>*</span></label>
                         <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
-                            name="status" optionLabel="child_name" required></p-dropdown>
+                            name="status" optionLabel="label" required></p-dropdown>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.status.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> Status is required

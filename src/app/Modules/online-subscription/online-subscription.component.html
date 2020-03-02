@@ -1,3 +1,41 @@
 <div class="main-content">
-    <p>online-subscription works!</p>
+    <div class="custom-table custom-lastchild-list onlineSubscriber-list">
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
+            [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+            <ng-template pTemplate="caption">
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
+                    </div>
+                    <!-- <button pButton type="button" label="Create Schedule" class="btn-warning" (click)="addNewSchedule($event)"></button> -->
+                </div>
+            </ng-template>
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                        {{col.header}}
+                        <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        
+                        <!-- <span *ngIf="i == 4"  class="d-flex action-color">
+                            <a href="javascript:;"  (click)="EditSchedule(rowData)" title="Edit">
+                                <span class="icon icon-edit-pencil wd-30"></span>
+                            </a>
+                            <a href="javascript:;" (click)="DeleteFee(rowData)" title="Delete">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
+                        </span> -->
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </div>
 </div>

@@ -1,0 +1,163 @@
+<div class="main-content custom-lastchild-list">
+    <div class="month-wise-dropdown">
+        <p-dropdown [options]="revenueMonth" placeholder="Feb 2020" itemSize="30"
+        name="contact_title" optionLabel="label" required></p-dropdown>
+    </div>
+ <div class="custom-dashboard">
+     <div class="row">
+         <div class="col-md-3">
+            <div class="custom-dashboard-block">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="custom-iconblock">
+                  <i class="icon icon-properties"></i>
+                </div>
+                <label class="heading-label">Orders</label>
+                </div>
+                <div class="dashboard-boxtext d-flex justify-content-around">
+                    <div>
+                        <label>All Orders</label>
+                        <h4>25</h4>
+                    </div>
+                 <div>
+                    <label>Pending Orders</label>
+                    <h4 class="bg-red">10</h4>
+                 </div>
+                </div>
+             
+           </div>
+         </div>
+         <div class="col-md-3">
+          
+           <div class="custom-dashboard-block">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="custom-iconblock">
+              <i class="icon icon-ticket-star-1 icon-f36"></i>
+            </div>
+            <label class="heading-label">Tickets</label>
+            </div>
+            <div class="dashboard-boxtext d-flex justify-content-around">
+                <div>
+                    <label>All Tickets</label>
+                    <h4>20</h4>
+                </div>
+             <div>
+                <label>Pending Tickets</label>
+                <h4 class="bg-red">10</h4>
+             </div>
+            </div>
+         
+       </div>
+        </div>
+        <div class="col-md-3">
+        
+           <div class="custom-dashboard-block">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="custom-iconblock">
+              <i class="icon icon-graduate-cap icon-f40"></i>
+            </div>
+            <label class="heading-label">Invoice for students</label>
+            </div>
+            <div class="dashboard-boxtext d-flex justify-content-around">
+                <div>
+                    <label>Amount</label>
+                    <h4>₹ 25,000</h4>
+                </div>
+             <div>
+                <label>Collected</label>
+                <h4 class="bg-brown">₹ 15,000</h4>
+             </div>
+            </div>
+         
+       </div>
+        </div>
+        <div class="col-md-3">
+        
+           <div class="custom-dashboard-block">
+            <div class="d-flex align-items-center justify-content-center">
+                <div class="custom-iconblock">
+              <i class="icon icon-modules icon-f34"></i>
+            </div>
+            <label class="heading-label">Invoice for franchise</label>
+            </div>
+            <div class="dashboard-boxtext d-flex justify-content-around">
+                <div>
+                    <label>Amount</label>
+                    <h4>₹ 35,000</h4>
+                </div>
+             <div>
+                <label>Collected</label>
+                  <h4 class="bg-brown">₹ 13,000</h4>
+             </div>
+            </div>
+         
+       </div>
+        </div>
+     </div>
+ </div>
+
+ <div class="custom-table mt-3 dashboard-list">
+     <h4>Orders List <span>( New Orders )</span></h4>
+    <p-table #dt [columns]="ordercols" [value]="cars" [paginator]="false" [rows]="10">
+        
+        <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of columns; let i = index">
+                    {{col.header}}
+                  
+                </th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-columns="columns">
+            <tr>
+               
+                <td *ngFor="let col of columns ; let i = index">
+                    <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                    <span *ngIf="i == 6">
+                        <span [ngClass]="[(rowData[col.field]==='Open') ? 'bg-gold' : '',
+                        (rowData[col.field]==='Pending')? 'bg-orange' : '',
+                        (rowData[col.field]==='Closed')? 'bg-brown' : '']"
+                        class='list-status'>{{rowData[col.field]}}</span>
+                    </span>
+                    <!-- <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
+                        <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>
+                        
+                    </span> -->
+                  
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+    <h5><a href="javascript:;">View More</a></h5>
+</div>
+
+    <div class="custom-table mt-3 dashboard-list">
+        <h4>Ticket List <span>( New Tickets )</span></h4>
+        <p-table #dt [columns]="cols" [value]="ticket" [rows]="10">
+           
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index">
+                        {{col.header}}
+                     
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                   
+                    <td *ngFor="let col of columns ; let i = index" (click)="viewTicket(rowData)">
+                        <span *ngIf="i!=5 && i!=7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                    <span *ngIf="i == 5">
+                        <span [ngClass]="[(rowData[col.field]==='Open') ? 'bg-gold' : '',
+                        (rowData[col.field]==='Pending')? 'bg-orange' : '',
+                        (rowData[col.field]==='Closed')? 'bg-brown' : '']"
+                        class='list-status'>{{rowData[col.field]}}</span>
+                    </span>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <h5><a href="javascript:;">View More</a></h5>
+    </div>
+
+</div>

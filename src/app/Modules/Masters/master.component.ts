@@ -74,10 +74,11 @@ export class MasterComponent implements OnInit {
       if(res.status){
         this.getMasterChilds(this.selectedMaster['master_key']);
         this.displayBasic = false;
+        this.loading = false;
       }else{
         this._toast.show('error',res.error);
+        this.loading = false;
       }
-      this.loading = false;
     });
   }
   ChangeMasterParent(event) {
@@ -91,7 +92,7 @@ export class MasterComponent implements OnInit {
       this.masterChildDescription = input;
   }
   AddMaster(event: Event){
-    console.log('Adding Master');
+    // console.log('Adding Master');
   }
   ngOnInit(): void {
     this.getAllMaster ();
@@ -132,7 +133,7 @@ export class MasterComponent implements OnInit {
   deleteMasterChild(rowData){
     this.loading = true;
     // console.log('deleteMasterChild rowData', rowData);    
-    this._common_service.delete('master_child',rowData.masterChildId).subscribe(res=>{
+    this._common_service.delete('master_child',rowData.master_child_id).subscribe(res=>{
       if(res.status){
         this.getMasterChilds(this.selectedMaster['master_key']);
       }else{

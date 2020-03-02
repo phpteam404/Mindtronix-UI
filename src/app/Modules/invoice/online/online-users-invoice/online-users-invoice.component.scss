@@ -1,6 +1,19 @@
 .custom-search .input-search i {
-    position: absolute;
-    z-index: 1;
-    margin: 8px 0px 0px;
-    right: 8px;
+    right: 15px;
+}
+.custom-form{
+    border: none;
+    background: transparent;
+}
+.franchise-name {
+    width: 1% !important;
+}
+.payment-text{
+    padding-left: 10px;
+    span{
+        font-size: 20px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+    }
 }

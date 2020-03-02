@@ -2044,6 +2044,27 @@ input:focus {
 .header-left-block.show .dropdown-menu{
   top: 60px !important;
 }
+.header-left-block .dropdown-menu{
+  border-radius: 4px;
+  background-color: #f8f9fa !important;
+}
+.header-left-block .dropdown-item{
+  padding: 0.4rem 0.7rem;
+  font-size: 14px;
+ 
+}
+.header-left-block .dropdown-item:active{
+  background-color: transparent !important;
+}
+.header-left-block ul li {
+  border-bottom: 1px solid #dddddd;
+}
+.header-left-block ul li:last-child{
+  border-bottom: 0px solid #dddddd;
+}
+.header-left-block .dropdown-item span{
+  width: 25%;
+}
 .header-right-block.show .dropdown-menu{
   top: 75px;
 }
@@ -3299,10 +3320,19 @@ border: 1px solid #aaa !important;
   visibility: hidden;
 } */
 .bg-brown{
-  color: #049F0C;
+  color: #049F0C !important;
 }
 .bg-gold{
-   color: #f00;
+   color: #ff0000 !important;
+}
+.bg-orange{
+  color: #de6e18 !important;
+}
+.bg-red{
+  color: #e8061b !important;
+}
+.bg-darkblue{
+  color: #1769ff;
 }
 .invalid-feedback {
   margin-top: 0 !important;
@@ -3415,7 +3445,26 @@ mat-file-upload .mat-button.mat-primary{
 .invalid-feedback{
   display: block;
 }
-
+.filter-form p-calendar .ui-inputtext {
+          height: auto !important;
+          border-right: none !important;
+  
+} 
+.filter-form p-calendar .ui-button {
+  color: #303030;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-left: none;
+  font-size: 14px;
+  padding: 3px 2px 3px;
+  line-height: 20px;
+}
+.filter-form .ui-datepicker table td {
+  padding: 0.1em;
+}
+.filter-form .ui-datepicker table td > a{
+  padding: 0.3em;
+}
 @media (min-width: 992px) {
   .navbar-form {
     margin-top: 21px;

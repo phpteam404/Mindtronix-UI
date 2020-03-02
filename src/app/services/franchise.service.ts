@@ -9,6 +9,10 @@ export class FranchiseService {
   constructor(private clientHttp : AppHttpClientService) { }
 
   getList(params){
-    return this.clientHttp.get('Agency/franchiseList?'+params);
+    return this.clientHttp.get('Franchise/franchiseList?'+params);
   }
+  addUpdate(params){
+    return this.clientHttp.post('Franchise/franchiseAdd',params);
+  }
+  
 }

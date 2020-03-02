@@ -14,6 +14,6 @@ export class SchoolService {
   constructor(private clientHttp : AppHttpClientService) { }
 
   getschoolList (param) {
-    return this.clientHttp.get('Agency/schoolsList'+param);
+    return this.clientHttp.get('Franchise/schoolsList'+param);
   }
 }

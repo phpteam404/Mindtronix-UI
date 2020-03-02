@@ -302,6 +302,16 @@ p-table{
     }
   }
 }
+.custom-row-select{
+  tbody{
+    tr{
+      cursor: pointer;
+      &:hover{
+        background-color: #e4e4e4 !important;
+      }
+    }
+  }
+}
 //table styles end here
 .custom-view{
   background-color: #fff;
@@ -542,19 +552,19 @@ p-table{
 
 /* Scrollbar Styling */
 .sidebar-wrapper::-webkit-scrollbar {
-  width: 5px;
+  width: 3px;
 }
 
 .sidebar-wrapper::-webkit-scrollbar-track {
   background-color: #ebebeb;
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
 }
 
 .sidebar-wrapper::-webkit-scrollbar-thumb {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-  background: #6d6d6d; 
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  background: #cccccc; 
 }
 
 // roll-tabs styles
@@ -974,4 +984,86 @@ input{
 
 .custom-maincontent-top{
   margin-top: 122px !important;
+}
+
+.custom-dashboard-block{
+  box-shadow: 1px 1px 9px 1px #cccccc;
+  background-color: #ffffff;
+  padding: 10px;
+  // display: flex;
+  // -webkit-box-align: center;
+  // align-items: center;
+  border-radius: 15px;
+  min-height: 100%;
+  .custom-iconblock{
+    width: 35px;
+    height: 35px;
+    font-size: 20px;
+    background: #eee;
+    text-align: center;
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 19px;
+    color: #e87a26;
+    margin-right: 10px;
+    .icon-f36{
+      font-size: 27px;
+    }
+    .icon-f34{
+      font-size: 24px;
+    }
+    .icon-f40{
+      font-size: 32px;
+    }
+  }
+  .dashboard-boxtext{
+    margin-top: 5px;
+      label{
+        font-size: 14px;
+        color: #928f8f;
+        line-height: 18px;
+        margin-bottom: 0px;
+      }
+      h4{
+        margin: 0;
+        font-size: 17px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 18px;
+      }
+     
+  }
+  .heading-label{
+    font-size: 16px;
+    font-weight: 500;
+  }
+}
+.dashboard-list{
+  background: #fff;
+    padding: 5px 15px 15px;
+    border: 1px solid #ccc;
+  h4{
+    margin: 5px 0px;
+    font-size: 16px;
+    color: #303030;
+    font-weight: 500;
+    span{
+      font-size: 14px;
+    }
+  }
+  h5{
+    margin: 12px 0px 5px;
+    font-size: 14px;
+    text-align: right;
+    a{
+      color: #0a6ebd !important ;
+      font-weight: 500;
+      &:hover{
+        color: #0a6ebd !important ;
+      }
+    }
+  }
+ 
 }
