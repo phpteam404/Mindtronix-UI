@@ -3,7 +3,7 @@ import { BasicComponent } from 'src/app/basic/basic.component';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
-import { ProfileComponent } from 'src/app/Modules/profile/profile/profile.component';
+import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
 import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 import { DashboardComponent } from 'src/app/Modules/dashboard/dashboard.component';
 
