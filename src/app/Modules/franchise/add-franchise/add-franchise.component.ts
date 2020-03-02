@@ -44,16 +44,16 @@ export class AddFranchiseComponent implements OnInit {
   fullObject:any={}
   pageTitle:string = "Create Franchise";
   
-  FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
+  FeeStructureList :{name:string,id:string}[] = dropdown.fee_structure;
 
   constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
     this.isUpdate=false;
     this.cities1 = [
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
+      {label:'New York', value:12},
+      {label:'Rome', value:13},
+      {label:'London', value:14},
+      {label:'Istanbul', value:15},
+      {label:'Paris', value:16}
     ];
     this.FeeStructureMaster = [
       {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10,action:''},
@@ -70,8 +70,8 @@ export class AddFranchiseComponent implements OnInit {
 
     ];
     this.status =[
-          {label:'Active',value:'active'},
-          {label:'InActive',value:'Inactive'}
+          {label:'Active',value:1},
+          {label:'InActive',value:0}
     ];
     this.title =[
           {label:'Franchise Admin',value:'Franchise Admin'},
@@ -108,7 +108,7 @@ export class AddFranchiseComponent implements OnInit {
     country :new FormControl('',[Validators.required]),
     state:new FormControl('',[Validators.required]),
     city:new FormControl('',[Validators.required]),
-    status :new FormControl({label:'Active',value:'active'},[Validators.required]),
+    status :new FormControl({label:'Active',value:1},[Validators.required]),
     address: new FormControl('',[Validators.required]),
   });
 

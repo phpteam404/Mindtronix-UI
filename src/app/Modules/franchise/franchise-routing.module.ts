@@ -18,7 +18,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'update/:id',
+    path: 'update/:name/:id',
     component: UpdateFranchiseComponent,
     data: {
       breadcrumbs: 'Update',

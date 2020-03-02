@@ -11,10 +11,11 @@ const routes: Routes = [
   {
     path: 'view/:name/:id',
     component: StudentViewComponent,
-    // data: {
-    //   breadcrumbs: 'Student invoice details',
-    //   title: 'Student invoice details'
-    // }
+    data: {
+      breadcrumbs: 'View',
+      title: 'Student invoice details',
+      superParentPath: 'invoices'
+    }
   }
 ];
 

@@ -1,3 +1,13 @@
 .custom-search .input-search i {
     right: 8px;
 }
+@media (max-width: 1199px){
+ .order-list{
+     th{
+         &:nth-child(4){
+            width: 125px;
+         }
+     }
+ }
+
+}

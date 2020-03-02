@@ -29,4 +29,7 @@ export class UserService {
   saveUser(params){
     return this.clientHttp.post('User/addUser',params);
   }
+  getById (params) {
+    return this.clientHttp.get('user/getUserList?'+params);
+  }
 }

@@ -10,7 +10,7 @@
             <div class="logo d-flex align-items-center">
                 <a href="javascript:;" class="simple-text">
                     <div class="logo-img">
-                        <img src="/Mindtronix_prototype/assets/img/logo.png"/>
+                        <img src="{{prdAssetPath}}/assets/img/logo.png"/>
                     </div>
                    <!-- <span>MINDTRONIX</span>  -->
                 </a>
@@ -44,19 +44,33 @@
                         </p> -->
                     </a>
                  
-                    <ul *dropdownMenu class="dropdown-menu" role="menu">
-                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 1</a></li>
+                    <ul *dropdownMenu class="dropdown-menu notification-list" role="menu">
+                        <li role="menuitem">
+                            <div class="dropdown-item">
+                               <span>New Ticket</span>
+                               <span><a href="javascript:;">#MI00001</a></span>
+                               <span>Created On : 28-02-2020</span>
+                            </div>
+                        </li>
+                        <li role="menuitem">
+                            <div class="dropdown-item">
+                               <span>New Invoice</span>
+                               <span><a href="javascript:;">#MI00001</a></span>
+                               <span>Created On : 28-02-2020</span>
+                            </div>
+                        </li>
+                        <!-- <li role="menuitem"><a class="dropdown-item" href="#">Notification 1</a></li>
                         <li role="menuitem"><a class="dropdown-item" href="#">Notification 2</a></li>
                         <li role="menuitem"><a class="dropdown-item" href="#">Notification 3</a></li>
                         <li role="menuitem"><a class="dropdown-item" href="#">Notification 4</a></li>
-                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 5</a></li>
+                        <li role="menuitem"><a class="dropdown-item" href="#">Notification 5</a></li> -->
                        
                     </ul>
                 </li>
               
                 <li class="header-right-block" dropdown>
                     <a href="javascript:;" dropdownToggle>
-                       <div class="user-logo"><img src="/Mindtronix_prototype/assets/img/default-img.png"></div>
+                       <div class="user-logo"><img src="{{prdAssetPath}}/assets/img/default-img.png"></div>
                        <div>
                            <h4>Administrator</h4>
                            <p>Admin</p>

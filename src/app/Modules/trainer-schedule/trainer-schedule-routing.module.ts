@@ -13,16 +13,16 @@ const routes: Routes = [
     path: 'add',
     component: AddTrainerComponent,
     data: {
-      braedcrumbs: 'Create Schedule',
-      superParentPath: 'users',
-      title: 'User'
+      breadcrumbs: 'Create Schedule',
+      title: 'Trainer'
     }
   },
   {
     path: 'update/:id',
     component: UpdateTrainerComponent,
     data: {
-      braedcrumbs: 'Update Schedule'
+      breadcrumbs: 'Update Schedule',
+      title: 'Trainer'
     }
   }
 ];

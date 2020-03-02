@@ -998,7 +998,7 @@ input{
   .custom-iconblock{
     width: 35px;
     height: 35px;
-    font-size: 20px;
+    font-size: 24px;
     background: #eee;
     text-align: center;
     border-radius: 50px;
@@ -1008,6 +1008,7 @@ input{
     line-height: 19px;
     color: #e87a26;
     margin-right: 10px;
+    padding: 5px;
     .icon-f36{
       font-size: 27px;
     }
@@ -1032,6 +1033,7 @@ input{
         font-weight: bold;
         color: #e87a26;
         line-height: 18px;
+        text-align: center;
       }
      
   }

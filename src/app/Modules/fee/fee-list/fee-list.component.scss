@@ -1,3 +1,8 @@
 .custom-search .input-search i {
     right: 162px;
 }
+@media (max-width: 1199px) {
+    .custom-search .input-search i {
+        right: 138px;
+    }
+}

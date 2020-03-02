@@ -5,6 +5,7 @@ import { SidebarComponent } from '../sidebar/sidebar.component';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { environment } from 'src/environments/environment';
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
@@ -13,6 +14,7 @@ import { AuthenticationService } from '../../services/authentication.service';
 
 export class NavbarComponent implements OnInit{
     private listTitles: any[];
+    prdAssetPath:string = environment.prdAssetPath;
     location: Location;
     private toggleButton: any;
     ly: SidebarComponent;

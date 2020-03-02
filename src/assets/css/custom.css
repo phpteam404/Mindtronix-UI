@@ -3182,6 +3182,8 @@ width: 45px;
  margin-left: 30px;
  border-left: 1px solid #ccc;
  padding-left: 15px;
+ padding-right: 5px;
+
 }
 .user-logo img{
  width: 100%;
@@ -3464,6 +3466,233 @@ mat-file-upload .mat-button.mat-primary{
 }
 .filter-form .ui-datepicker table td > a{
   padding: 0.3em;
+}
+.masters-list p-table .ui-table .ui-table-caption .ui-button-text{
+  font-size: 24px !important;
+  line-height: 24px !important;
+  padding: 0 5px 4px !important;
+}
+li.header-right-block:after {
+  content: '\e1d4';
+  font-family: 'tssfont' !important;
+  position: absolute;
+  top: 0;
+  right: 21px;
+  margin-top: 15px;
+  font-size: 18px;
+}
+.notification-list .dropdown-item span{
+  padding-right: 10px;
+}
+@media (max-width: 1199px) {
+  .notification-list .dropdown-item span{
+      font-size: 13px;
+  }
+.sidebar .sidebar-wrapper,
+.bootstrap-navbar .sidebar-wrapper,
+.sidebar, .bootstrap-navbar {
+  width: 200px;
+}
+.main-panel {
+  width: calc(100% - 200px);
+}
+.custom-dashboard-block .custom-iconblock {
+  width: 30px;
+  height: 30px;
+  font-size: 18px;
+  line-height: 16px;
+  margin-right: 8px;
+}
+.custom-dashboard-block .custom-iconblock .icon-f36 {
+  font-size: 23px;
+}
+.custom-dashboard-block .custom-iconblock .icon-f40 {
+  font-size: 26px;
+}
+.custom-dashboard-block .custom-iconblock .icon-f34 {
+  font-size: 20px;
+}
+.custom-dashboard-block {
+  padding: 10px 6px;
+}
+.custom-dashboard-block .heading-label {
+  font-size: 13px;
+}
+.custom-dashboard-block .dashboard-boxtext label {
+  font-size: 12px;
+  line-height: 16px;
+}
+.custom-dashboard-block .dashboard-boxtext h4 {
+  font-size: 14px;
+  line-height: 16px;
+}
+.dashboard-list h4 {
+  margin: 3px 0px;
+  font-size: 14px;
+}
+.dashboard-list h4 span,
+.copyright-block .copyright-text p {
+  font-size: 12px;
+}
+.custom-table p-table .ui-table .ui-table-thead th {
+  padding: 0.35rem;
+  font-size: 12px;
+}
+.custom-table p-table .ui-table .ui-table-tbody td {
+  padding: 0.35rem;
+  font-size: 12px;
+}
+.dashboard-list h5 {
+  margin: 10px 0px 0px;
+  font-size: 12px;
+}
+.page-title-card h4,
+.page-title-card h4 a{
+  font-size: 15px !important;
+}
+.franchise-list thead th:nth-child(7) {
+  width: 66px;
+}
+.custom-table p-table .ui-table .ui-table-thead th:last-child {
+  width: 65px;
+}
+.franchise-list thead th:nth-child(6),
+.franchise-list thead th:nth-child(5) {
+  width: 95px;
+}
+.franchise-list thead th:nth-child(1) {
+  width: 116px;
+}
+.custom-table p-table .ui-table .ui-table-thead th p-sorticon .pi {
+  font-size: 12px;
+}
+.franchise-list thead th:nth-child(4) {
+  width: 121px;
+}
+body .ui-inputtext,
+body .ui-button {
+  font-size: 12px;
+}
+.custom-table p-table .ui-table .ui-table-caption .ui-button-text {
+  padding: 5px 8px;
+}
+.view-page .custom-view-list .custom-view-div,
+body .ui-widget,
+.ui-dropdown .ui-dropdown-trigger .ui-dropdown-trigger-icon,
+.custom-veiw-rightside span,
+.custom-veiw-rightside .red-text,
+.custom-form input{
+  font-size: 12px !important;
+}
+.view-page .custom-view-list .schools-text span,
+.view-page .custom-view-list .students-text span,
+.view-page .custom-view-list .trainers-text span {
+  font-size: 17px !important;
+  line-height: 20px;
+}
+.add-icon-btn {
+  padding: 5px 10px !important;
+  font-size: 22px !important;
+  line-height: 18px;
+}
+.mat-horizontal-stepper-content .mt-4{
+  margin-top: 1.3rem!important;
+}
+.custom-form .custom-form-heading {
+  font-size: 14px;
+  padding: 3px 15px;
+}
+.custom-tabs .ui-tabview .ui-tabview-title,
+.custom-view p,
+.custom-view label,
+.custom-veiw-rightside .student-text{
+  font-size: 13px;
+  word-break: break-word;
+}
+.btn-edit .btn, .custom-btn-edit .btn {
+  font-size: 16px;
+  padding: 3px 4px;
+}
+.custom-veiw-rightside .revenue-text,
+.custom-veiw-rightside .green-text,
+.custom-veiw-rightside .red-text {
+  font-size: 14px;
+}
+.custom-form label {
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+.custom-form .btn-warning, .custom-form .btn-default {
+  padding: 4px 12px;
+  font-size: 13px;
+}
+.student-form h4 {
+  font-size: 14px;
+  margin: 0 0 2px;
+}
+body .ui-button.ui-button-icon-only .ui-button-text {
+  padding: 0.61em;
+}
+.student-form .ui-button.ui-button-text-only .ui-button-text {
+  padding: 0;
+}
+.student-view-list .trainers-text span,
+.schools-text span,
+.normal-text{
+  font-size: 12px !important;
+}
+.student-view-list .students-text span {
+  font-size: 16px !important;
+}
+.custom-form .ui-button.ui-button-text-only .ui-button-text {
+  padding:0;
+}
+.mat-button,
+.roll-tabs .roletab-content h4,
+.roll-tabs .ui-tabview ul li a .ui-tabview-left-icon{
+  font-size: 13px;
+}
+.roll-tabs-heading .tabs-heading-rightblock,
+.roll-tabs .ui-tabview .ui-tabview-panels {
+  width: calc( 100% - 210px )
+}
+.roll-tabs-heading .tabs-heading-leftblock h4,
+.roll-tabs-heading .tabs-heading-rightblock h4 {
+  font-size: 14px;
+  line-height: 18px;
+}
+.roll-tabs .ui-tabview ul,
+.roll-tabs-heading .tabs-heading-leftblock {
+  width: 210px;
+}
+.franchise-name span {
+  line-height: 18px;
+  font-size: 14px;
+}
+.filter-form p-calendar .ui-button {
+  padding: 0px 2px 3px !important;
+}
+.custom-row-select .custom-form p-dropdown .ui-dropdown{
+  height: 32px !important;
+}
+.custom-row-select .ui-inputtext{
+  height: 28px !important;
+}
+.custom-row-select .input-search .ui-inputtext {
+  height: 31px !important;
+}
+.franchise-name span{
+  font-size: 13px !important;
+}
+.invoice-download a{
+  font-size: 14px;
+}
+.alert .close ~ span {
+  max-width: 93%;
+}
+.alert{
+  font-size: 12px;
+}
 }
 @media (min-width: 992px) {
   .navbar-form {
