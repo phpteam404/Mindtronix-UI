@@ -68,7 +68,7 @@ export class AddStudentComponent implements OnInit {
     home_language: new FormControl(''),
     blood_group: new FormControl(''),
     history_of_illness: new FormControl(''),
-    status: new FormControl({label:'Active',value:'active'}, [Validators.required])
+    status: new FormControl({label:'Active',value:1}, [Validators.required])
   });
 
   ngOnInit(): void {

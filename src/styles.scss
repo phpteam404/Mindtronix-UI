@@ -203,7 +203,7 @@ p-table{
         border-bottom: 1px solid #dee2e6;
         span{
           display: block;
-          width: 99%;
+          width: 100%;
           text-overflow: ellipsis;
           overflow: hidden;
           white-space: nowrap;
@@ -446,7 +446,7 @@ p-table{
   border-color: #e87a26  !important;
 }
 .page-title-card{
-  margin-top: 61px;
+  // margin-top: 61px;
   padding: 10px;
   background-color: #fff;
   border-bottom: 1px solid #ccc;
@@ -490,6 +490,7 @@ p-table{
     padding: 10px 15px;
     width: 100%;
     background: #d2d2d2;
+    padding-left: 230px;
     p{
       font-size: 14px;
       margin: 0;
@@ -983,7 +984,7 @@ input{
 }
 
 .custom-maincontent-top{
-  margin-top: 122px !important;
+  margin-top: 60px !important;
 }
 
 .custom-dashboard-block{
@@ -998,17 +999,17 @@ input{
   .custom-iconblock{
     width: 35px;
     height: 35px;
-    font-size: 24px;
-    background: #eee;
+    // font-size: 24px;
+    // background: #eee;
     text-align: center;
-    border-radius: 50px;
+    // border-radius: 50px;
     display: flex;
     align-items: center;
     justify-content: center;
     line-height: 19px;
     color: #e87a26;
     margin-right: 10px;
-    padding: 5px;
+    // padding: 5px;
     .icon-f36{
       font-size: 27px;
     }
@@ -1039,7 +1040,8 @@ input{
   }
   .heading-label{
     font-size: 16px;
-    font-weight: 500;
+    font-weight: bold;
+    color: #e3772f;
   }
 }
 .dashboard-list{

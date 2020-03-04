@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-ticket',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ViewTicketComponent implements OnInit {
   status: any;
   displayBasic: boolean;
+  prdAssetPath:string = environment.prdAssetPath;
   constructor() { 
     this.status = [
       {label:'New',value:{id:1,name:'New'}},

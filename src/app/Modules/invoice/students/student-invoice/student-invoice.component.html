@@ -84,7 +84,7 @@
                 <tr>
                     <td *ngFor="let col of columns ; let i = index" (click)="viewStudents(rowData)">
                         <!-- <span *ngIf="i != 7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span> -->
-                        <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
                             (rowData[col.field]==='Over Due')? 'bg-gold' : '',

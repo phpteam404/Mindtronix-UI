@@ -71,7 +71,13 @@ body .ui-widget {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
   font-weight: 400;
 }
-
+body{
+  background-color: #f7f7f8 !important;
+}
+a[href^=tel]{
+  color:inherit;
+  text-decoration: inherit;
+}
 h1, .h1, h2, .h2, h3, .h3, h4, .h4 {
   font-weight: 300;
   margin: 30px 0 15px;
@@ -173,7 +179,7 @@ h1 .subtitle {
 
 body,
 .wrapper {
-  min-height: 100vh;
+  min-height: 100%;
   position: relative;
 }
 
@@ -243,9 +249,13 @@ input:focus {
 .wrapper {
   position: relative;
   top: 0;
-  height: 100vh;
+  height: 100%;
 }
-
+footer{
+  position: fixed;
+    width: 100%;
+    bottom: 0;
+}
 .sidebar,
 .bootstrap-navbar {
   position: fixed;
@@ -604,20 +614,22 @@ input:focus {
 .main-panel .main-content {
   padding: 20px 15px;
   min-height: calc(100% - 123px);
-  margin-top: 110px;
+  margin-top: 50px;
 }
 .main-panel > .footer {
   border-top: 1px solid #e7e7e7;
 }
-.main-panel .navbar {
+.main-header .navbar {
   margin-bottom: 0;
-  background-color: #ddd;
+  background-color: #ddd !important;
 }
 
 .sidebar,
 .main-panel,
 .sidebar-wrapper,
-.navbar-cmp-fixed .navbar {
+.navbar-cmp-fixed .navbar,
+.copyright-text,
+.show-menu .copyright-text {
   -webkit-transition-property: top,bottom,width;
   transition-property: top,bottom, width;
   -webkit-transition-duration: .2s,.2s, .35s;
@@ -630,6 +642,10 @@ input:focus {
 .main-panel {
   max-height: 100%;
   height: 100%;
+  margin-top: 61px;
+  overflow: hidden;
+  margin-bottom: 40px;
+  background: #f7f7f8;
 }
 
 .btn {
@@ -3262,6 +3278,9 @@ border: 1px solid #aaa !important;
 .show-menu .sub-menu li a{
   padding-left: 15px !important;
 }
+.show-menu .copyright-text{
+  padding-left: 55px;
+}
 .sidebar .nav li.active .sub-menu li a i,
 .sidebar .nav li.active .sub-menu li a p{
   color: #000000 !important;
@@ -3483,6 +3502,18 @@ li.header-right-block:after {
 }
 .notification-list .dropdown-item span{
   padding-right: 10px;
+}
+.ps__thumb-y{
+  width: 4px !important;
+  right: 0 !important;
+}
+.main-panel .ps__thumb-y {
+  width: 8px !important;
+  right: 0 !important;
+}
+.main-panel .ps__rail-y {
+  z-index: 9999;
+  width: 8px !important;
 }
 @media (max-width: 1199px) {
   .notification-list .dropdown-item span{
