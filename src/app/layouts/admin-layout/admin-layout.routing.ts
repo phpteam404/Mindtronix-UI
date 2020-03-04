@@ -137,6 +137,14 @@ export const AdminLayoutRoutes: Routes = [
         data: {
             breadcrumb: 'Orders'
         }
+    },
+    {
+        path: 'email-templates',
+        loadChildren: () => import('../../Modules/email-template/email-template.module').then(m => m.EmailTemplateModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Email Templates'
+        }
     }
    
 ];
