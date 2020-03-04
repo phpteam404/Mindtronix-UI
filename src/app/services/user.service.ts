@@ -14,10 +14,7 @@ export class UserService {
   constructor(private clientHttp : AppHttpClientService) {
   
   }
-  /* login(params) {
-    console.log('params--', params);
-    return this.clientHttp.post('Signup/login',params);        
-  }*/
+
   getUsersList () {
     return this.clientHttp.get('user/getUserList');
   }
@@ -28,5 +25,18 @@ export class UserService {
 
   saveUser(params){
     return this.clientHttp.post('User/addUser',params);
+  }
+
+  //Student services starts 
+  getStudentsList(params){
+    return this.clientHttp.get('User/studentList?'+params);
+  }
+
+  getStudentById(params){
+    return this.clientHttp.get('User/studentList?'+params);
+  }
+
+  deleteStudent(params){
+     return this.clientHttp.delete('User/Delete?'+params);
   }
 }

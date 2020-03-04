@@ -14,5 +14,7 @@ export class FranchiseService {
   addUpdate(params){
     return this.clientHttp.post('Franchise/franchiseAdd',params);
   }
-  
+  getFranchiseDropDowns(params){
+     return this.clientHttp.get('Franchise/franchiseListForDropDown',params);
+  }
 }

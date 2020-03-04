@@ -12,9 +12,9 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="name" name="name" type="text" required>
+                            <input pinputtext placeholder="Name" formControlName="student_name" name="last_name" type="text" required>
                             <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.name.invalid && submitted!=null && !submitted"
+                                *ngIf="studentForm.controls.student_name.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">Name is required
                             </div>
                         </div>
@@ -22,7 +22,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Date of Birth <span>*</span></label>
-                            <p-calendar formControlName="date_of_birth" name="date_of_birth" [showIcon]="true" [maxDate]="maxDate"
+                            <p-calendar formControlName="date_of_birth" dateFormat="dd/mm/yy"name="date_of_birth" [showIcon]="true" [maxDate]="maxDate"
                                 [monthNavigator]="true" [yearNavigator]="true" [yearRange]="('1990:2060')" required></p-calendar>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.date_of_birth.invalid && submitted!=null && !submitted"
@@ -33,8 +33,8 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Nationality <span>*</span></label>
-                            <p-dropdown [options]="NationalityList" formControlName="nationality" filter="true" placeholder="Select Nationality" itemSize="30"
-                                optionLabel="name" required name="nationality"></p-dropdown>
+                            <p-dropdown [options]="nationality" formControlName="nationality" filter="true" placeholder="Select Nationality" itemSize="30"
+                                optionLabel="label" required name="nationality"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.nationality.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Nationality is required
@@ -50,15 +50,15 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Mother Tongue</label>
-                            <p-dropdown [options]="MotherTongueList" formControlName="mother_tongue" filter="true" placeholder="Select Mother Tongue" 
-                                itemSize="30" optionLabel="name" name="mother_tongue"></p-dropdown>
+                            <p-dropdown [options]="mothertongue" formControlName="mother_tongue" filter="true" placeholder="Select Mother Tongue" 
+                                itemSize="30" optionLabel="label" name="mother_tongue"></p-dropdown>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Fee Structure<span>*</span></label>
-                            <p-dropdown [options]="FeeStructureList" formControlName="fee_structure" filter="true" placeholder="Select Fee Structure" 
-                                itemSize="30" optionLabel="name" name="fee_structure" required></p-dropdown>
+                            <p-dropdown [options]="feeTerm" formControlName="fee_structure" filter="true" placeholder="Select Fee Structure" 
+                                itemSize="30" optionLabel="label" name="fee_structure" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.fee_structure.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Fee Structure is required
@@ -100,7 +100,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <label>Password <span>*</span></label>
                             <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" required>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <label>Confirm Password <span>*</span></label>
                             <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" required>
@@ -141,8 +141,8 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Relation</label>
-                            <p-dropdown [options]="RelationList" formControlName="relation" filter="true" placeholder="Select Relation" 
-                                itemSize="30" optionLabel="name" name="relation" ></p-dropdown>
+                            <p-dropdown [options]="relation" formControlName="relation" filter="true" placeholder="Select Relation" 
+                                itemSize="30" optionLabel="label" name="relation" ></p-dropdown>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
@@ -161,7 +161,9 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name of the school <span>*</span></label>
-                            <input pinputtext type="text" placeholder="Name of the school" formControlName="school_id" name="school_id" required>
+                            <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="Select School" 
+                            itemSize="30" optionLabel="label" name="school_id" ></p-dropdown>
+                            <!-- <input pinputtext type="text" placeholder="Name of the school" formControlName="school_id" name="school_id" required> -->
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.school_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">School Name is required
@@ -171,8 +173,8 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Class/Grade</label>
-                            <p-dropdown [options]="ClassesList" formControlName="grade" filter="true" placeholder="Select Grade" 
-                                itemSize="30" optionLabel="name" name="grade" ></p-dropdown>
+                            <p-dropdown [options]="grade" formControlName="grade" filter="true" placeholder="Select Grade" 
+                                itemSize="30" optionLabel="label" name="grade" ></p-dropdown>
                         </div>
                     </div>
                     <!-- <div class="col-md-4 col-12">
@@ -193,8 +195,8 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Blood Group <span>*</span></label>
-                            <p-dropdown [options]="BloodGroupList" formControlName="blood_group" placeholder="Select Blood Group" 
-                                itemSize="30" optionLabel="name" name="blood_group" required></p-dropdown>
+                            <p-dropdown [options]="blood_group" formControlName="blood_group" placeholder="Select Blood Group" 
+                                itemSize="30" optionLabel="label" name="blood_group" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.blood_group.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Blood Group is required

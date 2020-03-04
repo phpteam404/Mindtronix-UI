@@ -5,6 +5,8 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import {SelectItem} from 'primeng/api';
+import { MasterService } from 'src/app/services/master.service';
+import { HttpParams } from '@angular/common/http';
 import  dropdown  from 'src/app/jsons/dropdown.json';
 
 interface City {
@@ -40,13 +42,16 @@ export class AddFranchiseComponent implements OnInit {
   selectedCities2: City[];
   ///
   isUpdate:boolean;
-
-  fullObject:any={}
-  pageTitle:string = "Create Franchise";
   
-  FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
+  state:any=[];
+  city:any=[];
+  country:any=[];
+  fullObject:any={};
+  pageTitle:string = "Create Franchise";
 
-  constructor(private _router: Router, private _toast: ToasterService, private _formBuilder: FormBuilder) {     
+  constructor(private _router: Router, private _toast: ToasterService, 
+              private _formBuilder: FormBuilder,
+              private masterservices:MasterService) {     
     this.isUpdate=false;
     this.cities1 = [
       {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
@@ -96,6 +101,26 @@ export class AddFranchiseComponent implements OnInit {
       { field: 'actions', header: 'Actions' }
     ]
   }
+
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this.masterservices.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'state')
+          this.state =  res.data.data;
+        if(masterKey == 'city')
+          this.city =  res.data.data;
+        if(masterKey =='country')
+          this.country =res.data.data;
+      }else{
+        this._toast.show('error',res.error);
+      }
+    });
+  }
+   
+  
   stepOneForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),
@@ -112,15 +137,15 @@ export class AddFranchiseComponent implements OnInit {
     address: new FormControl('',[Validators.required]),
   });
 
-  stepTwoForm = new FormGroup({  
+    stepTwoForm = new FormGroup({  
     contact_title :new FormControl('',[Validators.required]),
     contact_name:new FormControl('',[Validators.required]),
     contact_email: new FormControl('',[Validators.required, Validators.email]),
     contact_phone :new FormControl('',[Validators.required]),
-  });
-  stepThreeForm = new FormGroup({  
-    fee_structure :new FormControl('',[Validators.required])
-  });
+    });
+    stepThreeForm = new FormGroup({  
+      fee_structure :new FormControl('',[Validators.required])
+    });
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -129,6 +154,10 @@ export class AddFranchiseComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
+
+    this.getMasterDropdown('state');
+    this.getMasterDropdown('city');
+    this.getMasterDropdown('country');
   }
   // convenience getter for easy access to form fields
   get f() { return this.stepOneForm.controls; }

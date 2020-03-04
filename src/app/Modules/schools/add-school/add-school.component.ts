@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
+import { SchoolService } from 'src/app/services/school.service';
+import { FranchiseService } from 'src/app/services/franchise.service';
+import { MasterService } from 'src/app/services/master.service';
 import { Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-add-school',
@@ -12,29 +16,82 @@ export class AddSchoolComponent implements OnInit {
   submitted = null;
   pageTitle:string = "Create School";
   isUpdate:boolean = false;
+  franchise:any=[];
+  state:string;
+  city:string;
+  country:string;
 
-  constructor(private _router: Router, private _toast: ToasterService) { }
+  constructor(private _router: Router, private _toast: ToasterService,
+              private schoolService:SchoolService,
+              private franchiseService:FranchiseService,
+              private masterService:MasterService) { }
   schoolForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),
     contact_person: new FormControl(''),
-    phone_no: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required, Validators.email]),
+    franchise_id: new FormControl('',[Validators.required]),
     address: new FormControl(''),
     state: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
+    status:new FormControl([{label:'Active',value:'0'},{label:'InActive',value:'1'}]),
     pincode: new FormControl('')
   });
 
   ngOnInit(): void {
+    this.getFranchiseDropdown();
+    this.getMasterDropdown('state');
+    this.getMasterDropdown('city');
+    this.getMasterDropdown('country');
   }
 
-  submit(): any{
+  getFranchiseDropdown(){
+    this.franchiseService.getFranchiseDropDowns({}).subscribe(res=>{
+          if(res.status){
+            this.franchise = res.data.data;
+         }
+      });
+    }
+
+
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this.masterService.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'state')
+          this.state =  res.data.data;
+        if(masterKey == 'city')
+          this.city =  res.data.data;
+        if(masterKey =='country')
+          this.country =res.data.data;
+      }else{
+        this._toast.show('error',res.error);
+      }
+    });
+  }
+  
+
+  submit(): any {
     this.submitted = false;
     if (this.schoolForm.valid) {
-      this._toast.show('success','Successfully Added');
-      this.submitted = true;
-      this._router.navigate(['schools_management']);
+      var params={};
+      params = this.schoolForm.value;
+      params['franchise_id'] = this.schoolForm.value.franchise_id.value;
+      params['state'] = this.schoolForm.value.state.value;
+      params['city'] = this.schoolForm.value.city.value;
+      params['status'] =this.schoolForm.value.status.value;
+      this.schoolService.addSchool(params).subscribe(res => {
+        if (res.status) {
+          this.submitted = true;
+          //this._toast.show('success',res.message);
+          this._router.navigate(['schools_management']);
+        }else{
+          this._toast.show('error',JSON.parse(res.error));
+        }
+      });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }

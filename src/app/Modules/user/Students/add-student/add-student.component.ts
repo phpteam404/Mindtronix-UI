@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
-import  dropdown  from 'src/app/jsons/dropdown.json';
+import { MasterService } from 'src/app/services/master.service';
+import { HttpParams } from '@angular/common/http';
+import { SchoolService } from 'src/app/services/school.service';
+import { UserService} from 'src/app/services/user.service';
+import { FeeService} from 'src/app/services/fee.service';
+//import  dropdown  from 'src/app/jsons/dropdown.json';
 
 @Component({
   selector: 'app-add-student',
@@ -15,33 +20,32 @@ export class AddStudentComponent implements OnInit {
   status:any;
   submitted = null;
   maxDate: Date;
+  nationality:any;
+  mothertongue:any;
+  relation:any;
+  feeTerm:any;
+  grade:any;
+  blood_group:any;
+  schools:any;
   isUpdate:boolean=false;
 
-  NationalityList:{name:string,id:string}[] = dropdown.nationality;
-  BloodGroupList :{name:string,id:string}[] =dropdown.blood_group;
-  MotherTongueList :{name:string,id:string}[] =dropdown.mother_tongue;
-  FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
-  RelationList:{name:string,id:string}[]=dropdown.relation;
-  ClassesList :{name:string,id:string}[]=dropdown.classes;
+  
   pageTitle = "Create Student";
-  constructor(private _router: Router, private _toast: ToasterService) {     
+  constructor(private _router: Router, private _toast: ToasterService,
+              private masterService:MasterService,
+              private schoolService:SchoolService,
+              private userService:UserService,
+              private feeService:FeeService) {     
     console.log('AddStudentComponent---' );
     this.status =[
-          {label:'Active',value:'active'},
-          {label:'InActive',value:'Inactive'}
+          {label:'Active',value:'1'},
+          {label:'InActive',value:'0'}
     ];
-    this.cities = [
-      {label:'Select City', value:null},
-      {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-      {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-      {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-      {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-      {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
+
     this.maxDate = new Date();
   }
   studentForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
+    student_name: new FormControl('', [Validators.required]),
     date_of_birth: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
     password: new FormControl('',[ Validators.required,
@@ -61,35 +65,97 @@ export class AddStudentComponent implements OnInit {
     occupation: new FormControl(''),
     mobile_phone1: new FormControl(''),
     mobile_phone2: new FormControl(''),
-    school_id: new FormControl(''),
+    school_id: new FormControl('',[Validators.required]),
     grade: new FormControl(''),
-    agency_id: new FormControl(''),
-    languages: new FormControl(''),
-    home_language: new FormControl(''),
     blood_group: new FormControl(''),
     history_of_illness: new FormControl(''),
-    status: new FormControl({label:'Active',value:'active'}, [Validators.required])
+    status: new FormControl({label:'Active',value:'1'}, [Validators.required])
   });
 
   ngOnInit(): void {
+    this.getMasterDropdown('nationality');
+    this.getMasterDropdown('mothertongue');
+    this.getMasterDropdown('relation');
+    this.getMasterDropdown('grade');
+    this.getMasterDropdown('blood_group');
+    this.getschoolsDropdown();
+    this.getFeeStructureDropDown();
   }
+
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this.masterService.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'nationality')
+           this.nationality =  res.data.data;
+        if(masterKey=='mothertongue')
+           this.mothertongue =res.data.data;
+        if(masterKey=='relation')
+           this.relation=res.data.data;
+        if(masterKey=='grade')
+           this.grade = res.data.data;
+        if(masterKey =='blood_group')
+          this.blood_group =res.data.data;
+        }else{
+        this._toast.show('error',res.error);
+      }
+    });
+  }
+
+  getschoolsDropdown(){
+    this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
+          if(res.status){
+            this.schools = res.data.data;
+         }
+      });
+    }
+
+    getFeeStructureDropDown(){
+      this.feeService.getFeeDropDown({}).subscribe(res=>{
+        if(res.status){
+          this.feeTerm = res.data.data;
+       }
+    });
+    }
+
   // convenience getter for easy access to form fields
   get f() { return this.studentForm.controls; }
 
   submit(): any{
     this.submitted = false;
     if (this.studentForm.valid) {
-      
+      console.log('stdent info',this.studentForm.value);
       let pass = this.studentForm.get('password').value;
       let confirmPass = this.studentForm.get('cpassword').value;    
       if(pass === confirmPass){
+          var params={};
+          params =this.studentForm.value;
+          params['user_role_id'] =4;
+          params['nationality'] =this.studentForm.value.nationality.value;
+          params['mother_tongue'] =this.studentForm.value.mother_tongue.value;
+          params['fee_structure'] =this.studentForm.value.fee_structure.value;
+          params['relation'] =this.studentForm.value.relation.value;
+          params['school_id'] =this.studentForm.value.school_id.value;
+          params['grade'] = this.studentForm.value.grade.value;
+          params['blood_group'] =this.studentForm.value.blood_group.value;
+          params['status'] =this.studentForm.value.status.value;
+          this.userService.saveUser(params).subscribe(res => {
+            if (res.status) {
+              this.submitted = true;
+              this._router.navigate(['users/students']);
+            }else{
+              this._toast.show('error',JSON.parse(res.error));
+            }
+          });
       }else{
         this._toast.show('warning','Password and Confirm Password must match');
         return false;
       }  
       this.submitted = true;
-      this._toast.show('success','Successfully Added');
-      this._router.navigate(['users/students']);
+      // this._toast.show('success','Successfully Added');
+      // this._router.navigate(['users/students']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }

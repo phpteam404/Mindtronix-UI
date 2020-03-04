@@ -136,7 +136,9 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Country <span>*</span></label>
-                                <input pinputtext placeholder="Country" formControlName="country" name="country" type="text" required>
+                                <!-- <input pinputtext placeholder="Country" formControlName="country" name="country" type="text" required> -->
+                                <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="Select Country" itemSize="30"
+                                name="state" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.country.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">Country is required
@@ -146,7 +148,8 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>State <span>*</span></label>
-                                <input pinputtext placeholder="State" formControlName="state" name="state" type="text" required>
+                                <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="Select State" itemSize="30"
+                                name="country" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.state.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">State is required
@@ -156,7 +159,9 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>City <span>*</span></label>
-                                <input pinputtext placeholder="City" formControlName="city" name="city" type="text" required>
+                                <!-- <input pinputtext placeholder="City" formControlName="city" name="city" type="text" required> -->
+                                <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="Select City" itemSize="30"
+                                    name="state" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.city.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">City is required
