@@ -74,6 +74,7 @@
                 </div>
             </div>
             <div class="custom-static-view mt-3">
+                <h4>Previous Invoices</h4>
                 <div class="custom-table custom-lastchild-list">
                     <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
                      
@@ -111,14 +112,14 @@
     
     <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
         <div class="row custom-form">
-            <div class="col-md-4 col-12">
+            <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Status <span>*</span></label>
                     <p-dropdown [options]="status1" placeholder="Select Status" itemSize="30"
                     name="status" optionLabel="label" required></p-dropdown>
                 </div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Payment Type <span>*</span></label>
                     <p-dropdown [options]="type" placeholder="Select Payment Type" itemSize="30"

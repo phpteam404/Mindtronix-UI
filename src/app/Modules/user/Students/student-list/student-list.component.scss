@@ -1,3 +1,14 @@
 .custom-search .input-search i {
     right: 130px;
 }
+@media (max-width: 1199px) {
+.custom-student-list th:nth-child(2), .custom-student-list th:nth-child(8) {
+    width: 65px;
+}
+.custom-search .input-search i {
+    right: 110px;
+}
+.custom-student-list th:nth-child(6) {
+    width: 122px;
+}
+}

@@ -1,0 +1,15 @@
+.menu-button {
+    transition: 300ms ease-in-out;
+    transform: rotate(0deg);
+  }
+  .menu-button.rotated {
+    transform: rotate(180deg);
+  }
+  .submenu {
+    overflow-y: hidden;
+    transition: 300ms ease-in-out;
+    height: 0;
+  }
+  .submenu.expanded {
+    height: 144px;
+  }

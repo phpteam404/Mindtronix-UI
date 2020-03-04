@@ -7,7 +7,8 @@ console.log('settings.API_URL', settings.API_URL);
 export const environment = {
   apiUrl: (settings.API_URL !== undefined) ? settings.API_URL : 'http://localhost.com',
   localStorageKey: (settings.APP_STORAGE_KEY !== undefined) ? settings.APP_STORAGE_KEY : 'sessionUser',
-  production: (settings.PRODUCTION !== undefined) ? settings.PRODUCTION : false
+  production: (settings.PRODUCTION !== undefined) ? settings.PRODUCTION : false,
+  prdAssetPath: (settings.PRD_ASSESTS_PATH !== undefined) ? settings.PRD_ASSESTS_PATH : '',
 };
 /*
  * For easier debugging in development mode, you can import the following file

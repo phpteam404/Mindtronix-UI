@@ -29,7 +29,7 @@
                 <tr>
                    
                     <td *ngFor="let col of columns ; let i = index" (click)="viewTicket(rowData)">
-                        <span *ngIf="i != 6">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 6" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
                             <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>
                             

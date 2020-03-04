@@ -35,11 +35,11 @@ export class SchoolListComponent implements OnInit {
   EditSchool(data:any){
     console.log('data info',data);
     this.router.navigate(['update/'+data.name+'/'+btoa(data.school_id)],{ relativeTo: this._route});
-  }
+}
   GoToStudent(event: Event){
     this.router.navigate(['users/students'], {});
   }
-  
+
   DeleteSchool(data:any){
     console.log('data info',data);
      var params = new HttpParams()

@@ -33,11 +33,11 @@ export class FranchiseListComponent implements OnInit {
 
   viewFranchise(data){
     console.log('view===');
-    this.router.navigate(['view/'+(data.agency_name)+'/'+btoa(data.agency_id)],{ relativeTo: this._route});
+    this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.agency_id)],{ relativeTo: this._route});
   }
   editFranchise(data){
     console.log('edit===');
-   this.router.navigate(['update/'+btoa(data)],{ relativeTo: this._route});
+   this.router.navigate(['update/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
   }
  
   loadCarsLazy(event: LazyLoadEvent) {

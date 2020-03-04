@@ -11,10 +11,11 @@ const routes: Routes = [
   {
     path: 'view/:name/:id',
     component: FranchiseViewComponent,
-    // data: {
-    //   breadcrumbs: 'Student invoice details',
-    //    title: 'Student invoice details'
-    // }
+    data: {
+      breadcrumbs: 'View',
+      title: 'Franchise invoice details',
+      superParentPath: 'invoices'
+    }
   }
 ];
 

@@ -2,5 +2,11 @@
     position: fixed;
     top: 68px;
     z-index: 2;
-    right: 35px;
+    right: 16px;
+}
+@media (max-width: 1199px) {
+    .month-wise-dropdown{
+        top: 71px;
+    }
+
 }

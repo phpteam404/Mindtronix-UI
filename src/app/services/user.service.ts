@@ -39,4 +39,7 @@ export class UserService {
   deleteStudent(params){
      return this.clientHttp.delete('User/Delete?'+params);
   }
+  getById (params) {
+    return this.clientHttp.get('user/getUserList?'+params);
+  }
 }

@@ -6,6 +6,7 @@ import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
 import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 import { DashboardComponent } from 'src/app/Modules/dashboard/dashboard.component';
+import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/student-dashboard.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -23,6 +24,14 @@ export const AdminLayoutRoutes: Routes = [
         canActivate: [AuthGuard],
         data: {
             breadcrumb: 'Dashboard'
+        }
+    },
+    {
+        path: 'dashboard1',
+        component: StudentDashboardComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Student Dashboard'
         }
     },
     {
@@ -127,6 +136,14 @@ export const AdminLayoutRoutes: Routes = [
         canActivate: [AuthGuard],
         data: {
             breadcrumb: 'Orders'
+        }
+    },
+    {
+        path: 'email-templates',
+        loadChildren: () => import('../../Modules/email-template/email-template.module').then(m => m.EmailTemplateModule),
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Email Templates'
         }
     }
    

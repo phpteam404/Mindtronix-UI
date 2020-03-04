@@ -68,6 +68,6 @@ export class StudentInvoiceComponent implements OnInit {
   }
 
   viewStudents(data:any){
-    this.router.navigate(['view/'+data.title+'/'+btoa(data.issueId)], {relativeTo: this._route});
+    this.router.navigate(['view/'+data.name+'/'+btoa(data.issueId)], {relativeTo: this._route});
   }
 }

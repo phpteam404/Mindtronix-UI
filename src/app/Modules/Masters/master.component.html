@@ -1,5 +1,5 @@
 <div class="main-content">
-    <div class="custom-table">
+    <div class="custom-table masters-list">
         <p-table #dt [columns]="cols" [value]="MasterChilds" [paginator]="true" [rows]="10" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="row">
@@ -29,7 +29,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=2" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="Edit"></span></a>
                             <a href="javascript:;" ><span class="icon icon-delete" title="Delete" (click)="deleteMasterChild(rowData)"></span></a>

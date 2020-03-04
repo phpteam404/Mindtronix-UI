@@ -35,7 +35,7 @@
     </div>
     </div>
     </div>
-    <div class="custom-table custom-lastchild-list custom-row-select">
+    <div class="custom-table custom-lastchild-list custom-row-select student-invoice-list">
         <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
                 <!-- <div class="custom-search">
@@ -83,7 +83,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index" (click)="viewFranchise(rowData)">
-                        <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Over Due')? 'bg-gold' : '',
