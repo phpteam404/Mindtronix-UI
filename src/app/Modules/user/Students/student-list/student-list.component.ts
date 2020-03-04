@@ -58,49 +58,23 @@ export class StudentListComponent implements OnInit {
      }
   });
   }
-  getStudentsList(){ //this service is for getting schools dropdown through service
+  getStudentsList() { //this service is for getting schools dropdown through service
     this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
      }
    });
   }
-
  
   ngOnInit(): void {
     this.getStudentsList();
     this.getFranchiseList();
   }
-  
-  clearDropDown = () => {
-    this.selectedRange = '';
-  };
 
   AddNewStudent(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
   }
 
-  // onChange(event){
-
-  //   console.log('***', event.value.value);
-  //   if(event.value !=null){
-  //     console.log('list ---', this.studentsList.filter(t=>t.school == event.value.value).length);
-  //     if(this.studentsList.filter(t=>t.school == event.value.value).length>0)
-  //       this.studentsList = this.studentsList.filter(t=>t.school == event.value.value);
-  //   }
-  //   else this.getFilterList();
-  // }
-  // onChange2(event){
-  //   this.getStudentsList();
-
-  //   console.log('***', event.value.value);
-  //   if(event.value !=null){
-  //     console.log('list ---', this.studentsList.filter(t=>t.franchise == event.value.value).length);
-  //     if(this.studentsList.filter(t=>t.franchise == event.value.value).length>0)
-  //       this.studentsList = this.studentsList.filter(t=>t.franchise == event.value.value);
-  //   }
-  //   else this.getFilterList();
-  // }
   EditStudent(data:any){
     this.router.navigate(['update/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._route});
   }
@@ -115,7 +89,7 @@ export class StudentListComponent implements OnInit {
      this.userService.deleteStudent(params).subscribe(res=>{
        console.log('res info',res);
       if(res.status){
-        this._toast.show('success','res.message');
+        //this._toast.show('success','res.message');
         this.getList();
       }
      });

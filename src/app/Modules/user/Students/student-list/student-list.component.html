@@ -21,12 +21,12 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="schools" placeholder="Select a School" 
+                            <p-dropdown [options]="schools" placeholder="Select a School"  [showClear]="true"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
                         <div class="input-dropdown ml-2">
-                            <p-dropdown [options]="franchise" placeholder="Select a Franchise" 
+                            <p-dropdown [options]="franchise" placeholder="Select a Franchise" [showClear]="true"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'equals')"
                                 optionLabel="label"  filter="true"></p-dropdown>          
                         </div>
