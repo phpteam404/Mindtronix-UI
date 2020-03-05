@@ -27,8 +27,8 @@ export class AuthGuard implements CanActivate {
       // console.log('router---',this.router.url);
       // console.log('_ar---',this._ar.snapshot.url);
      if (this.ls.getItem('user')) {
-        this.service.isTokenExpired({'module_url':location.pathname,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
-          // console.log('isTokenExpired--', res);
+        this.service.isTokenExpired({'module_url':'#'+location.hash,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
+          // console.log('isTokenExpired--', location);
           if(res.status){
             return true;
           }else {

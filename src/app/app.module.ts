@@ -33,6 +33,7 @@ import {DropdownModule} from 'primeng/dropdown';
 import { BasicModule } from './Modules/basic/basic.module';
 import { DialogModule } from 'primeng/dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
       deps: [HttpClient]
     },
     { provide: ErrorHandler, useClass: ErrorHandlerService },
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
