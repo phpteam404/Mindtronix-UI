@@ -25,6 +25,7 @@ export class SidebarComponent implements OnInit {
   breadcrumbList: Array<any> = [];
   name: string;
   menu:any=[];
+  showSubmenu: boolean = false;
   public expandedIndex=-1;
   constructor(private ls: LocalStorageService,private router: Router) { 
     
@@ -39,6 +40,7 @@ export class SidebarComponent implements OnInit {
           title : item.module_name,
           icon : '',
           class:item.module_icon,
+          showSubMenu: false,
           childs:item.sub_menus
         };
         this.menuItems.push(obj);

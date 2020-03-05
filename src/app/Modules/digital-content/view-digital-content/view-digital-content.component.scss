@@ -55,3 +55,15 @@ a{
 background: #f9f7f7;
 padding: 15px;
 }
+@media (max-width: 1199px) {
+    .schools-text span {
+        font-size: 12px !important;
+    }
+    .download-btn{
+        font-size: 13px !important;
+    }
+    .url-text {
+        font-size: 12px;
+        margin-top: 1px;
+    }
+}

@@ -1,46 +1,31 @@
 <div class="main-content">
-    <div class="custom-table users-list">
-        <p-table #dt [columns]="cols" [value]="allUsersList" [paginator]="true" [rows]="10">
+    <div class="custom-table">
+        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
-                
-                <div class="custom-search justify-content-between">
-                    <div class="input-dropdown">
-                        <p-dropdown [options]="roles" placeholder="Select a Role" 
-                            styleClass="ui-column-filter"
-                            (onChange)="onChange($event)"
-                            optionLabel="label" [showClear]="true"></p-dropdown>
+                <div class="custom-search">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                        <i class="fa fa-search"></i> 
                     </div>
-                    <div class="d-flex">
-                        <div class="input-search">
-                            <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
-                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                            <i class="fa fa-search"></i> 
-                        </div>
-                        <button pButton type="button" label="Create User" class="btn-warning" (click)="AddNewUser($event)"></button>
-                    </div>
-                  
+                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewTrainer($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
                         {{col.header}}
-                        <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                        <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
                     </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i!=5 && i!=6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                        <span *ngIf="i == 5">
-                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
-                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
-                                class='list-status'>{{rowData[col.field]}}</span>
-                        </span>
-                        <span *ngIf="i == 6" class="d-flex action-color">
-                            <!-- <a href="javascript:;"  (click)="editUser(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
-                            <a href="javascript:;"  (click)="AddNewUser($event)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                        <span *ngIf="i != 4" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 4" class="d-flex action-color">
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;"><span class="icon icon-settings mr-2" title="Manage Users"></span> </a>
                             <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>
                         </span>
                     </td>

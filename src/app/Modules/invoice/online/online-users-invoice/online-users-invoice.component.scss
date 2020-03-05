@@ -17,3 +17,30 @@
         line-height: 22px;
     }
 }
+@media (max-width: 1199px){
+    .schools-text span,
+    .payment-text span {
+        font-size: 16px !important;
+    }
+    .filter-form p-calendar .ui-button {
+        padding: 0px 2px 3px !important;
+    }
+    .input-search input{
+         width: 200px !important;
+    }
+    .show-menu .input-search input{
+         width: 240px !important;
+    }
+    .student-invoice-list th:nth-child(3){
+        width: 130px;
+    }
+    .student-invoice-list th:nth-child(5){
+        width: 100px;
+    }
+    .student-invoice-list th:nth-child(6){
+        width: 80px;
+    }
+    .student-invoice-list th:last-child{
+        width: 70px !important;
+    }
+}

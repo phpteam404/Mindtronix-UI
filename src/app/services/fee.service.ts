@@ -17,4 +17,8 @@ export class FeeService {
   getById(params){
       return this.clientHttp.get('Fee/feeStructure?fee_master_id='+params.id);
   }
+
+  getFeeDropDown(params){
+    return this.clientHttp.get('Fee/feeStructureDropdown',params);
+  }
 }

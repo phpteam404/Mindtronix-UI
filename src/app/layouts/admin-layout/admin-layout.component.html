@@ -3,8 +3,10 @@
         <app-sidebar></app-sidebar>
         <!-- <div class="sidebar-background" style="background-image: url(assets/img/sidebar-5.jpg)"></div> -->
     </div>
-    <div class="main-panel">
+    <div class="main-header">
         <navbar-cmp></navbar-cmp>
+    </div>
+    <div class="main-panel">
         <!-- <mc-breadcrumbs></mc-breadcrumbs> -->
         <!-- <div>{{breadCrumb}}</div> -->
         <div class="page-title-card" [ngClass]="{breadCrumb_title: currentRouteParam}">
@@ -20,6 +22,8 @@
             <h4 *ngIf="!childBreadCrumb">{{breadCrumb}}</h4>
          </div>
         <router-outlet></router-outlet>
+    </div>
+    <div class="footer-section">
         <app-footer></app-footer>
     </div>
 </div>  

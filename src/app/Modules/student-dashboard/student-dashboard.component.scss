@@ -1,0 +1,62 @@
+
+.schools-text {
+    span{
+        font-size: 14px !important; 
+        font-weight: normal !important;
+         color: #303030 !important;
+        line-height: 16px !important;;
+    }
+    }
+    .digital-content-view{
+    padding: 0px 15px;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    }
+    .custom-leftborder{
+    border-left: 1px solid #cccccc;
+    }
+    .students-text,
+    .schools-text {
+    border-right: 0px solid #cccccc !important;
+    }
+    .franchise-name {
+    width: 1%;
+    }
+    .download-btn{
+    font-size: 14px;
+    i{
+        position: relative;
+        top: 2px;
+    }
+    }
+    .url-text{
+    font-size: 14px;
+    margin-top: 5px;
+    a{
+        position: relative;
+        top: 5px;
+        font-size: 21px;
+        margin-top: 9px;
+        color: #303030;
+    }
+    
+    }
+    .custom-viewbg{
+    background: #f9f7f7;
+    padding: 15px;
+    }
+    .view-page .custom-view-list .franchise-name {
+        width: 1%;
+    }
+    @media (max-width: 1199px) {
+        .schools-text span {
+            font-size: 12px !important;
+        }
+        .download-btn{
+            font-size: 13px !important;
+        }
+        .url-text {
+            font-size: 12px;
+            margin-top: 1px;
+        }
+    }

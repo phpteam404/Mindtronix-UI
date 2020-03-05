@@ -166,3 +166,16 @@
 .status-div{
    width: 0.4% !important;
 }
+
+@media (max-width: 1199px) {
+.normal-text{
+    font-size: 12px !important;
+  }
+  .ticket-heading{
+      font-size: 14px;
+  }
+  .history-view .lastseen-date div,
+  .history-view .history-list li{
+      font-size: 13px;
+  }
+}

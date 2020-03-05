@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 
 import { StudentRoutingModule } from './student-routing.module';
 import { AddStudentComponent } from './add-student/add-student.component';
@@ -41,6 +41,7 @@ import { TabViewModule } from 'primeng/tabview';
     ReactiveFormsModule,
     DropdownModule,
     TabViewModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class StudentModule { }

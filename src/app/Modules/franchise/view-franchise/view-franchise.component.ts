@@ -23,32 +23,33 @@ export class ViewFranchiseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.students = [
-      {name:'Tom Smith', phone:'9789456556',title:'Admin', email:'mindtronixsrp@mindtronics.com'},
-      {name:'sample data', phone:'7774564556',title:'Site Admin', email:'mindtronixsrp@mindtronics.com'},
-      {name:'abc data', phone:'7894555556',title:'Super Admin', email:'mindtronixsrp@mindtronics.com'},
-      {name:'test data', phone:'7894444556',title:'Admin', email:'mindtronixsrp@mindtronics.com'},
-      {name:'master data', phone:'7894563336',title:'Admin', email:'mindtronixsrp@mindtronics.com'},
+      {name:'Tom Smith', phone:'9789456556',title:'Admin', email:'mindtronixsrp@mindtronics.com',actions:''},
+      {name:'sample data', phone:'7774564556',title:'Site Admin', email:'mindtronixsrp@mindtronics.com',actions:''},
+      {name:'abc data', phone:'7894555556',title:'Super Admin', email:'mindtronixsrp@mindtronics.com',actions:''},
+      {name:'test data', phone:'7894444556',title:'Admin', email:'mindtronixsrp@mindtronics.com',actions:''},
+      {name:'master data', phone:'7894563336',title:'Admin', email:'mindtronixsrp@mindtronics.com',actions:''},
       
     ];
     this.cols = [
       { field: 'title', header: 'Contact Title' },
       { field: 'name', header: 'Contact Name' },
       { field: 'phone', header: 'Contact Phone' },
-      { field: 'email', header: 'Contact Email' }
+      { field: 'email', header: 'Contact Email' },
+      {field: 'actions', header: 'Actions'}
     ];
 
     this.FeeList = [
-      {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10},
-      {id:2,name:'3 (Three Months)', amount:6000, term:'Quarterly',discount:15},
-      {id:3,name:'6 (Six Months)', amount:11000, term:'Half Yearly',discount:20},
-      {id:4,name:'12 (Twelve Months)', amount:20500, term:'Yearly',discount:25}
+      {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10,actions:''},
+      {id:2,name:'3 (Three Months)', amount:6000, term:'Quarterly',discount:15,actions:''},
+      {id:3,name:'6 (Six Months)', amount:11000, term:'Half Yearly',discount:20,actions:''},
+      {id:4,name:'12 (Twelve Months)', amount:20500, term:'Yearly',discount:25,actions:''}
     ];
     this.FeeStructureCols = [
       { field: 'name', header: 'Fee Title' },
       { field: 'amount', header: 'Fee Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
-     
+      {field: 'actions', header: 'Actions'}
     ];
     this.status =[
       {label:'Active',value:'active'},
@@ -66,7 +67,7 @@ export class ViewFranchiseComponent implements OnInit {
       {label:'Dec 2019', value:'Dec 2019'},
     ];
    }
-   showBasicDialog() {
+  showBasicDialog() {
     this.displayBasic = true;
   }
   showBasicDialog1() {

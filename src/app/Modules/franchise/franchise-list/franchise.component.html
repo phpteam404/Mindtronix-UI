@@ -63,15 +63,15 @@
                 <tr>
                     <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && i != 7 && viewFranchise(rowData)">
                         
-                        <span *ngIf="i != 6 && i != 7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>  
+                        <span *ngIf="i != 6 && i != 7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>  
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 7" class="d-flex action-color">
-                            <!-- <a href="javascript:;" (click)="editFranchise(rowData.id)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
-                            <a href="javascript:;" (click)="AddNewFranchise($event)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <a href="javascript:;" (click)="editFranchise(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <!-- <a href="javascript:;" (click)="AddNewFranchise($event)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
                             <a href="javascript:;" (click)="GoToUsers($event)"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
                             <a href="javascript:;" (click)="GoToSchools($event)"><span class="icon icon-address" title="Manage Schools"></span></a>
                         </span>

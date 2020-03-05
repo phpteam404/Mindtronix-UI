@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Chart } from 'angular-highcharts';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-view-digital-content',
@@ -9,6 +10,8 @@ import { Chart } from 'angular-highcharts';
   styleUrls: ['./view-digital-content.component.scss']
 })
 export class ViewDigitalContentComponent implements OnInit {
+
+  prdAssetPath:string = environment.prdAssetPath;
   category:any =[];
   subCategory:any =[];
   grade:any =[];

@@ -1,6 +1,7 @@
 <div class="main-content">
     <div class="custom-table custom-student-list">
-        <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="studentsList"  [lazy]="true" [totalRecords]="totalRecords"
+           [paginator]="true"  (onLazyLoad)="loadStudentsLazy($event)" [rows]="10" [loading]="loading">
             <ng-template pTemplate="caption">
                 <!-- <div class="row">
                     <div class="col-md-4 col-12 ">
@@ -20,16 +21,14 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="schools" placeholder="Select a School" 
-                                styleClass="ui-column-filter"
-                                (onChange)="onChange($event)"
+                            <p-dropdown [options]="schools" placeholder="Select a School"  [showClear]="true"
+                                styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
                         <div class="input-dropdown ml-2">
-                            <p-dropdown [options]="franchise" placeholder="Select a Franchise" 
-                                styleClass="ui-column-filter"
-                                (onChange)="onChange2($event)"
-                                optionLabel="label" filter="true"></p-dropdown>
+                            <p-dropdown [options]="franchise" placeholder="Select a Franchise" [showClear]="true"
+                                styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'equals')"
+                                optionLabel="label"  filter="true"></p-dropdown>          
                         </div>
                     </div>                  
                     <div class="d-flex">
@@ -53,7 +52,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 8 && i != 7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                        <span *ngIf="i != 8 && i != 7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 7">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                                 (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
@@ -62,7 +61,7 @@
                         <span *ngIf="i == 8" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditStudent(rowData)"></span></a>
                             <a href="javascript:;" (click)="viewStudent(rowData)"><span class="icon icon-eye-2 mr-2" title="Manage Users"></span> </a> 
-                            <a href="javascript:;"><span class="icon icon-delete" title="Delete"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="DeleteStudent(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
