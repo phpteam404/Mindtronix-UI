@@ -7,10 +7,6 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
 
-interface Filter {
-  label: string,
-  value: string
-}
 @Component({
   selector: 'app-student-list',
   templateUrl: './student-list.component.html',
@@ -18,52 +14,35 @@ interface Filter {
 })
 export class StudentListComponent implements OnInit {
 
-  cities: any;
-  cars: any;
-  submitted:null;
   cols: any[];
   totalRecords: number; 
   loading: boolean;
-  selectedRange:any;
-  schools:Filter[];
-  selectedSchool:Filter[];
-  franchise:Filter[];
-  selectedFranchise:Filter[];
+  schools:any[];
+  franchise:any[];
   studentsList:any;
-
-  constructor(private router: Router, private _route: ActivatedRoute,
+  first:number=0;
+  constructor(private _router: Router, private _ar: ActivatedRoute,
               private _toast: ToasterService,
-              private userService:UserService,
-              private schoolService:SchoolService,private franchiseService:FranchiseService) {
-    
-    this.cols = [
-      { field: 'student_name', header: 'Student Name' },
-      { field: 'grade', header: 'Grade' },
-      { field: 'school_name', header: 'School' },
-      { field: 'franchise_name', header: 'Franchise' },
-      { field: 'contact_email', header: 'Contact Email' },
-      { field: 'phone_no', header: 'Contact Number' },
-      { field: 'last_login', header: 'Last Login' },
-      { field: 'status', header: 'Status' },
-      { field: 'actions', header: 'Actions' }
-    ];
-
+              private _service:UserService,
+              private _schoolService:SchoolService,private _fService:FranchiseService) {
     this.getStudentsList();
     this.getFranchiseList();
   }
-  getFranchiseList(){ //this service is for getting franchise dropdown through service
-    this.franchiseService.getFranchiseDropDowns({}).subscribe(res=>{
+  //this service is for getting franchise dropdown through service
+  getFranchiseList(){
+    this._fService.getFranchiseDropDowns({}).subscribe(res=>{
       if(res.status){
         this.franchise = res.data.data;
-     }
-  });
+      }
+    });
   }
-  getStudentsList() { //this service is for getting schools dropdown through service
-    this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
+  //this service is for getting schools dropdown through service
+  getStudentsList() {
+    this._schoolService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
-     }
-   });
+      }
+    });
   }
  
   ngOnInit(): void {
@@ -72,27 +51,27 @@ export class StudentListComponent implements OnInit {
   }
 
   AddNewStudent(event: Event){
-    this.router.navigate(['add'], {relativeTo: this._route});
+    this._router.navigate(['add'], {relativeTo: this._ar});
   }
 
   EditStudent(data:any){
-    this.router.navigate(['update/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._route});
+    this._router.navigate(['update/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
   }
   viewStudent(data:any){
-    this.router.navigate(['view/'+data.name+'/'+btoa(data.id)],{ relativeTo: this._route});
+    this._router.navigate(['view/'+data.name+'/'+btoa(data.id)],{ relativeTo: this._ar});
   }
 
   DeleteStudent(data:any){
      var params = new HttpParams()
         .set('id', data.user_id)
         .set('tablename', 'user');
-     this.userService.deleteStudent(params).subscribe(res=>{
+     this._service.deleteStudent(params).subscribe(res=>{
        console.log('res info',res);
       if(res.status){
-        //this._toast.show('success','res.message');
+        this.first=0;
         this.getList();
       }
-     });
+    });
   }
   loadStudentsLazy(event: LazyLoadEvent) {
     this.loading =true;
@@ -113,23 +92,26 @@ export class StudentListComponent implements OnInit {
     if(event.filters['equals']){
       params =params.set('franchise_id',event.filters['equals'].value.value);
     }
-    this.userService.getStudentsList(params).subscribe(res=>{
+    this._service.getStudentsList(params).subscribe(res=>{
       if(res.status){
-        //this.cols = res.data.table_headers;
+        this.cols = res.data.table_headers;
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
         this.loading = false;
       }
     });
   }
-   
-   getList(){
-    this.userService.getStudentsList({}).subscribe(res=>{
+  // called after record delete instead of lazyLoadEvent function 
+  getList(){
+    var param = new HttpParams()
+            .set('start',0+'')
+            .set('number', 10+'');
+    this._service.getStudentsList(param).subscribe(res=>{
       if(res.status){
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
         this.loading = false;
       }
     });
-   }
+  }  
 }

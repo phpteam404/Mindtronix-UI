@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { SchoolService } from 'src/app/services/school.service';
-import { CommonService } from 'src/app/services/common.service';
 import { ToasterService } from '../../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
@@ -16,46 +15,43 @@ export class SchoolListComponent implements OnInit {
   loading: boolean;
   schoolsList: any;
   cols: any[];
-  constructor(private router: Router,
-              private schoolService: SchoolService, 
-              private _commonService: CommonService, 
+  first:number=0;
+  constructor(private _router: Router,
+              private _service: SchoolService, 
               private _toasterService: ToasterService, 
-              private _route: ActivatedRoute) {
-    
-    
+              private _ar: ActivatedRoute) {
   }
-  ngOnInit(): void {
-    // this.getschoolList();
-    // console.log('getList');
-  }
+  ngOnInit(): void { }
 
   AddNewSchool(event: Event){
-    this.router.navigate(['add'], {relativeTo: this._route});
+    this._router.navigate(['add'], {relativeTo: this._ar});
   }
   EditSchool(data:any){
     console.log('data info',data);
-    this.router.navigate(['update/'+data.name+'/'+btoa(data.school_id)],{ relativeTo: this._route});
+    this._router.navigate(['update/'+data.name+'/'+btoa(data.school_id)],{ relativeTo: this._ar});
 }
   GoToStudent(event: Event){
-    this.router.navigate(['users/students'], {});
+    this._router.navigate(['users/students'], {});
   }
 
   DeleteSchool(data:any){
-    console.log('data info',data);
-     var params = new HttpParams()
+    var params = new HttpParams()
         .set('id', data.school_id)
         .set('tablename', 'school_master');
-    this.schoolService.deleteSchool(params).subscribe(res=>{
-     if(res.status){
+       // this._router.navigate(['schools_management'],{relativeTo:this._ar});
+    this._service.deleteSchool(params).subscribe(res=>{
+      if(res.status){
+        this.first=0;
        //this._toasterService.show('Success',res.message);
-       this.getschoolList();
+        this.getschoolList();
      }
-     else{
+      else{
         this._toasterService.show('error',JSON.parse(res.error));
-     }
+      }
     });
   }
   loadSchoolsLazy(event: LazyLoadEvent) {
+    console.log('event--', event);
     this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
     var params = new HttpParams()
@@ -68,7 +64,7 @@ export class SchoolListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search', event.globalFilter);
     }
-    this.schoolService.getschoolsList(params).subscribe(res=>{
+    this._service.getschoolsList(params).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.schoolsList = res.data.data;
@@ -79,8 +75,12 @@ export class SchoolListComponent implements OnInit {
   }
    
   getschoolList(){
-    this.schoolService.getschoolsList({}).subscribe(res=>{
+    var params = new HttpParams()
+                  .set('start',0+'')
+                  .set('number',10+'')
+    this._service.getschoolsList(params).subscribe(res=>{
       if(res.status){
+        this.cols = res.data.table_headers;
         this.schoolsList = res.data.data;
         this.totalRecords = res.data.total_records;
         this.loading = false;

@@ -59,13 +59,21 @@
                                 <div class="col-12">
                                     <div class="form-group">
                                         <input pinputtext placeholder="User Name" formControlName="username"
-                                            name="username" type="email" required email>
+                                            name="username" type="email" required>
+                                        <div class="invalid-feedback"
+                                            *ngIf="form.controls.username.invalid && submitted!=null && !submitted"
+                                            [ngClass]=" 'error'"> User Name is required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-group">
                                         <input pPassword placeholder="Password" formControlName="password"
                                         [feedback]="false" type="password" name="password" required>
+                                        <div class="invalid-feedback"
+                                            *ngIf="form.controls.password.invalid && submitted!=null && !submitted"
+                                            [ngClass]=" 'error'"> Password is required
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12">

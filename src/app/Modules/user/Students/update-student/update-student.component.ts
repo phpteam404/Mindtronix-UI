@@ -40,14 +40,13 @@ export class UpdateStudentComponent implements OnInit {
     console.log('AddStudentComponent---' );
 
     this.maxDate = new Date();
-    var id: any;
     _ar.paramMap.subscribe(params => {
-      id = atob(params['params'].id);
+      var id = atob(params['params'].id);
       var param = new HttpParams().set('user_id', id);
       _service.getStudentById(param).subscribe(res => {
         if (res.status) {
           this.studentObj = res.data.data[0];
-          console.log('studentobj info', this.studentObj.fee_structure);
+          console.log('studentobj info', this.studentObj);
           this.studentForm.setValue({
             user_id : this.studentObj.user_id,
             student_name : this.studentObj.student_name,
@@ -98,7 +97,7 @@ export class UpdateStudentComponent implements OnInit {
         relation: new FormControl(''),
         email: new FormControl('', [Validators.required, Validators.email]),
         occupation: new FormControl(''),
-        mobile_phone1: new FormControl(''),
+        mobile_phone1: new FormControl('', [Validators.required]),
         mobile_phone2: new FormControl(''),
         school_id: new FormControl(''),
         grade: new FormControl(''),

@@ -17,9 +17,9 @@ export class AddSchoolComponent implements OnInit {
   pageTitle:string = "Create School";
   isUpdate:boolean = false;
   franchise:any=[];
-  state:string;
-  city:string;
-  country:string;
+  state:any=[];
+  city:any=[];
+  country:any=[];
 
   constructor(private _router: Router, private _toast: ToasterService,
               private schoolService:SchoolService,
@@ -35,7 +35,6 @@ export class AddSchoolComponent implements OnInit {
     address: new FormControl(''),
     state: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
-    status:new FormControl([{label:'Active',value:'0'},{label:'InActive',value:'1'}]),
     pincode: new FormControl('')
   });
 
@@ -48,12 +47,11 @@ export class AddSchoolComponent implements OnInit {
 
   getFranchiseDropdown(){
     this.franchiseService.getFranchiseDropDowns({}).subscribe(res=>{
-          if(res.status){
+      if(res.status){
             this.franchise = res.data.data;
-         }
-      });
-    }
-
+      }
+    });
+  }
 
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
@@ -82,7 +80,6 @@ export class AddSchoolComponent implements OnInit {
       params['franchise_id'] = this.schoolForm.value.franchise_id.value;
       params['state'] = this.schoolForm.value.state.value;
       params['city'] = this.schoolForm.value.city.value;
-      params['status'] =this.schoolForm.value.status.value;
       this.schoolService.addSchool(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

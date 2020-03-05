@@ -7,7 +7,8 @@ import { UpdateSchoolComponent } from './update-school/update-school.component';
 const routes: Routes = [
   {
     path: '',
-    component: SchoolListComponent
+    component: SchoolListComponent,
+    runGuardsAndResolvers: 'always'
   },
   {
     path: 'add',

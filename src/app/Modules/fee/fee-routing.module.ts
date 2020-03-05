@@ -8,7 +8,7 @@ import { UpdateFeeComponent } from './update-fee/update-fee.component';
 const routes: Routes = [
   {
     path:'',
-    component: FeeListComponent,
+    component: FeeListComponent
   },
   {
     path: 'add',

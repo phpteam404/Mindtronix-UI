@@ -3,6 +3,7 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { LocalStorageService } from '../utils/local-storage.service';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToasterService } from '../utils/toaster.service';
 
 @Component({
   selector: 'app-login',
@@ -10,8 +11,8 @@ import { AuthenticationService } from '../services/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
-  constructor(private ls: LocalStorageService,private authService:AuthenticationService,private router: Router) { 
+  submitted=null;
+  constructor(private ls: LocalStorageService,private authService:AuthenticationService,private router: Router,private _toast: ToasterService) { 
       console.log('loaded LoginComponent');
   }
 
@@ -30,14 +31,16 @@ export class LoginComponent implements OnInit {
   currentUser:any = {};
 
   onSubmit(): any {
-    console.log(this.form.value.username);
-    console.log(this.form.value.password);
-    let params={};
-    params = {
-      'username': this.form.value.username,
-      'password': btoa(this.form.value.password)
-    };
+    this.submitted=false;
     if (this.form.valid) {
+      let params={};
+      params = {
+        'username': this.form.value.username,
+        'password': btoa(this.form.value.password)
+      };
+      console.log(this.form.value.username);
+      console.log(this.form.value.password);
+      this.submitted=true;
       this.authService.login(params).subscribe(res => {
         if (res.status) {
           res.data.access_token = res.access_token;
@@ -46,6 +49,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard']);
         }
       });
+    }else{
+      this._toast.show('warning','Invalid User Name and Password!')
     }
   }
 }

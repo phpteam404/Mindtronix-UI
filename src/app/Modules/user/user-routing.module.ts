@@ -6,7 +6,6 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('../../Modules/user/all-users/all-users.module').then(m => m.AllUsersModule),
-    canActivate: [AuthGuard],
     data: {
       breadcrumb: 'All Users'
     }

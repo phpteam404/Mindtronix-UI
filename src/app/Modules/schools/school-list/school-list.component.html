@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="custom-table school-list">
         <p-table #dt [columns]="cols" [value]="schoolsList"  [lazy]="true" (onLazyLoad)="loadSchoolsLazy($event)" 
-        [paginator]="true" [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+        [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords" [loading]="loading">
             <ng-template pTemplate="caption">
                 <!-- <div style="text-align: right">
                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>

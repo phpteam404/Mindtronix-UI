@@ -1,27 +1,12 @@
 <div class="main-content">
     <div class="custom-table custom-student-list">
-        <p-table #dt [columns]="cols" [value]="studentsList"  [lazy]="true" [totalRecords]="totalRecords"
-           [paginator]="true"  (onLazyLoad)="loadStudentsLazy($event)" [rows]="10" [loading]="loading">
+        <p-table #dt [columns]="cols" [value]="studentsList" [lazy]="true" [totalRecords]="totalRecords"
+           [paginator]="true" [(first)]="first" (onLazyLoad)="loadStudentsLazy($event)" [rows]="10" [loading]="loading">
             <ng-template pTemplate="caption">
-                <!-- <div class="row">
-                    <div class="col-md-4 col-12 ">
-                        <p-dropdown  [options]="schools" [(ngModel)]="selectedSchool" optionLabel="label"></p-dropdown >
-                    </div>
-                    <div class="col-md-8 col-12">
-                        <div class="custom-search">
-                            <div class="input-search">
-                                <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
-                                (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                                <i class="fa fa-search"></i> 
-                            </div>
-                            <button pButton type="button" label="Create Student" class="btn-warning" (click)="AddNewStudent($event)"></button>
-                        </div>
-                    </div>
-                </div> -->
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="schools" placeholder="Select a School"  [showClear]="true"
+                            <p-dropdown [options]="schools" placeholder="Select a School" [showClear]="true"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
@@ -61,7 +46,7 @@
                         <span *ngIf="i == 8" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditStudent(rowData)"></span></a>
                             <a href="javascript:;" (click)="viewStudent(rowData)"><span class="icon icon-eye-2 mr-2" title="Manage Users"></span> </a> 
-                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="DeleteStudent(rowData)"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="DeleteStudent(rowData,$event)"></span></a>
                         </span>
                     </td>
                 </tr>

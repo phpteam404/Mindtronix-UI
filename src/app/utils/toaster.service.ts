@@ -13,9 +13,9 @@ export class ToasterService {
    * @memberof ToasterService
    */
   show(type?: string, title?: string, message?: string) {
-    console.log('type--', type);
+    /*console.log('type--', type);
     console.log('title--', title);
-    console.log('message--', message);
+    console.log('message--', message);*/
     if (message || title) {
       if (title) {
         if (type === 'error') {

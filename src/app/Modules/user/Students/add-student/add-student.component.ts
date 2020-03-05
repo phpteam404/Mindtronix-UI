@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { SchoolService } from 'src/app/services/school.service';
 import { UserService} from 'src/app/services/user.service';
 import { FeeService} from 'src/app/services/fee.service';
+import { DatePipe } from '@angular/common';
 //import  dropdown  from 'src/app/jsons/dropdown.json';
 
 @Component({
@@ -16,7 +17,6 @@ import { FeeService} from 'src/app/services/fee.service';
 })
 export class AddStudentComponent implements OnInit {
 
-  cities:any;
   status:any;
   submitted = null;
   maxDate: Date;
@@ -28,21 +28,17 @@ export class AddStudentComponent implements OnInit {
   blood_group:any;
   schools:any;
   isUpdate:boolean=false;
-
-  
   pageTitle = "Create Student";
+
   constructor(private _router: Router, private _toast: ToasterService,
               private masterService:MasterService,
               private schoolService:SchoolService,
               private userService:UserService,
-              private feeService:FeeService) {     
+              private feeService:FeeService,
+              public datepipe: DatePipe) {     
     console.log('AddStudentComponent---' );
-    this.status =[
-          {label:'Active',value:'1'},
-          {label:'InActive',value:'0'}
-    ];
-
     this.maxDate = new Date();
+    console.log('this.status--', this.status);    
   }
   studentForm = new FormGroup({
     student_name: new FormControl('', [Validators.required]),
@@ -63,16 +59,17 @@ export class AddStudentComponent implements OnInit {
     relation: new FormControl(''),
     email: new FormControl('',[Validators.required,Validators.email]),
     occupation: new FormControl(''),
-    mobile_phone1: new FormControl(''),
+    mobile_phone1: new FormControl('', [Validators.required]),
     mobile_phone2: new FormControl(''),
     school_id: new FormControl('',[Validators.required]),
     grade: new FormControl(''),
     blood_group: new FormControl(''),
     history_of_illness: new FormControl(''),
-    status: new FormControl({label:'Active',value:'1'}, [Validators.required])
+    status: new FormControl('', [Validators.required])
   });
 
   ngOnInit(): void {
+    this.getMasterDropdown('status');
     this.getMasterDropdown('nationality');
     this.getMasterDropdown('mothertongue');
     this.getMasterDropdown('relation');
@@ -88,6 +85,10 @@ export class AddStudentComponent implements OnInit {
                   .set('dropdown',"true")
     return this.masterService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
+        if(masterKey == 'status'){
+          this.status =  res.data.data;
+          this.studentForm.controls['status'].setValue(res.data.data[0]);
+        }
         if(masterKey == 'nationality')
            this.nationality =  res.data.data;
         if(masterKey=='mothertongue')
@@ -106,22 +107,18 @@ export class AddStudentComponent implements OnInit {
 
   getschoolsDropdown(){
     this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
-          if(res.status){
-            this.schools = res.data.data;
-         }
-      });
-    }
-
-    getFeeStructureDropDown(){
-      this.feeService.getFeeDropDown({}).subscribe(res=>{
-        if(res.status){
-          this.feeTerm = res.data.data;
-       }
+      if(res.status){
+        this.schools = res.data.data;
+      }
     });
-    }
-
-  // convenience getter for easy access to form fields
-  get f() { return this.studentForm.controls; }
+  }
+  getFeeStructureDropDown(){
+    this.feeService.getFeeDropDown({}).subscribe(res=>{
+      if(res.status){
+        this.feeTerm = res.data.data;
+      }
+    });
+  }
 
   submit(): any{
     this.submitted = false;
@@ -141,10 +138,11 @@ export class AddStudentComponent implements OnInit {
           params['grade'] = this.studentForm.value.grade.value;
           params['blood_group'] =this.studentForm.value.blood_group.value;
           params['status'] =this.studentForm.value.status.value;
+          params['date_of_birth'] =this.datepipe.transform(this.studentForm.value.date_of_birth, 'yyyy/MM/dd');
           this.userService.saveUser(params).subscribe(res => {
             if (res.status) {
               this.submitted = true;
-              this._router.navigate(['users/students']);
+              this.goToList();
             }else{
               this._toast.show('error',JSON.parse(res.error));
             }
@@ -152,10 +150,7 @@ export class AddStudentComponent implements OnInit {
       }else{
         this._toast.show('warning','Password and Confirm Password must match');
         return false;
-      }  
-      this.submitted = true;
-      // this._toast.show('success','Successfully Added');
-      // this._router.navigate(['users/students']);
+      }
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }

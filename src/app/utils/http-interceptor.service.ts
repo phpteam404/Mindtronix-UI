@@ -19,7 +19,7 @@ export class HttpInterceptorService implements HttpInterceptor {
   constructor(private injector: Injector, private toast: ToasterService, private localStorage: LocalStorageService) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('HttpInterceptorService---' );
+    // console.log('HttpInterceptorService---' );
     let currentUser = localStorage.getItem('sessionUser_user');
     if (currentUser && JSON.parse(currentUser).access_token) {
         request = request.clone({

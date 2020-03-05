@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,6 +13,8 @@ export class DashboardComponent implements OnInit {
   ticket:any;
   cols:any;
   revenueMonth:any;
+  prdAssetPath:string = environment.prdAssetPath;
+
   constructor() {
     this.cities = [
         {label:'Select City', value:null},

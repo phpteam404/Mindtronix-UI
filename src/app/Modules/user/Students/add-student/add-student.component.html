@@ -12,7 +12,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Name <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="student_name" name="last_name" type="text" required>
+                            <input pinputtext placeholder="Name" formControlName="student_name" name="student_name" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.student_name.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">Name is required
@@ -130,7 +130,11 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <label>Mobile Phone</label>
-                        <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1">
+                        <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
+                        <div class="invalid-feedback"
+                            *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
+                            [ngClass]=" 'error'">Mobile Phone is required
+                        </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">

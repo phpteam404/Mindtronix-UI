@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute } from '@angular/router';
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree, Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { Observable } from 'rxjs';
 import { LocalStorageService } from '../utils/local-storage.service';
 import { AuthenticationService } from '../services/authentication.service';
+import { ToasterService } from '../utils/toaster.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-
-  constructor(private ls: LocalStorageService, private router: Router,private _ar: ActivatedRoute, private service: AuthenticationService) {
+  
+  constructor(private ls: LocalStorageService, private router: Router,private _toast: ToasterService,
+            private _ar: ActivatedRoute, private service: AuthenticationService) {
 
   } 
 
@@ -23,25 +25,25 @@ export class AuthGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      // console.log('AuthGuard---',location.pathname);
-      // console.log('router---',this.router.url);
-      // console.log('_ar---',this._ar.snapshot.url);
+     // console.log('next--', next.routeConfig.path);
      if (this.ls.getItem('user')) {
-        this.service.isTokenExpired({'module_url':'#'+location.hash,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
-          // console.log('isTokenExpired--', location);
+        this.service.isTokenExpired({'module_url':next['_routerState'].url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           if(res.status){
             return true;
           }else {
-           // this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+            if(!res.Authentication){
+              this._toast.show('error','Session expired !')
+              this.service.logout();
+              this.router.navigate(['/login']);
+            }
             return true;
           }
         })
         return true;
       } else {
-        this.router.navigate(['/login'], { queryParams: { returnUrl: state.url } });
+        this.router.navigate(['/login']);
         return false;
       }
-      return true;
   }
   
 
