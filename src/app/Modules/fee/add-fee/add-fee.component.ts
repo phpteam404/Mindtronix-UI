@@ -32,7 +32,7 @@ export class AddFeeComponent implements OnInit {
     term: new FormControl('', [Validators.required]),
     discount: new FormControl(''),
     discount_details: new FormControl(''),  
-    status: new FormControl({label:'Active',value:'1'}, [Validators.required]),  
+    status: new FormControl('', [Validators.required]),  
   });
 
   ngOnInit(): void {
@@ -51,7 +51,6 @@ export class AddFeeComponent implements OnInit {
       this._service.saveFee(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._toast.show('success',res.message);
           this._router.navigate(['fee_management']);
         }else{
           this._toast.show('error',JSON.parse(res.error));
@@ -74,8 +73,10 @@ export class AddFeeComponent implements OnInit {
       if(res.status){
         if(masterKey == 'fee_term')
           this.term =  res.data.data;
-        if(masterKey == 'status')
+        if(masterKey == 'status'){
           this.status =  res.data.data;
+          this.feeForm.controls['status'].setValue(res.data.data[0]);
+        }
       }else{
         this._toast.show('error',res.error);
       }

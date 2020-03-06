@@ -4,6 +4,8 @@ import { FeeService } from 'src/app/services/fee.service';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent } from 'primeng/api';
+import { Http } from '@angular/http';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-fee-list',
@@ -13,11 +15,13 @@ import { LazyLoadEvent } from 'primeng/api';
 export class FeeListComponent implements OnInit {
 
   list: any;
+  first:number=0;
   totalRecords: number;
   cols: any[];
   loading: boolean;
 
   constructor(private router: Router, private _route: ActivatedRoute,
+              private _cService: CommonService,
              private _service: FeeService, private _toast: ToasterService) {
    
     // this.cols = [
@@ -62,7 +66,7 @@ export class FeeListComponent implements OnInit {
         params = params.set('order', sortOrder);
     }
     if (event.globalFilter) {
-        params = params.set('search', event.globalFilter);
+        params = params.set('search_key', event.globalFilter);
     }
     console.log('params---', params);
     this._service.getList(params).subscribe(res=>{
@@ -75,6 +79,29 @@ export class FeeListComponent implements OnInit {
     });
   }
   deleteFee(data:any){
+    var params = new HttpParams()
+              .set('tablename','fee_master')
+              .set('id',data.fee_master_id)
+    this._cService.delete(params).subscribe(res=>{
+      if(res.status){
+        this.first=0;
+       //this._toasterService.show('Success',res.message);
+        this.getFeeList();
+      }
+    });
+  }
 
+  getFeeList(){
+    var params = new HttpParams()
+                  .set('start',0+'')
+                  .set('number',10+'')
+    this._service.getList(params).subscribe(res=>{
+      if(res.status){
+        this.cols = res.data.table_headers;
+        this.list = res.data.data;
+        this.totalRecords = res.data.total_records;
+        this.loading = false;
+      }
+    });
   }
 }

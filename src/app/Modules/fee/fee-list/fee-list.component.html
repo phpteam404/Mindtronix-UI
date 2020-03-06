@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="custom-table fee-list">
         <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
-            [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+            [rows]="10" [totalRecords]="totalRecords" [(first)]="first" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
@@ -14,7 +14,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 5" [field]="col.field"></p-sortIcon>
                     </th>

@@ -52,7 +52,7 @@ export class AddUserComponent implements OnInit {
       franchise_id: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required, Validators.email]),
       phone_no: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
-      status: new FormControl({label:'Active',value:1},[Validators.required]),
+      status: new FormControl('',[Validators.required]),
       password: new FormControl('',[ Validators.required]),
         // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
       // ]),
@@ -76,12 +76,11 @@ export class AddUserComponent implements OnInit {
       var params={};
       params = this.addUserForm.value;
       params['status'] = this.addUserForm.value.status.value;
-      params['agency_id'] = this.addUserForm.value.agency_id.value;
+      params['franchise_id'] = this.addUserForm.value.franchise_id.value;
       params['user_role_id'] = this.addUserForm.value.user_role_id.value;
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._toast.show('success',res.message);
           this._router.navigate(['users/all-users']);
         }else{
           this._toast.show('error',JSON.parse(res.error));
@@ -108,8 +107,10 @@ export class AddUserComponent implements OnInit {
       if(res.status){
         if(masterKey == 'franchise')
           this.franchise =  res.data.data;
-        if(masterKey == 'status')
+        if(masterKey == 'status'){
           this.status =  res.data.data;
+          this.addUserForm.controls['status'].setValue(res.data.data[0]);
+        }
       }
     });
   }

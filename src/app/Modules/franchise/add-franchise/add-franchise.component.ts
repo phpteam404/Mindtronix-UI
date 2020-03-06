@@ -6,8 +6,10 @@ import {STEPPER_GLOBAL_OPTIONS} from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material/stepper';
 import {SelectItem} from 'primeng/api';
 import { MasterService } from 'src/app/services/master.service';
+import { FeeService } from 'src/app/services/fee.service';
 import { HttpParams } from '@angular/common/http';
 import  dropdown  from 'src/app/jsons/dropdown.json';
+import { FranchiseService } from 'src/app/services/franchise.service';
 
 interface City {
   name: string,
@@ -24,7 +26,7 @@ interface City {
 export class AddFranchiseComponent implements OnInit {
   status:any;
   title:any;
-  FeeStructureMaster:any=[];
+  FeeStructureList:any=[];
   contactsList:any=[];
   contactsListCols:any=[];
   FeeList:any=[];
@@ -36,7 +38,6 @@ export class AddFranchiseComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   ///    
-  cities1: SelectItem[];
   cities2: City[];
   selectedCities1: City[];
   selectedCities2: City[];
@@ -48,24 +49,14 @@ export class AddFranchiseComponent implements OnInit {
   country:any=[];
   fullObject:any={};
   pageTitle:string = "Create Franchise";
-
+  stepOneForm: FormGroup;
+  stepTwoForm: FormGroup;
+  stepThreeForm: FormGroup;
   constructor(private _router: Router, private _toast: ToasterService, 
-              private _formBuilder: FormBuilder,
-              private masterservices:MasterService) {     
+              private _formBuilder: FormBuilder,private _feeService: FeeService,
+              private masterservices:MasterService, private _service: FranchiseService) {     
     this.isUpdate=false;
-    this.cities1 = [
-      {label:'New York', value:12},
-      {label:'Rome', value:13},
-      {label:'London', value:14},
-      {label:'Istanbul', value:15},
-      {label:'Paris', value:16}
-    ];
-    this.FeeStructureMaster = [
-      {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10,action:''},
-      {id:2,name:'3 (Three Months)', amount:6000, term:'Quarterly',discount:15,action:''},
-      {id:3,name:'6 (Six Months)', amount:11000, term:'Half Yearly',discount:20,action:''},
-      {id:4,name:'12 (Twelve Months)', amount:20500, term:'Yearly',discount:25,action:''}
-    ];
+  
     this.FeeStructureCols = [
       { field: 'name', header: 'Fee Title' },
       { field: 'amount', header: 'Fee Amount (₹)' },
@@ -74,10 +65,6 @@ export class AddFranchiseComponent implements OnInit {
       { field: 'action', header: 'Actions' }
 
     ];
-    this.status =[
-          {label:'Active',value:1},
-          {label:'InActive',value:0}
-    ];
     this.title =[
           {label:'Franchise Admin',value:'Franchise Admin'},
           {label:'Accountant',value:'Accountant'},
@@ -85,14 +72,6 @@ export class AddFranchiseComponent implements OnInit {
           {label:'Technical',value:'Technical'}
     ];
 
-    this.contactsList = [
-      {contact_name:'Tom Smith', contact_phone:'9789456556',contact_title:'Technical',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
-      {contact_name:'Mike', contact_phone:'7774564556',contact_title:'Finance',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
-      {contact_name:'Andrew', contact_phone:'7894555556',contact_title:'Accountant',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
-      {contact_name:'Tulip', contact_phone:'7894444556',contact_title:'Finance',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
-      {contact_name:'James', contact_phone:'7894563336',contact_title:'Franchise Admin',contact_email:'mindtronixsrp@mindtronics.com',actions:''},
-      
-    ];
     this.contactsListCols = [
       { field: 'contact_title', header: 'Contact Title' },
       { field: 'contact_name', header: 'Contact Name' },
@@ -101,7 +80,15 @@ export class AddFranchiseComponent implements OnInit {
       { field: 'actions', header: 'Actions' }
     ]
   }
-
+  getFeeStructureDropdown(){
+    var params = new HttpParams().set('status',1+'');
+    this._feeService.getList(params).subscribe(res=>{
+      if(res.status){
+        console.log('getFeeStructureDropdown--', res);
+        this.FeeStructureList = res.data.data;
+      }
+    });
+  }
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
@@ -114,38 +101,15 @@ export class AddFranchiseComponent implements OnInit {
           this.city =  res.data.data;
         if(masterKey =='country')
           this.country =res.data.data;
+        if(masterKey =='status'){
+          this.status =res.data.data;
+          this.stepOneForm.controls['status'].setValue(res.data.data[0]);
+        }
       }else{
         this._toast.show('error',res.error);
       }
     });
   }
-   
-  
-  stepOneForm = new FormGroup({
-    name: new FormControl('', [Validators.required]),
-    code: new FormControl('', [Validators.required]),
-    contact_person: new FormControl('',[Validators.required]),
-    phone: new FormControl('', [Validators.required]),
-    website_address :new FormControl(''),
-    landmark: new FormControl(''),
-    email: new FormControl('', [Validators.required, Validators.email]),
-    pincode :new FormControl(''),
-    country :new FormControl('',[Validators.required]),
-    state:new FormControl('',[Validators.required]),
-    city:new FormControl('',[Validators.required]),
-    status :new FormControl({label:'Active',value:1},[Validators.required]),
-    address: new FormControl('',[Validators.required]),
-  });
-
-    stepTwoForm = new FormGroup({  
-    contact_title :new FormControl('',[Validators.required]),
-    contact_name:new FormControl('',[Validators.required]),
-    contact_email: new FormControl('',[Validators.required, Validators.email]),
-    contact_phone :new FormControl('',[Validators.required]),
-    });
-    stepThreeForm = new FormGroup({  
-      fee_structure :new FormControl('',[Validators.required])
-    });
 
   ngOnInit(): void {
     this.firstFormGroup = this._formBuilder.group({
@@ -154,39 +118,61 @@ export class AddFranchiseComponent implements OnInit {
     this.secondFormGroup = this._formBuilder.group({
       secondCtrl: ['', Validators.required]
     });
-
+    this.stepOneForm = new FormGroup({
+      name: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      contact_person: new FormControl('',[Validators.required]),
+      phone: new FormControl('', [Validators.required]),
+      website_address :new FormControl(''),
+      landmark: new FormControl(''),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      pincode :new FormControl(''),
+      country :new FormControl('',[Validators.required]),
+      state:new FormControl('',[Validators.required]),
+      city:new FormControl('',[Validators.required]),
+      status :new FormControl('',[Validators.required]),
+      address: new FormControl('',[Validators.required]),
+    });
+    this.stepTwoForm = new FormGroup({  
+      contact_title :new FormControl('',[Validators.required]),
+      contact_name:new FormControl('',[Validators.required]),
+      contact_email: new FormControl('',[Validators.required, Validators.email]),
+      contact_phone :new FormControl('',[Validators.required]),
+    });
+    this.stepThreeForm = new FormGroup({  
+      fee_structure :new FormControl('',[Validators.required])
+    });
     this.getMasterDropdown('state');
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
+    this.getMasterDropdown('status');
+    this.getFeeStructureDropdown();
   }
-  // convenience getter for easy access to form fields
-  get f() { return this.stepOneForm.controls; }
-  get f2() { return this.stepTwoForm.controls; }
-  get f3() { return this.stepThreeForm.controls; }
 
   stepOneFormSubmit(): any{
-    console.log('this.stepOneForm---', this.stepOneForm.value);
     this.submitted1 = false;
-    if (this.stepOneForm.valid) {      
-      this._toast.show('success','Successfully Added');
+    if (this.stepOneForm.valid) {  
+      this.fullObject['1'] = this.stepOneForm.value;
+      this.fullObject['1'].country = this.stepOneForm.value.country.value;
+      this.fullObject['1'].state = this.stepOneForm.value.state.value;
+      this.fullObject['1'].city = this.stepOneForm.value.city.value;
+      this.fullObject['1'].status = this.stepOneForm.value.status.value;
       this.submitted1 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   stepTwoFormSubmit(): any{
-    console.log('this.stepTwoForm---', this.stepTwoForm.value);
-
     this.submitted2 = false;
     if (this.stepTwoForm.valid) {
       var obj={};
       obj['contact_title'] = this.stepTwoForm.value.contact_title.value;
       obj['contact_name'] = this.stepTwoForm.value.contact_name;
       obj['contact_phone'] = this.stepTwoForm.value.contact_phone;
+      obj['contact_email'] = this.stepTwoForm.value.contact_email;
       this.contactsList.push(obj);
       this.stepTwoForm.reset();
-      console.log('this.contactsList--', this.contactsList);
-      this._toast.show('success','Successfully Added');
+      this.fullObject['2'] = this.contactsList;
       this.submitted2 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -194,21 +180,11 @@ export class AddFranchiseComponent implements OnInit {
   }
   stepThreeFormSubmit(): any{
     console.log('this.stepThreeForm---', this.stepThreeForm.value);
-
     this.submitted3 = false;
     if (this.stepThreeForm.valid) {
-      this.FeeStructureMaster.forEach(item => { 
-        // console.log('item---', item);
-        this.stepThreeForm.value.fee_structure.forEach(fran => { 
-          if(item.id == fran['id']){
-            this.FeeList.push(item);
-          }
-        });
-      });
-      
-      this._toast.show('success','Successfully Added');
-      this.submitted3 = true;
-      this.stepThreeForm.reset();
+      this.FeeList = this.stepThreeForm.value.fee_structure;
+      this.fullObject['3'] = this.FeeList;      
+      //this._toast.show('success','Successfully Added');
       //this._router.navigate(['franchise']);
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -219,8 +195,33 @@ export class AddFranchiseComponent implements OnInit {
   }
   deleteContact(ind){
     this.contactsList.pop(ind);
+    this.fullObject['2'] = this.contactsList;
   }
   deleteFee(ind){
     this.FeeList.pop(ind);
+    this.fullObject['3'] = this.FeeList;
+  }
+  overAllSave(){
+    // if(this.stepOneForm.valid && this.stepTwoForm.valid && this.stepThreeForm.valid){
+    if(true){
+      var obj={};
+      obj = this.fullObject['1'];
+      obj['franchise_contacts']=[];
+      obj['franchise_contacts'] =  this.fullObject['2'];
+      var feeArr = [];
+      this.fullObject['3'].forEach(item => { 
+        feeArr.push(item.fee_master_id);
+      });
+      console.log('feeArr--', feeArr);
+      obj['fee_master_id'] =  feeArr;
+      console.log('obj--', obj);
+      this._service.addUpdate(obj).subscribe(res=>{
+        if(res.status){
+          this.submitted3 = true;
+          this.stepThreeForm.reset();
+        }
+      });
+    }
+    
   }
 }

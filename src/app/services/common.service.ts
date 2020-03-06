@@ -13,7 +13,7 @@ export class CommonService {
 
   constructor(private clientHttp : AppHttpClientService) { }
 
-  delete (table,id) {
-    return this.clientHttp.delete('User/Delete/'+table+'/'+id);
+  delete (params) {
+    return this.clientHttp.delete('User/Delete?'+params);
   }
 }

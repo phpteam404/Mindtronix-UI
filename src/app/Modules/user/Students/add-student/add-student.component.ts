@@ -35,10 +35,8 @@ export class AddStudentComponent implements OnInit {
               private schoolService:SchoolService,
               private userService:UserService,
               private feeService:FeeService,
-              public datepipe: DatePipe) {     
-    console.log('AddStudentComponent---' );
+              public datepipe: DatePipe) {
     this.maxDate = new Date();
-    console.log('this.status--', this.status);    
   }
   studentForm = new FormGroup({
     student_name: new FormControl('', [Validators.required]),
@@ -113,7 +111,8 @@ export class AddStudentComponent implements OnInit {
     });
   }
   getFeeStructureDropDown(){
-    this.feeService.getFeeDropDown({}).subscribe(res=>{
+    var params = new HttpParams();
+    this.feeService.getFeeDropDown(params).subscribe(res=>{
       if(res.status){
         this.feeTerm = res.data.data;
       }

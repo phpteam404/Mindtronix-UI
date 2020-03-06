@@ -22,7 +22,7 @@ const routes: Routes = [
     path: 'update/:name/:id',
     component: UpdateUserComponent,
     data: {
-      breadcrumbs: 'Update User',
+      breadcrumbs: 'Update',
       superParentPath: 'users',
       title: 'User'
     }

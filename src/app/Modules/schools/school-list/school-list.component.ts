@@ -4,6 +4,7 @@ import { SchoolService } from 'src/app/services/school.service';
 import { ToasterService } from '../../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
+import { CommonService } from 'src/app/services/common.service';
 @Component({
   selector: 'app-school-list',
   templateUrl: './school-list.component.html',
@@ -17,7 +18,8 @@ export class SchoolListComponent implements OnInit {
   cols: any[];
   first:number=0;
   constructor(private _router: Router,
-              private _service: SchoolService, 
+              private _service: SchoolService,
+              private _cService: CommonService, 
               private _toasterService: ToasterService, 
               private _ar: ActivatedRoute) {
   }
@@ -39,7 +41,7 @@ export class SchoolListComponent implements OnInit {
         .set('id', data.school_id)
         .set('tablename', 'school_master');
        // this._router.navigate(['schools_management'],{relativeTo:this._ar});
-    this._service.deleteSchool(params).subscribe(res=>{
+    this._cService.delete(params).subscribe(res=>{
       if(res.status){
         this.first=0;
        //this._toasterService.show('Success',res.message);
@@ -62,7 +64,7 @@ export class SchoolListComponent implements OnInit {
       params = params.set('order', sortOrder);
     }
     if (event.globalFilter) {
-      params = params.set('search', event.globalFilter);
+      params = params.set('search_key', event.globalFilter);
     }
     this._service.getschoolsList(params).subscribe(res=>{
       if(res.status){
