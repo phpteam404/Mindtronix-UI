@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { Router, ActivatedRoute } from '@angular/router';
+import { UserService} from 'src/app/services/user.service';
+import { DatePipe } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
+import { Time } from 'highcharts';
 @Component({
   selector: 'app-update-trainer',
   templateUrl: '../add-trainer/add-trainer.component.html',
@@ -9,53 +13,61 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class UpdateTrainerComponent implements OnInit {
   submitted = null;
-  fullObject:any={};
-  pageTitle:string="Update Schedule";
+  trainerObj:any={};
+  pageTitle:string ="Update Schedule";
   isUpdate:boolean=true;
-
-  // scheduleForm: FormGroup;
+  scheduleForm: FormGroup;
   trainers:any;
-  constructor(private _router: Router,private _ar: ActivatedRoute, private _toast: ToasterService) { 
-    this.trainers = [
-      {id:1,topic:'Gesture Controlled Robot', time:'10:00 AM',totime:'12:00 AM', date:'27-02-2020'},
-      {id:2,topic:'Edge Detection Robot', time:'11:00 AM',totime:'12:30 PM', date:'28-02-2020'},
-      {id:3,topic:'Fire Fighting Robot', time:'10:30 AM',totime:'11:00 AM', date:'29-02-2020'},
-      {id:4,topic:'Mobile Controlled Robot', time:'11:15 AM',totime:'12:00 AM', date:'01-03-2020'},
-      {id:5,topic:'Line Follower Robot', time:'10:45 AM',totime:'11:45 AM', date:'02-03-2020'},
-      {id:6,topic:'Gesture Controlled Robot', time:'02:00 PM',totime:'03:00 PM', date:'03-03-2020'},
-      {id:7,topic:'Fire Fighting Robot', time:'12:00 AM',totime:'02:00 PM', date:'04-03-2020'},
-      {id:8,topic:'Line Follower Robot', time:'03:00 PM',totime:'05:00 PM', date:'05-03-2020'},
-    ];
-
-    var id;
+  constructor(private _router: Router,private _ar: ActivatedRoute, private _toast: ToasterService,
+              private userService:UserService,public datepipe: DatePipe) { 
+    var id:any;
     _ar.paramMap.subscribe(params => {
       id = atob(params['params'].id);
-      console.log('params===>>>', id);
-      this.fullObject = this.trainers.filter(t=>t.id == id)[0];
-      this.scheduleForm.setValue({
-        topic: this.fullObject.topic,
-        schedule_date: this.fullObject.date,
-        schedule_time: this.fullObject.time,
-        to_time: this.fullObject.time,
+      userService.getTrainerById({'trainer_schedule_id':id}).subscribe(res=>{
+        if(res.status){
+          this.trainerObj = res.data.data[0];
+          //console.log('trainerobj info',this.trainerObj);
+          this.scheduleForm.setValue({
+            trainer_schedule_id: this.trainerObj.trainer_schedule_id,
+            topic: this.trainerObj.topic,
+            date:new Date(this.trainerObj.date),
+            description: this.trainerObj.description,
+            from_time: new Date(this.trainerObj.from_time),
+            to_time: new Date(this.trainerObj.to_time),
+          });          
+        }
       });
     });
   }
 
   ngOnInit(): void {
+    this.scheduleForm  = new FormGroup({
+      trainer_schedule_id: new FormControl(this.trainerObj.trainer_schedule_id),
+      topic: new FormControl('', [Validators.required]),
+      description: new FormControl(''),
+      date: new FormControl('', [Validators.required]),
+      from_time: new FormControl('', [Validators.required]),
+      to_time: new FormControl('', [Validators.required]),
+    });
   }
-  scheduleForm  = new FormGroup({
-    topic: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
-    schedule_date: new FormControl('', [Validators.required]),
-    schedule_time: new FormControl('', [Validators.required]),
-    to_time: new FormControl('', [Validators.required]),
-  });
-  submit(){
+
+  submit(): any {
     this.submitted = false;
-    if(this.scheduleForm.valid){
-      this._toast.show('success','Successfully Added');
-      this.submitted = true;
-      this.goToList();
+    if (this.scheduleForm.valid) {
+      var params={};
+      params = this.scheduleForm.value;
+      params['date'] =this.datepipe.transform(this.scheduleForm.value.date, 'yyyy/MM/dd');
+      params['from_time'] =this.datepipe.transform(this.scheduleForm.value.from_time,'HH:mm');
+      params['to_time'] =this.datepipe.transform(this.scheduleForm.value.to_time,'HH:mm');
+      this.userService.addTrainer(params).subscribe(res => {
+        if (res.status) {
+          this.submitted = true;
+          // this._toast.show('success',res.message);
+          this.goToList();
+        }else{
+          this._toast.show('error',JSON.parse(res.error));
+        }
+      });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }

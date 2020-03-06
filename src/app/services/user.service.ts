@@ -42,4 +42,19 @@ export class UserService {
   getById (params) {
     return this.clientHttp.get('user/getUserList?'+params);
   }
+  //trainer-schedule service starts
+  addTrainer(params){
+    return this.clientHttp.post('User/addTrainerSchedule',params);
+  }
+  
+  getTrainersList(params){
+    return this.clientHttp.get('User/trainerScheduleList?'+params);
+  }
+
+  getTrainerById(params){
+    return this.clientHttp.get('User/trainerScheduleList?trainer_schedule_id='+params.trainer_schedule_id);
+  }
+  deleteTrainer(params){
+      return this.clientHttp.delete('User/Delete?'+params);
+  }
 }

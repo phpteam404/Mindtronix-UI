@@ -23,9 +23,9 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Date <span>*</span></label>
-                            <p-calendar name="schedule_date" formControlName="schedule_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
+                            <p-calendar name="date" formControlName="date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
                             <div class="invalid-feedback"
-                            *ngIf="scheduleForm.controls.schedule_date.invalid && submitted!=null && !submitted"
+                            *ngIf="scheduleForm.controls.date.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> Date is required
                         </div>                
                         </div>
@@ -33,9 +33,9 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>From Time <span>*</span></label>
-                            <p-calendar name="schedule_time" formControlName="schedule_time" [timeOnly]="true" hourFormat="12"></p-calendar>
+                            <p-calendar name="from_time" formControlName="from_time" [timeOnly]="true" hourFormat="24"></p-calendar>
                             <div class="invalid-feedback"
-                            *ngIf="scheduleForm.controls.schedule_time.invalid && submitted!=null && !submitted"
+                            *ngIf="scheduleForm.controls.from_time.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> From Time is required
                         </div>                 
                         </div>
@@ -44,7 +44,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>To Time <span>*</span></label>
-                            <p-calendar name="to_time" formControlName="to_time" [timeOnly]="true" hourFormat="12"></p-calendar>
+                            <p-calendar name="to_time" formControlName="to_time" [timeOnly]="true" hourFormat="24"></p-calendar>
                             <div class="invalid-feedback"
                             *ngIf="scheduleForm.controls.to_time.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> To Time is required

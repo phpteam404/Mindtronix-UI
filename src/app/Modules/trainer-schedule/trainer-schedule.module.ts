@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 
 import { TrainerScheduleRoutingModule } from './trainer-schedule-routing.module';
 import { AddTrainerComponent } from './add-trainer/add-trainer.component';
@@ -26,6 +26,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     DropdownModule,
     KeyFilterModule,
     BasicModule.forRoot()
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class TrainerScheduleModule { }
