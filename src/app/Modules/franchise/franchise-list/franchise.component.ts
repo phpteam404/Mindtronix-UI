@@ -64,7 +64,7 @@ export class FranchiseListComponent implements OnInit {
         params = params.set('order', sortOrder);
     }
     if (event.globalFilter) {
-        params = params.set('search', event.globalFilter);
+        params = params.set('search_key', event.globalFilter);
     }
 
     this._service.getList(params).subscribe(res=>{

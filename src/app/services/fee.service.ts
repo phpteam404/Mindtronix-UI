@@ -19,6 +19,6 @@ export class FeeService {
   }
 
   getFeeDropDown(params){
-    return this.clientHttp.get('Fee/feeStructureDropdown',params);
+    return this.clientHttp.get('Fee/feeStructureDropdown?'+params);
   }
 }

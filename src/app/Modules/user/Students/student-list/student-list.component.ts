@@ -6,6 +6,7 @@ import { SchoolService } from 'src/app/services/school.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-student-list',
@@ -22,7 +23,7 @@ export class StudentListComponent implements OnInit {
   studentsList:any;
   first:number=0;
   constructor(private _router: Router, private _ar: ActivatedRoute,
-              private _toast: ToasterService,
+              private _toast: ToasterService,private _cService: CommonService,
               private _service:UserService,
               private _schoolService:SchoolService,private _fService:FranchiseService) {
     this.getStudentsList();
@@ -65,7 +66,7 @@ export class StudentListComponent implements OnInit {
      var params = new HttpParams()
         .set('id', data.user_id)
         .set('tablename', 'user');
-     this._service.deleteStudent(params).subscribe(res=>{
+     this._cService.delete(params).subscribe(res=>{
        console.log('res info',res);
       if(res.status){
         this.first=0;
@@ -84,7 +85,7 @@ export class StudentListComponent implements OnInit {
       params = params.set('order', sortOrder);
     }
     if (event.globalFilter) {
-      params = params.set('search', event.globalFilter);
+      params = params.set('search_key', event.globalFilter);
     }
     if(event.filters['contains']){
       params =params.set('school_id',event.filters['contains'].value.value);

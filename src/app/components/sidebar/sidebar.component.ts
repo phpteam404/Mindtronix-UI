@@ -41,6 +41,7 @@ export class SidebarComponent implements OnInit {
           icon : '',
           class:item.module_icon,
           showSubMenu: false,
+          showFirst: true,
           childs:item.sub_menus
         };
         this.menuItems.push(obj);
@@ -58,11 +59,12 @@ export class SidebarComponent implements OnInit {
               class:ch.module_icon
             };
             item.childs.push(obj);
+            item.childs[0].firstChild=true;
           });
         }
       });
       //this.menuItems = ROUTES.filter(menuItem => menuItem);
-      console.log('menuItems--',  this.menuItems );
+      // console.log('menuItems--',  this.menuItems );
     }else{
       this.ls.removeItem('user');
       this.router.navigate(['/login']);
@@ -78,5 +80,15 @@ export class SidebarComponent implements OnInit {
 
   Collaps(index: number) {  
     this.expandedIndex = index === this.expandedIndex ? -1 : index;  
+  }
+  goToFirstChild(obj){
+    var current = location.hash.split('#')[1];
+    if(current.includes(obj.path)){
+      console.log('own child');
+    }else{
+      if(obj.showSubmenu && obj.showFirst)
+        this.router.navigate([obj.childs[0].path]);
+      else this.router.navigate([obj.childs[0].path]);
+    }
   }
 }

@@ -27,10 +27,6 @@ export class SchoolService {
  
   getSchoolsDropDowns(params){
     return this.clientHttp.get('Franchise/schoolListForDropDown',params);
- }
-
- deleteSchool(params){
-  return this.clientHttp.delete('User/Delete?'+params);
-}
+  }
 
 }

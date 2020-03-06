@@ -15,8 +15,8 @@ export class UserService {
   
   }
 
-  getUsersList () {
-    return this.clientHttp.get('user/getUserList');
+  getUsersList (params) {
+    return this.clientHttp.get('user/getUserList?'+params);
   }
 
   getRolesList(params){
@@ -36,9 +36,6 @@ export class UserService {
     return this.clientHttp.get('User/studentList?'+params);
   }
 
-  deleteStudent(params){
-     return this.clientHttp.delete('User/Delete?'+params);
-  }
   getById (params) {
     return this.clientHttp.get('user/getUserList?'+params);
   }

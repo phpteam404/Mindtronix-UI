@@ -525,18 +525,24 @@ p-table{
           padding: 0;
           width: 100%;
           height: 35px;
-          padding: 5px 5px 5px 12px;
+          padding: 5px 5px 5px 17px;
           color: #000000;
           border-bottom: 1px solid #cccccc;
           .icon{
             font-size: 18px;
             padding-right: 5px;
             line-height: 16px;
+            // width: auto;
+            // height: auto;
+           
           }
           p{
             font-size: 14px;
             margin-bottom: 0;
             white-space: nowrap;
+          }
+          .mat-icon{
+            margin-left: -5px;
           }
           &:hover{
             background-color: #e3772f;
@@ -568,10 +574,9 @@ p-table{
   .mat-list-item-content{
     padding: 0;
     .mat-icon {
-      height: 20px;
-      width: 20px;
-      font-size: 21px;
+      font-size: 18px;
       color: #696868;
+      line-height: 25px;
   }
   }
   

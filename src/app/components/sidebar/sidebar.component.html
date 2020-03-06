@@ -71,53 +71,33 @@
                         <li routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" id="child_{{child.title | applyUnderScore:'_':' ' | lowercase}}"
                             *ngFor="let child of menuItem.childs"  [title]="child.title">
                             <a class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}"> 
-                                
+                              
                             </a>
                         </li>
                     </ul>
-                </div> -->
-            <!-- </li>            
+                </div> 
+            </li>            
         </ul> -->
-        <!-- <mat-list class="nav-item" *ngFor="let menuItem of menuItems" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-            <mat-list-item>
-                <a class="nav-link icon-down" *ngIf="menuItem.childs.length>0" href="javascript:;" >
+        <mat-nav-list class="nav-item" *ngFor="let menuItem of menuItems" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
+            <a mat-list-item class="nav-link icon-down parent-menu" 
+                *ngIf="menuItem.childs.length>0" href="javascript:;" (click)="menuItem.showSubmenu = !menuItem.showSubmenu;goToFirstChild(menuItem)" [title]="menuItem.title" >
+               <div class="d-flex align-items-center">
                     <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>
-                </a>
-                <a class="nav-link icon-down" *ngIf="menuItem.childs.length==0" [routerLink]="[menuItem.path]">
-                    <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
-                    <p>{{menuItem.title}}</p>
-                </a>
-                 <mat-icon class="menu-button" *ngIf="menuItem.childs.length>0"
-                     (click)="menuItem.showSubmenu = !menuItem.showSubmenu" 
-                     [ngClass]="{'rotated' : menuItem.showSubmenu}">expand_more</mat-icon>       
-            </mat-list-item>
+               </div> 
+               <mat-icon class="menu-button" [ngClass]="{'rotated' : menuItem.showSubmenu}">expand_more</mat-icon>   
+            </a>
+            <a class="nav-link icon-down single-menu" *ngIf="menuItem.childs.length==0" [routerLink]="[menuItem.path]"  [title]="menuItem.title" >
+                <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
+                <p>{{menuItem.title}}</p>
+            </a>
             <div class="submenu" [ngClass]="{'expanded' : menuItem.showSubmenu}" *ngIf="menuItem.childs.length>0">
-              <mat-list-item *ngFor="let child of menuItem.childs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-                <a class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
+                <a mat-list-item *ngFor="let child of menuItem.childs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" 
+                    (click)="menuItem.showFirst=!menuItem.showFirst;"
+                    class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
                     <p>{{child.title}}</p>
                 </a>
-                </mat-list-item>
             </div>
-          </mat-list> -->
-    <mat-nav-list class="nav-item" *ngFor="let menuItem of menuItems" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
-        <a mat-list-item class="nav-link icon-down parent-menu" *ngIf="menuItem.childs.length>0" href="javascript:;" (click)="menuItem.showSubmenu = !menuItem.showSubmenu" [title]="menuItem.title" >
-            <div class="d-flex">
-            <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
-            <p>{{menuItem.title}}</p>
-            </div> 
-            <mat-icon class="menu-button"
-                [ngClass]="{'rotated' : menuItem.showSubmenu}">expand_more</mat-icon>   
-        </a>
-        <a class="nav-link icon-down single-menu" *ngIf="menuItem.childs.length==0" [routerLink]="[menuItem.path]"  [title]="menuItem.title" >
-            <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
-            <p>{{menuItem.title}}</p>
-        </a>            
-        <div class="submenu" [ngClass]="{'expanded' : menuItem.showSubmenu}" *ngIf="menuItem.childs.length>0">
-            <a mat-list-item *ngFor="let child of menuItem.childs" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}" class="nav-link" [routerLink]="[child.path]" id="{{child.title | applyUnderScore:'_':' ' | lowercase}}">
-                <p>{{child.title}}</p>
-            </a>
-        </div>
-      </mat-nav-list>     
+        </mat-nav-list>    
     </div>
-  </div>
+</div>

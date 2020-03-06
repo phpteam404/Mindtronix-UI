@@ -4,6 +4,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
 import { ToasterService } from '../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http'
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 interface Master {
   master_name: string,
@@ -24,19 +25,21 @@ export class MasterComponent implements OnInit {
   masterChildDescription: string;
   masterChildId: Number;
   masterArray: any;
-  Add: boolean;
+  isCreate: boolean;
   loading: boolean = false;
-  name = '';
-  description = '';
+  name:string = '';
+  description:string = '';
 
   cities: any;
   cars: any;
   cols:any;
   selectedMaster: Master[];
   displayBasic: boolean;
+
+  submitted=null;
   constructor(private router: Router, 
               private _service: MasterService,
-              private _common_service: CommonService,
+              private _commonService: CommonService,
               private _route: ActivatedRoute,
               private _toast: ToasterService) { 
     
@@ -47,25 +50,27 @@ export class MasterComponent implements OnInit {
       { field: 'action', header: 'Actions' }
     ];
   }
-  showBasicDialog(rowData,bool) {
+  form = new FormGroup({
+    name: new FormControl('',[Validators.required]),
+    description: new FormControl('')
+  });
+  showBasicDialog(rowData,isCreate) {
+    if(isCreate)this.form.reset();
     this.displayBasic = true;
-    // console.log('showBasicDialog bool', !bool);
-    // console.log('selectedMaster ', this.selectedMaster);
-    // console.log('selectedMaster rowData', rowData);
-    this.Add = bool;
-    if(bool){
-      this.masterChildName = '';
-      this.masterChildDescription = '';
-    }else{
-      this.masterChildName = rowData.child_name;
-      this.masterChildDescription = rowData.description;
+    console.log('selectedMaster rowData', rowData);
+    this.isCreate = isCreate;
+    if(!isCreate){
       this.masterChildId = rowData.master_child_id;
+      this.form.setValue({
+        name:rowData.child_name,
+        description: rowData.description
+      });
     }
   }
-  postMaster(Add){
+  postMaster(isCreate){
     this.loading = true;
     // console.log('postMaster add', Add);
-    if(Add){
+    if(isCreate){
       this.masterArray = {master_id:this.selectedMaster['master_id'],child_name:this.masterChildName,description:this.masterChildDescription};
     }else{
       this.masterArray = {master_id:this.selectedMaster['master_id'],child_id:this.masterChildId,child_name:this.masterChildName,description:this.masterChildDescription};
@@ -132,8 +137,11 @@ export class MasterComponent implements OnInit {
   
   deleteMasterChild(rowData){
     this.loading = true;
-    // console.log('deleteMasterChild rowData', rowData);    
-    this._common_service.delete('master_child',rowData.master_child_id).subscribe(res=>{
+    // console.log('deleteMasterChild rowData', rowData); 
+    var params = new HttpParams()
+                  .set('tablename','master_child')
+                  .set('id',rowData.master_child_id)   
+    this._commonService.delete(params).subscribe(res=>{
       if(res.status){
         this.getMasterChilds(this.selectedMaster['master_key']);
       }else{
@@ -141,5 +149,35 @@ export class MasterComponent implements OnInit {
       }
       this.loading = false;
     });
+  }
+
+  submit(){
+    this.submitted=false;
+    if(this.form.valid){
+      var params={};
+      params['master_id'] = this.selectedMaster['master_id'];
+      params['child_name'] = this.form.value.name;
+      params['description'] = this.form.value.description;
+      if(!this.isCreate){
+        params['child_id']=this.masterChildId;
+      }
+      // console.log('post params--', params);
+      this._service.postMasterChild(params).subscribe(res=>{
+        if(res.status){
+          this.getMasterChilds(this.selectedMaster['master_key']);
+          this.form.reset();
+          this.displayBasic = false;
+          this.loading = false;
+          this.submitted=true;
+        }else{
+          this._toast.show('error',res.error);
+          this.loading = false;
+        }
+      });
+    }
+  }
+  close(){
+    this.form.reset();
+    this.displayBasic=false;
   }
 }

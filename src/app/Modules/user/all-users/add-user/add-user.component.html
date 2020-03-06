@@ -69,7 +69,7 @@
                             [ngClass]=" 'error'"> Phone is required
                         </div>
                     </div>                    
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <label>Password <span>*</span></label>
                             <input pPassword  placeholder="Password" formControlName="password" autocomplete="off" name="password" type="password" required>
@@ -84,7 +84,7 @@
                             </div> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <label>Confirm Password <span>*</span></label>
                             <input pPassword  placeholder="Confirm Password" autocomplete="off" formControlName="cpassword" name="cpassword" type="password" required>

@@ -141,7 +141,8 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   getFeeStructureDropDown(){
-    this.feeService.getFeeDropDown({}).subscribe(res=>{
+    var params = new HttpParams();
+    this.feeService.getFeeDropDown(params).subscribe(res=>{
       if(res.status){
         this.feeTerm = res.data.data;
      }

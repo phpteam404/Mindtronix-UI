@@ -20,7 +20,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 2" [field]="col.field"></p-sortIcon>
                     </th>
@@ -42,32 +42,34 @@
 </div>
 <!-- <button type="button" (click)="showBasicDialog()" pButton icon="pi pi-external-link" label="Show"></button> -->
 <p-dialog header="Add/Edit Master" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    
-    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+    <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{name}} Name <span>*</span></label>
-                    <input  placeholder="Name"  name="name" type="text" value="{{masterChildName}}" (input)="onChangeMaster($event.target.value)">
-                    <div *ngIf="submitted1 && f.name.errors" class="invalid-feedback">
-                        <div *ngIf="f.name.errors.required">Name is required</div>
+                    <input pinputtext placeholder="Name"  name="name" type="text" formControlName="name">
+                    <div class="invalid-feedback"
+                        *ngIf="form.controls.name.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">Name is required
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 col-12">
+            <div class="col-md-8 col-12">
                 <div class="form-group input-search">
-                    <label>{{description}} Description&nbsp; <span>*</span></label>
-                    <input  placeholder="Description"  name="description" type="text" value="{{masterChildDescription}}" (input)="onChangeMasterDesc($event.target.value)">
-                    <div *ngIf="submitted1 && f.description.errors" class="invalid-feedback">
-                        <div *ngIf="f.description.errors.required">Name is required</div>
-                    </div>
+                    <label>{{description}} Description</label>
+                    <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
+                    <!-- <input  placeholder="Description"  name="description" type="text" formControlName="description"> -->
                 </div>
             </div>
         </div>
-    <!-- </form> -->
-<p-footer>
+        <div class="text-right col-12 mb-2">
+            <button pButton class="btn-warning mr-2" type="submit" label="Save"></button>
+            <button pButton class="btn-default" type="button" label="Cancel" (click)="close()"></button>
+        </div>
+    </form>
+<!-- <p-footer>
     <button type="button" pButton class="btn-warning" (click)="postMaster(Add)" label="Yes"></button>
     <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-</p-footer>
+</p-footer> -->
 </p-dialog>
 <!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
