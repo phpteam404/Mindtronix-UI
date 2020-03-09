@@ -63,17 +63,17 @@ export class UpdateSchoolComponent implements OnInit {
   ngOnInit(): void {
 
     this. schoolForm = new FormGroup({
-      school_id: new FormControl(this.schoolObj.school_id),
-      name: new FormControl(this.schoolObj, [Validators.required]),
-      code: new FormControl(this.schoolObj, [Validators.required]),
-      contact_person: new FormControl(this.schoolObj.contact_person),
-      phone: new FormControl(this.schoolObj, [Validators.required]),
-      email: new FormControl(this.schoolObj, [Validators.required, Validators.email]),
-      franchise_id: new FormControl(this.schoolObj,[Validators.required]),
-      address: new FormControl(this.schoolObj.address),
-      state: new FormControl(this.schoolObj, [Validators.required]),
-      city: new FormControl(this.schoolObj, [Validators.required]),
-      pincode: new FormControl(this.schoolObj)
+      school_id: new FormControl(''),
+      name: new FormControl('', [Validators.required]),
+      code: new FormControl('', [Validators.required]),
+      contact_person: new FormControl(''),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      franchise_id: new FormControl('',[Validators.required]),
+      address: new FormControl(''),
+      state: new FormControl('', [Validators.required]),
+      city: new FormControl('', [Validators.required]),
+      pincode: new FormControl('')
      });
     this.getFranchiseDropdown();
     this.getMasterDropdown('state');

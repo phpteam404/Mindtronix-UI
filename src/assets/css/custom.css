@@ -3538,6 +3538,20 @@ li.header-right-block:after {
 .submenu{
    transition: none !important;
 }
+body .ui-datepicker table td,
+body .ui-datepicker table th {
+  padding: 0.3em;
+}
+body .ui-datepicker table td.ui-datepicker-today > a,
+body .ui-datepicker table td > a{
+  padding: 0;
+}
+.ui-dropdown-panel .ui-dropdown-items-wrapper{
+  max-height: 160px !important;
+}
+body .ui-table .ui-table-tfoot > tr > td {
+  font-weight: 400;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p {
     font-size: 13px;

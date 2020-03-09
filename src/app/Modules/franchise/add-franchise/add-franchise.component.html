@@ -238,22 +238,13 @@
                             <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
                         </div>
                     </div>
-                    <div class="text-center col-12">
+                    <!-- <div class="text-center col-12">
                         <button  matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
                         <button  matStepperNext class="btn-warning" type="button">Next</button>
-                    </div>
+                    </div> -->
                 </form>
                 <div class="custom-table mt-3">
                     <p-table #dt [columns]="contactsListCols" [value]="contactsList" [paginator]="false" [rows]="10">
-                        <!-- <ng-template pTemplate="caption">
-                            <div class="custom-search">
-                                <div class="input-search">
-                                    <input type="text" pInputText size="50" placeholder="Search..."
-                                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                                    <i class="fa fa-search"></i> 
-                                </div>
-                            </div>
-                        </ng-template> -->
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
@@ -274,7 +265,18 @@
                                 </td>
                             </tr>
                         </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                              <td [attr.colspan]="columns.length" class="text-center">
+                                 No records found
+                              </td>
+                            </tr>
+                        </ng-template>
                     </p-table>
+                </div>
+                <div class="text-center col-12 mt-4">
+                    <button  matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                    <button  matStepperNext class="btn-warning" type="button">Next</button>
                 </div>
             </mat-step>
             <mat-step label="Fee Management">
@@ -290,78 +292,15 @@
                         </div>
                         <div class="col-md-1 col-12 mb-5 mt-4">
                             <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
-                        </div>
-                        <!-- <div class="col-md-4 col-12">
-
-                            <div class="form-group">
-                                <label>Fee Name <span>*</span></label>
-                                <input pinputtext placeholder="Fee Name" name="fee_name" type="text" formControlname="fee_name"
-                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_name.errors }">
-                                <div *ngIf="submitted3 && f3.fee_name.errors" class="invalid-feedback">
-                                    <div *ngIf="f3.fee_name.errors.required">Fee Name is required</div>
-                                </div>
-                            </div>
                         </div>                        
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Fee Price <span>*</span></label>
-                                <input pinputtext placeholder="Price" name="fee_price" formControlname="fee_price"
-                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_price.errors }">
-                                <div *ngIf="submitted3 && f3.fee_price.errors" class="invalid-feedback">
-                                    <div *ngIf="f3.fee_price.errors.required"> Fee Price is required</div>
-                                </div>
-                            </div>
-                        </div>                        
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Offer Type</label>
-                                <input pinputtext placeholder="Offer Type" name="offer_type" formControlname="offer_type">                              
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Offer Details</label>
-                                <input pinputtext placeholder="Offer Details" name="offer_details" formControlname="offer_details">                               
-                            </div>
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <label>Discount</label>
-                            <input type="text" placeholder="Discount" pKeyFilter="int" name="discount" formControlname="discount">
-                        </div>
-                        <div class="col-md-4 col-12">
-                            <div class="form-group">
-                                <label>Discount Details</label>
-                                <input pinputtext placeholder="Discount Details" name="discount_details" formControlname="discount_details">
-                            </div>
-                        </div>
-                        <div class="col-md-12 col-12">
-                            <div class="form-group">
-                                <label>Fee Description</label>
-                                <textarea pInputTextarea placeholder="Fee Description" formControlName="fee_description" name="fee_description" 
-                                    [ngClass]="{ 'is-invalid': submitted3 && f3.fee_description.errors }"></textarea>
-                                <div *ngIf="submitted3 && f3.fee_description.errors" class="invalid-feedback">
-                                    <div *ngIf="f3.fee_description.errors.required">Fee Description is required</div>
-                                </div>
-                            </div>
-<<<<<<< HEAD
-                        </div> -->
                     </div>
-                    <div class="text-center">
+                    <!-- <div class="text-center">
                         <button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
                         <button class="btn-warning" (click)="overAllSave()" type="button">Save</button>
-                    </div>
+                    </div> -->
                 </form>
                 <div class="custom-table mt-3">
-                    <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
-                        <!-- <ng-template pTemplate="caption">
-                            <div class="custom-search">
-                                <div class="input-search">
-                                    <input type="text" pInputText size="50" placeholder="Search..."
-                                    (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                                    <i class="fa fa-search"></i> 
-                                </div>
-                            </div>
-                        </ng-template> -->
+                    <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">                       
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
@@ -380,9 +319,20 @@
                                         </a>
                                     </span>
                                 </td>
+                            </tr>                            
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage" let-columns>
+                            <tr>
+                              <td [attr.colspan]="columns.length" class="text-center">
+                                 No records found
+                              </td>
                             </tr>
                         </ng-template>
                     </p-table>
+                </div>
+                <div class="text-center mt-4">
+                    <button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>
+                    <button class="btn-warning" (click)="overAllSave()" type="button">Save</button>
                 </div>
             </mat-step>
         </mat-horizontal-stepper>

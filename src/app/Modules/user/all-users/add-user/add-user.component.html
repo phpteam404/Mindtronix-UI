@@ -38,11 +38,6 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Franchise <span>*</span></label>
-                             <!-- <p-dropdown [options]="franchise" placeholder="Select Franchise" formControlname="franchise" name="franchise"
-                                 [showClear]="true" optionLabel="label" itemSize="30" ></p-dropdown> -->
-                            <!--<div *ngIf="submitted && f.franchise.errors" class="invalid-feedback">
-                                <div *ngIf="f.franchise.errors.required">Franchise is required</div>
-                            </div> -->
                             <p-dropdown [options]="franchise" formControlName="franchise_id" placeholder="Select Franchise" itemSize="30"
                                 name="franchise" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"

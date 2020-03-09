@@ -204,21 +204,39 @@ export class AddFranchiseComponent implements OnInit {
   overAllSave(){
     // if(this.stepOneForm.valid && this.stepTwoForm.valid && this.stepThreeForm.valid){
     if(true){
+      console.log('this.fullObject--1', this.fullObject['1']);
+      console.log('this.fullObject--2', this.fullObject['2']);
+      if(this.fullObject['1']==undefined){
+        this.submitted1 = false;
+        this._toast.show('warning','Please enter Franchise details');
+        return false;
+      }
+      if(this.fullObject['2']==undefined){
+        this.submitted2 = false;
+        this._toast.show('warning','Please add Franchise contact details');
+        return false;
+      }
+      if(this.fullObject['3']==undefined){
+        this.submitted3 = false;
+        this._toast.show('warning','Please add Franchise fee details');
+        return false;
+      }
       var obj={};
       obj = this.fullObject['1'];
       obj['franchise_contacts']=[];
       obj['franchise_contacts'] =  this.fullObject['2'];
       var feeArr = [];
       this.fullObject['3'].forEach(item => { 
-        feeArr.push(item.fee_master_id);
+        feeArr.push(Number(item.fee_master_id));
       });
-      console.log('feeArr--', feeArr);
-      obj['fee_master_id'] =  feeArr;
+      console.log('feeArr--', feeArr.toString());
+      obj['fee_master_id'] =  feeArr.toString();
       console.log('obj--', obj);
       this._service.addUpdate(obj).subscribe(res=>{
         if(res.status){
           this.submitted3 = true;
           this.stepThreeForm.reset();
+          this.goToList();
         }
       });
     }

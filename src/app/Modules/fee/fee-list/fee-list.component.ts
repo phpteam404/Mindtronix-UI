@@ -90,7 +90,9 @@ export class FeeListComponent implements OnInit {
       }
     });
   }
-
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   getFeeList(){
     var params = new HttpParams()
                   .set('start',0+'')

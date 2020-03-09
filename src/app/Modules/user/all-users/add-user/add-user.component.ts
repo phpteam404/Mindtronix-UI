@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { MasterService } from 'src/app/services/master.service';
+import { FranchiseService } from 'src/app/services/franchise.service';
 
 @Component({
   selector: 'app-add-user',
@@ -27,6 +28,7 @@ export class AddUserComponent implements OnInit {
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _service: UserService,
+              private _franchise: FranchiseService,
               private _master: MasterService,
               private _ls: LocalStorageService) { 
   
@@ -43,7 +45,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit(): void {
     this.getRolesList();
     this.getMasterList('status');
-    this.getMasterList('franchise');
+    this.getFranchiseList();
     console.log('this.status--', this.status);
     this.addUserForm = new FormGroup({
       first_name: new FormControl('',[Validators.required]),
@@ -96,6 +98,13 @@ export class AddUserComponent implements OnInit {
     this._service.getRolesList(params).subscribe(res=>{
       if(res.status){
         this.roles = res.data.user_roles;
+      }
+    });
+  }
+  getFranchiseList(){
+    this._franchise.getFranchiseDropDowns({}).subscribe(res=>{
+      if(res.status){
+        this.franchise = res.data.data;
       }
     });
   }

@@ -45,7 +45,9 @@ export class TrainerListComponent implements OnInit {
       }
     });
   }
-  
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   loadTrainersLazy(event: LazyLoadEvent) {
     //console.log('event--', event);
     this.loading =true;

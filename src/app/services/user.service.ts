@@ -37,8 +37,13 @@ export class UserService {
   }
 
   getById (params) {
-    return this.clientHttp.get('user/getUserList?'+params);
+    return this.clientHttp.get('User/getUserList?'+params);
   }
+  
+  getStudentInfo(params){
+    return this.clientHttp.get('User/studentInfo?'+params);
+  }
+
   //trainer-schedule service starts
   addTrainer(params){
     return this.clientHttp.post('User/addTrainerSchedule',params);

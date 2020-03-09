@@ -6,6 +6,7 @@ import { UserService } from 'src/app/services/user.service';
 import { MasterService } from 'src/app/services/master.service';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { HttpParams } from '@angular/common/http';
+import { FranchiseService } from 'src/app/services/franchise.service';
 
 @Component({
   selector: 'app-update-user',
@@ -28,6 +29,7 @@ export class UpdateUserComponent implements OnInit {
     private _toast: ToasterService,
     private _service: UserService,
     private _master: MasterService,
+    private _franchise: FranchiseService,
     private _ar: ActivatedRoute,
     private _ls: LocalStorageService) {
       var id:any;
@@ -41,8 +43,8 @@ export class UpdateUserComponent implements OnInit {
           this.addUserForm.setValue({
             first_name: this.formObj.first_name,  
             last_name: this.formObj.last_name,  
-            user_role_id: this.formObj.user_role_id,
-            franchise_id: this.formObj.franchise_id,
+            franchise_id: this.formObj.franchise_name,
+            user_role_id: this.formObj.user_role,
             email: this.formObj.email,
             phone_no: this.formObj.phone_no,
             status: this.formObj.status, 
@@ -56,7 +58,7 @@ export class UpdateUserComponent implements OnInit {
 
     this.getRolesList();
     this.getMasterList('status');
-    this.getMasterList('franchise');
+    this.getFranchiseList();
     this.addUserForm = new FormGroup({
       first_name: new FormControl('',[Validators.required]),
       last_name: new FormControl(''),
@@ -72,6 +74,13 @@ export class UpdateUserComponent implements OnInit {
     this._service.getRolesList(params).subscribe(res=>{
       if(res.status){
         this.roles = res.data.user_roles;
+      }
+    });
+  }
+  getFranchiseList(){
+    this._franchise.getFranchiseDropDowns({}).subscribe(res=>{
+      if(res.status){
+        this.franchise = res.data.data;
       }
     });
   }

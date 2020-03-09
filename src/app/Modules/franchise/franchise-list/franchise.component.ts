@@ -33,13 +33,15 @@ export class FranchiseListComponent implements OnInit {
 
   viewFranchise(data){
     console.log('view===');
-    this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.agency_id)],{ relativeTo: this._route});
+    this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
   }
   editFranchise(data){
     console.log('edit===');
    this.router.navigate(['update/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
   }
- 
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   loadCarsLazy(event: LazyLoadEvent) {
     this.loading = true;
     console.log('event--', event);

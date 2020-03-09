@@ -102,7 +102,9 @@ export class MasterComponent implements OnInit {
   ngOnInit(): void {
     this.getAllMaster ();
   }
-
+  isEmptyTable() {
+    return (this.Masterslist.length == 0 ? true : false);
+  }
   //This service is to Fill Master Dropdown
   getAllMaster () {
     this.loading = true;
@@ -156,7 +158,7 @@ export class MasterComponent implements OnInit {
     if(this.form.valid){
       var params={};
       params['master_id'] = this.selectedMaster['master_id'];
-      params['child_name'] = this.form.value.name;
+      params['child_name'] = this.form.value.name.trim();
       params['description'] = this.form.value.description;
       if(!this.isCreate){
         params['child_id']=this.masterChildId;

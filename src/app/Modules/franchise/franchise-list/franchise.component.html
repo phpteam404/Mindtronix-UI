@@ -70,13 +70,22 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 7" class="d-flex action-color">
-                            <a href="javascript:;" (click)="editFranchise(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
+                            <!-- <a href="javascript:;" (click)="editFranchise(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
                             <!-- <a href="javascript:;" (click)="AddNewFranchise($event)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
                             <a href="javascript:;" (click)="GoToUsers($event)"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
                             <a href="javascript:;" (click)="GoToSchools($event)"><span class="icon icon-address" title="Manage Schools"></span></a>
                         </span>
                     </td>
                 </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-columns>
+                <ng-container *ngIf="isEmptyTable()">
+                <tr>
+                  <td [attr.colspan]="columns.length" class="text-center">
+                    No records found
+                  </td>
+                </tr>
+                </ng-container>
             </ng-template>
         </p-table>
     </div>

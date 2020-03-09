@@ -10,7 +10,7 @@ export class OnlineUsersListComponent implements OnInit {
 
   allUsersList:any=[];
   cols:any=[];
-
+  totalRecords:number;
   constructor(private _router: Router, private _ar: ActivatedRoute) { 
     this.cols = [
       { field: 'name', header: 'Student Name' },
@@ -46,7 +46,9 @@ export class OnlineUsersListComponent implements OnInit {
       {status:'Active', grade:'VII', city:'Tirupathi', name:'Verdans', email:'verdans@mindtronics.com', phone:'8569874589', manager:'Laura',actions:''}
     ];
   }
-
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   ngOnInit(): void {
   }
   updateOnlineUser(data: any){

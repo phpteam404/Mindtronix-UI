@@ -31,11 +31,13 @@ export class SchoolListComponent implements OnInit {
   EditSchool(data:any){
     console.log('data info',data);
     this._router.navigate(['update/'+data.name+'/'+btoa(data.school_id)],{ relativeTo: this._ar});
-}
-  GoToStudent(event: Event){
-    this._router.navigate(['users/students'], {});
   }
-
+  goToStudent(data: any){
+    this._router.navigate(['users/students'], {queryParams:{'school_id':btoa(data.school_id)}});
+  }
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   DeleteSchool(data:any){
     var params = new HttpParams()
         .set('id', data.school_id)

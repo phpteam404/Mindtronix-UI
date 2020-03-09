@@ -108,22 +108,23 @@
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
                     <div>Student Name
-                        <span>Ramakrishna</span>
+                        <span>{{studentObj.student_name}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">Fee Structure
-                        <span>Monthly</span>
+                        <span>{{studentObj.fee_structure}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="students-text">Last Invoice Amount
-                        <span>₹ 10,000</span>
+                        <span>₹{{studentObj.last_invoice_amount }}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="trainers-text">Last Login
-                        <span>25/02/2020 12:30 PM</span>
+                        <!-- <span>25/02/2020 12:30 PM</span> -->
+                        <span>{{studentObj.last_login  | date:'yyyy-MM-dd hh:mm a'}}</span>
                     </div>
                 </div>
             </div>
@@ -136,33 +137,32 @@
                                    
                                     <div class="col-md-4 col-12">
                                         <label>Student Name</label>
-                                        <p>Ramakrishna</p>
+                                        <p>{{studentObj.student_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Date of Birth</label>
-                                        <p>12/10/1994</p>
+                                        <p>{{studentObj.date_of_birth | date:'yyyy-MM-dd'}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Nationality </label>
-                                        <p>India</p>
+                                        <p>{{studentObj.nationality}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Place of Birth</label>
-                                        <p>Hyderabad</p>
+                                        <p>{{studentObj.place_of_birth}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Mother Tongue</label>
-                                        <p>Telugu</p>
+                                        <p>{{studentObj.mother_tongue}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Fee Structure</label>
-                                        <p>Monthly</p>
+                                        <p>{{studentObj.fee_structure}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Address</label>
-                                        <p>Sr nagar, Hyedrabad, 500038</p>
+                                        <p>{{studentObj.address}}</p>
                                     </div>
-                                    
                                 </div>
                             </div>
                         </div>
@@ -174,33 +174,32 @@
                                    
                                     <div class="col-md-4 col-12">
                                         <label>Name of Parent/Guardian</label>
-                                        <p>Father</p>
+                                        <p>{{studentObj.name_of_parent}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Contact Email</label>
-                                        <p>prasad@gmail.com</p>
+                                        <p>{{studentObj.contact_email}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Home Phone  </label>
-                                        <p>9922162317</p>
+                                        <p>{{studentObj.home_phone}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Mobile Phone</label>
-                                        <p>8213561328</p>
+                                        <p>{{studentObj.mobile_phone}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Mobile Phone2</label>
-                                        <p>--</p>
+                                        <p>{{studentObj.mobile_phone2}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Relation</label>
-                                        <p>Mother</p>
+                                        <p>{{studentObj.relation}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>Occupation</label>
-                                        <p>Software</p>
-                                    </div>
-                                    
+                                        <p>{{studentObj.occupation}}</p>
+                                    </div>                                    
                                 </div>
                             </div>
                         </div>
@@ -212,17 +211,15 @@
                                    
                                     <div class="col-md-4 col-12">
                                         <label>Name of the school</label>
-                                        <p>Delhi public school</p>
+                                        <p>{{studentObj.school_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Class/Grade</label>
-                                        <p>VI</p>
-                                    </div>
-                                   
+                                        <p>{{studentObj.grade}}</p>
+                                    </div>                                   
                                 </div>
                             </div>
-                        </div>
-                     
+                        </div>                     
                     </p-tabPanel>
                     <p-tabPanel header="Medical Information">
                         <div class="custom-view">
@@ -231,21 +228,19 @@
                                    
                                     <div class="col-md-4 col-12">
                                         <label>Blood Group</label>
-                                        <p>A +</p>
+                                        <p>{{studentObj.blood_group}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>History of any Illness</label>
-                                        <p>--</p>
+                                        <p>{{studentObj.history_of_illness}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>Status </label>
-                                        <p>Active</p>
+                                        <p>{{studentObj.status | titlecase}}</p>
                                     </div>
-                                   
                                 </div>
                             </div>
                         </div>
-                     
                     </p-tabPanel>
                 </p-tabView>
             </div>

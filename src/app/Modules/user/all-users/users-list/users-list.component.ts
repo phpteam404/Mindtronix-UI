@@ -43,7 +43,9 @@ export class UsersListComponent implements OnInit {
         }
     })
   }
-
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   loadSchoolsLazy(event: LazyLoadEvent) {
     console.log('event--', event);
     this.loading =true;

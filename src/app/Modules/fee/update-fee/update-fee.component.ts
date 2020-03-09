@@ -36,7 +36,7 @@ export class UpdateFeeComponent implements OnInit {
           this.feeForm.setValue({
             fee_master_id: this.formObj.fee_master_id,  
             name: this.formObj.name,
-            amount: this.formObj.amount,
+            amount: Number(this.formObj.amount),
             term: this.formObj.term,
             discount: this.formObj.discount,
             discount_details: this.formObj.discount_details,  

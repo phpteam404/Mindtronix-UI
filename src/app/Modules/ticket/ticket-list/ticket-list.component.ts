@@ -53,7 +53,9 @@ export class TicketListComponent implements OnInit {
     //this.getList();
    console.log('getList');
   }
-
+  isEmptyTable() {
+    return (this.cars.length == 0 ? true : false);
+  }
   AddNewTicket(event: Event){
     this.router.navigate(['info'], {relativeTo: this._route});
   }
