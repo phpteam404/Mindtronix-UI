@@ -18,7 +18,7 @@ interface Master {
   styleUrls: ['./master.component.scss']
 })
 export class MasterComponent implements OnInit {
-  Masterslist: any;//For List service 
+  Masterslist: any=[];//For List service 
   FirstMaster: any;
   MasterChilds: any;//For Master Childs List Service
   masterChildName: string;
@@ -55,6 +55,7 @@ export class MasterComponent implements OnInit {
     description: new FormControl('')
   });
   showBasicDialog(rowData,isCreate) {
+    this.submitted=null;
     if(isCreate)this.form.reset();
     this.displayBasic = true;
     console.log('selectedMaster rowData', rowData);
@@ -95,10 +96,7 @@ export class MasterComponent implements OnInit {
   }
   onChangeMasterDesc(input){
       this.masterChildDescription = input;
-  }
-  AddMaster(event: Event){
-    // console.log('Adding Master');
-  }
+  }  
   ngOnInit(): void {
     this.getAllMaster ();
   }

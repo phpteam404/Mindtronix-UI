@@ -13,6 +13,10 @@ export class AddTrainerComponent implements OnInit {
   submitted = null;
   pageTitle:string = "Create Schedule";
   isUpdate:boolean=false;
+  fromTime:any;
+  toTime:any;
+  validTime:boolean;
+  minDate:Date= new Date();
   constructor(private _router: Router,
                private _toast: ToasterService,
                private userService:UserService,
@@ -37,7 +41,14 @@ export class AddTrainerComponent implements OnInit {
   submit(): any {
     console.log(this.scheduleForm.value);
     this.submitted = false;
+    this.validTime = true;
     if (this.scheduleForm.valid) {
+      this.fromTime = this.scheduleForm.value.from_time;
+      this.toTime = this.scheduleForm.value.to_time;
+      if (this.fromTime.getTime() > this.toTime.getTime()) {
+        this.validTime=false;
+        return false;
+      }
       var params={};
       params = this.scheduleForm.value;
       params['date'] =this.datepipe.transform(this.scheduleForm.value.date, 'yyyy/MM/dd');
@@ -57,5 +68,19 @@ export class AddTrainerComponent implements OnInit {
   }
   goToList(){
     this._router.navigate(['trainer-schedule']);
+  }
+ 
+  timeChanged(){
+    console.log('to_time', this.scheduleForm.value.to_time);
+    this.validTime=false;
+    this.fromTime = this.scheduleForm.value.from_time;
+    this.toTime = this.scheduleForm.value.to_time;
+    if (this.fromTime.getTime() < this.toTime.getTime()) {
+      console.log('***correct***' );
+      this.validTime=true;
+    }else{
+      console.log('---wrong---');
+      this.validTime=false;
+    }
   }
 }

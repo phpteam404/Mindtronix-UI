@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { FeeService } from 'src/app/services/fee.service';
 import { MasterService } from 'src/app/services/master.service';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-view-franchise',
@@ -14,7 +15,7 @@ import { MasterService } from 'src/app/services/master.service';
   styleUrls: ['./view-franchise.component.scss']
 })
 export class ViewFranchiseComponent implements OnInit {
-  students: any;
+  contacts: any;
   cols:any;
   FeeList:any=[];
   FeeStructureCols:any=[];
@@ -44,48 +45,36 @@ export class ViewFranchiseComponent implements OnInit {
   franchiseId:any;
   franchiseName:any;
 
-  secondFormIndex:number;
+  secondFormCreate:boolean;
 
   constructor(private _ar: ActivatedRoute,
               private _router: Router,
               private _service: FranchiseService,
+              private _cService: CommonService,
               private _toast: ToasterService,
               private _feeService: FeeService,
               private masterservices:MasterService) {
    
     this.cols = [
-      { field: 'contact_title', header: 'Contact Title' },
-      { field: 'name', header: 'Contact Name' },
-      { field: 'contact_phone', header: 'Contact Phone' },
+      { field: 'contact_title_display', header: 'Contact Title' },
+      { field: 'contact_name', header: 'Contact Name' },
+      { field: 'contact_number', header: 'Contact Phone' },
       { field: 'contact_email', header: 'Contact Email' },
       {field: 'actions', header: 'Actions'}
     ];
-
-    this.FeeList = [
-      {id:1,name:'1 (One Month)', amount:2500, term:'Monthly',discount:10,actions:''},
-      {id:2,name:'3 (Three Months)', amount:6000, term:'Quarterly',discount:15,actions:''},
-      {id:3,name:'6 (Six Months)', amount:11000, term:'Half Yearly',discount:20,actions:''},
-      {id:4,name:'12 (Twelve Months)', amount:20500, term:'Yearly',discount:25,actions:''}
-    ];
+    
     this.FeeStructureCols = [
-      { field: 'name', header: 'Fee Title' },
+      { field: 'fee_title', header: 'Fee Title' },
       { field: 'amount', header: 'Fee Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
       {field: 'actions', header: 'Actions'}
-    ];
-    this.title =[
-      {label:'Franchise Admin',value:'Franchise Admin'},
-      {label:'Accountant',value:'Accountant'},
-      {label:'Finance',value:'Finance'},
-      {label:'Technical',value:'Technical'}
     ];
     this.revenueMonth = [
       {label:'Feb 2020', value:'Feb 2020'},
       {label:'Jan 2020', value:'Jan 2020'},
       {label:'Dec 2019', value:'Dec 2019'},
     ];
-
   }  
   
   showBasicDialog() {
@@ -100,8 +89,9 @@ export class ViewFranchiseComponent implements OnInit {
     this.secondForm.reset();
     this.ThridForm.reset();
   }
-  showBasicDialog1() {
+  showBasicDialog1(isCreate) {
     this.displayBasic1 = true;
+    this.secondFormCreate = isCreate;
   }
   showBasicDialog2() {
     this.displayBasic2 = true;    
@@ -121,7 +111,7 @@ export class ViewFranchiseComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       contact_person: new FormControl('',[Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required,Validators.minLength(10)]),
       website_address :new FormControl(''),
       landmark: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -133,10 +123,11 @@ export class ViewFranchiseComponent implements OnInit {
       address: new FormControl('',[Validators.required]),
     });
     this.secondForm = new FormGroup({  
+      franchise_contact_id :new FormControl(''),
       contact_title :new FormControl('',[Validators.required]),
       contact_name:new FormControl('',[Validators.required]),
       contact_email: new FormControl('',[Validators.required, Validators.email]),
-      contact_phone :new FormControl('',[Validators.required]),
+      contact_number :new FormControl('',[Validators.required,Validators.minLength(10) ]),
     });
     this.ThridForm = new FormGroup({  
       fee_structure :new FormControl('',[Validators.required])
@@ -145,6 +136,7 @@ export class ViewFranchiseComponent implements OnInit {
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
     this.getMasterDropdown('status');
+    this.getMasterDropdown('contact_type');
     this.getFeeStructureDropdown();
   }
   loadStatisticsChart(){
@@ -205,6 +197,8 @@ export class ViewFranchiseComponent implements OnInit {
           this.city =  res.data.data;
         if(masterKey =='country')
           this.country =res.data.data;
+        if(masterKey =='contact_type')
+          this.title =res.data.data;
         if(masterKey =='status'){
           this.status =res.data.data;
           this.firstForm.controls['status'].setValue(res.data.data[0]);
@@ -227,6 +221,8 @@ export class ViewFranchiseComponent implements OnInit {
     this._service.getFranchiseInfo(params).subscribe(res => {
       if(res.status){
         this.franchiseObj = res.data.data[0];
+        this.contacts = res.data.data[0].franchise_contacts_information;
+        this.FeeList = res.data.data[0].fee_detalis;
         this.franchiseExtraInfo = res.data;        
       }
     });
@@ -248,7 +244,7 @@ export class ViewFranchiseComponent implements OnInit {
           console.log(obj,'****', this.franchiseName);
           if(this.franchiseName === this.firstForm.value.name){
             console.log('*-*-*same name *-*-*-');
-          }
+          }else{} //this._router.navigate(['view/'+(this.firstForm.value.name)+'/'+btoa(this.franchiseObj.franchise_id)],{relativeTo:this._ar});
         }
       });
       this.hideBasicDialog();
@@ -257,30 +253,28 @@ export class ViewFranchiseComponent implements OnInit {
   secondFormSubmit(){
     this.submitted2=false;
     if(this.secondForm.valid){
-      console.log('this.secondForm.valid', this.secondForm.value);
-      var obj={};
-      obj =  this.secondForm.value;
-      // obj['contact_title'] = this.secondForm.value.contact_title.value;
-      var contactList = this.students;
-      contactList[this.secondFormIndex]=obj;
-      var params={};
-      params['franchise_id']=this.franchiseId;
-      params['franchise_contacts']=contactList;
-      console.log('***', params);
-      this._service.updateFranchiseContacts(params).subscribe(res => {
+      var obj={},form={};
+      form = this.secondForm.value;
+      obj['contact_title_display'] = form['contact_title'].label;
+      obj['contact_title'] = form['contact_title'].value;
+      obj['contact_name'] = form['contact_name'];
+      obj['contact_email'] = form['contact_email'];
+      obj['contact_number'] = form['contact_number'];
+      obj['franchise_id']=this.franchiseId;
+      if(!this.secondFormCreate) obj['franchise_contact_id'] = this.secondForm.value.franchise_contact_id;
+      this._service.updateFranchiseContacts(obj).subscribe(res => {
         if(res.status){
-          this.getFranchiseData();
+          this.getFranchiseInfo(this.franchiseId);
+          this.hideBasicDialog();
         }
-      });      
+      });
     }
   }
-
   getFranchiseData(){
     var param = new HttpParams().set('franchise_id',this.franchiseId);
     this._service.getList(param).subscribe(res => {
       if(res.status){
         this.franchise = res.data.data[0];
-        this.students = res.data.data[0].franchise_contact_list;
         this.firstForm.setValue({
           name : this.franchise.franchise_name,
           code : this.franchise.franchise_code,
@@ -301,14 +295,22 @@ export class ViewFranchiseComponent implements OnInit {
   }
 
   editContact(data:any,index:number){
-    this.showBasicDialog1();
-    console.log(index,'--', data);
-    this.secondFormIndex=index;
+    this.showBasicDialog1(false);
     this.secondForm.setValue({
+      franchise_contact_id : (data.franchise_contact_id)?data.franchise_contact_id:'',
       contact_title : data.contact_title,
-      contact_name: data.name,
+      contact_name: data.contact_name,
       contact_email: data.contact_email,
-      contact_phone :data.contact_phone,
+      contact_number : data.contact_number,
+    });
+  }
+  deleteFrachiseContact(data:any){
+    console.log('data', data);
+    var params = new HttpParams().set('tablename','franchise_contacts').set('id',data.franchise_contact_id);
+    this._cService.delete(params).subscribe(res => {
+      if(res.status){
+        this.getFranchiseInfo(this.franchiseId);
+      }
     });
   }
 }

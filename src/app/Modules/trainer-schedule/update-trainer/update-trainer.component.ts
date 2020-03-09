@@ -18,6 +18,10 @@ export class UpdateTrainerComponent implements OnInit {
   isUpdate:boolean=true;
   scheduleForm: FormGroup;
   trainers:any;
+  fromTime:any;
+  toTime:any;
+  validTime:boolean;
+  minDate:Date= new Date();
   constructor(private _router: Router,private _ar: ActivatedRoute, private _toast: ToasterService,
               private userService:UserService,public datepipe: DatePipe) { 
     var id:any;
@@ -34,7 +38,12 @@ export class UpdateTrainerComponent implements OnInit {
             description: this.trainerObj.description,
             from_time: new Date(this.trainerObj.from_time),
             to_time: new Date(this.trainerObj.to_time),
-          });          
+          });
+          this.fromTime = this.scheduleForm.value.from_time;
+          this.toTime = this.scheduleForm.value.to_time;
+          if (this.fromTime.getTime() > this.toTime.getTime()) {
+            this.validTime=false;
+          }else this.validTime=true;
         }
       });
     });
@@ -54,6 +63,12 @@ export class UpdateTrainerComponent implements OnInit {
   submit(): any {
     this.submitted = false;
     if (this.scheduleForm.valid) {
+      this.fromTime = this.scheduleForm.value.from_time;
+      this.toTime = this.scheduleForm.value.to_time;
+      if (this.fromTime.getTime() > this.toTime.getTime()) {
+        this.validTime=false;
+        return false;
+      }
       var params={};
       params = this.scheduleForm.value;
       params['date'] =this.datepipe.transform(this.scheduleForm.value.date, 'yyyy/MM/dd');
@@ -74,5 +89,18 @@ export class UpdateTrainerComponent implements OnInit {
   }
   goToList(){
     this._router.navigate(['trainer-schedule']);
+  }
+  timeChanged(){
+    console.log('to_time', this.scheduleForm.value.to_time);
+    this.validTime=false;
+    this.fromTime = this.scheduleForm.value.from_time;
+    this.toTime = this.scheduleForm.value.to_time;
+    if (this.fromTime.getTime() < this.toTime.getTime()) {
+      console.log('***correct***' );
+      this.validTime=true;
+    }else{
+      console.log('---wrong---');
+      this.validTime=false;
+    }
   }
 }

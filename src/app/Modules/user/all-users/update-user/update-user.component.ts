@@ -41,6 +41,7 @@ export class UpdateUserComponent implements OnInit {
           this.formObj = res.data.data[0];
           console.log('this.formObj--', this.formObj);
           this.addUserForm.setValue({
+            user_id: this.formObj.user_id,  
             first_name: this.formObj.first_name,  
             last_name: this.formObj.last_name,  
             franchise_id: this.formObj.franchise_name,
@@ -60,12 +61,13 @@ export class UpdateUserComponent implements OnInit {
     this.getMasterList('status');
     this.getFranchiseList();
     this.addUserForm = new FormGroup({
+      user_id: new FormControl(''),
       first_name: new FormControl('',[Validators.required]),
       last_name: new FormControl(''),
       user_role_id: new FormControl('',[Validators.required]),
       franchise_id: new FormControl('',[Validators.required]),
       email: new FormControl('',[Validators.required, Validators.email]),
-      phone_no: new FormControl('',[Validators.required , Validators.minLength(10), Validators.maxLength(10)]),
+      phone_no: new FormControl('',[Validators.required , Validators.minLength(10)]),
       status: new FormControl('',[Validators.required]), 
     });
   }
@@ -99,5 +101,28 @@ export class UpdateUserComponent implements OnInit {
   }
   cancel(){
     this._router.navigate(['users/all-users']);
+  }
+  submit(): any{
+    this.submitted = false;
+    console.log('this.addUserForm---', this.addUserForm.value);
+    console.log('this.addUserForm errors---', this.addUserForm);
+    if (this.addUserForm.valid) {
+      var params={};
+      params = this.addUserForm.value;
+      params['']
+      params['status'] = this.addUserForm.value.status.value;
+      params['franchise_id'] = this.addUserForm.value.franchise_id.value;
+      params['user_role_id'] = this.addUserForm.value.user_role_id.value;
+      this._service.saveUser(params).subscribe(res => {
+        if (res.status) {
+          this.submitted = true;
+          this._router.navigate(['users/all-users']);
+        }else{
+          this._toast.show('error',JSON.parse(res.error));
+        }
+      });
+    }else{
+      this._toast.show('warning','Please enter mandatory fields.');
+    }
   }
 }

@@ -65,17 +65,11 @@ export class AddFranchiseComponent implements OnInit {
       { field: 'action', header: 'Actions' }
 
     ];
-    this.title =[
-          {label:'Franchise Admin',value:'Franchise Admin'},
-          {label:'Accountant',value:'Accountant'},
-          {label:'Finance',value:'Finance'},
-          {label:'Technical',value:'Technical'}
-    ];
 
     this.contactsListCols = [
       { field: 'contact_title', header: 'Contact Title' },
       { field: 'contact_name', header: 'Contact Name' },
-      { field: 'contact_phone', header: 'Contact Number' },
+      { field: 'contact_number', header: 'Contact Number' },
       { field: 'contact_email', header: 'Contact Email' },
       { field: 'actions', header: 'Actions' }
     ]
@@ -101,6 +95,8 @@ export class AddFranchiseComponent implements OnInit {
           this.city =  res.data.data;
         if(masterKey =='country')
           this.country =res.data.data;
+        if(masterKey =='contact_type')
+          this.title =res.data.data;
         if(masterKey =='status'){
           this.status =res.data.data;
           this.stepOneForm.controls['status'].setValue(res.data.data[0]);
@@ -122,7 +118,7 @@ export class AddFranchiseComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       contact_person: new FormControl('',[Validators.required]),
-      phone: new FormControl('', [Validators.required]),
+      phone: new FormControl('', [Validators.required,Validators.minLength(10)]),
       website_address :new FormControl(''),
       landmark: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -137,7 +133,7 @@ export class AddFranchiseComponent implements OnInit {
       contact_title :new FormControl('',[Validators.required]),
       contact_name:new FormControl('',[Validators.required]),
       contact_email: new FormControl('',[Validators.required, Validators.email]),
-      contact_phone :new FormControl('',[Validators.required]),
+      contact_number :new FormControl('',[Validators.required,Validators.minLength(10)]),
     });
     this.stepThreeForm = new FormGroup({  
       fee_structure :new FormControl('',[Validators.required])
@@ -146,6 +142,7 @@ export class AddFranchiseComponent implements OnInit {
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
     this.getMasterDropdown('status');
+    this.getMasterDropdown('contact_type');
     this.getFeeStructureDropdown();
   }
 
@@ -168,11 +165,12 @@ export class AddFranchiseComponent implements OnInit {
       var obj={};
       obj['contact_title'] = this.stepTwoForm.value.contact_title.value;
       obj['contact_name'] = this.stepTwoForm.value.contact_name;
-      obj['contact_phone'] = this.stepTwoForm.value.contact_phone;
+      obj['contact_number'] = this.stepTwoForm.value.contact_number;
       obj['contact_email'] = this.stepTwoForm.value.contact_email;
       this.contactsList.push(obj);
       this.stepTwoForm.reset();
       this.fullObject['2'] = this.contactsList;
+      console.log('this.contactsList--', this.contactsList);
       this.submitted2 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -239,7 +237,6 @@ export class AddFranchiseComponent implements OnInit {
           this.goToList();
         }
       });
-    }
-    
+    }    
   }
 }

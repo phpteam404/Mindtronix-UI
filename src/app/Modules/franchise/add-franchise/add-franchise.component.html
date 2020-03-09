@@ -102,7 +102,7 @@
                             <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
                             <div class="invalid-feedback"
                                     *ngIf="stepOneForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                                [ngClass]=" 'error'">Contact number is required
+                                [ngClass]=" 'error'">Contact number must be 10 digits
                             </div> 
                         </div>
                         <div class="col-md-4 col-12">
@@ -200,7 +200,7 @@
                                 name="contact_title" optionLabel="label" required></p-dropdown>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_title.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Title is required
+                                   [ngClass]=" 'error'"> Contact Title must be 10 digits
                                </div>
                             </div>
                         </div>
@@ -217,10 +217,10 @@
                        
                         <div class="col-md-2 col-12">
                             <label>Contact Number <span>*</span></label>
-                            <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_phone"
+                            <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_number"
                                 name="contact_phone" required>                           
                             <div class="invalid-feedback"
-                                *ngIf="stepTwoForm.controls.contact_phone.invalid && submitted2!=null && !submitted2"
+                                *ngIf="stepTwoForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
                                 [ngClass]=" 'error'"> Contact number is required
                             </div>
                         </div>

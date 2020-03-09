@@ -22,8 +22,7 @@
             <div class="col-md-4 col-12 mt-2">
                 <label>Status </label>
                 <p>Active</p>
-            </div>
-            
+            </div>            
           </div>
         </div>
     </div>
@@ -69,8 +68,7 @@
             <div class="col-md-4 col-12 mt-2">
                 <label>-- </label>
                 <p>--</p>
-            </div>
-            
+            </div>            
           </div>
         </div>
     </div>
@@ -97,13 +95,11 @@
             <div class="col-md-4 col-12 mt-2">
                 <label>-- </label>
                 <p>--</p>
-            </div>
-            
+            </div>            
           </div>
         </div>
     </div> -->
     <div class="row view-page">
-
         <div class="col-md-9 col-12">
             <div class="custom-view-list">
                 <div class="custom-view-div franchise-name">
@@ -188,7 +184,6 @@
                                         <label>Status</label>
                                         <p>{{franchiseObj.status | titlecase }}</p>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
@@ -197,12 +192,12 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                    <!-- <div class="col-12 custom-btn-edit">
-                                        <button type="button" class="btn" (click)="showBasicDialog1()"><i class="icon icon-edit-pencil"></i></button>
-                                     </div> -->
+                                    <div class="col-12 custom-btn-edit">
+                                        <button type="button" title="Add" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
+                                     </div>
                                     <div class="col-12">
                                         <div class="custom-table">
-                                            <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">                                              
+                                            <p-table #dt [columns]="cols" [value]="contacts" [paginator]="true" [rows]="10">                                              
                                                 <ng-template pTemplate="header" let-columns>
                                                     <tr>
                                                         <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
@@ -216,10 +211,10 @@
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 4"  class="d-flex action-color">
-                                                                <a class="mr-2" href="javascript:;" (click)="editContact(rowData,i)" >
+                                                                <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
-                                                                <a href="javascript:;">
+                                                                <a href="javascript:;" (click)="deleteFrachiseContact(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -237,9 +232,9 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                    <!-- <div class="col-12 custom-btn-edit">
-                                        <button type="button" class="btn" (click)="showBasicDialog2()"><i class="icon icon-edit-pencil"></i></button>
-                                     </div> -->
+                                    <div class="col-12 custom-btn-edit">
+                                        <button type="button" class="btn" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
+                                     </div>
                                     <div class="col-12">
                                         <div class="custom-table ">
                                             <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
@@ -265,10 +260,7 @@
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 4"  class="d-flex action-color">
-                                                                <a class="mr-2" href="javascript:;">
-                                                                    <span class="icon icon-edit-pencil" title="Edit"></span>
-                                                                </a>
-                                                                <a href="javascript:;">
+                                                                <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -280,8 +272,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                     
+                        </div>                     
                     </p-tabPanel>
                 </p-tabView>
             </div>
@@ -290,21 +281,24 @@
             <div class="custom-veiw-rightside">
                 <div class="revenue-text revenue-month-dropdown">Revenue
                         <p-dropdown [options]="revenueMonth" placeholder="Feb 2020" itemSize="30"
-                        name="contact_title" optionLabel="label" required></p-dropdown>
-                      
+                        name="contact_title" optionLabel="label" required></p-dropdown>                      
                 </div>
                 <div class="student-text">For Students
                     <div class="custom-flex"> <span> Invoiced<a href="javascript:;" class="green-text">₹
                                 10,000</a></span><span>Collected<a href="javascript:;" class="green-text text-right">₹
                                 5,000</a><a href="javascript:;" class="red-text text-right">- ₹
-                                    5,000</a><span class="due-text">Due</span></span>
+                                5,000</a><span class="due-text">Due</span></span>
                     </div>
                 </div>
                 <div class="student-text">For Mindtronix
                     <div class="custom-flex">
-                        <span>Invoiced<a href="javascript:;" class="green-text">₹ 10,000</a></span><span>Paid<a href="javascript:;"
-                                class="red-text text-right">₹ 5,000</a></span>
-                                <!-- <span class="due-text">Due</span> -->
+                        <span>Invoiced
+                            <a href="javascript:;" class="green-text">₹ 10,000</a>
+                        </span>
+                        <span>Paid
+                            <a href="javascript:;" class="red-text text-right">₹ 5,000</a>
+                        </span>
+                        <!-- <span class="due-text">Due</span> -->
                     </div>
                 </div>
             </div>
@@ -317,141 +311,139 @@
 </div>
   <!-- franchise details popup -->
 <p-dialog header="Edit Franchise Details" [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
-    
- 
-        <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()">
-            <div class="row custom-form">
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Franchise Name <span>*</span></label>
-                        <input pinputtext type="text" placeholder="Name" name="name" formControlName="name" required>
-                        <div class="invalid-feedback"
-                             *ngIf="firstForm.controls.name.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">Franchise Name is required
-                        </div> 
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Franchise Code <span>*</span></label>
-                        <input pinputtext type="text" placeholder="Code" name="code" formControlName="code" required>
-                        <div class="invalid-feedback"
-                                *ngIf="firstForm.controls.code.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">Franchise Code is required
-                        </div> 
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Owner Name <span>*</span></label>
-                        <input pinputtext type="text" placeholder="Contact Person" name="contact_person" formControlName="contact_person" required>
-                        <div class="invalid-feedback"
-                            *ngIf="firstForm.controls.contact_person.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">Owner Name is required
-                        </div>
-                       
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <label>Contact Number <span>*</span></label>
-                    <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
+    <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()">
+        <div class="row custom-form">
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Franchise Name <span>*</span></label>
+                    <input pinputtext type="text" placeholder="Name" name="name" formControlName="name" required>
                     <div class="invalid-feedback"
-                            *ngIf="firstForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Contact number is required
-                    </div>                  
+                            *ngIf="firstForm.controls.name.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">Franchise Name is required
+                    </div> 
                 </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Contact Email <span>*</span></label>
-                        <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
-                        <div class="invalid-feedback"
-                                *ngIf="firstForm.controls.email.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">Email is required
-                        </div>                      
-                    </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Franchise Code <span>*</span></label>
+                    <input pinputtext type="text" placeholder="Code" name="code" formControlName="code" required>
+                    <div class="invalid-feedback"
+                            *ngIf="firstForm.controls.code.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">Franchise Code is required
+                    </div> 
                 </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Website Address</label>
-                        <input pinputtext placeholder="www.mindtronix.com" formControlName="website_address" name="website_address" type="text">
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Owner Name <span>*</span></label>
+                    <input pinputtext type="text" placeholder="Contact Person" name="contact_person" formControlName="contact_person" required>
+                    <div class="invalid-feedback"
+                        *ngIf="firstForm.controls.contact_person.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">Owner Name is required
                     </div>
+                    
                 </div>
-                <div class="col-md-12 col-12">
-                    <div class="form-group">
-                        <label>Address</label>
-                        <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
-                    </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>Contact Number <span>*</span></label>
+                <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
+                <div class="invalid-feedback"
+                        *ngIf="firstForm.controls.phone.invalid && submitted1!=null && !submitted1"
+                    [ngClass]=" 'error'">Contact number must be 10 digits
+                </div>                  
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Contact Email <span>*</span></label>
+                    <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
+                    <div class="invalid-feedback"
+                            *ngIf="firstForm.controls.email.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">Email is required
+                    </div>                      
                 </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Landmark</label>
-                        <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
-                    </div>
-                </div>                        
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Country <span>*</span></label>
-                        <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="Select Country" itemSize="30"
-                            name="state" optionLabel="label" required></p-dropdown>
-                        <div class="invalid-feedback"
-                                *ngIf="firstForm.controls.country.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">Country is required
-                        </div>                        
-                    </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Website Address</label>
+                    <input pinputtext placeholder="www.mindtronix.com" formControlName="website_address" name="website_address" type="text">
                 </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>State <span>*</span></label>
-                        <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="Select State" itemSize="30"
-                            name="country" optionLabel="label" required></p-dropdown>
-                        <div class="invalid-feedback"
-                                *ngIf="firstForm.controls.state.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">State is required
-                        </div>
-                    </div>
+            </div>
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <label>Address</label>
+                    <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
                 </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>City <span>*</span></label>
-                        <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="Select City" itemSize="30"
-                            name="state" optionLabel="label" required></p-dropdown>
-                        <div class="invalid-feedback"
-                                *ngIf="firstForm.controls.city.invalid && submitted1!=null && !submitted1"
-                            [ngClass]=" 'error'">City is required
-                        </div>                     
-                    </div>
-                </div> 
-                <div class="col-md-4 col-12">
-                    <label>Pincode</label>
-                    <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
-                </div>                       
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Status <span>*</span></label>
-                        <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
-                        name="status" optionLabel="label" required></p-dropdown>
-                        <div class="invalid-feedback"
-                            *ngIf="firstForm.controls.status.invalid && submitted1!=null && !submitted1"
-                           [ngClass]=" 'error'"> Status is required
-                       </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Landmark</label>
+                    <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
+                </div>
+            </div>                        
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Country <span>*</span></label>
+                    <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="Select Country" itemSize="30"
+                        name="state" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                            *ngIf="firstForm.controls.country.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">Country is required
+                    </div>                        
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>State <span>*</span></label>
+                    <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="Select State" itemSize="30"
+                        name="country" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                            *ngIf="firstForm.controls.state.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">State is required
                     </div>
                 </div>
             </div>
-            <div class="text-center mb-2">
-                <button pButton class="btn-warning mr-2" label="Update" type="submit"></button>
-                <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>City <span>*</span></label>
+                    <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="Select City" itemSize="30"
+                        name="state" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                            *ngIf="firstForm.controls.city.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">City is required
+                    </div>                     
+                </div>
+            </div> 
+            <div class="col-md-4 col-12">
+                <label>Pincode</label>
+                <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+            </div>                       
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>Status <span>*</span></label>
+                    <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                    name="status" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="firstForm.controls.status.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'"> Status is required
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
+        <div class="text-center mb-2">
+            <button pButton class="btn-warning mr-2" label="Update" type="submit"></button>
+            <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
+        </div>
+    </form>
 <!-- <p-footer>
     <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
     <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
 </p-footer> -->
 </p-dialog>
-  <!-- contact information popup -->
+<!-- contact information popup -->
 <p-dialog header="Edit Contact Information" [(visible)]="displayBasic1" [style]="{width: '65vw'}" [baseZIndex]="10000">
     <form [formGroup]="secondForm" (ngSubmit)="secondFormSubmit()">
         <div class="row custom-form">
-            <div class="col-md-3 col-12">
+            <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Contact Title <span>*</span></label>
                     <p-dropdown [options]="title" formControlName="contact_title" placeholder="Select Title" itemSize="30"
@@ -462,7 +454,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3 col-12">
+            <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Name <span>*</span></label>
                     <input pinputtext placeholder="Contact Name" type="text" formControlName="contact_name" name="contact_name" required>
@@ -471,19 +463,17 @@
                        [ngClass]=" 'error'"> Contact Name is required
                     </div>                
                 </div>
-            </div>
-        
-            <div class="col-md-3 col-12">
+            </div>        
+            <div class="col-md-6 col-12">
                 <label>Contact Number <span>*</span></label>
-                <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_phone"
+                <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_number"
                     name="contact_phone" required>                           
                 <div class="invalid-feedback"
-                    *ngIf="secondForm.controls.contact_phone.invalid && submitted2!=null && !submitted2"
-                    [ngClass]=" 'error'"> Contact number is required
-                </div>                         
-                
+                    *ngIf="secondForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
+                    [ngClass]=" 'error'"> Contact number must be 10 digits
+                </div>                
             </div>
-            <div class="col-md-3 col-12">
+            <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Contact Email <span>*</span></label>
                     <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
@@ -497,25 +487,21 @@
         <div class="text-center col-12 mb-2">
             <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
             <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
-        </div>   
-    </form>   
+        </div>
+    </form>
 </p-dialog>
-
 <!-- fee management popup -->
-<p-dialog header="Edit Fee Management" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">
-    
+<p-dialog header="Edit Fee Management" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
     <!-- <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()"></form> -->
     <div class="row custom-form">
         <div class="col-md-6 col-12 mb-3">
             <label>Fee Structure <span>*</span></label>
             <p-multiSelect [options]="FeeStructureList" optionLabel="name" 
-                name="fee_structure" required></p-multiSelect>
-           
+                name="fee_structure" required></p-multiSelect>           
         </div>
         <div class="col-md-1 col-12 mb-3 mt-4">
             <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
-        </div>
-        
+        </div>        
     </div>
     <div class="text-center mb-2">
         <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
@@ -523,16 +509,7 @@
     </div>
     <!-- </form> -->
     <div class="custom-table custom-lastchild-list mt-3">
-        <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
-            <!-- <ng-template pTemplate="caption">
-                <div class="custom-search">
-                    <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..."
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                        <i class="fa fa-search"></i> 
-                    </div>
-                </div>
-            </ng-template> -->
+        <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">           
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
@@ -555,8 +532,4 @@
             </ng-template>
         </p-table>
     </div>
-<!-- <p-footer>
-    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
-    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-</p-footer> -->
 </p-dialog>

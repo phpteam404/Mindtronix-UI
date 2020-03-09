@@ -42,10 +42,10 @@ export class AddStudentComponent implements OnInit {
     student_name: new FormControl('', [Validators.required]),
     date_of_birth: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
-    password: new FormControl('',[ Validators.required,
+    password: new FormControl('',[ Validators.required,Validators.minLength(8)
                                   //  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
     ]),
-    cpassword: new FormControl('',[ Validators.required,
+    cpassword: new FormControl('',[ Validators.required,,Validators.minLength(8)
                                     // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
     ]),
     place_of_birth: new FormControl(''),
@@ -53,12 +53,12 @@ export class AddStudentComponent implements OnInit {
     address: new FormControl(''),
     parent_name: new FormControl('', [Validators.required]),
     fee_structure: new FormControl('', [Validators.required]),
-    phone_no: new FormControl(''),
+    phone_no: new FormControl('',[Validators.minLength(10)]),
     relation: new FormControl(''),
     email: new FormControl('',[Validators.required,Validators.email]),
     occupation: new FormControl(''),
-    mobile_phone1: new FormControl('', [Validators.required]),
-    mobile_phone2: new FormControl(''),
+    mobile_phone1: new FormControl('', [Validators.required,Validators.minLength(10)]),
+    mobile_phone2: new FormControl('',[Validators.minLength(10)]),
     school_id: new FormControl('',[Validators.required]),
     grade: new FormControl(''),
     blood_group: new FormControl(''),

@@ -61,7 +61,7 @@
                             name="contact_phone" required>
                         <div class="invalid-feedback"
                             *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'"> Phone is required
+                            [ngClass]=" 'error'">Contact number must be 10 digits
                         </div>
                     </div>                    
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">
@@ -71,7 +71,7 @@
 
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Invalid Password
+                                [ngClass]=" 'error'">Password must be 8 characters
                             </div>
                             <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
                                 <div *ngIf="f.password.errors.required">Password is required</div>
@@ -85,7 +85,7 @@
                             <input pPassword  placeholder="Confirm Password" autocomplete="off" formControlName="cpassword" name="cpassword" type="password" required>
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.cpassword.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Invalid Confirm Password
+                                [ngClass]=" 'error'">Confirm Password must be 8 characters
                             </div>
                             <!-- <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
                                 <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>

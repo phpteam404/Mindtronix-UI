@@ -67,7 +67,7 @@ export class UpdateSchoolComponent implements OnInit {
       name: new FormControl('', [Validators.required]),
       code: new FormControl('', [Validators.required]),
       contact_person: new FormControl(''),
-      phone: new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]),
+      phone: new FormControl('', [Validators.required, Validators.minLength(10) ]),
       email: new FormControl('', [Validators.required, Validators.email]),
       franchise_id: new FormControl('',[Validators.required]),
       address: new FormControl(''),

@@ -52,7 +52,7 @@ export class HttpInterceptorService implements HttpInterceptor {
         this.toast.show('success',resJson.message);
       }
     } else {
-      this.toast.show('error',resJson.error.message);
+      this.toast.show('error',resJson.error);
     }
     return resJson;
   }

@@ -19,7 +19,14 @@ export class ToasterService {
     if (message || title) {
       if (title) {
         if (type === 'error') {
-         this.toastr.error(title, message);
+          if(typeof title === 'object'){
+            var obj = JSON.parse(JSON.stringify(title));
+            var keys = Object.keys(obj);
+            keys.forEach(item => {
+              this.toastr.error(obj[item], message);
+            });
+          }
+          else this.toastr.error(title, message);
         } else if (type === 'success') {
           if(title == 'Success' || title == 'success'){}
           else this.toastr.success(title, message);
