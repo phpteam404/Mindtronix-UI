@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService} from 'src/app/services/user.service';
 import { ToasterService } from 'src/app/utils/toaster.service';
@@ -7,6 +7,7 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-student-list',
@@ -22,11 +23,13 @@ export class StudentListComponent implements OnInit {
   franchise:any[];
   studentsList:any;
   first:number=0;
+  schoolFilter:any;
+  id:any;
   constructor(private _router: Router, private _ar: ActivatedRoute,
               private _toast: ToasterService,private _cService: CommonService,
               private _service:UserService,
               private _schoolService:SchoolService,private _fService:FranchiseService) {
-    this.getStudentsList();
+    this.getSchoolsList();
     this.getFranchiseList();
   }
   //this service is for getting franchise dropdown through service
@@ -38,17 +41,29 @@ export class StudentListComponent implements OnInit {
     });
   }
   //this service is for getting schools dropdown through service
-  getStudentsList() {
+  @ViewChild('dt') dt: Table;
+  getSchoolsList() {
     this._schoolService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
+        this.schools.forEach(item => {
+          if(item.value == this.id){
+            this.dt.filter(item,'school_id','contains');
+            this.schoolFilter=item;
+          }
+        });
       }
     });
   }
  
-  ngOnInit(): void {
-    this.getStudentsList();
+  ngOnInit(): void {-
+
     this.getFranchiseList();
+    this._ar.queryParams.subscribe(params => {
+      console.log('params info',params);
+      this.id = atob(params['school_id']);
+    });
+    this.getSchoolsList();
   }
 
   AddNewStudent(event: Event){
@@ -59,7 +74,7 @@ export class StudentListComponent implements OnInit {
     this._router.navigate(['update/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
   }
   viewStudent(data:any){
-    this._router.navigate(['view/'+data.name+'/'+btoa(data.id)],{ relativeTo: this._ar});
+    this._router.navigate(['view/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
   }
 
   DeleteStudent(data:any){
@@ -74,6 +89,9 @@ export class StudentListComponent implements OnInit {
       }
     });
   }
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
   loadStudentsLazy(event: LazyLoadEvent) {
     this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
@@ -87,8 +105,8 @@ export class StudentListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    if(event.filters['contains']){
-      params =params.set('school_id',event.filters['contains'].value.value);
+    if(event.filters['school_id']){
+      params =params.set('school_id',event.filters['school_id'].value.value);
     }
     if(event.filters['equals']){
       params =params.set('franchise_id',event.filters['equals'].value.value);
