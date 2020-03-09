@@ -50,7 +50,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Mother Tongue</label>
-                            <p-dropdown [options]="mothertongue" formControlName="mother_tongue" filter="true" placeholder="Select Mother Tongue" 
+                            <p-dropdown [options]="mothertongue"  [showClear]="true" formControlName="mother_tongue" filter="true" placeholder="Select Mother Tongue" 
                                 itemSize="30" optionLabel="label" name="mother_tongue"></p-dropdown>
                         </div>
                     </div>
@@ -129,7 +129,7 @@
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Mobile Phone</label>
+                        <label>Mobile Phone <span>*</span></label>
                         <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
                         <div class="invalid-feedback"
                             *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
@@ -145,7 +145,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Relation</label>
-                            <p-dropdown [options]="relation" formControlName="relation" filter="true" placeholder="Select Relation" 
+                            <p-dropdown [options]="relation"  [showClear]="true" formControlName="relation" filter="true" placeholder="Select Relation" 
                                 itemSize="30" optionLabel="label" name="relation" ></p-dropdown>
                         </div>
                     </div>
@@ -167,7 +167,6 @@
                             <label>Name of the school <span>*</span></label>
                             <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="Select School" 
                             itemSize="30" optionLabel="label" name="school_id" ></p-dropdown>
-                            <!-- <input pinputtext type="text" placeholder="Name of the school" formControlName="school_id" name="school_id" required> -->
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.school_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">School Name is required
@@ -177,8 +176,8 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Class/Grade</label>
-                            <p-dropdown [options]="grade" formControlName="grade" filter="true" placeholder="Select Grade" 
-                                itemSize="30" optionLabel="label" name="grade" ></p-dropdown>
+                            <p-dropdown [options]="grade"  formControlName="grade" filter="true" placeholder="Select Grade" 
+                                itemSize="30" optionLabel="label" name="grade" [showClear]="true" ></p-dropdown>
                         </div>
                     </div>
                     <!-- <div class="col-md-4 col-12">
