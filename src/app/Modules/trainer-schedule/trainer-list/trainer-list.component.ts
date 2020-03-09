@@ -28,7 +28,7 @@ export class TrainerListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this._route});
   }
   EditTrainerSchedule(data:any){
-    this.router.navigate(['update/'+btoa(data.trainer_schedule_id)],{ relativeTo: this._route});
+    this.router.navigate(['update/'+data.topic+'/'+btoa(data.trainer_schedule_id)],{ relativeTo: this._route});
   }
 
   DeleteTrainerSchedule(data:any){

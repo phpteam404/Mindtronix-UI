@@ -18,11 +18,12 @@ const routes: Routes = [
     }
   },
   {
-    path: 'update/:id',
+    //path: 'update/:id',
+    path:'update/:name/:id',
     component: UpdateTrainerComponent,
     data: {
       breadcrumbs: 'Update Schedule',
-      title: 'Trainer'
+      title: 'Topic'
     }
   }
 ];
