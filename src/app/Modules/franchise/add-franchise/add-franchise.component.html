@@ -111,7 +111,7 @@
                                 <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.email.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">Email is required
+                                    [ngClass]=" 'error'">Email is required and should be in proper format!
                                 </div> 
                             </div>
                         </div>
@@ -230,7 +230,7 @@
                                 <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Email is required
+                                   [ngClass]=" 'error'"> Contact Email is required and should be in proper format!
                                </div>
                             </div>
                         </div>

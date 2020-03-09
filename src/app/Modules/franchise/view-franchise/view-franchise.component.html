@@ -214,7 +214,7 @@
                                                                 <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
-                                                                <a href="javascript:;" (click)="deleteFrachiseContact(rowData)">
+                                                                <a href="javascript:;" (click)="deleteFranchiseContact(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -358,7 +358,7 @@
                     <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.email.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Email is required
+                        [ngClass]=" 'error'">Email is required and should be in proper format!
                     </div>                      
                 </div>
             </div>
@@ -479,7 +479,7 @@
                     <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
                     <div class="invalid-feedback"
                         *ngIf="secondForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                        [ngClass]=" 'error'"> Contact Email is required
+                        [ngClass]=" 'error'"> Contact Email is required and should be in proper format!
                     </div>
                 </div>
             </div>
@@ -492,23 +492,27 @@
 </p-dialog>
 <!-- fee management popup -->
 <p-dialog header="Edit Fee Management" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
-    <!-- <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()"></form> -->
-    <div class="row custom-form">
-        <div class="col-md-6 col-12 mb-3">
-            <label>Fee Structure <span>*</span></label>
-            <p-multiSelect [options]="FeeStructureList" optionLabel="name" 
-                name="fee_structure" required></p-multiSelect>           
+    <form [formGroup]="thirdForm" (ngSubmit)="thirdFormSubmit()">
+        <div class="row custom-form">
+            <div class="col-md-6 col-12 mb-3">
+                <label>Fee Structure <span>*</span></label>
+                <p-multiSelect [options]="FeeStructureList" optionLabel="name" formControlName="fee_structure"
+                    name="fee_structure" required></p-multiSelect>  
+                <div class="invalid-feedback"
+                        *ngIf="thirdForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
+                    [ngClass]=" 'error'">Fee Structure is required
+                </div>
+            </div>
+            <!-- <div class="col-md-1 col-12 mb-3 mt-4">
+                <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
+            </div> -->
         </div>
-        <div class="col-md-1 col-12 mb-3 mt-4">
-            <button  class="btn-warning add-icon-btn" type="submit" title="Add">+</button>
-        </div>        
-    </div>
-    <div class="text-center mb-2">
-        <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
-        <button pButton class="btn-default" (click)="goToList()" type="button" label="Cancel" (click)="displayBasic2=false;"></button>
-    </div>
-    <!-- </form> -->
-    <div class="custom-table custom-lastchild-list mt-3">
+        <div class="text-center mb-2">
+            <button pButton class="btn-warning mr-2" type="submit" label="Save"></button>
+            <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog();"></button>
+        </div>
+    </form>
+    <!-- <div class="custom-table custom-lastchild-list mt-3">
         <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">           
             <ng-template pTemplate="header" let-columns>
                 <tr>
@@ -531,5 +535,5 @@
                 </tr>
             </ng-template>
         </p-table>
-    </div>
+    </div> -->
 </p-dialog>

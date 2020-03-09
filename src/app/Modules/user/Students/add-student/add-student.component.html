@@ -80,85 +80,85 @@
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Name of Parent/Guardian <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="parent_name" name="parent_name" type="text" required>
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.parent_name.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Parent/Guardian is required
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Name of Parent/Guardian <span>*</span></label>
+                                    <input pinputtext placeholder="Name" formControlName="parent_name" name="parent_name" type="text" required>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.parent_name.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">Parent/Guardian is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Contact Email <span>*</span></label>
+                                    <input pinputtext placeholder="Parent Email" formControlName="email" name="email" type="email" required>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.email.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">Email is required and should be in proper format!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12" *ngIf="!isUpdate">
+                                <div class="form-group">
+                                    <label>Password <span>*</span></label>
+                                    <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" required>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.password.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">Password must be 8 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12" *ngIf="!isUpdate">
+                                <div class="form-group">
+                                    <label>Confirm Password <span>*</span></label>
+                                    <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" required>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.cpassword.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">Confirm Password must be 8 characters
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label>Home Phone <span>*</span></label>
+                                <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
+                                <div class="invalid-feedback"
+                                    *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
+                                    [ngClass]=" 'error'">Home Phone must be 10 digits
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label>Mobile Phone <span>*</span></label>
+                                <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
+                                <div class="invalid-feedback"
+                                    *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
+                                    [ngClass]=" 'error'">Mobile Phone must be 10 digits
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Mobile Phone2 </label>
+                                    <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2">
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">Mobile Phone2 must be 10 digits
+                                    </div>
+                                </div>                        
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Relation</label>
+                                    <p-dropdown [options]="relation"  [showClear]="true" formControlName="relation" filter="true" placeholder="Select Relation" 
+                                        itemSize="30" optionLabel="label" name="relation" ></p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label>Occupation</label>
+                                <input pinputtext type="text" placeholder="Occupation" formControlName="occupation" name="occupation">
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Contact Email <span>*</span></label>
-                            <input pinputtext placeholder="Parent Email" formControlName="email" name="email" type="email" required>
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.email.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Email is required
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
-                        <div class="form-group">
-                            <label>Password <span>*</span></label>
-                            <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" required>
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.password.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Password must be 8 characters
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12" *ngIf="!isUpdate">
-                        <div class="form-group">
-                            <label>Confirm Password <span>*</span></label>
-                            <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" required>
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.cpassword.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Confirm Password must be 8 characters
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Home Phone <span>*</span></label>
-                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
-                        <div class="invalid-feedback"
-                            *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
-                            [ngClass]=" 'error'">Home Phone must be 10 digits
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Mobile Phone <span>*</span></label>
-                        <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
-                        <div class="invalid-feedback"
-                            *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
-                            [ngClass]=" 'error'">Mobile Phone must be 10 digits
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Mobile Phone2 </label>
-                            <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2">
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Mobile Phone2 must be 10 digits
-                            </div>
-                        </div>                        
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Relation</label>
-                            <p-dropdown [options]="relation"  [showClear]="true" formControlName="relation" filter="true" placeholder="Select Relation" 
-                                itemSize="30" optionLabel="label" name="relation" ></p-dropdown>
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Occupation</label>
-                        <input pinputtext type="text" placeholder="Occupation" formControlName="occupation" name="occupation">
-                    </div>
-                </div>
-                </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
@@ -166,32 +166,32 @@
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Name of the school <span>*</span></label>
-                            <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="Select School" 
-                            itemSize="30" optionLabel="label" name="school_id" ></p-dropdown>
-                            <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.school_id.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">School Name is required
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Name of the school <span>*</span></label>
+                                    <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="Select School" 
+                                    itemSize="30" optionLabel="label" name="school_id" ></p-dropdown>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.school_id.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">School Name is required
+                                    </div>
+                                </div>
                             </div>
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Class/Grade</label>
+                                    <p-dropdown [options]="grade"  formControlName="grade" filter="true" placeholder="Select Grade" 
+                                        itemSize="30" optionLabel="label" name="grade" [showClear]="true" ></p-dropdown>
+                                </div>
+                            </div>
+                            <!-- <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>Agency Id</label>
+                                    <input pinputtext type="text" placeholder="Agency Id from locatorage" formControlName="agency_id" name="agency_id">
+                                </div>
+                            </div> -->
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Class/Grade</label>
-                            <p-dropdown [options]="grade"  formControlName="grade" filter="true" placeholder="Select Grade" 
-                                itemSize="30" optionLabel="label" name="grade" [showClear]="true" ></p-dropdown>
-                        </div>
-                    </div>
-                    <!-- <div class="col-md-4 col-12">
-                        <div class="form-group">
-                            <label>Agency Id</label>
-                            <input pinputtext type="text" placeholder="Agency Id from locatorage" formControlName="agency_id" name="agency_id">
-                        </div>
-                    </div> -->
-                </div>
-                </div>
                 </div>
                 <div class="row">
                     <div class="col-12">

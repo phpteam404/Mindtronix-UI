@@ -71,15 +71,18 @@ export class AddSchoolComponent implements OnInit {
     });
   }
   
+  getFranchise() { return this.schoolForm.value.franchise_id.value;}
+  getState() { return this.schoolForm.value.state.value;}
+  getCity() { return this.schoolForm.value.city.value;}
 
   submit(): any {
     this.submitted = false;
     if (this.schoolForm.valid) {
       var params={};
       params = this.schoolForm.value;
-      params['franchise_id'] = this.schoolForm.value.franchise_id.value;
-      params['state'] = this.schoolForm.value.state.value;
-      params['city'] = this.schoolForm.value.city.value;
+      params['franchise_id'] = this.getFranchise();
+      params['state'] = this.getState()();
+      params['city'] = this.getCity();
       this.schoolService.addSchool(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

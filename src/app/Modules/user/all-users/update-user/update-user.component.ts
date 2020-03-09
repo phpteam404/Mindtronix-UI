@@ -71,6 +71,11 @@ export class UpdateUserComponent implements OnInit {
       status: new FormControl('',[Validators.required]), 
     });
   }
+
+  getStatus(){return this.addUserForm.controls.status.value.value;}
+  getfranchise(){return this.addUserForm.controls.franchise_id.value.value;}
+  getuserRole(){return this.addUserForm.controls.user_role_id.value.value;}
+
   getRolesList(){
     var params=new HttpParams().set("dropdown","true");
     this._service.getRolesList(params).subscribe(res=>{
@@ -110,9 +115,9 @@ export class UpdateUserComponent implements OnInit {
       var params={};
       params = this.addUserForm.value;
       params['']
-      params['status'] = this.addUserForm.value.status.value;
-      params['franchise_id'] = this.addUserForm.value.franchise_id.value;
-      params['user_role_id'] = this.addUserForm.value.user_role_id.value;
+      params['status'] = this.getStatus();
+      params['franchise_id'] = this.getfranchise();
+      params['user_role_id'] = this.getuserRole();
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

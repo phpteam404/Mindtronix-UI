@@ -50,7 +50,7 @@
                             <input pinputtext placeholder="Email" formControlName="email" name="email" type="email" required>
                             <div class="invalid-feedback"
                                  *ngIf="schoolForm.controls.email.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Email is required
+                                [ngClass]=" 'error'">Email is required and should be in proper format!
                             </div> 
                         </div>
                     </div>

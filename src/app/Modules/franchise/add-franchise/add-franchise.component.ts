@@ -146,14 +146,21 @@ export class AddFranchiseComponent implements OnInit {
     this.getFeeStructureDropdown();
   }
 
+  getCountry(){ return this.stepOneForm.value.country.value;}
+  getState(){ return this.stepOneForm.value.country.value;}
+  getCity(){ return this.stepOneForm.value.country.value;}
+  getStatus(){ return this.stepOneForm.value.country.value;}
+
+  getContactTitle(){ return this.stepTwoForm.value.contact_title.value; }
+
   stepOneFormSubmit(): any{
     this.submitted1 = false;
     if (this.stepOneForm.valid) {  
       this.fullObject['1'] = this.stepOneForm.value;
-      this.fullObject['1'].country = this.stepOneForm.value.country.value;
-      this.fullObject['1'].state = this.stepOneForm.value.state.value;
-      this.fullObject['1'].city = this.stepOneForm.value.city.value;
-      this.fullObject['1'].status = this.stepOneForm.value.status.value;
+      this.fullObject['1'].country = this.getCountry();
+      this.fullObject['1'].state = this.getState();
+      this.fullObject['1'].city = this.getCity();
+      this.fullObject['1'].status = this.getStatus();
       this.submitted1 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -163,7 +170,7 @@ export class AddFranchiseComponent implements OnInit {
     this.submitted2 = false;
     if (this.stepTwoForm.valid) {
       var obj={};
-      obj['contact_title'] = this.stepTwoForm.value.contact_title.value;
+      obj['contact_title'] = this.getContactTitle();
       obj['contact_name'] = this.stepTwoForm.value.contact_name;
       obj['contact_number'] = this.stepTwoForm.value.contact_number;
       obj['contact_email'] = this.stepTwoForm.value.contact_email;

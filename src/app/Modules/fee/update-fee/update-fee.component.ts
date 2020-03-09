@@ -61,13 +61,17 @@ export class UpdateFeeComponent implements OnInit {
     this.getMasterData('fee_term');
     this.getMasterData('status');
   }
+
+  getStatus(){ return this.feeForm.value.status.value; }
+  getTerm(){ return this.feeForm.value.term.value; }
+
   submit(): any {
     this.submitted = false;
     if (this.feeForm.valid) {
       var params={};
       params = this.feeForm.value;
-      params['status'] = this.feeForm.value.status.value;
-      params['term'] = this.feeForm.value.term.value;
+      params['status'] = this.getStatus();
+      params['term'] = this.getTerm();
       this._service.saveFee(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

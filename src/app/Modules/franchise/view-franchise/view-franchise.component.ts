@@ -34,7 +34,7 @@ export class ViewFranchiseComponent implements OnInit {
   submitted1=null;
   secondForm:FormGroup;
   submitted2=null;
-  ThridForm:FormGroup;
+  thirdForm:FormGroup;
   submitted3=null;
   
   FeeStructureList:any;
@@ -87,7 +87,7 @@ export class ViewFranchiseComponent implements OnInit {
     this.displayBasic2 = false;
     this.firstForm.reset();
     this.secondForm.reset();
-    this.ThridForm.reset();
+    this.thirdForm.reset();
   }
   showBasicDialog1(isCreate) {
     this.displayBasic1 = true;
@@ -129,7 +129,7 @@ export class ViewFranchiseComponent implements OnInit {
       contact_email: new FormControl('',[Validators.required, Validators.email]),
       contact_number :new FormControl('',[Validators.required,Validators.minLength(10) ]),
     });
-    this.ThridForm = new FormGroup({  
+    this.thirdForm = new FormGroup({  
       fee_structure :new FormControl('',[Validators.required])
     });
     this.getMasterDropdown('state');
@@ -227,15 +227,23 @@ export class ViewFranchiseComponent implements OnInit {
       }
     });
   }
+
+  getCountry(){ return this.firstForm.value.country.value;}
+  getState(){ return this.firstForm.value.country.value;}
+  getCity(){ return this.firstForm.value.country.value;}
+  getStatus(){ return this.firstForm.value.country.value;}
+
+  getContactTitle(){ return this.secondForm.value.contact_title.value; }
+
   firstFormSubmit(){
     this.submitted1=false;
     if(this.firstForm.valid){
       var obj={};
       obj = this.firstForm.value;
-      obj['country'] = this.firstForm.value.country.value;
-      obj['state'] = this.firstForm.value.state.value;
-      obj['city'] = this.firstForm.value.city.value;
-      obj['status'] = this.firstForm.value.status.value;
+      obj['country'] = this.getCountry();
+      obj['state'] = this.getState();
+      obj['city'] = this.getCity();
+      obj['status'] = this.getStatus();
       obj['franchise_id'] = this.franchiseObj.franchise_id;
       this._service.addUpdate(obj).subscribe(res=>{
         if(res.status){
@@ -253,14 +261,10 @@ export class ViewFranchiseComponent implements OnInit {
   secondFormSubmit(){
     this.submitted2=false;
     if(this.secondForm.valid){
-      var obj={},form={};
-      form = this.secondForm.value;
-      obj['contact_title_display'] = form['contact_title'].label;
-      obj['contact_title'] = form['contact_title'].value;
-      obj['contact_name'] = form['contact_name'];
-      obj['contact_email'] = form['contact_email'];
-      obj['contact_number'] = form['contact_number'];
-      obj['franchise_id']=this.franchiseId;
+      var obj={};
+      obj = this.secondForm.value;
+      obj['contact_title'] = this.getContactTitle();
+      obj['franchise_id'] = this.franchiseId;
       if(!this.secondFormCreate) obj['franchise_contact_id'] = this.secondForm.value.franchise_contact_id;
       this._service.updateFranchiseContacts(obj).subscribe(res => {
         if(res.status){
@@ -304,9 +308,38 @@ export class ViewFranchiseComponent implements OnInit {
       contact_number : data.contact_number,
     });
   }
-  deleteFrachiseContact(data:any){
+  deleteFranchiseContact(data:any){
     console.log('data', data);
     var params = new HttpParams().set('tablename','franchise_contacts').set('id',data.franchise_contact_id);
+    this._cService.delete(params).subscribe(res => {
+      if(res.status){
+        this.getFranchiseInfo(this.franchiseId);
+      }
+    });
+  }
+
+  thirdFormSubmit(){
+    this.submitted3=false;
+    if(this.thirdForm.valid){
+      var params={};
+      var fee=[];
+      this.thirdForm.value.fee_structure.forEach(item => {
+        fee.push(item.fee_master_id);
+      });
+      params['fee_master_id'] = fee.toString();
+      params['franchise_id'] = this.franchiseId;
+      this._service.updateFranchiseFee(params).subscribe(res => {
+        if(res.status){
+          this.getFranchiseInfo(this.franchiseId);
+          this.hideBasicDialog();
+        }
+      })
+    }
+  }
+
+  deleteFranchiseFee(data:any){
+    console.log('data', data);
+    var params = new HttpParams().set('tablename','franchise_fee').set('id',data.fee_master_id);
     this._cService.delete(params).subscribe(res => {
       if(res.status){
         this.getFranchiseInfo(this.franchiseId);

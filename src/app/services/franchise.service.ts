@@ -24,4 +24,8 @@ export class FranchiseService {
   updateFranchiseContacts(params){
     return this.clientHttp.post('Franchise/addUpdateFranchiseContacts',params);
   }
+
+  updateFranchiseFee(params){
+    return this.clientHttp.post('Franchise/addFranchiseFeeMaster',params);
+  }
 }

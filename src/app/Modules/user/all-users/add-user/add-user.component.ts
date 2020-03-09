@@ -63,6 +63,10 @@ export class AddUserComponent implements OnInit {
       // ])
     });
   }
+  
+  getStatus(){return this.addUserForm.controls.status.value.value;}
+  getfranchise(){return this.addUserForm.controls.franchise_id.value.value;}
+  getuserRole(){return this.addUserForm.controls.user_role_id.value.value;}
 
   submit(): any{
     this.submitted = false;
@@ -77,16 +81,15 @@ export class AddUserComponent implements OnInit {
       }  
       var params={};
       params = this.addUserForm.value;
-      params['status'] = this.addUserForm.value.status.value;
-      params['franchise_id'] = this.addUserForm.value.franchise_id.value;
-      params['user_role_id'] = this.addUserForm.value.user_role_id.value;
+      params['status'] = this.getStatus();
+      params['franchise_id'] = this.getfranchise();
+      params['user_role_id'] = this.getuserRole();
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
           this._router.navigate(['users/all-users']);
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
         }
+        console.log('form value---', this.addUserForm.value);
       });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');

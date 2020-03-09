@@ -118,7 +118,14 @@ export class AddStudentComponent implements OnInit {
       }
     });
   }
-
+  getNationality(){ return this.studentForm.value.nationality.value;}
+  getMotherTongue(){ return this.studentForm.value.mother_tongue.value;}
+  getFeeStructure(){ return this.studentForm.value.fee_structure.value;}
+  getRelation(){ return this.studentForm.value.relation.value;}
+  getSchool(){ return this.studentForm.value.school_id.value;}
+  getGrade(){ return this.studentForm.value.grade.value;}
+  getBloodGroup(){ return this.studentForm.value.blood_group.value;}
+  getStatus(){ return this.studentForm.value.status.value;}
   submit(): any{
     this.submitted = false;
     if (this.studentForm.valid) {
@@ -128,15 +135,15 @@ export class AddStudentComponent implements OnInit {
       if(pass === confirmPass){
           var params={};
           params =this.studentForm.value;
-          params['user_role_id'] =4;
-          params['nationality'] =this.studentForm.value.nationality.value;
-          params['mother_tongue'] =this.studentForm.value.mother_tongue.value;
-          params['fee_structure'] =this.studentForm.value.fee_structure.value;
-          params['relation'] =this.studentForm.value.relation.value;
-          params['school_id'] =this.studentForm.value.school_id.value;
-          params['grade'] = this.studentForm.value.grade.value;
-          params['blood_group'] =this.studentForm.value.blood_group.value;
-          params['status'] =this.studentForm.value.status.value;
+          params['user_role_id'] = 4;
+          params['nationality'] = this.getNationality();
+          params['mother_tongue'] = this.getMotherTongue();
+          params['fee_structure'] = this.getFeeStructure();
+          params['relation'] = this.getRelation();
+          params['school_id'] = this.getSchool();
+          params['grade'] = this.getGrade();
+          params['blood_group'] =this.getBloodGroup();
+          params['status'] = this.getStatus();
           params['date_of_birth'] =this.datepipe.transform(this.studentForm.value.date_of_birth, 'yyyy/MM/dd');
           this.userService.saveUser(params).subscribe(res => {
             if (res.status) {

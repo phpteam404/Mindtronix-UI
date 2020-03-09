@@ -39,8 +39,8 @@ export class UpdateTrainerComponent implements OnInit {
             from_time: new Date(this.trainerObj.from_time),
             to_time: new Date(this.trainerObj.to_time),
           });
-          this.fromTime = this.scheduleForm.value.from_time;
-          this.toTime = this.scheduleForm.value.to_time;
+          this.fromTime = this.getFromTime();
+          this.toTime = this.getToTime();
           if (this.fromTime.getTime() > this.toTime.getTime()) {
             this.validTime=false;
           }else this.validTime=true;
@@ -60,20 +60,24 @@ export class UpdateTrainerComponent implements OnInit {
     });
   }
 
+  getDate() { return this.scheduleForm.value.date;}
+  getFromTime() { return this.scheduleForm.value.from_time;}
+  getToTime() { return this.scheduleForm.value.to_time;}
+
   submit(): any {
     this.submitted = false;
     if (this.scheduleForm.valid) {
-      this.fromTime = this.scheduleForm.value.from_time;
-      this.toTime = this.scheduleForm.value.to_time;
+      this.fromTime = this.getFromTime();
+      this.toTime = this.getToTime();
       if (this.fromTime.getTime() > this.toTime.getTime()) {
         this.validTime=false;
         return false;
       }
       var params={};
       params = this.scheduleForm.value;
-      params['date'] =this.datepipe.transform(this.scheduleForm.value.date, 'yyyy/MM/dd');
-      params['from_time'] =this.datepipe.transform(this.scheduleForm.value.from_time,'HH:mm');
-      params['to_time'] =this.datepipe.transform(this.scheduleForm.value.to_time,'HH:mm');
+      params['date'] =this.datepipe.transform(this.getDate(), 'yyyy/MM/dd');
+      params['from_time'] =this.datepipe.transform(this.getFromTime(),'HH:mm');
+      params['to_time'] =this.datepipe.transform(this.getToTime(),'HH:mm');
       this.userService.addTrainer(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
@@ -91,10 +95,10 @@ export class UpdateTrainerComponent implements OnInit {
     this._router.navigate(['trainer-schedule']);
   }
   timeChanged(){
-    console.log('to_time', this.scheduleForm.value.to_time);
+    console.log('to_time', this.getToTime());
     this.validTime=false;
-    this.fromTime = this.scheduleForm.value.from_time;
-    this.toTime = this.scheduleForm.value.to_time;
+    this.fromTime = this.getFromTime();
+    this.toTime = this.getToTime();
     if (this.fromTime.getTime() < this.toTime.getTime()) {
       console.log('***correct***' );
       this.validTime=true;
