@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { LazyLoadEvent} from 'primeng/api';
 @Component({
   selector: 'app-online-subscription',
   templateUrl: './online-subscription.component.html',
@@ -30,8 +30,11 @@ export class OnlineSubscriptionComponent implements OnInit {
     { field: 'planDate', header: 'Plan Expiry Date' }
   ];
  }
-
+ isEmptyTable() {
+  return (this.list.length == 0 ? true : false);
+} 
   ngOnInit(): void {
   }
 
+ 
 }

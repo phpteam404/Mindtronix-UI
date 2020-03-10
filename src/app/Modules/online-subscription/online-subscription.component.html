@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-table custom-lastchild-list onlineSubscriber-list">
-        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true"  [paginator]="true" 
             [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
