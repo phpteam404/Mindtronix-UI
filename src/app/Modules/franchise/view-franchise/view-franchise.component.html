@@ -369,7 +369,7 @@
                 <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
                 <div class="invalid-feedback"
                         *ngIf="firstForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                    [ngClass]=" 'error'">Contact number must be 10 digits
+                    [ngClass]=" 'error'">Contact number should be minimum 10 digits
                 </div>                  
             </div>
             <div class="col-md-4 col-12">
@@ -490,7 +490,7 @@
                     name="contact_phone" required>                           
                 <div class="invalid-feedback"
                     *ngIf="secondForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
-                    [ngClass]=" 'error'"> Contact number must be 10 digits
+                    [ngClass]=" 'error'"> Contact number should be minimum 10 digits
                 </div>                
             </div>
             <div class="col-md-6 col-12">
@@ -499,7 +499,7 @@
                     <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
                     <div class="invalid-feedback"
                         *ngIf="secondForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                        [ngClass]=" 'error'"> Contact Email is required and should be in proper format!
+                        [ngClass]=" 'error'">Enter valid email
                     </div>
                 </div>
             </div>

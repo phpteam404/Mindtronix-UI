@@ -29,13 +29,13 @@
                                 [ngClass]=" 'error'">Role is required!</div>     -->
                                 
                             <p-dropdown [options]="roles" formControlName="user_role_id" placeholder="Select Role" itemSize="30"
-                                name="role" optionLabel="label" required></p-dropdown>
+                                name="role" optionLabel="label" required (onChange) ="roleBasedFranchise()"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.user_role_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">Role is required!</div>
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="enableFranchise">
                         <div class="form-group">
                             <label>Franchise <span>*</span></label>
                             <p-dropdown [options]="franchise" formControlName="franchise_id" placeholder="Select Franchise" itemSize="30"
@@ -61,7 +61,7 @@
                             name="contact_phone" required>
                         <div class="invalid-feedback"
                             *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'">Contact number must be 10 digits
+                            [ngClass]=" 'error'">Contact number should be minimum 10 digits
                         </div>
                     </div>                    
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">

@@ -80,7 +80,7 @@
         </ul> -->
         <mat-nav-list class="nav-item" *ngFor="let menuItem of menuItems" routerLinkActive="active" [routerLinkActiveOptions]="{exact: false}">
             <a mat-list-item class="nav-link icon-down parent-menu" 
-                *ngIf="menuItem.childs.length>0" href="javascript:;" (click)="menuItem.showSubmenu = !menuItem.showSubmenu;goToFirstChild(menuItem)" [title]="menuItem.title" >
+                *ngIf="menuItem.childs.length>0" href="javascript:;" (click)="menuItem.showSubmenu = !menuItem.showSubmenu;" [title]="menuItem.title" >
                <div class="d-flex align-items-center">
                     <i class="{{menuItem.class}}">{{menuItem.icon}}</i>
                     <p>{{menuItem.title}}</p>

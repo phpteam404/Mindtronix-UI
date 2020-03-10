@@ -40,7 +40,7 @@
                             <input pinputtext placeholder="Contact Number" pKeyFilter="int" formControlName="phone" name="phone" type="text" required>
                             <div class="invalid-feedback"
                                     *ngIf="schoolForm.controls.phone.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Contact Number must be 10 digits
+                                [ngClass]=" 'error'">Contact Number should be minimum 10 digits
                             </div> 
                         </div>
                     </div>

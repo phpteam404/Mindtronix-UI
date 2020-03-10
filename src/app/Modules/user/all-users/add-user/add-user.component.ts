@@ -21,6 +21,7 @@ export class AddUserComponent implements OnInit {
   franchise: any;
   status: any;
   isUpdate:boolean=false;
+  enableFranchise:boolean=true;
 
   formObj: any = {};
   pageTitle:string = "Create User";
@@ -51,7 +52,7 @@ export class AddUserComponent implements OnInit {
       first_name: new FormControl('',[Validators.required]),
       last_name: new FormControl(''),
       user_role_id: new FormControl('',[Validators.required]),
-      franchise_id: new FormControl('',[Validators.required]),
+      franchise_id: new FormControl(''),
       email: new FormControl('',[Validators.required, Validators.email]),
       phone_no: new FormControl('',[Validators.required , Validators.minLength(10)]),
       status: new FormControl('',[Validators.required]),
@@ -128,6 +129,19 @@ export class AddUserComponent implements OnInit {
   }
   cancel(){
     this._router.navigate(['users/all-users']);
+  }
+  roleBasedFranchise(){
+    var roleId =this.getuserRole();
+    console.log('roleId--',roleId);
+    if(Number(roleId)==5) {
+      this.addUserForm.get('franchise_id').clearValidators();      
+      this.addUserForm.controls['franchise_id'].updateValueAndValidity();
+      this.enableFranchise=false;
+    } else {
+      this.addUserForm.controls['franchise_id'].setValidators([Validators.required]);
+      this.addUserForm.controls['franchise_id'].updateValueAndValidity();
+      this.enableFranchise=true;
+    }
   }
 
 }

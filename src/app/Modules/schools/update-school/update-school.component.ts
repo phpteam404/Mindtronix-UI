@@ -6,6 +6,8 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { MasterService } from 'src/app/services/master.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { HttpParams } from '@angular/common/http';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
+
 @Component({
   selector: 'app-update-school',
   templateUrl: '../add-school/add-school.component.html',
@@ -26,10 +28,12 @@ export class UpdateSchoolComponent implements OnInit {
   maxDate: Date;
   isUpdate:boolean=true;
   schoolForm:FormGroup;
+  hideFranchise:boolean;
+
 
   constructor(private _router: Router, private _toast: ToasterService,
               private schoolService: SchoolService, private _ar: ActivatedRoute,
-              private franchiseService:FranchiseService,
+              private franchiseService:FranchiseService,private _ls: LocalStorageService,
               private masterService:MasterService) { 
   
     this.maxDate = new Date();
@@ -69,7 +73,7 @@ export class UpdateSchoolComponent implements OnInit {
       contact_person: new FormControl(''),
       phone: new FormControl('', [Validators.required, Validators.minLength(10) ]),
       email: new FormControl('', [Validators.required, Validators.email]),
-      franchise_id: new FormControl('',[Validators.required]),
+      franchise_id: new FormControl(''),
       address: new FormControl(''),
       state: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
@@ -79,6 +83,7 @@ export class UpdateSchoolComponent implements OnInit {
     this.getMasterDropdown('state');
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
+    this.conditionalValidation();
   }
 
 
@@ -138,5 +143,16 @@ export class UpdateSchoolComponent implements OnInit {
     this._router.navigate(['schools_management']);
   }
 
+  conditionalValidation(){
+    var userRole = this._ls.getItem('user',true).data.user_role_id;
+    console.log('userRole---', userRole);
+    if(Number(userRole)==2) {
+      this.schoolForm.get('franchise_id').clearValidators();
+      this.hideFranchise=true;
+    } else {
+      this.schoolForm.get('franchise_id').setValidators(Validators.required)
+      this.hideFranchise=false;
+    }
+  }
   
 }

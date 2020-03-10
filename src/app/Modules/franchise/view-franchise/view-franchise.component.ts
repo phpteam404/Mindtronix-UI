@@ -92,9 +92,15 @@ export class ViewFranchiseComponent implements OnInit {
   showBasicDialog1(isCreate) {
     this.displayBasic1 = true;
     this.secondFormCreate = isCreate;
+    this.submitted2=null;
   }
   showBasicDialog2() {
-    this.displayBasic2 = true;    
+    this.displayBasic2 = true;
+    this.submitted3=null;
+    /*this.thirdForm.setValue({
+      fee_structure:this.FeeList.fee_structure
+    });*/
+    console.log('prepopulate---', this.franchiseObj.fee_detalis);
   }
 
   ngOnInit(): void {
@@ -206,7 +212,7 @@ export class ViewFranchiseComponent implements OnInit {
     });
   }
   getFeeStructureDropdown(){
-    var params = new HttpParams().set('status',1+'');
+    var params = new HttpParams().set('status',1+'').set('franchise_id',this.franchiseId);
     this._feeService.getList(params).subscribe(res=>{
       if(res.status){
         this.FeeStructureList = res.data.data;
@@ -251,6 +257,8 @@ export class ViewFranchiseComponent implements OnInit {
         }
       });
       this.hideBasicDialog();
+    }else{
+      this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   secondFormSubmit(){
@@ -263,10 +271,13 @@ export class ViewFranchiseComponent implements OnInit {
       if(!this.secondFormCreate) obj['franchise_contact_id'] = this.secondForm.value.franchise_contact_id;
       this._service.updateFranchiseContacts(obj).subscribe(res => {
         if(res.status){
+          this.submitted1=true;
           this.getFranchiseInfo(this.franchiseId);
           this.hideBasicDialog();
         }
       });
+    }else{
+      this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   getFranchiseData(){
@@ -324,10 +335,13 @@ export class ViewFranchiseComponent implements OnInit {
       params['franchise_id'] = this.franchiseId;
       this._service.updateFranchiseFee(params).subscribe(res => {
         if(res.status){
+          this.submitted3=true;
           this.getFranchiseInfo(this.franchiseId);
           this.hideBasicDialog();
         }
       })
+    }else{
+      this._toast.show('warning','Please enter mandatory fields.');
     }
   }
 

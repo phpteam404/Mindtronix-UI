@@ -102,7 +102,7 @@
                             <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="phone" name="phone" required>
                             <div class="invalid-feedback"
                                     *ngIf="stepOneForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                                [ngClass]=" 'error'">Contact number must be 10 digits
+                                [ngClass]=" 'error'">Contact number should be minimum 10 digits
                             </div> 
                         </div>
                         <div class="col-md-4 col-12">
@@ -193,7 +193,7 @@
             <mat-step label="Contact Information">
                 <form [formGroup]="stepTwoForm" (ngSubmit)="stepTwoFormSubmit()">
                     <div class="row">
-                        <div class="col-md-3 col-12">
+                        <div class="col-md-2 col-12">
                             <div class="form-group">
                                 <label>Contact Title <span>*</span></label>
                                 <p-dropdown [options]="title" formControlName="contact_title" placeholder="Select Title" itemSize="30"
@@ -215,13 +215,13 @@
                             </div>
                         </div>
                        
-                        <div class="col-md-2 col-12">
+                        <div class="col-md-3 col-12">
                             <label>Contact Number <span>*</span></label>
                             <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_number"
                                 name="contact_phone" required>                           
                             <div class="invalid-feedback"
                                 *ngIf="stepTwoForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
-                                [ngClass]=" 'error'"> Contact number must be 10 digits
+                                [ngClass]=" 'error'"> Contact number should be minimum 10 digits
                             </div>
                         </div>
                         <div class="col-md-3 col-12">
@@ -230,8 +230,8 @@
                                 <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
                                 <div class="invalid-feedback"
                                     *ngIf="stepTwoForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                                   [ngClass]=" 'error'"> Contact Email is required and should be in proper format!
-                               </div>
+                                   [ngClass]=" 'error'">Enter valid email
+                                </div>
                             </div>
                         </div>
                         <div class="col-md-1 col-12 mt-4">

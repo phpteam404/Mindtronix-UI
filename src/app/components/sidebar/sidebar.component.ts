@@ -83,9 +83,11 @@ export class SidebarComponent implements OnInit {
   }
   goToFirstChild(obj){
     var current = location.hash.split('#')[1];
+    console.log('obj.path---',obj,'--current--', current);
     if(current.includes(obj.path)){
       console.log('own child');
     }else{
+      console.log('others');
       if(obj.showSubmenu && obj.showFirst)
         this.router.navigate([obj.childs[0].path]);
       else this.router.navigate([obj.childs[0].path]);

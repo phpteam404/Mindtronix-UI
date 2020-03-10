@@ -125,7 +125,7 @@
                                 <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
-                                    [ngClass]=" 'error'">Home Phone must be 10 digits
+                                    [ngClass]=" 'error'">Home Phone should be minimum 10 digits
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
@@ -133,7 +133,7 @@
                                 <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
-                                    [ngClass]=" 'error'">Mobile Phone must be 10 digits
+                                    [ngClass]=" 'error'">Mobile Phone should be minimum 10 digits
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
@@ -142,7 +142,7 @@
                                     <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2">
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Mobile Phone2 must be 10 digits
+                                        [ngClass]=" 'error'">Mobile Phone2 should be minimum 10 digits
                                     </div>
                                 </div>                        
                             </div>
