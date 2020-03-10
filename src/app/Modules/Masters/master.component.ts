@@ -6,6 +6,9 @@ import { ToasterService } from '../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http'
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 
+import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import {ConfirmationService} from 'primeng/api';
+
 interface Master {
   master_name: string,
   master_id: string,
@@ -41,7 +44,8 @@ export class MasterComponent implements OnInit {
               private _service: MasterService,
               private _commonService: CommonService,
               private _route: ActivatedRoute,
-              private _toast: ToasterService) { 
+              private _toast: ToasterService,
+              private _confirm: ConfirmationService) { 
     
     
     this.cols = [
@@ -82,7 +86,6 @@ export class MasterComponent implements OnInit {
         this.displayBasic = false;
         this.loading = false;
       }else{
-        this._toast.show('error',res.error);
         this.loading = false;
       }
     });
@@ -113,9 +116,7 @@ export class MasterComponent implements OnInit {
           this.getMasterChilds(res.data.data[0].master_key);
           this.selectedMaster = res.data.data[0];
         }
-      }else{
-        this._toast.show('error',res.error);
-      }
+      }else{}
       this.loading = false;
     });
   }
@@ -128,27 +129,32 @@ export class MasterComponent implements OnInit {
       if(res.status){
         this.MasterChilds = res.data.data;
         this.cols = res.data.table_headers;
-      }else{
-        this._toast.show('error',res.error);
-      }
+      }else{}
       this.loading = false;
     });
   }
   
   deleteMasterChild(rowData){
-    this.loading = true;
-    // console.log('deleteMasterChild rowData', rowData); 
-    var params = new HttpParams()
-                  .set('tablename','master_child')
-                  .set('id',rowData.master_child_id)   
-    this._commonService.delete(params).subscribe(res=>{
-      if(res.status){
-        this.getMasterChilds(this.selectedMaster['master_key']);
-      }else{
-        this._toast.show('error',res.error);
-      }
-      this.loading = false;
-    });
+   /* console.log('deleteMasterChild');
+    this._confirm.confirm({
+      message: 'Do you want to delete this record?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-info-circle',
+      accept: () => {*/
+        this.loading = true;
+        // console.log('deleteMasterChild rowData', rowData); 
+        var params = new HttpParams()
+                      .set('tablename','master_child')
+                      .set('id',rowData.master_child_id)   
+        this._commonService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getMasterChilds(this.selectedMaster['master_key']);
+          }else{}
+          this.loading = false;
+        });
+     /* },
+      reject: () => {}
+    });    */
   }
 
   submit(){
@@ -170,7 +176,6 @@ export class MasterComponent implements OnInit {
           this.loading = false;
           this.submitted=true;
         }else{
-          this._toast.show('error',res.error);
           this.loading = false;
         }
       });

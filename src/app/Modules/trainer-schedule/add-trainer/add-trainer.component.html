@@ -33,7 +33,7 @@
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>From Time <span>*</span></label>
-                            <p-calendar name="from_time" formControlName="from_time" (onSelect)="timeChanged()" [timeOnly]="true" hourFormat="24" readonlyInput="true"></p-calendar>
+                            <p-calendar name="from_time" formControlName="from_time" (onSelect)="timeChanged1()" [timeOnly]="true" hourFormat="24" readonlyInput="true"></p-calendar>
                             <div class="invalid-feedback"
                                 *ngIf="scheduleForm.controls.from_time.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'"> From Time is required

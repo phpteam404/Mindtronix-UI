@@ -20,7 +20,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 2" [field]="col.field"></p-sortIcon>
                     </th>

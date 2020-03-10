@@ -6,6 +6,7 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { MasterService } from 'src/app/services/master.service';
 import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
 
 @Component({
   selector: 'app-add-school',
@@ -20,8 +21,11 @@ export class AddSchoolComponent implements OnInit {
   state:any=[];
   city:any=[];
   country:any=[];
+  hideFranchise:boolean;
 
-  constructor(private _router: Router, private _toast: ToasterService,
+  constructor(private _router: Router,
+              private _toast: ToasterService,
+              private _ls: LocalStorageService,
               private schoolService:SchoolService,
               private franchiseService:FranchiseService,
               private masterService:MasterService) { }
@@ -31,7 +35,7 @@ export class AddSchoolComponent implements OnInit {
     contact_person: new FormControl(''),
     phone: new FormControl('', [Validators.required, Validators.minLength(10) ]),
     email: new FormControl('', [Validators.required, Validators.email]),
-    franchise_id: new FormControl('',[Validators.required]),
+    franchise_id: new FormControl(''),
     address: new FormControl(''),
     state: new FormControl('', [Validators.required]),
     city: new FormControl('', [Validators.required]),
@@ -43,6 +47,7 @@ export class AddSchoolComponent implements OnInit {
     this.getMasterDropdown('state');
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
+    this.conditionalValidation();
   }
 
   getFranchiseDropdown(){
@@ -81,7 +86,7 @@ export class AddSchoolComponent implements OnInit {
       var params={};
       params = this.schoolForm.value;
       params['franchise_id'] = this.getFranchise();
-      params['state'] = this.getState()();
+      params['state'] = this.getState();
       params['city'] = this.getCity();
       this.schoolService.addSchool(params).subscribe(res => {
         if (res.status) {
@@ -99,6 +104,18 @@ export class AddSchoolComponent implements OnInit {
 
   goToList(){
     this._router.navigate(['schools_management']);
+  }
+
+  conditionalValidation(){
+    var userRole = this._ls.getItem('user',true).data.user_role_id;
+    console.log('userRole---', userRole);
+    if(Number(userRole)==2) {
+      this.schoolForm.get('franchise_id').clearValidators();
+      this.hideFranchise=true;
+    } else {
+      this.schoolForm.get('franchise_id').setValidators(Validators.required)
+      this.hideFranchise=false;
+    }
   }
 
 }

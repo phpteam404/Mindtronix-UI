@@ -71,6 +71,7 @@ export class UpdateTrainerComponent implements OnInit {
       this.toTime = this.getToTime();
       if (this.fromTime.getTime() > this.toTime.getTime()) {
         this.validTime=false;
+        this._toast.show('warning','To Time must be more than From Time');
         return false;
       }
       var params={};
@@ -94,17 +95,34 @@ export class UpdateTrainerComponent implements OnInit {
   goToList(){
     this._router.navigate(['trainer-schedule']);
   }
-  timeChanged(){
-    console.log('to_time', this.getToTime());
+  timeChanged1(){
     this.validTime=false;
     this.fromTime = this.getFromTime();
     this.toTime = this.getToTime();
-    if (this.fromTime.getTime() < this.toTime.getTime()) {
-      console.log('***correct***' );
+    if(this.toTime !=''){
+      if (this.fromTime.getTime() < this.toTime.getTime()) {
+        this.validTime=true;
+      }else{
+        if(!this.scheduleForm.valid && this.submitted==null){
+          this.validTime=false;
+        }
+      }
+    }else {
       this.validTime=true;
-    }else{
-      console.log('---wrong---');
-      this.validTime=false;
+    }
+  }
+  timeChanged(){
+    this.validTime=false;
+    this.fromTime = this.getFromTime();
+    this.toTime = this.getToTime();
+    if(this.fromTime != ''){
+      if (this.fromTime.getTime() < this.toTime.getTime()) {
+        this.validTime=true;
+      }else{
+        this.validTime=false;
+      }
+    }else {
+      this.validTime=true;
     }
   }
 }

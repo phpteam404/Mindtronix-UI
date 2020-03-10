@@ -54,7 +54,7 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-4 col-12" *ngIf="!hideFranchise">
                         <div class="form-group">
                             <label>Franchise <span>*</span></label>
                             <p-dropdown [options]="franchise" formControlName="franchise_id" filter="true" placeholder="Select Franchise" itemSize="30"
