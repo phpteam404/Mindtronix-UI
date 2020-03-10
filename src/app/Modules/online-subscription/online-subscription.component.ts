@@ -34,4 +34,8 @@ export class OnlineSubscriptionComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isEmptyTable() {
+    return (this.list.length == 0 ? true : false);
+  }
+
 }

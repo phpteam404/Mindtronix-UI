@@ -61,7 +61,7 @@ export class StudentListComponent implements OnInit {
     this.getFranchiseList();
     this._ar.queryParams.subscribe(params => {
       console.log('params info',params);
-      this.id = atob(params['school_id']);
+      if(params['school_id'])this.id = atob(params['school_id']);
     });
     this.getSchoolsList();
   }

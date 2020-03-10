@@ -229,9 +229,9 @@ export class ViewFranchiseComponent implements OnInit {
   }
 
   getCountry(){ return this.firstForm.value.country.value;}
-  getState(){ return this.firstForm.value.country.value;}
-  getCity(){ return this.firstForm.value.country.value;}
-  getStatus(){ return this.firstForm.value.country.value;}
+  getState(){ return this.firstForm.value.state.value;}
+  getCity(){ return this.firstForm.value.city.value;}
+  getStatus(){ return this.firstForm.value.status.value;}
 
   getContactTitle(){ return this.secondForm.value.contact_title.value; }
 

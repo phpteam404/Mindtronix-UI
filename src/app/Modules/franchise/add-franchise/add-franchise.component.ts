@@ -147,9 +147,9 @@ export class AddFranchiseComponent implements OnInit {
   }
 
   getCountry(){ return this.stepOneForm.value.country.value;}
-  getState(){ return this.stepOneForm.value.country.value;}
-  getCity(){ return this.stepOneForm.value.country.value;}
-  getStatus(){ return this.stepOneForm.value.country.value;}
+  getState(){ return this.stepOneForm.value.state.value;}
+  getCity(){ return this.stepOneForm.value.city.value;}
+  getStatus(){ return this.stepOneForm.value.status.value;}
 
   getContactTitle(){ return this.stepTwoForm.value.contact_title.value; }
 
