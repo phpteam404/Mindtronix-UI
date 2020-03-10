@@ -14,7 +14,7 @@ export class FranchiseInvoiceComponent implements OnInit {
  
   students: any;
   cols:any;
- 
+  totalRecords:number;
   status:Filter[];
   selectedStatus:Filter[];
   constructor(private router: Router, private _route: ActivatedRoute) {
@@ -54,6 +54,10 @@ export class FranchiseInvoiceComponent implements OnInit {
       
     ];
   }
+  isEmptyTable() {
+    return (this.students.length == 0 ? true : false);
+  }
+  
   ngOnInit(): void {
   }
   onChange2(event){

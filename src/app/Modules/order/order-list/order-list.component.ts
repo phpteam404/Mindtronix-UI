@@ -9,6 +9,7 @@ export class OrderListComponent implements OnInit {
   cities: any;
   cars: any;
   cols:any;
+  totalRecords:number;
   constructor() {
     this.cities = [
         {label:'Select City', value:null},
@@ -45,6 +46,8 @@ export class OrderListComponent implements OnInit {
   ngOnInit(): void {
   
   }
-
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
  
 }

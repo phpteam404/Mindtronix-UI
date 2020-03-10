@@ -13,7 +13,7 @@ export class StudentInvoiceComponent implements OnInit {
 
   students: any;
   cols:any;
- 
+  totalRecords:number;
   status:Filter[];
   selectedStatus:Filter[];
   constructor(private router: Router, private _route: ActivatedRoute) {
@@ -52,6 +52,10 @@ export class StudentInvoiceComponent implements OnInit {
       {invoiceNo:'MIS0012',name:'Rani', phone:'7890010006', email:'Rani@gmail.com', date:'26-02-2020', Amount:'₹ 3,000',status:'Due',actions:''},
       
     ];
+  }
+
+  isEmptyTable() {
+    return (this.students.length == 0 ? true : false);
   }
   ngOnInit(): void {
   }
