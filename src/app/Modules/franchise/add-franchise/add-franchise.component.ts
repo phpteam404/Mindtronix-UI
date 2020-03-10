@@ -67,7 +67,7 @@ export class AddFranchiseComponent implements OnInit {
     ];
 
     this.contactsListCols = [
-      { field: 'contact_title', header: 'Contact Title' },
+      { field: 'contact_title_display', header: 'Contact Title' },
       { field: 'contact_name', header: 'Contact Name' },
       { field: 'contact_number', header: 'Contact Number' },
       { field: 'contact_email', header: 'Contact Email' },
@@ -127,7 +127,7 @@ export class AddFranchiseComponent implements OnInit {
       state:new FormControl('',[Validators.required]),
       city:new FormControl('',[Validators.required]),
       status :new FormControl('',[Validators.required]),
-      address: new FormControl('',[Validators.required]),
+      address: new FormControl(''),
     });
     this.stepTwoForm = new FormGroup({  
       contact_title :new FormControl('',[Validators.required]),
@@ -152,9 +152,11 @@ export class AddFranchiseComponent implements OnInit {
   getStatus(){ return this.stepOneForm.value.status.value;}
 
   getContactTitle(){ return this.stepTwoForm.value.contact_title.value; }
+  getContactTitleLabel(){ return this.stepTwoForm.value.contact_title.label; }
 
   stepOneFormSubmit(): any{
     this.submitted1 = false;
+    console.log('this.stepOneForm.value--', this.stepOneForm.value);
     if (this.stepOneForm.valid) {  
       this.fullObject['1'] = this.stepOneForm.value;
       this.fullObject['1'].country = this.getCountry();
@@ -163,6 +165,7 @@ export class AddFranchiseComponent implements OnInit {
       this.fullObject['1'].status = this.getStatus();
       this.submitted1 = true;
     }else{
+      console.log('1**');
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
@@ -170,6 +173,7 @@ export class AddFranchiseComponent implements OnInit {
     this.submitted2 = false;
     if (this.stepTwoForm.valid) {
       var obj={};
+      obj['contact_title_display'] = this.getContactTitleLabel();
       obj['contact_title'] = this.getContactTitle();
       obj['contact_name'] = this.stepTwoForm.value.contact_name;
       obj['contact_number'] = this.stepTwoForm.value.contact_number;

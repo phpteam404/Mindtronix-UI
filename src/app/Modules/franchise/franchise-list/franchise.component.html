@@ -69,12 +69,15 @@
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
-                        <span *ngIf="i == 7" class="d-flex action-color">
-                            <!-- <a href="javascript:;" (click)="editFranchise(rowData)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
-                            <!-- <a href="javascript:;" (click)="AddNewFranchise($event)"><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a> -->
-                            <a href="javascript:;" (click)="GoToUsers($event)"><span class="icon icon-admin-2 mr-2" title="Manage Users"></span> </a>
-                            <a href="javascript:;" (click)="GoToSchools($event)"><span class="icon icon-address" title="Manage Schools"></span></a>
+                        <span class="d-flex action-color" *ngIf="i == 7 && isEnabled(rowData)">
+                            <a href="javascript:;" (click)="goToUsers(rowData)">
+                                <span class="icon icon-admin-2 mr-2" title="Manage Users"></span>
+                            </a>
+                            <a href="javascript:;" (click)="goToSchools(rowData)">
+                                <span class="icon icon-address" title="Manage Schools"></span>
+                            </a>
                         </span>
+                        <span class="d-flex action-color" *ngIf="i == 7 && !isEnabled(rowData)">---</span>
                     </td>
                 </tr>
             </ng-template>

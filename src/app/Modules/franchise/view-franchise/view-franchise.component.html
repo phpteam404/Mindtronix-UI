@@ -192,7 +192,7 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                    <div class="col-12 custom-btn-edit">
+                                    <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
                                         <button type="button" title="Add" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
@@ -210,7 +210,7 @@
                                                     <tr>
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                                                            <span *ngIf="i == 4"  class="d-flex action-color">
+                                                            <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
                                                                 <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
@@ -218,8 +218,18 @@
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
+                                                            <span class="d-flex action-color" *ngIf="i == 4 && !isEnabled()">---</span>
                                                         </td>
                                                     </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="footer" let-columns>
+                                                    <ng-container *ngIf="isEmptyTable1()">
+                                                    <tr>
+                                                      <td [attr.colspan]="columns.length" class="text-center">
+                                                        No records found
+                                                      </td>
+                                                    </tr>
+                                                    </ng-container>
                                                 </ng-template>
                                             </p-table>
                                         </div>
@@ -232,7 +242,7 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                    <div class="col-12 custom-btn-edit">
+                                    <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
                                         <button type="button" class="btn" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
@@ -259,13 +269,23 @@
                                                     <tr>
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                                                            <span *ngIf="i == 4"  class="d-flex action-color">
+                                                            <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
                                                                 <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
+                                                            <span class="d-flex action-color" *ngIf="i == 4 && !isEnabled()">---</span>
                                                         </td>
                                                     </tr>
+                                                </ng-template>
+                                                <ng-template pTemplate="footer" let-columns>
+                                                    <ng-container *ngIf="isEmptyTable()">
+                                                    <tr>
+                                                      <td [attr.colspan]="columns.length" class="text-center">
+                                                        No records found
+                                                      </td>
+                                                    </tr>
+                                                    </ng-container>
                                                 </ng-template>
                                             </p-table>
                                         </div> 

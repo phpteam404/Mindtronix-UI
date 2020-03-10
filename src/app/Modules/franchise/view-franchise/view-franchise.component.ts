@@ -102,7 +102,6 @@ export class ViewFranchiseComponent implements OnInit {
       this.franchiseId = atob(params['params'].id);
       this.franchiseName = (params['params'].name);
       this.getFranchiseInfo(this.franchiseId);
-      console.log('url params----', this.franchiseName);
       this.getFranchiseData();
     });
     this.loadStatisticsChart();
@@ -182,7 +181,6 @@ export class ViewFranchiseComponent implements OnInit {
       name: 'Collected Amount',
       data: [49.9, 71.5, 98.5]
     };
-    console.log('chart--', chart);
     this.chart = chart;
   }
   getMasterDropdown(masterKey): any{
@@ -201,7 +199,6 @@ export class ViewFranchiseComponent implements OnInit {
           this.title =res.data.data;
         if(masterKey =='status'){
           this.status =res.data.data;
-          this.firstForm.controls['status'].setValue(res.data.data[0]);
         }
       }else{
         this._toast.show('error',res.error);
@@ -249,9 +246,7 @@ export class ViewFranchiseComponent implements OnInit {
         if(res.status){
           this.submitted1 = true;
           this.getFranchiseInfo(this.franchiseObj.franchise_id); 
-          console.log(obj,'****', this.franchiseName);
           if(this.franchiseName === this.firstForm.value.name){
-            console.log('*-*-*same name *-*-*-');
           }else{} //this._router.navigate(['view/'+(this.firstForm.value.name)+'/'+btoa(this.franchiseObj.franchise_id)],{relativeTo:this._ar});
         }
       });
@@ -309,7 +304,6 @@ export class ViewFranchiseComponent implements OnInit {
     });
   }
   deleteFranchiseContact(data:any){
-    console.log('data', data);
     var params = new HttpParams().set('tablename','franchise_contacts').set('id',data.franchise_contact_id);
     this._cService.delete(params).subscribe(res => {
       if(res.status){
@@ -338,12 +332,25 @@ export class ViewFranchiseComponent implements OnInit {
   }
 
   deleteFranchiseFee(data:any){
-    console.log('data', data);
     var params = new HttpParams().set('tablename','franchise_fee').set('id',data.fee_master_id);
     this._cService.delete(params).subscribe(res => {
       if(res.status){
         this.getFranchiseInfo(this.franchiseId);
       }
     });
+  }
+  isEnabled(){
+    if(this.franchiseObj.status == 'active') return true;
+    else return false;
+  }
+  isEmptyTable(){
+    if(this.FeeList)
+      return (this.FeeList.length == 0 ? true : false);
+    else return true;
+  }
+  isEmptyTable1(){
+    if(this.contacts)
+      return (this.contacts.length == 0 ? true : false);
+    else return true;
   }
 }

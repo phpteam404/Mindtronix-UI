@@ -5,6 +5,8 @@ import { ToasterService } from '../../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
+import { FranchiseService } from 'src/app/services/franchise.service';
+import { Table } from 'primeng/table';
 @Component({
   selector: 'app-school-list',
   templateUrl: './school-list.component.html',
@@ -14,16 +16,42 @@ export class SchoolListComponent implements OnInit {
 
   totalRecords: number; 
   loading: boolean;
+  id: any = 0;
+  franchiseId: any;
   schoolsList: any;
+  franchiseList: any[];
   cols: any[];
   first:number=0;
   constructor(private _router: Router,
               private _service: SchoolService,
+              private _fService:FranchiseService,
               private _cService: CommonService, 
               private _toasterService: ToasterService, 
               private _ar: ActivatedRoute) {
   }
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this._ar.queryParams.subscribe(params => {
+      //console.log('params info',params);
+      if(params['franchise_id'])this.id = atob(params['franchise_id']);
+    });
+    this.getFranchiseDropdown();
+  }
+
+  @ViewChild('dt') dt: Table;
+   getFranchiseDropdown(){
+     this._fService.getFranchiseDropDowns({}).subscribe(res=>{
+       if(res.status){
+             this.franchiseList = res.data.data;
+             this.franchiseList.forEach(item => {
+               //console.log('first item info',item);
+               if(item.value == this.id){
+                 this.dt.filter(item,'franchise_id','contains');
+                 this.franchiseId=item;
+               }
+             });
+       }
+     });
+   }
 
   AddNewSchool(event: Event){
     this._router.navigate(['add'], {relativeTo: this._ar});
@@ -67,6 +95,9 @@ export class SchoolListComponent implements OnInit {
     }
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
+    }
+    if(event.filters['franchise_id']){
+      params =params.set('franchise_id',event.filters['franchise_id'].value.value);
     }
     this._service.getschoolsList(params).subscribe(res=>{
       if(res.status){

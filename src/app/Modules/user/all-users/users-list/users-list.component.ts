@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { LazyLoadEvent } from 'primeng/api';
 import { HttpParams } from '@angular/common/http';
 import { CommonService } from 'src/app/services/common.service';
+import { Table } from 'primeng/table';
+import { FranchiseService } from 'src/app/services/franchise.service';
 
 @Component({
   selector: 'app-users-list',
@@ -13,17 +15,38 @@ import { CommonService } from 'src/app/services/common.service';
 export class UsersListComponent implements OnInit {
 
   roles: any;
+  id: any=0;
+  franchiseId: any;
   allUsersList: any;
   totalRecords:number;
   loading: boolean;
+  franchiseList: any[];
   cols: any[];
   first:number=0;
-  constructor(private router: Router,private _service:UserService,private _cService: CommonService, private _route: ActivatedRoute) {
+  constructor(private router: Router,private _service:UserService,private _cService: CommonService, private _fService: FranchiseService, private _route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    //this.getList();
-    console.log('getList');
+    this._route.queryParams.subscribe(params => {
+      console.log('params info',params);
+      if(params['franchise_id'])this.id = atob(params['franchise_id']);
+    });
+    this.getFranchiseDropdown();
+  }
+  
+  @ViewChild('dt') dt: Table;
+  getFranchiseDropdown(){
+    this._fService.getFranchiseDropDowns({}).subscribe(res=>{
+      if(res.status){
+            this.franchiseList = res.data.data;
+            this.franchiseList.forEach(item => {
+              if(item.value == this.id){
+                this.dt.filter(item,'franchise_id','contains');
+                this.franchiseId=item;
+              }
+            });
+      }
+    });
   }
 
   AddNewUser(event: Event){
@@ -59,6 +82,9 @@ export class UsersListComponent implements OnInit {
     }
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
+    }
+    if(event.filters['franchise_id']){
+      params =params.set('franchise_id',event.filters['franchise_id'].value.value);
     }
     this._service.getUsersList(params).subscribe(res=>{
       if(res.status){

@@ -24,19 +24,17 @@ export class FranchiseListComponent implements OnInit {
   AddNewFranchise(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
   }
-  GoToSchools(event: Event){
-    this.router.navigate(['schools_management'], {});
+  goToSchools(data : any){
+    this.router.navigate(['schools_management'], { queryParams: { franchise_id: btoa(data.franchise_id)}});
   }
-  GoToUsers(event: Event){
-    this.router.navigate(['users/all-users'], {});
+  goToUsers(data : any){
+    this.router.navigate(['users/all-users'], { queryParams: { franchise_id: btoa(data.franchise_id)}});
   }
 
   viewFranchise(data){
-    console.log('view===');
     this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
   }
   editFranchise(data){
-    console.log('edit===');
    this.router.navigate(['update/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
   }
   isEmptyTable() {
@@ -44,19 +42,6 @@ export class FranchiseListComponent implements OnInit {
   }
   loadCarsLazy(event: LazyLoadEvent) {
     this.loading = true;
-    console.log('event--', event);
-    console.log('event.first--', event.first);
-    console.log('event.rows--', event.rows);
-    console.log('event.sortField--', event.sortField);
-    console.log('event.sortOrder--', event.sortOrder);
-    //in a real application, make a remote request to load data using state metadata from event
-    //event.first = First row offset
-    //event.rows = Number of rows per page
-    //event.sortField = Field name to sort with
-    //event.sortOrder = Sort order as number, 1 for asc and -1 for dec
-    //filters: FilterMetadata object having field as key and filter value, filter matchMode as value
-    //imitate db connection over a network
-    
     var sortOrder= (event.sortOrder==1)?"ASC":"DESC";
     var params = new HttpParams()
         .set('start', event.first+'')
@@ -77,5 +62,10 @@ export class FranchiseListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  isEnabled(row){
+    if(row.status == 'Active') return true;
+    else return false;
   }
 }
