@@ -7,6 +7,8 @@ import { MasterService } from 'src/app/services/master.service';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { HttpParams } from '@angular/common/http';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-user',
@@ -26,13 +28,17 @@ export class UpdateUserComponent implements OnInit {
   pageTitle:string = "Update User";
 
   constructor(private _router: Router,
-    private _toast: ToasterService,
-    private _service: UserService,
-    private _master: MasterService,
-    private _franchise: FranchiseService,
-    private _ar: ActivatedRoute,
-    private _ls: LocalStorageService) {
-      var id:any;
+              private _toast: ToasterService,
+              private _service: UserService,
+              private _master: MasterService,
+              private _franchise: FranchiseService,
+              private _ar: ActivatedRoute,
+              private _ls: LocalStorageService,
+              public translate: TranslateService) {
+      
+    translate.setDefaultLang(environment.defaultLanguage);
+
+    var id:any;
     _ar.paramMap.subscribe(params => {
       id = atob(params['params'].id);
       var param=new HttpParams().set('user_id',id+'')

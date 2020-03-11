@@ -32,7 +32,9 @@ export class MasterComponent implements OnInit {
   loading: boolean = false;
   name:string = '';
   description:string = '';
-
+  displayButton:boolean;
+  displayBasicDelete:boolean;
+  dataInfo:any;
   cities: any;
   cars: any;
   cols:any;
@@ -60,9 +62,13 @@ export class MasterComponent implements OnInit {
   });
   showBasicDialog(rowData,isCreate) {
     this.submitted=null;
-    if(isCreate)this.form.reset();
     this.displayBasic = true;
-    console.log('selectedMaster rowData', rowData);
+    if(isCreate){
+      this.form.reset();
+      this.displayButton = true;
+    }
+    else
+      this.displayButton = false;
     this.isCreate = isCreate;
     if(!isCreate){
       this.masterChildId = rowData.master_child_id;
@@ -134,27 +140,22 @@ export class MasterComponent implements OnInit {
     });
   }
   
-  deleteMasterChild(rowData){
-   /* console.log('deleteMasterChild');
-    this._confirm.confirm({
-      message: 'Do you want to delete this record?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-info-circle',
-      accept: () => {*/
-        this.loading = true;
-        // console.log('deleteMasterChild rowData', rowData); 
+  deleteMasterChild(){
+        this.loading = true; 
         var params = new HttpParams()
                       .set('tablename','master_child')
-                      .set('id',rowData.master_child_id)   
+                      .set('id',this.dataInfo.master_child_id)   
         this._commonService.delete(params).subscribe(res=>{
           if(res.status){
             this.getMasterChilds(this.selectedMaster['master_key']);
+            this.displayBasicDelete=false;
           }else{}
           this.loading = false;
         });
-     /* },
-      reject: () => {}
-    });    */
+  }
+  showBasicDialogDelete(data:any) {
+    this.displayBasicDelete = true;
+    this.dataInfo =data; 
   }
 
   submit(){

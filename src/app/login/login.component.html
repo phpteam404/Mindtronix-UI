@@ -62,7 +62,7 @@
                                             name="username" type="email" required>
                                         <div class="invalid-feedback"
                                             *ngIf="form.controls.username.invalid && submitted!=null && !submitted"
-                                            [ngClass]=" 'error'"> User Name is required
+                                            [ngClass]=" 'error'">  {{'login.userNameError' | translate }} 
                                         </div>
                                     </div>
                                 </div>
@@ -72,7 +72,7 @@
                                         [feedback]="false" type="password" name="password" required>
                                         <div class="invalid-feedback"
                                             *ngIf="form.controls.password.invalid && submitted!=null && !submitted"
-                                            [ngClass]=" 'error'"> Password is required
+                                            [ngClass]=" 'error'"> {{'login.passwordError' | translate }} 
                                         </div>
                                     </div>
                                 </div>

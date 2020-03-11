@@ -41,7 +41,8 @@ export class UpdateSchoolComponent implements OnInit {
     var id:any;
     _ar.paramMap.subscribe(params => {
       id = atob(params['params'].id);
-      schoolService.getById({'id':id}).subscribe(res=>{
+      var param=new HttpParams().set('school_id',id);
+      schoolService.getById(param).subscribe(res=>{
         if(res.status){
           this.schoolObj = res.data.data[0];
           console.log('schoolobj info',this.schoolObj);

@@ -39,7 +39,7 @@
             </ng-template>
         </p-table> -->
         <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
-            [rows]="10" [totalRecords]="totalRecords" [loading]="loading">
+            [rows]="10" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">                
                 <div class="custom-search">
                     <div class="input-search">

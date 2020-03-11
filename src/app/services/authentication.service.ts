@@ -10,7 +10,6 @@ import { LocalStorageService } from '../utils/local-storage.service';
 })
 export class AuthenticationService {
 
-
     constructor(private http: AppHttpClientService,private ls: LocalStorageService) {}
 
     login(params) {

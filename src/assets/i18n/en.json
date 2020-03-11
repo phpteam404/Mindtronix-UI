@@ -1,0 +1,27 @@
+{
+    "login":{
+        "userName": "User Name",
+        "password": "Password",
+        "userNameError": "User Name is required",
+        "passwordError": "Password is required"
+    },
+    "franchise":{
+        "create": "Create Franchise",
+        "view": "View Franchise",
+        "franchiseDetails": "Franchise Details",
+        "contactInfo": "Contact Information",
+        "feeManagement": "Fee Management"
+    },
+    "fee":{
+        
+    },
+    "buttons":{
+        "save": "Save",
+        "create": "Create",
+        "delete": "Delete",
+        "view": "View",
+        "cancel": "Cancel",
+        "update": "Update"
+    }
+
+}

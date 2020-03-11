@@ -8,6 +8,8 @@ import { HttpParams } from '@angular/common/http';
 import { UserService} from 'src/app/services/user.service';
 import { FeeService} from 'src/app/services/fee.service';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-student',
@@ -35,8 +37,11 @@ export class UpdateStudentComponent implements OnInit {
               private _ar: ActivatedRoute,
               private masterService:MasterService,
               private _service:UserService,
-              private schoolService:SchoolService,private feeService:FeeService,
-              public datepipe: DatePipe) {
+              private schoolService:SchoolService,
+              private feeService:FeeService,
+              public datepipe: DatePipe,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
     console.log('AddStudentComponent---' );
 
     this.maxDate = new Date();

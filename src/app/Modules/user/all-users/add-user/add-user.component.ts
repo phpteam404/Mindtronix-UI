@@ -7,6 +7,8 @@ import { HttpParams } from '@angular/common/http';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { MasterService } from 'src/app/services/master.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-add-user',
@@ -31,7 +33,10 @@ export class AddUserComponent implements OnInit {
               private _service: UserService,
               private _franchise: FranchiseService,
               private _master: MasterService,
-              private _ls: LocalStorageService) { 
+              private _ls: LocalStorageService,
+              public translate: TranslateService) {
+                
+     translate.setDefaultLang(environment.defaultLanguage);
   
     /*this.franchise = [
       {label:'Mindtronix Learning Centre', value:'Mindtronix Learning Centre'},

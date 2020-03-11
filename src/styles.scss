@@ -5,7 +5,26 @@
 .toast-bootstrap-compatibility-fix {
   opacity:1;
 }
-
+.loading-overlay {
+  text-align: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255,255,255,0.5);
+  z-index: 99995;
+  img{
+    top: 50%;
+    left: 50%;
+    position: absolute;
+    width: 75px;
+    transform: translate(-50%,-50%);
+  }
+}
+.loading-overlay.http-service{
+  background: rgba(255,255,255,0.0) !important;
+}
 //form styles start here
 .custom-form{
   background-color: #fff;

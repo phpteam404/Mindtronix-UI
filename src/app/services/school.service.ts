@@ -13,20 +13,20 @@ export class SchoolService {
 
   constructor(private clientHttp : AppHttpClientService) { }
 
-  getschoolsList (param) {
-    return this.clientHttp.get('Franchise/schoolsList?'+param);
+  getschoolsList (params) {
+    return this.clientHttp.get('Franchise/schoolsList', params);
   }
 
   addSchool(params){
-    return this.clientHttp.post('Franchise/addSchool',params).pipe(map(user=>{return user}));
+    return this.clientHttp.post('Franchise/addSchool', params).pipe(map(user=>{return user}));
   }
 
   getById(params){
-    return this.clientHttp.get('Franchise/schoolInfo?school_id='+params.id);
+    return this.clientHttp.get('Franchise/schoolInfo', params);
   }
  
   getSchoolsDropDowns(params){
-    return this.clientHttp.get('Franchise/schoolListForDropDown',params);
+    return this.clientHttp.get('Franchise/schoolListForDropDown', params);
   }
 
 }

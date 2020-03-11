@@ -52,7 +52,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         this.toast.show('success',resJson.message);
       }
     } else {
-      this.toast.show('error',resJson.error);
+      if(resJson.Authentication != undefined){}
+      else this.toast.show('error',resJson.error);
     }
     return resJson;
   }

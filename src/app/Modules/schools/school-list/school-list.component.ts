@@ -17,8 +17,10 @@ export class SchoolListComponent implements OnInit {
   totalRecords: number; 
   loading: boolean;
   id: any = 0;
+  displayBasic:boolean;
   franchiseId: any;
   schoolsList: any;
+  dataInfo:any;
   franchiseList: any[];
   cols: any[];
   first:number=0;
@@ -66,21 +68,26 @@ export class SchoolListComponent implements OnInit {
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }
-  DeleteSchool(data:any){
+  DeleteSchool(){
     var params = new HttpParams()
-        .set('id', data.school_id)
+        .set('id', this.dataInfo.school_id)
         .set('tablename', 'school_master');
        // this._router.navigate(['schools_management'],{relativeTo:this._ar});
     this._cService.delete(params).subscribe(res=>{
       if(res.status){
         this.first=0;
-       //this._toasterService.show('Success',res.message);
+        this.displayBasic = false;
         this.getschoolList();
      }
       else{
         this._toasterService.show('error',JSON.parse(res.error));
       }
     });
+  }
+
+  showBasicDialog(data:any) {
+    this.displayBasic = true;
+    this.dataInfo =data; 
   }
   loadSchoolsLazy(event: LazyLoadEvent) {
     console.log('event--', event);

@@ -193,7 +193,7 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" title="Add" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
+                                        <button type="button" title="Add Contact" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
                                         <div class="custom-table">
@@ -214,7 +214,7 @@
                                                                 <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
-                                                                <a href="javascript:;" (click)="deleteFranchiseContact(rowData)">
+                                                                <a href="javascript:;" (click)="showBasicDialogDelete(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -243,7 +243,7 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" class="btn" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
+                                        <button type="button" class="btn" title ="Add Fee Structure" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
                                         <div class="custom-table ">
@@ -270,7 +270,7 @@
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
-                                                                <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
+                                                                <a href="javascript:;" (click)="showFeeDelete(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -460,7 +460,7 @@
 </p-footer> -->
 </p-dialog>
 <!-- contact information popup -->
-<p-dialog header="Edit Contact Information" [(visible)]="displayBasic1" [style]="{width: '65vw'}" [baseZIndex]="10000">
+<p-dialog header={{header}} [(visible)]="displayBasic1" [style]="{width: '65vw'}" [baseZIndex]="10000">
     <form [formGroup]="secondForm" (ngSubmit)="secondFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
@@ -505,19 +505,20 @@
             </div>
         </div>
         <div class="text-center col-12 mb-2">
-            <button pButton class="btn-warning mr-2" type="submit" label="Update"></button>
+            <button pButton class="btn-warning mr-2" type="submit" *ngIf="buttonDisabled" label="Save"></button> 
+            <button pButton class="btn-warning mr-2" type="submit" *ngIf="!buttonDisabled" label="Update"></button> 
             <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
         </div>
     </form>
 </p-dialog>
 <!-- fee management popup -->
-<p-dialog header="Edit Fee Management" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
+<p-dialog header="Create Fee Structure" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
     <form [formGroup]="thirdForm" (ngSubmit)="thirdFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12 mb-3">
                 <label>Fee Structure <span>*</span></label>
                 <p-multiSelect [options]="FeeStructureList" optionLabel="name" formControlName="fee_structure"
-                    name="fee_structure" required></p-multiSelect>  
+                    name="fee_structure" defaultLabel="Select Fee Structure" required></p-multiSelect>  
                 <div class="invalid-feedback"
                         *ngIf="thirdForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
                     [ngClass]=" 'error'">Fee Structure is required
@@ -556,4 +557,18 @@
             </ng-template>
         </p-table>
     </div> -->
+</p-dialog>
+<p-dialog header="confirmation" [(visible)]="displayBasicDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are you sure you want to delete this record ?
+  <p-footer>
+      <button type="button" pButton class="btn-warning" (click)="deleteFranchiseContact()" label="Yes"></button>
+      <button type="button" pButton class="btn-default" (click)="displayBasicDialog=false" label="No"></button>
+  </p-footer>
+</p-dialog>
+<p-dialog header="confirmation" [(visible)]="displayFeeDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are You Sure You Want To Permanently Delete This Record ???
+  <p-footer>
+      <button type="button" pButton class="btn-warning" (click)="deleteFranchiseFee()" label="Yes"></button>
+      <button type="button" pButton class="btn-default" (click)="displayFeeDialog=false" label="No"></button>
+  </p-footer>
 </p-dialog>

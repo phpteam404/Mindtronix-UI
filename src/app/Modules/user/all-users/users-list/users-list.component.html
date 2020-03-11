@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="custom-table">
         <p-table #dt [columns]="cols" [value]="allUsersList"  [lazy]="true" (onLazyLoad)="loadSchoolsLazy($event)" 
-            [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords" [loading]="loading">
+            [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <!-- <div class="custom-search">
                     <div class="input-search">
@@ -49,7 +49,7 @@
                         </span>
                         <span *ngIf="i == 6" class="d-flex action-color">
                             <a href="javascript:;" (click)="editUser(rowData)" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
-                            <a href="javascript:;" (click)="deleteUser(rowData)"><span class="icon icon-delete" title="Delete"></span></a>
+                            <a href="javascript:;" (click)="showBasicDialog(rowData)"><span class="icon icon-delete" title="Delete"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -66,3 +66,10 @@
         </p-table>
     </div>
 </div>
+<p-dialog header="confirmation" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    Are You Sure You Want To Permanently Delete This Record ?? 
+  <p-footer>
+      <button type="button" pButton class="btn-warning" (click)="deleteUser()" label="Yes"></button>
+      <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
+  </p-footer>
+</p-dialog>

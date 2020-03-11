@@ -1,7 +1,7 @@
 <div class="main-content">
     <div class="custom-table school-list">
         <p-table #dt [columns]="cols" [value]="schoolsList"  [lazy]="true" (onLazyLoad)="loadSchoolsLazy($event)" 
-        [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords" [loading]="loading">
+        [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <!-- <div style="text-align: right">
                     <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
@@ -58,7 +58,7 @@
                         <span *ngIf="i!=5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 5" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditSchool(rowData)"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete mr-2" title="Delete" (click) ="DeleteSchool(rowData)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete mr-2" title="Delete" (click) ="showBasicDialog(rowData)"></span></a>
                             <a href="javascript:;"><span class="icon icon-users" (click)="goToStudent(rowData)" title="Manage Students"></span></a>
                         </span>
                     </td>

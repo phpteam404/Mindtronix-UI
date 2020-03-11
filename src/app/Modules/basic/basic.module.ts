@@ -22,6 +22,10 @@ import { FileUploadModule } from 'primeng/fileupload';
 import { CheckboxModule } from 'primeng/checkbox';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { FormsModule } from '@angular/forms';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { DialogModule } from 'primeng/dialog';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
@@ -33,6 +37,7 @@ const BasicModuleImports = [
     MatSelectModule,
     MatTooltipModule,
     FormsModule,
+    DialogModule,
     AccordionModule,
     PanelModule,
     ButtonModule,
@@ -46,6 +51,13 @@ const BasicModuleImports = [
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      }
+    })
     // DatexPipe
 ]
 
@@ -64,4 +76,7 @@ export class BasicModule {
       ngModule: BasicModule
     };
   }
+}
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }

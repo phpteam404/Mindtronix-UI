@@ -35,6 +35,9 @@ import { DialogModule } from 'primeng/dialog';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,7 +52,6 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     FormsModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BasicModule,
     HttpClientModule,
     MatInputModule,
     MatButtonModule,
@@ -72,7 +74,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     CalendarModule,
     DropdownModule,
     DialogModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    BasicModule.forRoot(),
   ],
   providers: [
     { 
@@ -91,3 +94,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+export function httpTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}

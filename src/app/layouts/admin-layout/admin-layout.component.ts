@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationStart, NavigationEnd, Router, ActivatedRoute, RoutesRecognized } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators'
 import { Subscription } from 'rxjs';
 import PerfectScrollbar from 'perfect-scrollbar';
 import { Location } from '@angular/common';
+import { NavigationError,ActivatedRoute, NavigationCancel, NavigationEnd, NavigationStart, Event as RouterEvent, Router } from '@angular/router';
+import { AppHttpClientService } from 'src/app/utils/app-http-client.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-admin-layout',
@@ -18,14 +20,16 @@ export class AdminLayoutComponent implements OnInit {
   public currentRouteParam: string;
   
   private _router: Subscription;
-
+  loading = true;
   parentRoute: string;
   pageTitle: string;
 
   staticBreadCrumb = false;
 
   page: string;
-  constructor(public location: Location, private router: Router, private _ar: ActivatedRoute) {
+  constructor(public location: Location, private router: Router,
+    public translate: TranslateService,
+     private _ar: ActivatedRoute, private httpService : AppHttpClientService) {
     this.staticBreadCrumb = false;
     /*console.log('_ar.data---', _ar.data);
     console.log('_ar.Snapshot ---', _ar.snapshot);
@@ -142,5 +146,19 @@ export class AdminLayoutComponent implements OnInit {
       }
       return bool;
   }
-
+  navigationInterceptor(event: RouterEvent): void {
+    if (event instanceof NavigationStart) {
+      this.loading = true;
+    }
+    if (event instanceof NavigationEnd) {
+      this.loading = false;
+    }
+    // Set loading state to false in both of the below events to hide the spinner in case a request fails
+    if (event instanceof NavigationCancel) {
+      this.loading = false;
+    }
+    if (event instanceof NavigationError) {
+      this.loading = false;
+    }
+  }
 }

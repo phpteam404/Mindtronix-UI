@@ -5,6 +5,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FeeService } from 'src/app/services/fee.service';
 import { HttpParams } from '@angular/common/http';
 import { MasterService } from 'src/app/services/master.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-fee',
@@ -25,12 +27,14 @@ export class UpdateFeeComponent implements OnInit {
               private _toast: ToasterService,
               private _ar: ActivatedRoute,
               private _masterService: MasterService,
-              private _service: FeeService) {
-    
+              private _service: FeeService,
+              public translate: TranslateService) {
+     translate.setDefaultLang(environment.defaultLanguage);
     var id:any;
     _ar.paramMap.subscribe(params => {
       id = atob(params['params'].id);
-      _service.getById({'id':id}).subscribe(res=>{
+      var param = new HttpParams().set('fee_master_id',id);
+      _service.getById(param).subscribe(res=>{
         if(res.status){
           this.formObj = res.data.data[0];
           this.feeForm.setValue({

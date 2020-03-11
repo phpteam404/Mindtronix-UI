@@ -64,13 +64,13 @@
     </div> -->
     <div class="custom-form">
         <mat-horizontal-stepper>
-            <mat-step label="Franchise Details">
+            <mat-step label="{{'franchise.franchiseDetails' | translate}}">
                 <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()">
                     <div class="row">
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Franchise Name <span>*</span></label>
-                                <input pinputtext type="text" placeholder="Name" name="name" formControlName="name" required>
+                                <input pinputtext type="text" placeholder="Franchise Name" name="name" formControlName="name" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.name.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">Franchise Name is required
@@ -80,7 +80,7 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>Franchise Code <span>*</span></label>
-                                <input pinputtext type="text" placeholder="Code" name="code" formControlName="code" required>
+                                <input pinputtext type="text" placeholder="Franchise Code" name="code" formControlName="code" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.code.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">Franchise Code is required
@@ -190,7 +190,7 @@
                     </div>
                 </form>
             </mat-step>
-            <mat-step label="Contact Information">
+            <mat-step label="{{'franchise.contactInfo' | translate}}">
                 <form [formGroup]="stepTwoForm" (ngSubmit)="stepTwoFormSubmit()">
                     <div class="row">
                         <div class="col-md-2 col-12">
@@ -279,13 +279,13 @@
                     <button  matStepperNext class="btn-warning" type="button">Next</button>
                 </div>
             </mat-step>
-            <mat-step label="Fee Management">
+            <mat-step label="{{'franchise.feeManagement' | translate}}">
                 <form [formGroup]="stepThreeForm" (ngSubmit)="stepThreeFormSubmit()">
                     <div class="row">
                         <div class="col-md-4 col-12 mb-5">
-                            <label>Fee Structure <span>*</span></label>
+                            <label>Fee Structure<span>*</span></label>
                             <p-multiSelect [options]="FeeStructureList" formControlName="fee_structure" optionLabel="name" 
-                                name="fee_structure" required></p-multiSelect>
+                                name="fee_structure" defaultLabel="Select Fee Structure" required></p-multiSelect>
                             <div class="invalid-feedback"
                                 *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
                                 [ngClass]=" 'error'">Fee Structure is required</div>

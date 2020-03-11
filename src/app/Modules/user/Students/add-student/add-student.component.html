@@ -11,8 +11,8 @@
                     <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Name <span>*</span></label>
-                            <input pinputtext placeholder="Name" formControlName="student_name" name="student_name" type="text" required>
+                            <label>Student Name <span>*</span></label>
+                            <input pinputtext placeholder="Student Name" formControlName="student_name" name="student_name" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.student_name.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">Name is required
@@ -83,7 +83,7 @@
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label>Name of Parent/Guardian <span>*</span></label>
-                                    <input pinputtext placeholder="Name" formControlName="parent_name" name="parent_name" type="text" required>
+                                    <input pinputtext placeholder="Parent/Guardian Name" formControlName="parent_name" name="parent_name" type="text" required>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.parent_name.invalid && submitted!=null && !submitted "
                                         [ngClass]=" 'error'">Parent/Guardian is required
@@ -122,14 +122,14 @@
                             </div>
                             <div class="col-md-4 col-12">
                                 <label>Home Phone <span>*</span></label>
-                                <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
+                                <input type="text" placeholder=" Home Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
                                     [ngClass]=" 'error'">Home Phone should be minimum 10 digits
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Mobile Phone <span>*</span></label>
+                                <label>Mobile Phone 1 <span>*</span></label>
                                 <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
@@ -138,7 +138,7 @@
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Mobile Phone2 </label>
+                                    <label>Mobile Phone 2 </label>
                                     <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2">
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
@@ -216,21 +216,32 @@
                             <textarea pInputTextarea placeholder="History of any Illness If any" formControlName="history_of_illness"  name="history_of_illness"></textarea>
                         </div>
                     </div>
+                    </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-12">
+                        <h4>Current Status</h4>
+                    </div>
+                    <div class="col-12">
+                        <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>Status <span>*</span></label>
                             <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
-                            name="status" optionLabel="label" required></p-dropdown>
+                                       name="status" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="studentForm.controls.status.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Status is required
+                                 *ngIf="studentForm.controls.status.invalid && submitted!=null && !submitted "
+                                 [ngClass]=" 'error'">Status is required
                             </div>
                         </div>
                     </div>
                     </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="Save" *ngIf="!isUpdate"class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="Update" *ngIf="isUpdate" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>

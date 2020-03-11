@@ -8,6 +8,8 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import { FeeService } from 'src/app/services/fee.service';
 import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-franchise',
@@ -23,6 +25,12 @@ export class ViewFranchiseComponent implements OnInit {
   displayBasic1: boolean;
   displayBasic2: boolean;
   title:any;
+  buttonDisabled :boolean;
+  displayBasicDialog :boolean;
+  dataInfo:any;
+  header:string;
+  displayFeeDialog:boolean;
+  feeInfo:any;
   revenueMonth:any;
   chart:Chart;
   
@@ -53,7 +61,9 @@ export class ViewFranchiseComponent implements OnInit {
               private _cService: CommonService,
               private _toast: ToasterService,
               private _feeService: FeeService,
-              private masterservices:MasterService) {
+              private masterservices:MasterService,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
    
     this.cols = [
       { field: 'contact_title_display', header: 'Contact Title' },
@@ -91,6 +101,10 @@ export class ViewFranchiseComponent implements OnInit {
   }
   showBasicDialog1(isCreate) {
     this.displayBasic1 = true;
+    if(isCreate) {
+       this.buttonDisabled =true;
+       this.header ="Create Contact Information";
+     }
     this.secondFormCreate = isCreate;
     this.submitted2=null;
   }
@@ -102,7 +116,15 @@ export class ViewFranchiseComponent implements OnInit {
     });*/
     console.log('prepopulate---', this.franchiseObj.fee_detalis);
   }
-
+ 
+  showBasicDialogDelete(data:any) {
+    this.displayBasicDialog = true;
+    this.dataInfo =data; 
+  }
+  showFeeDelete(data:any){
+    this.displayFeeDialog =true;
+    this.feeInfo =data;
+  }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
       this.franchiseId = atob(params['params'].id);
@@ -305,6 +327,8 @@ export class ViewFranchiseComponent implements OnInit {
   }
 
   editContact(data:any,index:number){
+    this.buttonDisabled =false;
+    this.header="Edit Contact Information";
     this.showBasicDialog1(false);
     this.secondForm.setValue({
       franchise_contact_id : (data.franchise_contact_id)?data.franchise_contact_id:'',
@@ -314,10 +338,11 @@ export class ViewFranchiseComponent implements OnInit {
       contact_number : data.contact_number,
     });
   }
-  deleteFranchiseContact(data:any){
-    var params = new HttpParams().set('tablename','franchise_contacts').set('id',data.franchise_contact_id);
+  deleteFranchiseContact(){
+    var params = new HttpParams().set('tablename','franchise_contacts').set('id',this.dataInfo.franchise_contact_id);
     this._cService.delete(params).subscribe(res => {
       if(res.status){
+        this.displayBasicDialog=false;
         this.getFranchiseInfo(this.franchiseId);
       }
     });
@@ -345,10 +370,11 @@ export class ViewFranchiseComponent implements OnInit {
     }
   }
 
-  deleteFranchiseFee(data:any){
-    var params = new HttpParams().set('tablename','franchise_fee').set('id',data.fee_master_id);
+  deleteFranchiseFee(){
+    var params = new HttpParams().set('tablename','franchise_fee').set('id',this.feeInfo.fee_master_id);
     this._cService.delete(params).subscribe(res => {
       if(res.status){
+        this.displayFeeDialog=false;
         this.getFranchiseInfo(this.franchiseId);
       }
     });

@@ -6,6 +6,8 @@ import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent } from 'primeng/api';
 import { Http } from '@angular/http';
 import { CommonService } from 'src/app/services/common.service';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-fee-list',
@@ -20,9 +22,13 @@ export class FeeListComponent implements OnInit {
   cols: any[];
   loading: boolean;
 
-  constructor(private router: Router, private _route: ActivatedRoute,
-              private _cService: CommonService,
-             private _service: FeeService, private _toast: ToasterService) {
+  constructor(private router: Router,
+             private _route: ActivatedRoute,
+             private _cService: CommonService,
+             private _service: FeeService, 
+             private _toast: ToasterService,
+             public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
    
     // this.cols = [
     //   { field: 'name', header: 'Fee Title' },

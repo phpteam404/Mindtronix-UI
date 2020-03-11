@@ -6,6 +6,7 @@ import { UserService} from 'src/app/services/user.service';
 import { DatePipe } from '@angular/common';
 import { HttpParams } from '@angular/common/http';
 import { Time } from 'highcharts';
+import { Http } from '@angular/http';
 @Component({
   selector: 'app-update-trainer',
   templateUrl: '../add-trainer/add-trainer.component.html',
@@ -27,7 +28,8 @@ export class UpdateTrainerComponent implements OnInit {
     var id:any;
     _ar.paramMap.subscribe(params => {
       id = atob(params['params'].id);
-      userService.getTrainerById({'trainer_schedule_id':id}).subscribe(res=>{
+      var reqParams = new HttpParams().set('trainer_schedule_id',id);
+      userService.getTrainerById(reqParams).subscribe(res=>{
         if(res.status){
           this.trainerObj = res.data.data[0];
           //console.log('trainerobj info',this.trainerObj);

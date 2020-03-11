@@ -14,6 +14,6 @@ export class CommonService {
   constructor(private clientHttp : AppHttpClientService) { }
 
   delete (params) {
-    return this.clientHttp.delete('User/Delete?'+params);
+    return this.clientHttp.delete('User/Delete', params);
   }
 }

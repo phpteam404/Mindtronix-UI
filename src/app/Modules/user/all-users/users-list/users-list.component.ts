@@ -6,6 +6,8 @@ import { HttpParams } from '@angular/common/http';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-users-list',
@@ -16,6 +18,8 @@ export class UsersListComponent implements OnInit {
 
   roles: any;
   id: any=0;
+  displayBasic:boolean;
+  dataInfo:any;
   franchiseId: any;
   allUsersList: any;
   totalRecords:number;
@@ -23,7 +27,13 @@ export class UsersListComponent implements OnInit {
   franchiseList: any[];
   cols: any[];
   first:number=0;
-  constructor(private router: Router,private _service:UserService,private _cService: CommonService, private _fService: FranchiseService, private _route: ActivatedRoute) {
+  constructor(private router: Router,
+              private _service:UserService,
+              private _cService: CommonService,
+              private _fService: FranchiseService, 
+              private _route: ActivatedRoute,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
   }
 
   ngOnInit(): void {
@@ -55,16 +65,21 @@ export class UsersListComponent implements OnInit {
   editUser(data:any){
     this.router.navigate(['update/'+data.user_name+'/'+btoa(data.user_id)], {relativeTo: this._route});
   }
-  deleteUser(data:any){
+  deleteUser(){
     var params = new HttpParams()
                   .set('tablename','user')
-                  .set('id',data.user_id);
+                  .set('id',this.dataInfo.user_id);
     this._cService.delete(params).subscribe(res => {
         if(res.status){
           this.first=0;
+          this.displayBasic=false;
           this.getList();
         }
     })
+  }
+  showBasicDialog(data:any) {
+    this.displayBasic = true;
+    this.dataInfo =data; 
   }
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);

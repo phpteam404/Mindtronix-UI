@@ -5,6 +5,8 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import  dropdown  from 'src/app/jsons/dropdown.json';
 import { HttpParams } from '@angular/common/http';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-update-franchise',
@@ -32,7 +34,8 @@ export class UpdateFranchiseComponent implements OnInit {
   pageTitle:string = "Update Franchise";
   FeeStructureList :{name:string,id:string}[] =dropdown.fee_structure;
 
-  constructor(private _router: Router, private _toast: ToasterService, private _service: FranchiseService,private _ar: ActivatedRoute) {     
+  constructor(private _router: Router, private _toast: ToasterService, public translate: TranslateService,private _service: FranchiseService,private _ar: ActivatedRoute) {     
+    translate.setDefaultLang(environment.defaultLanguage);
     this.status =[
       {label:'Active',value:1},
       {label:'InActive',value:0}

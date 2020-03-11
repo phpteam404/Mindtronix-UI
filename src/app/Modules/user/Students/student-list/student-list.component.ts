@@ -8,6 +8,8 @@ import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-student-list',
@@ -19,16 +21,24 @@ export class StudentListComponent implements OnInit {
   cols: any[];
   totalRecords: number; 
   loading: boolean;
+  displayBasic: boolean;
   schools:any[];
   franchise:any[];
   studentsList:any;
   first:number=0;
   schoolFilter:any;
   id:any;
-  constructor(private _router: Router, private _ar: ActivatedRoute,
-              private _toast: ToasterService,private _cService: CommonService,
+  dataInfo:any;
+  constructor(private _router: Router, 
+              private _ar: ActivatedRoute,
+              private _toast: ToasterService,
+              private _cService: CommonService,
               private _service:UserService,
-              private _schoolService:SchoolService,private _fService:FranchiseService) {
+              private _schoolService:SchoolService,
+              private _fService:FranchiseService,
+              public translate: TranslateService) {
+                
+    translate.setDefaultLang(environment.defaultLanguage);
     this.getSchoolsList();
     this.getFranchiseList();
   }
@@ -77,17 +87,23 @@ export class StudentListComponent implements OnInit {
     this._router.navigate(['view/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
   }
 
-  DeleteStudent(data:any){
+  DeleteStudent(){
      var params = new HttpParams()
-        .set('id', data.user_id)
+        .set('id', this.dataInfo.user_id)
         .set('tablename', 'user');
      this._cService.delete(params).subscribe(res=>{
        console.log('res info',res);
       if(res.status){
         this.first=0;
+        this.displayBasic = false;
         this.getList();
       }
     });
+  }
+
+  showBasicDialog(data:any) {
+    this.displayBasic = true;
+    this.dataInfo =data; 
   }
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);

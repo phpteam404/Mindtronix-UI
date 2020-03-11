@@ -1,8 +1,9 @@
 import { Component, HostListener } from '@angular/core';
-import { NavigationError, NavigationCancel, NavigationEnd, NavigationStart, RouterEvent, Router } from '@angular/router';
+import { NavigationError, NavigationCancel, NavigationEnd, NavigationStart, Event as RouterEvent, Router } from '@angular/router';
 import { AuthenticationService } from './services/authentication.service';
 import { LocalStorageService } from './utils/local-storage.service';
-
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -12,8 +13,10 @@ export class AppComponent {
   title = 'mindtronics';
   loading = true;
   currentUser: any;
-  constructor(private router:Router, private ls: LocalStorageService,private authService: AuthenticationService){
-    console.log('AppComponent----' );
+  constructor(private router:Router, private ls: LocalStorageService,
+            private authService: AuthenticationService,public translate: TranslateService){
+              
+    translate.setDefaultLang(environment.defaultLanguage);
 
     if (this.ls.getItem('user')) {
     } else {
@@ -27,10 +30,10 @@ export class AppComponent {
     this.currentUser = this.ls.getItem('user');
   }  
 
-logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-}
+  logout() {
+      this.authService.logout();
+      this.router.navigate(['/login']);
+  }
   navigationInterceptor(event: RouterEvent): void {
     if (event instanceof NavigationStart) {
       this.loading = true;
@@ -48,7 +51,7 @@ logout() {
   }
 
   @HostListener("window:onbeforeunload",["$event"])
-    clearLocalStorage(event){
-        localStorage.clear();
-    }
+  clearLocalStorage(event){
+      localStorage.clear();
+  }
 }

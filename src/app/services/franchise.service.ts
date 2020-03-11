@@ -9,7 +9,7 @@ export class FranchiseService {
   constructor(private clientHttp : AppHttpClientService) { }
 
   getList(params){
-    return this.clientHttp.get('Franchise/franchiseList?'+params);
+    return this.clientHttp.get('Franchise/franchiseList',params);
   }
   addUpdate(params){
     return this.clientHttp.post('Franchise/franchiseAdd',params);
@@ -18,7 +18,7 @@ export class FranchiseService {
      return this.clientHttp.get('Franchise/franchiseListForDropDown',params);
   }
   getFranchiseInfo(params){
-    return this.clientHttp.get('Franchise/franchiseInfo?'+params);
+    return this.clientHttp.get('Franchise/franchiseInfo',params);
   }
 
   updateFranchiseContacts(params){

@@ -8,6 +8,8 @@ import { SchoolService } from 'src/app/services/school.service';
 import { UserService} from 'src/app/services/user.service';
 import { FeeService} from 'src/app/services/fee.service';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 //import  dropdown  from 'src/app/jsons/dropdown.json';
 
 @Component({
@@ -35,7 +37,9 @@ export class AddStudentComponent implements OnInit {
               private schoolService:SchoolService,
               private userService:UserService,
               private feeService:FeeService,
-              public datepipe: DatePipe) {
+              public datepipe: DatePipe,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
     this.maxDate = new Date();
   }
   studentForm = new FormGroup({

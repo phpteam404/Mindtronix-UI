@@ -10,6 +10,8 @@ import { FeeService } from 'src/app/services/fee.service';
 import { HttpParams } from '@angular/common/http';
 import  dropdown  from 'src/app/jsons/dropdown.json';
 import { FranchiseService } from 'src/app/services/franchise.service';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 interface City {
   name: string,
@@ -54,16 +56,18 @@ export class AddFranchiseComponent implements OnInit {
   stepThreeForm: FormGroup;
   constructor(private _router: Router, private _toast: ToasterService, 
               private _formBuilder: FormBuilder,private _feeService: FeeService,
-              private masterservices:MasterService, private _service: FranchiseService) {     
+              public translate: TranslateService,
+              private masterservices:MasterService, private _service: FranchiseService) {
+    
+    translate.setDefaultLang(environment.defaultLanguage);
+
     this.isUpdate=false;
-  
     this.FeeStructureCols = [
       { field: 'name', header: 'Fee Title' },
       { field: 'amount', header: 'Fee Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
       { field: 'action', header: 'Actions' }
-
     ];
 
     this.contactsListCols = [

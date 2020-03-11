@@ -12,13 +12,13 @@ export class FeeService {
     return this.clientHttp.post('Fee/addFeeUpdate', params);
   }
   getList(params){
-      return this.clientHttp.get('Fee/feeStructure?'+params);
+      return this.clientHttp.get('Fee/feeStructure', params);
   }
   getById(params){
-      return this.clientHttp.get('Fee/feeStructure?fee_master_id='+params.id);
+      return this.clientHttp.get('Fee/feeStructure', params);
   }
 
   getFeeDropDown(params){
-    return this.clientHttp.get('Fee/feeStructureDropdown?'+params);
+    return this.clientHttp.get('Fee/feeStructureDropdown', params);
   }
 }

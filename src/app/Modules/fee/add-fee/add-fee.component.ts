@@ -6,6 +6,8 @@ import { FeeService } from 'src/app/services/fee.service';
 import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
 import { HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-fee',
@@ -24,7 +26,9 @@ export class AddFeeComponent implements OnInit {
               private _toast: ToasterService, 
               private _masterService: MasterService, 
               private _commonService: CommonService, 
-              private _service: FeeService) {
+              private _service: FeeService,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
    }
   feeForm = new FormGroup({
     name: new FormControl('', [Validators.required]),

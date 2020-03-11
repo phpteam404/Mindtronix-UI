@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-view-student',
@@ -11,7 +13,11 @@ import { HttpParams } from '@angular/common/http';
 export class ViewStudentComponent implements OnInit {
 
   studentObj:any={};
-  constructor(private _ar: ActivatedRoute, private _service: UserService) { }
+  constructor(private _ar: ActivatedRoute, 
+              private _service: UserService,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
+  }
 
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
