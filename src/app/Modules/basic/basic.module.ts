@@ -26,6 +26,8 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DialogModule } from 'primeng/dialog';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { ConfirmationService } from 'primeng/api';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
@@ -51,6 +53,7 @@ const BasicModuleImports = [
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule,
+    ConfirmDialogModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -68,7 +71,8 @@ const BasicModuleImports = [
   ],
   exports:[
     BasicModuleImports
-  ]
+  ],
+  providers:[ConfirmationService]
 })
 export class BasicModule { 
   static forRoot(): ModuleWithProviders {

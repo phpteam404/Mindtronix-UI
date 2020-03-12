@@ -32,7 +32,7 @@
                         <span *ngIf="i!=2" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="Edit"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete" title="Delete" (click)="showBasicDialogDelete(rowData)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete" title="Delete" (click)="deleteMasterChild(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -49,8 +49,13 @@
         </p-table>
     </div>
 </div>
-<!-- <button type="button" (click)="showBasicDialog()" pButton icon="pi pi-external-link" label="Show"></button> -->
-<p-dialog header="Add/Edit Master" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
+<p-dialog header="Add/Edit Master" [(visible)]="displayBasic" 
+            [modal]="true" 
+            [style]="{width: '50vw'}" 
+            [baseZIndex]="10000" 
+            [draggable]="false" 
+            [resizable]="false"  
+            appendTo="body">
     <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
@@ -77,17 +82,5 @@
             <button pButton class="btn-default" type="button" label="Cancel" (click)="close()"></button>
         </div>
     </form>
-<!-- <p-footer>
-    <button type="button" pButton class="btn-warning" (click)="postMaster(Add)" label="Yes"></button>
-    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-</p-footer> -->
 </p-dialog>
-<!-- <p-confirmDialog header="Confirmation" icon="pi pi-exclamation-triangle"></p-confirmDialog> -->
-
-<p-dialog header="confirmation" [(visible)]="displayBasicDelete" [style]="{width: '50vw'}" [baseZIndex]="10000">
-        Are You Sure You Want To Permanently Delete This Record ?? 
-      <p-footer>
-          <button type="button" pButton class="btn-warning" (click)="deleteMasterChild()" label="Yes"></button>
-          <button type="button" pButton class="btn-default" (click)="displayBasicDelete=false" label="No"></button>
-      </p-footer>
-  </p-dialog>
+<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>

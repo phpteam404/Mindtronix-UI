@@ -6,8 +6,9 @@ import { ToasterService } from '../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http'
 import { FormGroup, Validators, FormControl } from '@angular/forms';
 
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {ConfirmationService} from 'primeng/api';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 
 interface Master {
   master_name: string,
@@ -24,38 +25,29 @@ export class MasterComponent implements OnInit {
   Masterslist: any=[];//For List service 
   FirstMaster: any;
   MasterChilds: any;//For Master Childs List Service
-  masterChildName: string;
-  masterChildDescription: string;
   masterChildId: Number;
-  masterArray: any;
   isCreate: boolean;
-  loading: boolean = false;
-  name:string = '';
-  description:string = '';
   displayButton:boolean;
-  displayBasicDelete:boolean;
-  dataInfo:any;
-  cities: any;
-  cars: any;
   cols:any;
   selectedMaster: Master[];
   displayBasic: boolean;
-
   submitted=null;
+
   constructor(private router: Router, 
               private _service: MasterService,
               private _commonService: CommonService,
               private _route: ActivatedRoute,
               private _toast: ToasterService,
-              private _confirm: ConfirmationService) { 
-    
+              private _confirm: ConfirmationService,
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
     
     this.cols = [
       { field: 'child_name', header: 'Master Name' },
       { field: 'description', header: 'Master Description' },
       { field: 'action', header: 'Actions' }
     ];
-  }
+  }  
   form = new FormGroup({
     name: new FormControl('',[Validators.required]),
     description: new FormControl('')
@@ -67,8 +59,8 @@ export class MasterComponent implements OnInit {
       this.form.reset();
       this.displayButton = true;
     }
-    else
-      this.displayButton = false;
+    else this.displayButton = false;
+
     this.isCreate = isCreate;
     if(!isCreate){
       this.masterChildId = rowData.master_child_id;
@@ -78,34 +70,10 @@ export class MasterComponent implements OnInit {
       });
     }
   }
-  postMaster(isCreate){
-    this.loading = true;
-    // console.log('postMaster add', Add);
-    if(isCreate){
-      this.masterArray = {master_id:this.selectedMaster['master_id'],child_name:this.masterChildName,description:this.masterChildDescription};
-    }else{
-      this.masterArray = {master_id:this.selectedMaster['master_id'],child_id:this.masterChildId,child_name:this.masterChildName,description:this.masterChildDescription};
-    }
-    this._service.postMasterChild(this.masterArray).subscribe(res=>{
-      if(res.status){
-        this.getMasterChilds(this.selectedMaster['master_key']);
-        this.displayBasic = false;
-        this.loading = false;
-      }else{
-        this.loading = false;
-      }
-    });
-  }
   ChangeMasterParent(event) {
     this.getMasterChilds(event.value.master_key);
     this.selectedMaster = event.value;
   }
-  onChangeMaster(input){
-      this.masterChildName = input;
-  }
-  onChangeMasterDesc(input){
-      this.masterChildDescription = input;
-  }  
   ngOnInit(): void {
     this.getAllMaster ();
   }
@@ -114,7 +82,6 @@ export class MasterComponent implements OnInit {
   }
   //This service is to Fill Master Dropdown
   getAllMaster () {
-    this.loading = true;
     this._service.getAllMaster().subscribe(res=>{
       if(res.status){
         this.Masterslist = res.data.data;
@@ -123,41 +90,18 @@ export class MasterComponent implements OnInit {
           this.selectedMaster = res.data.data[0];
         }
       }else{}
-      this.loading = false;
     });
   }
-
   //This service is to Get Master childs Based on Selected Master
   getMasterChilds(FirstMaster){
     var params = new HttpParams().set('master_key',FirstMaster);
-    this.loading = true;
     this._service.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         this.MasterChilds = res.data.data;
         this.cols = res.data.table_headers;
       }else{}
-      this.loading = false;
     });
   }
-  
-  deleteMasterChild(){
-        this.loading = true; 
-        var params = new HttpParams()
-                      .set('tablename','master_child')
-                      .set('id',this.dataInfo.master_child_id)   
-        this._commonService.delete(params).subscribe(res=>{
-          if(res.status){
-            this.getMasterChilds(this.selectedMaster['master_key']);
-            this.displayBasicDelete=false;
-          }else{}
-          this.loading = false;
-        });
-  }
-  showBasicDialogDelete(data:any) {
-    this.displayBasicDelete = true;
-    this.dataInfo =data; 
-  }
-
   submit(){
     this.submitted=false;
     if(this.form.valid){
@@ -174,10 +118,8 @@ export class MasterComponent implements OnInit {
           this.getMasterChilds(this.selectedMaster['master_key']);
           this.form.reset();
           this.displayBasic = false;
-          this.loading = false;
           this.submitted=true;
         }else{
-          this.loading = false;
         }
       });
     }
@@ -185,5 +127,23 @@ export class MasterComponent implements OnInit {
   close(){
     this.form.reset();
     this.displayBasic=false;
+  }
+  deleteMasterChild(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'master_child')
+                    .set('id', data.master_child_id)   
+        this._commonService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getMasterChilds(this.selectedMaster['master_key']);
+          }else{}
+        });
+      },
+      reject: () => {}
+    });
   }
 }
