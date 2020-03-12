@@ -22,7 +22,6 @@ export class ToasterService {
           if(typeof title === 'object'){
             var obj = JSON.parse(JSON.stringify(title));
             var keys = Object.keys(obj);
-            console.log('ToastrService keys*-*-*-', keys);
             keys.forEach(item => {
               this.toastr.error(obj[item], message);
             });

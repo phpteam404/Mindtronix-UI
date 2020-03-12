@@ -9,6 +9,7 @@ import { map,catchError } from 'rxjs/operators';
 import * as CryptoJS from 'crypto-js';
 import { LocalStorageService } from './local-storage.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 export interface IRequestOptions {
   headers?: HttpHeaders;
@@ -35,8 +36,8 @@ export class AppHttpClientService {
   // Extending the HttpClient through the Angular DI.
   public constructor(private http: HttpClient,private router: Router,
                     public loadingIndicatorService: LoadingIndicatorService,
-                    public _ls: LocalStorageService,
-                    public toaster: ToasterService) {
+                    private _ls: LocalStorageService,
+                    private toaster: ToastrService) {
       // If you don't want to use the extended versions in some cases you can access the public property and use the original one.
       // for ex. this.httpClient.http.get(...)
   }
@@ -161,53 +162,25 @@ export class AppHttpClientService {
         var dec = JSON.parse(CryptoJS.AES.decrypt(enc, this.key, this.enycOptions).toString(CryptoJS.enc.Utf8));
         console.log('decrypted---', dec);
 
-        resData = JSON.parse(CryptoJS.AES.decrypt(resData.responseData, this.key, this.enycOptions).toString(CryptoJS.enc.Utf8));
-        // resData = JSON.parse(CryptoJS.AES.decrypt(resData.responseData, this.key, this.enycOptions));
+        // resData = JSON.parse(CryptoJS.AES.decrypt(resData.responseData, this.key, this.enycOptions).toString(CryptoJS.enc.Utf8));
+        resData = JSON.parse(CryptoJS.AES.decrypt(resData.responseData, this.key, this.enycOptions));
         
     } else {
         resData = res;
     }
-    if (resData.success && resData.message) {
-      this.toaster.show('success', resData.message);
-    }
     if (!res.status) {
-        if (!this._ls.getItem('user')) {
-            // this.router.navigate(['login']);
-            this.popupLoin();
-            this.toaster.show('error', 'Session Terminated', resData.message);
-        } else {
-            this.popupLoin();
-            this.toaster.show('error', 'Service Expired', resData.message);
-        }
-    }
-    if (!res.status) {
-        this.toaster.show('error', 'Something went wrong!');
-        return false;
-    }
-    if (res.status) 
-      return resData;
-    else {
-      this.toaster.show('error', resData.message);
-      if (resData.data && resData.data.error) {
-          for (const key in resData.data.error) {
-              if (resData.data.error[key].ErrorMessage) {
-                this.toaster.show('info', key + ' : ' + resData.data.error[key].ErrorMessage);
-              }
-          }
+      if(!res.Authentication){
+        return resData;
+      }else{
+        //this.toaster.error('error', 'Something went wrong!', resData.message);
+        return resData;
       }
-      if (resData.data && resData.data.UniqueValidationFails) {
-        this.toaster.show('info', resData.data['UniqueValidationFails']);
-      }
-      return false;
-    }
+    }    
+    if (res.status) return resData;    
   }
   popupLoin(){
     this._ls.removeItem('user');
     this.router.navigate(['login']);
-  }
-  errorUnauthorized(err: any) {
-    this.toaster.show('error', 'Error', err.message);
-    this.popupLoin();
   }
 
   set(keys, value){
@@ -224,6 +197,6 @@ export class AppHttpClientService {
     return encrypted.toString();
   }
 }
-export function AppHttpClientCreator(http: HttpClient,router: Router,loadingIndicatorService:LoadingIndicatorService,_ls: LocalStorageService,toaster: ToasterService) {
+export function AppHttpClientCreator(http: HttpClient,router: Router,loadingIndicatorService:LoadingIndicatorService,_ls: LocalStorageService,toaster: ToastrService) {
   return new AppHttpClientService(http,router,loadingIndicatorService,_ls,toaster);
 }
