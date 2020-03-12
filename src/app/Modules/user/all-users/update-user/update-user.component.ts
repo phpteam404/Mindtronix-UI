@@ -40,7 +40,8 @@ export class UpdateUserComponent implements OnInit {
 
     var id:any;
     _ar.paramMap.subscribe(params => {
-      id = atob(params['params'].id);
+      console.log('params---', params);
+      id = atob(params['params']['id?:franchise_id']);
       var param=new HttpParams().set('user_id',id+'')
       _service.getById(param).subscribe(res=>{
         if(res.status){

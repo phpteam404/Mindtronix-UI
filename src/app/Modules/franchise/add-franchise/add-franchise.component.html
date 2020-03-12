@@ -30,7 +30,7 @@
                     
                     <div class="col-md-4 col-12">
                         <label>Phone <span>*</span></label>
-                        <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
+                        <input type="text" placeholder="Phone" pKeyFilter="pint" formControlName="phone" name="phone" [ngClass]="{ 'is-invalid': submitted && f.phone.errors }">
                         <div *ngIf="submitted && f.phone.errors" class="invalid-feedback">
                             <div *ngIf="f.phone.errors.required">Phone is required</div>
                         </div>
@@ -99,7 +99,7 @@
                         </div>
                         <div class="col-md-4 col-12">
                             <label>Contact Number <span>*</span></label>
-                            <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="phone" name="phone" required>
+                            <input type="text" placeholder="Contact Number" pKeyFilter="pint" formControlName="phone" name="phone" required>
                             <div class="invalid-feedback"
                                     *ngIf="stepOneForm.controls.phone.invalid && submitted1!=null && !submitted1"
                                 [ngClass]=" 'error'">Contact number should be minimum 10 digits
@@ -170,7 +170,7 @@
                         </div> 
                         <div class="col-md-4 col-12">
                             <label>Pincode</label>
-                            <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+                            <input type="text" placeholder="Pincode" pKeyFilter="pint" formControlName="pincode" name="pincode">
                         </div>                       
                         <div class="col-md-4 col-12">
                             <div class="form-group">
@@ -217,7 +217,7 @@
                        
                         <div class="col-md-3 col-12">
                             <label>Contact Number <span>*</span></label>
-                            <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_number"
+                            <input type="text" placeholder="Contact Number" pKeyFilter="pint" formControlName="contact_number"
                                 name="contact_phone" required>                           
                             <div class="invalid-feedback"
                                 *ngIf="stepTwoForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
@@ -285,6 +285,7 @@
                         <div class="col-md-4 col-12 mb-5">
                             <label>Fee Structure<span>*</span></label>
                             <p-multiSelect [options]="FeeStructureList" formControlName="fee_structure" optionLabel="name" 
+                                [showClear]="true"
                                 name="fee_structure" defaultLabel="Select Fee Structure" required></p-multiSelect>
                             <div class="invalid-feedback"
                                 *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"

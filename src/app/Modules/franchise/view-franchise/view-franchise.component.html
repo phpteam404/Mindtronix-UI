@@ -330,7 +330,7 @@
     </div>
 </div>
   <!-- franchise details popup -->
-<p-dialog header="Edit Franchise Details" [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
+<p-dialog header="Edit Franchise Details" [(visible)]="displayBasic" [modal]="true" [style]="{width: '65vw'}" appendTo="body" [baseZIndex]="1">
     <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
@@ -460,7 +460,7 @@
 </p-footer> -->
 </p-dialog>
 <!-- contact information popup -->
-<p-dialog header={{header}} [(visible)]="displayBasic1" [style]="{width: '65vw'}" [baseZIndex]="10000">
+<p-dialog header={{header}} [(visible)]="displayBasic1" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '65vw'}" appendTo="body" [baseZIndex]="10000" appendTo="body">
     <form [formGroup]="secondForm" (ngSubmit)="secondFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
@@ -512,7 +512,7 @@
     </form>
 </p-dialog>
 <!-- fee management popup -->
-<p-dialog header="Create Fee Structure" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
+<p-dialog header="Create Fee Structure" [(visible)]="displayBasic2" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '65vw'}" [baseZIndex]="10000" appendTo="body">    
     <form [formGroup]="thirdForm" (ngSubmit)="thirdFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12 mb-3">
@@ -558,14 +558,14 @@
         </p-table>
     </div> -->
 </p-dialog>
-<p-dialog header="confirmation" [(visible)]="displayBasicDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+<p-dialog header="confirmation" [(visible)]="displayBasicDialog" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" appendTo="body">
     Are you sure you want to delete this record ?
   <p-footer>
       <button type="button" pButton class="btn-warning" (click)="deleteFranchiseContact()" label="Yes"></button>
       <button type="button" pButton class="btn-default" (click)="displayBasicDialog=false" label="No"></button>
   </p-footer>
 </p-dialog>
-<p-dialog header="confirmation" [(visible)]="displayFeeDialog" [style]="{width: '50vw'}" [baseZIndex]="10000">
+<p-dialog header="confirmation" [(visible)]="displayFeeDialog" [style]="{width: '50vw'}" [modal]="true" [baseZIndex]="10000" appendTo="body">
     Are You Sure You Want To Permanently Delete This Record ???
   <p-footer>
       <button type="button" pButton class="btn-warning" (click)="deleteFranchiseFee()" label="Yes"></button>

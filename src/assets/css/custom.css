@@ -3243,14 +3243,16 @@ border: 1px solid #de6e18 !important;
   box-shadow: none !important;
   color: #fff;
 }
-.btn-default{
+.btn-default,
+.ui-confirmdialog .ui-dialog-footer button:last-child{
 background-color: #bbb !important;
 color: #fff;
 border: 1px solid #bbb !important;
 opacity: 1;
 }
 .btn-default:hover,
-.btn-default:active{
+.btn-default:active,
+.ui-confirmdialog .ui-dialog-footer button:last-child:hover{
 background-color: #aaa !important;
 color: #fff !important;
 border: 1px solid #aaa !important;
@@ -3491,7 +3493,7 @@ mat-file-upload .mat-button.mat-primary{
   line-height: 24px !important;
   padding: 0 5px 4px !important;
 }
-li.header-right-block:after {
+/* li.header-right-block:after {
   content: '\e1d4';
   font-family: 'tssfont' !important;
   position: absolute;
@@ -3499,7 +3501,28 @@ li.header-right-block:after {
   right: 21px;
   margin-top: 15px;
   font-size: 18px;
+} */
+.header-right-block .pi-chevron-down:before {
+  content: "\e902";
+  position: absolute;
+  right: 15px;
+  font-size: 15px;
+  top: 23px;
 }
+.header-right-block.open .pi-chevron-down:before{
+  transform: rotate(180deg);
+}
+.ui-confirmdialog .ui-dialog-footer button:first-child{
+  background-color: #e87a26 !important;
+  color: #fff;
+  border: 1px solid #e87a26 !important;
+}
+.ui-confirmdialog .ui-dialog-footer button:first-child:hover{
+   background-color: #de6e18 !important;
+    color: #fff !important;
+    border: 1px solid #de6e18 !important;
+}
+
 .notification-list .dropdown-item span{
   padding-right: 10px;
 }
@@ -3562,6 +3585,17 @@ p-dropdown .ui-dropdown-panel .ui-dropdown-filter{
 }
 p-dropdown .ui-dropdown-panel .ui-dropdown-item{
   padding: 0.3em 0.857em !important;
+}
+.ui-dialog-content .custom-form{
+  border: none !important;
+}
+.ui-multiselect-panel .ui-chkbox .ui-chkbox-box{
+  width: 16px;
+  height: 16px;
+}
+body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-container .ui-inputtext {
+  padding: 0.29em;
+  height: 28px;
 }
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p {

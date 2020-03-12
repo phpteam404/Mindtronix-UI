@@ -29,6 +29,8 @@ export class StudentListComponent implements OnInit {
   schoolFilter:any;
   id:any;
   dataInfo:any;
+  listParamsRef:any={};
+  franchiseFilter:any='';
   constructor(private _router: Router, 
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
@@ -66,12 +68,16 @@ export class StudentListComponent implements OnInit {
     });
   }
  
-  ngOnInit(): void {-
-
+  ngOnInit(): void {
     this.getFranchiseList();
     this._ar.queryParams.subscribe(params => {
       console.log('params info',params);
-      if(params['school_id'])this.id = atob(params['school_id']);
+      if(params['school_id']){
+        this.id = atob(params['school_id']);
+        this.loading=false;
+      }else{
+        this.loading=true;
+      }
     });
     this.getSchoolsList();
   }
@@ -81,10 +87,16 @@ export class StudentListComponent implements OnInit {
   }
 
   EditStudent(data:any){
-    this._router.navigate(['update/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
+    if(this.franchiseFilter)
+      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.franchiseFilter)},relativeTo: this._ar});
+    else
+      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});
   }
   viewStudent(data:any){
-    this._router.navigate(['view/'+data.student_name+'/'+btoa(data.user_id)],{ relativeTo: this._ar});
+    if(this.franchiseFilter)
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.franchiseFilter)},relativeTo: this._ar});
+    else
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});
   }
 
   DeleteStudent(){
@@ -94,7 +106,6 @@ export class StudentListComponent implements OnInit {
      this._cService.delete(params).subscribe(res=>{
        console.log('res info',res);
       if(res.status){
-        this.first=0;
         this.displayBasic = false;
         this.getList();
       }
@@ -109,30 +120,42 @@ export class StudentListComponent implements OnInit {
     return (this.totalRecords == 0 ? true : false);
   }
   loadStudentsLazy(event: LazyLoadEvent) {
-    this.loading =true;
+    console.log(this.loading,'event--', event.filters['school_id']);
+    // this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
-    var params = new HttpParams()
-      .set('start', event.first+'')
-      .set('number', event.rows+'');
-    if (event.sortField) {
-      params = params.set('sort', event.sortField);
-      params = params.set('order', sortOrder);
+      var params = new HttpParams()
+        .set('start', event.first+'')
+        .set('number', event.rows+'');
+      if (event.sortField) {
+        params = params.set('sort', event.sortField);
+        params = params.set('order', sortOrder);
+      }
+      if (event.globalFilter) {
+        params = params.set('search_key', event.globalFilter);
+      }      
+      if(event.filters['equals']){
+        params =params.set('franchise_id',event.filters['equals'].value.value);
+      }
+    if(this.loading){
+      if(event.filters['school_id']){
+        params =params.set('school_id',event.filters['school_id'].value.value);
+        this.franchiseFilter = event.filters['school_id'].value.value;
+      }
+    }else {
+      if(event.filters['school_id'] == undefined){
+        return false;
+      }else{
+        params =params.set('school_id',event.filters['school_id'].value.value);
+        this.franchiseFilter = event.filters['school_id'].value.value;
+      }
     }
-    if (event.globalFilter) {
-      params = params.set('search_key', event.globalFilter);
-    }
-    if(event.filters['school_id']){
-      params =params.set('school_id',event.filters['school_id'].value.value);
-    }
-    if(event.filters['equals']){
-      params =params.set('franchise_id',event.filters['equals'].value.value);
-    }
+    this.listParamsRef = params;
     this._service.getStudentsList(params).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
+        this.loading = true;
       }
     });
   }
@@ -141,11 +164,11 @@ export class StudentListComponent implements OnInit {
     var param = new HttpParams()
             .set('start',0+'')
             .set('number', 10+'');
-    this._service.getStudentsList(param).subscribe(res=>{
+    this.first = this.listParamsRef.updates[0].value;
+    this._service.getStudentsList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
       }
     });
   }  

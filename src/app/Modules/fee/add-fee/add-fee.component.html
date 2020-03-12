@@ -18,7 +18,7 @@
                         <label>Fee Amount(₹)<span>*</span></label>
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon">₹</span>
-                            <input type="text" placeholder="Amount" pKeyFilter="int" formControlName="amount" name="amount" required>
+                            <input type="text" placeholder="Amount" pKeyFilter="pint" formControlName="amount" name="amount" required>
                         </div>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.amount.invalid && submitted!=null && !submitted"
@@ -38,7 +38,7 @@
                         <div class="form-group">
                             <label>Discount (%)</label>
                             <div class="ui-inputgroup">
-                                <input pinputtext type="text" pKeyFilter="int" [maxlength]="2" placeholder="Discount" formControlName="discount" name="discount">
+                                <input pinputtext type="text" pKeyFilter="pint" [maxlength]="2" placeholder="Discount" formControlName="discount" name="discount">
                                 <span class="ui-inputgroup-addon">%</span> 
                             </div>
                         </div>

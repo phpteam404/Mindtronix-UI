@@ -71,9 +71,9 @@
                 <li class="header-right-block" dropdown>
                     <a href="javascript:;" dropdownToggle>
                        <div class="user-logo"><img src="{{prdAssetPath}}/assets/img/default-img.png"></div>
-                       <div>
-                           <h4>Administrator</h4>
-                           <p>Admin</p>
+                       <div class="pi pi-chevron-down">
+                           <h4>{{curUser.first_name | titlecase}} {{curUser.last_name}}</h4>
+                           <p>{{curUser.user_role_name | titlecase}}</p>
                        </div>
                     </a>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">

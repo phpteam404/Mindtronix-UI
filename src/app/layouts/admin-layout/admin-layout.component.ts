@@ -6,6 +6,8 @@ import { Location } from '@angular/common';
 import { NavigationError,ActivatedRoute, NavigationCancel, NavigationEnd, NavigationStart, Event as RouterEvent, Router } from '@angular/router';
 import { AppHttpClientService } from 'src/app/utils/app-http-client.service';
 import { TranslateService } from '@ngx-translate/core';
+import { UsersListComponent } from 'src/app/Modules/user/all-users/users-list/users-list.component';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-admin-layout',
@@ -18,18 +20,21 @@ export class AdminLayoutComponent implements OnInit {
   public breadCrumb: string;
   public childBreadCrumb: string;
   public currentRouteParam: string;
-  
+  prdAssetPath:string = environment.prdAssetPath;
   private _router: Subscription;
   loading = true;
   parentRoute: string;
+  parentParams: any;
   pageTitle: string;
 
   staticBreadCrumb = false;
 
   page: string;
-  constructor(public location: Location, private router: Router,
-    public translate: TranslateService,
-     private _ar: ActivatedRoute, private httpService : AppHttpClientService) {
+  constructor(public location: Location,
+              private router: Router,
+              public translate: TranslateService,
+              private _ar: ActivatedRoute,
+              private httpService : AppHttpClientService) {
     this.staticBreadCrumb = false;
     /*console.log('_ar.data---', _ar.data);
     console.log('_ar.Snapshot ---', _ar.snapshot);
@@ -66,13 +71,23 @@ export class AdminLayoutComponent implements OnInit {
     ).subscribe(data => {
       //console.log('route++++', data['breadcrumbs']);
       //console.log('route+**+', data);
-      // console.log('current route', this.router.url);
-      // console.log('current _ar', this._ar);
+      console.log('current route', this.router);
+      console.log('current _ar', this._ar);     
       this.breadCrumb = data['breadcrumb']
       this.childBreadCrumb = data['breadcrumbs']
       if(data['superParentPath']){
         this.parentRoute = '/'+data['superParentPath']+this.parentRoute;
       }
+      _ar.queryParams.subscribe(params => {
+        var obj = JSON.parse(JSON.stringify(params));
+        this.parentParams = obj;
+        var keys = Object.keys(obj);
+        keys.forEach(item => {
+          // parentParams+= '?'+item+'='+obj[item]
+        });
+        // this.parentRoute = this.parentRoute+parentParams;
+        console.log('this.parentRoute--', this.parentRoute);
+      });
       if(data['title']){
         this.pageTitle = data['title'];
       }

@@ -6,5 +6,5 @@ export const settings = {
     PRD_ASSESTS_PATH: '',// /Mindtronix_prototype
     PRODUCTION: true,
     DEFAULT_LANG:'en',
-    ENCRYPTION:true
+    ENCRYPTION:false
 };

@@ -30,17 +30,19 @@ export class UpdateSchoolComponent implements OnInit {
   schoolForm:FormGroup;
   hideFranchise:boolean;
 
-
-  constructor(private _router: Router, private _toast: ToasterService,
-              private schoolService: SchoolService, private _ar: ActivatedRoute,
-              private franchiseService:FranchiseService,private _ls: LocalStorageService,
+  constructor(private _router: Router,
+              private _toast: ToasterService,
+              private schoolService: SchoolService, 
+              private _ar: ActivatedRoute,
+              private franchiseService:FranchiseService,
+              private _ls: LocalStorageService,
               private masterService:MasterService) { 
   
     this.maxDate = new Date();
     
     var id:any;
     _ar.paramMap.subscribe(params => {
-      id = atob(params['params'].id);
+      id = atob(params['params']['id?:franchise_id']);
       var param=new HttpParams().set('school_id',id);
       schoolService.getById(param).subscribe(res=>{
         if(res.status){
@@ -62,11 +64,8 @@ export class UpdateSchoolComponent implements OnInit {
         }
       });
     });
-  }
-    
-  
+  }  
   ngOnInit(): void {
-
     this. schoolForm = new FormGroup({
       school_id: new FormControl(''),
       name: new FormControl('', [Validators.required]),
@@ -79,15 +78,13 @@ export class UpdateSchoolComponent implements OnInit {
       state: new FormControl('', [Validators.required]),
       city: new FormControl('', [Validators.required]),
       pincode: new FormControl('')
-     });
+    });
     this.getFranchiseDropdown();
     this.getMasterDropdown('state');
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
     this.conditionalValidation();
   }
-
-
   getFranchiseDropdown(){ // this function is for displaying the agency names in dropdown while creating schools
     this.franchiseService.getFranchiseDropDowns({}).subscribe(res=>{
       if(res.status){
@@ -95,7 +92,6 @@ export class UpdateSchoolComponent implements OnInit {
      }
    });
   }
-
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
@@ -113,7 +109,6 @@ export class UpdateSchoolComponent implements OnInit {
       }
     });
   }
-
   getFranchise() { return this.schoolForm.value.franchise_id.value;}
   getState() { return this.schoolForm.value.state.value;}
   getCity() { return this.schoolForm.value.city.value;}
@@ -139,11 +134,9 @@ export class UpdateSchoolComponent implements OnInit {
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
-
   goToList(){
     this._router.navigate(['schools_management']);
   }
-
   conditionalValidation(){
     var userRole = this._ls.getItem('user',true).data.user_role_id;
     console.log('userRole---', userRole);
@@ -154,6 +147,5 @@ export class UpdateSchoolComponent implements OnInit {
       this.schoolForm.get('franchise_id').setValidators(Validators.required)
       this.hideFranchise=false;
     }
-  }
-  
+  }  
 }

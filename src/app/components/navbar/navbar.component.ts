@@ -19,11 +19,12 @@ export class NavbarComponent implements OnInit{
     private toggleButton: any;
     ly: SidebarComponent;
     private sidebarVisible: boolean;
-
+    curUser:any;
     constructor(location: Location,  private element: ElementRef,private router:Router,
                private ls: LocalStorageService,private authService: AuthenticationService) {
       this.location = location;
-          this.sidebarVisible = false;
+      this.sidebarVisible = false;
+      this.curUser = ls.getItem('user',true).data;
     }
 
     ngOnInit(){

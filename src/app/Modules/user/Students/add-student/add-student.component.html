@@ -122,7 +122,7 @@
                             </div>
                             <div class="col-md-4 col-12">
                                 <label>Home Phone <span>*</span></label>
-                                <input type="text" placeholder=" Home Phone" pKeyFilter="int" formControlName="phone_no" name="phone_no" required>
+                                <input type="text" placeholder=" Home Phone" pKeyFilter="pint" formControlName="phone_no" name="phone_no" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
                                     [ngClass]=" 'error'">Home Phone should be minimum 10 digits
@@ -130,7 +130,7 @@
                             </div>
                             <div class="col-md-4 col-12">
                                 <label>Mobile Phone 1 <span>*</span></label>
-                                <input type="text" placeholder="Mobile Phone 1" pKeyFilter="int" formControlName="mobile_phone1" name="mobile_phone1" required>
+                                <input type="text" placeholder="Mobile Phone 1" pKeyFilter="pint" formControlName="mobile_phone1" name="mobile_phone1" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
                                     [ngClass]=" 'error'">Mobile Phone should be minimum 10 digits
@@ -139,7 +139,7 @@
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label>Mobile Phone 2 </label>
-                                    <input type="text" placeholder="Mobile Phone 2" pKeyFilter="int" formControlName="mobile_phone2" name="mobile_phone2">
+                                    <input type="text" placeholder="Mobile Phone 2" pKeyFilter="pint" formControlName="mobile_phone2" name="mobile_phone2">
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
                                         [ngClass]=" 'error'">Mobile Phone2 should be minimum 10 digits

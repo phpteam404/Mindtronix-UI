@@ -32,6 +32,7 @@ export class AuthGuard implements CanActivate {
             return true;
           }else {
             if(!res.Authentication){
+              console.log('res---', res);
               this._toast.show('error','Session expired !')
               this.service.logout();
               this.router.navigate(['/login']);

@@ -15,7 +15,7 @@
                 <span>{{currentRouteParam}}</span>
             </h5>
             <h4 class="" *ngIf="childBreadCrumb">
-                <a [routerLink]="parentRoute" href="parentRoute">{{breadCrumb}}</a>
+                <a [routerLink]="parentRoute" [queryParams]="parentParams" href="javascript:;">{{breadCrumb}}</a>
                 <span *ngIf="childBreadCrumb"> / </span>
                 <span>{{childBreadCrumb}}</span>
             </h4>
@@ -23,7 +23,7 @@
          </div>
         <router-outlet></router-outlet>
         <div class="loading-overlay" [hidden]="httpService.pendingRequestsNumber==0">
-            <img src="assets/img/ajax-loader.gif" style="width: 75px">
+            <img src="{{prdAssetPath}}/assets/img/ajax-loader.gif" style="width: 75px">
             <!-- show something fancy here, here with Angular 2 Material's loading bar or circle -->
           </div>
     </div>

@@ -27,6 +27,8 @@ export class UsersListComponent implements OnInit {
   franchiseList: any[];
   cols: any[];
   first:number=0;
+  listParamsRef:any={};
+  franchiseFilter:any='';
   constructor(private router: Router,
               private _service:UserService,
               private _cService: CommonService,
@@ -39,7 +41,10 @@ export class UsersListComponent implements OnInit {
   ngOnInit(): void {
     this._route.queryParams.subscribe(params => {
       console.log('params info',params);
-      if(params['franchise_id'])this.id = atob(params['franchise_id']);
+      if(params['franchise_id']){
+        this.id = atob(params['franchise_id']);
+        this.loading = false;
+      }else this.loading = true;
     });
     this.getFranchiseDropdown();
   }
@@ -63,15 +68,17 @@ export class UsersListComponent implements OnInit {
     this.router.navigate(['add'], {relativeTo: this._route});
   }
   editUser(data:any){
-    this.router.navigate(['update/'+data.user_name+'/'+btoa(data.user_id)], {relativeTo: this._route});
+    if(this.franchiseFilter)
+      this.router.navigate(['update',data.user_name,btoa(data.user_id)],{queryParams:{'franchise_id':btoa(this.franchiseFilter)},relativeTo: this._route});
+    else
+      this.router.navigate(['update',data.user_name,btoa(data.user_id)],{relativeTo: this._route});
   }
   deleteUser(){
     var params = new HttpParams()
                   .set('tablename','user')
                   .set('id',this.dataInfo.user_id);
     this._cService.delete(params).subscribe(res => {
-        if(res.status){
-          this.first=0;
+        if(res.status){          
           this.displayBasic=false;
           this.getList();
         }
@@ -86,7 +93,6 @@ export class UsersListComponent implements OnInit {
   }
   loadSchoolsLazy(event: LazyLoadEvent) {
     console.log('event--', event);
-    this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
     var params = new HttpParams()
       .set('start', event.first+'')
@@ -97,16 +103,27 @@ export class UsersListComponent implements OnInit {
     }
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
+    }  
+    if(this.loading){
+      if(event.filters['franchise_id']){
+        params =params.set('franchise_id',event.filters['franchise_id'].value.value);
+        this.franchiseFilter = event.filters['franchise_id'].value.value;
+      }
+    }else {
+      if(event.filters['franchise_id'] == undefined){
+        return false;
+      }else{
+        params =params.set('franchise_id',event.filters['franchise_id'].value.value);
+        this.franchiseFilter = event.filters['franchise_id'].value.value;
+      }
     }
-    if(event.filters['franchise_id']){
-      params =params.set('franchise_id',event.filters['franchise_id'].value.value);
-    }
+    this.listParamsRef = params;
     this._service.getUsersList(params).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.allUsersList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
+        this.loading = true;
       }
     });
   }
@@ -115,14 +132,13 @@ export class UsersListComponent implements OnInit {
     var params = new HttpParams()
       .set('start', 0+'')
       .set('number', 10+'');
-    this._service.getUsersList(params).subscribe(res=>{
+    this.first = this.listParamsRef.updates[0].value;
+    this._service.getUsersList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.allUsersList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
       }
     });
   }
-
 }

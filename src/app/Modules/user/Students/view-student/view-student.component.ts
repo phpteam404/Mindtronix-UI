@@ -21,7 +21,7 @@ export class ViewStudentComponent implements OnInit {
 
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
-      var id = atob(params['params'].id);
+      var id = atob(params['params']['id?:school_id']);
       this.getStudentInfo(id);
     });
   }
