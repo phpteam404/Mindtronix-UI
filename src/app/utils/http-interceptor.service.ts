@@ -25,7 +25,8 @@ export class HttpInterceptorService implements HttpInterceptor {
         request = request.clone({
             setHeaders: {
                 Authorization: `${JSON.parse(currentUser).access_token}`,
-                User: `${JSON.parse(currentUser).data['user_id']}`
+                User: `${JSON.parse(currentUser).data['user_id']}`,
+                'Cache-Control': 'no-cache no-store must-revalidate'
             }
         });
     }

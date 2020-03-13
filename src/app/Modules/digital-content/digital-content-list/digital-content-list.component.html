@@ -1,6 +1,8 @@
 <div class="main-content">
     <div class="custom-table fee-list">
-        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" 
+            (onLazyLoad)="loadDigitalContentLazy($event)" [first]="first"
+            [paginator]="true" [rows]="10"  [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
@@ -13,7 +15,7 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
                     </th>
@@ -29,7 +31,7 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span> -->
                         <span *ngIf="i == 6"  class="d-flex action-color">
-                            <a href="javascript:;" (click)="viewContent()" title="Edit">
+                            <a href="javascript:;" (click)="viewContent(rowData)" title="Edit">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a>
                             <a href="javascript:;" (click)="DeleteFee(rowData)" title="Delete">

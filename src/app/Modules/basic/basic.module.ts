@@ -21,7 +21,7 @@ import { PasswordModule } from 'primeng/password';
 import { FileUploadModule } from 'primeng/fileupload';
 import { CheckboxModule } from 'primeng/checkbox';
 import { KeyFilterModule } from 'primeng/keyfilter';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -31,7 +31,9 @@ import { ConfirmationService } from 'primeng/api';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
-  CommonModule,
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     MatButtonModule,
     MatRippleModule,
     MatFormFieldModule,

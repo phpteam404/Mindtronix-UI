@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder,Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Headers,RequestOptions  } from '@angular/http'
-import { HttpParams } from '@angular/common/http';
+import { HttpParams} from '@angular/common/http';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { MasterService } from 'src/app/services/master.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-import { DatePipe, formatDate } from '@angular/common';
-import {DigitalContentService} from 'src/app/services/digital-content.service';
+import { DatePipe} from '@angular/common';
+import { ContentService } from 'src/app/services/content.service';
 
 @Component({
   selector: 'app-add-digital-content',
@@ -16,6 +15,7 @@ import {DigitalContentService} from 'src/app/services/digital-content.service';
   styleUrls: ['./add-digital-content.component.scss']
 })
 export class AddDigitalContentComponent implements OnInit {
+
   submitted = null;
   category:any =[];
   subCategory:any =[];
@@ -23,23 +23,21 @@ export class AddDigitalContentComponent implements OnInit {
   level:any =[];
   tags:any =[];
   status:any =[];
-  selectedFile:any;
+  selectedFile:any=[];
   categories:any;
   sub_categories:any;
   content_level:any;
-
+  fileArr:any = [];
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
-              public datepipe: DatePipe,
-              public fb: FormBuilder,
-              private _dService:DigitalContentService,
-              public translate: TranslateService,
-              private masterservices:MasterService) {
-                translate.setDefaultLang(environment.defaultLanguage);
-
-   }
-   digitalForm = new FormGroup({
+              private _mservice:MasterService,
+              public _service: ContentService,
+              private datepipe: DatePipe,
+              private translate: TranslateService){
+    translate.setDefaultLang(environment.defaultLanguage);
+  }
+  digitalForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     sub_category: new FormControl('', [Validators.required]),
@@ -48,8 +46,9 @@ export class AddDigitalContentComponent implements OnInit {
     content_level: new FormControl('', [Validators.required]),
     tags: new FormControl('', [Validators.required]),
     expiry_date: new FormControl(''),  
-    status: new FormControl({label:'Active',value:1}, [Validators.required]),  
-    files: new FormControl('')
+    status: new FormControl('', [Validators.required]),  
+    files: new FormControl(),
+    fileSource: new FormControl()
   });
   ngOnInit(): void {
     this.getMasterDropdown('categories');
@@ -64,7 +63,7 @@ export class AddDigitalContentComponent implements OnInit {
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this.masterservices.getMasterChilds(params).subscribe(res=>{
+    return this._mservice.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'categories')
           this.categories =  res.data.data;
@@ -93,37 +92,37 @@ export class AddDigitalContentComponent implements OnInit {
   getTags() { return this.digitalForm.value.tags.value;}
   getDate() { return this.digitalForm.value.expiry_date;}
   getStatus() { return this.digitalForm.value.status.value;}
+  getName() { return this.digitalForm.value.name;}
+  getDesc() { return this.digitalForm.value.description;}
 
 
   submit(){
-    const formData = new FormData();
     this.submitted=false;
-    console.log('this.digitalForm',this.digitalForm.value);
-    let headers = new Headers();
-    headers.append('Content-Type', 'multipart/form-data');
-    headers.append('Accept', 'application/json');
-    let options = new RequestOptions({ headers: headers });
-    if(this.digitalForm.valid){
-        var params={};
-        params =this.digitalForm.value;
-        params['expiry_date'] =this.datepipe.transform(this.getDate(), 'yyyy/MM/dd');
-        params['category'] = this.getCategory();
-        params['sub_category'] = this.getSubCategory();
-        params['content_level'] = this.getContentLevel();
-        params['grade'] = this.getGrade();
-        params['tags'] = this.getTags();
-        params['status'] = this.getStatus();
-        params['files'] =   this.selectedFile;
-      this._dService.addDigitalContent(params).subscribe(res =>{
-         if(res.status){
-            this.submitted=true;
-            this._router.navigate(['digital_content']);
-         }
-         else
-         {
-          this._toast.show('error',JSON.parse(res.error));
-         }
-      });
+    if(this.digitalForm.valid){        
+        const formData = new FormData();
+        formData.append('name', this.getName());
+        formData.append('description', this.getDesc());
+        formData.append('category', this.getCategory());
+        formData.append('sub_category', this.getSubCategory());
+        formData.append('expiry_date', this.datepipe.transform(this.getDate(), 'yyyy/MM/dd'));
+        formData.append('status', this.getStatus());
+        formData.append('tags', this.getTags());
+        formData.append('grade', this.getGrade());
+        formData.append('content_level', this.getContentLevel());
+        for (var i = 0; i < this.fileArr.length; i++) { 
+          formData.append("files["+i+"]", this.fileArr[i]);
+        }
+        console.log('formData--', formData);
+        this._service.addDigitalContent(formData).subscribe(res =>{
+          if(res.status){
+              this.submitted=true;
+              this.goToList();
+          }
+          else
+          {
+            this._toast.show('error',JSON.parse(res.error));
+          }
+        });
     }
     else
     {
@@ -131,19 +130,21 @@ export class AddDigitalContentComponent implements OnInit {
     }
   }
 
-  onUploadClicked(event:Event) {
-    console.log('selected info',event[0].name);
-    this.selectedFile =event[0].name;
-  }
-  
-
   onSelectedFilesChanged(event){
-    console.log('selected info',event[0].name);
-      this.selectedFile =event[0].name;
+      this.selectedFile = event.target.files;
   }
   goToList(){
     this._router.navigate(['digital_content']);
   }
-  
+  onFileSelect(event) {
+    if (event.target.files.length > 0) {
+      Object.keys(event.target.files).forEach( key => {
+        this.fileArr.push(event.target.files[key]);
+      });
+      this.digitalForm.patchValue({
+        fileSource: this.fileArr
+      });
+    }
+  }
 
 }

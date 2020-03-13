@@ -90,21 +90,21 @@
                             </div>
                       </div>
                     </div>
-                     <div class="col-md-8 col-12">
+                     <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label>File Upload</label>
-                            <mat-file-upload
+                            <input type="file" name="files" multiple formControlName="files" (change)="onFileSelect($event)" style="height: 45px;" />
+                            <!-- <mat-file-upload
                                 [labelText]="''"  (formControlName)="files"
                                 [selectButtonText]="'Choose File(s)'"
-                                [selectFilesButtonType]="file"
+                                [selectFilesButtonType]="button"
                                 [selectedText]="translateValue"
                                 [allowMultipleFiles]="true"
                                 [showUploadButton]="false"
-                                [acceptedTypes]="'.png, .jpg, .jpeg'"
-                                (uploadClicked)="onUploadClicked($event)"
+                                [acceptedTypes]="'.png, .jpg, .jpeg, .mp4, .mov, .pdf, .exs'"
                                 (selectedFilesChanged)="onSelectedFilesChanged($event)"
                                 >
-                            </mat-file-upload>
+                            </mat-file-upload> -->
                         </div>
                     </div>                    
 

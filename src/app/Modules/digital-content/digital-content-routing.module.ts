@@ -16,14 +16,15 @@ const routes: Routes = [
     path:'add',
     component: AddDigitalContentComponent,
     data: {
-      breadcrumbs: 'Add'
+      breadcrumbs: 'Create'
     }
   },
   {
-    path:'view/:id',
+    path:'view/:name/:id',
     component: ViewDigitalContentComponent,
     data: {
-      breadcrumbs: 'View'
+      breadcrumbs: 'View',
+      title: 'Digital Content'
     }
   },
   {

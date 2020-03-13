@@ -88,21 +88,20 @@ export class AppHttpClientService {
   public post<T>(endPoint: string, params: Object, options?: IRequestOptions): Observable<any> {
 
     this.pendingRequestsNumber++;
-        let param: any = {};
-        console.log('post params--', params);
-        if (this.encrypt) {
-            param.requestData = CryptoJS.AES.encrypt(JSON.stringify(params), this.key, this.enycOptions).toString();
-        } else {
-            param = params;
-        }
-       // param = this.set(this.key,params);
-        return this.http.post(this.api + endPoint, param, options).pipe(map(res => {
-            this.pendingRequestsNumber--;
-            return this.resStatus(res);
-        }, err => {
-            this.pendingRequestsNumber--;
-        }))
-        //return this.http.post<T>(this.api + endPoint, params, options);
+    let param: any = {};
+    console.log('post params--', params);
+    if (this.encrypt) {
+        param.requestData = CryptoJS.AES.encrypt(JSON.stringify(params), this.key, this.enycOptions).toString();
+    } else {
+        param = params;
+    }
+    return this.http.post(this.api + endPoint, param, options).pipe(map(res => {
+        this.pendingRequestsNumber--;
+        return this.resStatus(res);
+    }, err => {
+        this.pendingRequestsNumber--;
+    }))
+    // return this.http.post<T>(this.api + endPoint, params, options);
   }
 
   /**

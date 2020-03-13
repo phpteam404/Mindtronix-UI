@@ -32,7 +32,7 @@ export class AdminLayoutComponent implements OnInit {
   page: string;
   constructor(public location: Location,
               private router: Router,
-              public translate: TranslateService,
+              private translate: TranslateService,
               private _ar: ActivatedRoute,
               private httpService : AppHttpClientService) {
     this.staticBreadCrumb = false;
