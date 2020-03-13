@@ -139,6 +139,20 @@
         "ticketTitle":"Ticket Title",
         "createTicket":"Create Ticket"
     },
+    "digitalContent":{
+        "createContent":"Create Content",
+        "add":{
+            "contentName":"Content Name",
+            "status":"Status",
+            "expiryDate":"Expiry Date",
+            "tags":"Tags",
+            "contentLevel":"Content Level",
+            "grade":"Grade",
+            "subCategory":"Sub Category",
+            "category":"Category",
+            "contentDescription":"Content Description"
+        }
+    },
     "buttons":{
         "save": "Save",
         "create": "Create",
@@ -182,7 +196,12 @@
         "date":"Date is required",
         "fromTime":"From Time is required",
         "toTime":"To Time is required",
-        "note":"NOTE: To Time must be more than From Time"
+        "note":"NOTE: To Time must be more than From Time",
+        "contentName":"Content Name is required",
+        "category":"Category is required",
+        "subCategory":"Sub Category is required",
+        "contentLevel":"Content Level is required",
+        "contentTags":"Tags is required"
     },
     "dropdown":{
         "country":"Country is required",
@@ -229,7 +248,11 @@
         "title":"Select Title",
         "contactName":"Contact Name",
         "feestructure":"Fee Structure",
-        "term":"Select Term"
+        "term":"Select Term",
+        "tags":"Select Tags",
+        "contentLevel":"Select content Level",
+        "category":"Select Category",
+        "subCategory":"Select Sub Category"
 
     },
     "title":{
