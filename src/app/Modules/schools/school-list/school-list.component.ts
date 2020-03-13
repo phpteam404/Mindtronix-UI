@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { SchoolService } from 'src/app/services/school.service';
 import { ToasterService } from '../../../utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent} from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { Table } from 'primeng/table';
@@ -35,6 +35,7 @@ export class SchoolListComponent implements OnInit {
               private _cService: CommonService, 
               private _toasterService: ToasterService, 
               private _ar: ActivatedRoute,
+              private _confirm: ConfirmationService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
   }
@@ -82,25 +83,26 @@ export class SchoolListComponent implements OnInit {
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }
-  DeleteSchool(){
-    var params = new HttpParams()
-        .set('id', this.dataInfo.school_id)
-        .set('tablename', 'school_master');
-       // this._router.navigate(['schools_management'],{relativeTo:this._ar});
-    this._cService.delete(params).subscribe(res=>{
-      if(res.status){
-        this.displayBasic = false;
-        this.getschoolList();
-      }
-      else{
-        this._toasterService.show('error',JSON.parse(res.error));
-      }
+  DeleteSchool(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'school_master')
+                    .set('id', data.school_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getschoolList();
+          }else{
+            this._toasterService.show('error',JSON.parse(res.error));
+          }
+        });
+      },
+      reject: () => {}
     });
-  }
-
-  showBasicDialog(data:any) {
-    this.displayBasic = true;
-    this.dataInfo =data; 
   }
   loadSchoolsLazy(event: LazyLoadEvent) {
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";

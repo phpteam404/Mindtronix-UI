@@ -1,5 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { ToasterService } from 'src/app/utils/toaster.service';
+import { UserService} from 'src/app/services/user.service';
+import { HttpParams } from '@angular/common/http';
+import { LazyLoadEvent} from 'primeng/api';
+import { CommonService } from 'src/app/services/common.service';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms'; 
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-trainer-list',
@@ -7,56 +17,111 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./trainer-list.component.scss']
 })
 export class TrainerListComponent implements OnInit {
-
-  
-  cities: any;
-  cars: any;
-  cols:any;
-  constructor(private router: Router, private _route: ActivatedRoute) {
-    this.cities = [
-        {label:'Select City', value:null},
-        {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
-        {label:'Rome', value:{id:2, name: 'Rome', code: 'RM'}},
-        {label:'London', value:{id:3, name: 'London', code: 'LDN'}},
-        {label:'Istanbul', value:{id:4, name: 'Istanbul', code: 'IST'}},
-        {label:'Paris', value:{id:5, name: 'Paris', code: 'PRS'}}
-    ];
-    this.cars = [
-      {name:'Grab Kit', email:'grabKit@mindtronics.com', phone:'7894564556', manager:'Mike',actions:''},
-      {name:'Tech Point', email:'tech_point@mindtronics.com', phone:'7418523654', manager:'Peter',actions:''},
-      {name:'Mindex', email:'mindex@mindtronics.com', phone:'9632587412', manager:'Jenny',actions:''},
-      {name:'Grade Power', email:'grade_power@mindtronics.com', phone:'6987452541', manager:'Lisa',actions:''},
-      {name:'Tera Soft', email:'teraSoft@mindtronics.com', phone:'8965412547', manager:'John II',actions:''},
-      {name:'Brain Balance', email:'brain-blnc@mindtronics.com', phone:'7588965415', manager:'John',actions:''},
-      {name:'Learning Horizon', email:'lhorizon@mindtronics.com', phone:'9658745896', manager:'Peter',actions:''},
-      {name:'Lesson Up', email:'lessonUp@mindtronics.com', phone:'9658745896', manager:'Karen',actions:''},
-      {name:'Brain Gym', email:'gym-brain@mindtronics.com', phone:'8569745896', manager:'Dominique',actions:''},
-      {name:'Robo Soft', email:'robosoft@mindtronics.com', phone:'7545896552', manager:'Christian',actions:''},
-      {name:'Simply Brilliant', email:'sbrilliant@mindtronics.com', phone:'9632568745', manager:'Jimmy',actions:''},
-      {name:'Inquistive', email:'inquistive@mindtronics.com', phone:'7895874568', manager:'Trump',actions:''},
-      {name:'People Tech', email:'people_tech@mindtronics.com', phone:'9658523645', manager:'Donald',actions:''},
-      {name:'Bulb', email:'bulb@mindtronics.com', phone:'7845258963', manager:'Modi',actions:''},
-      {name:'Newton', email:'newton@mindtronics.com', phone:'8547896541', manager:'Jack',actions:''},
-      {name:'Study Point', email:'spoint@mindtronics.com', phone:'7458963521', manager:'Bill Gates',actions:''},
-      {name:'Robo Tech', email:'robo-tech@mindtronics.com', phone:'6985236545', manager:'Obama',actions:''},
-      {name:'Tutor Pedia', email:'tpedia@mindtronics.com', phone:'8569874589', manager:'Laura',actions:''}
-    ];
-    this.cols = [
-      { field: 'name', header: 'Name' },
-      { field: 'email', header: 'Email' },
-      { field: 'phone', header: 'Phone' },
-      { field: 'manager', header: 'Manager' },
-      { field: 'actions', header: 'Actions' }
-    ];
-  }
+  totalRecords: number;
+  cols: any[];
+  loading: boolean;
+  trainers:any;
+  isCreate: boolean;
+  hideSchedule:boolean;
+  scheduleForm:FormGroup;
+  first:number=0;
+  TrainersList =[];
+  constructor(private router: Router, 
+              private _toast: ToasterService,
+              private _route: ActivatedRoute,
+              private _commonService: CommonService,
+              private userService:UserService,
+              private _ls: LocalStorageService,
+              public translate: TranslateService, 
+              private _confirm: ConfirmationService) {
+                translate.setDefaultLang(environment.defaultLanguage);
+    
+   }
 
   ngOnInit(): void {
-    //this.getList();
-   console.log('getList');
+    this.conditionalValidation();
   }
-
 
   AddNewTrainer(event: Event){
     this.router.navigate(['add'], {relativeTo: this._route});
+  }
+  EditTrainerSchedule(data:any){
+    this.router.navigate(['update/'+data.topic+'/'+btoa(data.trainer_schedule_id)],{ relativeTo: this._route});
+  }
+  
+  DeleteTrainerSchedule(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'trainer_schedule')
+                    .set('id', data.trainer_schedule_id)   
+        this._commonService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getTrainersListInfo();
+          }else{
+            this._toast.show('error',JSON.parse(res.error));
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
+ 
+
+ 
+  isEmptyTable() {
+    return (this.totalRecords == 0 ? true : false);
+  }
+  loadTrainersLazy(event: LazyLoadEvent) {
+    //console.log('event--', event);
+    this.loading =true;
+    var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
+    var params = new HttpParams()
+      .set('start', event.first+'')
+      .set('number', event.rows+'');
+    if (event.sortField) {
+      params = params.set('sort', event.sortField);
+      params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+      params = params.set('search_key', event.globalFilter);
+    }
+    this.userService.getTrainersList(params).subscribe(res=>{
+      if(res.status){
+        this.cols = res.data.table_headers;
+        this.TrainersList = res.data.data;
+        this.totalRecords = res.data.total_records;
+        this.loading = false;
+      }
+    });
+  }
+  
+  getTrainersListInfo(){
+    var params = new HttpParams()
+                  .set('start',0+'')
+                  .set('number',10+'')
+    this.userService.getTrainersList(params).subscribe(res=>{
+      if(res.status){
+        this.cols = res.data.table_headers;
+        this.TrainersList = res.data.data;
+        this.totalRecords = res.data.total_records;
+        this.loading = false;
+      }
+    });
+  }
+
+  conditionalValidation(){
+    var userRole = this._ls.getItem('user',true).data.user_role_id;
+    console.log('userRole---', userRole);
+    if(Number(userRole)==3) {
+      this.hideSchedule=true;
+    } 
+    else {
+      this.hideSchedule=false;
+    }
   }
 }

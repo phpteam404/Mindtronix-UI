@@ -7,13 +7,137 @@
     },
     "franchise":{
         "create": "Create Franchise",
-        "view": "View Franchise",
         "franchiseDetails": "Franchise Details",
         "contactInfo": "Contact Information",
-        "feeManagement": "Fee Management"
+        "feeManagement": "Fee Management",
+        "createFeeStructure":"Create Fee Structure",
+        "createContactInformation":"Create Contact Information",
+        "editFranchiseDetails":"Edit Franchise Details",
+        "add":{
+            "franchiseName":"Franchise Name",
+            "franchiseCode":"Franchise Code",
+            "ownerName":"Owner Name",
+            "contactNumber":"Contact Number",
+            "contactEmail":"Contact Email",
+            "websiteAddress":"Website Address",
+            "address":"Address",
+            "landMark":"Landmark",
+            "country":"Country",
+            "state":"State",
+            "city":"City",
+            "pincode":"Pincode",
+            "status":"Status",
+            "contactTitle":"Contact Title",
+            "name":"Name",
+            "feeStructure":"Fee Structure"
+        },
+        "view":{
+            "#schools":"# Schools",
+            "#students":"# Students",
+            "#trainers":"# Trainers",
+            "revenue":"Revenue",
+            "forStudents":"For Students",
+            "forMindtronix":"For Mindtronix",
+            "invoiced":"Invoiced",
+            "paid":"Paid",
+            "collected":"Collected",
+            "statistics":"Statistics"
+        }
+       
     },
     "fee":{
+        "createfee":"Create Fee Structure",
+        "feeTitle":"Fee Title",
+        "feeAmount":"Fee Amount",
+        "term":"Term",
+        "discount":"Discount",
+        "discountDetails":"Discount Details",
+        "status":"Status"
         
+    },
+    "users":{
+         "userCreate":"Create User",
+      "add":{
+             "firstName":"First Name",
+             "lastName":"Last Name",
+             "role": "Role",
+             "franchise":"Franchise",
+             "contactEmail":"Contact Email",
+             "contactNumber":"Contact Number",
+             "password":"Password",
+             "confirmPassword":"Confirm Password",
+             "status":"Status"
+         }
+       
+    },
+    "student":{
+         "createStudent":"Create Student",
+         "studentInfo":"Student Information",
+         "parentInfo":"Parent Information",
+         "educationDetails":"Education Details",
+         "medicalInfo":"Medical Information",
+         "currentStatus":"Current Status",
+         "add":{
+              "name":"Student Name",
+              "dateOfBirth":"Date of Birth",
+              "nationality":"Nationality",
+              "placeOfBirth":"Place of Birth",
+              "motherTongue":"Mother Tongue",
+              "feeStructure":"Fee Structure",
+              "address":"Address",
+              "parentName":"Name of Parent/Guardian",
+              "studentContactEmail":"Contact Email",
+              "password":"Password",
+              "confirmPassword":"Confirm Password",
+              "studentHomePhone":"Home Phone",
+              "studentMobilePhone1":"Mobile Phone 1",
+              "studentMobilePhone2":"Mobile Phone 2",
+              "relation":"Relation",
+              "occupation":"Occupation",
+              "schoolName":"Name of the school",
+              "class":"Class/Grade",
+              "bloodGroup":"Blood Group",
+              "historyOfIllness":"History of any Illness",
+              "studentCurrentStatus":"Status"
+         },
+         "view":{
+             "studentName":"Student Name",
+             "feeStructure":"Fee Structure",
+             "lastInvoiceAmount":"Last Invoice Amount",
+             "lastLogin":"Last Login",
+             "studentHistory":"Student History",
+             "status":"Status"
+         }
+    },
+    "schools":{
+        "createSchool":"Create School",
+        "schoolName":"School Name",
+        "schoolCode":"School Code",
+        "pincode":"PinCode",
+        "city":"City",
+        "state":"State",
+        "franchise":"Franchise",
+        "contactEmail":"Contact Email",
+        "contactNumber":"Contact Number",
+        "contactPerson":"Contact Person"
+
+    },
+    "masters":{
+        "dialogHeader":"Add/Edit Master",
+        "name":"Name",
+        "description":"Description"
+    },
+    "trainers":{
+          "createTrainer":"Create Schedule",
+          "topic":"Topic",
+          "description":"Description",
+          "date":"Date",
+          "fromTime":"From Time",
+          "toTime":"To Time"
+    },
+    "ticket":{
+        "ticketTitle":"Ticket Title",
+        "createTicket":"Create Ticket"
     },
     "buttons":{
         "save": "Save",
@@ -21,7 +145,101 @@
         "delete": "Delete",
         "view": "View",
         "cancel": "Cancel",
-        "update": "Update"
+        "update": "Update",
+        "next":"Next",
+        "back":"Back",
+        "yes":"Yes",
+        "no":"No"
+    },
+    "errorMessages":{
+        "contactNumber":"Contact number should be minimum 10 digits",
+        "contactEmail":"Email is required and should be in proper format!",
+        "franchiseName":"Franchise Name is required",
+        "franchiseCode":"Franchise Code is required",
+        "franchiseOwner":"Owner Name is required",
+        "contactTitle":"Contact Title is required",
+        "contactName" :"Contact Name is required",
+        "email":"Enter valid email",
+        "feeStructure":"Fee Structure is required",
+        "userName":"Name is required!",
+        "userRole":"Role is required!",
+        "franchiseUser":"Franchise is required!",
+        "password":"Password must be 8 characters",
+        "confirmPassword":"Confirm Password must be 8 characters",
+        "dateOfBirth":"Date of Birth is required",
+        "parentGuardianName":"Parent/Guardian is required",
+        "homePhone":"Home Phone should be minimum 10 digits",
+        "mobilePhone1":"Mobile Phone should be minimum 10 digits",
+        "mobilePhone2":"Mobile Phone2 should be minimum 10 digits",
+        "schoolName":"School Name is required",
+        "feeTitle":"Fee Title is required",
+        "feeAmount":" Amount is required",
+        "feeTerm":"Term is required",
+        "schoolcode":"School Code is required",
+        "contactPersonRequired":"Contact Person is required",
+        "name":"Name is required",
+        "topic":"Topic is required",
+        "date":"Date is required",
+        "fromTime":"From Time is required",
+        "toTime":"To Time is required",
+        "note":"NOTE: To Time must be more than From Time"
+    },
+    "dropdown":{
+        "country":"Country is required",
+        "state":"State is required",
+        "city":"City is required",
+        "status":"Status is required",
+        "nationality":"Nationality is required",
+        "bloodGroup":"Blood Group is required"
+    },
+    "general":{
+         "noRecords":"No records found",
+         "confirmDelete":"Are you sure you want to delete this record ?"
+    },
+    "placeholder":{
+        "status":"Select Status",
+        "bloodGroup":"Select Blood Group",
+        "country":"Select Country",
+        "relation":"Select Relation",
+        "city":"Select City",
+        "state":"Select State",
+        "occupation":"Occupation",
+        "studentName":"Student Name",
+        "nationality":"Select Nationality",
+        "placeOfBirth":"Place of Birth",
+        "motherTongue":"Select Mother Tongue",
+        "feeStructure":"Select Fee Structure",
+        "address":"Address",
+        "parentGuardianName":"Parent/Guardian Name",
+        "parentEmail":"Parent Email",
+        "password":"Password",
+        "confirmPassword":"Confirm Password",
+        "homePhone":"Home Phone",
+        "mobilePhone1":"Mobile Phone 1",
+        "mobilePhone2":"Mobile Phone 2",
+        "schoolName":"Select School",
+        "grade":"Select Grade",
+        "historyOfIllness":"History of any Illness If any",
+        "franchise":"Select Franchise",
+        "search":"Search...",
+        "firstName":"First Name",
+        "role":"Select Role",
+        "contactPerson":"Contact Person",
+        "websiteAddress":"www.mindtronix.com",
+        "title":"Select Title",
+        "contactName":"Contact Name",
+        "feestructure":"Fee Structure",
+        "term":"Select Term"
+
+    },
+    "title":{
+        "edit":"Edit",
+        "delete":"Delete",
+        "add":"Add",
+        "addContact":"Add Contact",
+        "addFeeStructure":"Add Fee Structure",
+        "manageStudents":"Manage Students",
+        "manageUsers":"Manage Users"
     }
 
 }

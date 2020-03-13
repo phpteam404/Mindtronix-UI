@@ -6,24 +6,24 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="schools" placeholder="Select a School" [showClear]="true"
+                            <p-dropdown [options]="schools" placeholder="{{'placeholder.schoolName'|translate}}" [showClear]="true"
                                 [(ngModel)]="schoolFilter"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'school_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
                         <div class="input-dropdown ml-2">
-                            <p-dropdown [options]="franchise" placeholder="Select a Franchise" [showClear]="true"
+                            <p-dropdown [options]="franchise" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value, 'equals')"
                                 optionLabel="label"  filter="true"></p-dropdown>          
                         </div>
                     </div>                  
                     <div class="d-flex">
                         <div class="input-search">
-                            <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                            <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <i class="fa fa-search"></i> 
                         </div>
-                        <button pButton type="button" label="Create Student" class="btn-warning" (click)="AddNewStudent($event)"></button>
+                        <button pButton type="button" label="{{'student.createStudent'|translate}}" class="btn-warning" (click)="AddNewStudent($event)"></button>
                     </div>                  
                 </div>
             </ng-template>
@@ -48,7 +48,7 @@
                         <span *ngIf="i == 8" class="d-flex action-color">
                             <a href="javascript:;" (click)="viewStudent(rowData)"><span class="icon icon-eye-2 mr-2" title="View"></span> </a> 
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditStudent(rowData)"></span></a>
-                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="showBasicDialog(rowData)"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="DeleteStudent(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -57,7 +57,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                   {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>
@@ -65,10 +65,4 @@
         </p-table>
     </div>
 </div>
-<p-dialog header="confirmation" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    Are you sure you want to delete this record ?  
-  <p-footer>
-      <button type="button" pButton class="btn-warning" (click)="DeleteStudent()" label="Yes"></button>
-      <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-  </p-footer>
-</p-dialog>
+<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>

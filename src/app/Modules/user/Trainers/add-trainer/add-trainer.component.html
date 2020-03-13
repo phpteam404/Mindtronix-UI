@@ -1,28 +1,65 @@
 <div class="main-content">
-    <form novalidate>
-        <pe-steps [(activeIndex)]="activeIndex" (change)="onChange($event)">
-            <pe-step label="First Step">
-                <label for="firstname">First Name:</label>
-                <input id="firstname" name="firstname" type="text"
-                       pInputText [(ngModel)]="firstName"/>
-                <button pButton label="Go" (click)="next()"></button>
-            </pe-step>
-            
-            <pe-step label="Second Step">
-                <label for="lastname">Last Name:</label>
-                <input id="lastname" name="lastname" type="text"
-                       pInputText [(ngModel)]="lastName"/>
-                <button pButton label="Go" (click)="next()"></button>
-            </pe-step>
-            
-            <pe-step label="Third Step">
-                <label for="address">Address:</label>
-                <input id="address" name="address" type="text"
-                       pInputText [(ngModel)]="address"/>
-                <button pButton label="Ok" (click)="ok()"></button>
-            </pe-step>
-        </pe-steps>
-        
-        <p-growl [value]="msgs"></p-growl>
-    </form>
+    <div class="custom-form">
+        <h4 class="custom-form-heading">{{pageTitle}}</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="scheduleForm" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'trainers.topic'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'trainers.topic'|translate}}" formControlName="topic" name="topic" type="text" required>
+                            <div class="invalid-feedback"
+                                *ngIf="scheduleForm.controls.topic.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.topic'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-8 col-12">
+                        <div class="form-group">
+                            <label>{{'trainers.description'|translate}}</label>
+                            <textarea pInputTextarea placeholder="{{'trainers.description'|translate}}" formControlName="description"  name="description"></textarea>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'trainers.date'|translate}} <span>*</span></label>
+                            <p-calendar name="date" formControlName="date" [showIcon]="true" dateFormat="dd/mm/yy"  [minDate]="minDate" readonlyInput="true"></p-calendar>
+                            <div class="invalid-feedback"
+                                *ngIf="scheduleForm.controls.date.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.date'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'trainers.fromTime'|translate}} <span>*</span></label>
+                            <p-calendar name="from_time" formControlName="from_time" (onSelect)="timeChanged1()" [timeOnly]="true" hourFormat="24" readonlyInput="true"></p-calendar>
+                            <div class="invalid-feedback"
+                                *ngIf="scheduleForm.controls.from_time.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.fromTime'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'trainers.toTime'|translate}} <span>*</span></label>
+                            <p-calendar name="to_time" formControlName="to_time" (onSelect)="timeChanged()" [timeOnly]="true" hourFormat="24" readonlyInput="true"></p-calendar>
+                            <div class="invalid-feedback"
+                                *ngIf="scheduleForm.controls.to_time.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.toTime'|translate}}
+                            </div>
+                            <div class="invalid-feedback" *ngIf="!validTime && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.note'|translate}}
+                            </div>
+                        </div>
+                    </div>                   
+                    <div class="col-12 text-right custom-btn">
+                        <button pButton type="submit" label="{{'buttons.save'|translate}}"  *ngIf="!isUpdate"class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="{{'buttons.update'|translate}}" *ngIf="isUpdate" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>

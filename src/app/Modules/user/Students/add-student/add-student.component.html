@@ -5,70 +5,70 @@
             <form [formGroup]="studentForm" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-12">
-                        <h4>Student Information</h4>
+                        <h4>{{'student.studentInfo'|translate}}</h4>
                     </div>
                     <div class="col-12">
                     <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Student Name <span>*</span></label>
-                            <input pinputtext placeholder="Student Name" formControlName="student_name" name="student_name" type="text" required>
+                            <label>{{'student.add.name'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'placeholder.studentName'|translate}}" formControlName="student_name" name="student_name" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.student_name.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Name is required
+                                [ngClass]=" 'error'">{{'errorMessages.userName'|translate}}
                             </div>
                         </div>
                     </div>                    
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Date of Birth <span>*</span></label>
-                            <p-calendar formControlName="date_of_birth" dateFormat="dd/mm/yy"name="date_of_birth" [showIcon]="true" [maxDate]="maxDate"
+                            <label>{{'student.add.dateOfBirth'|translate}} <span>*</span></label>
+                            <p-calendar formControlName="date_of_birth" dateFormat="dd/mm/yy" name="date_of_birth" [showIcon]="true" [maxDate]="maxDate"
                                 [monthNavigator]="true" [yearNavigator]="true" [yearRange]="('1990:2060')" required></p-calendar>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.date_of_birth.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Date of Birth is required
+                                [ngClass]=" 'error'">{{'errorMessages.dateOfBirth'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Nationality <span>*</span></label>
-                            <p-dropdown [options]="nationality" formControlName="nationality" filter="true" placeholder="Select Nationality" itemSize="30"
+                            <label>{{'student.add.nationality'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="nationality" formControlName="nationality" filter="true" placeholder="{{'placeholder.nationality'|translate}}" itemSize="30"
                                 optionLabel="label" required name="nationality"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.nationality.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Nationality is required
+                                [ngClass]=" 'error'">{{'dropdown.nationality'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Place of Birth</label>
-                            <input pinputtext placeholder="Place of Birth" formControlName="place_of_birth" name="place_of_birth" type="text">
+                            <label>{{'student.add.placeOfBirth'|translate}}</label>
+                            <input pinputtext placeholder="Place of Birth" formControlName="place_of_birth" name="{{'placeholder.placeOfBirth'|translate}}" type="text">
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Mother Tongue</label>
-                            <p-dropdown [options]="mothertongue"  [showClear]="true" formControlName="mother_tongue" filter="true" placeholder="Select Mother Tongue" 
+                            <label>{{'student.add.motherTongue'|translate}}</label>
+                            <p-dropdown [options]="mothertongue"  [showClear]="true" formControlName="mother_tongue" filter="true" placeholder="{{'placeholder.motherTongue'|translate}}" 
                                 itemSize="30" optionLabel="label" name="mother_tongue"></p-dropdown>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Fee Structure<span>*</span></label>
-                            <p-dropdown [options]="feeTerm" formControlName="fee_structure" filter="true" placeholder="Select Fee Structure" 
+                            <label>{{'student.add.feeStructure'|translate}}<span>*</span></label>
+                            <p-dropdown [options]="feeTerm" formControlName="fee_structure" filter="true" placeholder="{{'placeholder.feeStructure'|translate}}" 
                                 itemSize="30" optionLabel="label" name="fee_structure" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.fee_structure.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Fee Structure is required
+                                [ngClass]=" 'error'">{{'errorMessages.feeStructure'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-12 col-12">
                         <div class="form-group">
-                            <label>Address</label>
-                            <textarea pInputTextarea placeholder="Address" formControlName="address"  name="address"></textarea>
+                            <label>{{'student.add.address'|translate}}</label>
+                            <textarea pInputTextarea placeholder="{{'placeholder.address'|translate}}" formControlName="address"  name="address"></textarea>
                         </div>
                     </div>
                 </div>   
@@ -76,111 +76,111 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h4>Parent Information</h4>
+                        <h4>{{'student.parentInfo'|translate}}</h4>
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Name of Parent/Guardian <span>*</span></label>
-                                    <input pinputtext placeholder="Parent/Guardian Name" formControlName="parent_name" name="parent_name" type="text" required>
+                                    <label>{{'student.add.parentName'|translate}} <span>*</span></label>
+                                    <input pinputtext placeholder="{{'placeholder.parentGuardianName'|translate}}" formControlName="parent_name" name="parent_name" type="text" required>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.parent_name.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Parent/Guardian is required
+                                        [ngClass]=" 'error'">{{'errorMessages.parentGuardianName'|translate}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Contact Email <span>*</span></label>
-                                    <input pinputtext placeholder="Parent Email" formControlName="email" name="email" type="email" required>
+                                    <label>{{'student.add.studentContactEmail'|translate}} <span>*</span></label>
+                                    <input pinputtext placeholder="{{'placeholder.parentEmail'|translate}}" formControlName="email" name="email" type="email" required>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.email.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Email is required and should be in proper format!
+                                        [ngClass]=" 'error'">{{'errorMessages.contactEmail'|translate}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" *ngIf="!isUpdate">
                                 <div class="form-group">
-                                    <label>Password <span>*</span></label>
-                                    <input pPassword  placeholder="Password" formControlName="password" name="password" type="password" required>
+                                    <label> {{'student.add.password'|translate}} <span>*</span></label>
+                                    <input pPassword  placeholder="{{'placeholder.password'|translate}}" formControlName="password" name="password" type="password" required>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.password.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Password must be 8 characters
+                                        [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" *ngIf="!isUpdate">
                                 <div class="form-group">
-                                    <label>Confirm Password <span>*</span></label>
-                                    <input pPassword  placeholder="Confirm Password" formControlName="cpassword" name="cpassword" type="password" required>
+                                    <label>{{'student.add.confirmPassword'|translate}} <span>*</span></label>
+                                    <input pPassword  placeholder="{{'placeholder.confirmPassword'|translate}}" formControlName="cpassword" name="cpassword" type="password" required>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.cpassword.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Confirm Password must be 8 characters
+                                        [ngClass]=" 'error'">{{'errorMessages.confirmPassword'|translate}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Home Phone <span>*</span></label>
-                                <input type="text" placeholder=" Home Phone" pKeyFilter="pint" formControlName="phone_no" name="phone_no" required>
+                                <label> {{'student.add.studentHomePhone'|translate}} <span>*</span></label>
+                                <input type="text" placeholder="{{'placeholder.homePhone'|translate}}" pKeyFilter="pint" formControlName="phone_no" name="phone_no" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
-                                    [ngClass]=" 'error'">Home Phone should be minimum 10 digits
+                                    [ngClass]=" 'error'">{{'errorMessages.homePhone'|translate}}
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Mobile Phone 1 <span>*</span></label>
-                                <input type="text" placeholder="Mobile Phone 1" pKeyFilter="pint" formControlName="mobile_phone1" name="mobile_phone1" required>
+                                <label>{{'student.add.studentMobilePhone1'|translate}}<span>*</span></label>
+                                <input type="text" placeholder="{{'placeholder.mobilePhone1'|translate}}" pKeyFilter="pint" formControlName="mobile_phone1" name="mobile_phone1" required>
                                 <div class="invalid-feedback"
                                     *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
-                                    [ngClass]=" 'error'">Mobile Phone should be minimum 10 digits
+                                    [ngClass]=" 'error'">{{'errorMessages.mobilePhone1'|translate}}
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Mobile Phone 2 </label>
-                                    <input type="text" placeholder="Mobile Phone 2" pKeyFilter="pint" formControlName="mobile_phone2" name="mobile_phone2">
+                                    <label>{{'student.add.studentMobilePhone2'|translate}} </label>
+                                    <input type="text" placeholder="{{'placeholder.mobilePhone2'|translate}}" pKeyFilter="pint" formControlName="mobile_phone2" name="mobile_phone2">
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.mobile_phone2.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">Mobile Phone2 should be minimum 10 digits
+                                        [ngClass]=" 'error'">{{'errorMessages.mobilePhone2'|translate}}
                                     </div>
                                 </div>                        
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Relation</label>
-                                    <p-dropdown [options]="relation"  [showClear]="true" formControlName="relation" filter="true" placeholder="Select Relation" 
+                                    <label>{{'student.add.relation'|translate}}</label>
+                                    <p-dropdown [options]="relation"  [showClear]="true" formControlName="relation" filter="true" placeholder="{{'placeholder.relation'|translate}}" 
                                         itemSize="30" optionLabel="label" name="relation" ></p-dropdown>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Occupation</label>
-                                <input pinputtext type="text" placeholder="Occupation" formControlName="occupation" name="occupation">
+                                <label>{{'student.add.occupation'|translate}}</label>
+                                <input pinputtext type="text" placeholder="{{'placeholder.occupation'|translate}}" formControlName="occupation" name="occupation">
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h4>Education Details</h4>
+                        <h4>{{'student.educationDetails'|translate}}</h4>
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Name of the school <span>*</span></label>
-                                    <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="Select School" 
+                                    <label>{{'student.add.schoolName'|translate}} <span>*</span></label>
+                                    <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="{{'placeholder.schoolName'|translate}}" 
                                     itemSize="30" optionLabel="label" name="school_id" ></p-dropdown>
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.school_id.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">School Name is required
+                                        [ngClass]=" 'error'">{{'errorMessages.schoolName'|translate}}
                                     </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>Class/Grade</label>
-                                    <p-dropdown [options]="grade"  formControlName="grade" filter="true" placeholder="Select Grade" 
+                                    <label>{{'student.add.class'|translate}}</label>
+                                    <p-dropdown [options]="grade"  formControlName="grade" filter="true" placeholder="{{'placeholder.grade'|translate}}" 
                                         itemSize="30" optionLabel="label" name="grade" [showClear]="true" ></p-dropdown>
                                 </div>
                             </div>
@@ -195,25 +195,25 @@
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <h4>Medical Information</h4>
+                        <h4>{{'student.medicalInfo'|translate}}</h4>
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Blood Group <span>*</span></label>
-                            <p-dropdown [options]="blood_group" formControlName="blood_group" placeholder="Select Blood Group" 
+                            <label>{{'student.add.bloodGroup'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="blood_group" formControlName="blood_group" placeholder="{{'placeholder.bloodGroup'|translate}}" 
                                 itemSize="30" optionLabel="label" name="blood_group" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="studentForm.controls.blood_group.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">Blood Group is required
+                                [ngClass]=" 'error'">{{'dropdown.bloodGroup'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-8 col-12">
                         <div class="form-group">
-                            <label>History of any Illness</label>
-                            <textarea pInputTextarea placeholder="History of any Illness If any" formControlName="history_of_illness"  name="history_of_illness"></textarea>
+                            <label>{{'student.add.historyOfIllness'|translate}}</label>
+                            <textarea pInputTextarea placeholder="{{'placeholder.historyOfIllness'|translate}}" formControlName="history_of_illness"  name="history_of_illness"></textarea>
                         </div>
                     </div>
                     </div>
@@ -222,27 +222,27 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <h4>Current Status</h4>
+                        <h4>{{'student.currentStatus'|translate}}</h4>
                     </div>
                     <div class="col-12">
                         <div class="row form-bg">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Status <span>*</span></label>
-                            <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                            <label>{{'student.add.studentCurrentStatus'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="status" formControlName="status" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                                        name="status" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
                                  *ngIf="studentForm.controls.status.invalid && submitted!=null && !submitted "
-                                 [ngClass]=" 'error'">Status is required
+                                 [ngClass]=" 'error'">{{'dropdown.status'|translate}}
                             </div>
                         </div>
                     </div>
                     </div>
                     </div>
                     <div class="col-12 text-right">
-                        <button pButton type="submit" label="Save" *ngIf="!isUpdate"class="btn-warning mr-2"></button>
-                        <button pButton type="submit" label="Update" *ngIf="isUpdate" class="btn-warning mr-2"></button>
-                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                        <button pButton type="submit" label="{{'buttons.save'|translate}}" *ngIf="!isUpdate"class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="{{'buttons.update'|translate}}" *ngIf="isUpdate" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>
             </form>

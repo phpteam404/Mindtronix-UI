@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { UserService} from 'src/app/services/user.service';
 import { DatePipe, formatDate } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-add-trainer',
   templateUrl: './add-trainer.component.html',
@@ -20,7 +22,9 @@ export class AddTrainerComponent implements OnInit {
   constructor(private _router: Router,
                private _toast: ToasterService,
                private userService:UserService,
+               public translate: TranslateService, 
                public datepipe: DatePipe) {
+                translate.setDefaultLang(environment.defaultLanguage);
     var currTime:string ='';
     
     currTime = new Date().setHours(15) + ':' + new Date().setMinutes(15) + ':'+  new Date().setSeconds(0);

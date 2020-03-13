@@ -6,62 +6,62 @@
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>School Name <span>*</span></label>
-                            <input pinputtext placeholder="School Name" formControlName="name" name="name" type="text" required>
+                            <label>{{'schools.schoolName'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'schools.schoolName'|translate}}" formControlName="name" name="name" type="text" required>
                             <div class="invalid-feedback"
                                     *ngIf="schoolForm.controls.name.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">School Name is required
+                                [ngClass]=" 'error'">{{'errorMessages.schoolName'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>School Code <span>*</span></label>
-                            <input pinputtext placeholder="School Code" formControlName="code" name="code" type="text" required>
+                            <label>{{'schools.schoolCode'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'schools.schoolCode'|translate}}" formControlName="code" name="code" type="text" required>
                             <div class="invalid-feedback"
                                     *ngIf="schoolForm.controls.code.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">School Code is required
+                                [ngClass]=" 'error'">{{'errorMessages.schoolcode' |translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Contact Person <span>*</span></label>
-                            <input pinputtext placeholder="Contact Person Name" formControlName="contact_person" name="contact_person" type="text" required>
+                            <label>{{'schools.contactPerson'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'schools.contactPerson'|translate}}" formControlName="contact_person" name="contact_person" type="text" required>
                             <div class="invalid-feedback"
                                     *ngIf="schoolForm.controls.contact_person.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Contact Person is required
+                                [ngClass]=" 'error'">{{'errorMessages.contactPersonRequired'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Contact Number <span>*</span></label>
-                            <input pinputtext placeholder="Contact Number" pKeyFilter="pint" formControlName="phone" name="phone" type="text" required>
+                            <label>{{'schools.contactNumber'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'schools.contactNumber'|translate}}" pKeyFilter="pint" formControlName="phone" name="phone" type="text" required>
                             <div class="invalid-feedback"
                                     *ngIf="schoolForm.controls.phone.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Contact Number should be minimum 10 digits
+                                [ngClass]=" 'error'">{{'errorMessages.contactNumber'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Contact Email <span>*</span></label>
-                            <input pinputtext placeholder="Contact Email" formControlName="email" name="email" type="email" required>
+                            <label>{{'schools.contactEmail'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'schools.contactEmail'|translate}}" formControlName="email" name="email" type="email" required>
                             <div class="invalid-feedback"
                                  *ngIf="schoolForm.controls.email.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Email is required and should be in proper format!
+                                [ngClass]=" 'error'">{{'errorMessages.contactEmail'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12" *ngIf="!hideFranchise">
                         <div class="form-group">
-                            <label>Franchise <span>*</span></label>
-                            <p-dropdown [options]="franchise" formControlName="franchise_id" filter="true" placeholder="Select Franchise" itemSize="30"
+                            <label>{{'schools.franchise'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="franchise" formControlName="franchise_id" filter="true" placeholder="{{'placeholder.franchise'|translate}}" itemSize="30"
                             name="franchise_id" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
                                  *ngIf="schoolForm.controls.franchise_id.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Franchise is required
+                                [ngClass]=" 'error'">{{'errorMessages.franchiseUser'|translate}}
                             </div> 
                         </div>
                     </div>
@@ -73,36 +73,36 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>State <span>*</span></label>
-                            <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="Select State" itemSize="30"
+                            <label>{{'schools.state'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="{{'placeholder.state'|translate}}" itemSize="30"
                             name="state" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="schoolForm.controls.state.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">State is required
+                                [ngClass]=" 'error'">{{'dropdown.state'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>City <span>*</span></label>
-                            <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="Select City" itemSize="30"
+                            <label>{{'schools.city'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="{{'placeholder.city'|translate}}" itemSize="30"
                             name="state" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="schoolForm.controls.city.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">City is required
+                                [ngClass]=" 'error'">{{'dropdown.city'|translate}}
                             </div> 
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>PinCode</label>
-                            <input type="text" placeholder="PinCode" pKeyFilter="pint" formControlName="pincode" name="pincode">
+                            <label>{{'schools.pincode'|translate}}</label>
+                            <input type="text" placeholder="{{'schools.pincode'|translate}}" pKeyFilter="pint" formControlName="pincode" name="pincode">
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">
-                        <button pButton type="submit" label="Save" *ngIf="!isUpdate" class="btn-warning mr-2"></button> 
-                        <button pButton type="submit" label="Update" *ngIf="isUpdate" class="btn-warning mr-2"></button>
-                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                        <button pButton type="submit" label="{{'buttons.save'|translate}}" *ngIf="!isUpdate" class="btn-warning mr-2"></button> 
+                        <button pButton type="submit" label="{{'buttons.update'|translate}}" *ngIf="isUpdate" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>
             </form>

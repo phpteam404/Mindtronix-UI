@@ -6,6 +6,8 @@ import { FranchiseService } from 'src/app/services/franchise.service';
 import { MasterService } from 'src/app/services/master.service';
 import { Router } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 
 @Component({
@@ -28,7 +30,10 @@ export class AddSchoolComponent implements OnInit {
               private _ls: LocalStorageService,
               private schoolService:SchoolService,
               private franchiseService:FranchiseService,
-              private masterService:MasterService) { }
+              public translate: TranslateService, 
+              private masterService:MasterService) { 
+                translate.setDefaultLang(environment.defaultLanguage);
+              }
   schoolForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),

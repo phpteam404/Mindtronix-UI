@@ -6,60 +6,60 @@
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Fee Title <span>*</span></label>
-                            <input pinputtext placeholder="Fee Title" formControlName="name" name="name" type="text" required>
+                            <label>{{'fee.feeTitle'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'fee.feeTitle'|translate}}" formControlName="name" name="name" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="feeForm.controls.name.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'"> Fee Title is required
+                                [ngClass]=" 'error'"> {{'errorMessages.feeTitle'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12 input-addon-iconleft">
-                        <label>Fee Amount(₹)<span>*</span></label>
+                        <label>{{'fee.feeAmount'|translate}}(₹)<span>*</span></label>
                         <div class="ui-inputgroup">
                             <span class="ui-inputgroup-addon">₹</span>
-                            <input type="text" placeholder="Amount" pKeyFilter="pint" formControlName="amount" name="amount" required>
+                            <input type="text" placeholder="{{'fee.feeAmount'|translate}}" pKeyFilter="pint" formControlName="amount" name="amount" required>
                         </div>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.amount.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'"> Amount is required
+                            [ngClass]=" 'error'">{{'errorMessages.feeAmount'|translate}}
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Term <span>*</span></label>
-                        <p-dropdown [options]="term" formControlName="term" placeholder="Select Term" itemSize="30"
+                        <label>{{'fee.term'|translate}} <span>*</span></label>
+                        <p-dropdown [options]="term" formControlName="term" placeholder="{{'placeholder.term'|translate}}" itemSize="30"
                             name="term" optionLabel="label" required></p-dropdown>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.term.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'"> Term is required
+                            [ngClass]=" 'error'"> {{'errorMessages.feeTerm'|translate}}
                         </div>
                     </div>
                     <div class="col-md-4 col-12 input-addon-iconright">
                         <div class="form-group">
-                            <label>Discount (%)</label>
+                            <label>{{'fee.discount'|translate}} (%)</label>
                             <div class="ui-inputgroup">
-                                <input pinputtext type="text" pKeyFilter="pint" [maxlength]="2" placeholder="Discount" formControlName="discount" name="discount">
+                                <input pinputtext type="text" pKeyFilter="pint" [maxlength]="2" placeholder="{{'fee.discount'|translate}}" formControlName="discount" name="discount">
                                 <span class="ui-inputgroup-addon">%</span> 
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Discount Details</label>
-                        <input pinputtext type="text" placeholder="Discount Details" formControlName="discount_details" name="discount_details">
+                        <label>{{'fee.discountDetails'|translate}}</label>
+                        <input pinputtext type="text" placeholder="{{'fee.discountDetails'|translate}}s" formControlName="discount_details" name="discount_details">
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Status <span>*</span></label>
-                        <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                        <label>{{'fee.status'|translate}} <span>*</span></label>
+                        <p-dropdown [options]="status" formControlName="status" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                             name="status" optionLabel="label" required></p-dropdown>
                         <div class="invalid-feedback"
                             *ngIf="feeForm.controls.status.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'"> Status is required
+                            [ngClass]=" 'error'"> {{'dropdown.status'|translate}}
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">
-                        <button pButton type="submit" label="Save" *ngIf="!isUpdate" class="btn-warning mr-2"></button>
-                        <button pButton type="submit" label="Update" *ngIf="isUpdate" class="btn-warning mr-2"></button>
-                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                        <button pButton type="submit" label="{{'buttons.save'|translate}}" *ngIf="!isUpdate" class="btn-warning mr-2"></button>
+                        <button pButton type="submit" label="{{'buttons.update'|translate}}" *ngIf="isUpdate" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>
             </form>

@@ -5,7 +5,7 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent} from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,6 +38,7 @@ export class StudentListComponent implements OnInit {
               private _service:UserService,
               private _schoolService:SchoolService,
               private _fService:FranchiseService,
+              private _confirm: ConfirmationService,
               public translate: TranslateService) {
                 
     translate.setDefaultLang(environment.defaultLanguage);
@@ -99,23 +100,28 @@ export class StudentListComponent implements OnInit {
       this._router.navigate(['view',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});
   }
 
-  DeleteStudent(){
-     var params = new HttpParams()
-        .set('id', this.dataInfo.user_id)
-        .set('tablename', 'user');
-     this._cService.delete(params).subscribe(res=>{
-       console.log('res info',res);
-      if(res.status){
-        this.displayBasic = false;
-        this.getList();
-      }
+  DeleteStudent(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'user')
+                    .set('id', data.user_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getList();
+          }else{
+            this._toast.show('error',JSON.parse(res.error));
+          }
+        });
+      },
+      reject: () => {}
     });
   }
 
-  showBasicDialog(data:any) {
-    this.displayBasic = true;
-    this.dataInfo =data; 
-  }
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }

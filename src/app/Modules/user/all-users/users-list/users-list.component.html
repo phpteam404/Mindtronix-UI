@@ -14,7 +14,7 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="franchiseList" placeholder="Select Franchise" [showClear]="true"
+                            <p-dropdown [options]="franchiseList" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseId"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'franchise_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
@@ -22,11 +22,11 @@
                     </div>                  
                     <div class="d-flex">
                         <div class="input-search">
-                            <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                            <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <i class="fa fa-search"></i> 
                         </div>
-                        <button pButton type="button" label="Create User" class="btn-warning" (click)="AddNewUser($event)"></button>
+                        <button pButton type="button" label="{{'users.userCreate'|translate}}" class="btn-warning" (click)="AddNewUser($event)"></button>
                     </div>                  
                 </div>
             </ng-template>
@@ -48,8 +48,8 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 6" class="d-flex action-color">
-                            <a href="javascript:;" (click)="editUser(rowData)" ><span class="icon icon-edit-pencil mr-2" title="Edit"></span></a>
-                            <a href="javascript:;" (click)="showBasicDialog(rowData)"><span class="icon icon-delete" title="Delete"></span></a>
+                            <a href="javascript:;" (click)="editUser(rowData)" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}"></span></a>
+                            <a href="javascript:;" (click)="deleteUser(rowData)"><span class="icon icon-delete" title="{{'title.delete'|translate}}"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -58,7 +58,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                  {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>
@@ -66,10 +66,4 @@
         </p-table>
     </div>
 </div>
-<p-dialog header="confirmation" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    Are You Sure You Want To Permanently Delete This Record ?? 
-  <p-footer>
-      <button type="button" pButton class="btn-warning" (click)="deleteUser()" label="Yes"></button>
-      <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-  </p-footer>
-</p-dialog>
+<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>

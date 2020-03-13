@@ -5,6 +5,8 @@ import { LazyLoadEvent } from 'primeng/api';
 import { HttpParams } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { DatePipe} from '@angular/common';
+
 @Component({
   selector: 'app-franchise',
   templateUrl: './franchise.component.html',
@@ -17,7 +19,11 @@ export class FranchiseListComponent implements OnInit {
   cols: any[];
   loading: boolean;
 
-  constructor(private _service: FranchiseService,public translate: TranslateService,private router: Router, private _route: ActivatedRoute) {
+  constructor(private _service: FranchiseService,
+              public translate: TranslateService,
+              private router: Router,
+              public datepipe: DatePipe,
+              private _route: ActivatedRoute) {
     translate.setDefaultLang(environment.defaultLanguage);
   }
 

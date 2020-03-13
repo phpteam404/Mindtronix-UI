@@ -28,7 +28,7 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
-                            <p-dropdown [options]="franchiseList" placeholder="Select Franchise" [showClear]="true"
+                            <p-dropdown [options]="franchiseList" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseId"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'franchise_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
@@ -36,11 +36,11 @@
                     </div>                  
                     <div class="d-flex">
                         <div class="input-search">
-                            <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                            <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}." class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <i class="fa fa-search"></i> 
                         </div>
-                        <button pButton type="button" label="Create School" class="btn-warning" (click)="AddNewSchool($event)"></button>
+                        <button pButton type="button" label="{{'schools.createSchool'|translate}}" class="btn-warning" (click)="AddNewSchool($event)"></button>
                     </div>                  
                 </div>
             </ng-template>
@@ -57,9 +57,9 @@
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i!=5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 5" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditSchool(rowData)"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete mr-2" title="Delete" (click) ="showBasicDialog(rowData)"></span></a>
-                            <a href="javascript:;"><span class="icon icon-users" (click)="goToStudent(rowData)" title="Manage Students"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}" (click)="EditSchool(rowData)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete mr-2" title="{{'title.delete'|translate}}" (click) ="DeleteSchool(rowData)"></span></a>
+                            <a href="javascript:;"><span class="icon icon-users" (click)="goToStudent(rowData)" title="{{'title.manageStudents'|translate}}"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -68,7 +68,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                    {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>
@@ -76,3 +76,4 @@
         </p-table>
     </div>
 </div>
+<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>

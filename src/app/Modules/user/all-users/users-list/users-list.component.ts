@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { HttpParams } from '@angular/common/http';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
@@ -34,6 +34,7 @@ export class UsersListComponent implements OnInit {
               private _cService: CommonService,
               private _fService: FranchiseService, 
               private _route: ActivatedRoute,
+              private _confirm: ConfirmationService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
   }
@@ -73,21 +74,27 @@ export class UsersListComponent implements OnInit {
     else
       this.router.navigate(['update',data.user_name,btoa(data.user_id)],{relativeTo: this._route});
   }
-  deleteUser(){
-    var params = new HttpParams()
-                  .set('tablename','user')
-                  .set('id',this.dataInfo.user_id);
-    this._cService.delete(params).subscribe(res => {
-        if(res.status){          
-          this.displayBasic=false;
-          this.getList();
-        }
-    })
-  }
-  showBasicDialog(data:any) {
-    this.displayBasic = true;
-    this.dataInfo =data; 
-  }
+  
+  deleteUser(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'user')
+                    .set('id', data.user_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getList();
+          }else{
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }  
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }

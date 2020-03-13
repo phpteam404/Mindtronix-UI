@@ -10,6 +10,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { CommonService } from 'src/app/services/common.service';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import {ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-view-franchise',
@@ -26,11 +27,7 @@ export class ViewFranchiseComponent implements OnInit {
   displayBasic2: boolean;
   title:any;
   buttonDisabled :boolean;
-  displayBasicDialog :boolean;
-  dataInfo:any;
   header:string;
-  displayFeeDialog:boolean;
-  feeInfo:any;
   revenueMonth:any;
   chart:Chart;
   
@@ -61,6 +58,7 @@ export class ViewFranchiseComponent implements OnInit {
               private _cService: CommonService,
               private _toast: ToasterService,
               private _feeService: FeeService,
+              private _confirm: ConfirmationService,
               private masterservices:MasterService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
@@ -117,14 +115,6 @@ export class ViewFranchiseComponent implements OnInit {
     console.log('prepopulate---', this.franchiseObj.fee_detalis);
   }
  
-  showBasicDialogDelete(data:any) {
-    this.displayBasicDialog = true;
-    this.dataInfo =data; 
-  }
-  showFeeDelete(data:any){
-    this.displayFeeDialog =true;
-    this.feeInfo =data;
-  }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
       this.franchiseId = atob(params['params'].id);
@@ -338,13 +328,24 @@ export class ViewFranchiseComponent implements OnInit {
       contact_number : data.contact_number,
     });
   }
-  deleteFranchiseContact(){
-    var params = new HttpParams().set('tablename','franchise_contacts').set('id',this.dataInfo.franchise_contact_id);
-    this._cService.delete(params).subscribe(res => {
-      if(res.status){
-        this.displayBasicDialog=false;
-        this.getFranchiseInfo(this.franchiseId);
-      }
+
+  deleteFranchiseContact(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'franchise_contacts')
+                    .set('id', data.franchise_contact_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getFranchiseInfo(this.franchiseId);
+          }else{
+          }
+        });
+      },
+      reject: () => {}
     });
   }
 
@@ -370,15 +371,26 @@ export class ViewFranchiseComponent implements OnInit {
     }
   }
 
-  deleteFranchiseFee(){
-    var params = new HttpParams().set('tablename','franchise_fee').set('id',this.feeInfo.fee_master_id);
-    this._cService.delete(params).subscribe(res => {
-      if(res.status){
-        this.displayFeeDialog=false;
-        this.getFranchiseInfo(this.franchiseId);
-      }
+  deleteFranchiseFee(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'franchise_fee')
+                    .set('id', data.fee_master_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getFranchiseInfo(this.franchiseId);
+          }else{
+          }
+        });
+      },
+      reject: () => {}
     });
   }
+  
   isEnabled(){
     if(this.franchiseObj.status == 'active') return true;
     else return false;

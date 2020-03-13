@@ -6,11 +6,11 @@
                
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Create Schedule" class="btn-warning" (click)="AddNewTrainer($event)"></button>
+                    <button pButton type="button" label="{{'trainers.createTrainer'|translate}}" class="btn-warning" (click)="AddNewTrainer($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -24,10 +24,12 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 4" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
+                        <span *ngIf="i !=1" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span> 
+                        <span *ngIf="i==1" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM,yyyy'}}</span>    
+                      
                         <span *ngIf="i == 4" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditTrainerSchedule(rowData)"></span></a>
-                            <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="showBasicDialog(rowData)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}" (click)="EditTrainerSchedule(rowData)"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="{{'ttile.delete'|translate}}" (click)="DeleteTrainerSchedule(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -36,7 +38,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                    {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>
@@ -44,11 +46,4 @@
         </p-table>
     </div>
 </div>
-
-<p-dialog header="confirmation" [(visible)]="displayBasic" [style]="{width: '50vw'}" [baseZIndex]="10000">
-    Are you sure you want to delete this record ?
-  <p-footer>
-      <button type="button" pButton class="btn-warning" (click)="DeleteTrainerSchedule()" label="Yes"></button>
-      <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-  </p-footer>
-</p-dialog>
+<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>

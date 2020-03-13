@@ -107,22 +107,22 @@
         <div class="col-md-9 col-12">
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
-                    <div>Student Name
+                    <div>{{'student.view.studentName'|translate}}
                         <span>{{studentObj.student_name}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text">Fee Structure
+                    <div class="schools-text">{{'student.view.feeStructure'|translate}}
                         <span>{{studentObj.fee_structure}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="students-text">Last Invoice Amount
+                    <div class="students-text">{{'student.view.lastInvoiceAmount'|translate}}
                         <span>₹{{studentObj.last_invoice_amount }}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="trainers-text">Last Login
+                    <div class="trainers-text">{{'student.view.lastLogin'|translate}}
                         <!-- <span>25/02/2020 12:30 PM</span> -->
                         <span>{{studentObj.last_login  | date:'dd-MM-yyyy hh:mm a'}}</span>
                     </div>
@@ -130,112 +130,112 @@
             </div>
             <div class="custom-tabs clearfix">
                 <p-tabView>
-                    <p-tabPanel header="Student Information">
+                    <p-tabPanel header="{{'student.studentInfo'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                    
                                     <div class="col-md-4 col-12">
-                                        <label>Student Name</label>
+                                        <label>{{'student.view.studentName'|translate}}</label>
                                         <p>{{studentObj.student_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Date of Birth</label>
+                                        <label>{{'student.add.dateOfBirth'|translate}}</label>
                                         <p>{{studentObj.date_of_birth | date:'dd-MM-yyyy'}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Nationality </label>
+                                        <label>{{'student.add.nationality'|translate}} </label>
                                         <p>{{studentObj.nationality}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Place of Birth</label>
+                                        <label>{{'student.add.placeOfBirth'|translate}}</label>
                                         <p>{{studentObj.place_of_birth}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Mother Tongue</label>
+                                        <label>{{'student.add.motherTongue'|translate}}</label>
                                         <p>{{studentObj.mother_tongue}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Fee Structure</label>
+                                        <label>{{'student.add.feeStructure'|translate}}</label>
                                         <p>{{studentObj.fee_structure}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Address</label>
+                                        <label>{{'student.add.address'|translate}}</label>
                                         <p>{{studentObj.address}}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="Parent Information">
+                    <p-tabPanel header="{{'student.parentInfo'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                    
                                     <div class="col-md-4 col-12">
-                                        <label>Name of Parent/Guardian</label>
+                                        <label>{{'student.add.parentName'|translate}}</label>
                                         <p>{{studentObj.name_of_parent}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Contact Email</label>
+                                        <label>{{'student.add.studentContactEmail'|translate}}</label>
                                         <p>{{studentObj.contact_email}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Home Phone  </label>
+                                        <label>{{'student.add.studentHomePhone'|translate}}  </label>
                                         <p>{{studentObj.home_phone}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Mobile Phone</label>
+                                        <label>{{'student.add.studentMobilePhone1'|translate}}</label>
                                         <p>{{studentObj.mobile_phone}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Mobile Phone2</label>
+                                        <label>{{'student.add.studentMobilePhone2'|translate}}</label>
                                         <p>{{studentObj.mobile_phone2}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Relation</label>
+                                        <label>{{'student.add.relation'|translate}}</label>
                                         <p>{{studentObj.relation}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Occupation</label>
+                                        <label>{{'student.add.occupation'|translate}}</label>
                                         <p>{{studentObj.occupation}}</p>
                                     </div>                                    
                                 </div>
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="Education Details">
+                    <p-tabPanel header="{{'student.educationDetails'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                    
                                     <div class="col-md-4 col-12">
-                                        <label>Name of the school</label>
+                                        <label>{{'student.add.schoolName'|translate}}</label>
                                         <p>{{studentObj.school_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Class/Grade</label>
+                                        <label>{{'student.add.class'|translate}}</label>
                                         <p>{{studentObj.grade}}</p>
                                     </div>                                   
                                 </div>
                             </div>
                         </div>                     
                     </p-tabPanel>
-                    <p-tabPanel header="Medical Information">
+                    <p-tabPanel header="{{'student.medicalInfo'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                    
                                     <div class="col-md-4 col-12">
-                                        <label>Blood Group</label>
+                                        <label>{{'student.add.bloodGroup'|translate}}</label>
                                         <p>{{studentObj.blood_group}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>History of any Illness</label>
+                                        <label>{{'student.add.historyOfIllness'|translate}}</label>
                                         <p>{{studentObj.history_of_illness}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Status </label>
+                                        <label>{{'student.view.status'|translate}} </label>
                                         <p>{{studentObj.status | titlecase}}</p>
                                     </div>
                                 </div>
@@ -248,7 +248,7 @@
         <div class="col-md-3 col-12 pl-0">
           
             <div class="custom-static-view custom-minheight">
-                <h4>Student History</h4>
+                <h4>{{'student.view.studentHistory'|translate}}</h4>
                
             </div>
         </div>

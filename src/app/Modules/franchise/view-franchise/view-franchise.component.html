@@ -103,97 +103,97 @@
         <div class="col-md-9 col-12">
             <div class="custom-view-list">
                 <div class="custom-view-div franchise-name">
-                    <div>Franchise Name
+                    <div>{{'franchise.add.franchiseName'|translate}}
                         <span>{{franchiseObj.franchise_name}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text"># Schools
+                    <div class="schools-text">{{'franchise.view.#schools'|translate}}
                         <span>{{franchiseExtraInfo.no_of_schools}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="students-text"># Students
+                    <div class="students-text">{{'franchise.view.#schools'|translate}}
                         <span>{{franchiseExtraInfo.no_of_student}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="trainers-text"># Trainers
+                    <div class="trainers-text">{{'franchise.view.#trainers'|translate}}
                         <span>{{franchiseExtraInfo.no_of_trainers}}</span>
                     </div>
                 </div>
             </div>
             <div class="custom-tabs clearfix">
                 <p-tabView>
-                    <p-tabPanel header="Franchise Details">
+                    <p-tabPanel header="{{'franchise.franchiseDetails'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 btn-edit">
-                                      <a href="javascript:;" class="btn" (click)="showBasicDialog()"><i class="icon icon-edit-pencil"></i></a>
+                                      <a href="javascript:;" class="btn" title="{{'title.edit'|translate}}" (click)="showBasicDialog()"><i class="icon icon-edit-pencil"></i></a>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Franchise Name</label>
+                                        <label>{{'franchise.add.franchiseName'|translate}}</label>
                                         <p>{{franchiseObj.franchise_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Franchise Code</label>
+                                        <label>{{'franchise.add.franchiseCode'|translate}}</label>
                                         <p>{{franchiseObj.franchise_code}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
-                                        <label>Owner Name</label>
+                                        <label>{{'franchise.add.ownerName'|translate}}</label>
                                         <p>{{franchiseObj.owner_name}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Contact Number</label>
+                                        <label>{{'franchise.add.contactNumber'|translate}}</label>
                                         <p>{{franchiseObj.contact_number}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Contact Email</label>
+                                        <label>{{'franchise.add.contactEmail'|translate}}</label>
                                         <p>{{franchiseObj.email}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Website Address</label>
+                                        <label>{{'franchise.add.websiteAddress'|translate}}</label>
                                         <p>{{franchiseObj.website_address}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Address</label>
+                                        <label>{{'franchise.add.address'|translate}}</label>
                                         <p>{{franchiseObj.address}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Landmark</label>
+                                        <label>{{'franchise.add.landMark'|translate}}</label>
                                         <p>{{franchiseObj.landmark}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Country</label>
+                                        <label>{{'franchise.add.country'|translate}}</label>
                                         <p>{{franchiseObj.country}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>State</label>
+                                        <label>{{'franchise.add.state'|translate}}</label>
                                         <p>{{franchiseObj.state}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>City</label>
+                                        <label>{{'franchise.add.city'|translate}}</label>
                                         <p>{{franchiseObj.city}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Pincode</label>
+                                        <label>{{'franchise.add.pincode'|translate}}</label>
                                         <p>{{franchiseObj.pincode}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>Status</label>
+                                        <label>{{'franchise.add.status'|translate}}</label>
                                         <p>{{franchiseObj.status | titlecase }}</p>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="Contact Information">
+                    <p-tabPanel header="{{'franchise.contactInfo'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" title="Add Contact" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
+                                        <button type="button" title="{{'title.addContact'|translate}}" class="btn" (click)="showBasicDialog1(true)"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
                                         <div class="custom-table">
@@ -214,7 +214,7 @@
                                                                 <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
-                                                                <a href="javascript:;" (click)="showBasicDialogDelete(rowData)">
+                                                                <a href="javascript:;" (click)="deleteFranchiseContact(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -226,7 +226,7 @@
                                                     <ng-container *ngIf="isEmptyTable1()">
                                                     <tr>
                                                       <td [attr.colspan]="columns.length" class="text-center">
-                                                        No records found
+                                                       {{'general.noRecords'|translate}}
                                                       </td>
                                                     </tr>
                                                     </ng-container>
@@ -238,12 +238,13 @@
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="Fee Management">
+                    <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
+                    <p-tabPanel header="{{'franchise.feeManagement'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" class="btn" title ="Add Fee Structure" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
+                                        <button type="button" class="btn" title ="{{'title.addFeeStructure'|translate}}" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
                                         <div class="custom-table ">
@@ -270,8 +271,8 @@
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
-                                                                <a href="javascript:;" (click)="showFeeDelete(rowData)">
-                                                                    <span class="icon icon-delete" title="Delete"></span>
+                                                                <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
+                                                                    <span class="icon icon-delete" title="{{'title.delete'|translate}}"></span>
                                                                 </a>
                                                             </span>
                                                             <span class="d-flex action-color" *ngIf="i == 4 && !isEnabled()">---</span>
@@ -282,7 +283,7 @@
                                                     <ng-container *ngIf="isEmptyTable()">
                                                     <tr>
                                                       <td [attr.colspan]="columns.length" class="text-center">
-                                                        No records found
+                                                        {{'general.noRecords'|translate}}
                                                       </td>
                                                     </tr>
                                                     </ng-container>
@@ -297,25 +298,26 @@
                 </p-tabView>
             </div>
         </div>
+        <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-veiw-rightside">
-                <div class="revenue-text revenue-month-dropdown">Revenue
+                <div class="revenue-text revenue-month-dropdown">{{'franchise.view.revenue'|translate}}
                         <p-dropdown [options]="revenueMonth" placeholder="Feb 2020" itemSize="30"
                         name="contact_title" optionLabel="label" required></p-dropdown>                      
                 </div>
-                <div class="student-text">For Students
-                    <div class="custom-flex"> <span> Invoiced<a href="javascript:;" class="green-text">₹
-                                10,000</a></span><span>Collected<a href="javascript:;" class="green-text text-right">₹
+                <div class="student-text">{{'franchise.view.forStudents'|translate}}
+                    <div class="custom-flex"> <span> {{'franchise.view.invoiced'|translate}}<a href="javascript:;" class="green-text">₹
+                                10,000</a></span><span>{{'franchise.view.collected'|translate}}<a href="javascript:;" class="green-text text-right">₹
                                 5,000</a><a href="javascript:;" class="red-text text-right">- ₹
                                 5,000</a><span class="due-text">Due</span></span>
                     </div>
                 </div>
-                <div class="student-text">For Mindtronix
+                <div class="student-text">{{'franchise.view.forMindtronix'|translate}}
                     <div class="custom-flex">
-                        <span>Invoiced
+                        <span>{{'franchise.view.invoiced'|translate}}
                             <a href="javascript:;" class="green-text">₹ 10,000</a>
                         </span>
-                        <span>Paid
+                        <span>{{'franchise.view.paid'|translate}}
                             <a href="javascript:;" class="red-text text-right">₹ 5,000</a>
                         </span>
                         <!-- <span class="due-text">Due</span> -->
@@ -323,135 +325,135 @@
                 </div>
             </div>
             <div class="custom-static-view">
-                <h4>Statistics</h4>
+                <h4>{{'franchise.view.statistics'|translate}}</h4>
                 <div [chart]="chart" width="200%" height="auto"></div>
             </div>
         </div>
     </div>
 </div>
   <!-- franchise details popup -->
-<p-dialog header="Edit Franchise Details" [(visible)]="displayBasic" [modal]="true" [style]="{width: '65vw'}" appendTo="body" [baseZIndex]="1">
+<p-dialog header="{{'franchise.editFranchiseDetails'|translate}}" [modal]="true" [draggable]="false" [resizable]="false" appendTo="body" [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
     <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Franchise Name <span>*</span></label>
-                    <input pinputtext type="text" placeholder="Name" name="name" formControlName="name" required>
+                    <label>{{'franchise.add.franchiseName'|translate}} <span>*</span></label>
+                    <input pinputtext type="text" placeholder="{{'franchise.add.franchiseName'|translate}}" name="name" formControlName="name" required>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.name.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Franchise Name is required
+                        [ngClass]=" 'error'">{{'errorMessages.franchiseName'|translate}}
                     </div> 
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Franchise Code <span>*</span></label>
-                    <input pinputtext type="text" placeholder="Code" name="code" formControlName="code" required>
+                    <label>{{'franchise.add.franchiseCode'|translate}} <span>*</span></label>
+                    <input pinputtext type="text" placeholder="{{'franchise.add.franchiseCode'|translate}}" name="code" formControlName="code" required>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.code.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Franchise Code is required
+                        [ngClass]=" 'error'">{{'errorMessages.franchiseCode'|translate}}
                     </div> 
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Owner Name <span>*</span></label>
-                    <input pinputtext type="text" placeholder="Contact Person" name="contact_person" formControlName="contact_person" required>
+                    <label>{{'franchise.add.ownerName'|translate}}<span>*</span></label>
+                    <input pinputtext type="text" placeholder="{{'placeholder.contactPerson'|translate}}" name="contact_person" formControlName="contact_person" required>
                     <div class="invalid-feedback"
                         *ngIf="firstForm.controls.contact_person.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Owner Name is required
+                        [ngClass]=" 'error'">{{'errorMessages.franchiseOwner'|translate}}
                     </div>
                     
                 </div>
             </div>
             <div class="col-md-4 col-12">
-                <label>Contact Number <span>*</span></label>
-                <input type="text" placeholder="Phone" pKeyFilter="int" formControlName="phone" name="phone" required>
+                <label>{{'franchise.add.contactNumber' |translate}} <span>*</span></label>
+                <input type="text" placeholder="{{'franchise.add.contactNumber' |translate}}" pKeyFilter="pint" formControlName="phone" name="phone" required>
                 <div class="invalid-feedback"
                         *ngIf="firstForm.controls.phone.invalid && submitted1!=null && !submitted1"
-                    [ngClass]=" 'error'">Contact number should be minimum 10 digits
+                    [ngClass]=" 'error'">{{'errorMessages.contactNumber'|translate}}
                 </div>                  
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Contact Email <span>*</span></label>
-                    <input pinputtext placeholder="Conatct Email" formControlName="email" name="email" type="email" required>
+                    <label>{{'franchise.add.contactEmail' |translate}} <span>*</span></label>
+                    <input pinputtext placeholder="{{'franchise.add.contactEmail' |translate}}" formControlName="email" name="email" type="email" required>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.email.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Email is required and should be in proper format!
+                        [ngClass]=" 'error'">{{'errorMessages.contactEmail'|translate}}
                     </div>                      
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Website Address</label>
-                    <input pinputtext placeholder="www.mindtronix.com" formControlName="website_address" name="website_address" type="text">
+                    <label>{{'franchise.add.websiteAddress' |translate}}</label>
+                    <input pinputtext placeholder="{{'placeholder.websiteAddress'|translate}}" formControlName="website_address" name="website_address" type="text">
                 </div>
             </div>
             <div class="col-md-12 col-12">
                 <div class="form-group">
-                    <label>Address</label>
-                    <textarea pInputTextarea placeholder="Address" formControlName="address" name="address"></textarea>
+                    <label>{{'franchise.add.address' |translate}}</label>
+                    <textarea pInputTextarea placeholder="{{'franchise.add.address' |translate}}" formControlName="address" name="address"></textarea>
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Landmark</label>
-                    <input pinputtext type="text" placeholder="Landmark" formControlName="landmark" name="landmark">
+                    <label>{{'franchise.add.landMark' |translate}}</label>
+                    <input pinputtext type="text" placeholder="{{'franchise.add.landMark' |translate}" formControlName="landmark" name="landmark">
                 </div>
             </div>                        
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Country <span>*</span></label>
-                    <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="Select Country" itemSize="30"
+                    <label>{{'franchise.add.country' |translate}} <span>*</span></label>
+                    <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="{{'placeholder.country'|translate}}" itemSize="30"
                         name="state" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.country.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">Country is required
+                        [ngClass]=" 'error'">{{'dropdown.country'|translate}}
                     </div>                        
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>State <span>*</span></label>
-                    <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="Select State" itemSize="30"
+                    <label>{{'franchise.add.state' |translate}}<span>*</span></label>
+                    <p-dropdown [options]="state" formControlName="state" filter="true" placeholder="{{'placeholder.state'|translate}}" itemSize="30"
                         name="country" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.state.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">State is required
+                        [ngClass]=" 'error'">{{'dropdown.state'|translate}}
                     </div>
                 </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>City <span>*</span></label>
-                    <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="Select City" itemSize="30"
+                    <label>{{'franchise.add.city' |translate}} <span>*</span></label>
+                    <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="{{'placeholder.city'|translate}}" itemSize="30"
                         name="state" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
                             *ngIf="firstForm.controls.city.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">City is required
+                        [ngClass]=" 'error'">{{'dropdown.city'|translate}}
                     </div>                     
                 </div>
             </div> 
             <div class="col-md-4 col-12">
-                <label>Pincode</label>
-                <input type="text" placeholder="Pincode" pKeyFilter="int" formControlName="pincode" name="pincode">
+                <label>{{'franchise.add.pincode' |translate}}</label>
+                <input type="text" placeholder="{{'franchise.add.pincode' |translate}}" pKeyFilter="pint" formControlName="pincode" name="pincode">
             </div>                       
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>Status <span>*</span></label>
-                    <p-dropdown [options]="status" formControlName="status" placeholder="Select Status" itemSize="30"
+                    <label>{{'franchise.add.status' |translate}} <span>*</span></label>
+                    <p-dropdown [options]="status" formControlName="status" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                     name="status" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="firstForm.controls.status.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'"> Status is required
+                        [ngClass]=" 'error'"> {{'dropdown.status'|translate}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center mb-2">
-            <button pButton class="btn-warning mr-2" label="Update" type="submit"></button>
-            <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
+            <button pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}" type="submit"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="hideBasicDialog()"></button>
         </div>
     </form>
 <!-- <p-footer>
@@ -460,68 +462,68 @@
 </p-footer> -->
 </p-dialog>
 <!-- contact information popup -->
-<p-dialog header={{header}} [(visible)]="displayBasic1" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '65vw'}" appendTo="body" [baseZIndex]="10000" appendTo="body">
+<p-dialog header={{header}} [(visible)]="displayBasic1" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [style]="{width: '65vw'}" [baseZIndex]="10000">
     <form [formGroup]="secondForm" (ngSubmit)="secondFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Contact Title <span>*</span></label>
-                    <p-dropdown [options]="title" formControlName="contact_title" placeholder="Select Title" itemSize="30"
+                    <label>{{'franchise.add.contactTitle'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="title" formControlName="contact_title" placeholder="{{'placeholder.title'|translate}}" itemSize="30"
                         name="contact_title" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="secondForm.controls.contact_title.invalid && submitted2!=null && !submitted2"
-                        [ngClass]=" 'error'"> Contact Title is required
+                        [ngClass]=" 'error'"> {{'errorMessages.contactTitle'|translate}}
                     </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Name <span>*</span></label>
-                    <input pinputtext placeholder="Contact Name" type="text" formControlName="contact_name" name="contact_name" required>
+                    <label>{{'franchise.add.name'|translate}} <span>*</span></label>
+                    <input pinputtext placeholder="{{'placeholder.contactName'|translate}}" type="text" formControlName="contact_name" name="contact_name" required>
                     <div class="invalid-feedback"
                         *ngIf="secondForm.controls.contact_name.invalid && submitted2!=null && !submitted2"
-                       [ngClass]=" 'error'"> Contact Name is required
+                       [ngClass]=" 'error'"> {{'errorMessages.contactName'|translate}}
                     </div>                
                 </div>
             </div>        
             <div class="col-md-6 col-12">
-                <label>Contact Number <span>*</span></label>
-                <input type="text" placeholder="Contact Number" pKeyFilter="int" formControlName="contact_number"
+                <label>{{'franchise.add.contactNumber'|translate}} <span>*</span></label>
+                <input type="text" placeholder="{{'franchise.add.contactNumber'|translate}}" pKeyFilter="pint" formControlName="contact_number"
                     name="contact_phone" required>                           
                 <div class="invalid-feedback"
                     *ngIf="secondForm.controls.contact_number.invalid && submitted2!=null && !submitted2"
-                    [ngClass]=" 'error'"> Contact number should be minimum 10 digits
+                    [ngClass]=" 'error'"> {{'errorMessages.contactNumber'|translate}}
                 </div>                
             </div>
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Contact Email <span>*</span></label>
-                    <input pinputtext placeholder="Contact Email" type="email" formControlName="contact_email" name="contact_email" required>
+                    <label>{{'franchise.add.contactEmail'|translate}}<span>*</span></label>
+                    <input pinputtext placeholder="{{'franchise.add.contactEmail'|translate}}" type="email" formControlName="contact_email" name="contact_email" required>
                     <div class="invalid-feedback"
                         *ngIf="secondForm.controls.contact_email.invalid && submitted2!=null && !submitted2"
-                        [ngClass]=" 'error'">Enter valid email
+                        [ngClass]=" 'error'">{{'errorMessages.email'|translate}}
                     </div>
                 </div>
             </div>
         </div>
         <div class="text-center col-12 mb-2">
-            <button pButton class="btn-warning mr-2" type="submit" *ngIf="buttonDisabled" label="Save"></button> 
-            <button pButton class="btn-warning mr-2" type="submit" *ngIf="!buttonDisabled" label="Update"></button> 
-            <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog()"></button>
+            <button pButton class="btn-warning mr-2" type="submit" *ngIf="buttonDisabled" label="{{'buttons.save'|translate}}"></button> 
+            <button pButton class="btn-warning mr-2" type="submit" *ngIf="!buttonDisabled" label="{{'buttons.update'|translate}}"></button> 
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="hideBasicDialog()"></button>
         </div>
     </form>
 </p-dialog>
 <!-- fee management popup -->
-<p-dialog header="Create Fee Structure" [(visible)]="displayBasic2" [modal]="true" [draggable]="false" [resizable]="false" [style]="{width: '65vw'}" [baseZIndex]="10000" appendTo="body">    
+<p-dialog header="{{'franchise.createFeeStructure'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
     <form [formGroup]="thirdForm" (ngSubmit)="thirdFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12 mb-3">
-                <label>Fee Structure <span>*</span></label>
+                <label>{{'franchise.add.feeStructure' |translate}} <span>*</span></label>
                 <p-multiSelect [options]="FeeStructureList" optionLabel="name" formControlName="fee_structure"
-                    name="fee_structure" defaultLabel="Select Fee Structure" required></p-multiSelect>  
+                    name="fee_structure" defaultLabel="{{'placeholder.feeStructure'|translate}}" required></p-multiSelect>  
                 <div class="invalid-feedback"
                         *ngIf="thirdForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
-                    [ngClass]=" 'error'">Fee Structure is required
+                    [ngClass]=" 'error'">{{'errorMessages.feeStructure'|translate}}
                 </div>
             </div>
             <!-- <div class="col-md-1 col-12 mb-3 mt-4">
@@ -529,8 +531,8 @@
             </div> -->
         </div>
         <div class="text-center mb-2">
-            <button pButton class="btn-warning mr-2" type="submit" label="Save"></button>
-            <button pButton class="btn-default" type="button" label="Cancel" (click)="hideBasicDialog();"></button>
+            <button pButton class="btn-warning mr-2" type="submit" label="{{'buttons.save'|translate}}"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="hideBasicDialog();"></button>
         </div>
     </form>
     <!-- <div class="custom-table custom-lastchild-list mt-3">
@@ -558,17 +560,4 @@
         </p-table>
     </div> -->
 </p-dialog>
-<p-dialog header="confirmation" [(visible)]="displayBasicDialog" [modal]="true" [style]="{width: '50vw'}" [baseZIndex]="10000" appendTo="body">
-    Are you sure you want to delete this record ?
-  <p-footer>
-      <button type="button" pButton class="btn-warning" (click)="deleteFranchiseContact()" label="Yes"></button>
-      <button type="button" pButton class="btn-default" (click)="displayBasicDialog=false" label="No"></button>
-  </p-footer>
-</p-dialog>
-<p-dialog header="confirmation" [(visible)]="displayFeeDialog" [style]="{width: '50vw'}" [modal]="true" [baseZIndex]="10000" appendTo="body">
-    Are You Sure You Want To Permanently Delete This Record ???
-  <p-footer>
-      <button type="button" pButton class="btn-warning" (click)="deleteFranchiseFee()" label="Yes"></button>
-      <button type="button" pButton class="btn-default" (click)="displayFeeDialog=false" label="No"></button>
-  </p-footer>
-</p-dialog>
+

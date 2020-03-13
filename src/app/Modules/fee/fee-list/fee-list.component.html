@@ -5,11 +5,11 @@
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Create Fee Structure" class="btn-warning" (click)="addNewFee($event)"></button>
+                    <button pButton type="button" label="{{'fee.createfee'|translate}}" class="btn-warning" (click)="addNewFee($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -32,7 +32,7 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 5"  class="d-flex action-color">
-                            <a href="javascript:;" (click)="updateFee(rowData)" title="Edit">
+                            <a href="javascript:;" (click)="updateFee(rowData)" title="{{'title.edit'|translate}}">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a>
                             <!-- <a href="javascript:;" (click)="deleteFee(rowData)" title="Delete">
@@ -46,7 +46,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                    {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>

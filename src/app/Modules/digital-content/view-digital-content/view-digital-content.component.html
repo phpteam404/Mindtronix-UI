@@ -210,7 +210,7 @@
     </div>
 </div>
   <!-- franchise details popup -->
-<p-dialog header="Update Content Details" [(visible)]="displayBasic3" [style]="{width: '65vw'}" [baseZIndex]="1">
+<p-dialog header="Update Content Details" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic3" [style]="{width: '65vw'}" [baseZIndex]="1">
     
  
         <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"> -->

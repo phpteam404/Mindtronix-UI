@@ -31,8 +31,8 @@
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i!=2" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="Edit"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete" title="Delete" (click)="deleteMasterChild(rowData)"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="{{'title.edit'|translate}}"></span></a>
+                            <a href="javascript:;" ><span class="icon icon-delete" title="{{'title.delete'|translate}}" (click)="deleteMasterChild(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>
@@ -77,9 +77,9 @@
             </div>
         </div>
         <div class="text-right col-12 mb-2">
-            <button pButton class="btn-warning mr-2" type="submit"  *ngIf="displayButton" label="Save" ></button>
-            <button pButton class="btn-warning mr-2" type="submit" *ngIf="!displayButton" label="Update"></button>
-            <button pButton class="btn-default" type="button" label="Cancel" (click)="close()"></button>
+            <button pButton class="btn-warning mr-2" type="submit"  *ngIf="displayButton" label="{{'buttons.save' |translate}}" ></button>
+            <button pButton class="btn-warning mr-2" type="submit" *ngIf="!displayButton" label="{{'buttons.update' |translate}}"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel' |translate}}" (click)="close()"></button>
         </div>
     </form>
 </p-dialog>

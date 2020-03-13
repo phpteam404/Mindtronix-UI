@@ -40,15 +40,15 @@
         </p-table> -->
         <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
             [rows]="10" [totalRecords]="totalRecords">
-            <ng-template pTemplate="caption">                
+            <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." 
+                        <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" 
                             (input)="dt.filterGlobal($event.target.value, 'contains')"
                             class="mr-2" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Create Franchise" class="btn-warning" (click)="AddNewFranchise($event)"></button>
+                    <button pButton type="button" label="{{'franchise.create' | translate}}" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -63,7 +63,8 @@
                 <tr>
                     <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && i != 7 && viewFranchise(rowData)">
                         
-                        <span *ngIf="i != 6 && i != 7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>  
+                        <span *ngIf="i != 6 && i != 7 && i !=5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span> 
+                        <span *ngIf="i != 6 && i != 7 && i==5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM,yyyy hh:mm a'}}</span>    
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
@@ -85,7 +86,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                    {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>

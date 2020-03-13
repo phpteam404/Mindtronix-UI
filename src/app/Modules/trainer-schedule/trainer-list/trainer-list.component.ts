@@ -4,9 +4,11 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import { UserService} from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
+import { CommonService } from 'src/app/services/common.service';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms'; 
-import {ConfirmDialogModule} from 'primeng/confirmdialog';
+import { TranslateService } from '@ngx-translate/core';
+import { environment } from 'src/environments/environment';
 import {ConfirmationService} from 'primeng/api';
 
 @Component({
@@ -17,17 +19,22 @@ import {ConfirmationService} from 'primeng/api';
 export class TrainerListComponent implements OnInit {
   totalRecords: number;
   cols: any[];
-  dataInfo:any;
   loading: boolean;
   trainers:any;
   isCreate: boolean;
-  displayBasic: boolean;
   hideSchedule:boolean;
   scheduleForm:FormGroup;
   first:number=0;
   TrainersList =[];
-  constructor(private router: Router, private _toast: ToasterService,private _route: ActivatedRoute,
-              private userService:UserService,private _ls: LocalStorageService,private _confirm: ConfirmationService) {
+  constructor(private router: Router, 
+              private _toast: ToasterService,
+              private _route: ActivatedRoute,
+              private _commonService: CommonService,
+              private userService:UserService,
+              private _ls: LocalStorageService,
+              public translate: TranslateService, 
+              private _confirm: ConfirmationService) {
+                translate.setDefaultLang(environment.defaultLanguage);
     
    }
 
@@ -41,32 +48,31 @@ export class TrainerListComponent implements OnInit {
   EditTrainerSchedule(data:any){
     this.router.navigate(['update/'+data.topic+'/'+btoa(data.trainer_schedule_id)],{ relativeTo: this._route});
   }
-
-  DeleteTrainerSchedule(){
-    var params = new HttpParams()
-        .set('id', this.dataInfo.trainer_schedule_id)
-        .set('tablename', 'trainer_schedule');
-    this.userService.deleteTrainer(params).subscribe(res=>{
-      if(res.status){
-        this.first=0;
-        this.displayBasic = false;
-        this.getTrainersListInfo();
-     }
-      else{
-        this._toast.show('error',JSON.parse(res.error));
-      }
+  
+  DeleteTrainerSchedule(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'trainer_schedule')
+                    .set('id', data.trainer_schedule_id)   
+        this._commonService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getTrainersListInfo();
+          }else{
+            this._toast.show('error',JSON.parse(res.error));
+          }
+        });
+      },
+      reject: () => {}
     });
   }
+ 
 
-  showBasicDialog(data:any) {
-    this.displayBasic = true;
-    this.dataInfo =data; 
-  }
-
-  close(){
-    this.scheduleForm.reset();
-    this.displayBasic=false;
-  }
+ 
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }
