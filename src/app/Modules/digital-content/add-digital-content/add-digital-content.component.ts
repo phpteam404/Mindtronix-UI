@@ -28,8 +28,12 @@ export class AddDigitalContentComponent implements OnInit {
   sub_categories:any;
   content_level:any;
   fileArr:any = [];
+  fileTypes = ["image/jpeg",
+                    "image/png",
+                    "application/pdf",
+                    "video/mp4",
+                    "video/quicktime"];
   constructor(private _router: Router,
-              private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _mservice:MasterService,
               public _service: ContentService,
@@ -112,7 +116,6 @@ export class AddDigitalContentComponent implements OnInit {
         for (var i = 0; i < this.fileArr.length; i++) { 
           formData.append("files["+i+"]", this.fileArr[i]);
         }
-        console.log('formData--', formData);
         this._service.addDigitalContent(formData).subscribe(res =>{
           if(res.status){
               this.submitted=true;
@@ -137,9 +140,19 @@ export class AddDigitalContentComponent implements OnInit {
     this._router.navigate(['digital_content']);
   }
   onFileSelect(event) {
+    
     if (event.target.files.length > 0) {
       Object.keys(event.target.files).forEach( key => {
-        this.fileArr.push(event.target.files[key]);
+        if(this.fileTypes.indexOf(event.target.files[key].type)> -1){
+          this.fileArr.push(event.target.files[key]);
+        }
+        else {
+          this._toast.show('warning','No file uploaded or invalid file type!');
+          this.digitalForm.patchValue({
+            files:''
+          })
+          return false;
+        }
       });
       this.digitalForm.patchValue({
         fileSource: this.fileArr

@@ -201,7 +201,8 @@
         "category":"Category is required",
         "subCategory":"Sub Category is required",
         "contentLevel":"Content Level is required",
-        "contentTags":"Tags is required"
+        "contentTags":"Tags is required",
+        "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files"
     },
     "dropdown":{
         "country":"Country is required",
