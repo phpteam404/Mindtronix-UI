@@ -1,102 +1,103 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Create Content</h4>
+        <h4 class="custom-form-heading">{{'digitalContent.createContent'|translate}}</h4>
         <div class="custom-form-content">
-            <form [formGroup]="feeForm" (ngSubmit)="submit()">
+            <form [formGroup]="digitalForm" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Content Name <span>*</span></label>
-                            <input pinputtext placeholder="Content Name" formControlName="name" name="name" type="text" required>
+                            <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" formControlName="name" name="name" type="text" required>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.name.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'"> Name is required
+                                *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-8 col-12">
                         <div class="form-group">
-                            <label>Content Description</label>
-                            <textarea pInputTextarea placeholder="Content Description" formControlName="description" name="Content Description"></textarea>
+                            <label>{{'digitalContent.add.contentDescription'|translate}}</label>
+                            <textarea pInputTextarea placeholder="{{'digitalContent.add.contentDescription'|translate}}" formControlName="description" name="Content Description"></textarea>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Category <span>*</span></label>
-                            <p-dropdown [options]="category" formControlName="category" placeholder="Select Category" itemSize="30"
-                                name="category" optionLabel="label" required></p-dropdown>
+                            <label>{{'digitalContent.add.category'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="categories" formControlName="category" placeholder="{{'placeholder.category'|translate}}" itemSize="30"
+                                name="category" optionLabel="label"  filter ="true" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.category.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'"> Category is required
+                                *ngIf="digitalForm.controls.category.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'"> {{'errorMessages.category'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Sub Category <span>*</span></label>
-                            <p-dropdown [options]="subCategory" formControlName="sub_category" placeholder="Select Sub Category" itemSize="30"
-                                name="sub_category" optionLabel="label" required></p-dropdown>
+                            <label>{{'digitalContent.add.subCategory'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="sub_categories" formControlName="sub_category" placeholder="{{'placeholder.subCategory'|translate}}" itemSize="30"
+                                name="sub_category" optionLabel="label" filter ="true" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.sub_category.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Sub Category is required
+                                *ngIf="digitalForm.controls.sub_category.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.subCategory'|translate}}
                             </div>
                        </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Grade <span>*</span></label>
-                            <p-dropdown [options]="grade" placeholder="Grade" formControlName="grade" itemSize="30"
-                                name="grade" optionLabel="label" required></p-dropdown>
+                            <label>{{'digitalContent.add.grade'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="grade" placeholder="{{'placeholder.grade'|translate}}" formControlName="grade" itemSize="30"
+                                name="grade" optionLabel="label" filter ="true" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.grade.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Grade is required
+                                *ngIf="digitalForm.controls.grade.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.grade'|translate}}
                             </div>
                        </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Content Level <span>*</span></label>
-                            <p-dropdown [options]="level" formControlName="content_level" placeholder="Select Content Level" itemSize="30"
-                                name="content_level" optionLabel="label" required></p-dropdown>
+                            <label>{{'digitalContent.add.contentLevel'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="content_level" formControlName="content_level" placeholder="{{'placeholder.contentLevel'|translate}}" itemSize="30"
+                                name="content_level" optionLabel="label" filter ="true" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.content_level.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Content Level is required
+                                *ngIf="digitalForm.controls.content_level.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.contentLevel'|translate}}
                             </div>
                        </div>
                     </div>
                     <div class="col-md-4 col-12">
-                        <label>Tags <span>*</span></label>
-                        <p-dropdown [options]="tags" formControlName="tags" placeholder="Select Tags" itemSize="30"
-                            name="tags" optionLabel="label" required></p-dropdown>
+                        <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
+                        <p-dropdown [options]="tags" formControlName="tags" placeholder="{{'placeholder.tags'|translate}}" itemSize="30"
+                            name="tags" optionLabel="label"  filter ="true" required></p-dropdown>
                         <div class="invalid-feedback"
-                            *ngIf="feeForm.controls.tags.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'">Tags is required
+                            *ngIf="digitalForm.controls.tags.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Expiry Date</label>
+                            <label>{{'digitalContent.add.expiryDate'|translate}}</label>
                             <p-calendar name="expiry_date" formControlName="expiry_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>Status <span>*</span></label>
-                            <p-dropdown [options]="status"  itemSize="30" formControlName="status"
+                            <label>{{'digitalContent.add.status'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="status"  itemSize="30" formControlName="status" placeholder="{{'placeholder.status'|translate}}"
                                 name="status" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
-                                *ngIf="feeForm.controls.status.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'">Status is required
+                                *ngIf="digitalForm.controls.status.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'dropdown.status'|translate}}
                             </div>
                       </div>
                     </div>
-                    <div class="col-md-8 col-12">
+                     <div class="col-md-8 col-12">
                         <div class="form-group">
                             <label>File Upload</label>
                             <mat-file-upload
-                                [labelText]="''"
+                                [labelText]="''"  (formControlName)="files"
                                 [selectButtonText]="'Choose File(s)'"
                                 [selectFilesButtonType]="file"
+                                [selectedText]="translateValue"
                                 [allowMultipleFiles]="true"
                                 [showUploadButton]="false"
                                 [acceptedTypes]="'.png, .jpg, .jpeg'"
@@ -105,10 +106,11 @@
                                 >
                             </mat-file-upload>
                         </div>
-                    </div>                   
+                    </div>                    
+
                     <div class="col-12 text-right custom-btn">
-                        <button pButton type="submit" label="Save" class="btn-warning mr-2"></button>
-                        <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
+                        <button pButton type="submit" label="{{'buttons.save'|translate}}" class="btn-warning mr-2"></button>
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
                     </div>
                 </div>
             </form>

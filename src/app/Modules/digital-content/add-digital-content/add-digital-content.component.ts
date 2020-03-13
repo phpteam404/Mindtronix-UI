@@ -1,6 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder,Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Headers,RequestOptions  } from '@angular/http'
+import { HttpParams } from '@angular/common/http';
+import { ToasterService } from 'src/app/utils/toaster.service';
+import { MasterService } from 'src/app/services/master.service';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+import { DatePipe, formatDate } from '@angular/common';
+import {DigitalContentService} from 'src/app/services/digital-content.service';
+
 @Component({
   selector: 'app-add-digital-content',
   templateUrl: './add-digital-content.component.html',
@@ -14,42 +23,23 @@ export class AddDigitalContentComponent implements OnInit {
   level:any =[];
   tags:any =[];
   status:any =[];
+  selectedFile:any;
+  categories:any;
+  sub_categories:any;
+  content_level:any;
 
- 
+  constructor(private _router: Router,
+              private _ar: ActivatedRoute,
+              private _toast: ToasterService,
+              public datepipe: DatePipe,
+              public fb: FormBuilder,
+              private _dService:DigitalContentService,
+              public translate: TranslateService,
+              private masterservices:MasterService) {
+                translate.setDefaultLang(environment.defaultLanguage);
 
-  constructor(private _router: Router,private _ar: ActivatedRoute) {
-    this.category= [
-      {label: "Science Product", value:"Science Product"},
-      {label: "Electric", value:"Electric"},
-      {label: "Robot", value:"Robot"}
-    ];
-    this.subCategory =[
-      {label:'Students Science Kits',value:'Students Science Kits'},
-      {label:'Robot Management',value:'Robot Management'}
-    ];
-    this.grade =[
-      {label:'V',value:'V'},
-      {label:'VI',value:'VI'},
-      {label:'VII',value:'VII'},
-      {label:'VIII',value:'VIII'},
-      {label:'IX',value:'IX'},
-      {label:'X',value:'X'}
-    ];
-    this.level =[
-      {label:'Low',value:'Low'},
-      {label:'Medium',value:'Medium'},
-      {label:'Advanced',value:'Advanced'}
-    ];
-    this.tags =[
-      {label:'Circuit',value:'Circuit'},
-      {label:'Battery',value:'Battery'}
-    ];
-    this.status =[
-      {label:'Active',value:1},
-      {label:'Inactive',value:0}
-    ];
    }
-   feeForm = new FormGroup({
+   digitalForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     category: new FormControl('', [Validators.required]),
     sub_category: new FormControl('', [Validators.required]),
@@ -62,22 +52,98 @@ export class AddDigitalContentComponent implements OnInit {
     files: new FormControl('')
   });
   ngOnInit(): void {
+    this.getMasterDropdown('categories');
+    this.getMasterDropdown('sub_categories');
+    this.getMasterDropdown('grade');
+    this.getMasterDropdown('tags');
+    this.getMasterDropdown('content_level');
+    this.getMasterDropdown('status');
   }
+
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this.masterservices.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'categories')
+          this.categories =  res.data.data;
+        if(masterKey == 'sub_categories')
+          this.sub_categories =  res.data.data;
+        if(masterKey =='grade')
+          this.grade =res.data.data;
+        if(masterKey =='tags')
+          this.tags =res.data.data;
+        if(masterKey =='content_level')
+           this.content_level=res.data.data;
+        if(masterKey =='status'){
+          this.status =res.data.data;
+          this.digitalForm.controls['status'].setValue(res.data.data[0]);
+        }
+      }else{
+        this._toast.show('error',res.error);
+      }
+    });
+  }
+
+  getCategory() { return this.digitalForm.value.category.value;}
+  getSubCategory() { return this.digitalForm.value.sub_category.value;}
+  getContentLevel() { return this.digitalForm.value.content_level.value;}
+  getGrade() { return this.digitalForm.value.grade.value;}
+  getTags() { return this.digitalForm.value.tags.value;}
+  getDate() { return this.digitalForm.value.expiry_date;}
+  getStatus() { return this.digitalForm.value.status.value;}
+
+
   submit(){
+    const formData = new FormData();
     this.submitted=false;
-    console.log('this.feeForm',this.feeForm.value);
-    if(this.feeForm.valid){
-      this.submitted=true;
-     this._router.navigate(['digital_content/view/1']);
+    console.log('this.digitalForm',this.digitalForm.value);
+    let headers = new Headers();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    let options = new RequestOptions({ headers: headers });
+    if(this.digitalForm.valid){
+        var params={};
+        params =this.digitalForm.value;
+        params['expiry_date'] =this.datepipe.transform(this.getDate(), 'yyyy/MM/dd');
+        params['category'] = this.getCategory();
+        params['sub_category'] = this.getSubCategory();
+        params['content_level'] = this.getContentLevel();
+        params['grade'] = this.getGrade();
+        params['tags'] = this.getTags();
+        params['status'] = this.getStatus();
+        params['files'] =   this.selectedFile;
+      this._dService.addDigitalContent(params).subscribe(res =>{
+         if(res.status){
+            this.submitted=true;
+            this._router.navigate(['digital_content']);
+         }
+         else
+         {
+          this._toast.show('error',JSON.parse(res.error));
+         }
+      });
+    }
+    else
+    {
+      this._toast.show('warning','Please enter mandatory fields.');
     }
   }
-  onUploadClicked(event: Event){
-    console.log('event--', event);
+
+  onUploadClicked(event:Event) {
+    console.log('selected info',event[0].name);
+    this.selectedFile =event[0].name;
   }
-  onSelectedFilesChanged(event: Event){
-    console.log('event--', event);
+  
+
+  onSelectedFilesChanged(event){
+    console.log('selected info',event[0].name);
+      this.selectedFile =event[0].name;
   }
   goToList(){
     this._router.navigate(['digital_content']);
   }
+  
+
 }
