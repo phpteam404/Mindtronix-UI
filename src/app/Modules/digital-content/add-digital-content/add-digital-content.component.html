@@ -93,7 +93,11 @@
                      <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label>File Upload</label>
-                            <input type="file" name="files" multiple formControlName="files" (change)="onFileSelect($event)" style="height: 45px;" />
+                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
+                                (change)="onFileSelect($event)" style="height: 45px;" />
+                            <div class="invalid-feedback"
+                                [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
+                            </div>
                             <!-- <mat-file-upload
                                 [labelText]="''"  (formControlName)="files"
                                 [selectButtonText]="'Choose File(s)'"
@@ -106,8 +110,7 @@
                                 >
                             </mat-file-upload> -->
                         </div>
-                    </div>                    
-
+                    </div>
                     <div class="col-12 text-right custom-btn">
                         <button pButton type="submit" label="{{'buttons.save'|translate}}" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>

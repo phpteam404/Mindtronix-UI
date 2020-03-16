@@ -209,7 +209,8 @@
         "contentLevel":"Content Level is required",
         "contentTags":"Tags is required",
         "ticketTitle":"Title is required",
-        "issueType":"Issue Type is Required"
+        "issueType":"Issue Type is Required",
+        "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files"
     },
     "dropdown":{
         "country":"Country is required",
@@ -261,7 +262,7 @@
         "contentLevel":"Select content Level",
         "category":"Select Category",
         "subCategory":"Select Sub Category",
-        "title":"Title",
+        "titleTicket":" Ticket Title",
         "issueType":"Select Issue Type",
         "description":"Description"
 
