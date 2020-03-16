@@ -62,9 +62,8 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index"  (click)="i != 6 && i != 7 && viewFranchise(rowData)">
-                        
-                        <span *ngIf="i != 6 && i != 7 && i !=5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span> 
-                        <span *ngIf="i != 6 && i != 7 && i==5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM,yyyy hh:mm a'}}</span>    
+                        <span *ngIf="i!=6 && i!=7 && i!=5" title="{{rowData[col.field]}}" x-ms-format-detection="none"> {{rowData[col.field]}}</span>
+                        <span *ngIf="i!=6 && i!=7 && i==5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM ,yyyy'}}</span>
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"

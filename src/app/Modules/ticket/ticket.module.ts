@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule,DatePipe } from '@angular/common';
 import { FeeRoutingModule } from './ticket-routing.module';
 import { TicketInfoComponent } from './ticket-info/ticket-info.component';
 import { TicketListComponent } from './ticket-list/ticket-list.component';
@@ -34,6 +34,7 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     BasicModule.forRoot(),
     DialogModule
-  ]
+  ],
+  providers: [DatePipe]
 })
 export class TicketModule { }

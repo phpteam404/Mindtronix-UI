@@ -1,38 +1,41 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">Create Ticket</h4>
+        <h4 class="custom-form-heading">{{'ticket.createTicket'|translate}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="ticketForm" (ngSubmit)="submit()">
                 <div class="row">
                     <div class="col-md-6 col-12">
                         <div class="form-group">
-                            <label>Ticket Title <span>*</span></label>
-                            <input pinputtext placeholder="Title" formControlName="title" name="title" type="text" required>
+                            <label>{{'ticket.add.ticketTitle'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'placeholder.title'|translate}}" formControlName="title" name="title" type="text" required>
                             <div class="invalid-feedback"
                                 *ngIf="ticketForm.controls.title.invalid && submitted!=null && !submitted"
-                                [ngClass]=" 'error'"> Title is required
+                                [ngClass]=" 'error'"> {{'errorMessages.ticketTitle'|translate}}
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6 col-12">
                         <div class="form-group">
-                            <label>Issue Type <span>*</span></label>
-                            <p-dropdown [options]="issue" placeholder="Select Issue Type" itemSize="30"
-                                name="issue" optionLabel="label" required></p-dropdown>
-                                              
+                            <label>{{'ticket.add.issueType'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="ticketIssue" placeholder="{{'placeholder.issueType'|translate}}" itemSize="30"
+                                name="issue" optionLabel="label"  formControlName="issue_type" required></p-dropdown>
+                                <div class="invalid-feedback"
+                                *ngIf="ticketForm.controls.issue_type.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.issueType'|translate}}
+                            </div>              
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label>Issue Description</label>
-                            <textarea pInputTextarea placeholder="Description" formControlName="description"  name="description"></textarea>
+                            <label>{{'ticket.add.issueDescription'|translate}}</label>
+                            <textarea pInputTextarea placeholder="{{'placeholder.description'|translate}}" formControlName="description"  name="description"></textarea>
                         </div>
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label>Attach issue screenshot</label>
-                            <!-- <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload> -->
-                            <mat-file-upload
+                            <label>{{'ticket.add.attachIssue'|translate}}</label>
+                            <input type="file" name="files" multiple formControlName="files" (change)="onFileSelect($event)" style="height: 45px;" />
+                            <!-- <mat-file-upload
                                 [labelText]="''"
                                 [selectButtonText]="'Choose File(s)'"
                                 [selectFilesButtonType]="file"
@@ -42,7 +45,7 @@
                                 (uploadClicked)="onUploadClicked($event)"
                                 (selectedFilesChanged)="onSelectedFilesChanged($event)"
                                 >
-                            </mat-file-upload>
+                            </mat-file-upload> -->
                         </div>
                     </div>
                    

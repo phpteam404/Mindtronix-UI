@@ -136,8 +136,14 @@
           "toTime":"To Time"
     },
     "ticket":{
-        "ticketTitle":"Ticket Title",
-        "createTicket":"Create Ticket"
+        "createTicket":"Create Ticket",
+        "add":{
+           "ticketTitle":"Ticket Title",
+           "issueType":"Issue Type",
+           "issueDescription":"Issue Description",
+           "attachIssue":"Attach issue screenshot"   
+        }
+        
     },
     "digitalContent":{
         "createContent":"Create Content",
@@ -201,7 +207,9 @@
         "category":"Category is required",
         "subCategory":"Sub Category is required",
         "contentLevel":"Content Level is required",
-        "contentTags":"Tags is required"
+        "contentTags":"Tags is required",
+        "ticketTitle":"Title is required",
+        "issueType":"Issue Type is Required"
     },
     "dropdown":{
         "country":"Country is required",
@@ -252,13 +260,17 @@
         "tags":"Select Tags",
         "contentLevel":"Select content Level",
         "category":"Select Category",
-        "subCategory":"Select Sub Category"
+        "subCategory":"Select Sub Category",
+        "title":"Title",
+        "issueType":"Select Issue Type",
+        "description":"Description"
 
     },
     "title":{
         "edit":"Edit",
         "delete":"Delete",
         "add":"Add",
+        "view":"View",
         "addContact":"Add Contact",
         "addFeeStructure":"Add Fee Structure",
         "manageStudents":"Manage Students",
