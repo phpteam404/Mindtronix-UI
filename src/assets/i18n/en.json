@@ -47,6 +47,7 @@
     },
     "fee":{
         "createfee":"Create Fee Structure",
+        "updatefee":"Update Fee Structure",
         "feeTitle":"Fee Title",
         "feeAmount":"Fee Amount",
         "term":"Term",

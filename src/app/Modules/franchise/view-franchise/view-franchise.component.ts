@@ -59,7 +59,7 @@ export class ViewFranchiseComponent implements OnInit {
               private _toast: ToasterService,
               private _feeService: FeeService,
               private _confirm: ConfirmationService,
-              private masterservices:MasterService,
+              private _mService:MasterService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
    
@@ -109,10 +109,6 @@ export class ViewFranchiseComponent implements OnInit {
   showBasicDialog2() {
     this.displayBasic2 = true;
     this.submitted3=null;
-    /*this.thirdForm.setValue({
-      fee_structure:this.FeeList.fee_structure
-    });*/
-    console.log('prepopulate---', this.franchiseObj.fee_detalis);
   }
  
   ngOnInit(): void {
@@ -137,7 +133,7 @@ export class ViewFranchiseComponent implements OnInit {
       state:new FormControl('',[Validators.required]),
       city:new FormControl('',[Validators.required]),
       status :new FormControl('',[Validators.required]),
-      address: new FormControl('',[Validators.required]),
+      address: new FormControl(''),
     });
     this.secondForm = new FormGroup({  
       franchise_contact_id :new FormControl(''),
@@ -205,7 +201,7 @@ export class ViewFranchiseComponent implements OnInit {
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this.masterservices.getMasterChilds(params).subscribe(res=>{
+    return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'state')
           this.state =  res.data.data;
@@ -218,8 +214,6 @@ export class ViewFranchiseComponent implements OnInit {
         if(masterKey =='status'){
           this.status =res.data.data;
         }
-      }else{
-        this._toast.show('error',res.error);
       }
     });
   }
@@ -242,12 +236,34 @@ export class ViewFranchiseComponent implements OnInit {
       }
     });
   }
+  getFranchiseData(){
+    var param = new HttpParams().set('franchise_id',this.franchiseId);
+    this._service.getList(param).subscribe(res => {
+      if(res.status){
+        this.franchise = res.data.data[0];
+        this.firstForm.setValue({
+          name : this.franchise.franchise_name,
+          code : this.franchise.franchise_code,
+          contact_person : this.franchise.owner_name,
+          phone : this.franchise.contact_number,
+          website_address : this.franchise.website_address,
+          landmark : this.franchise.landmark,
+          email: this.franchise.email,
+          pincode : this.franchise.pincode,
+          country : this.franchise.country,
+          state : this.franchise.state,
+          city : this.franchise.city,
+          status : this.franchise.status,
+          address : this.franchise.address,
+        }); 
+      }
+    });
+  }
 
   getCountry(){ return this.firstForm.value.country.value;}
   getState(){ return this.firstForm.value.state.value;}
   getCity(){ return this.firstForm.value.city.value;}
   getStatus(){ return this.firstForm.value.status.value;}
-
   getContactTitle(){ return this.secondForm.value.contact_title.value; }
 
   firstFormSubmit(){
@@ -292,63 +308,6 @@ export class ViewFranchiseComponent implements OnInit {
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
-  getFranchiseData(){
-    var param = new HttpParams().set('franchise_id',this.franchiseId);
-    this._service.getList(param).subscribe(res => {
-      if(res.status){
-        this.franchise = res.data.data[0];
-        this.firstForm.setValue({
-          name : this.franchise.franchise_name,
-          code : this.franchise.franchise_code,
-          contact_person : this.franchise.owner_name,
-          phone : this.franchise.contact_number,
-          website_address : this.franchise.website_address,
-          landmark : this.franchise.landmark,
-          email: this.franchise.email,
-          pincode : this.franchise.pincode,
-          country : this.franchise.country,
-          state : this.franchise.state,
-          city : this.franchise.city,
-          status : this.franchise.status,
-          address : this.franchise.address,
-        }); 
-      }
-    });
-  }
-
-  editContact(data:any,index:number){
-    this.buttonDisabled =false;
-    this.header="Edit Contact Information";
-    this.showBasicDialog1(false);
-    this.secondForm.setValue({
-      franchise_contact_id : (data.franchise_contact_id)?data.franchise_contact_id:'',
-      contact_title : data.contact_title,
-      contact_name: data.contact_name,
-      contact_email: data.contact_email,
-      contact_number : data.contact_number,
-    });
-  }
-
-  deleteFranchiseContact(data) {
-    this._confirm.confirm({
-      message: 'Are you sure that you want to delete?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-        var params = new HttpParams()
-                    .set('tablename', 'franchise_contacts')
-                    .set('id', data.franchise_contact_id)   
-        this._cService.delete(params).subscribe(res=>{
-          if(res.status){
-            this.getFranchiseInfo(this.franchiseId);
-          }else{
-          }
-        });
-      },
-      reject: () => {}
-    });
-  }
-
   thirdFormSubmit(){
     this.submitted3=false;
     if(this.thirdForm.valid){
@@ -370,7 +329,37 @@ export class ViewFranchiseComponent implements OnInit {
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
-
+  editContact(data:any,index:number){
+    this.buttonDisabled =false;
+    this.header="Edit Contact Information";
+    this.showBasicDialog1(false);
+    this.secondForm.setValue({
+      franchise_contact_id : (data.franchise_contact_id)?data.franchise_contact_id:'',
+      contact_title : data.contact_title,
+      contact_name: data.contact_name,
+      contact_email: data.contact_email,
+      contact_number : data.contact_number,
+    });
+  }
+  deleteFranchiseContact(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'franchise_contacts')
+                    .set('id', data.franchise_contact_id)   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getFranchiseInfo(this.franchiseId);
+          }else{
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
   deleteFranchiseFee(data) {
     this._confirm.confirm({
       message: 'Are you sure that you want to delete?',
@@ -390,7 +379,6 @@ export class ViewFranchiseComponent implements OnInit {
       reject: () => {}
     });
   }
-  
   isEnabled(){
     if(this.franchiseObj.status == 'active') return true;
     else return false;

@@ -39,29 +39,24 @@ export class AddFranchiseComponent implements OnInit {
   submitted3 = null;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  ///    
-  cities2: City[];
-  selectedCities1: City[];
-  selectedCities2: City[];
-  ///
-  isUpdate:boolean;
   
   state:any=[];
   city:any=[];
   country:any=[];
   fullObject:any={};
-  pageTitle:string = "Create Franchise";
   stepOneForm: FormGroup;
   stepTwoForm: FormGroup;
   stepThreeForm: FormGroup;
-  constructor(private _router: Router, private _toast: ToasterService, 
-              private _formBuilder: FormBuilder,private _feeService: FeeService,
-              public translate: TranslateService,
-              private masterservices:MasterService, private _service: FranchiseService) {
-    
+  constructor(private _router: Router,
+              private _toast: ToasterService, 
+              private _formBuilder: FormBuilder,
+              private _feeService: FeeService,
+              private _service: FranchiseService,
+              private masterservices:MasterService,
+              public translate: TranslateService
+            ){    
     translate.setDefaultLang(environment.defaultLanguage);
 
-    this.isUpdate=false;
     this.FeeStructureCols = [
       { field: 'name', header: 'Fee Title' },
       { field: 'amount', header: 'Fee Amount (₹)' },

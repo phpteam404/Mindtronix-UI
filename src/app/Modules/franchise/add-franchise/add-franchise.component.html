@@ -73,7 +73,7 @@
                                 <input pinputtext type="text" placeholder="{{'franchise.add.franchiseName'|translate}}" name="name" formControlName="name" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.name.invalid && submitted1!=null && !submitted1"
-                                    [ngClass]=" 'error'">{{'errorMessages.franchiseName'|translate}}
+                                    [ngClass]="'error'">{{'errorMessages.franchiseName'|translate}}
                                 </div> 
                             </div>
                         </div>
@@ -213,8 +213,7 @@
                                    [ngClass]=" 'error'"> {{'errorMessages.contactName'|translate}}
                                </div>
                             </div>
-                        </div>
-                       
+                        </div>                       
                         <div class="col-md-3 col-12">
                             <label>{{'franchise.add.contactNumber'|translate}} <span>*</span></label>
                             <input type="text" placeholder="{{'franchise.add.contactNumber'|translate}}" pKeyFilter="pint" formControlName="contact_number"

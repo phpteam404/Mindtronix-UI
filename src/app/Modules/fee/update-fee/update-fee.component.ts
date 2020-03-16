@@ -19,21 +19,19 @@ export class UpdateFeeComponent implements OnInit {
   term:any =[];
   status:any =[];
   formObj:any={};
-  pageTitle:string="Update Fee Structure";
   feeForm: FormGroup;
   isUpdate:boolean = true;
-
+  feeId:any;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _ar: ActivatedRoute,
-              private _masterService: MasterService,
+              private _mService: MasterService,
               private _service: FeeService,
               public translate: TranslateService) {
      translate.setDefaultLang(environment.defaultLanguage);
-    var id:any;
     _ar.paramMap.subscribe(params => {
-      id = atob(params['params'].id);
-      var param = new HttpParams().set('fee_master_id',id);
+      this.feeId = atob(params['params'].id);
+      var param = new HttpParams().set('fee_master_id',this.feeId);
       _service.getById(param).subscribe(res=>{
         if(res.status){
           this.formObj = res.data.data[0];
@@ -49,18 +47,17 @@ export class UpdateFeeComponent implements OnInit {
         }
       });
     });
-  }
-  
+  } 
 
   ngOnInit(): void {
     this.feeForm = new FormGroup({
-      fee_master_id: new FormControl(this.formObj.fee_master_id),  
-      name: new FormControl(this.formObj.name, [Validators.required]),
-      amount: new FormControl(this.formObj.amount, [Validators.required]),
-      term: new FormControl(this.formObj.term, [Validators.required]),
-      discount: new FormControl(this.formObj.discount),
-      discount_details: new FormControl(this.formObj.discount_details),  
-      status: new FormControl(this.formObj.status, [Validators.required]),  
+      fee_master_id: new FormControl(''),  
+      name: new FormControl('', [Validators.required]),
+      amount: new FormControl('', [Validators.required]),
+      term: new FormControl('', [Validators.required]),
+      discount: new FormControl(''),
+      discount_details: new FormControl(''),  
+      status: new FormControl('', [Validators.required]),  
     });
     this.getMasterData('fee_term');
     this.getMasterData('status');
@@ -79,10 +76,7 @@ export class UpdateFeeComponent implements OnInit {
       this._service.saveFee(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          // this._toast.show('success',res.message);
           this.goToList();
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
         }
       });
     }else{
@@ -92,19 +86,16 @@ export class UpdateFeeComponent implements OnInit {
   goToList(){
     this._router.navigate(['fee_management']);
   }
-  //This service is to Get Master childs Based on Selected Master
   getMasterData(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this._masterService.getMasterChilds(params).subscribe(res=>{
+    return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'fee_term')
           this.term =  res.data.data;
         if(masterKey == 'status')
           this.status =  res.data.data;
-      }else{
-        this._toast.show('error',res.error);
       }
     });
   }

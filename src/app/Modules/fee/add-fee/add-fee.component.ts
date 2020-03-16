@@ -4,7 +4,6 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import { Router } from '@angular/router';
 import { FeeService } from 'src/app/services/fee.service';
 import { MasterService } from 'src/app/services/master.service';
-import { CommonService } from 'src/app/services/common.service';
 import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
@@ -21,11 +20,9 @@ export class AddFeeComponent implements OnInit {
   status:any =[];
   isUpdate:boolean = false;
 
-  pageTitle:string="Create Fee Structure";
   constructor(private _router: Router, 
               private _toast: ToasterService, 
-              private _masterService: MasterService, 
-              private _commonService: CommonService, 
+              private _mService: MasterService, 
               private _service: FeeService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
@@ -58,8 +55,6 @@ export class AddFeeComponent implements OnInit {
         if (res.status) {
           this.submitted = true;
           this._router.navigate(['fee_management']);
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
         }
       });
     }else{
@@ -75,7 +70,7 @@ export class AddFeeComponent implements OnInit {
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this._masterService.getMasterChilds(params).subscribe(res=>{
+    return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'fee_term')
           this.term =  res.data.data;
@@ -83,8 +78,6 @@ export class AddFeeComponent implements OnInit {
           this.status =  res.data.data;
           this.feeForm.controls['status'].setValue(res.data.data[0]);
         }
-      }else{
-        this._toast.show('error',res.error);
       }
     });
   }

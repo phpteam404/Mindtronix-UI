@@ -20,17 +20,18 @@ export class FranchiseListComponent implements OnInit {
   loading: boolean;
 
   constructor(private _service: FranchiseService,
-              public translate: TranslateService,
               private router: Router,
               public datepipe: DatePipe,
-              private _route: ActivatedRoute) {
+              private _ar: ActivatedRoute,
+              public translate: TranslateService
+            ){
     translate.setDefaultLang(environment.defaultLanguage);
   }
 
   ngOnInit(): void {}
 
   AddNewFranchise(event: Event){
-    this.router.navigate(['add'], {relativeTo: this._route});
+    this.router.navigate(['add'], {relativeTo: this._ar});
   }
   goToSchools(data : any){
     this.router.navigate(['schools_management'], { queryParams: { franchise_id: btoa(data.franchise_id)}});
@@ -40,10 +41,10 @@ export class FranchiseListComponent implements OnInit {
   }
 
   viewFranchise(data){
-    this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
+    this.router.navigate(['view/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._ar});
   }
   editFranchise(data){
-   this.router.navigate(['update/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._route});
+   this.router.navigate(['update/'+(data.franchise_name)+'/'+btoa(data.franchise_id)],{ relativeTo: this._ar});
   }
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
@@ -61,7 +62,6 @@ export class FranchiseListComponent implements OnInit {
     if (event.globalFilter) {
         params = params.set('search_key', event.globalFilter);
     }
-
     this._service.getList(params).subscribe(res=>{
       if(res.status){
         this.list = res.data.data;
