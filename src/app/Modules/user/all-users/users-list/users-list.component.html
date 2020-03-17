@@ -66,4 +66,9 @@
         </p-table>
     </div>
 </div>
-<p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
+<p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
+                acceptLabel="{{'general.acceptLabel' | translate}}"
+                rejectLabel="{{'general.rejectLabel' | translate}}"
+                message="{{'general.confirmDelete' | translate}}" 
+                icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+</p-confirmDialog>

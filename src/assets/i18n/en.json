@@ -148,9 +148,18 @@
            "attachIssue":"Attach issue screenshot"   
         },
         "view":{
-            "attachments":"Attachments"
-        }
-        
+            "attachments":"Attachments",
+            "ticketid":"Ticket Id",
+            "createdBy":"Created By",
+            "createdDate":"Created Date",
+            "lastUpdated":"Last Updated",
+            "lastUpdatedBy":"Last Updated By",
+            "ticketStatus":"Status",
+            "issueTitle":"Issue Title",
+            "ticketHistory":"Ticket History",
+            "comment":"Comment",
+            "attachIssueScreenshot":"Attach issue screenshot"
+        }        
     },
     "digitalContent":{
         "createContent":"Create Content",
@@ -164,7 +173,8 @@
             "subCategory":"Sub Category",
             "category":"Category",
             "contentDescription":"Content Description",
-            "fileUpload":"File Upload"
+            "fileUpload":"File Upload",
+            "fileSelected":"Files Selected"
         },
         "view":{
             "noOfViews":"No.of Views"

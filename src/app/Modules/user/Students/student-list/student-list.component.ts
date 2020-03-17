@@ -104,9 +104,6 @@ export class StudentListComponent implements OnInit {
 
   DeleteStudent(data) {
     this._confirm.confirm({
-      message: 'Are you sure that you want to delete?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         var params = new HttpParams()
                     .set('tablename', 'user')

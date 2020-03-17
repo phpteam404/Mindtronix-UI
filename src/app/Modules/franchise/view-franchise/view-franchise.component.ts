@@ -342,10 +342,7 @@ export class ViewFranchiseComponent implements OnInit {
     });
   }
   deleteFranchiseContact(data) {
-    this._confirm.confirm({
-      message: 'Are you sure that you want to delete?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-exclamation-triangle',
+    this._confirm.confirm({      
       accept: () => {
         var params = new HttpParams()
                     .set('tablename', 'franchise_contacts')
@@ -362,9 +359,6 @@ export class ViewFranchiseComponent implements OnInit {
   }
   deleteFranchiseFee(data) {
     this._confirm.confirm({
-      message: 'Are you sure that you want to delete?',
-      header: 'Delete Confirmation',
-      icon: 'pi pi-exclamation-triangle',
       accept: () => {
         var params = new HttpParams()
                     .set('tablename', 'franchise_fee')

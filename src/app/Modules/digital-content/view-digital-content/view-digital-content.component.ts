@@ -302,4 +302,7 @@ export class ViewDigitalContentComponent implements OnInit {
       params = params.set('search_key', event.globalFilter);
     }
   }
+  isEmptyTable(){
+    return (this.documents == 0 ? true : false);
+  }
 }

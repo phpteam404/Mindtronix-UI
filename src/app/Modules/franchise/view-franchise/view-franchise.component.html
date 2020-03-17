@@ -238,7 +238,12 @@
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
+                    <p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
+                        acceptLabel="{{'general.acceptLabel' | translate}}"
+                        rejectLabel="{{'general.rejectLabel' | translate}}"
+                        message="{{'general.confirmDelete' | translate}}" 
+                        icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+                    </p-confirmDialog>
                     <p-tabPanel header="{{'franchise.feeManagement'|translate}}">
                         <div class="custom-view">
                             <div class="custom-view-content">
@@ -298,7 +303,12 @@
                 </p-tabView>
             </div>
         </div>
-        <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
+        <p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
+            acceptLabel="{{'general.acceptLabel' | translate}}"
+            rejectLabel="{{'general.rejectLabel' | translate}}"
+            message="{{'general.confirmDelete' | translate}}" 
+            icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+        </p-confirmDialog>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-veiw-rightside">
                 <div class="revenue-text revenue-month-dropdown">{{'franchise.view.revenue'|translate}}
