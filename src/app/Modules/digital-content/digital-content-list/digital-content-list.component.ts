@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent } from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { ContentService } from 'src/app/services/content.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
+import { CommonService } from 'src/app/services/common.service';
 
 @Component({
   selector: 'app-digital-content-list',
@@ -16,10 +17,13 @@ export class DigitalContentListComponent implements OnInit {
   cols:any;
   totalRecords: number; 
   first:number=0;
+  listParamsRef:any={};
   constructor(private _router: Router,
              private _ar: ActivatedRoute,
              private _service: ContentService,
-             private translate: TranslateService) {    
+             private _cService: CommonService,
+             private _confirm: ConfirmationService,
+             public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
    }
 
@@ -29,7 +33,6 @@ export class DigitalContentListComponent implements OnInit {
     this._router.navigate(['add'],{relativeTo:this._ar});
   }
   viewContent(data:any){
-    console.log('data info',data);
     this._router.navigate(['view',data.content_name,btoa(data.digital_content_management_id)],{ relativeTo: this._ar});
   }
   isEmptyTable() {
@@ -48,7 +51,34 @@ export class DigitalContentListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
+    this.listParamsRef = params;
     this._service.getdigitalContentList(params).subscribe(res=>{
+      if(res.status){
+        this.cols = res.data.table_headers;
+        this.list = res.data.data;
+        this.totalRecords = res.data.total_records;
+      }
+    });
+  }
+  DeleteDigitalContent(data:any) {
+    this._confirm.confirm({
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'digital_content_management')
+                    .set('id', data.digital_content_management_id);   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+            this.getList();
+          }else{
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
+  getList(){
+    this.first = this.listParamsRef.updates[0].value;
+    this._service.getdigitalContentList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.list = res.data.data;

@@ -10,7 +10,6 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'dashboard',
-    // loadChildren: './layouts/admin-layout/admin-layout.module#AdminLayoutModule',
     pathMatch: 'full',
   }, {
     path: '',

@@ -146,6 +146,9 @@
            "issueType":"Issue Type",
            "issueDescription":"Issue Description",
            "attachIssue":"Attach issue screenshot"   
+        },
+        "view":{
+            "attachments":"Attachments"
         }
         
     },
@@ -160,7 +163,11 @@
             "grade":"Grade",
             "subCategory":"Sub Category",
             "category":"Category",
-            "contentDescription":"Content Description"
+            "contentDescription":"Content Description",
+            "fileUpload":"File Upload"
+        },
+        "view":{
+            "noOfViews":"No.of Views"
         }
     },
     "buttons":{
@@ -227,7 +234,11 @@
     },
     "general":{
          "noRecords":"No records found",
-         "confirmDelete":"Are you sure you want to delete this record ?"
+         "search": "Search...",
+         "deleteHeader":"Delete Confirmation",
+         "confirmDelete":"Are you sure that you want to delete?",
+         "acceptLabel": "Yes",
+         "rejectLabel": "No"
     },
     "placeholder":{
         "status":"Select Status",

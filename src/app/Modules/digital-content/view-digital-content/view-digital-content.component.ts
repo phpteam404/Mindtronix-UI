@@ -39,15 +39,14 @@ export class ViewDigitalContentComponent implements OnInit {
   
   digitalContentId:any;
   digitalContent:any={};
-  list: any;
   cols:any;
   
   documents:any=[];
   fileTypes = ["image/jpeg",
-  "image/png",
-  "application/pdf",
-  "video/mp4",
-  "video/quicktime"];
+              "image/png",
+              "application/pdf",
+              "video/mp4",
+              "video/quicktime"];
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
@@ -56,17 +55,15 @@ export class ViewDigitalContentComponent implements OnInit {
               private _confirm: ConfirmationService,
               private _mservice:MasterService,
               private _cService: CommonService,
-              public translate: TranslateService) { 
-              translate.setDefaultLang(environment.defaultLanguage);
-              this.maxDate = new Date();
-
-              this.cols = [
-                { field: 'attacheImg', header: 'Img' },
-                { field: 'document_name', header: 'Name' },
-                { field: 'action', header: 'Actions' }
-            ];
-          
-     }
+              public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
+    this.maxDate = new Date();
+    this.cols = [
+      { field: 'attacheImg', header: 'Img' },
+      { field: 'document_name', header: 'Name' },
+      { field: 'action', header: 'Actions' }
+    ];          
+  } 
 
      
   showBasicDialog3() {
@@ -79,13 +76,6 @@ export class ViewDigitalContentComponent implements OnInit {
     this.digitalForm.reset();
   }
   ngOnInit(): void {
-    this.list = [
-      { attacheImg: '', name: 'Prasad', action: ''},
-      { attacheImg: '', name: 'Naresh', action: ''},
-      { attacheImg: '', name: 'Swetha', action: ''},
-      { attacheImg: '', name: 'Parvathi', action: ''},
-      { attacheImg: '', name: 'Ramakrishna', action: ''}
-  ];
     this._ar.paramMap.subscribe(params => {
       this.digitalContentId = atob(params['params'].id);
       this.contentName = (params['params'].name);
@@ -215,12 +205,12 @@ export class ViewDigitalContentComponent implements OnInit {
         }
         else {
           this._toast.show('warning','No file uploaded or invalid file type!');
-          this.digitalForm.setValue({
+          this.digitalForm.patchValue({
             files:''
           })
           return false;
         }
-      });
+      });      
     }
   }
 
@@ -297,5 +287,19 @@ export class ViewDigitalContentComponent implements OnInit {
         }); 
       }
     });
+  }
+ 
+  loadDigitalContentLazy(event: LazyLoadEvent) {
+    var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
+    var params = new HttpParams()
+      .set('start', event.first+'')
+      .set('number', event.rows+'');
+    if (event.sortField) {
+      params = params.set('sort', event.sortField);
+      params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+      params = params.set('search_key', event.globalFilter);
+    }
   }
 }

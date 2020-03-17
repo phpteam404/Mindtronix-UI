@@ -108,30 +108,30 @@
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
                     <div>Ticket Id
-                        <span>#MI000001 <span class="normal-text"> (Kit Related) </span></span>
+                        <span>{{ticketObj.issue_id}} <span class="normal-text"> ({{ticketObj.issue_type}}) </span></span>
                     </div>
                 </div>
                
                 <div class="custom-view-div">
                     <div class="schools-text">Created By
-                        <span>Prasad</span>
+                        <span>{{ticketObj.created_by}}</span>
                     </div>
                 </div>
                
                 
                 <div class="custom-view-div">
                     <div class="schools-text">Created Date
-                        <span>25/02/2020</span>
+                        <span>{{ticketObj.created_date|date:'dd MMM,yyyy'}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">Last Updated
-                        <span>26/02/2020</span>
+                        <span>{{ticketObj.last_updated|date:'dd MMM,yyyy'}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">Last Updated By
-                        <span>Ramakrishna</span>
+                        <span>{{ticketObj.last_updated_by}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div status-div">
@@ -140,7 +140,7 @@
                             Status
                             <!-- <button type="submit" class="icon icon-edit-pencil" (click)="showBasicDialog()"></button> -->
                         </div>
-                        <span class="status-greentext">Closed</span>
+                        <span class="status-greentext">{{ticketObj.status}}</span>
                     </div>
                 </div>
             </div>
@@ -149,27 +149,22 @@
                   
                     <div class="col-md-4 col-12">
                         <label>Issue Title</label>
-                        <p>Kit not working</p>
+                        <p>{{ticketObj.title}}</p>
                     </div>
                     <div class="col-md-8 col-12 mb-3">
                         <label>Issue Description</label>
-                        <p>Restart your web browser; often times, this simple action can promptly fix the issue. If you still cannot register the kit ID after performing the above actions, please contact our support team here. Please include a description of the issue, and the kit ID</p>
+                        <p> {{ticketObj.description}}</p>
                     </div>
                     <div class="col-12">
-                        <label>Attachments</label>
+                        <label>{{'ticket.view.attachments'|translate}}</label>
                         <div class="attachment-img">
-                            <div>
-                                <img src="{{prdAssetPath}}/assets/img/kit1.png" alt="">
-                            </div>
-                            <div>
-                                <img src="{{prdAssetPath}}/assets/img/kit2.png" alt=""> 
-                            </div>
-                            <div>
-                                <img src="{{prdAssetPath}}/assets/img/kit3.png" alt="">
-                            </div>
-                          
-                           
-                           
+                          <div *ngFor="let row of documents">
+                                  <img src="{{row.document_url}}" alt="">
+                          </div>
+                            <div *ngIf="documents==''">
+                                {{'general.noRecords'|translate}}
+                            </div> 
+        
                         </div>
                     </div>
                 </div>
@@ -180,7 +175,6 @@
                         <ul class="history-view">
                            <li class="lastseen-date"><div>26 Feb 2020</div></li>
                                 <ul class="history-list">
-                                   
                                     <li>
                                         <div>02:30 PM By <span class="name-highlight">Prasad</span><span class="green-text pl-2">Closed</span></div>
                                         <div>Status Closed</div>
@@ -208,7 +202,7 @@
                         <ul class="history-view">
                             <li class="lastseen-date"><div>25 Feb 2020</div></li>
                                  <ul class="history-list">
-                                    
+                
                                      <li>
                                          <div>02:30 PM By <span class="name-highlight">Prasad</span><span class="red-text pl-2">Inprogress</span></div>
                                          <div>Status changed from New to Inprogress</div>

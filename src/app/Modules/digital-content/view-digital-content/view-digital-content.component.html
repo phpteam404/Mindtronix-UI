@@ -106,22 +106,22 @@
         <div class="col-md-9 col-12">
             <div class="custom-view-list">
                 <div class="custom-view-div franchise-name">
-                    <div>Category
+                    <div>{{'digitalContent.add.category'|translate}}
                         <span>{{digitalContentObj.category}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text">Sub Category
+                    <div class="schools-text">{{'digitalContent.add.subCategory'|translate}}
                         <span>{{digitalContentObj.sub_category}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div custom-leftborder">
-                    <div class="schools-text">Content Level
+                    <div class="schools-text">{{'digitalContent.add.contentLevel'|translate}}
                         <span>{{digitalContentObj.content_level}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div custom-leftborder">
-                    <div class="students-text">No.of Views
+                    <div class="students-text">{{'digitalContent.view.noOfViews'|translate}}
                         <span>{{digitalContentObj.no_of_views}}</span>
                     </div>
                 </div>
@@ -140,73 +140,84 @@
                                 <a href="javascript:;" class="btn" (click)="showBasicDialog3()"><i class="icon icon-edit-pencil"></i></a>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Content Name</label>
+                                <label>{{'digitalContent.add.contentName'|translate}}</label>
                                 <p>{{digitalContentObj.content_name}}</p>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Content Description</label>
+                                <label>{{'digitalContent.add.contentDescription'|translate}}</label>
                                 <p>{{digitalContentObj.description}}</p>
                             </div>
                             <div class="col-md-4 col-12">
-                                <label>Category</label>
+                                <label>{{'digitalContent.add.category'|translate}}</label>
                                 <p>{{digitalContentObj.category}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Sub Category</label>
+                                <label>{{'digitalContent.add.subCategory'|translate}}</label>
                                 <p>{{digitalContentObj.sub_category}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Grade</label>
+                                <label>{{'digitalContent.add.grade'|translate}}</label>
                                 <p>{{digitalContentObj.grade}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Content Level</label>
+                                <label>{{'digitalContent.add.contentLevel'|translate}}</label>
                                 <p>{{digitalContentObj.content_level}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Tags </label>
+                                <label>{{'digitalContent.add.tags'|translate}} </label>
                                 <p>{{digitalContentObj.tags}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Expiry Date</label>
+                                <label>{{'digitalContent.add.expiryDate'|translate}}</label>
                                 <p>{{digitalContentObj.expiry_date | date: 'dd MMM,yyyy'}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
-                                <label>Status</label>
+                                <label>{{'digitalContent.add.status'|translate}}</label>
                                 <p>{{digitalContentObj.status}}</p>
-                            </div>                                   
+                            </div>
+                            
                         </div>
                     </div>
-                </div>              
+                </div>
             </div>
             <div class="attachements-list">
-                <h4>Attachments</h4>
+                <h4>{{'ticket.view.attachments'|translate}}</h4>
                 <div class="custom-table">
-                    <p-table #dt [columns]="cols" [value]="documents">
+                    <p-table #dt [columns]="cols" [value]="documents" [lazy]="true" [totalRecords]="totalRecords">
                         <ng-template pTemplate="header" let-columns>
-                            <tr>
-                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
-                                    {{col.header}}
-                                    <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
-                                </th>
-                            </tr>
+                                <tr>
+                                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                                        {{col.header}}
+                                        <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                                    </th>
+                                </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
                                 <td *ngFor="let col of columns ; let i = index">
-                                    <span *ngIf="i != 2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                                
+                                    <span *ngIf="i != 2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+    
                                     <span *ngIf="i == 0"  class="d-flex action-color attache-img">
                                     <img src="assets/img/attachement-imgs/png-file.png" alt="">
                                     
                                     </span>
-                                    <span *ngIf="i == 2"  class="d-flex action-color">                                   
+                                    <span *ngIf="i == 2"  class="d-flex action-color">
                                         <a href="javascript:;" (click)="DeleteAttachments(rowData)" title="Delete">
                                             <span class="icon icon-delete wd-30"></span>
                                         </a>
                                     </span>
                                 </td>
                             </tr>
-                        </ng-template>                        
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <ng-container *ngIf="isEmptyTable()">
+                            <tr>
+                            <td [attr.colspan]="columns.length" class="text-center">
+                                {{'general.noRecords'|translate}}
+                            </td>
+                            </tr>
+                            </ng-container>
+                        </ng-template>
                     </p-table>
                 </div>
             </div>
@@ -230,6 +241,7 @@
         </div>
     </div>
 </div>
+  <!-- content details popup -->
 <p-dialog header="Update Content Details" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic3" [style]="{width: '65vw'}" [baseZIndex]="1">
      <form [formGroup]="digitalForm" (ngSubmit)="submit()">
         <div class="row custom-form">
@@ -238,8 +250,8 @@
                     <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
                     <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" formControlName ="name" name="name" type="text" required>
                     <div class="invalid-feedback"
-                        *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
-                        [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
+                            *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
                     </div>
                 </div>
             </div>
@@ -257,7 +269,7 @@
                     <div class="invalid-feedback"
                         *ngIf="digitalForm.controls.category.invalid && submitted!=null && !submitted"
                         [ngClass]=" 'error'"> {{'errorMessages.category'|translate}}
-                </div>
+                    </div>
                 </div>
             </div>
             <div class="col-md-4 col-12">
@@ -269,7 +281,7 @@
                         *ngIf="digitalForm.controls.sub_category.invalid && submitted!=null && !submitted"
                         [ngClass]=" 'error'">{{'errorMessages.subCategory'|translate}}
                     </div>
-            </div>
+                </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
@@ -280,7 +292,7 @@
                         *ngIf="digitalForm.controls.grade.invalid && submitted!=null && !submitted"
                         [ngClass]=" 'error'">{{'errorMessages.grade'|translate}}
                     </div>
-            </div>
+                </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
@@ -291,7 +303,7 @@
                         *ngIf="digitalForm.controls.content_level.invalid && submitted!=null && !submitted"
                         [ngClass]=" 'error'">{{'errorMessages.contentLevel'|translate}}
                     </div>
-            </div>
+                </div>
             </div>
             <div class="col-md-4 col-12">
                 <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
@@ -313,28 +325,13 @@
                     <label>{{'digitalContent.add.status'|translate}} <span>*</span></label>
                     <p-dropdown [options]="status"  itemSize="30" formControlName ="status"
                         name="status" optionLabel="label" required></p-dropdown>
-                
-            </div>
+                </div>
             </div>
             <div class="col-md-8 col-12">
                 <div class="form-group">
-                    <label>File Upload</label>
+                    <label>{{'digitalContent.add.fileUpload'|translate}}</label>
                     <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
-                    (change)="onFileSelect($event)" style="height: 45px;" />
-                    <div class="invalid-feedback"
-                        [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
-                    </div>
-                    <!-- <mat-file-upload
-                        [labelText]="''"
-                        [selectButtonText]="'Choose File(s)'"
-                        [selectFilesButtonType]="file"
-                        [allowMultipleFiles]="true"
-                        [showUploadButton]="false"
-                        [acceptedTypes]="'.png, .jpg, .jpeg'"
-                        (uploadClicked)="onUploadClicked($event)"
-                        (selectedFilesChanged)="onSelectedFilesChanged($event)"
-                        >
-                    </mat-file-upload> -->
+                        (change)="onFileSelect($event)" style="height: 45px;" />
                 </div>
             </div>  
         </div>

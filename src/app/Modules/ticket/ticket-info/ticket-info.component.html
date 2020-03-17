@@ -34,36 +34,17 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label>{{'ticket.add.attachIssue'|translate}}</label>
-                            <input type="file" name="files" multiple formControlName="files" (change)="onFileSelect($event)" style="height: 45px;" />
-                            <!-- <mat-file-upload
-                                [labelText]="''"
-                                [selectButtonText]="'Choose File(s)'"
-                                [selectFilesButtonType]="file"
-                                [allowMultipleFiles]="true"
-                                [showUploadButton]="false"
-                                [acceptedTypes]="'.png, .jpg, .jpeg'"
-                                (uploadClicked)="onUploadClicked($event)"
-                                (selectedFilesChanged)="onSelectedFilesChanged($event)"
-                                >
-                            </mat-file-upload> -->
+                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs" (change)="onFileSelect($event)" style="height: 45px;" />
+                            <div class="invalid-feedback"
+                                  [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
+                            </div>
                         </div>
-                    </div>
-                   
+                    </div>                   
                     <div class="col-12 text-right custom-btn">
                         <button pButton type="submit" label="Create" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>
                     </div>
-                </div>
-                <!-- <div class="row">
-                    <div class="col-md-12 col-12">
-                        <div class="form-group">
-                            <label>Attachments</label>
-                            <mat-file-upload
-                                name="file_upload">
-                            </mat-file-upload>
-                        </div>
-                    </div>
-                </div> -->
+                </div>               
             </form>
         </div>
     </div>

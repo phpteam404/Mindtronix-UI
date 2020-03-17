@@ -1,16 +1,15 @@
 <div class="main-content">
     <div class="custom-table fee-list">
-        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" 
-            (onLazyLoad)="loadDigitalContentLazy($event)" [first]="first"
-            [paginator]="true" [rows]="10"  [totalRecords]="totalRecords">
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadDigitalContentLazy($event)" 
+            [first]="first" [paginator]="true" [rows]="10"  [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="Search..." class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="Create Content" class="btn-warning" (click)="addNewContent($event)"></button>
+                    <button pButton type="button" label="{{'digitalContent.createContent' | translate}}" class="btn-warning" (click)="addNewContent($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -24,32 +23,33 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                        <!-- <span *ngIf="i == 5">
-                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
-                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
-                                class='list-status'>{{rowData[col.field]}}</span>
-                        </span> -->
+                        <span *ngIf="i != 6" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                      
                         <span *ngIf="i == 6"  class="d-flex action-color">
-                            <a href="javascript:;" (click)="viewContent(rowData)" title="Edit">
+                            <a href="javascript:;" (click)="viewContent(rowData)" title="{{'title.edit'|translate}}">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a>
-                            <a href="javascript:;" (click)="DeleteFee(rowData)" title="Delete">
+                            <a href="javascript:;" (click)="DeleteDigitalContent(rowData)" title="{{'title.delete'|translate}}">
                                 <span class="icon icon-delete wd-30"></span>
                             </a>
                         </span>
                     </td>
                 </tr>
             </ng-template>
-            <!-- <ng-template pTemplate="footer" let-columns>
+            <ng-template pTemplate="footer" let-columns>
                 <ng-container *ngIf="isEmptyTable()">
-                <tr>
-                  <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
-                  </td>
-                </tr>
+                    <tr>
+                        <td [attr.colspan]="columns.length" class="text-center">
+                            {{'general.noRecords'|translate}}
+                        </td>
+                    </tr>
                 </ng-container>
-            </ng-template> -->
+            </ng-template>
         </p-table>
     </div>
 </div>
+<p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
+    acceptLabel="{{'general.acceptLabel' | translate}}"
+    rejectLabel="{{'general.rejectLabel' | translate}}"
+    message="{{'general.confirmDelete' | translate}}" 
+    icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+</p-confirmDialog>
