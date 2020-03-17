@@ -13,16 +13,14 @@ const routes: Routes = [
     path: 'add',
     component: AddTrainerComponent,
     data: {
-      breadcrumbs: 'Create Schedule',
-      title: 'Trainer'
+      breadcrumbs: 'Create Schedule'
     }
   },
   {
-    //path: 'update/:id',
     path:'update/:name/:id',
     component: UpdateTrainerComponent,
     data: {
-      breadcrumbs: 'Update Schedule',
+      breadcrumbs: 'Update',
       title: 'Topic'
     }
   }

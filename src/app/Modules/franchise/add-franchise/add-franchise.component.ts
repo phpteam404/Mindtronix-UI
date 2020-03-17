@@ -77,7 +77,6 @@ export class AddFranchiseComponent implements OnInit {
     var params = new HttpParams().set('status',1+'');
     this._feeService.getList(params).subscribe(res=>{
       if(res.status){
-        console.log('getFeeStructureDropdown--', res);
         this.FeeStructureList = res.data.data;
       }
     });
@@ -100,8 +99,6 @@ export class AddFranchiseComponent implements OnInit {
           this.status =res.data.data;
           this.stepOneForm.controls['status'].setValue(res.data.data[0]);
         }
-      }else{
-        this._toast.show('error',res.error);
       }
     });
   }
@@ -155,8 +152,7 @@ export class AddFranchiseComponent implements OnInit {
 
   stepOneFormSubmit(): any{
     this.submitted1 = false;
-    console.log('this.stepOneForm.value--', this.stepOneForm.value);
-    if (this.stepOneForm.valid) {  
+    if (this.stepOneForm.valid) {
       this.fullObject['1'] = this.stepOneForm.value;
       this.fullObject['1'].country = this.getCountry();
       this.fullObject['1'].state = this.getState();
@@ -164,7 +160,6 @@ export class AddFranchiseComponent implements OnInit {
       this.fullObject['1'].status = this.getStatus();
       this.submitted1 = true;
     }else{
-      console.log('1**');
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
@@ -180,20 +175,16 @@ export class AddFranchiseComponent implements OnInit {
       this.contactsList.push(obj);
       this.stepTwoForm.reset();
       this.fullObject['2'] = this.contactsList;
-      console.log('this.contactsList--', this.contactsList);
       this.submitted2 = true;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
   stepThreeFormSubmit(): any{
-    console.log('this.stepThreeForm---', this.stepThreeForm.value);
     this.submitted3 = false;
     if (this.stepThreeForm.valid) {
       this.FeeList = this.stepThreeForm.value.fee_structure;
-      this.fullObject['3'] = this.FeeList;      
-      //this._toast.show('success','Successfully Added');
-      //this._router.navigate(['franchise']);
+      this.fullObject['3'] = this.FeeList;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
@@ -213,8 +204,6 @@ export class AddFranchiseComponent implements OnInit {
   overAllSave(){
     // if(this.stepOneForm.valid && this.stepTwoForm.valid && this.stepThreeForm.valid){
     if(true){
-      console.log('this.fullObject--1', this.fullObject['1']);
-      console.log('this.fullObject--2', this.fullObject['2']);
       if(this.fullObject['1']==undefined){
         this.submitted1 = false;
         this._toast.show('warning','Please enter Franchise details');
@@ -238,9 +227,7 @@ export class AddFranchiseComponent implements OnInit {
       this.fullObject['3'].forEach(item => { 
         feeArr.push(Number(item.fee_master_id));
       });
-      console.log('feeArr--', feeArr.toString());
       obj['fee_master_id'] =  feeArr.toString();
-      console.log('obj--', obj);
       this._service.addUpdate(obj).subscribe(res=>{
         if(res.status){
           this.submitted3 = true;

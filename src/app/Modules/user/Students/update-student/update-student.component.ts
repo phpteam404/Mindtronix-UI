@@ -31,18 +31,16 @@ export class UpdateStudentComponent implements OnInit {
   schools:any;
   grade:any;
   studentForm: FormGroup;
-  pageTitle = "Update Student";
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _ar: ActivatedRoute,
-              private masterService:MasterService,
+              private _mService:MasterService,
               private _service:UserService,
-              private schoolService:SchoolService,
-              private feeService:FeeService,
+              private _sService:SchoolService,
+              private _feeService:FeeService,
               public datepipe: DatePipe,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
-    console.log('AddStudentComponent---' );
 
     this.maxDate = new Date();
     _ar.paramMap.subscribe(params => {
@@ -116,7 +114,7 @@ export class UpdateStudentComponent implements OnInit {
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this.masterService.getMasterChilds(params).subscribe(res => {
+    return this._mService.getMasterChilds(params).subscribe(res => {
       if(res.status){
         if(masterKey == 'nationality'){
           this.nationality =  res.data.data;
@@ -131,14 +129,12 @@ export class UpdateStudentComponent implements OnInit {
           this.blood_group =res.data.data;
         if(masterKey =='status')
           this.status =res.data.data;
-        }else {
-        this._toast.show('error',res.error);
       }
     });
   }
 
   getschoolsDropdown(){
-    this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
+    this._sService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
       }
@@ -147,7 +143,7 @@ export class UpdateStudentComponent implements OnInit {
 
   getFeeStructureDropDown(){
     var params = new HttpParams();
-    this.feeService.getFeeDropDown(params).subscribe(res=>{
+    this._feeService.getFeeDropDown(params).subscribe(res=>{
       if(res.status){
         this.feeTerm = res.data.data;
      }
@@ -183,10 +179,7 @@ export class UpdateStudentComponent implements OnInit {
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          // this._toast.show('success',res.message);
           this.goToList();
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
         }
       });
     }else{
@@ -196,6 +189,4 @@ export class UpdateStudentComponent implements OnInit {
   goToList(){
     this._router.navigate(['users/students']);
   }
-
-
 }

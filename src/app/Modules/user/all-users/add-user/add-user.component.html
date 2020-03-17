@@ -1,6 +1,7 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">{{pageTitle}}</h4>
+        <h4 class="custom-form-heading" *ngIf="isUpdate">{{'users.userUpdate' |translate}}</h4>
+        <h4 class="custom-form-heading" *ngIf="!isUpdate">{{'users.userCreate' |translate}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="addUserForm" role="form" (ngSubmit)="submit()" novalidate>
                 <div class="row">

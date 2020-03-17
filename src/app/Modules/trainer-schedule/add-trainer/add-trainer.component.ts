@@ -13,7 +13,6 @@ import { environment } from 'src/environments/environment';
 })
 export class AddTrainerComponent implements OnInit {
   submitted = null;
-  pageTitle:string = "Create Schedule";
   isUpdate:boolean=false;
   fromTime:any;
   toTime:any;
@@ -24,11 +23,7 @@ export class AddTrainerComponent implements OnInit {
                private userService:UserService,
                public translate: TranslateService, 
                public datepipe: DatePipe) {
-                translate.setDefaultLang(environment.defaultLanguage);
-    var currTime:string ='';
-    
-    currTime = new Date().setHours(15) + ':' + new Date().setMinutes(15) + ':'+  new Date().setSeconds(0);
-    console.log('currTime--',formatDate(new Date(), 'hh:mm:ss', 'en-US', '+0530'));
+    translate.setDefaultLang(environment.defaultLanguage);
   }
 
   ngOnInit(): void {
@@ -46,7 +41,6 @@ export class AddTrainerComponent implements OnInit {
   getToTime() { return this.scheduleForm.value.to_time;}
 
   submit(): any {
-    console.log(this.scheduleForm.value);
     this.submitted = false;
     this.validTime = true;
     if (this.scheduleForm.valid) {
@@ -65,9 +59,7 @@ export class AddTrainerComponent implements OnInit {
       this.userService.addTrainer(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._router.navigate(['trainer-schedule']);
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
+          this.goToList();
         }
       });
     }else{

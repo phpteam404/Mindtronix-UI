@@ -25,15 +25,7 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Students'
     }
-  },
-  {
-    path: 'trainers',
-    loadChildren: () => import('../../Modules/user/Trainers/trainer.module').then(m => m.TrainerModule),
-    canActivate: [AuthGuard],
-    data: {
-      breadcrumb: 'Trainers'
-    }
-  },
+  },  
   {
     path: 'online-users',
     loadChildren: () => import('../../Modules/user/OnlineUsers/online-users.module').then(m => m.OnlineUsersModule),

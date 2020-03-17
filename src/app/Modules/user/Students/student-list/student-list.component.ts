@@ -27,7 +27,7 @@ export class StudentListComponent implements OnInit {
   studentsList:any;
   first:number=0;
   schoolFilter:any;
-  id:any;
+  studentId:any;
   dataInfo:any;
   listParamsRef:any={};
   franchiseFilter:any='';
@@ -39,13 +39,14 @@ export class StudentListComponent implements OnInit {
               private _schoolService:SchoolService,
               private _fService:FranchiseService,
               private _confirm: ConfirmationService,
-              public translate: TranslateService) {
-                
+              public translate: TranslateService) {                
     translate.setDefaultLang(environment.defaultLanguage);
     this.getSchoolsList();
     this.getFranchiseList();
   }
-  //this service is for getting franchise dropdown through service
+  /*
+    this service is for getting franchise dropdown through service
+  */
   getFranchiseList(){
     this._fService.getFranchiseDropDowns({}).subscribe(res=>{
       if(res.status){
@@ -53,14 +54,16 @@ export class StudentListComponent implements OnInit {
       }
     });
   }
-  //this service is for getting schools dropdown through service
+  /*
+    this service is for getting schools dropdown through service
+  */
   @ViewChild('dt') dt: Table;
   getSchoolsList() {
     this._schoolService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
         this.schools.forEach(item => {
-          if(item.value == this.id){
+          if(item.value == this.studentId){
             this.dt.filter(item,'school_id','contains');
             this.schoolFilter=item;
           }
@@ -72,9 +75,8 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.getFranchiseList();
     this._ar.queryParams.subscribe(params => {
-      console.log('params info',params);
       if(params['school_id']){
-        this.id = atob(params['school_id']);
+        this.studentId = atob(params['school_id']);
         this.loading=false;
       }else{
         this.loading=true;
@@ -126,8 +128,6 @@ export class StudentListComponent implements OnInit {
     return (this.totalRecords == 0 ? true : false);
   }
   loadStudentsLazy(event: LazyLoadEvent) {
-    console.log(this.loading,'event--', event.filters['school_id']);
-    // this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
       var params = new HttpParams()
         .set('start', event.first+'')
@@ -167,9 +167,6 @@ export class StudentListComponent implements OnInit {
   }
   // called after record delete instead of lazyLoadEvent function 
   getList(){
-    var param = new HttpParams()
-            .set('start',0+'')
-            .set('number', 10+'');
     this.first = this.listParamsRef.updates[0].value;
     this._service.getStudentsList(this.listParamsRef).subscribe(res=>{
       if(res.status){

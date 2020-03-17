@@ -20,7 +20,7 @@ export class AuthenticationService {
     }
     isTokenExpired(params){
       console.log('isTokenExpired params', params);
-      return this,this.http.post('User/access',params);
+      return this.http.post('User/access',params);
     }
     logout() {
       // remove user from local storage to log user out

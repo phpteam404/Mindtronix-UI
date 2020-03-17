@@ -1,8 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormControl, Validators } from '@angular/forms';
 import { Chart } from 'angular-highcharts';
+import { ToasterService } from 'src/app/utils/toaster.service';
+import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+import { MasterService } from 'src/app/services/master.service';
+import { ContentService } from 'src/app/services/content.service';
+import { LazyLoadEvent,ConfirmationService } from 'primeng/api';
+import { CommonService } from 'src/app/services/common.service';
+import { DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-view-digital-content',
@@ -12,52 +20,128 @@ import { environment } from 'src/environments/environment';
 export class ViewDigitalContentComponent implements OnInit {
 
   prdAssetPath:string = environment.prdAssetPath;
-  category:any =[];
-  subCategory:any =[];
+  categories:any =[];
+  sub_categories:any =[];
+  submitted=null;
   grade:any =[];
-  level:any =[];
+  content_level:any =[];
   tags:any =[];
+  first:number=0;
   status:any =[];
+  fileArr:any = [];
   displayBasic3: boolean;
   chart:Chart;
+  contentName:any;
+  maxDate: Date;
+  digitalForm:FormGroup;
+  displayBasic:boolean;
+  digitalContentObj:any={};
+  
+  digitalContentId:any;
+  digitalContent:any={};
+  list: any;
+  cols:any;
+  
+  documents:any=[];
+  fileTypes = ["image/jpeg",
+  "image/png",
+  "application/pdf",
+  "video/mp4",
+  "video/quicktime"];
+  constructor(private _router: Router,
+              private _ar: ActivatedRoute,
+              private _toast: ToasterService,
+              private _service:ContentService,
+              public datepipe: DatePipe,
+              private _confirm: ConfirmationService,
+              private _mservice:MasterService,
+              private _cService: CommonService,
+              public translate: TranslateService) { 
+              translate.setDefaultLang(environment.defaultLanguage);
+              this.maxDate = new Date();
 
-  constructor() { 
-    this.category= [
-      {label: "Science Product", value:"Science Product"},
-      {label: "Electric", value:"Electric"},
-      {label: "Robot", value:"Robot"}
-    ];
-    this.subCategory =[
-      {label:'Students Science Kits',value:'Students Science Kits'},
-      {label:'Robot Management',value:'Robot Management'}
-    ];
-    this.grade =[
-      {label:'V',value:'V'},
-      {label:'VI',value:'VI'},
-      {label:'VII',value:'VII'},
-      {label:'VIII',value:'VIII'},
-      {label:'IX',value:'IX'},
-      {label:'X',value:'X'}
-    ];
-    this.level =[
-      {label:'Low',value:'Low'},
-      {label:'Medium',value:'Medium'},
-      {label:'Advanced',value:'Advanced'}
-    ];
-    this.tags =[
-      {label:'Circuit',value:'Circuit'},
-      {label:'Battery',value:'Battery'}
-    ];
-    this.status =[
-      {label:'Active',value:1},
-      {label:'Inactive',value:0}
-    ];
-  }
+              this.cols = [
+                { field: 'attacheImg', header: 'Img' },
+                { field: 'document_name', header: 'Name' },
+                { field: 'action', header: 'Actions' }
+            ];
+          
+     }
+
+     
   showBasicDialog3() {
     this.displayBasic3 = true;
+    this.getDigitalContentData();
+  }
+
+  hideBasicDialog() {
+    this.displayBasic3 = false;
+    this.digitalForm.reset();
   }
   ngOnInit(): void {
+    this.list = [
+      { attacheImg: '', name: 'Prasad', action: ''},
+      { attacheImg: '', name: 'Naresh', action: ''},
+      { attacheImg: '', name: 'Swetha', action: ''},
+      { attacheImg: '', name: 'Parvathi', action: ''},
+      { attacheImg: '', name: 'Ramakrishna', action: ''}
+  ];
+    this._ar.paramMap.subscribe(params => {
+      this.digitalContentId = atob(params['params'].id);
+      this.contentName = (params['params'].name);
+      this.getDigitalContentInfo(this.digitalContentId);
+      this.getDigitalContentData();
+    });
     this.loadStatisticsChart();
+
+    this.digitalForm = new FormGroup({
+    digital_content_management_id: new FormControl(''),
+    name: new FormControl('', [Validators.required]),
+    category: new FormControl('', [Validators.required]),
+    sub_category: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
+    grade: new FormControl('', [Validators.required]),
+    content_level: new FormControl('', [Validators.required]),
+    tags: new FormControl('', [Validators.required]),
+    expiry_date: new FormControl(''),  
+    status: new FormControl('', [Validators.required]),
+    files:new FormControl(''),
+    //fileSource: new FormControl('')
+    });
+
+    this.getMasterDropdown('categories');
+    this.getMasterDropdown('sub_categories');
+    this.getMasterDropdown('grade');
+    this.getMasterDropdown('tags');
+    this.getMasterDropdown('content_level');
+    this.getMasterDropdown('status');
+  }
+
+
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this._mservice.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'categories')
+          this.categories =  res.data.data;
+        if(masterKey == 'sub_categories')
+          this.sub_categories =  res.data.data;
+        if(masterKey =='grade')
+          this.grade =res.data.data;
+        if(masterKey =='tags')
+          this.tags =res.data.data;
+        if(masterKey =='content_level')
+           this.content_level=res.data.data;
+        if(masterKey =='status'){
+          this.status =res.data.data;
+          this.digitalForm.controls['status'].setValue(res.data.data[0]);
+        }
+      }else{
+        this._toast.show('error',res.error);
+      }
+    });
   }
   loadStatisticsChart(){
     let chart = new Chart({
@@ -97,7 +181,121 @@ export class ViewDigitalContentComponent implements OnInit {
       name: 'No.of Views',
       data: [83, 78, 106]
     };
-    console.log('chart--', chart);
     this.chart = chart;
+  }
+
+
+  DeleteAttachments(data) {
+    this._confirm.confirm({
+      message: 'Are you sure that you want to delete?',
+      header: 'Delete Confirmation',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        var params = new HttpParams()
+                    .set('tablename', 'documents')
+                    .set('id', data.document_id);   
+        this._cService.delete(params).subscribe(res=>{
+          if(res.status){
+               this.first=0;
+               this.getDigitalContentInfo(this.digitalContentId);
+          }else{
+            this._toast.show('error',JSON.parse(res.error));
+          }
+        });
+      },
+      reject: () => {}
+    });
+  }
+  onFileSelect(event) {
+    
+    if (event.target.files.length > 0) {
+      Object.keys(event.target.files).forEach( key => {
+        if(this.fileTypes.indexOf(event.target.files[key].type)> -1){
+          this.fileArr.push(event.target.files[key]);
+        }
+        else {
+          this._toast.show('warning','No file uploaded or invalid file type!');
+          this.digitalForm.setValue({
+            files:''
+          })
+          return false;
+        }
+      });
+    }
+  }
+
+  getCategory() { return this.digitalForm.value.category.value;}
+  getSubCategory() { return this.digitalForm.value.sub_category.value;}
+  getContentLevel() { return this.digitalForm.value.content_level.value;}
+  getGrade() { return this.digitalForm.value.grade.value;}
+  getTags() { return this.digitalForm.value.tags.value;}
+  getDate() { return this.digitalForm.value.expiry_date;}
+  getStatus() { return this.digitalForm.value.status.value;}
+  getName() { return this.digitalForm.value.name;}
+  getDesc() { return this.digitalForm.value.description;}
+
+  submit(){
+    this.submitted=false;
+    if(this.digitalForm.valid){
+      const formData = new FormData();
+      formData.append('digital_content_management_id',this.digitalContentId);
+      formData.append('name', this.getName());
+      formData.append('description', this.getDesc());
+      formData.append('category', this.getCategory());
+      formData.append('sub_category', this.getSubCategory());
+      formData.append('expiry_date', this.datepipe.transform(this.getDate(), 'yyyy/MM/dd'));
+      formData.append('status', this.getStatus());
+      formData.append('tags', this.getTags());
+      formData.append('grade', this.getGrade());
+      formData.append('content_level', this.getContentLevel());
+      for (var i = 0; i < this.fileArr.length; i++) { 
+        formData.append("files["+i+"]", this.fileArr[i]);
+      }
+      this._service.addDigitalContent(formData).subscribe(res=>{
+        if(res.status){
+          this.submitted = true;
+          this.getDigitalContentInfo(this.digitalContentObj.digital_content_management_id); 
+          if(this.contentName === this.digitalForm.value.name){
+          }else{}
+        }
+      });
+      this.hideBasicDialog();
+    }else{
+      this._toast.show('warning','Please enter mandatory fields.');
+    }
+  }
+  getDigitalContentInfo(digitalContentId){
+    var params = new HttpParams()
+               .set('digital_content_management_id',digitalContentId)
+               .set('request_type','view');
+    this._service.getDigitalContentInfo(params).subscribe(res => {
+      if(res.status){
+        this.digitalContentObj = res.data.data[0];
+        this.documents =res.data.data[0].documents;      
+      }
+    });
+  }
+  getDigitalContentData(){
+    var param = new HttpParams() 
+            .set('digital_content_management_id',this.digitalContentId)
+           .set('request_type','edit');
+    this._service.getDigitalContentInfo(param).subscribe(res => {
+      if(res.status){
+        this.digitalContent = res.data.data[0];
+        this.digitalForm.setValue({
+          name : this.digitalContent.name,
+          category : this.digitalContent.category,
+          sub_category : this.digitalContent.sub_category,
+          description : this.digitalContent.description ? this.digitalContent.description :'',
+          grade : this.digitalContent.grade,
+          content_level : this.digitalContent.content_level,
+          tags: this.digitalContent.tags,
+          expiry_date : new Date(this.digitalContent.expiry_date),
+          status : this.digitalContent.status,
+          files:'',
+          digital_content_management_id:''
+        }); 
+      }
+    });
   }
 }

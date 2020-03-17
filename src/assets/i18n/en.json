@@ -58,6 +58,7 @@
     },
     "users":{
          "userCreate":"Create User",
+         "userUpdate":"Create User",
       "add":{
              "firstName":"First Name",
              "lastName":"Last Name",
@@ -73,6 +74,7 @@
     },
     "student":{
          "createStudent":"Create Student",
+         "updateStudent":"Update Student",
          "studentInfo":"Student Information",
          "parentInfo":"Parent Information",
          "educationDetails":"Education Details",
@@ -130,6 +132,7 @@
     },
     "trainers":{
           "createTrainer":"Create Schedule",
+          "updateTrainer":"Update Schedule",
           "topic":"Topic",
           "description":"Description",
           "date":"Date",
@@ -211,6 +214,7 @@
         "contentTags":"Tags is required",
         "ticketTitle":"Title is required",
         "issueType":"Issue Type is Required",
+        "grade":"Grade is Required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files"
     },
     "dropdown":{

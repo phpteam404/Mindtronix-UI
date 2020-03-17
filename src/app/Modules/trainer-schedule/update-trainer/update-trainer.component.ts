@@ -15,7 +15,6 @@ import { Http } from '@angular/http';
 export class UpdateTrainerComponent implements OnInit {
   submitted = null;
   trainerObj:any={};
-  pageTitle:string ="Update Schedule";
   isUpdate:boolean=true;
   scheduleForm: FormGroup;
   trainers:any;
@@ -32,7 +31,6 @@ export class UpdateTrainerComponent implements OnInit {
       userService.getTrainerById(reqParams).subscribe(res=>{
         if(res.status){
           this.trainerObj = res.data.data[0];
-          //console.log('trainerobj info',this.trainerObj);
           this.scheduleForm.setValue({
             trainer_schedule_id: this.trainerObj.trainer_schedule_id,
             topic: this.trainerObj.topic,
@@ -84,10 +82,7 @@ export class UpdateTrainerComponent implements OnInit {
       this.userService.addTrainer(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          // this._toast.show('success',res.message);
           this.goToList();
-        }else{
-          this._toast.show('error',JSON.parse(res.error));
         }
       });
     }else{

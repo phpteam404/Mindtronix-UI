@@ -103,27 +103,26 @@
         </div>
     </div> -->
     <div class="row view-page">
-
         <div class="col-md-9 col-12">
             <div class="custom-view-list">
                 <div class="custom-view-div franchise-name">
                     <div>Category
-                        <span>Science Product</span>
+                        <span>{{digitalContentObj.category}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">Sub Category
-                        <span>Students Science Kits</span>
+                        <span>{{digitalContentObj.sub_category}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div custom-leftborder">
                     <div class="schools-text">Content Level
-                        <span>Low</span>
+                        <span>{{digitalContentObj.content_level}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div custom-leftborder">
                     <div class="students-text">No.of Views
-                        <span>10</span>
+                        <span>{{digitalContentObj.no_of_views}}</span>
                     </div>
                 </div>
                 <!-- <div class="custom-view-div">
@@ -134,68 +133,90 @@
                 </div> -->
             </div>
             <div class="digital-content-view clearfix">
-              
-                
-                        <div class="custom-view">
-                            <div class="custom-view-content">
-                                <div class="row">
-                                    <div class="col-12 btn-edit">
-                                      <a href="javascript:;" class="btn" (click)="showBasicDialog3()"><i class="icon icon-edit-pencil"></i></a>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <label>Content Name</label>
-                                        <p>RamaKrishna</p>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <label>Content Description</label>
-                                        <p>Students Science Kits</p>
-                                    </div>
-                                    <div class="col-md-4 col-12">
-                                        <label>Category</label>
-                                        <p>Robot</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Sub Category</label>
-                                        <p>Students Science Kits</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Grade</label>
-                                        <p>X</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Content Level</label>
-                                        <p>Low</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Tags </label>
-                                        <p>Battery</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Expairy Date</label>
-                                        <p>26/03/2020</p>
-                                    </div>
-                                    <div class="col-md-4 col-12 mt-3">
-                                        <label>Status</label>
-                                        <p>Active</p>
-                                    </div>
-                                   
-                                </div>
+                <div class="custom-view">
+                    <div class="custom-view-content">
+                        <div class="row">
+                            <div class="col-12 btn-edit">
+                                <a href="javascript:;" class="btn" (click)="showBasicDialog3()"><i class="icon icon-edit-pencil"></i></a>
                             </div>
+                            <div class="col-md-4 col-12">
+                                <label>Content Name</label>
+                                <p>{{digitalContentObj.content_name}}</p>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label>Content Description</label>
+                                <p>{{digitalContentObj.description}}</p>
+                            </div>
+                            <div class="col-md-4 col-12">
+                                <label>Category</label>
+                                <p>{{digitalContentObj.category}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Sub Category</label>
+                                <p>{{digitalContentObj.sub_category}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Grade</label>
+                                <p>{{digitalContentObj.grade}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Content Level</label>
+                                <p>{{digitalContentObj.content_level}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Tags </label>
+                                <p>{{digitalContentObj.tags}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Expiry Date</label>
+                                <p>{{digitalContentObj.expiry_date | date: 'dd MMM,yyyy'}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>Status</label>
+                                <p>{{digitalContentObj.status}}</p>
+                            </div>                                   
                         </div>
-                 
-                 
-              
+                    </div>
+                </div>              
+            </div>
+            <div class="attachements-list">
+                <h4>Attachments</h4>
+                <div class="custom-table">
+                    <p-table #dt [columns]="cols" [value]="documents">
+                        <ng-template pTemplate="header" let-columns>
+                            <tr>
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                                    {{col.header}}
+                                    <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-rowData let-columns="columns">
+                            <tr>
+                                <td *ngFor="let col of columns ; let i = index">
+                                    <span *ngIf="i != 2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                                
+                                    <span *ngIf="i == 0"  class="d-flex action-color attache-img">
+                                    <img src="assets/img/attachement-imgs/png-file.png" alt="">
+                                    
+                                    </span>
+                                    <span *ngIf="i == 2"  class="d-flex action-color">                                   
+                                        <a href="javascript:;" (click)="DeleteAttachments(rowData)" title="Delete">
+                                            <span class="icon icon-delete wd-30"></span>
+                                        </a>
+                                    </span>
+                                </td>
+                            </tr>
+                        </ng-template>                        
+                    </p-table>
+                </div>
             </div>
         </div>
+        <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
         <div class="col-md-3 col-12 pl-0">
-           
             <div class="custom-static-view">
-               
                 <div class="custom-view-div custom-viewbg">
                     <div class="trainers-text qr-code">
                         <img src="{{prdAssetPath}}/assets/img/QR-code.png">
-                       
-                      
                     </div>
                     <div class="text-center">
                     <button class="btn-warning download-btn mt-2"><i class="icon icon-download-1 pr-2"></i>Download</button>
@@ -209,104 +230,119 @@
         </div>
     </div>
 </div>
-  <!-- franchise details popup -->
 <p-dialog header="Update Content Details" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic3" [style]="{width: '65vw'}" [baseZIndex]="1">
-    
- 
-        <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"> -->
-            <div class="row custom-form">
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Content Name <span>*</span></label>
-                        <input pinputtext placeholder="Content Name" name="name" type="text" required>
-                      
+     <form [formGroup]="digitalForm" (ngSubmit)="submit()">
+        <div class="row custom-form">
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
+                    <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" formControlName ="name" name="name" type="text" required>
+                    <div class="invalid-feedback"
+                        *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
                     </div>
                 </div>
-                <div class="col-md-8 col-12">
-                    <div class="form-group">
-                        <label>Content Description</label>
-                        <textarea pInputTextarea placeholder="Content Description" name="Content Description"></textarea>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Category <span>*</span></label>
-                        <p-dropdown [options]="category" placeholder="Select Category" itemSize="30"
-                            name="category" optionLabel="label" required></p-dropdown>
-                      
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Sub Category <span>*</span></label>
-                        <p-dropdown [options]="subCategory" placeholder="Select Sub Category" itemSize="30"
-                            name="sub_category" optionLabel="label" required></p-dropdown>
-                        
-                   </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Grade <span>*</span></label>
-                        <p-dropdown [options]="grade" placeholder="Grade" itemSize="30"
-                            name="grade" optionLabel="label" required></p-dropdown>
-                      
-                   </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Content Level <span>*</span></label>
-                        <p-dropdown [options]="level" placeholder="Select Content Level" itemSize="30"
-                            name="content_level" optionLabel="label" required></p-dropdown>
-                      
-                   </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <label>Tags <span>*</span></label>
-                    <p-dropdown [options]="tags" placeholder="Select Tags" itemSize="30"
-                        name="tags" optionLabel="label" required></p-dropdown>
-                    
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Expairy Date</label>
-                        <p-calendar name="expiry_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
-                    </div>
-                </div>
-                <div class="col-md-4 col-12">
-                    <div class="form-group">
-                        <label>Status <span>*</span></label>
-                        <p-dropdown [options]="status"  itemSize="30"
-                            name="status" optionLabel="label" required></p-dropdown>
-                      
-                  </div>
-                </div>
-                <div class="col-md-8 col-12">
-                    <div class="form-group">
-                        <label>File Upload</label>
-                        <mat-file-upload
-                            [labelText]="''"
-                            [selectButtonText]="'Choose File(s)'"
-                            [selectFilesButtonType]="file"
-                            [allowMultipleFiles]="true"
-                            [showUploadButton]="false"
-                            [acceptedTypes]="'.png, .jpg, .jpeg'"
-                            (uploadClicked)="onUploadClicked($event)"
-                            (selectedFilesChanged)="onSelectedFilesChanged($event)"
-                            >
-                        </mat-file-upload>
-                    </div>
-                </div>  
             </div>
-            <div class="text-center mb-2">
-                <button pButton class="btn-warning mr-2" label="Update" type="submit"></button>
-                <button pButton class="btn-default" type="button" label="Cancel" (click)="goToList()"></button>
+            <div class="col-md-8 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.contentDescription'|translate}}</label>
+                    <textarea pInputTextarea placeholder="{{'digitalContent.add.contentDescription'|translate}}" formControlName ="description" name="Content Description"></textarea>
+                </div>
             </div>
-   
-    <!-- </form> -->
-<!-- <p-footer>
-    <button type="button" pButton class="btn-warning" (click)="displayBasic=false" label="Yes"></button>
-    <button type="button" pButton class="btn-default" (click)="displayBasic=false" label="No"></button>
-</p-footer> -->
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.category'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="categories" placeholder="{{'placeholder.category'|translate}}" itemSize="30"
+                        name="category" optionLabel="label" formControlName ="category" filter ="true" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="digitalForm.controls.category.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'"> {{'errorMessages.category'|translate}}
+                </div>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.subCategory'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="sub_categories" placeholder="Select Sub Category" itemSize="30"
+                        name="sub_category" filter="true" formControlName ="sub_category" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="digitalForm.controls.sub_category.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.subCategory'|translate}}
+                    </div>
+            </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.grade'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="grade" placeholder="{{'placeholder.grade'|translate}}" itemSize="30"
+                        name="grade" optionLabel="label" formControlName ="grade" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="digitalForm.controls.grade.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.grade'|translate}}
+                    </div>
+            </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.contentLevel'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="content_level" placeholder="{{'placeholder.contentLevel'|translate}}" itemSize="30"
+                        name="content_level" optionLabel="label" formControlName ="content_level"  filter="true" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="digitalForm.controls.content_level.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.contentLevel'|translate}}
+                    </div>
+            </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
+                <p-dropdown [options]="tags" placeholder="{{'placeholder.tags'|translate}}" itemSize="30"
+                    name="tags" filter="true" optionLabel="label" formControlName ="tags" required></p-dropdown>
+                <div class="invalid-feedback"
+                    *ngIf="digitalForm.controls.tags.invalid && submitted!=null && !submitted"
+                    [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.expiryDate'|translate}}</label>
+                    <p-calendar name="expiry_date" formControlName="expiry_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
+                </div>
+            </div>
+            <div class="col-md-4 col-12">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.status'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="status"  itemSize="30" formControlName ="status"
+                        name="status" optionLabel="label" required></p-dropdown>
+                
+            </div>
+            </div>
+            <div class="col-md-8 col-12">
+                <div class="form-group">
+                    <label>File Upload</label>
+                    <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
+                    (change)="onFileSelect($event)" style="height: 45px;" />
+                    <div class="invalid-feedback"
+                        [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
+                    </div>
+                    <!-- <mat-file-upload
+                        [labelText]="''"
+                        [selectButtonText]="'Choose File(s)'"
+                        [selectFilesButtonType]="file"
+                        [allowMultipleFiles]="true"
+                        [showUploadButton]="false"
+                        [acceptedTypes]="'.png, .jpg, .jpeg'"
+                        (uploadClicked)="onUploadClicked($event)"
+                        (selectedFilesChanged)="onSelectedFilesChanged($event)"
+                        >
+                    </mat-file-upload> -->
+                </div>
+            </div>  
+        </div>
+        <div class="text-center mb-2">
+            <button pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}" type="submit"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="hideBasicDialog()"></button>
+        </div>
+    </form>
 </p-dialog>
 
 

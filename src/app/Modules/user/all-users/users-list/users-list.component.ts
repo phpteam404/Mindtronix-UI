@@ -136,9 +136,6 @@ export class UsersListComponent implements OnInit {
   }
 
   getList(){
-    var params = new HttpParams()
-      .set('start', 0+'')
-      .set('number', 10+'');
     this.first = this.listParamsRef.updates[0].value;
     this._service.getUsersList(this.listParamsRef).subscribe(res=>{
       if(res.status){

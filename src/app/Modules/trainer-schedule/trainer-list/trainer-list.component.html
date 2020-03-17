@@ -2,15 +2,14 @@
     <div class="custom-table school-list">
         <p-table #dt [columns]="cols" [value]="TrainersList"  [lazy]="true" (onLazyLoad)="loadTrainersLazy($event)" 
         [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords">
-            <ng-template pTemplate="caption">
-               
+            <ng-template pTemplate="caption">               
                 <div class="custom-search">
                     <div class="input-search">
                         <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                        <i class="fa fa-search"></i> 
+                        <i class="fa fa-search" [ngClass]="{'search-right': !hideSchedule}"></i> 
                     </div>
-                    <button pButton type="button" label="{{'trainers.createTrainer'|translate}}" class="btn-warning" (click)="AddNewTrainer($event)"></button>
+                    <button pButton type="button" *ngIf="hideSchedule" label="{{'trainers.createTrainer'|translate}}" class="btn-warning" (click)="AddNewTrainer($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -26,10 +25,9 @@
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i !=1" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span> 
                         <span *ngIf="i==1" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM,yyyy'}}</span>    
-                      
                         <span *ngIf="i == 4" class="d-flex action-color">
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}" (click)="EditTrainerSchedule(rowData)"></span></a>
-                            <a href="javascript:;"><span class="icon icon-delete" title="{{'ttile.delete'|translate}}" (click)="DeleteTrainerSchedule(rowData)"></span></a>
+                            <a href="javascript:;"><span class="icon icon-delete" title="{{'title.delete'|translate}}" (click)="DeleteTrainerSchedule(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>

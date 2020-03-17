@@ -1,6 +1,7 @@
 <div class="main-content">
     <div class="custom-form">
-        <h4 class="custom-form-heading">{{pageTitle}}</h4>
+        <h4 class="custom-form-heading" *ngIf="!isUpdate">{{'trainers.createTrainer' |translate}}</h4>
+        <h4 class="custom-form-heading" *ngIf="isUpdate">{{'trainers.updateTrainer' |translate}}</h4>
         <div class="custom-form-content">
             <form [formGroup]="scheduleForm" (ngSubmit)="submit()">
                 <div class="row">

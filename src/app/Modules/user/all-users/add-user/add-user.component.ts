@@ -26,8 +26,6 @@ export class AddUserComponent implements OnInit {
   enableFranchise:boolean=true;
 
   formObj: any = {};
-  pageTitle:string = "Create User";
-
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _service: UserService,

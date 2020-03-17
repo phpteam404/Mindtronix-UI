@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
-import { UserService} from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms'; 
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import {ConfirmationService} from 'primeng/api';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-trainer-list',
@@ -19,23 +18,21 @@ import {ConfirmationService} from 'primeng/api';
 export class TrainerListComponent implements OnInit {
   totalRecords: number;
   cols: any[];
-  loading: boolean;
   trainers:any;
   isCreate: boolean;
-  hideSchedule:boolean;
-  scheduleForm:FormGroup;
+  hideSchedule:boolean=false;
   first:number=0;
   TrainersList =[];
+  listParamsRef:any;
   constructor(private router: Router, 
               private _toast: ToasterService,
               private _route: ActivatedRoute,
-              private _commonService: CommonService,
-              private userService:UserService,
+              private _cService: CommonService,
+              private _uService: UserService,
               private _ls: LocalStorageService,
               public translate: TranslateService, 
               private _confirm: ConfirmationService) {
-                translate.setDefaultLang(environment.defaultLanguage);
-    
+      translate.setDefaultLang(environment.defaultLanguage);
    }
 
   ngOnInit(): void {
@@ -58,9 +55,8 @@ export class TrainerListComponent implements OnInit {
         var params = new HttpParams()
                     .set('tablename', 'trainer_schedule')
                     .set('id', data.trainer_schedule_id)   
-        this._commonService.delete(params).subscribe(res=>{
+        this._cService.delete(params).subscribe(res=>{
           if(res.status){
-               this.first=0;
                this.getTrainersListInfo();
           }else{
             this._toast.show('error',JSON.parse(res.error));
@@ -77,8 +73,6 @@ export class TrainerListComponent implements OnInit {
     return (this.totalRecords == 0 ? true : false);
   }
   loadTrainersLazy(event: LazyLoadEvent) {
-    //console.log('event--', event);
-    this.loading =true;
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
     var params = new HttpParams()
       .set('start', event.first+'')
@@ -90,33 +84,29 @@ export class TrainerListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    this.userService.getTrainersList(params).subscribe(res=>{
+    this.listParamsRef = params;
+    this._uService.getTrainersList(params).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.TrainersList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
       }
     });
   }
   
   getTrainersListInfo(){
-    var params = new HttpParams()
-                  .set('start',0+'')
-                  .set('number',10+'')
-    this.userService.getTrainersList(params).subscribe(res=>{
+    this.first = this.listParamsRef.updates[0].value;
+    this._uService.getTrainersList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.TrainersList = res.data.data;
         this.totalRecords = res.data.total_records;
-        this.loading = false;
       }
     });
   }
 
   conditionalValidation(){
     var userRole = this._ls.getItem('user',true).data.user_role_id;
-    console.log('userRole---', userRole);
     if(Number(userRole)==3) {
       this.hideSchedule=true;
     } 

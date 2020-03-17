@@ -23,9 +23,7 @@ export class UpdateUserComponent implements OnInit {
   franchise: any;
   status: any;
   isUpdate:boolean=true;
-
   formObj: any = {};
-  pageTitle:string = "Update User";
 
   constructor(private _router: Router,
               private _toast: ToasterService,

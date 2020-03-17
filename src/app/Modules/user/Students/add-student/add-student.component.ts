@@ -30,12 +30,12 @@ export class AddStudentComponent implements OnInit {
   blood_group:any;
   schools:any;
   isUpdate:boolean=false;
-  pageTitle = "Create Student";
 
-  constructor(private _router: Router, private _toast: ToasterService,
-              private masterService:MasterService,
-              private schoolService:SchoolService,
-              private userService:UserService,
+  constructor(private _router: Router,
+              private _toast: ToasterService,
+              private _mService:MasterService,
+              private _sService:SchoolService,
+              private _uService:UserService,
               private feeService:FeeService,
               public datepipe: DatePipe,
               public translate: TranslateService) {
@@ -85,7 +85,7 @@ export class AddStudentComponent implements OnInit {
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this.masterService.getMasterChilds(params).subscribe(res=>{
+    return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'status'){
           this.status =  res.data.data;
@@ -101,14 +101,12 @@ export class AddStudentComponent implements OnInit {
            this.grade = res.data.data;
         if(masterKey =='blood_group')
           this.blood_group =res.data.data;
-        }else{
-        this._toast.show('error',res.error);
       }
     });
   }
 
   getschoolsDropdown(){
-    this.schoolService.getSchoolsDropDowns({}).subscribe(res=>{
+    this._sService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
         this.schools = res.data.data;
       }
@@ -133,7 +131,6 @@ export class AddStudentComponent implements OnInit {
   submit(): any{
     this.submitted = false;
     if (this.studentForm.valid) {
-      console.log('stdent info',this.studentForm.value);
       let pass = this.studentForm.get('password').value;
       let confirmPass = this.studentForm.get('cpassword').value;    
       if(pass === confirmPass){
@@ -149,12 +146,10 @@ export class AddStudentComponent implements OnInit {
           params['blood_group'] =this.getBloodGroup();
           params['status'] = this.getStatus();
           params['date_of_birth'] =this.datepipe.transform(this.studentForm.value.date_of_birth, 'yyyy/MM/dd');
-          this.userService.saveUser(params).subscribe(res => {
+          this._uService.saveUser(params).subscribe(res => {
             if (res.status) {
               this.submitted = true;
               this.goToList();
-            }else{
-              this._toast.show('error',JSON.parse(res.error));
             }
           });
       }else{
@@ -168,5 +163,4 @@ export class AddStudentComponent implements OnInit {
   goToList(){
     this._router.navigate(['users/students']);
   }
-
 }
