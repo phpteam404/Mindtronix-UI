@@ -10,12 +10,6 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./role-management.component.scss']
 })
 export class RoleManagementComponent implements OnInit {
-  superAdminCategories: string[] = ['one','two','three','four','five','six','seven','eight','night','ten','eleven'];
-  siteAdminCategories: string[] = ['one','two','three','four','five','six','seven','eight','night','ten','eleven'];
-  lcAdminCategories: string[] = ['three','five','eight','ten'];
-  trainerCategories: string[] = ['three','five'];
-  studentCategories: string[] = ['five'];
-  OnlineUserCategories: string[] = ['five'];
   roles:any=[];
   modules:any=[];
   accessObj=[];
