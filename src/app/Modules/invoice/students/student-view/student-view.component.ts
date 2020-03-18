@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-student-view',
@@ -11,7 +14,10 @@ export class StudentViewComponent implements OnInit {
   type:any;
   students:any;
   cols:any;
-  constructor() { 
+  constructor(private _ar: ActivatedRoute,
+              private _router: Router,
+              public translate: TranslateService) { 
+     translate.setDefaultLang(environment.defaultLanguage);
     this.status1 = [
       {label:'Paid',value:{id:1,name:'Paid'}},
       {label:'Due',value:{id:2,name:'Due'}},
