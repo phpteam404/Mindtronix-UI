@@ -27,6 +27,8 @@ export class ViewTicketComponent implements OnInit {
   submitted=null;
   fileTypes = ["image/jpeg","image/png"];
   maxSize = environment.maxUploadSize; 
+  previewFile:boolean =false;
+  preview:any;
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               public _toast: ToasterService,
@@ -157,5 +159,9 @@ export class ViewTicketComponent implements OnInit {
     this.updateForm.patchValue({
       files:''
     })
+  }
+  previewAttachment(data:any){
+    this.previewFile =true;
+    this.preview =data.document_url;
   }
 }

@@ -156,9 +156,9 @@
                     <div class="col-12">
                         <label>{{'ticket.view.attachments'|translate}}</label>
                         <div class="attachment-img">
-                          <div *ngFor="let row of documents">
+                            <div *ngFor="let row of documents" (click)="previewAttachment(row)">
                                 <img src="{{row.document_url}}" alt="">
-                          </div>
+                            </div>
                         </div>
                         <div *ngIf="documents==''" class="f11">
                             {{'general.noAttachments'|translate}}
@@ -181,7 +181,7 @@
                                     </div>
                                     <div>{{col.message}}</div>
                                     <div class="history-attachment-img">
-                                        <div *ngFor="let file of col.documents">
+                                        <div *ngFor="let file of col.documents" (click)="previewAttachment(file)">
                                             <img src="{{file.document_url}}" alt="">
                                         </div>                                       
                                     </div>
@@ -266,3 +266,14 @@
         </div>       
     </form>
 </p-dialog>
+<!-- Ticket Attachements popup-->
+<p-dialog header="View Attachement" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" 
+    [(visible)]="previewFile" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <div style="font-size:16px;text-align:center;padding:20px">
+        <div class="row m-0">
+            <div class="col-12" style="text-align:center">
+                <img src="{{preview}}" height="300" style="width:40%;height:100%;">
+           </div>
+       </div>
+    </div>
+</p-dialog> 
