@@ -181,6 +181,10 @@
             "contentAttachments":"Add Attachments"
         }
     },
+    "roles":{
+        "applicationRoles":"Application Roles",
+        "moduleAccess":"Module Access"
+    },
     "buttons":{
         "save": "Save",
         "create": "Create",
