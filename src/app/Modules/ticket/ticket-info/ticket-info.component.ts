@@ -44,6 +44,7 @@ export class TicketInfoComponent implements OnInit {
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
+                  .set('type','all')
                   .set('dropdown',"true")
     return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){

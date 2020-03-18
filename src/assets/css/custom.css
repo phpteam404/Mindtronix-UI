@@ -3601,6 +3601,10 @@ body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-contain
   .custom-side-menu .mat-list-base .nav-link p {
     font-size: 13px;
   }
+  .selected-file-list span {
+    font-size: 13px;
+    margin-right: 8px;
+}
   .notification-list .dropdown-item span{
       font-size: 13px;
   }

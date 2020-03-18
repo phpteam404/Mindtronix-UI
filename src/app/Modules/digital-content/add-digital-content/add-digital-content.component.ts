@@ -28,7 +28,7 @@ export class AddDigitalContentComponent implements OnInit {
   sub_categories:any;
   content_level:any;
   fileArr:any = [];
-  maxSize = 20000000; 
+  maxSize = environment.maxUploadSize; 
   fileTypes = ["image/jpeg",
               "image/png",
               "application/pdf",

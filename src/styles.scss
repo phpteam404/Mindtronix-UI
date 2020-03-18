@@ -1215,3 +1215,28 @@ input{
     height: 100%;
   }
 }
+.selected-file-list{
+  display: flex;
+  align-items: center;
+  span{
+    font-size: 14px;
+    margin-right: 10px;
+    a{
+      color: #303030;
+      &:hover{
+        color: #e87a26;
+      }
+      span{
+        font-size: 13px;
+      }
+    }
+   
+  }
+}
+.file-text{
+  white-space: nowrap; 
+  width: 250px; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
