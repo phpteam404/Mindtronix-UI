@@ -11,6 +11,8 @@ import { ContentService } from 'src/app/services/content.service';
 import { LazyLoadEvent,ConfirmationService } from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { DatePipe} from '@angular/common';
+declare var require:any;
+const FileSaver = require('file-saver');
 
 @Component({
   selector: 'app-view-digital-content',
@@ -102,7 +104,7 @@ export class ViewDigitalContentComponent implements OnInit {
     this.getMasterDropdown('categories');
     this.getMasterDropdown('sub_categories');
     this.getMasterDropdown('grade');
-    this.getMasterDropdown('tags');
+    // this.getMasterDropdown('tags');
     this.getMasterDropdown('content_level');
     this.getMasterDropdown('status');
   }
@@ -218,7 +220,7 @@ export class ViewDigitalContentComponent implements OnInit {
   getSubCategory() { return this.digitalForm.value.sub_category.value;}
   getContentLevel() { return this.digitalForm.value.content_level.value;}
   getGrade() { return this.digitalForm.value.grade.value;}
-  getTags() { return this.digitalForm.value.tags.value;}
+  getTags() { return this.digitalForm.value.tags;}
   getDate() { return this.digitalForm.value.expiry_date;}
   getStatus() { return this.digitalForm.value.status.value;}
   getName() { return this.digitalForm.value.name;}
@@ -279,7 +281,7 @@ export class ViewDigitalContentComponent implements OnInit {
           description : this.digitalContent.description ? this.digitalContent.description :'',
           grade : this.digitalContent.grade,
           content_level : this.digitalContent.content_level,
-          tags: this.digitalContent.tags,
+          tags: (this.digitalContent.tags)?this.digitalContent.tags.split(","):[],
           expiry_date : new Date(this.digitalContent.expiry_date),
           status : this.digitalContent.status,
           files:'',
