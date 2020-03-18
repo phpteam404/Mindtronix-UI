@@ -16,7 +16,7 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 })
 export class ViewTicketComponent implements OnInit {
   status: any;
-  displayBasic: boolean;
+  viewModal: boolean;
   ticketId:any;
   ticketName:any;
   documents:any=[];
@@ -26,7 +26,7 @@ export class ViewTicketComponent implements OnInit {
   prdAssetPath:string = environment.prdAssetPath;
   submitted=null;
   fileTypes = ["image/jpeg","image/png"];
-  maxSize = 20000000; 
+  maxSize = environment.maxUploadSize; 
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               public _toast: ToasterService,
@@ -36,12 +36,10 @@ export class ViewTicketComponent implements OnInit {
               private _tService:TicketService) {
     translate.setDefaultLang(environment.defaultLanguage); 
   }
-  showBasicDialog() {
-    this.displayBasic = true;
-  }
-  hideBasicDialog() {
-    this.displayBasic = false;
+  updateTicketModal(flag) {
+    this.viewModal = flag;
     this.updateForm.reset();
+    this.fileArr=[];
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -101,7 +99,7 @@ export class ViewTicketComponent implements OnInit {
       this._tService.updateTicketStatus(formData).subscribe(res =>{
         if(res.status){
             this.submitted=true;
-            this.displayBasic = false;
+            this.updateTicketModal(false);
             this.getTicketInfo(this.ticketId);
         }
         else
@@ -146,5 +144,11 @@ export class ViewTicketComponent implements OnInit {
         size+=item.size;
     });
     return size;
+  }
+  deleteSelectedFile(indx){
+    this.fileArr.splice(indx, 1);
+    this.updateForm.patchValue({
+      files:''
+    })
   }
 }

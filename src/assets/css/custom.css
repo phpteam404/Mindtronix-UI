@@ -3597,6 +3597,23 @@ body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-contain
   padding: 0.29em;
   height: 28px;
 }
+.custom-btn-plus{
+  position: absolute;
+  margin-top: -33px;
+  right: 18px;
+  text-align: right;
+}
+.custom-btn-plus .btn{
+  border: none;
+  background: #e87a26;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 4px 5px;
+  line-height: 14px;
+}
+.custom-btn-plus .btn:hover{
+  background: #de6e18;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p {
     font-size: 13px;

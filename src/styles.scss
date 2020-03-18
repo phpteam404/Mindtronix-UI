@@ -1206,6 +1206,19 @@ input{
       color: #505050;
       margin: 0 0 5px;
     }
+    tbody{
+      tr{
+        cursor: pointer;
+        td{
+          &:first-child{
+            width: 50px;
+          }
+          a{
+            color: #333333;
+          }
+        }
+      }
+    }
 }
 .attache-img{
   width: 35px !important;
@@ -1213,11 +1226,15 @@ input{
   img{
     width: 100%;
     height: 100%;
+    border: 1px solid #cccccc;
+    padding: 3px;
+    border-radius: 4px;
   }
 }
 .selected-file-list{
   display: flex;
   align-items: center;
+  margin-bottom: 4px;
   span{
     font-size: 14px;
     margin-right: 10px;
@@ -1239,4 +1256,7 @@ input{
   overflow: hidden;
   text-overflow: ellipsis;
   display: block;
+}
+.file-size{
+  min-width: 60px;
 }

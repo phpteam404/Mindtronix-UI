@@ -34,12 +34,26 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label>{{'ticket.add.attachIssue'|translate}}</label>
-                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs" (change)="onFileSelect($event)" style="height: 45px;" />
+                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .exs" (change)="onFileSelect($event)" style="height: 45px;" />
                             <div class="invalid-feedback"
-                                  [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
+                                  [ngClass]=" 'error'">{{'errorMessages.allowedImageTypes'|translate}}
                             </div>
                         </div>
-                    </div>                   
+                    </div> 
+                    <div class="col-md-12 col-12 mt-10" *ngIf="fileArr.length>0">
+                        <div class="form-group">
+                            <label>{{'digitalContent.add.fileSelected'|translate}} </label>
+                            <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
+                                <span class="file-text" title="{{file.name}}">{{file.name}}</span>
+                                <span class="file-size">{{file.sizeVal}}</span>
+                                <span>
+                                    <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                        <span class="icon icon-delete wd-30"></span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-12 text-right custom-btn">
                         <button pButton type="submit" label="Create" class="btn-warning mr-2"></button>
                         <button pButton type="button" label="Cancel" (click)="goToList()" class="btn-default"></button>

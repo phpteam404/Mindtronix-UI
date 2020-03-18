@@ -28,6 +28,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
+import { environment } from 'src/environments/environment';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
@@ -84,5 +85,5 @@ export class BasicModule {
   }
 }
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http,environment.prdAssetPath+'/assets/i18n/');
 }

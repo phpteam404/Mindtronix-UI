@@ -194,12 +194,12 @@
         </div>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-static-view custom-minheight text-center">
-                <button pButton type="submit" class="btn-warning" (click)="showBasicDialog()" label="Update Ticket"></button>
+                <button pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Update Ticket"></button>
             </div>
         </div>
     </div>
 </div>
-<p-dialog header="Update Status" [(visible)]="displayBasic" [draggable]="false" [resizable]="false" 
+<p-dialog header="Update Status" [(visible)]="viewModal" [draggable]="false" [resizable]="false" 
     appendTo="body" [style]="{width: '45vw'}" [baseZIndex]="10000">
     <form [formGroup]="updateForm" (ngSubmit)="updateTicket()">
         <div class="row custom-form">
@@ -245,10 +245,24 @@
                     </mat-file-upload> -->
                 </div>
             </div>
+            <div class="col-md-12 col-12 mt-10" *ngIf="fileArr.length>0">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.fileSelected'|translate}} </label>
+                    <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
+                        <span class="file-text" title="{{file.name}}">{{file.name}}</span>
+                        <span class="file-size">{{file.sizeVal}}</span>
+                        <span>
+                            <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>      
         <div class="col-12 p-0 text-right mb-2">
             <button type="submit" pButton class="btn-warning mr-2" label="Update"></button>
-            <button type="button" pButton class="btn-default" label="Cancel" (click)="hideBasicDialog()"></button>
+            <button type="button" pButton class="btn-default" label="Cancel" (click)="updateTicketModal(false)"></button>
         </div>       
     </form>
 </p-dialog>

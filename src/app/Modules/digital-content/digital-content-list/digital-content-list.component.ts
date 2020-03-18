@@ -55,7 +55,7 @@ export class DigitalContentListComponent implements OnInit {
     this.listParamsRef = params;
     this._service.getdigitalContentList(params).subscribe(res=>{
       if(res.status){
-        this.cols = res.data.table_headers;
+        this.cols = (res.data.table_headers)?res.data.table_headers:[];
         this.list = res.data.data;
         this.totalRecords = res.data.total_records;
       }

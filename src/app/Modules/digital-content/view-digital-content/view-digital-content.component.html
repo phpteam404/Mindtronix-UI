@@ -184,7 +184,7 @@
                 <h4>{{'ticket.view.attachments'|translate}}</h4>
                 <div class="custom-table">
                     <div class ="row">
-                        <div class="col-12 custom-btn-edit">
+                        <div class="col-12 custom-btn-plus">
                             <button type="button"  class="btn" (click)="uploadAttachmentModal(true)"><i class="icon icon-plus"></i></button>
                        </div>
                     </div>
@@ -351,7 +351,7 @@
 </p-dialog>
 <p-dialog header="{{'digitalContent.view.contentAttachments'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="uploadAttachments" [style]="{width: '65vw'}" [baseZIndex]="10000">
     <form [formGroup]="AttachmentForm" (ngSubmit)="onSubmit()">
-       <div class="row custom-form">
+        <div class="row custom-form m-0">
            <div class="col-md-12 col-12">
                <div class="form-group">
                     <label>{{'digitalContent.add.fileUpload'|translate}} <span>*</span></label>
@@ -363,19 +363,19 @@
                </div>
            </div>
            <div class="col-md-6 col-12 mt-10" *ngIf="fileArr.length>0">
-            <div class="form-group">
-                <label>{{'digitalContent.add.fileSelected'|translate}} </label>
-                <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
-                    <span class="file-text" title="{{file.name}}">{{file.name}}</span>
-                    <span class="">{{file.sizeVal}}</span>
-                    <span>
-                        <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
-                            <span class="icon icon-delete wd-30"></span>
-                        </a>
-                    </span>
+                <div class="form-group">
+                    <label>{{'digitalContent.add.fileSelected'|translate}} </label>
+                    <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
+                        <span class="file-text" title="{{file.name}}">{{file.name}}</span>
+                        <span class="file-size">{{file.sizeVal}}</span>
+                        <span>
+                            <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
+                        </span>
+                    </div>
                 </div>
             </div>
-        </div>
        </div>
        <div class="text-center mb-2">
            <button pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}" type="submit"></button>
@@ -384,10 +384,9 @@
    </form>
 </p-dialog>
 <p-dialog header="View Attachement" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="previewFile" [style]="{width: '65vw'}" [baseZIndex]="10000">
-    <div class="ui-grid ui-grid-responsive ui-fluid" 
-         style="font-size:16px;text-align:center;padding:20px">
-        <div class="ui-grid-row">
-            <div class="ui-grid-col-12" style="text-align:center">
+    <div style="font-size:16px;text-align:center;padding:20px">
+        <div class="row m-0">
+            <div class="col-12" style="text-align:center">
                 <img  src="{{previewUrl}}" *ngIf="(format != 'mp4' && format != 'mov')" height="400">
                 <video src="{{previewUrl}}" *ngIf="(format == 'mp4' || format == 'mov')" height="400" controls></video>
            </div>

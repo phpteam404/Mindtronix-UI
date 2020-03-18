@@ -18,11 +18,8 @@ export class TicketInfoComponent implements OnInit {
   fileArr:any = [];
   ticketIssue:any;
   submitted=null;
-  fileTypes = ["image/jpeg",
-              "image/png",
-              "application/pdf",
-              "video/mp4",
-              "video/quicktime"];
+  maxSize = environment.maxUploadSize;
+  fileTypes = ["image/jpeg","image/png"];
   constructor(private _router: Router, 
               private _toast: ToasterService,
               private _tService:TicketService,
@@ -50,8 +47,6 @@ export class TicketInfoComponent implements OnInit {
       if(res.status){
         if(masterKey == 'ticket_issue_type')
           this.ticketIssue =  res.data.data;
-      }else{
-        this._toast.show('error',res.error);
       }
     });
   }  
@@ -62,26 +57,27 @@ export class TicketInfoComponent implements OnInit {
   submit(){
     this.submitted=false;
     if(this.ticketForm.valid){        
-        const formData = new FormData();
-        formData.append('title', this.getTitle());
-        formData.append('description', this.getDescription());
-        formData.append('issue', this.getIssueType());
-        for (var i = 0; i < this.fileArr.length; i++) { 
-          formData.append("files["+i+"]", this.fileArr[i]);
+      const formData = new FormData();
+      formData.append('title', this.getTitle());
+      formData.append('description', this.getDescription());
+      formData.append('issue', this.getIssueType());
+      if(Number(this.getUploadedFilesSize()) > Number(this.maxSize)){
+        this._toast.show('warning','Maximum File upload size is 20 MB!');
+        this.ticketForm.patchValue({
+          files:''
+        })
+        return false;
+      }
+      for (var i = 0; i < this.fileArr.length; i++) { 
+        formData.append("files["+i+"]", this.fileArr[i]);
+      }
+      this._tService.addTicket(formData).subscribe(res =>{
+        if(res.status){
+            this.submitted=true;
+            this.goToList();
         }
-        this._tService.addTicket(formData).subscribe(res =>{
-          if(res.status){
-              this.submitted=true;
-              this.goToList();
-          }
-          else
-          {
-            this._toast.show('error',JSON.parse(res.error));
-          }
-        });
-    }
-    else
-    {
+      });
+    }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
   }
@@ -92,6 +88,7 @@ export class TicketInfoComponent implements OnInit {
     if (event.target.files.length > 0) {
       Object.keys(event.target.files).forEach( key => {
         if(this.fileTypes.indexOf(event.target.files[key].type)> -1){
+          event.target.files[key].sizeVal = this.bytesToSize(event.target.files[key].size);        
           this.fileArr.push(event.target.files[key]);
         }
         else {
@@ -103,5 +100,27 @@ export class TicketInfoComponent implements OnInit {
         }
       });
     }
+  }
+  deleteSelectedFile(indx){
+    this.fileArr.splice(indx, 1);
+    this.ticketForm.patchValue({
+      files:''
+    })
+  }
+  getUploadedFilesSize(){
+    var size=0;
+    this.fileArr.forEach(item => { 
+      if(item)
+        size+=item.size;
+    });
+    return size;
+  }
+
+  bytesToSize(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) return 'n/a';
+    const i = Number(Math.floor(Math.log(Math.abs(bytes)) / Math.log(1024)));
+    if (i === 0) return `${bytes} ${sizes[i]})`;
+    return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`;
   }
 }
