@@ -17,4 +17,7 @@ export class ContentService {
   getDigitalContentInfo(params){
     return this.clientHttp.get('Digitalcontent/digitalContentInfo', params);
   }
+  getDocuments(params){
+    return this.clientHttp.post('Digitalcontent/addDigitalContentDocuments',params);
+  }
 }

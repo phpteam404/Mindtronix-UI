@@ -11,6 +11,10 @@ import { BasicModule } from '../basic/basic.module';
 import { MatFileUploadModule } from 'mat-file-upload';
 import { ChartModule } from 'angular-highcharts';
 import { DialogModule } from 'primeng/dialog';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ChipsModule } from 'primeng/chips';
+import { OverlayPanelModule } from 'primeng/overlaypanel';
+
 @NgModule({
   declarations: [
     DigitalContentListComponent,
@@ -26,7 +30,10 @@ import { DialogModule } from 'primeng/dialog';
     BasicModule.forRoot(),
     MatFileUploadModule,
     ChartModule,
-    DialogModule
+    DialogModule,
+    MultiSelectModule,
+    ChipsModule,
+    OverlayPanelModule
   ]
 })
 export class DigitalContentModule { }

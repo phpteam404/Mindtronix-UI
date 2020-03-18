@@ -28,11 +28,12 @@ export class AddDigitalContentComponent implements OnInit {
   sub_categories:any;
   content_level:any;
   fileArr:any = [];
+  maxSize = 20000000; 
   fileTypes = ["image/jpeg",
-                    "image/png",
-                    "application/pdf",
-                    "video/mp4",
-                    "video/quicktime"];
+              "image/png",
+              "application/pdf",
+              "video/mp4",
+              "video/quicktime"];
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _mservice:MasterService,
@@ -51,14 +52,12 @@ export class AddDigitalContentComponent implements OnInit {
     tags: new FormControl('', [Validators.required]),
     expiry_date: new FormControl(''),  
     status: new FormControl('', [Validators.required]),  
-    files: new FormControl(),
-    fileSource: new FormControl()
+    files: new FormControl()
   });
   ngOnInit(): void {
     this.getMasterDropdown('categories');
     this.getMasterDropdown('sub_categories');
     this.getMasterDropdown('grade');
-    this.getMasterDropdown('tags');
     this.getMasterDropdown('content_level');
     this.getMasterDropdown('status');
   }
@@ -75,8 +74,6 @@ export class AddDigitalContentComponent implements OnInit {
           this.sub_categories =  res.data.data;
         if(masterKey =='grade')
           this.grade =res.data.data;
-        if(masterKey =='tags')
-          this.tags =res.data.data;
         if(masterKey =='content_level')
            this.content_level=res.data.data;
         if(masterKey =='status'){
@@ -93,7 +90,7 @@ export class AddDigitalContentComponent implements OnInit {
   getSubCategory() { return this.digitalForm.value.sub_category.value;}
   getContentLevel() { return this.digitalForm.value.content_level.value;}
   getGrade() { return this.digitalForm.value.grade.value;}
-  getTags() { return this.digitalForm.value.tags.value;}
+  getTags() { return this.digitalForm.value.tags;}
   getDate() { return this.digitalForm.value.expiry_date;}
   getStatus() { return this.digitalForm.value.status.value;}
   getName() { return this.digitalForm.value.name;}
@@ -113,6 +110,13 @@ export class AddDigitalContentComponent implements OnInit {
         formData.append('tags', this.getTags());
         formData.append('grade', this.getGrade());
         formData.append('content_level', this.getContentLevel());
+        if(Number(this.getUploadedFilesSize()) > Number(this.maxSize)){
+          this._toast.show('warning','Maximum File upload size is 20 MB!');
+          this.digitalForm.patchValue({
+            files:''
+          })
+          return false;
+        }
         for (var i = 0; i < this.fileArr.length; i++) { 
           formData.append("files["+i+"]", this.fileArr[i]);
         }
@@ -140,10 +144,10 @@ export class AddDigitalContentComponent implements OnInit {
     this._router.navigate(['digital_content']);
   }
   onFileSelect(event) {
-    
     if (event.target.files.length > 0) {
-      Object.keys(event.target.files).forEach( key => {
+      Object.keys(event.target.files).forEach( key => {        
         if(this.fileTypes.indexOf(event.target.files[key].type)> -1){
+          event.target.files[key].sizeVal = this.bytesToSize(event.target.files[key].size);        
           this.fileArr.push(event.target.files[key]);
         }
         else {
@@ -153,11 +157,29 @@ export class AddDigitalContentComponent implements OnInit {
           })
           return false;
         }
-      });
-      this.digitalForm.patchValue({
-        fileSource: this.fileArr
-      });
+      });     
     }
   }
+  deleteSelectedFile(indx){
+    this.fileArr.splice(indx, 1);
+    this.digitalForm.patchValue({
+      files:''
+    })
+  }
+  getUploadedFilesSize(){
+    var size=0;
+    this.fileArr.forEach(item => { 
+      if(item)
+        size+=item.size;
+    });
+    return size;
+  }
 
+  bytesToSize(bytes) {
+    const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) return 'n/a';
+    const i = Number(Math.floor(Math.log(Math.abs(bytes)) / Math.log(1024)));
+    if (i === 0) return `${bytes} ${sizes[i]})`;
+    return `${(bytes / (1024 ** i)).toFixed(1)} ${sizes[i]}`;
+  }
 }

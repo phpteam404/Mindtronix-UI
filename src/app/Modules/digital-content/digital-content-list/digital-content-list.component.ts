@@ -6,6 +6,7 @@ import { ContentService } from 'src/app/services/content.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 import { CommonService } from 'src/app/services/common.service';
+import { OverlayPanel } from 'primeng/overlaypanel';
 
 @Component({
   selector: 'app-digital-content-list',
@@ -86,4 +87,15 @@ export class DigitalContentListComponent implements OnInit {
       }
     });
   }
+  selectedTag:any=[];
+  selectTag(event,tag: any, overlaypanel: OverlayPanel) {
+    this.selectedTag = tag.split(',');
+    const index: number = this.selectedTag.indexOf(this.selectedTag[0]);
+    if (index !== -1) {
+      this.selectedTag.splice(index, 1);
+    } 
+    console.log('tag---', this.selectedTag);
+    if(this.selectedTag)
+      overlaypanel.toggle(event);
+}
 }

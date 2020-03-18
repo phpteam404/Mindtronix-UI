@@ -64,19 +64,27 @@
                             </div>
                        </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <!-- <div class="col-md-4 col-12">
                         <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
-                        <p-dropdown [options]="tags" formControlName="tags" placeholder="{{'placeholder.tags'|translate}}" itemSize="30"
-                            name="tags" optionLabel="label"  filter ="true" required></p-dropdown>
+                        <p-multiSelect [options]="tags" optionLabel="label" formControlName="tags"
+                            name="tags" defaultLabel="{{'placeholder.tags'|translate}}" filter ="true" required></p-multiSelect>  
                         <div class="invalid-feedback"
                             *ngIf="digitalForm.controls.tags.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
                         </div>
-                    </div>
+                    </div> -->
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>{{'digitalContent.add.expiryDate'|translate}}</label>
                             <p-calendar name="expiry_date" formControlName="expiry_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
+                        <p-chips formControlName="tags" placeholder="Enter your tags here" [allowDuplicate]="false"></p-chips> 
+                        <div class="invalid-feedback"
+                            *ngIf="digitalForm.controls.tags.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
@@ -90,25 +98,30 @@
                             </div>
                       </div>
                     </div>
-                     <div class="col-md-6 col-12">
+                    <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>File Upload</label>
+                            <label>{{'digitalContent.add.fileUpload'|translate}} </label>
                             <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
                                 (change)="onFileSelect($event)" style="height: 45px;" />
                             <div class="invalid-feedback"
                                 [ngClass]=" 'error'">{{'errorMessages.allowedFileTypes'|translate}}
                             </div>
-                            <!-- <mat-file-upload
-                                [labelText]="''"  (formControlName)="files"
-                                [selectButtonText]="'Choose File(s)'"
-                                [selectFilesButtonType]="button"
-                                [selectedText]="translateValue"
-                                [allowMultipleFiles]="true"
-                                [showUploadButton]="false"
-                                [acceptedTypes]="'.png, .jpg, .jpeg, .mp4, .mov, .pdf, .exs'"
-                                (selectedFilesChanged)="onSelectedFilesChanged($event)"
-                                >
-                            </mat-file-upload> -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12"></div>
+                    <div class="col-md-4 col-12" *ngIf="fileArr.length>0"></div>
+                    <div class="col-md-6 col-12 mt-10" *ngIf="fileArr.length>0">
+                        <div class="form-group">
+                            <label>{{'digitalContent.add.fileSelected'|translate}} </label>
+                            <div *ngFor="let file of fileArr; let i = index">
+                                <span class="f11 mr-2">{{file.name}}</span>
+                                <span class="f11">{{file.sizeVal}}</span>
+                                <span>
+                                    <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                        <span class="icon icon-delete wd-30"></span>
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">

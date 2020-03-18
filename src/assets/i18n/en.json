@@ -177,7 +177,8 @@
             "fileSelected":"Files Selected"
         },
         "view":{
-            "noOfViews":"No.of Views"
+            "noOfViews":"No.of Views",
+            "contentAttachments":"Add Attachments"
         }
     },
     "buttons":{
@@ -232,7 +233,10 @@
         "ticketTitle":"Title is required",
         "issueType":"Issue Type is Required",
         "grade":"Grade is Required",
-        "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files"
+        "status":"Status is Required",
+        "comments":"Comments is Required",
+        "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",
+        "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs) files"
     },
     "dropdown":{
         "country":"Country is required",
@@ -248,7 +252,8 @@
          "deleteHeader":"Delete Confirmation",
          "confirmDelete":"Are you sure that you want to delete?",
          "acceptLabel": "Yes",
-         "rejectLabel": "No"
+         "rejectLabel": "No",
+         "noAttachments":"No Attachments found"
     },
     "placeholder":{
         "status":"Select Status",
@@ -284,7 +289,7 @@
         "contactName":"Contact Name",
         "feestructure":"Fee Structure",
         "term":"Select Term",
-        "tags":"Select Tags",
+        "tags":"Enter your tags here",
         "contentLevel":"Select content Level",
         "category":"Select Category",
         "subCategory":"Select Sub Category",

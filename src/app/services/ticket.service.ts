@@ -11,7 +11,7 @@ export class TicketService {
 
 
   addTicket(params){
-    return this.clientHttp.post('Ticket/addTicket',params).pipe(map(user=>{return user}));
+    return this.clientHttp.post('Ticket/addTicket',params);
   }
   
   getTicketList (param) {
@@ -20,5 +20,9 @@ export class TicketService {
 
   getTicketInfo (param) {
     return this.clientHttp.get('Ticket/ticketInfo',param);
+  }
+
+  updateTicketStatus(params){
+    return this.clientHttp.post('Ticket/addTicketChat',params);
   }
 }

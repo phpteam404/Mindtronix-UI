@@ -106,7 +106,7 @@ export class StudentListComponent implements OnInit {
     this._confirm.confirm({
       accept: () => {
         var params = new HttpParams()
-                    .set('tablename', 'user')
+                    .set('tablename', 'student')
                     .set('id', data.user_id)   
         this._cService.delete(params).subscribe(res=>{
           if(res.status){

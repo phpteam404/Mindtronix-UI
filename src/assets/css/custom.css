@@ -3590,8 +3590,8 @@ p-dropdown .ui-dropdown-panel .ui-dropdown-item{
   border: none !important;
 }
 .ui-multiselect-panel .ui-chkbox .ui-chkbox-box{
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-container .ui-inputtext {
   padding: 0.29em;

@@ -134,9 +134,12 @@
                     <div class="trainers-text">
                         <div class="status-edit">
                             {{'ticket.view.ticketStatus'|translate}}
-                            <!-- <button type="submit" class="icon icon-edit-pencil" (click)="showBasicDialog()"></button> -->
                         </div>
-                        <span class="status-greentext">{{ticketObj.status}}</span>
+                        <span [ngClass]="{'status-greentext': ticketObj.status=='Closed',
+                                            'status-redtext': ticketObj.status!='Closed'}">
+                            {{ticketObj.status}}
+                        </span>
+                        <!-- <span class="status-redtext">{{ticketObj.status}}</span> -->
                     </div>
                 </div>
             </div>
@@ -154,56 +157,37 @@
                         <label>{{'ticket.view.attachments'|translate}}</label>
                         <div class="attachment-img">
                           <div *ngFor="let row of documents">
-                                  <img src="{{row.document_url}}" alt="">
+                                <img src="{{row.document_url}}" alt="">
                           </div>
-                            <div *ngIf="documents==''">
-                                {{'general.noRecords'|translate}}
-                            </div> 
                         </div>
+                        <div *ngIf="documents==''" class="f11">
+                            {{'general.noAttachments'|translate}}
+                        </div> 
                     </div>
                 </div>
                 <div class="row ticket-history">
                     <h4 class="ticket-heading">{{'ticket.view.ticketHistory'|translate}}</h4>
                     <div class="col-12">
-                        <ul class="history-view">
-                           <li class="lastseen-date"><div>26 Feb 2020</div></li>
+                        <ul class="history-view" *ngFor="let row of chatHistory">
+                           <li class="lastseen-date"><div>{{row[0].date}}</div></li>
                             <ul class="history-list">
-                                <li>
-                                    <div>02:30 PM By <span class="name-highlight">Prasad</span><span class="green-text pl-2">Closed</span></div>
-                                    <div>Status Closed</div>
+                                <li  *ngFor="let col of row">
+                                    <div>{{col.time}} By <span class="name-highlight">{{col.created_by}}</span>
+                                        <span class="pl-2" 
+                                            [ngClass]="{'green-text': col.status=='Closed',
+                                                        'red-text': col.status!='Closed'}">
+                                            {{col.status}}
+                                        </span>
+                                    </div>
+                                    <div>{{col.message}}</div>
                                     <div class="history-attachment-img">
-                                        <div>
-                                            <img src="{{prdAssetPath}}/assets/img/kit1.png" alt="">
-                                        </div>
-                                        <div>
-                                            <img src="{{prdAssetPath}}/assets/img/kit2.png" alt=""> 
-                                        </div>
-                                        <div>
-                                            <img src="{{prdAssetPath}}/assets/img/kit3.png" alt="">
-                                        </div>
-                                        
+                                        <div *ngFor="let file of col.documents">
+                                            <img src="{{file.document_url}}" alt="">
+                                        </div>                                       
                                     </div>
                                 </li>
-                                <!-- <li>
-                                    <div>02:00 PM By <span class="name-highlight">Ramakrishna</span></div>
-                                    <div>Issue Created</div>
-                                    
-                                </li> -->
                             </ul>
-                        </ul>
-                        <ul class="history-view">
-                            <li class="lastseen-date"><div>25 Feb 2020</div></li>
-                            <ul class="history-list">
-                                <li>
-                                    <div>02:30 PM By <span class="name-highlight">Prasad</span><span class="red-text pl-2">Inprogress</span></div>
-                                    <div>Status changed from New to Inprogress</div>
-                                </li>
-                                <li>
-                                    <div>02:00 PM By <span class="name-highlight">Ramakrishna</span><span class="red-text pl-2">New</span></div>
-                                    <div>Issue Created</div>
-                                </li>
-                            </ul>
-                         </ul>
+                        </ul>                        
                     </div>
                 </div>
             </div>
@@ -215,28 +199,40 @@
         </div>
     </div>
 </div>
-<p-dialog header="Update Status" [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
-    
-    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+<p-dialog header="Update Status" [(visible)]="displayBasic" [draggable]="false" [resizable]="false" 
+    appendTo="body" [style]="{width: '45vw'}" [baseZIndex]="10000">
+    <form [formGroup]="updateForm" (ngSubmit)="updateTicket()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>Status <span>*</span></label>
-                    <p-dropdown [options]="status" placeholder="Select Status" itemSize="30"
-                    name="status" optionLabel="label" required></p-dropdown>
+                    <p-dropdown [options]="status" placeholder="Select Status" itemSize="30" formControlName="status"
+                        name="status" optionLabel="label" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
+                        [ngClass]="'error'">{{'errorMessages.status'|translate}}
+                    </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
-                    <label>Comment</label>
-                    <textarea pInputTextarea placeholder="Comment" name="description"></textarea>
+                    <label>Comments <span>*</span></label>
+                    <textarea pInputTextarea placeholder="Comment" formControlName="comments" name="description" required></textarea>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.comments.invalid && submitted!=null && !submitted"
+                        [ngClass]="'error'">{{'errorMessages.comments'|translate}}
+                    </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
                     <label>Attach issue screenshot</label>
-                    <!-- <p-fileUpload name="myfile[]" url="./upload.php" multiple="multiple"></p-fileUpload> -->
-                    <mat-file-upload
+                    <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .exs"
+                        (change)="onFileSelect($event)" style="height: 45px;" />
+                    <div class="invalid-feedback"
+                        [ngClass]=" 'error'">{{'errorMessages.allowedImageTypes'|translate}}
+                    </div>
+                    <!-- <mat-file-upload
                         [labelText]="''"
                         [selectButtonText]="'Choose File(s)'"
                         [selectFilesButtonType]="file"
@@ -246,16 +242,13 @@
                         (uploadClicked)="onUploadClicked($event)"
                         (selectedFilesChanged)="onSelectedFilesChanged($event)"
                         >
-                    </mat-file-upload>
+                    </mat-file-upload> -->
                 </div>
             </div>
-        </div>
-      
+        </div>      
         <div class="col-12 p-0 text-right mb-2">
-            <button type="button" pButton class="btn-warning mr-2" label="Update"></button>
-            <button type="button" pButton class="btn-default" label="Cancel"></button>
-        </div>
-       
-    <!-- </form> -->
-
+            <button type="submit" pButton class="btn-warning mr-2" label="Update"></button>
+            <button type="button" pButton class="btn-default" label="Cancel" (click)="hideBasicDialog()"></button>
+        </div>       
+    </form>
 </p-dialog>
