@@ -3614,6 +3614,47 @@ body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-contain
 .custom-btn-plus .btn:hover{
   background: #de6e18;
 }
+p-dialog .ui-dialog {
+  overflow: scroll;
+  max-height: 60%;
+}
+.ui-dialog-content {
+  max-height: 450px;
+  min-height: 200px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding: 15px;
+}
+body .ui-dialog{
+  top: 60px !important;
+}
+body .ui-dialog .ui-dialog-footer{
+  padding: 0 !important;
+}
+body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
+  height: 420px;
+  overflow-y: auto;
+
+}
+/* width */
+.ui-tabview-panel::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+.ui-tabview-panel::-webkit-scrollbar-track {
+  background: #e6e3e3;
+}
+
+/* Handle */
+.ui-tabview-panel::-webkit-scrollbar-thumb {
+  background: #cccccc;
+}
+
+/* Handle on hover */
+.ui-tabview-panel::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {
@@ -3954,6 +3995,7 @@ body .ui-button.ui-button-icon-only .ui-button-text {
     height: calc(100vh - 61px);
     width: 100%;
   }
+  
   .sidebar::before,
   .bootstrap-navbar::before {
     top: 0;

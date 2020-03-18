@@ -11,11 +11,15 @@
     <div class="roll-tabs">
         <p-tabView (onChange)="onRoleChange($event)">
             <p-tabPanel leftIcon="pi pi-caret-right" *ngFor="let role of roles;let i=index;"
-                header="{{role.user_role_name}}" >
+                header="{{role.user_role_name}}" [selected]="i===currentRole">
                 <div class="roletab-content" *ngFor="let mod of modules;let m=index;">
                     <h4>{{mod.module_name}}</h4>
                     <div>
-                        <p-checkbox name="{{mod.module_name}}" label="" value="{{mod}}" [(ngModel)]="accessObj[m]"></p-checkbox>
+                        <p-checkbox name="checkbox"
+                            [value]="mod.is_access_status" [(ngModel)]="mod.is_access_status"
+                            [attr.checked]="mod.is_access_status == '1' ? true : false" 
+                            binary="true">
+                        </p-checkbox>
                     </div>
                 </div>
                 <!-- <div class="roletab-content">

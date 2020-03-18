@@ -11,4 +11,8 @@ export class RoleService {
   getRolesList(params){
     return this.clientHttp.get('User/rolesManagementList',params);
   }
+
+  updateRoleAccess(params){
+    return this.clientHttp.post('User/updateRolesManagement', params);
+  }
 }

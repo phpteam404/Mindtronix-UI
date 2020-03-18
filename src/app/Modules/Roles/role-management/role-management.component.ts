@@ -13,6 +13,7 @@ export class RoleManagementComponent implements OnInit {
   roles:any=[];
   modules:any=[];
   accessObj=[];
+  currentRole:any=0;
   constructor(private _service: RoleService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
@@ -29,18 +30,31 @@ export class RoleManagementComponent implements OnInit {
       if(res.status){
         this.roles = res.data.user_roles;
         this.modules = res.data.modules;
+        this.modules.forEach(item => { 
+          if(item.is_access_status=='1'){
+            item.is_access_status=true;
+          }else item.is_access_status=false;
+        });
       }
     });
   } 
-  submitRoleAccess(){
-    console.log('modules', this.modules);
-    console.log('accessObj', this.accessObj);
-    this.accessObj.forEach((k,v) => { 
-    console.log(k,'--', v);
+  submitRoleAccess(){    
+    this.modules.forEach(item => { 
+      if(item.is_access_status){
+        item.is_access_status=1;
+      }else item.is_access_status=0;
     });
-    
+    console.log('this.modules--', this.modules);
+    var params={};
+    params['modules']=this.modules;
+    this._service.updateRoleAccess(params).subscribe(res=>{
+      if(res.status){
+        // this.accessObj
+      }
+    });
   }
   onRoleChange(event){
+    this.currentRole=event.index;
     this.getRolesList(this.roles[event.index])
-  }
+  } 
 }

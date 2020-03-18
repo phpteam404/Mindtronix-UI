@@ -40,6 +40,11 @@ export class ViewTicketComponent implements OnInit {
     this.viewModal = flag;
     this.updateForm.reset();
     this.fileArr=[];
+    this.updateForm.setValue({
+      status: this.ticketObj.status_display,
+      comments:'',
+      files:''
+    });
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -52,6 +57,7 @@ export class ViewTicketComponent implements OnInit {
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
+                  .set('ticket_id',this.ticketId)
                   .set('dropdown',"true")
     return this._mService.getMasterChilds(params).subscribe(res=>{
       if(res.status){
@@ -73,6 +79,7 @@ export class ViewTicketComponent implements OnInit {
         this.ticketObj = res.data.ticket_data;
         this.documents =res.data.ticket_data.documents; 
         this.chatHistory = res.data.chat_history;  
+        console.log('this.status', this.status);        
       }
     });
   }
