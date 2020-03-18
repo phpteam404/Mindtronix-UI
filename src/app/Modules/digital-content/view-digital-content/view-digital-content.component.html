@@ -201,7 +201,11 @@
                             <tr>
                                 <td *ngFor="let col of columns ; let i = index" (click)="rowData['type']!='pdf' && i!=2 && previewAttachment(rowData)">
                                     <span *ngIf="i == 0"  class="d-flex action-color attache-img">
-                                        <img src="{{rowData['document_url']}}" alt=""> 
+                                        <img *ngIf="rowData['type'] == 'pdf'" src="{{prdAssetPath}}/assets/img/attachement-imgs/pdf-file.png" alt=""> 
+                                        <img *ngIf="(rowData['type'] == 'mp4')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mp4-file.png" alt=""> 
+                                        <img *ngIf="(rowData['type'] == 'mov')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mov-file.png" alt=""> 
+                                        <img *ngIf="(rowData['type'] == 'jpeg') || (rowData['type'] == 'jpg') || (rowData['type'] == 'png')"
+                                             src="{{rowData['document_url']}}" alt=""> 
                                     </span>
                                     <a *ngIf="i == 1 && rowData['type']=='pdf'" title="{{rowData[col.field]}}" 
                                         href="javascript:;" (click)="downloadPdf(rowData['document_url'],rowData[col.field])">

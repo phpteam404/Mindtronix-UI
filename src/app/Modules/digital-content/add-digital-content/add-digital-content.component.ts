@@ -28,6 +28,7 @@ export class AddDigitalContentComponent implements OnInit {
   sub_categories:any;
   content_level:any;
   fileArr:any = [];
+  minDate:Date = new Date();
   maxSize = environment.maxUploadSize; 
   fileTypes = ["image/jpeg",
               "image/png",
@@ -35,6 +36,7 @@ export class AddDigitalContentComponent implements OnInit {
               "video/mp4",
               "video/quicktime"];
   constructor(private _router: Router,
+              private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _mservice:MasterService,
               public _service: ContentService,
@@ -123,7 +125,7 @@ export class AddDigitalContentComponent implements OnInit {
         this._service.addDigitalContent(formData).subscribe(res =>{
           if(res.status){
               this.submitted=true;
-              this.goToList();
+              this.goToView(res.data.data,this.getName());
           }
           else
           {
@@ -142,6 +144,9 @@ export class AddDigitalContentComponent implements OnInit {
   }
   goToList(){
     this._router.navigate(['digital_content']);
+  }
+  goToView(id:any,name:any){
+    this._router.navigate(['view',name,btoa(id)],{relativeTo:this._ar});
   }
   onFileSelect(event) {
     if (event.target.files.length > 0) {

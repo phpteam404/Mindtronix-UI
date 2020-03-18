@@ -3615,8 +3615,9 @@ body .ui-multiselect-panel .ui-multiselect-header .ui-multiselect-filter-contain
   background: #de6e18;
 }
 @media (max-width: 1199px) {
-  .custom-side-menu .mat-list-base .nav-link p {
-    font-size: 13px;
+  .custom-side-menu .mat-list-base .nav-link p,
+  .view-page .custom-view-list .trainers-text span  {
+    font-size: 13px !important;
   }
   .selected-file-list span {
     font-size: 13px;
@@ -3721,9 +3722,10 @@ body .ui-widget,
 .custom-form input{
   font-size: 12px !important;
 }
-.view-page .custom-view-list .schools-text span,
-.view-page .custom-view-list .students-text span,
-.view-page .custom-view-list .trainers-text span {
+.view-page .custom-view-list .schools-text span{
+  font-size: 13px !important;
+}
+.view-page .custom-view-list .students-text span{
   font-size: 17px !important;
   line-height: 20px;
 }

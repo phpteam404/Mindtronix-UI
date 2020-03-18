@@ -45,9 +45,9 @@ export class ViewDigitalContentComponent implements OnInit {
   documents:any=[];
 
   previewUrl:any;
-  format;
-  maxSize = environment.maxUploadSize; 
-
+  format:any;
+  maxSize = environment.maxUploadSize;
+  prdAssetPath:string = environment.prdAssetPath;
   fileTypes = ["image/jpeg",
               "image/png",
               "application/pdf",
