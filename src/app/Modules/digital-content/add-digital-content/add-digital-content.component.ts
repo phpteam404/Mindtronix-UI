@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { HttpParams} from '@angular/common/http';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { MasterService } from 'src/app/services/master.service';
@@ -36,7 +36,6 @@ export class AddDigitalContentComponent implements OnInit {
               "video/mp4",
               "video/quicktime"];
   constructor(private _router: Router,
-              private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _mservice:MasterService,
               public _service: ContentService,
@@ -146,7 +145,7 @@ export class AddDigitalContentComponent implements OnInit {
     this._router.navigate(['digital_content']);
   }
   goToView(id:any,name:any){
-    this._router.navigate(['view',name,btoa(id)],{relativeTo:this._ar});
+    this._router.navigate(['/digital_content/view',name,btoa(id)]);
   }
   onFileSelect(event) {
     if (event.target.files.length > 0) {

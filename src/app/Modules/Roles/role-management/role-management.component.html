@@ -5,20 +5,20 @@
         </div>
         <div class="tabs-heading-rightblock">
            <h4>Module Access</h4>
-           <button pButton type="submit" label="Save" class="btn-warning"></button>
+           <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button>
         </div>
     </div>
     <div class="roll-tabs">
-        <p-tabView>
-            <p-tabPanel header="Super Admin" leftIcon="pi pi-caret-right">
-                <div class="roletab-content">
-                    <h4>Dashboard</h4>
+        <p-tabView (onChange)="onRoleChange($event)">
+            <p-tabPanel leftIcon="pi pi-caret-right" *ngFor="let role of roles;let i=index;"
+                header="{{role.user_role_name}}" >
+                <div class="roletab-content" *ngFor="let mod of modules;let m=index;">
+                    <h4>{{mod.module_name}}</h4>
                     <div>
-                        <p-checkbox name="group1" value="one" label="" [(ngModel)]="superAdminCategories"
-                        inputId="one"></p-checkbox>
+                        <p-checkbox name="{{mod.module_name}}" label="" value="{{mod}}" [(ngModel)]="accessObj[m]"></p-checkbox>
                     </div>
                 </div>
-                <div class="roletab-content">
+                <!-- <div class="roletab-content">
                     <h4>Franchise</h4>
                     <div>
                         <p-checkbox name="group1" value="two" label="" [(ngModel)]="superAdminCategories"
@@ -87,9 +87,9 @@
                         <p-checkbox name="group1" value="eleven" label="" [(ngModel)]="superAdminCategories"
                         inputId="2"></p-checkbox>
                     </div>
-                </div>
+                </div> -->
             </p-tabPanel>
-            <p-tabPanel header="Site Admin" leftIcon="pi pi-caret-right">
+            <!-- <p-tabPanel header="Site Admin" leftIcon="pi pi-caret-right">
                     <div class="roletab-content">
                             <h4>Dashboard</h4>
                             <div>
@@ -483,7 +483,7 @@
                             inputId="2"></p-checkbox>
                         </div>
                     </div>
-            </p-tabPanel>
+            </p-tabPanel> -->
         </p-tabView>
     </div>   
 </div>
