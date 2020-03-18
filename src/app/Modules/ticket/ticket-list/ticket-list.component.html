@@ -3,13 +3,7 @@
         <p-table #dt [columns]="cols" [value]="TicketList"  [lazy]="true" 
                 (onLazyLoad)="loadTicketLazy($event)" [paginator]="true" 
                 [totalRecords]="totalRecords" [rows]="10">
-            <ng-template pTemplate="caption">
-                <!-- <div style="text-align: right">
-                    <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-                    <input type="text" pInputText size="50" placeholder="Global Filter" class="mr-2"
-                        (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                    <button pButton type="button" label="Add" class="btn-warning" (click)="AddNewFranchise($event)"></button>
-                </div> -->
+            <ng-template pTemplate="caption">               
                 <div class="custom-search">
                     <div class="input-search">
                         <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"

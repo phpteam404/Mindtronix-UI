@@ -37,6 +37,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { environment } from 'src/environments/environment';
 
 @NgModule({
   declarations: [
@@ -96,5 +97,5 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 export class AppModule { }
 
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http,environment.prdAssetPath+'/assets/i18n/');
 }

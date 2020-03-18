@@ -70,7 +70,7 @@ export class TicketListComponent implements OnInit {
     return (this.TicketList == 0 ? true : false);
   }
   AddNewTicket(event: Event){
-    this.router.navigate(['info'], {relativeTo: this._route});
+    this.router.navigate(['create'], {relativeTo: this._route});
   }
 
   viewTicket(data:any){

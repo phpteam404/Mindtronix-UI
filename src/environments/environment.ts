@@ -11,6 +11,7 @@ export const environment = {
   prdAssetPath: (settings.PRD_ASSESTS_PATH !== undefined) ? settings.PRD_ASSESTS_PATH : '',
   encrypt: (settings.ENCRYPTION !== undefined) ? settings.ENCRYPTION : false,
   defaultLanguage: (settings.DEFAULT_LANG !== undefined) ? settings.DEFAULT_LANG : 'en',
+  maxUploadSize: (settings.MAX_UPLOAD !== undefined) ? settings.MAX_UPLOAD : 0,
 };
 /*
  * For easier debugging in development mode, you can import the following file

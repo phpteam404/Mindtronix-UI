@@ -6,5 +6,6 @@ export const settings = {
     PRD_ASSESTS_PATH: '',// /Mindtronix_prototype
     PRODUCTION: true,
     DEFAULT_LANG:'en',
+    MAX_UPLOAD:20000000, //(in bytes)
     ENCRYPTION:false
 };

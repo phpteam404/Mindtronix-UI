@@ -137,7 +137,7 @@
                     <div class="custom-view-content">
                         <div class="row">
                             <div class="col-12 btn-edit">
-                                <a href="javascript:;" class="btn" (click)="showBasicDialog3()"><i class="icon icon-edit-pencil"></i></a>
+                                <a href="javascript:;" class="btn" (click)="updateContentModal(true)"><i class="icon icon-edit-pencil"></i></a>
                             </div>
                             <div class="col-md-4 col-12">
                                 <label>{{'digitalContent.add.contentName'|translate}}</label>
@@ -183,51 +183,65 @@
             <div class="attachements-list">
                 <h4>{{'ticket.view.attachments'|translate}}</h4>
                 <div class="custom-table">
+                    <div class ="row">
+                        <div class="col-12 custom-btn-plus">
+                            <button type="button"  class="btn" (click)="uploadAttachmentModal(true)"><i class="icon icon-plus"></i></button>
+                       </div>
+                    </div>
                     <p-table #dt [columns]="cols" [value]="documents" [lazy]="true" [totalRecords]="totalRecords">
                         <ng-template pTemplate="header" let-columns>
-                                <tr>
-                                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
-                                        {{col.header}}
-                                        <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
-                                    </th>
-                                </tr>
+                            <tr>
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                                    {{col.header}}
+                                    <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                                </th>
+                            </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
-                                <td *ngFor="let col of columns ; let i = index">
-                                    <span *ngIf="i != 2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-    
+                                <td *ngFor="let col of columns ; let i = index" (click)="rowData['type']!='pdf' && i!=2 && previewAttachment(rowData)">
                                     <span *ngIf="i == 0"  class="d-flex action-color attache-img">
-                                    <img src="assets/img/attachement-imgs/png-file.png" alt="">
-                                    
+                                        <img src="{{rowData['document_url']}}" alt=""> 
+                                    </span>
+                                    <a *ngIf="i == 1 && rowData['type']=='pdf'" title="{{rowData[col.field]}}" 
+                                        href="javascript:;" (click)="downloadPdf(rowData['document_url'],rowData[col.field])">
+                                        {{rowData[col.field]}}
+                                    </a>
+                                    <span *ngIf="i == 1 && rowData['type']!='pdf'" title="{{rowData[col.field]}}">
+                                       {{rowData[col.field]}}
                                     </span>
                                     <span *ngIf="i == 2"  class="d-flex action-color">
                                         <a href="javascript:;" (click)="DeleteAttachments(rowData)" title="Delete">
                                             <span class="icon icon-delete wd-30"></span>
                                         </a>
                                     </span>
-                                </td>
+                               </td>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="footer" let-columns>
                             <ng-container *ngIf="isEmptyTable()">
-                            <tr>
-                            <td [attr.colspan]="columns.length" class="text-center">
-                                {{'general.noRecords'|translate}}
-                            </td>
-                            </tr>
+                                <tr>
+                                    <td [attr.colspan]="columns.length" class="text-center">
+                                        {{'general.noAttachments'|translate}}
+                                    </td>
+                                </tr>
                             </ng-container>
                         </ng-template>
                     </p-table>
                 </div>
             </div>
         </div>
-        <p-confirmDialog class="confirm-dialog" appendTo="body"></p-confirmDialog>
+        <p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
+            acceptLabel="{{'general.acceptLabel' | translate}}"
+            rejectLabel="{{'general.rejectLabel' | translate}}"
+            message="{{'general.confirmDelete' | translate}}" 
+            icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+        </p-confirmDialog>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-static-view">
                 <div class="custom-view-div custom-viewbg">
                     <div class="trainers-text qr-code">
-                        <img src="{{prdAssetPath}}/assets/img/QR-code.png">
+                        <img src="{{digitalContentObj.qr_code}}">
                     </div>
                     <div class="text-center">
                     <button class="btn-warning download-btn mt-2"><i class="icon icon-download-1 pr-2"></i>Download</button>
@@ -242,13 +256,13 @@
     </div>
 </div>
   <!-- content details popup -->
-<p-dialog header="Update Content Details" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic3" [style]="{width: '65vw'}" [baseZIndex]="1">
+<p-dialog header="Update Content Details" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="editModal" [style]="{width: '65vw'}" [baseZIndex]="10000">
      <form [formGroup]="digitalForm" (ngSubmit)="submit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
-                    <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" formControlName ="name" name="name" type="text" required>
+                    <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" disabled formControlName ="name" name="name" type="text" required>
                     <div class="invalid-feedback"
                             *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
@@ -297,7 +311,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{'digitalContent.add.contentLevel'|translate}} <span>*</span></label>
-                    <p-dropdown [options]="content_level" placeholder="{{'placeholder.contentLevel'|translate}}" itemSize="30"
+                    <p-dropdown [options]="contentLevel" placeholder="{{'placeholder.contentLevel'|translate}}" itemSize="30"
                         name="content_level" optionLabel="label" formControlName ="content_level"  filter="true" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="digitalForm.controls.content_level.invalid && submitted!=null && !submitted"
@@ -307,8 +321,9 @@
             </div>
             <div class="col-md-4 col-12">
                 <label>{{'digitalContent.add.tags'|translate}} <span>*</span></label>
-                <p-dropdown [options]="tags" placeholder="{{'placeholder.tags'|translate}}" itemSize="30"
-                    name="tags" filter="true" optionLabel="label" formControlName ="tags" required></p-dropdown>
+                <p-chips formControlName="tags" name="tags" placeholder="Enter your tags here" [allowDuplicate]="false" required></p-chips> 
+                <!-- <p-dropdown [options]="tags" placeholder="{{'placeholder.tags'|translate}}" itemSize="30"
+                    name="tags" filter="true" optionLabel="label" formControlName ="tags" required></p-dropdown> -->
                 <div class="invalid-feedback"
                     *ngIf="digitalForm.controls.tags.invalid && submitted!=null && !submitted"
                     [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
@@ -317,7 +332,7 @@
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{'digitalContent.add.expiryDate'|translate}}</label>
-                    <p-calendar name="expiry_date" formControlName="expiry_date" [showIcon]="true" [maxDate]="maxDate"></p-calendar>
+                    <p-calendar name="expiry_date" formControlName="expiry_date" [showIcon]="true" [minDate]="minDate"></p-calendar>
                 </div>
             </div>
             <div class="col-md-4 col-12">
@@ -327,19 +342,56 @@
                         name="status" optionLabel="label" required></p-dropdown>
                 </div>
             </div>
-            <div class="col-md-8 col-12">
-                <div class="form-group">
-                    <label>{{'digitalContent.add.fileUpload'|translate}}</label>
-                    <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
-                        (change)="onFileSelect($event)" style="height: 45px;" />
-                </div>
-            </div>  
         </div>
         <div class="text-center mb-2">
             <button pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}" type="submit"></button>
-            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="hideBasicDialog()"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="updateContentModal(false)"></button>
         </div>
     </form>
 </p-dialog>
+<p-dialog header="{{'digitalContent.view.contentAttachments'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="uploadAttachments" [style]="{width: '65vw'}" [baseZIndex]="10000">
+    <form [formGroup]="AttachmentForm" (ngSubmit)="onSubmit()">
+        <div class="row custom-form m-0">
+           <div class="col-md-12 col-12">
+               <div class="form-group">
+                    <label>{{'digitalContent.add.fileUpload'|translate}} <span>*</span></label>
+                   <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs"
+                       (change)="onFileSelect($event)" style="height: 45px;"/>
+                    <div class="invalid-feedback"
+                       [ngClass]="'error'">{{'errorMessages.allowedFileTypes'|translate}}
+                   </div>
+               </div>
+           </div>
+           <div class="col-md-6 col-12 mt-10" *ngIf="fileArr.length>0">
+                <div class="form-group">
+                    <label>{{'digitalContent.add.fileSelected'|translate}} </label>
+                    <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
+                        <span class="file-text" title="{{file.name}}">{{file.name}}</span>
+                        <span class="file-size">{{file.sizeVal}}</span>
+                        <span>
+                            <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                <span class="icon icon-delete wd-30"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+            </div>
+       </div>
+       <div class="text-center mb-2">
+           <button pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}" type="submit"></button>
+           <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="uploadAttachmentModal(false)"></button>
+       </div>
+   </form>
+</p-dialog>
+<p-dialog header="View Attachement" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="previewFile" [style]="{width: '65vw'}" [baseZIndex]="10000">
+    <div style="font-size:16px;text-align:center;padding:20px">
+        <div class="row m-0">
+            <div class="col-12" style="text-align:center">
+                <img  src="{{previewUrl}}" *ngIf="(format != 'mp4' && format != 'mov')" height="400">
+                <video src="{{previewUrl}}" *ngIf="(format == 'mp4' || format == 'mov')" height="400" controls></video>
+           </div>
+       </div>
+    </div>
+</p-dialog> 
 
 

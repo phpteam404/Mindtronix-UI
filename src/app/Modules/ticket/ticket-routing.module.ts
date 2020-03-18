@@ -11,7 +11,7 @@ const routes: Routes = [
     component: TicketListComponent
   },
   {
-    path: 'info',
+    path: 'create',
     component: TicketInfoComponent,
     data: {
       breadcrumbs: 'Create Ticket'
