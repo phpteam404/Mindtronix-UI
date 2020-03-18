@@ -16,14 +16,14 @@
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
                         {{col.header}}
-                        <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
+                        <p-sortIcon *ngIf="i != 8" [field]="col.field"></p-sortIcon>
                     </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index">
-                        <span *ngIf="i != 7 && i != 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                      
+                        <span *ngIf="i != 7 && i != 8 && i != 5" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                      
                         <span *ngIf="i == 5" title="{{rowData[col.field]}}" class="d-flex action-color overlay">
                             <span *ngIf="rowData[col.field].split(',')[0]">{{rowData[col.field].split(',')[0]}}</span>
                             <span *ngIf="rowData[col.field].split(',')[1]">
@@ -32,11 +32,17 @@
                                 </a>
                             </span>                            
                         </span>
-                        <span *ngIf="i == 7"  class="d-flex action-color">
+                        <span *ngIf="i == 7">
+                            <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
+                                              (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
+                        </span>
+                        <span *ngIf="i == 8"  class="d-flex action-color">
                             <a href="javascript:;" (click)="viewContent(rowData)" title="{{'title.edit'|translate}}">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a>
-                            <a href="javascript:;" (click)="DeleteDigitalContent(rowData)" title="{{'title.delete'|translate}}">
+                            <a href="javascript:;" (click)="DeleteDigitalContent(rowData)" 
+                                *ngIf="rowData['status'] != 'Inactive'" title="{{'title.delete'|translate}}">
                                 <span class="icon icon-delete wd-30"></span>
                             </a>
                         </span>

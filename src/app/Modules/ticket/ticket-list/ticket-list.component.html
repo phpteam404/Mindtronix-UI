@@ -25,8 +25,14 @@
                 <tr>
             
                     <td *ngFor="let col of columns ; let i = index" (click)="viewTicket(rowData)">
-                        <span *ngIf="i != 6 && i != 4" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
-                        <span *ngIf="i != 6 && i == 4" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM ,yyyy'}}</span> 
+                        <span *ngIf="i != 6 && i != 4 && i != 5" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 4 " title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM ,yyyy'}}</span> 
+                        <span *ngIf="i == 5">
+                            <span [ngClass]="[(rowData[col.field]==='Closed') ? 'bg-brown' : '',
+                                                (rowData[col.field]==='New') ? 'bg-blue' : '',
+                                                (rowData[col.field]!='Closed' && rowData[col.field]!='New')? 'bg-gold' : '']"
+                                class='list-status'>{{rowData[col.field]}}</span>
+                        </span>
                         <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
                             <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="{{'title.view'|translate}}"></span></a>
                         </span>

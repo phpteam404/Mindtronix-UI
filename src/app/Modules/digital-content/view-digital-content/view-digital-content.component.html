@@ -183,7 +183,7 @@
             <div class="attachements-list">
                 <h4>{{'ticket.view.attachments'|translate}}</h4>
                 <div class="custom-table">
-                    <div class ="row">
+                    <div class ="row" *ngIf="digitalContentObj.status != 'Inactive'">
                         <div class="col-12 custom-btn-plus">
                             <button type="button"  class="btn" (click)="uploadAttachmentModal(true)"><i class="icon icon-plus"></i></button>
                        </div>
@@ -215,7 +215,8 @@
                                        {{rowData[col.field]}}
                                     </span>
                                     <span *ngIf="i == 2"  class="d-flex action-color">
-                                        <a href="javascript:;" (click)="DeleteAttachments(rowData)" title="Delete">
+                                        <a href="javascript:;" *ngIf="digitalContentObj.status != 'Inactive'"
+                                            (click)="DeleteAttachments(rowData)" title="Delete">
                                             <span class="icon icon-delete wd-30"></span>
                                         </a>
                                     </span>
