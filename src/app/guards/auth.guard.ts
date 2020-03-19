@@ -4,13 +4,18 @@ import { Observable } from 'rxjs';
 import { LocalStorageService } from '../utils/local-storage.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ToasterService } from '../utils/toaster.service';
+import { AppHttpClientService } from '../utils/app-http-client.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   
-  constructor(private ls: LocalStorageService, private router: Router,private _toast: ToasterService,
-            private _ar: ActivatedRoute, private service: AuthenticationService) {
+  constructor(private ls: LocalStorageService,
+              private router: Router,
+              private _toast: ToasterService,
+              private httpService : AppHttpClientService,
+              private _ar: ActivatedRoute,
+              private service: AuthenticationService) {
 
   } 
 
@@ -29,10 +34,15 @@ export class AuthGuard implements CanActivate {
      if (this.ls.getItem('user')) {
         this.service.isTokenExpired({'module_url':next['_routerState'].url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           if(res.status){
-            return true;
+            this.httpService.pendingRequestsNumber=0;
+            if(res.data.access)
+              return true;
+            else {
+              this.router.navigate(['/404']);
+            }
           }else {
             if(!res.Authentication){
-              console.log('res---', res);
+              // console.log('res---', res);
               this._toast.show('error','Session expired !')
               this.service.logout();
               this.router.navigate(['/login']);

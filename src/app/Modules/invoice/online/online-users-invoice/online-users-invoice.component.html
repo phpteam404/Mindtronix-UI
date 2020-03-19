@@ -4,30 +4,30 @@
         <div class="col-12">
     <div class="custom-view-list student-view-list">
         <div class="custom-view-div franchise-name">
-            <div>Month
+            <div>{{'invoices.list.month'|translate}}
                 <span>Feb 2020</span>
             </div>
         </div>
        
         <div class="custom-view-div">
-            <div class="schools-text"># Invoice
+            <div class="schools-text">{{'invoices.list.#invoice'|translate}}
                 <span>50</span>
             </div>
         </div>
        
         
         <div class="custom-view-div">
-            <div class="schools-text"># Invoice Amount
+            <div class="schools-text">{{'invoices.list.#invoiceAmount'|translate}}
                 <span>₹ 10,000</span>
             </div>
         </div>
         <div class="custom-view-div">
-            <div class="schools-text">Collected Amount
+            <div class="schools-text">{{'invoices.list.collectedAmount'|translate}}
                 <span>₹ 5,000</span>
             </div>
         </div>
         <div class="custom-view-div">
-            <div class="payment-text">Due
+            <div class="payment-text">{{'invoices.list.due'|translate}}
                 <span>₹ 5,000</span>
             </div>
         </div>
@@ -48,15 +48,15 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex custom-form">
                         <div class="col-md-4 p-0 filter-form">
-                            <p-calendar name="from_date" [showIcon]="true" [maxDate]="maxDate" placeholder="Invoice From Date"></p-calendar>
+                            <p-calendar name="from_date" [showIcon]="true" [maxDate]="maxDate" placeholder="{{'placeholder.invoiceFromDate'|translate}}"></p-calendar>
                         
                         </div>
                         <div class="col-md-4 p-0 filter-form ml-2">
-                            <p-calendar name="to_date" [showIcon]="true" [maxDate]="maxDate" placeholder="Invoice To Date"></p-calendar>
+                            <p-calendar name="to_date" [showIcon]="true" [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}"></p-calendar>
                         
                         </div>
                         <div class="input-dropdown ml-2">
-                            <p-dropdown [options]="staus" placeholder="Select Status" 
+                            <p-dropdown [options]="status" placeholder="{{'placeholder.status'|translate}}" 
                                 styleClass="ui-column-filter"
                                 (onChange)="onChange2($event)"
                                 optionLabel="label" filter="true"></p-dropdown>
@@ -105,7 +105,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                   {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>

@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import { TranslateService } from '@ngx-translate/core';
+
 interface Filter {
   label: string,
   value: string
@@ -16,7 +19,10 @@ export class OnlineUsersInvoiceComponent implements OnInit {
   totalRecords:number;
   status:Filter[];
   selectedStatus:Filter[];
-  constructor(private router: Router, private _route: ActivatedRoute) {
+  constructor(private router: Router, 
+              private _route: ActivatedRoute,
+              public translate: TranslateService) {
+        translate.setDefaultLang(environment.defaultLanguage);
     this.status = [
       {label: 'Due',value:'Due'},
       {label:'Paid', value:'Paid'},

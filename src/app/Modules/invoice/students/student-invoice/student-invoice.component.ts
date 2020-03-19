@@ -20,6 +20,7 @@ export class StudentInvoiceComponent implements OnInit {
   totalRecords:number;
   status:Filter[];
   selectedStatus:Filter[];
+  minDate:Date = new Date();
   constructor(private router: Router, 
               private _route: ActivatedRoute,
               public translate: TranslateService,

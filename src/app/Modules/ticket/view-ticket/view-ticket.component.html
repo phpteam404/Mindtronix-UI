@@ -156,7 +156,7 @@
                     <div class="col-12">
                         <label>{{'ticket.view.attachments'|translate}}</label>
                         <div class="attachment-img">
-                            <div *ngFor="let row of documents" (click)="previewAttachment(row)">
+                            <div *ngFor="let row of documents" (click)="previewAttachment(row)" style="cursor: pointer;">
                                 <img src="{{row.document_url}}" alt="">
                             </div>
                         </div>
@@ -181,7 +181,7 @@
                                     </div>
                                     <div>{{col.message}}</div>
                                     <div class="history-attachment-img">
-                                        <div *ngFor="let file of col.documents" (click)="previewAttachment(file)">
+                                        <div *ngFor="let file of col.documents" (click)="previewAttachment(file)" style="cursor: pointer;">
                                             <img src="{{file.document_url}}" alt="">
                                         </div>                                       
                                     </div>

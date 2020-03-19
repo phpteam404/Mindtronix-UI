@@ -40,6 +40,7 @@ import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription
 import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/student-dashboard.component';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
 
 @NgModule({
   imports: [
@@ -83,7 +84,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     ProfileComponent,
     DashboardComponent,
     OnlineSubscriptionComponent,
-    StudentDashboardComponent
+    StudentDashboardComponent,
+    PageNotFoundComponent
   ]
 })
 

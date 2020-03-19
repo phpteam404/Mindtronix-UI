@@ -185,6 +185,15 @@
         "applicationRoles":"Application Roles",
         "moduleAccess":"Module Access"
     },
+    "invoices":{
+        "list":{
+             "month":"Month",
+             "#invoice":"# Invoice",
+             "#invoiceAmount":"# Invoice Amount",
+             "collectedAmount":"Collected Amount",
+             "due":"Due"
+         }
+     },
     "buttons":{
         "save": "Save",
         "create": "Create",
@@ -299,7 +308,9 @@
         "subCategory":"Select Sub Category",
         "titleTicket":" Ticket Title",
         "issueType":"Select Issue Type",
-        "description":"Description"
+        "description":"Description",
+        "invoiceFromDate":"Invoice From Date",
+        "invoiceToDate":" Invoice To Date"
 
     },
     "title":{
