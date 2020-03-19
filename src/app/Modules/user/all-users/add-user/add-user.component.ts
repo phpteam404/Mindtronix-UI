@@ -59,12 +59,12 @@ export class AddUserComponent implements OnInit {
       email: new FormControl('',[Validators.required, Validators.email]),
       phone_no: new FormControl('',[Validators.required , Validators.minLength(10)]),
       status: new FormControl('',[Validators.required]),
-      password: new FormControl('',[ Validators.required, Validators.minLength(8)]),
-        // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      // ]),
-      cpassword: new FormControl('',[ Validators.required, Validators.minLength(8)])
-        //  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
-      // ])
+      password: new FormControl('',[Validators.required, Validators.minLength(8),
+                                    Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
+      ]),
+      cpassword: new FormControl('',[ Validators.required, Validators.minLength(8),
+                                      Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
+      ])
     });
   }
   

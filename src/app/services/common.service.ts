@@ -16,4 +16,10 @@ export class CommonService {
   delete (params) {
     return this.clientHttp.delete('User/Delete', params);
   }
+  addProfile(params){
+    return this.clientHttp.post('User/updateProfile',params);
+  }
+  profileInfo(){
+    return this.clientHttp.get('User/profileInfo');
+  }
 }

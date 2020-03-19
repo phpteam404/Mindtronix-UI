@@ -84,7 +84,7 @@ export class UpdateFeeComponent implements OnInit {
     }
   }
   goToList(){
-    this._router.navigate(['fee_management']);
+    this._router.navigate(['fee_master']);
   }
   getMasterData(masterKey): any{
     var params = new HttpParams()

@@ -165,16 +165,16 @@
                                         <p>{{franchiseObj.landmark}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>{{'franchise.add.country'|translate}}</label>
-                                        <p>{{franchiseObj.country}}</p>
+                                        <label>{{'franchise.add.city'|translate}}</label>
+                                        <p>{{franchiseObj.city}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>{{'franchise.add.state'|translate}}</label>
                                         <p>{{franchiseObj.state}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
-                                        <label>{{'franchise.add.city'|translate}}</label>
-                                        <p>{{franchiseObj.city}}</p>
+                                        <label>{{'franchise.add.country'|translate}}</label>
+                                        <p>{{franchiseObj.country}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>{{'franchise.add.pincode'|translate}}</label>
@@ -398,6 +398,10 @@
                 <div class="form-group">
                     <label>{{'franchise.add.websiteAddress' |translate}}</label>
                     <input pinputtext placeholder="{{'placeholder.websiteAddress'|translate}}" formControlName="website_address" name="website_address" type="text">
+                    <div class="invalid-feedback"
+                        *ngIf="firstForm.controls.website_address.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">{{'errorMessages.websiteAddress'|translate}}
+                    </div> 
                 </div>
             </div>
             <div class="col-md-12 col-12">
@@ -414,13 +418,13 @@
             </div>                        
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>{{'franchise.add.country' |translate}} <span>*</span></label>
-                    <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="{{'placeholder.country'|translate}}" itemSize="30"
+                    <label>{{'franchise.add.city' |translate}} <span>*</span></label>
+                    <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="{{'placeholder.city'|translate}}" itemSize="30"
                         name="state" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
-                            *ngIf="firstForm.controls.country.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">{{'dropdown.country'|translate}}
-                    </div>                        
+                            *ngIf="firstForm.controls.city.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">{{'dropdown.city'|translate}}
+                    </div>                     
                 </div>
             </div>
             <div class="col-md-4 col-12">
@@ -436,15 +440,15 @@
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
-                    <label>{{'franchise.add.city' |translate}} <span>*</span></label>
-                    <p-dropdown [options]="city" formControlName="city" filter="true" placeholder="{{'placeholder.city'|translate}}" itemSize="30"
+                    <label>{{'franchise.add.country' |translate}} <span>*</span></label>
+                    <p-dropdown [options]="country" formControlName="country" filter="true" placeholder="{{'placeholder.country'|translate}}" itemSize="30"
                         name="state" optionLabel="label" required></p-dropdown>
                     <div class="invalid-feedback"
-                            *ngIf="firstForm.controls.city.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">{{'dropdown.city'|translate}}
-                    </div>                     
+                            *ngIf="firstForm.controls.country.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">{{'dropdown.country'|translate}}
+                    </div>                        
                 </div>
-            </div> 
+            </div>
             <div class="col-md-4 col-12">
                 <label>{{'franchise.add.pincode' |translate}}</label>
                 <input type="text" placeholder="{{'franchise.add.pincode' |translate}}" pKeyFilter="pint" formControlName="pincode" name="pincode">

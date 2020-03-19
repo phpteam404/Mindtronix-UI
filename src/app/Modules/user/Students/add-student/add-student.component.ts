@@ -46,11 +46,11 @@ export class AddStudentComponent implements OnInit {
     student_name: new FormControl('', [Validators.required]),
     date_of_birth: new FormControl('', [Validators.required]),
     nationality: new FormControl('', [Validators.required]),
-    password: new FormControl('',[ Validators.required,Validators.minLength(8)
-                                  //  Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+    password: new FormControl('',[ Validators.required, Validators.minLength(8),
+                                  Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
-    cpassword: new FormControl('',[ Validators.required,,Validators.minLength(8)
-                                    // Validators.pattern('(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}')
+    cpassword: new FormControl('',[ Validators.required, Validators.minLength(8),
+                                    Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
     place_of_birth: new FormControl(''),
     mother_tongue: new FormControl(''),

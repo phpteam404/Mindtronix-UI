@@ -58,7 +58,7 @@
     },
     "users":{
          "userCreate":"Create User",
-         "userUpdate":"Create User",
+         "userUpdate":"Update User",
       "add":{
              "firstName":"First Name",
              "lastName":"Last Name",
@@ -185,6 +185,20 @@
         "applicationRoles":"Application Roles",
         "moduleAccess":"Module Access"
     },
+    "profile":{
+        "basicInformation":"Basic Information",
+        "firstName":"First Name",
+        "lastName":"Last Name",
+        "contactEmail":"Contact Email",
+        "contactNumber":"Contact Number",
+        "changePassword":"Change Password",
+        "oldPassword":"Old Password",
+        "newPassword":"New Password",
+        "confirmPassword":"Confirm Password",
+        "others":"Others",
+        "ima":"I'm a",
+        "grade":"Grade"
+    },
     "invoices":{
         "list":{
              "month":"Month",
@@ -216,6 +230,7 @@
         "contactName" :"Contact Name is required",
         "email":"Enter valid email",
         "feeStructure":"Fee Structure is required",
+        "websiteAddress":"website address is Invalid",
         "userName":"Name is required!",
         "userRole":"Role is required!",
         "franchiseUser":"Franchise is required!",
@@ -295,6 +310,7 @@
         "franchise":"Select Franchise",
         "search":"Search...",
         "firstName":"First Name",
+        "lastName":"Last Name",
         "role":"Select Role",
         "contactPerson":"Contact Person",
         "websiteAddress":"www.mindtronix.com",
@@ -311,7 +327,6 @@
         "description":"Description",
         "invoiceFromDate":"Invoice From Date",
         "invoiceToDate":" Invoice To Date"
-
     },
     "title":{
         "edit":"Edit",
@@ -322,6 +337,8 @@
         "addFeeStructure":"Add Fee Structure",
         "manageStudents":"Manage Students",
         "manageUsers":"Manage Users"
+    },
+    "info":{
+        "password":"Password must be combination of upper and lower alphabets, numbers and special characters ($@!%*#?&().-_=+) of 8-20 characters"
     }
-
 }

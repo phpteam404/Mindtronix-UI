@@ -60,11 +60,11 @@ export const AdminLayoutRoutes: Routes = [
         }
     },
     {
-        path: 'fee_management',
+        path: 'fee_master',
         loadChildren: () => import('../../Modules/fee/fee.module').then(m => m.FeeModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Fee Management'
+            breadcrumb: 'Fee Master'
         }
     },
     {

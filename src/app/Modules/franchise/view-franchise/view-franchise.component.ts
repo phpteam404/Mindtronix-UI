@@ -125,7 +125,7 @@ export class ViewFranchiseComponent implements OnInit {
       code: new FormControl('', [Validators.required]),
       contact_person: new FormControl('',[Validators.required]),
       phone: new FormControl('', [Validators.required,Validators.minLength(10)]),
-      website_address :new FormControl(''),
+      website_address :new FormControl('',[Validators.pattern('^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$')]),
       landmark: new FormControl(''),
       email: new FormControl('', [Validators.required, Validators.email]),
       pincode :new FormControl(''),

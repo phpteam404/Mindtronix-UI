@@ -14,6 +14,7 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
+                            <label>{{'users.add.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchiseList" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseId"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'franchise_id' ,'contains')"

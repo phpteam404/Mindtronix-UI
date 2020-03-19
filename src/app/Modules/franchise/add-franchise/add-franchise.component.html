@@ -118,7 +118,11 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>{{'franchise.add.websiteAddress' |translate}}</label>
-                                <input pinputtext placeholder="{{'placeholder.websiteAddress'|translate}}" formControlName="website_address" name="website_address" type="text">
+                                <input pinputtext placeholder="{{'placeholder.websiteAddress'|translate}}" formControlName="website_address" name="website_address" type="url">
+                                <div class="invalid-feedback"
+                                     *ngIf="stepOneForm.controls.website_address.invalid && submitted1!=null && !submitted1"
+                                    [ngClass]=" 'error'">{{'errorMessages.websiteAddress'|translate}}
+                                </div> 
                             </div>
                         </div>
                         <div class="col-md-12 col-12">

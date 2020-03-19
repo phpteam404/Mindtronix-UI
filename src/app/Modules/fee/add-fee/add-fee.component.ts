@@ -54,7 +54,7 @@ export class AddFeeComponent implements OnInit {
       this._service.saveFee(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._router.navigate(['fee_management']);
+          this._router.navigate(['fee_master']);
         }
       });
     }else{
@@ -62,7 +62,7 @@ export class AddFeeComponent implements OnInit {
     }
   }
   goToList(){
-    this._router.navigate(['fee_management']);
+    this._router.navigate(['fee_master']);
   }
 
   //This service is to Get Master childs Based on Selected Master

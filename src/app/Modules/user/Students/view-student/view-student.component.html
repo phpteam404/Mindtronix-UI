@@ -124,7 +124,7 @@
                 <div class="custom-view-div">
                     <div class="trainers-text">{{'student.view.lastLogin'|translate}}
                         <!-- <span>25/02/2020 12:30 PM</span> -->
-                        <span>{{studentObj.last_login  | date:'dd-MM-yyyy hh:mm a'}}</span>
+                        <span>{{studentObj.last_login  | date:'dd MMM yyyy hh:mm a'}}</span>
                     </div>
                 </div>
             </div>
@@ -141,7 +141,7 @@
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>{{'student.add.dateOfBirth'|translate}}</label>
-                                        <p>{{studentObj.date_of_birth | date:'dd-MM-yyyy'}}</p>
+                                        <p>{{studentObj.date_of_birth | date:'dd MMM yyyy'}}</p>
                                     </div>
                                     <div class="col-md-4 col-12">
                                         <label>{{'student.add.nationality'|translate}} </label>
