@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     if (this.ls.getItem('user')) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate([this.ls.getItem('user',true).menu[0].module_url]);
     }
   }
   form = new FormGroup({
@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
           res.data.access_token = res.access_token;
           res.data.menu = res.menu;
           this.ls.setItem('user', res.data, true);
-          this.router.navigate(['/dashboard']);
+          this.router.navigate([res.menu[0].module_url]);
         }
       });
     }else{

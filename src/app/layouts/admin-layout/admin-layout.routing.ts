@@ -149,7 +149,10 @@ export const AdminLayoutRoutes: Routes = [
     },
     { 
         path: '404',
-        component: PageNotFoundComponent
+        component: PageNotFoundComponent,
+        data: {
+            breadcrumb: '404'
+        }
     },
    
 ];

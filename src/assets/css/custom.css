@@ -3637,7 +3637,7 @@ body .ui-dialog .ui-dialog-footer{
 body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
   height: 420px;
   overflow-y: auto;
-
+  position: relative;
 }
 /* width */
 .ui-tabview-panel::-webkit-scrollbar {

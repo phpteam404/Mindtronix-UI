@@ -32,7 +32,9 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
      // console.log('next--', next.routeConfig.path);
      if (this.ls.getItem('user')) {
-        this.service.isTokenExpired({'module_url':next['_routerState'].url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
+       var url = next['_routerState'].url.toString();
+       url = url.split('?')[0];
+        this.service.isTokenExpired({'module_url':url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           if(res.status){
             this.httpService.pendingRequestsNumber=0;
             if(res.data.access)
