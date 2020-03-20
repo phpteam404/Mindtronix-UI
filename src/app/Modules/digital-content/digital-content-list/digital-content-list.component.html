@@ -65,9 +65,9 @@
     acceptLabel="{{'general.acceptLabel' | translate}}"
     rejectLabel="{{'general.rejectLabel' | translate}}"
     message="{{'general.confirmDelete' | translate}}" 
-    icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+    icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
 </p-confirmDialog>
-<p-overlayPanel #op3 [dismissable]="true" appendTo="body">
+<p-overlayPanel #op3 [dismissable]="true"  >
     <ul *ngIf="selectedTag" class="tags-overlay">
         <li *ngFor="let tag of selectedTag">{{tag}}</li>
     </ul>

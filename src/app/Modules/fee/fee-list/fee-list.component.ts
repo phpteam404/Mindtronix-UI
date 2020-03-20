@@ -18,7 +18,7 @@ export class FeeListComponent implements OnInit {
   first:number=0;
   totalRecords: number;
   cols: any[];
-  listParamsRef:any={};
+  listParamsRef:LazyLoadEvent;
 
   constructor(private router: Router,
              private _route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class FeeListComponent implements OnInit {
   updateFee(data:any){
     this.router.navigate(['update/'+ data.name + '/' +btoa(data.fee_master_id)],{relativeTo: this._route})
   }
-  loadCarsLazy(event: LazyLoadEvent) {
+  loadFeeLazy(event: LazyLoadEvent) {
     var sortOrder= (event.sortOrder==1)?"ASC":"DESC";
     var params = new HttpParams()
         .set('start', event.first+'')
@@ -48,7 +48,7 @@ export class FeeListComponent implements OnInit {
     if (event.globalFilter) {
         params = params.set('search_key', event.globalFilter);
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._service.getList(params).subscribe(res=>{
       if(res.status){
         this.list = res.data.data;
@@ -71,13 +71,14 @@ export class FeeListComponent implements OnInit {
     return (this.totalRecords == 0 ? true : false);
   }
   getFeeList(){
-    this.first = this.listParamsRef.updates[0].value;
-    this._service.getList(this.listParamsRef).subscribe(res=>{
+    this.first = this.listParamsRef.first;
+    this.loadFeeLazy(this.listParamsRef);
+    /*this._service.getList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.list = res.data.data;
         this.totalRecords = res.data.total_records;
       }
-    });
+    });*/
   }
 }

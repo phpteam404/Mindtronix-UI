@@ -21,7 +21,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'update/:name/:id?:school_id',
+    path: 'update/:name/:id?:school_id?:franchise_id',
     component: UpdateStudentComponent,
     data: {
       breadcrumbs: 'Update',
@@ -30,7 +30,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'view/:name/:id?:school_id',
+    path: 'view/:name/:id?:school_id?:franchise_id',
     component: ViewStudentComponent,
     data: {
       breadcrumbs: 'View',

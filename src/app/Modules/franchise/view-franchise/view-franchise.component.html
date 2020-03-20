@@ -242,7 +242,7 @@
                         acceptLabel="{{'general.acceptLabel' | translate}}"
                         rejectLabel="{{'general.rejectLabel' | translate}}"
                         message="{{'general.confirmDelete' | translate}}" 
-                        icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+                        icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
                     </p-confirmDialog> -->
                     <p-tabPanel header="{{'franchise.feeManagement'|translate}}">
                         <div class="custom-view">
@@ -307,7 +307,7 @@
             acceptLabel="{{'general.acceptLabel' | translate}}"
             rejectLabel="{{'general.rejectLabel' | translate}}"
             message="{{'general.confirmDelete' | translate}}" 
-            icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+            icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
         </p-confirmDialog>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-veiw-rightside">
@@ -342,7 +342,7 @@
     </div>
 </div>
   <!-- franchise details popup -->
-<p-dialog header="{{'franchise.editFranchiseDetails'|translate}}" [modal]="true" [draggable]="false" [resizable]="false" appendTo="body" [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
+<p-dialog header="{{'franchise.editFranchiseDetails'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"   [(visible)]="displayBasic" [style]="{width: '65vw'}" [baseZIndex]="1">
     <form [formGroup]="firstForm" (ngSubmit)="firstFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
@@ -476,7 +476,7 @@
 </p-footer> -->
 </p-dialog>
 <!-- contact information popup -->
-<p-dialog header={{header}} [(visible)]="displayBasic1" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [style]="{width: '65vw'}" [baseZIndex]="10000">
+<p-dialog header={{header}} [(visible)]="displayBasic1" [modal]="true" [draggable]="false" [resizable]="false"    [style]="{width: '65vw'}" [baseZIndex]="10000">
     <form [formGroup]="secondForm" (ngSubmit)="secondFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
@@ -528,7 +528,7 @@
     </form>
 </p-dialog>
 <!-- fee management popup -->
-<p-dialog header="{{'franchise.createFeeStructure'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
+<p-dialog header="{{'franchise.createFeeStructure'|translate}}" [modal]="true" [draggable]="false" [resizable]="false"    [(visible)]="displayBasic2" [style]="{width: '65vw'}" [baseZIndex]="10000">    
     <form [formGroup]="thirdForm" (ngSubmit)="thirdFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12 mb-3">

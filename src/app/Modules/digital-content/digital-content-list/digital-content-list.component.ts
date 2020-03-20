@@ -18,7 +18,7 @@ export class DigitalContentListComponent implements OnInit {
   cols:any;
   totalRecords: number; 
   first:number=0;
-  listParamsRef:any={};
+  listParamsRef:LazyLoadEvent;
   constructor(private _router: Router,
              private _ar: ActivatedRoute,
              private _service: ContentService,
@@ -52,7 +52,7 @@ export class DigitalContentListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._service.getdigitalContentList(params).subscribe(res=>{
       if(res.status){
         this.cols = (res.data.table_headers)?res.data.table_headers:[];
@@ -70,7 +70,6 @@ export class DigitalContentListComponent implements OnInit {
         this._cService.delete(params).subscribe(res=>{
           if(res.status){
             this.getList();
-          }else{
           }
         });
       },
@@ -78,14 +77,15 @@ export class DigitalContentListComponent implements OnInit {
     });
   }
   getList(){
-    this.first = this.listParamsRef.updates[0].value;
-    this._service.getdigitalContentList(this.listParamsRef).subscribe(res=>{
+    this.first = this.listParamsRef.first;
+    this.loadDigitalContentLazy(this.listParamsRef);
+    /*this._service.getdigitalContentList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.list = res.data.data;
         this.totalRecords = res.data.total_records;
       }
-    });
+    });*/
   }
   selectedTag:any=[];
   selectTag(event,tag: any, overlaypanel: OverlayPanel) {

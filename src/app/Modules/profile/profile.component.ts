@@ -50,8 +50,10 @@ export class ProfileComponent implements OnInit {
 
     this.passwordForm  = new FormGroup({
       old_password: new FormControl('', [Validators.required]),
-      new_password :new FormControl('',[Validators.required]),
-      confirm_password:new FormControl('',[Validators.required])
+      new_password :new FormControl('',[Validators.required, Validators.minLength(8),
+        Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')]),
+      confirm_password:new FormControl('',[Validators.required, Validators.minLength(8),
+        Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')])
     });
 
     this.othersForm  = new FormGroup({

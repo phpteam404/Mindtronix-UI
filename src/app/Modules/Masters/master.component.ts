@@ -32,7 +32,7 @@ export class MasterComponent implements OnInit {
   selectedMaster: Master[];
   displayBasic: boolean;
   submitted=null;
-
+  dialogHeader:any='';
   constructor(private router: Router, 
               private _service: MasterService,
               private _commonService: CommonService,
@@ -58,8 +58,12 @@ export class MasterComponent implements OnInit {
     if(isCreate){
       this.form.reset();
       this.displayButton = true;
+      this.dialogHeader="masters.createDialogHeader";
     }
-    else this.displayButton = false;
+    else {
+      this.displayButton = false;
+      this.dialogHeader="masters.updateDialogHeader";
+    }
 
     this.isCreate = isCreate;
     if(!isCreate){

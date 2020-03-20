@@ -5,7 +5,7 @@
             <ng-template pTemplate="caption">               
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'trainers.search'|translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search" [ngClass]="{'search-right': !hideSchedule}"></i> 
                     </div>
@@ -48,5 +48,5 @@
     acceptLabel="{{'general.acceptLabel' | translate}}"
     rejectLabel="{{'general.rejectLabel' | translate}}"
     message="{{'general.confirmDelete' | translate}}" 
-    icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+    icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
 </p-confirmDialog>

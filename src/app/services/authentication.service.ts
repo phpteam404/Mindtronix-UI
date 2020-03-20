@@ -22,6 +22,9 @@ export class AuthenticationService {
       console.log('isTokenExpired params', params);
       return this.http.post('User/access',params);
     }
+    forgotPassword(params){
+      return this.http.post('Signup/forgetPassword',params);
+    }
     logout() {
       // remove user from local storage to log user out
       this.ls.removeItem('user');

@@ -2,7 +2,7 @@
     <div class="custom-table masters-list">
         <p-table #dt [columns]="cols" [value]="MasterChilds" [paginator]="true" [rows]="10">
             <ng-template pTemplate="caption">
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-md-4 col-12 text-left input-dropdown">
                         <p-dropdown [options]="Masterslist" [filter]="true" [(ngModel)]="selectedMaster" (onChange)="ChangeMasterParent($event)" optionLabel="master_name"></p-dropdown >
                     </div>
@@ -16,6 +16,22 @@
                             <button pButton type="button" label="+" class="btn-warning" (click)="showBasicDialog({},true)"></button>
                         </div>
                     </div>
+                </div> -->
+                <div class="custom-search justify-content-between">
+                    <div class="d-flex">
+                        <div class="input-dropdown">
+                            <!-- <label>{{'users.add.franchise' |translate}} : &nbsp;</label> -->
+                            <p-dropdown [options]="Masterslist" [filter]="true" [(ngModel)]="selectedMaster" (onChange)="ChangeMasterParent($event)" optionLabel="master_name"></p-dropdown >
+                        </div>
+                    </div>                  
+                    <div class="d-flex">
+                        <div class="input-search">
+                            <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}" class="mr-2"
+                            (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
+                            <i class="fa fa-search"></i> 
+                        </div>
+                        <button pButton type="button" label="{{'masters.create' | translate}}" class="btn-warning" (click)="showBasicDialog({},true)"></button>
+                    </div>                  
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -49,13 +65,13 @@
         </p-table>
     </div>
 </div>
-<p-dialog header="Add/Edit Master" [(visible)]="displayBasic" 
+<p-dialog header="{{dialogHeader | translate}}" [(visible)]="displayBasic" 
             [modal]="true" 
             [style]="{width: '50vw'}" 
             [baseZIndex]="10000" 
             [draggable]="false" 
             [resizable]="false"  
-            appendTo="body">
+             >
     <form [formGroup]="form" (ngSubmit)="submit()">
         <div class="row custom-form">
             <div class="col-md-4 col-12">
@@ -87,5 +103,5 @@
     acceptLabel="{{'general.acceptLabel' | translate}}"
     rejectLabel="{{'general.rejectLabel' | translate}}"
     message="{{'general.confirmDelete' | translate}}" 
-    icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+    icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
 </p-confirmDialog>

@@ -44,7 +44,8 @@ export class UpdateStudentComponent implements OnInit {
 
     this.maxDate = new Date();
     _ar.paramMap.subscribe(params => {
-      var id = atob(params['params']['id?:school_id']);
+      console.log('*********', params['params']);
+      var id = atob(params['params']['id?:school_id?:franchise_id']);
       var param = new HttpParams().set('user_id', id);
       _service.getStudentById(param).subscribe(res => {
         if (res.status) {

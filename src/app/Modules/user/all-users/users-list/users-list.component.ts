@@ -27,7 +27,7 @@ export class UsersListComponent implements OnInit {
   franchiseList: any[];
   cols: any[];
   first:number=0;
-  listParamsRef:any={};
+  listParamsRef:LazyLoadEvent;
   franchiseFilter:any='';
   constructor(private router: Router,
               private _service:UserService,
@@ -41,7 +41,6 @@ export class UsersListComponent implements OnInit {
 
   ngOnInit(): void {
     this._route.queryParams.subscribe(params => {
-      console.log('params info',params);
       if(params['franchise_id']){
         this.id = atob(params['franchise_id']);
         this.loading = false;
@@ -95,8 +94,7 @@ export class UsersListComponent implements OnInit {
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }
-  loadSchoolsLazy(event: LazyLoadEvent) {
-    console.log('event--', event);
+  loadUserssLazy(event: LazyLoadEvent) {
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
     var params = new HttpParams()
       .set('start', event.first+'')
@@ -121,9 +119,11 @@ export class UsersListComponent implements OnInit {
         this.franchiseFilter = event.filters['franchise_id'].value.value;
       }
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._service.getUsersList(params).subscribe(res=>{
       if(res.status){
+        if(params.get('franchise_id')) this.franchiseFilter = params.get('franchise_id');
+        else this.franchiseFilter='';
         this.cols = res.data.table_headers;
         this.allUsersList = res.data.data;
         this.totalRecords = res.data.total_records;
@@ -133,13 +133,8 @@ export class UsersListComponent implements OnInit {
   }
 
   getList(){
-    this.first = this.listParamsRef.updates[0].value;
-    this._service.getUsersList(this.listParamsRef).subscribe(res=>{
-      if(res.status){
-        this.cols = res.data.table_headers;
-        this.allUsersList = res.data.data;
-        this.totalRecords = res.data.total_records;
-      }
-    });
+    this.first = this.listParamsRef.first;
+    console.log('this.listParamsRef--', this.listParamsRef);
+    this.loadUserssLazy(this.listParamsRef);
   }
 }

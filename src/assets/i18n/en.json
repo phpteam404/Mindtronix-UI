@@ -3,16 +3,19 @@
         "userName": "User Name",
         "password": "Password",
         "userNameError": "User Name is required",
-        "passwordError": "Password is required"
+        "passwordError": "Password is required",
+        "enterUserName": "Enter User Name",
+        "forgotPassword": "Forgot Password"
     },
     "franchise":{
         "create": "Create Franchise",
         "franchiseDetails": "Franchise Details",
         "contactInfo": "Contact Information",
         "feeManagement": "Fee Management",
-        "createFeeStructure":"Create Fee Structure",
+        "createFeeStructure":"Create Fee Master",
         "createContactInformation":"Create Contact Information",
         "editFranchiseDetails":"Edit Franchise Details",
+        "search":"Search by Code / Name / Email / Contact / City",
         "add":{
             "franchiseName":"Franchise Name",
             "franchiseCode":"Franchise Code",
@@ -29,7 +32,7 @@
             "status":"Status",
             "contactTitle":"Contact Title",
             "name":"Name",
-            "feeStructure":"Fee Structure"
+            "feeStructure":"Fee Master"
         },
         "view":{
             "#schools":"# Schools",
@@ -46,30 +49,32 @@
        
     },
     "fee":{
-        "createfee":"Create Fee Structure",
-        "updatefee":"Update Fee Structure",
+        "createfee":"Create Fee Master",
+        "updatefee":"Update Fee Master",
         "feeTitle":"Fee Title",
         "feeAmount":"Fee Amount",
         "term":"Term",
         "discount":"Discount",
         "discountDetails":"Discount Details",
-        "status":"Status"
+        "status":"Status",
+        "search":"Search by Fee Title / Term / Discount"
         
     },
     "users":{
-         "userCreate":"Create User",
-         "userUpdate":"Update User",
-      "add":{
-             "firstName":"First Name",
-             "lastName":"Last Name",
-             "role": "Role",
-             "franchise":"Franchise",
-             "contactEmail":"Contact Email",
-             "contactNumber":"Contact Number",
-             "password":"Password",
-             "confirmPassword":"Confirm Password",
-             "status":"Status"
-         }
+        "userCreate":"Create User",
+        "userUpdate":"Update User",
+        "search":"Search by Name / Email / Contact / Franchise",
+        "add":{
+            "firstName":"First Name",
+            "lastName":"Last Name",
+            "role": "Role",
+            "franchise":"Franchise",
+            "contactEmail":"Contact Email",
+            "contactNumber":"Contact Number",
+            "password":"Password",
+            "confirmPassword":"Confirm Password",
+            "status":"Status"
+        }
        
     },
     "student":{
@@ -80,13 +85,14 @@
          "educationDetails":"Education Details",
          "medicalInfo":"Medical Information",
          "currentStatus":"Current Status",
+         "search":"Search by Name / School / Email / Contact / Franchise",
          "add":{
               "name":"Student Name",
               "dateOfBirth":"Date of Birth",
               "nationality":"Nationality",
               "placeOfBirth":"Place of Birth",
               "motherTongue":"Mother Tongue",
-              "feeStructure":"Fee Structure",
+              "feeStructure":"Fee Master",
               "address":"Address",
               "parentName":"Name of Parent/Guardian",
               "studentContactEmail":"Contact Email",
@@ -105,7 +111,7 @@
          },
          "view":{
              "studentName":"Student Name",
-             "feeStructure":"Fee Structure",
+             "feeStructure":"Fee Master",
              "lastInvoiceAmount":"Last Invoice Amount",
              "lastLogin":"Last Login",
              "studentHistory":"Student History",
@@ -126,7 +132,9 @@
 
     },
     "masters":{
-        "dialogHeader":"Add/Edit Master",
+        "createDialogHeader":"Create Master",
+        "updateDialogHeader":"Update Master",
+        "create":"Create Master",
         "name":"Name",
         "description":"Description"
     },
@@ -137,7 +145,8 @@
           "description":"Description",
           "date":"Date",
           "fromTime":"From Time",
-          "toTime":"To Time"
+          "toTime":"To Time",
+          "search":"Search by Topic"
     },
     "ticket":{
         "createTicket":"Create Ticket",
@@ -209,6 +218,7 @@
          }
      },
     "buttons":{
+        "send": "Send",
         "save": "Save",
         "create": "Create",
         "delete": "Delete",
@@ -229,7 +239,7 @@
         "contactTitle":"Contact Title is required",
         "contactName" :"Contact Name is required",
         "email":"Enter valid email",
-        "feeStructure":"Fee Structure is required",
+        "feeStructure":"Fee Master is required",
         "websiteAddress":"website address is Invalid",
         "userName":"Name is required!",
         "userRole":"Role is required!",
@@ -295,7 +305,7 @@
         "nationality":"Select Nationality",
         "placeOfBirth":"Place of Birth",
         "motherTongue":"Select Mother Tongue",
-        "feeStructure":"Select Fee Structure",
+        "feeStructure":"Select Fee Master",
         "address":"Address",
         "parentGuardianName":"Parent/Guardian Name",
         "parentEmail":"Parent Email",
@@ -316,7 +326,7 @@
         "websiteAddress":"www.mindtronix.com",
         "title":"Select Title",
         "contactName":"Contact Name",
-        "feestructure":"Fee Structure",
+        "feestructure":"Fee Master",
         "term":"Select Term",
         "tags":"Enter your tags here",
         "contentLevel":"Select content Level",
@@ -334,9 +344,10 @@
         "add":"Add",
         "view":"View",
         "addContact":"Add Contact",
-        "addFeeStructure":"Add Fee Structure",
+        "addFeeStructure":"Add Fee Master",
         "manageStudents":"Manage Students",
-        "manageUsers":"Manage Users"
+        "manageUsers":"Manage Users",
+        "manageSchoools":"Manage Schools"
     },
     "info":{
         "password":"Password must be combination of upper and lower alphabets, numbers and special characters ($@!%*#?&().-_=+) of 8-20 characters"

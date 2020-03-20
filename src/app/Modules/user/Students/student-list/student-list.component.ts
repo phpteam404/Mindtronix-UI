@@ -21,16 +21,20 @@ export class StudentListComponent implements OnInit {
   cols: any[];
   totalRecords: number; 
   loading: boolean;
+  loading1: boolean;
   displayBasic: boolean;
   schools:any[];
   franchise:any[];
   studentsList:any;
   first:number=0;
   schoolFilter:any;
+  franchiseFilter:any;
   studentId:any;
+  franchiseId:any;
   dataInfo:any;
-  listParamsRef:any={};
-  franchiseFilter:any='';
+  listParamsRef:LazyLoadEvent;
+  schoolFilterId:any='';
+  franchiseFilterId:any='';
   constructor(private _router: Router, 
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
@@ -47,17 +51,23 @@ export class StudentListComponent implements OnInit {
   /*
     this service is for getting franchise dropdown through service
   */
+  @ViewChild('dt') dt: Table;
   getFranchiseList(){
     this._fService.getFranchiseDropDowns({}).subscribe(res=>{
       if(res.status){
         this.franchise = res.data.data;
+        this.franchise.forEach(item => {
+          if(item.value == this.franchiseId){
+            this.dt.filter(item,'franchise_id','equals');
+            this.franchiseFilter=item;
+          }
+        });
       }
     });
   }
   /*
     this service is for getting schools dropdown through service
   */
-  @ViewChild('dt') dt: Table;
   getSchoolsList() {
     this._schoolService.getSchoolsDropDowns({}).subscribe(res=>{
       if(res.status){
@@ -75,11 +85,18 @@ export class StudentListComponent implements OnInit {
   ngOnInit(): void {
     this.getFranchiseList();
     this._ar.queryParams.subscribe(params => {
-      if(params['school_id']){
-        this.studentId = atob(params['school_id']);
-        this.loading=false;
+      if(params['school_id'] || params['franchise_id']){
+        if(params['school_id']){
+          this.studentId = atob(params['school_id']);
+          this.loading=false;
+        }
+        if(params['franchise_id']){
+          this.franchiseId = atob(params['franchise_id']);
+          this.loading1=false;
+        }
       }else{
         this.loading=true;
+        this.loading1=true;
       }
     });
     this.getSchoolsList();
@@ -90,16 +107,28 @@ export class StudentListComponent implements OnInit {
   }
 
   EditStudent(data:any){
-    if(this.franchiseFilter)
-      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.franchiseFilter)},relativeTo: this._ar});
+    if(this.schoolFilterId && this.franchiseFilterId=='')
+      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.schoolFilterId)},relativeTo: this._ar});
+    else if(this.schoolFilterId=='' && this.franchiseFilterId)
+      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{queryParams:{'franchise_id':btoa(this.franchiseFilterId)},relativeTo: this._ar});
+    else if(this.schoolFilterId && this.franchiseFilterId)
+      this._router.navigate(['update',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.schoolFilterId),'franchise_id':btoa(this.franchiseFilterId)},relativeTo: this._ar});
     else
       this._router.navigate(['update',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});
   }
   viewStudent(data:any){
-    if(this.franchiseFilter)
-      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.franchiseFilter)},relativeTo: this._ar});
+    if(this.schoolFilterId && this.franchiseFilterId=='')
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.schoolFilterId)},relativeTo: this._ar});
+    else if(this.schoolFilterId=='' && this.franchiseFilterId)
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'franchise_id':btoa(this.franchiseFilterId)},relativeTo: this._ar});
+    else if(this.schoolFilterId && this.franchiseFilterId)
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.schoolFilterId),'franchise_id':btoa(this.franchiseFilterId)},relativeTo: this._ar});
     else
       this._router.navigate(['view',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});
+    /*if(this.schoolFilterId)
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{queryParams:{'school_id':btoa(this.schoolFilterId)},relativeTo: this._ar});
+    else
+      this._router.navigate(['view',data.student_name,btoa(data.user_id)],{relativeTo: this._ar});*/
   }
 
   DeleteStudent(data) {
@@ -125,51 +154,75 @@ export class StudentListComponent implements OnInit {
     return (this.totalRecords == 0 ? true : false);
   }
   loadStudentsLazy(event: LazyLoadEvent) {
+    console.log('event*-*-*-*', event);
+    console.log('event.filters["franchise_id"]', event.filters['franchise_id']);
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
-      var params = new HttpParams()
-        .set('start', event.first+'')
-        .set('number', event.rows+'');
-      if (event.sortField) {
-        params = params.set('sort', event.sortField);
-        params = params.set('order', sortOrder);
-      }
-      if (event.globalFilter) {
-        params = params.set('search_key', event.globalFilter);
-      }      
-      if(event.filters['equals']){
-        params =params.set('franchise_id',event.filters['equals'].value.value);
-      }
+    var params = new HttpParams()
+      .set('start', event.first+'')
+      .set('number', event.rows+'');
+    if (event.sortField) {
+      params = params.set('sort', event.sortField);
+      params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+      params = params.set('search_key', event.globalFilter);
+    }
+    /* if(event.filters['equals']){
+      params =params.set('franchise_id',event.filters['equals'].value.value);
+    }*/
     if(this.loading){
       if(event.filters['school_id']){
         params =params.set('school_id',event.filters['school_id'].value.value);
-        this.franchiseFilter = event.filters['school_id'].value.value;
+        this.schoolFilterId = event.filters['school_id'].value.value;
       }
     }else {
       if(event.filters['school_id'] == undefined){
-        return false;
+        if(event.filters['franchise_id'] == undefined) return false;
+        else{}
       }else{
         params =params.set('school_id',event.filters['school_id'].value.value);
-        this.franchiseFilter = event.filters['school_id'].value.value;
+        this.schoolFilterId = event.filters['school_id'].value.value;
+      }
+    }    
+    if(this.loading1){
+      if(event.filters['franchise_id']){
+        params =params.set('franchise_id',event.filters['franchise_id'].value.value);
+        this.franchiseFilterId = event.filters['franchise_id'].value.value;
+      }
+    }else {
+      if(event.filters['franchise_id'] == undefined){
+        if(event.filters['school_id'] == undefined) return false;
+        else{}
+      }else{
+        params =params.set('franchise_id',event.filters['franchise_id'].value.value);
+        this.franchiseFilterId = event.filters['franchise_id'].value.value;
       }
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._service.getStudentsList(params).subscribe(res=>{
       if(res.status){
+        if(params.get('school_id')) this.schoolFilterId = params.get('school_id');
+        else this.schoolFilterId ='';
+        if(params.get('franchise_id')) this.franchiseFilterId = params.get('franchise_id');
+        else this.franchiseFilterId = '';
+        
         this.cols = res.data.table_headers;
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
         this.loading = true;
+        this.loading1 = true;
       }
     });
   }
   // called after record delete instead of lazyLoadEvent function 
   getList(){
-    this.first = this.listParamsRef.updates[0].value;
-    this._service.getStudentsList(this.listParamsRef).subscribe(res=>{
+    this.first = this.listParamsRef.first;
+    this.loadStudentsLazy(this.listParamsRef);
+    /*this._service.getStudentsList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.studentsList = res.data.data;
         this.totalRecords = res.data.total_records;
       }
-    });
+    });*/
   }  
 }

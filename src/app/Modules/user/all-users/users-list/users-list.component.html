@@ -1,6 +1,6 @@
 <div class="main-content">
     <div class="custom-table">
-        <p-table #dt [columns]="cols" [value]="allUsersList"  [lazy]="true" (onLazyLoad)="loadSchoolsLazy($event)" 
+        <p-table #dt [columns]="cols" [value]="allUsersList"  [lazy]="true" (onLazyLoad)="loadUserssLazy($event)" 
             [paginator]="true" [rows]="10" [(first)]="first" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <!-- <div class="custom-search">
@@ -23,7 +23,7 @@
                     </div>                  
                     <div class="d-flex">
                         <div class="input-search">
-                            <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
+                            <input type="text" pInputText size="50" placeholder="{{'users.search'|translate}}" class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <i class="fa fa-search"></i> 
                         </div>
@@ -71,5 +71,5 @@
                 acceptLabel="{{'general.acceptLabel' | translate}}"
                 rejectLabel="{{'general.rejectLabel' | translate}}"
                 message="{{'general.confirmDelete' | translate}}" 
-                icon="pi pi-exclamation-triangle" class="confirm-dialog" appendTo="body">
+                icon="pi pi-exclamation-triangle" class="confirm-dialog"  >
 </p-confirmDialog>

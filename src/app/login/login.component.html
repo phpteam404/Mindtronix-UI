@@ -80,7 +80,7 @@
                                     <button pButton type="submit" label="SIGN IN" class="btn-warning"></button>
                                 </div>
                                 <div class="col-12 forget-psd">
-                                    <a class="" href="javascript:;">Forgot password ?</a>
+                                    <a class="" href="javascript:;" (click)="showForgotPassword(true)">{{'login.forgotPassword' | translate }} ?</a>
                                 </div>
                             </form>
                         </div>
@@ -90,3 +90,23 @@
         </div>
     </div>
 </div>
+<p-dialog header="{{'login.forgotPassword' | translate }}" [modal]="true" [draggable]="false" [resizable]="false"   [(visible)]="forgotPasswordDialog" [style]="{width: '30vw'}" [baseZIndex]="10000">    
+    <form [formGroup]="passwordForm" (ngSubmit)="forgotPassword()">
+        <div class="row custom-form">
+            <div class="col-md-12 col-12">
+                <div class="form-group">
+                    <input pinputtext placeholder="{{'login.enterUserName' | translate }}" formControlName="username"
+                        name="username" type="email" required>
+                    <div class="invalid-feedback"
+                        *ngIf="passwordForm.controls.username.invalid && submitted1!=null && !submitted1"
+                        [ngClass]=" 'error'">  {{'login.userNameError' | translate }} 
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-center mb-2">
+            <button pButton class="btn-warning mr-2" type="submit" label="{{'buttons.send'|translate}}"></button>
+            <button pButton class="btn-default" type="button" label="{{'buttons.cancel'|translate}}" (click)="showForgotPassword(false);"></button>
+        </div>
+    </form>
+</p-dialog>

@@ -26,7 +26,7 @@ export class SchoolListComponent implements OnInit {
   franchiseList: any[];
   cols: any[];
   first:number=0;
-  listParamsRef:any={};
+  listParamsRef:LazyLoadEvent;
   franchiseFilter:any='';
 
   constructor(private _router: Router,
@@ -68,7 +68,7 @@ export class SchoolListComponent implements OnInit {
     });
   }
 
-  AddNewSchool(event: Event){
+  AddNewSchool(){
     this._router.navigate(['add'], {relativeTo: this._ar});
   }
   EditSchool(data:any){
@@ -126,9 +126,11 @@ export class SchoolListComponent implements OnInit {
         this.franchiseFilter = event.filters['franchise_id'].value.value;
       }
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._service.getschoolsList(params).subscribe(res=>{
       if(res.status){
+        if(params.get('franchise_id')) this.franchiseFilter = params.get('franchise_id');
+        else this.franchiseFilter='';
         this.cols = res.data.table_headers;
         this.schoolsList = res.data.data;
         this.totalRecords = res.data.total_records;
@@ -138,16 +140,14 @@ export class SchoolListComponent implements OnInit {
   }
    
   getschoolList(){
-    var params = new HttpParams()
-                  .set('start',0+'')
-                  .set('number',10+'')
-    this.first = this.listParamsRef.updates[0].value;
-    this._service.getschoolsList(this.listParamsRef).subscribe(res=>{
+    this.first = this.listParamsRef.first;
+    this.loadSchoolsLazy(this.listParamsRef);
+    /*this._service.getschoolsList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.schoolsList = res.data.data;
         this.totalRecords = res.data.total_records;
       }
-    });
+    });*/
   }
 }

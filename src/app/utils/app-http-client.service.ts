@@ -49,7 +49,7 @@ export class AppHttpClientService {
    * @returns {Observable<T>}
    */
   public get<T>(endPoint: string,data?: any, options?: IRequestOptions): Observable<any> {
-   // this.pendingRequestsNumber++;
+      this.pendingRequestsNumber++;
         const params = new URLSearchParams();
         var appendParams=false;
         if(data && data.updates !=undefined){
@@ -70,7 +70,7 @@ export class AppHttpClientService {
           if(appendParams)endPoint = endPoint+"?"+param;
         }
     return this.http.get(this.api + endPoint, options).pipe(map((res: Response) => {
-         // this.pendingRequestsNumber--;
+         this.pendingRequestsNumber--;
           return this.resStatus(res);
       }, err => {
          // this.pendingRequestsNumber--;
@@ -89,7 +89,7 @@ export class AppHttpClientService {
 
     this.pendingRequestsNumber++;
     let param: any = {};
-    console.log('post params--', params);
+    // console.log('post params--', params);
     if (this.encrypt) {
         param.requestData = CryptoJS.AES.encrypt(JSON.stringify(params), this.key, this.enycOptions).toString();
     } else {

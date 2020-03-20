@@ -1,11 +1,11 @@
 <div class="main-content">
     <div class="custom-table fee-list">
-        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [paginator]="true" 
+        <p-table #dt [columns]="cols" [value]="list" [lazy]="true" (onLazyLoad)="loadFeeLazy($event)" [paginator]="true" 
             [rows]="10" [totalRecords]="totalRecords" [(first)]="first">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="{{'placeholder.search'|translate}}" class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'fee.search'|translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>

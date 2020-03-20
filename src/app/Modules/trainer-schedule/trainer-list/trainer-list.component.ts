@@ -23,7 +23,7 @@ export class TrainerListComponent implements OnInit {
   hideSchedule:boolean=false;
   first:number=0;
   TrainersList =[];
-  listParamsRef:any;
+  listParamsRef:LazyLoadEvent;
   constructor(private router: Router, 
               private _toast: ToasterService,
               private _route: ActivatedRoute,
@@ -81,7 +81,7 @@ export class TrainerListComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    this.listParamsRef = params;
+    this.listParamsRef = event;
     this._uService.getTrainersList(params).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
@@ -92,14 +92,15 @@ export class TrainerListComponent implements OnInit {
   }
   
   getTrainersListInfo(){
-    this.first = this.listParamsRef.updates[0].value;
-    this._uService.getTrainersList(this.listParamsRef).subscribe(res=>{
+    this.first = this.listParamsRef.first;
+    this.loadTrainersLazy(this.listParamsRef);
+   /*this._uService.getTrainersList(this.listParamsRef).subscribe(res=>{
       if(res.status){
         this.cols = res.data.table_headers;
         this.TrainersList = res.data.data;
         this.totalRecords = res.data.total_records;
       }
-    });
+    });*/
   }
 
   conditionalValidation(){
