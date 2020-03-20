@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators,ReactiveFormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { UserService } from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
@@ -21,12 +21,14 @@ export class AddUserComponent implements OnInit {
   submitted = null;
   roles: any;
   franchise: any;
+  franchiseId: any;
   status: any;
   isUpdate:boolean=false;
   enableFranchise:boolean=true;
 
   formObj: any = {};
   constructor(private _router: Router,
+              private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _service: UserService,
               private _franchise: FranchiseService,
@@ -50,7 +52,6 @@ export class AddUserComponent implements OnInit {
     this.getRolesList();
     this.getMasterList('status');
     this.getFranchiseList();
-    console.log('this.status--', this.status);
     this.addUserForm = new FormGroup({
       first_name: new FormControl('',[Validators.required]),
       last_name: new FormControl(''),
@@ -66,6 +67,11 @@ export class AddUserComponent implements OnInit {
                                       Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
       ])
     });
+    this._ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
+    });
   }
   
   getStatus(){return this.addUserForm.controls.status.value.value;}
@@ -74,8 +80,6 @@ export class AddUserComponent implements OnInit {
 
   submit(): any{
     this.submitted = false;
-    console.log('this.addUserForm---', this.addUserForm.value);
-    console.log('this.addUserForm errors---', this.addUserForm);
     if (this.addUserForm.valid) {
       let pass = this.addUserForm.get('password').value;
       let confirmPass = this.addUserForm.get('cpassword').value;    
@@ -91,9 +95,8 @@ export class AddUserComponent implements OnInit {
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._router.navigate(['users/all-users']);
+          this.cancel();
         }
-        console.log('form value---', this.addUserForm.value);
       });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -131,11 +134,12 @@ export class AddUserComponent implements OnInit {
     });
   }
   cancel(){
-    this._router.navigate(['users/all-users']);
+    if(this.franchiseId)
+      this._router.navigate(['users/all-users'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else this._router.navigate(['users/all-users']);
   }
   roleBasedFranchise(){
     var roleId =this.getuserRole();
-    console.log('roleId--',roleId);
     if(Number(roleId)==5) {
       this.addUserForm.get('franchise_id').clearValidators();      
       this.addUserForm.controls['franchise_id'].updateValueAndValidity();

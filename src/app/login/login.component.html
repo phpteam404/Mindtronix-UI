@@ -99,7 +99,7 @@
                         name="username" type="email" required>
                     <div class="invalid-feedback"
                         *ngIf="passwordForm.controls.username.invalid && submitted1!=null && !submitted1"
-                        [ngClass]=" 'error'">  {{'login.userNameError' | translate }} 
+                        [ngClass]=" 'error'">  {{'login.emailInvalid' | translate }} 
                     </div>
                 </div>
             </div>

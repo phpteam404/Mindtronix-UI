@@ -69,7 +69,10 @@ export class SchoolListComponent implements OnInit {
   }
 
   AddNewSchool(){
-    this._router.navigate(['add'], {relativeTo: this._ar});
+    if(this.franchiseFilter)
+      this._router.navigate(['add'],{queryParams:{'franchise_id':btoa(this.franchiseFilter)},relativeTo: this._ar});
+    else
+      this._router.navigate(['add'],{ relativeTo: this._ar});
   }
   EditSchool(data:any){
     if(this.franchiseFilter)

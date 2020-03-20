@@ -5,7 +5,7 @@
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}" class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="{{'digitalContent.search' | translate}}" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
@@ -14,7 +14,8 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias"
+                        [ngClass]="[(columns.length-3===i) ? 'text-right' : '']">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != (columns.length-1)" [field]="col.field"></p-sortIcon>
                     </th>
@@ -22,7 +23,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index" (click)="(i != (columns.length-1)) && viewContent(rowData)">
+                    <td *ngFor="let col of columns ; let i = index" [ngClass]="[(columns.length-3===i) ? 'text-right' : '']"
+                        (click)="(i != (columns.length-1)) && viewContent(rowData)">
                         <span *ngIf="(i != (columns.length-2) && i != (columns.length-1))" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                      
                         <!-- <span *ngIf="i == 5" title="{{rowData[col.field]}}" class="d-flex action-color overlay">
                             <span *ngIf="rowData[col.field].split(',')[0]">{{rowData[col.field].split(',')[0]}}</span>

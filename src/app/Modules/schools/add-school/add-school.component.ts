@@ -4,7 +4,7 @@ import { ToasterService } from 'src/app/utils/toaster.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { MasterService } from 'src/app/services/master.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { HttpParams } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
@@ -24,8 +24,10 @@ export class AddSchoolComponent implements OnInit {
   city:any=[];
   country:any=[];
   hideFranchise:boolean;
+  franchiseId:any;
 
   constructor(private _router: Router,
+              private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _ls: LocalStorageService,
               private schoolService:SchoolService,
@@ -53,6 +55,11 @@ export class AddSchoolComponent implements OnInit {
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
     this.conditionalValidation();
+    this._ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
+    });
   }
 
   getFranchiseDropdown(){
@@ -108,7 +115,9 @@ export class AddSchoolComponent implements OnInit {
   }
 
   goToList(){
-    this._router.navigate(['schools_management']);
+    if(this.franchiseId)
+      this._router.navigate(['schools_management'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else this._router.navigate(['schools_management']);
   }
 
   conditionalValidation(){

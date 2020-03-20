@@ -248,15 +248,17 @@
             <div class="col-md-12 col-12 mt-10" *ngIf="fileArr.length>0">
                 <div class="form-group">
                     <label>{{'digitalContent.add.fileSelected'|translate}} </label>
-                    <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
-                        <span class="file-text" title="{{file.name}}">{{file.name}}</span>
-                        <span class="file-size">{{file.sizeVal}}</span>
-                        <span>
-                            <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
-                                <span class="icon icon-delete wd-30"></span>
-                            </a>
-                        </span>
-                    </div>
+                    <div class="custom-scroll">
+                        <div *ngFor="let file of fileArr; let i = index" class="selected-file-list">
+                            <span class="file-text" title="{{file.name}}">{{file.name}}</span>
+                            <span class="file-size">{{file.sizeVal}}</span>
+                            <span>
+                                <a href="javascript:;" (click)="deleteSelectedFile(i)" title="{{'title.delete'|translate}}">
+                                    <span class="icon icon-delete wd-30"></span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>                    
                 </div>
             </div>
         </div>      

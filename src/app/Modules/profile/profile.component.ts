@@ -97,7 +97,9 @@ export class ProfileComponent implements OnInit {
     this.submitted = false;
     if (this.basicInformationForm.valid) {
       var params={};
-      params = this.basicInformationForm.value;
+      params['first_name'] = this.basicInformationForm.value.first_name;
+      params['last_name'] = this.basicInformationForm.value.last_name;
+      params['phone_no'] = this.basicInformationForm.value.phone_no;
       this._cService.addProfile(params).subscribe(res => {
         if (res.status) {
           var obj={};

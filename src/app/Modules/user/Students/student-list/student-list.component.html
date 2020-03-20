@@ -6,12 +6,14 @@
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
                         <div class="input-dropdown">
+                            <label>{{'student.school' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="schools" placeholder="{{'placeholder.schoolName'|translate}}" [showClear]="true"
                                 [(ngModel)]="schoolFilter"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'school_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
                         <div class="input-dropdown ml-2">
+                            <label>{{'student.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchise" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseFilter"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'franchise_id', 'equals')"

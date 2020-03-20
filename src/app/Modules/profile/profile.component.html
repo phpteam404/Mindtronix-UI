@@ -71,28 +71,28 @@
                                                 <input pPassword  placeholder="Old Password" formControlName="old_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.old_password.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'">Old  Password required
+                                                    [ngClass]=" 'error'">{{'errorMessages.oldPassword'|translate}}
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
+                                        <div class="col-md-6 col-12 mb-3">
                                             <div class="form-group">
                                                 <label>{{'profile.newPassword'|translate}}</label>
                                                 <input   placeholder="New Password" formControlName="new_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.new_password.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'">Password must contain atleat one Number,one special
+                                                    [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
                                                 </div>
                                                 <!-- <div class="invalid-feedback" *ngIf="passwordForm.controls.newPassword">Password Must contain atleast one number one capital letter</div> -->
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12">
+                                        <div class="col-md-6 col-12 mb-3">
                                             <div class="form-group">
                                                 <label>{{'profile.confirmPassword'|translate}}</label>
                                                 <input pPassword  placeholder="Confirm Password" formControlName="confirm_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.confirm_password.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'"> Confirm Password required
+                                                    [ngClass]=" 'error'"> {{'errorMessages.confirmPassword'|translate}}
                                                 </div>
                                             </div>
                                         </div>

@@ -5,6 +5,7 @@
         "userNameError": "User Name is required",
         "passwordError": "Password is required",
         "enterUserName": "Enter User Name",
+        "emailInvalid": "Invalid User Name",
         "forgotPassword": "Forgot Password"
     },
     "franchise":{
@@ -45,8 +46,7 @@
             "paid":"Paid",
             "collected":"Collected",
             "statistics":"Statistics"
-        }
-       
+        }       
     },
     "fee":{
         "createfee":"Create Fee Master",
@@ -74,8 +74,7 @@
             "password":"Password",
             "confirmPassword":"Confirm Password",
             "status":"Status"
-        }
-       
+        }       
     },
     "student":{
          "createStudent":"Create Student",
@@ -85,6 +84,8 @@
          "educationDetails":"Education Details",
          "medicalInfo":"Medical Information",
          "currentStatus":"Current Status",
+         "school":"School",
+         "franchise":"Franchise",
          "search":"Search by Name / School / Email / Contact / Franchise",
          "add":{
               "name":"Student Name",
@@ -135,6 +136,8 @@
         "createDialogHeader":"Create Master",
         "updateDialogHeader":"Update Master",
         "create":"Create Master",
+        "master":"Master",
+        "masterType":"Master Type",
         "name":"Name",
         "description":"Description"
     },
@@ -150,6 +153,7 @@
     },
     "ticket":{
         "createTicket":"Create Ticket",
+        "search":"Search by Issue Id / Title / Type / Created by / Status",
         "add":{
            "ticketTitle":"Ticket Title",
            "issueType":"Issue Type",
@@ -172,8 +176,9 @@
     },
     "digitalContent":{
         "createContent":"Create Content",
+        "search":"Search by Content / Grade / Category / Sub Category / Level",
         "add":{
-            "contentName":"Content Name",
+            "contentName":"Content Title",
             "status":"Status",
             "expiryDate":"Expiry Date",
             "tags":"Tags",
@@ -244,8 +249,9 @@
         "userName":"Name is required!",
         "userRole":"Role is required!",
         "franchiseUser":"Franchise is required!",
-        "password":"Password must be 8 characters",
-        "confirmPassword":"Confirm Password must be 8 characters",
+        "oldPassword":"Old Password is required!",
+        "password":"Password must contain at least 8 characters including alphabets(A-Z) uppercase / lowercase, special characters and numbers",
+        "confirmPassword":"Confirm Password must contain at least 8 characters including alphabets(A-Z) uppercase / lowercase, special characters and numbers",
         "dateOfBirth":"Date of Birth is required",
         "parentGuardianName":"Parent/Guardian is required",
         "homePhone":"Home Phone should be minimum 10 digits",
@@ -263,7 +269,7 @@
         "fromTime":"From Time is required",
         "toTime":"To Time is required",
         "note":"NOTE: To Time must be more than From Time",
-        "contentName":"Content Name is required",
+        "contentName":"Content Title is required",
         "category":"Category is required",
         "subCategory":"Sub Category is required",
         "contentLevel":"Content Level is required",
@@ -273,6 +279,7 @@
         "grade":"Grade is Required",
         "status":"Status is Required",
         "comments":"Comments is Required",
+        "designation":"Designation Required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",
         "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs) files"
     },

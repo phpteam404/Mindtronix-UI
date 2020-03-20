@@ -65,7 +65,10 @@ export class UsersListComponent implements OnInit {
   }
 
   AddNewUser(event: Event){
-    this.router.navigate(['add'], {relativeTo: this._route});
+    if(this.franchiseFilter)
+      this.router.navigate(['add'],{queryParams:{'franchise_id':btoa(this.franchiseFilter)},relativeTo: this._route});
+    else
+      this.router.navigate(['add'],{relativeTo: this._route});
   }
   editUser(data:any){
     if(this.franchiseFilter)

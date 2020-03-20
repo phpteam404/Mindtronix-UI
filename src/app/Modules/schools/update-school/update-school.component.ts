@@ -29,7 +29,7 @@ export class UpdateSchoolComponent implements OnInit {
   isUpdate:boolean=true;
   schoolForm:FormGroup;
   hideFranchise:boolean;
-
+  franchiseId:any;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private schoolService: SchoolService, 
@@ -63,6 +63,11 @@ export class UpdateSchoolComponent implements OnInit {
           });          
         }
       });
+    });
+    _ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
     });
   }  
   ngOnInit(): void {
@@ -135,7 +140,9 @@ export class UpdateSchoolComponent implements OnInit {
     }
   }
   goToList(){
-    this._router.navigate(['schools_management']);
+    if(this.franchiseId)
+      this._router.navigate(['schools_management'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else this._router.navigate(['schools_management']);
   }
   conditionalValidation(){
     var userRole = this._ls.getItem('user',true).data.user_role_id;

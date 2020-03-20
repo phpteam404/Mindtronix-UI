@@ -21,10 +21,11 @@ export class UpdateUserComponent implements OnInit {
   submitted = null;
   roles: any;
   franchise: any;
+  franchiseId: any;
   status: any;
   isUpdate:boolean=true;
   formObj: any = {};
-
+  enableFranchise:boolean=true;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _service: UserService,
@@ -54,9 +55,17 @@ export class UpdateUserComponent implements OnInit {
             email: this.formObj.email,
             phone_no: this.formObj.phone_no,
             status: this.formObj.status, 
-          });          
+          });
+          if(this.formObj.user_role_id==5){
+            this.enableFranchise=false;
+          }
         }
       });
+    });
+    _ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
     });
   }
 
@@ -110,7 +119,10 @@ export class UpdateUserComponent implements OnInit {
     });
   }
   cancel(){
-    this._router.navigate(['users/all-users']);
+    if(this.franchiseId)
+      this._router.navigate(['users/all-users'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else this._router.navigate(['users/all-users']);
+    // this._router.navigate(['users/all-users']);
   }
   submit(): any{
     this.submitted = false;
@@ -121,18 +133,32 @@ export class UpdateUserComponent implements OnInit {
       params = this.addUserForm.value;
       params['']
       params['status'] = this.getStatus();
-      params['franchise_id'] = this.getfranchise();
+      if(this.enableFranchise)params['franchise_id'] = this.getfranchise();
+      else params['franchise_id']='';
       params['user_role_id'] = this.getuserRole();
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._router.navigate(['users/all-users']);
+          this.cancel();
         }else{
           this._toast.show('error',JSON.parse(res.error));
         }
       });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
+    }
+  }
+  roleBasedFranchise(){
+    var roleId =this.getuserRole();
+    console.log('roleId--',roleId);
+    if(Number(roleId)==5) {
+      this.addUserForm.get('franchise_id').clearValidators();      
+      this.addUserForm.controls['franchise_id'].updateValueAndValidity();
+      this.enableFranchise=false;
+    } else {
+      this.addUserForm.controls['franchise_id'].setValidators([Validators.required]);
+      this.addUserForm.controls['franchise_id'].updateValueAndValidity();
+      this.enableFranchise=true;
     }
   }
 }
