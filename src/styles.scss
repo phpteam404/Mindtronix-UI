@@ -509,10 +509,12 @@ p-table{
   width: 100%;
   
   .copyright-text{
-    padding: 10px 15px;
-    width: 100%;
+    padding: 8px 15px;
+    /* width: 100%; */
     background: #d2d2d2;
-    padding-left: 230px;
+    /* padding-left: 230px; */
+    position: fixed;
+    bottom: 0;
     p{
       font-size: 14px;
       margin: 0;

@@ -222,7 +222,7 @@
     },
     "errorMessages":{
         "contactNumber":"Contact number should be minimum 10 digits",
-        "contactEmail":"Email is required and should be in proper format!",
+        "contactEmail":"Email should be valid!",
         "franchiseName":"Franchise Name is required",
         "franchiseCode":"Franchise Code is required",
         "franchiseOwner":"Owner Name is required",

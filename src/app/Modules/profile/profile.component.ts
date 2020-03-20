@@ -9,6 +9,7 @@ import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { MasterService } from 'src/app/services/master.service';
 import { SchoolService } from 'src/app/services/school.service';
 import { HttpParams } from '@angular/common/http';
+import { SharedService } from 'src/app/services/shared.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -31,8 +32,10 @@ export class ProfileComponent implements OnInit {
               private _cService:CommonService,
               private _ls: LocalStorageService,
               private _sService:SchoolService,
+              public _ss: SharedService,
               private masterService:MasterService,
               public translate: TranslateService) {
+                this._ss = _ss;
         translate.setDefaultLang(environment.defaultLanguage); 
    }
 
@@ -95,6 +98,12 @@ export class ProfileComponent implements OnInit {
       params = this.basicInformationForm.value;
       this._cService.addProfile(params).subscribe(res => {
         if (res.status) {
+          var obj={};
+          obj = this._ls.getItem('user',true);
+          obj['data'].first_name = this.basicInformationForm.value.first_name;
+          obj['data'].last_name = this.basicInformationForm.value.last_name;
+          this._ls.setItem('user',obj,true);
+          this._ss.change();
           this.submitted = true;
           this._router.navigate([this._ls.getItem('user',true).menu[0].module_url]);
         }
@@ -151,7 +160,7 @@ export class ProfileComponent implements OnInit {
    getProfileInfo(){
     this._cService.profileInfo().subscribe(res =>{
       if(res.status){
-        this.profileInfo =res.data.profile_info[0];
+        this.profileInfo =res.data.profile_info[0];       
         this.basicInformationForm.setValue({
           first_name: this.profileInfo.first_name,
           last_name:this.profileInfo.last_name,

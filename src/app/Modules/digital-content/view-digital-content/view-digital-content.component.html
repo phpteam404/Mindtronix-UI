@@ -139,15 +139,15 @@
                             <div class="col-12 btn-edit">
                                 <a href="javascript:;" class="btn" (click)="updateContentModal(true)"><i class="icon icon-edit-pencil"></i></a>
                             </div>
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-12 col-12">
                                 <label>{{'digitalContent.add.contentName'|translate}}</label>
                                 <p>{{digitalContentObj.content_name}}</p>
                             </div>
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-12 col-12 mt-3">
                                 <label>{{'digitalContent.add.contentDescription'|translate}}</label>
                                 <p>{{digitalContentObj.description}}</p>
                             </div>
-                            <div class="col-md-4 col-12">
+                            <div class="col-md-4 col-12 mt-3">
                                 <label>{{'digitalContent.add.category'|translate}}</label>
                                 <p>{{digitalContentObj.category}}</p>
                             </div>
@@ -388,7 +388,7 @@
        </div>
    </form>
 </p-dialog>
-<p-dialog header="View Attachement" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="previewFile" [style]="{width: '50vw'}" [baseZIndex]="10000">
+<p-dialog header="View Attachment" [modal]="true" [draggable]="false" [resizable]="false"  appendTo="body" [(visible)]="previewFile" [style]="{width: '50vw'}" [baseZIndex]="10000">
     <div style="font-size:16px;text-align:center;padding:20px">
         <div class="row m-0">
             <div class="col-12" style="text-align:center">

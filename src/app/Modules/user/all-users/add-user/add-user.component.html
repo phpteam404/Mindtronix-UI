@@ -62,7 +62,8 @@
                     </div>                    
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
-                            <label>{{'users.add.password' |translate}} <span>*</span></label>
+                            <!-- <label>{{'users.add.password' |translate}} <span>*</span><i class="icon icon-info-circle" pTooltip="Enter your username Enter your username Enter your username Enter your username Enter your username"></i></label> -->
+                            <label>{{'users.add.password' |translate}}</label>
                             <input pPassword  placeholder="{{'users.add.password' |translate}}" formControlName="password" autocomplete="off" name="password" type="password" required>
 
                             <div class="invalid-feedback"

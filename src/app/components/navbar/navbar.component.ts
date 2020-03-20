@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { environment } from 'src/environments/environment';
+import { SharedService } from 'src/app/services/shared.service';
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
@@ -20,10 +21,18 @@ export class NavbarComponent implements OnInit{
     ly: SidebarComponent;
     private sidebarVisible: boolean;
     curUser:any;
-    constructor(location: Location,  private element: ElementRef,private router:Router,
-               private ls: LocalStorageService,private authService: AuthenticationService) {
+    constructor(location: Location,
+               private element: ElementRef,
+               private router:Router,
+               public _ss: SharedService,
+               private ls: LocalStorageService,
+               private authService: AuthenticationService) {
+      this._ss = _ss;
       this.location = location;
       this.sidebarVisible = false;
+      this._ss.getEmittedValue().subscribe(item => {
+        this.curUser=ls.getItem('user',true).data;
+      });
       this.curUser = ls.getItem('user',true).data;
     }
 

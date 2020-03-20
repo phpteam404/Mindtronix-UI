@@ -29,6 +29,7 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
+import { TooltipModule } from 'primeng/tooltip';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
@@ -53,6 +54,7 @@ const BasicModuleImports = [
     DropdownModule,
     InputTextareaModule,
     PasswordModule,
+    TooltipModule,
     FileUploadModule,
     CheckboxModule,
     KeyFilterModule,
