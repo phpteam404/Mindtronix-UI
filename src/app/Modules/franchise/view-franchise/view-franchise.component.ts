@@ -64,10 +64,10 @@ export class ViewFranchiseComponent implements OnInit {
     translate.setDefaultLang(environment.defaultLanguage);
    
     this.cols = [
-      { field: 'contact_title_display', header: 'Contact Title' },
-      { field: 'contact_name', header: 'Contact Name' },
-      { field: 'contact_number', header: 'Contact Phone' },
-      { field: 'contact_email', header: 'Contact Email' },
+      { field: 'contact_title_display', header: 'Title' },
+      { field: 'contact_name', header: 'Name' },
+      { field: 'contact_number', header: 'Contact' },
+      { field: 'contact_email', header: 'Email' },
       {field: 'actions', header: 'Actions'}
     ];
     
