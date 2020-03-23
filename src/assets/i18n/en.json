@@ -171,7 +171,8 @@
             "issueTitle":"Issue Title",
             "ticketHistory":"Ticket History",
             "comment":"Comment",
-            "attachIssueScreenshot":"Attach issue screenshot"
+            "attachIssueScreenshot":"Attach issue screenshot",
+            "reopen":"Reopen"
         }        
     },
     "digitalContent":{
@@ -220,6 +221,15 @@
              "#invoiceAmount":"# Invoice Amount",
              "collectedAmount":"Collected Amount",
              "due":"Due"
+         },
+         "view":{
+             "invoice":"Invoice",
+             "amount":"Amount",
+             "invoiceGeneratedDate":"Invoice Generated Date",
+             "dueBy":"Due By",
+             "status":"Status",
+             "contactNumber":"Contact Number",
+             "memberSince":"Member Since"
          }
      },
     "buttons":{

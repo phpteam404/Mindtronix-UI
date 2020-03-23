@@ -10,7 +10,7 @@
                                     <div class="row">
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.firstName'|translate}}</label>
+                                                <label>{{'profile.firstName'|translate}} <span>*</span></label>
                                                 <input pinputtext placeholder="{{'placeholder.firstName'|translate}}" name="name" formControlName="first_name" type="text" required>
                                                 <div  class="invalid-feedback"
                                                     *ngIf="basicInformationForm.controls.first_name.invalid && submitted!=null && !submitted"
@@ -26,13 +26,13 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>Role</label>
+                                                <label>{{'users.add.role'|translate}}</label>
                                                 <input pinputtext placeholder="Role " name="role" formControlName="role" disabled="true" type="text" >
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.contactEmail'|translate}} <span>*</span></label>
+                                                <label>{{'profile.contactEmail'|translate}} </label>
                                                 <input pinputtext placeholder="Contact Email" name="email" formControlName="email" type="email" disabled="true">
                                                 <div  class="invalid-feedback"
                                                     *ngIf="basicInformationForm.controls.email.invalid && submitted!=null && !submitted"
@@ -42,7 +42,7 @@
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.contactNumber'|translate}}</label>
+                                                <label>{{'profile.contactNumber'|translate}} <span>*</span></label>
                                                 <input type="text" placeholder="Contact Number" pKeyFilter="pint" formControlName="phone_no"
                                                 name="contact_number" required>
                                                 <div  class="invalid-feedback"
@@ -67,7 +67,7 @@
                                     <div class="row">
                                         <div class="col-md-12 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.oldPassword'|translate}}</label>
+                                                <label>{{'profile.oldPassword'|translate}} <span>*</span></label>
                                                 <input pPassword  placeholder="Old Password" formControlName="old_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.old_password.invalid && submitted!=null && !submitted"
@@ -75,24 +75,23 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12 mb-3">
+                                        <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.newPassword'|translate}}</label>
+                                                <label>{{'profile.newPassword'|translate}} <span>*</span></label>
                                                 <input   placeholder="New Password" formControlName="new_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.new_password.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
+                                                    [ngClass]=" 'error'">Password must contain atleat one Number,one special
                                                 </div>
-                                                <!-- <div class="invalid-feedback" *ngIf="passwordForm.controls.newPassword">Password Must contain atleast one number one capital letter</div> -->
                                             </div>
                                         </div>
-                                        <div class="col-md-6 col-12 mb-3">
+                                        <div class="col-md-6 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.confirmPassword'|translate}}</label>
+                                                <label>{{'profile.confirmPassword'|translate}} <span>*</span></label>
                                                 <input pPassword  placeholder="Confirm Password" formControlName="confirm_password" name="password" type="password" required>
                                                 <div class="invalid-feedback"
                                                     *ngIf="passwordForm.controls.confirm_password.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'"> {{'errorMessages.confirmPassword'|translate}}
+                                                    [ngClass]=" 'error'"> Confirm Password required
                                                 </div>
                                             </div>
                                         </div>
@@ -112,34 +111,34 @@
                                     <div class="row">
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.ima'|translate}} </label>
+                                                <label>{{'profile.ima'|translate}} <span>*</span> </label>
                                                 <p-dropdown [options]="designation" itemSize="30"  formControlName="type"
                                                     name="designation" optionLabel="label" required ></p-dropdown>
                                                 <div class="invalid-feedback"
                                                     *ngIf="othersForm.controls.type.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'"> Type required
+                                                    [ngClass]=" 'error'"> {{'errorMessages.designation'|translate}}
                                             </div>                
                                             </div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>{{'profile.grade'|translate}}</label>
+                                                <label>{{'profile.grade'|translate}} <span>*</span></label>
                                                 <p-dropdown [options]="grade" placeholder="Grade" itemSize="30" 
-                                                    name="grade" formControlName="grade" optionLabel="label" ></p-dropdown>
+                                                    name="grade" formControlName="grade" optionLabel="label" required ></p-dropdown>
                                                 <div class="invalid-feedback"
                                                     *ngIf="othersForm.controls.grade.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'"> Grade required
+                                                    [ngClass]=" 'error'"> {{'errorMessages.grade'|translate}}
                                             </div> 
                                         </div>
                                         </div>
                                         <div class="col-md-4 col-12">
                                             <div class="form-group">
-                                                <label>School Name</label>
+                                                <label>{{'schools.schoolName'|translate}}</label>
                                                 <p-dropdown [options]="schools" placeholder="{{'placeholder.schoolName'|translate}}" itemSize="30" 
-                                                    name="school_name" formControlName="school_name" optionLabel="label" ></p-dropdown>
+                                                    name="school_name" formControlName="school_name" optionLabel="label"required  ></p-dropdown>
                                                 <div class="invalid-feedback"
                                                     *ngIf="othersForm.controls.school_name.invalid && submitted!=null && !submitted"
-                                                    [ngClass]=" 'error'"> School Name required
+                                                    [ngClass]=" 'error'">{{'errorMessages.schoolName'|translate}}
                                             </div> 
                                         </div>
                                         </div>

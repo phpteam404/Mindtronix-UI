@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { MasterService } from 'src/app/services/master.service';
+import { InvoiceService} from 'src/app/services/invoice.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-student-view',
@@ -14,16 +18,18 @@ export class StudentViewComponent implements OnInit {
   type:any;
   students:any;
   cols:any;
+  dueDate:any;
+  invoiceStatus:any;
+  StudentInvoiceId:any;
+  studentName:any;
+  studentInvoiceObj:any=[];
   constructor(private _ar: ActivatedRoute,
               private _router: Router,
+              private _service:MasterService,
+              private _Service:InvoiceService,
               public translate: TranslateService) { 
      translate.setDefaultLang(environment.defaultLanguage);
-    this.status1 = [
-      {label:'Paid',value:{id:1,name:'Paid'}},
-      {label:'Due',value:{id:2,name:'Due'}},
-      {label:'Invoiced',value:{id:3,name:'Due'}},
-      {label:'Over Due',value:{id:4,name:'Over Due'}}
-    ];
+   
     this.type = [
       {label:'Cash',value:{id:1,name:'Cash'}},
       {label:'Online',value:{id:2,name:'Online'}}
@@ -47,7 +53,41 @@ export class StudentViewComponent implements OnInit {
   showBasicDialog() {
     this.displayBasic = true;
   }
-  ngOnInit(): void {
+  hideBasicDialog(){
+    this.displayBasic =false;
   }
+  ngOnInit(): void {
+    this._ar.paramMap.subscribe(params => {
+      this.StudentInvoiceId = atob(params['params'].id);
+      this.studentName = (params['params'].name);
+      this.getStudentInvoiceData(this.StudentInvoiceId);
+    });
+    this.getMasterDropdown('invoice_status');
+  }
+  
+  getMasterDropdown(masterKey): any{
+    var params = new HttpParams()
+                  .set('master_key',masterKey)
+                  .set('dropdown',"true")
+    return this._service.getMasterChilds(params).subscribe(res=>{
+      if(res.status){
+        if(masterKey == 'invoice_status')
+           this.invoiceStatus =  res.data.data;
 
+      }
+    });
+  }
+  
+  getStudentInvoiceData(StudentInvoiceId){
+    var params = new HttpParams().set('student_invoice_id',StudentInvoiceId);
+    this._Service.getStudentsView(params).subscribe(res => {
+      if(res.status){
+        this.studentInvoiceObj = res.data.data[0];
+        this.dueDate = res.data.due_date;
+        //this.contacts = res.data.data[0].franchise_contacts_information;
+        //this.FeeList = res.data.data[0].fee_detalis;
+        //this.franchiseExtraInfo = res.data;        
+      }
+    });
+  }
 }

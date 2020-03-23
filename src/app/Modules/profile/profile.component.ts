@@ -49,11 +49,9 @@ export class ProfileComponent implements OnInit {
     });
 
     this.passwordForm  = new FormGroup({
-      old_password: new FormControl('', [Validators.required]),
-      new_password :new FormControl('',[Validators.required, Validators.minLength(8),
-        Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')]),
-      confirm_password:new FormControl('',[Validators.required, Validators.minLength(8),
-        Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')])
+      old_password: new FormControl('', [Validators.required,Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')]),
+      new_password :new FormControl('',[Validators.required,Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')]),
+      confirm_password:new FormControl('',[Validators.required,Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')])
     });
 
     this.othersForm  = new FormGroup({
@@ -97,9 +95,7 @@ export class ProfileComponent implements OnInit {
     this.submitted = false;
     if (this.basicInformationForm.valid) {
       var params={};
-      params['first_name'] = this.basicInformationForm.value.first_name;
-      params['last_name'] = this.basicInformationForm.value.last_name;
-      params['phone_no'] = this.basicInformationForm.value.phone_no;
+      params = this.basicInformationForm.value;
       this._cService.addProfile(params).subscribe(res => {
         if (res.status) {
           var obj={};

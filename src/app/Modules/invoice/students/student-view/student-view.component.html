@@ -4,65 +4,55 @@
         <div class="col-md-8 col-12">
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
-                    <div>Invoice
-                        <span>MIS0001</span>
+                    <div>{{'invoices.view.invoice'|translate}}
+                        <span>{{studentInvoiceObj.invoice_number}}</span>
                     </div>
                 </div>
-               
                 <div class="custom-view-div franchise-name">
-                    <div class="pl-2">Amount
-                        <span>₹ 10,000</span>
-                    </div>
-                </div>
-               
-                
-                <div class="custom-view-div">
-                    <div class="schools-text">Date
-                        <span>25/02/2020</span>
+                    <div class="pl-2">{{'invoices.view.amount'|translate}}
+                        <span>₹ {{studentInvoiceObj.amount}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text">Due By
-                        <span>Ramakrishna</span>
+                    <div class="schools-text"> {{'invoices.view.invoiceGeneratedDate'|translate}}
+                        <span>{{studentInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="payment-text">Status
-                        <span class="bg-brown">Paid</span>
+                    <div class="schools-text">{{'invoices.view.dueBy'|translate}}
+                        <span>{{dueDate |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
-                
+                <div class="custom-view-div">
+                    <div class="payment-text">{{'invoices.view.status'|translate}}
+                        <span class="bg-brown">{{studentInvoiceObj.status}}</span>
+                    </div>
+                </div>
             </div>
             <div class="custom-view ticket-view-content">
                 <div class="row">
-                  
-                    <div class="col-md-4 col-12">
-                        <label>Student Name</label>
-                        <p>Prasad</p>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Contact Email</label>
-                        <p>Prasad@gmail.com</p>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Contact Number</label>
-                        <p>9977534219</p>
-                    </div>
-                    <!-- <div class="col-12">
-                        <h4>Plan Details</h4>
-                    </div> -->
-                    <div class="col-md-4 col-12 mt-2">
-                        <label>Fee Structure</label>
-                        <p>Monthly</p>
-                    </div>
-                    <div class="col-md-4 col-12 mt-2">
-                    <label>Member Since</label>
-                    <p>26-02-2019</p>
+                  <div class="col-md-4 col-12">
+                        <label>{{'student.add.name'|translate}}</label>
+                        <p>{{studentInvoiceObj.student_name}}</p>
+                  </div>
+                  <div class="col-md-4 col-12">
+                        <label>{{'student.add.studentContactEmail'|translate}}</label>
+                        <p>{{studentInvoiceObj.email}}</p>
+                  </div>
+                  <div class="col-md-4 col-12">
+                       <label>{{'invoices.view.contactNumber'|translate}}</label>
+                       <p>{{studentInvoiceObj.phone_no}}</p>
+                  </div>
+                  <div class="col-md-4 col-12 mt-2">
+                        <label>{{'placeholder.feestructure'|translate}}</label>
+                        <p>{{studentInvoiceObj.fee_structure}}</p>
+                  </div>
+                  <div class="col-md-4 col-12 mt-2">
+                     <label>{{'invoices.view.memberSince'|translate}}</label>
+                     <p>{{studentInvoiceObj.member_since |date:'dd MMM yyyy'}}</p>
+                  </div>
                 </div>
-                </div>
-             
             </div>
-          
         </div>
         <div class="col-md-4 col-12 pl-0">
           
@@ -70,7 +60,6 @@
                 <button pButton type="submit" class="btn-warning" (click)="showBasicDialog()" label="Update Status"></button>
                 <div class="text-center mt-2 invoice-download">
                    <a href="javascript:;">Invoice Download<i class="icon icon-download-1"></i></a>
-                   
                 </div>
             </div>
             <div class="custom-static-view mt-3">
@@ -108,15 +97,15 @@
         </div>
     </div>
 </div>
-<p-dialog header="Update Status"[modal]="true" [draggable]="false" [resizable]="false"     [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
+<p-dialog header="Update Status"[modal]="true" [draggable]="false" [resizable]="false"  appendTo="body"  [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
     
-    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+    <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Status <span>*</span></label>
-                    <p-dropdown [options]="status1" placeholder="Select Status" itemSize="30"
-                    name="status" optionLabel="label" required></p-dropdown>
+                    <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
+                    name="status" optionLabel="label" [showClear]="true" required></p-dropdown>
                 </div>
             </div>
             <div class="col-md-6 col-12">
@@ -137,9 +126,9 @@
       
         <div class="col-12 p-0 text-right mb-2">
             <button type="button" pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}"></button>
-            <button type="button" pButton class="btn-default" label="{{'buttons.cancel'|translate}}"></button>
+            <button type="button" pButton class="btn-default"  (click)="hideBasicDialog()" label="{{'buttons.cancel'|translate}}"></button>
         </div>
        
-    <!-- </form> -->
+    </form>
 
 </p-dialog>
