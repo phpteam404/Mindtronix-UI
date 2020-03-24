@@ -87,8 +87,10 @@ export class StudentInvoiceComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy/MM/dd');
-    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy/MM/dd');
+    /*this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy/MM/dd');
+    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy/MM/dd');*/
+    this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy-MM-dd');
+    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy-MM-dd');
     this.status_id = this.filtersForm.value.status_id.value;
     if(this.fromDate) params = params.set('from_date', this.fromDate);
     if (this.toDate) params = params.set('to_date', this.toDate);
