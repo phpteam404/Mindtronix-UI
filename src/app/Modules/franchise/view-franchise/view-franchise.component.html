@@ -252,7 +252,7 @@
                                         <button type="button" class="btn" title ="{{'title.addFeeStructure'|translate}}" (click)="showBasicDialog2()"><i class="icon icon-plus"></i></button>
                                      </div>
                                     <div class="col-12">
-                                        <div class="custom-table ">
+                                        <div class="custom-table switch-list">
                                             <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">
                                                 <!-- <ng-template pTemplate="caption">
                                                     <div class="custom-search">
@@ -279,9 +279,10 @@
                                                             <span *ngIf="i != 4 && i!=1" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i != 4 && i==1" title="{{rowData[col.field]}}">{{rowData[col.field] |number}}</span>
                                                             <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
-                                                                <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
+                                                                <!-- <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
                                                                     <span class="icon icon-delete" title="{{'title.delete'|translate}}"></span>
-                                                                </a>
+                                                                </a> -->
+                                                                <ui-switch uncheckedLabel="No" checkedLabel="Yes"  size="small"></ui-switch>
                                                             </span>
                                                             <span class="d-flex action-color" *ngIf="i == 4 && !isEnabled()">---</span>
                                                         </td>

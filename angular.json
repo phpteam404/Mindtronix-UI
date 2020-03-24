@@ -38,6 +38,7 @@
               "node_modules/material-design-icons/iconfont/material-icons.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/assets/css/demo.css",
               "src/assets/css/custom.css"
             ],
@@ -114,6 +115,7 @@
               "node_modules/material-design-icons/iconfont/material-icons.css",
               "node_modules/primeng/resources/themes/nova-light/theme.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/assets/css/demo.css",
               "src/assets/css/custom.css"
             ],

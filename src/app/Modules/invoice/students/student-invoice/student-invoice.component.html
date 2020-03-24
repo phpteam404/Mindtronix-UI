@@ -53,23 +53,24 @@
                         optionLabel="label" filter="true">
                     </p-dropdown>
                 </div>
+                <button pButton type="submit" label="Go" class="btn-warning ml-2 p-0"></button>
             </div>
             <!-- <button pButton type="submit" label="Go" class="btn-warning"></button> -->
             <div class="d-flex">
                 <div class="input-search">
                     <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}"
-                        class="mr-2" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                        class="" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         style="width:auto;">
-                    <i class="fa fa-search"></i>
+                    <i class="fa fa-search mr-2"></i>
                 </div>
-                <button pButton type="submit" label="Go" class="btn-warning"></button>
+                <!-- <button pButton type="submit" label="Go" class="btn-warning"></button> -->
             </div>
         </div>
     </form>
    
   
     <!-- for form ends-->
-    <div class="custom-table custom-lastchild-list custom-row-select student-invoice-list">
+    <div class="custom-table custon-idlist  custom-lastchild-list custom-row-select student-invoice-list">
         <p-table #dt [columns]="cols" [value]="invoicelist" (onLazyLoad)="loadStudentsInvoiceLazy($event)"
             [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">

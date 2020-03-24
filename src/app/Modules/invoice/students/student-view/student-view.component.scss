@@ -21,7 +21,7 @@
         font-weight: bold;
         color: #e87a26;
         line-height: 22px;
-        font-size: 16px;
+        font-size: 14px;
     }
 }
 .status-edit{
@@ -191,4 +191,8 @@
         }
     }
    
+}
+.view-page .custom-view-list .custom-view-div {
+    width: 0%;
+    padding-right: 15px;
 }

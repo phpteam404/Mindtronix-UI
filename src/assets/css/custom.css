@@ -3684,7 +3684,7 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
   overflow-x: hidden;
 }
 .custom-scroll{
-  height: 150px;
+  max-height: 150px;
   overflow-y: auto;
 }
 /* width */
@@ -3713,6 +3713,34 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 /*.ui-table p-sorticon {
   float: left;
 }*/
+.switch.switch-small > .switch-pane .switch-label-checked {
+  color: #fff;
+  font-size: 13px;
+  /* padding-left: 25px; */
+}
+.switch.switch-small > .switch-pane .switch-label-unchecked{
+  color: #000000;
+  font-size: 13px;
+}
+.custom-table.switch-list p-table .ui-table .ui-table-tbody td:last-child span{
+   display: none;
+}
+.switch.checked .switch-pane .switch-label-checked,
+.switch .switch-pane .switch-label-unchecked {
+  display: block !important;
+}
+.switch:focus{
+  outline: none;
+
+}
+.custom-table.custon-idlist p-table .ui-table .ui-table-tbody td:first-child span {
+  display: contents;
+  overflow: initial;
+
+}
+.custom-table.custon-idlist p-table .ui-table .ui-table-thead th:first-child{
+  width: 200px;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

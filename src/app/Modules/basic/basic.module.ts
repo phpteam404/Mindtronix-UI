@@ -30,6 +30,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ConfirmationService } from 'primeng/api';
 import { environment } from 'src/environments/environment';
 import { TooltipModule } from 'primeng/tooltip';
+import { UiSwitchModule } from 'ngx-ui-switch';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 
 const BasicModuleImports = [
@@ -59,6 +60,7 @@ const BasicModuleImports = [
     CheckboxModule,
     KeyFilterModule,
     ConfirmDialogModule,
+    UiSwitchModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

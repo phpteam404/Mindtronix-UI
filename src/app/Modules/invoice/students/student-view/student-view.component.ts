@@ -87,7 +87,7 @@ export class StudentViewComponent implements OnInit {
         this.dueDate = res.data.due_date;
         this.paidDate =res.data.paid_date;
         this.studentId = res.data.data[0].student_id;
-        console.log('tudentid---',this.studentId);
+        console.log('studentid---',this.studentId);
         this.getPreviousInvoiceList(this.studentId);
       }
     });
@@ -117,6 +117,7 @@ export class StudentViewComponent implements OnInit {
           if(res.status){
             this.submitted = true;
             this.updateForm.reset();
+            this.showBasicDialog(false);
           }
         });
      }
