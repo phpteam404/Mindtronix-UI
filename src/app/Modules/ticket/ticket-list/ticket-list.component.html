@@ -27,10 +27,12 @@
                         <span *ngIf="i != (columns.length-3) && i != (columns.length-2) && i != (columns.length-1)" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == (columns.length-3)" title="{{rowData[col.field] | date: 'dd MMM yyyy'}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM yyyy'}}</span> 
                         <span *ngIf="i == (columns.length-2)">
-                            <span [ngClass]="[(rowData[col.field]==='Closed') ? 'bg-brown' : '',
-                                                (rowData[col.field]==='New') ? 'bg-blue' : '',
-                                                (rowData[col.field]!='Closed' && rowData[col.field]!='New')? 'bg-gold' : '']"
+                            <span *ngIf="rowData[col.field]!='Re Open' && rowData[col.field]!='Close'" 
+                                [ngClass]="[(rowData[col.field]==='New') ? 'bg-blue' : '',
+                                            (rowData[col.field]!='Close' && rowData[col.field]!='New')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
+                            <span *ngIf="rowData[col.field]=='Re Open'" class="list-status bg-gold">Re Opened</span>
+                            <span *ngIf="rowData[col.field]=='Close'" class="list-status bg-brown">Closed</span>
                         </span>
                         <span *ngIf="i == (columns.length-1)" class="d-flex action-color justify-content-center">
                             <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="{{'title.view'|translate}}"></span></a>

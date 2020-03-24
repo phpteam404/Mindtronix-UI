@@ -135,8 +135,19 @@
                         <div class="status-edit">
                             {{'ticket.view.ticketStatus'|translate}}
                         </div>
-                        <span [ngClass]="{'status-greentext': ticketObj.status=='Closed',
-                                            'status-redtext': ticketObj.status!='Closed'}">
+                        <span *ngIf="ticketObj.status=='Close'" 
+                            [ngClass]="{'status-greentext': ticketObj.status=='Close',
+                                        'status-redtext': ticketObj.status!='Close'}">
+                            Closed
+                        </span>
+                        <span *ngIf="ticketObj.status=='Re Open'" 
+                            [ngClass]="{'status-greentext': ticketObj.status=='Close',
+                                        'status-redtext': ticketObj.status!='Close'}">
+                            Re Opened
+                        </span>
+                        <span *ngIf="ticketObj.status!='Re Open' && ticketObj.status!='Close'" 
+                            [ngClass]="{'status-greentext': ticketObj.status=='Close',
+                                        'status-redtext': ticketObj.status!='Close'}">
                             {{ticketObj.status}}
                         </span>
                         <!-- <span class="status-redtext">{{ticketObj.status}}</span> -->
@@ -172,10 +183,25 @@
                            <li class="lastseen-date"><div>{{row[0].date}}</div></li>
                             <ul class="history-list">
                                 <li  *ngFor="let col of row">
-                                    <div>{{col.time}} By <span class="name-highlight">{{col.created_by}}</span>
-                                        <span class="pl-2" 
+                                    <div><span class="history-time">{{col.time}} By &nbsp;</span> <span class="name-highlight">{{col.created_by}}</span>
+                                        <!-- <span class="pl-1" 
                                             [ngClass]="{'green-text': col.status=='Closed',
                                                         'red-text': col.status!='Closed'}">
+                                            {{col.status}}
+                                        </span> -->
+                                        <span *ngIf="col.status=='Close'"  class="pl-1" 
+                                            [ngClass]="{'green-text': col.status=='Close',
+                                                        'red-text': col.status!='Close'}">
+                                            Closed
+                                        </span>
+                                        <span *ngIf="col.status=='Re Open'" class="pl-1" 
+                                            [ngClass]="{'green-text': col.status=='Close',
+                                                        'red-text': col.status!='Close'}">
+                                            Re Opened
+                                        </span>
+                                        <span *ngIf="col.status!='Re Open' && col.status!='Close'" class="pl-1" 
+                                            [ngClass]="{'green-text': col.status=='Close',
+                                                        'red-text': col.status!='Close'}">
                                             {{col.status}}
                                         </span>
                                     </div>
@@ -194,7 +220,8 @@
         </div>
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-static-view custom-minheight text-center">
-                <button pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Update Ticket"></button>
+                <button *ngIf="isClosed" pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Reopen"></button>
+                <button *ngIf="!isClosed" pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Update Ticket"></button>
             </div>
         </div>
     </div>
@@ -207,7 +234,7 @@
                 <div class="form-group">
                     <label>Status <span>*</span></label>
                     <p-dropdown [options]="status" placeholder="Select Status" itemSize="30" formControlName="status"
-                        name="status" optionLabel="label" required></p-dropdown>
+                        name="status" optionLabel="label" required [disabled]="isClosed"></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
                         [ngClass]="'error'">{{'errorMessages.status'|translate}}
@@ -263,7 +290,8 @@
             </div>
         </div>      
         <div class="col-12 p-0 text-right mb-2">
-            <button type="submit" pButton class="btn-warning mr-2" label="Update"></button>
+            <button type="submit" *ngIf="isClosed" pButton class="btn-warning mr-2" label="Reopen"></button>
+            <button type="submit" *ngIf="!isClosed" pButton class="btn-warning mr-2" label="Update"></button>
             <button type="button" pButton class="btn-default" label="Cancel" (click)="updateTicketModal(false)"></button>
         </div>       
     </form>

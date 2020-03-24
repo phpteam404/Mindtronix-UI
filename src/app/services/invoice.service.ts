@@ -6,12 +6,15 @@ import { AppHttpClientService } from '../utils/app-http-client.service';
 })
 export class InvoiceService {
 
-  constructor(private clientHttp : AppHttpClientService) { }
+  constructor(private clientHttp: AppHttpClientService) { }
 
-  getstudentInvoice(params){
-     return this.clientHttp.get('Invoice/studentInvoiceList',params);
+  getstudentInvoice(params) {
+    return this.clientHttp.get('Invoice/studentInvoiceList', params);
   }
-  getStudentsView(params){
-    return this.clientHttp.get('Invoice/studentInvoiceList',params);
+  getStudentsView(params) {
+    return this.clientHttp.get('Invoice/studentInvoiceList', params);
+  }
+  getPreviousinvoices(params) {
+    return this.clientHttp.get('Invoice/getPreviousStudentInvoices', params);
   }
 }

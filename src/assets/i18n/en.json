@@ -172,6 +172,7 @@
             "ticketHistory":"Ticket History",
             "comment":"Comment",
             "attachIssueScreenshot":"Attach issue screenshot",
+            "updateTicket":"Update Ticket",
             "reopen":"Reopen"
         }        
     },

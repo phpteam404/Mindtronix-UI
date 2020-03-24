@@ -6,6 +6,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { InvoiceService} from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
+import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-student-view',
@@ -18,36 +19,26 @@ export class StudentViewComponent implements OnInit {
   type:any;
   students:any;
   cols:any;
+  previouslist:any;
   dueDate:any;
   invoiceStatus:any;
   StudentInvoiceId:any;
   studentName:any;
+  studentId:any;
   studentInvoiceObj:any=[];
+  loading:boolean;
   constructor(private _ar: ActivatedRoute,
               private _router: Router,
-              private _service:MasterService,
+              private _mservice:MasterService,
               private _Service:InvoiceService,
               public translate: TranslateService) { 
      translate.setDefaultLang(environment.defaultLanguage);
    
-    this.type = [
-      {label:'Cash',value:{id:1,name:'Cash'}},
-      {label:'Online',value:{id:2,name:'Online'}}
-    ];
     this.cols = [
-      { field: 'invoiceNo', header: 'Invoice No' },
-      { field: 'date', header: 'Date' },
-      { field: 'Amount', header: 'Amount' },
+      { field: 'invoice_number', header: 'Invoice No' },
+      { field: 'invoice_date', header: 'Date' },
+      { field: 'amount', header: 'Amount' },
       { field: 'status', header: 'Status' }
-    ];
-    this.students = [
-      {invoiceNo:'MIS0001',date:'25-02-2020', Amount:'₹ 1,000',status:'Paid'},
-      {invoiceNo:'MIS0002', date:'26-02-2020', Amount:'₹ 5,000',status:'Invoiced'},
-      {invoiceNo:'MIS0003',date:'24-02-2020', Amount:'₹ 2,000',status:'Due'},
-      {invoiceNo:'MIS0004', date:'25-02-2020', Amount:'₹ 1,000',status:'Paid'},
-      {invoiceNo:'MIS0005', date:'22-02-2020', Amount:'₹ 3,000',status:'Paid'},
-      {invoiceNo:'MIS0006', date:'25-02-2020', Amount:'₹ 1,000',status:'Due'},
-    
     ];
   }
   showBasicDialog() {
@@ -63,17 +54,26 @@ export class StudentViewComponent implements OnInit {
       this.getStudentInvoiceData(this.StudentInvoiceId);
     });
     this.getMasterDropdown('invoice_status');
+    this.getMasterDropdown('invoice_payment_mode');
   }
   
+
+  updateForm  = new FormGroup({
+    status: new FormControl('', [Validators.required]),
+    type: new FormControl('', [Validators.required]),
+    commnets:new FormControl('')
+  });
+
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
                   .set('master_key',masterKey)
                   .set('dropdown',"true")
-    return this._service.getMasterChilds(params).subscribe(res=>{
+    return this._mservice.getMasterChilds(params).subscribe(res=>{
       if(res.status){
         if(masterKey == 'invoice_status')
            this.invoiceStatus =  res.data.data;
-
+        if(masterKey =='invoice_payment_mode')
+          this.type =res.data.data;
       }
     });
   }
@@ -84,10 +84,41 @@ export class StudentViewComponent implements OnInit {
       if(res.status){
         this.studentInvoiceObj = res.data.data[0];
         this.dueDate = res.data.due_date;
-        //this.contacts = res.data.data[0].franchise_contacts_information;
-        //this.FeeList = res.data.data[0].fee_detalis;
-        //this.franchiseExtraInfo = res.data;        
+        this.studentId = res.data.data[0].student_id;
+        console.log('tudentid---',this.studentId);
+        this.getPreviousInvoiceList(this.studentId);
       }
     });
   }
+
+  // loadStudentspreviousInvoiceLazy(event: LazyLoadEvent) {
+  //   console.log('event info',event);
+  //   this.loading = true;
+  //   var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
+  //   var params = new HttpParams()
+  //        .set('start', event.first+'')
+  //        .set('number', event.rows+'');
+  //   if (event.sortField) {
+  //       params = params.set('sort', event.sortField);
+  //       params = params.set('order', sortOrder);
+  //   }
+  //   params =params.set('student_id',this.studentId);     
+  //   this._Service.getPreviousinvoices(params).subscribe(res=>{
+  //     if(res.status){
+  //       this.cols = res.data.table_headers;
+  //       this.previouslist = res.data.data;
+  //       this.loading = false;
+  //     }
+  //   });
+  // } 
+
+   getPreviousInvoiceList(id:any){
+    var params = new HttpParams().set('student_id',id);
+    this._Service.getPreviousinvoices(params).subscribe(res=>{
+       if(res.status){
+        //this.cols = res.data.table_headers;
+        this.previouslist = res.data.data;
+       }
+    });
+   }
 }

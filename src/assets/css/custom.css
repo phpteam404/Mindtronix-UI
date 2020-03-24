@@ -616,10 +616,20 @@ footer{
 .main-content,
 .page-title-card{
   padding-left: 245px !important;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .show-menu .main-content,
 .show-menu .page-title-card{
   padding-left: 70px !important;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
 }
 .main-panel .main-content {
   padding: 20px 15px;
@@ -637,11 +647,20 @@ footer{
 .sidebar,
 /* .main-panel, */
 .sidebar-wrapper,
-.navbar-cmp-fixed .navbar,
 .copyright-text,
+.show-menu .copyright-text
 .show-menu .copyright-text,
 .main-content,
-.page-title-card {
+.page-title-card,
+.copyright-block,
+.show-menu .copyright-block{
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.navbar-cmp-fixed .navbar{
   -webkit-transition-property: top,bottom,width;
   transition-property: top,bottom, width;
   -webkit-transition-duration: .2s,.2s, .35s;
@@ -651,18 +670,7 @@ footer{
   -webkit-overflow-scrolling: touch;
 }
 
-.copyright-block{
-  /* -webkit-transform: translate3d(230px, 0, 0);
-  -moz-transform: translate3d(230px, 0, 0);
-  -o-transform: translate3d(230px, 0, 0);
-  -ms-transform: translate3d(230px, 0, 0);
-  transform: translate3d(230px, 0, 0); */
-  -webkit-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
-  -moz-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
-  -o-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
-  -ms-transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
-  transition: all 0.33s cubic-bezier(0.685, 0.0473, 0.346, 1);
-}
+
 .main-panel {
   /* max-height: 100%;
   height: 100vh; */
@@ -3313,7 +3321,6 @@ border: 1px solid #aaa !important;
 .show-menu .copyright-text{
   /* padding-left: 55px; */
   display: none;
-  transition: all 0.5s ease-in;
     background-color: #ececec !important;
 }
 .sidebar .nav li.active .sub-menu li a i,
@@ -3703,9 +3710,9 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-.ui-table p-sorticon {
+/*.ui-table p-sorticon {
   float: left;
-}
+}*/
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

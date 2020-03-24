@@ -3,6 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { DatePipe, formatDate } from '@angular/common';
+import { HttpParams } from '@angular/common/http';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { MasterService } from 'src/app/services/master.service';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+
 
 interface Filter {
   label: string,
@@ -15,73 +20,87 @@ interface Filter {
 })
 export class StudentInvoiceComponent implements OnInit {
 
-  students: any;
-  cols:any;
-  totalRecords:number;
-  status:Filter[];
-  selectedStatus:Filter[];
-  minDate:Date = new Date();
-  constructor(private router: Router, 
-              private _route: ActivatedRoute,
-              public translate: TranslateService,
-              public datepipe: DatePipe) {
-                translate.setDefaultLang(environment.defaultLanguage);
+  cols: any;
+  totalRecords: number;
+  invoicelist: any;
+  invoiceStatus: any;
+  invoiceCount: any;
+  totalInvoiceAmount: number;
+  invoiceCollectedAmount: number;
+  month: any;
+  year: any;
+  dueAmount: any;
+  constructor(private router: Router,
+    private _route: ActivatedRoute,
+    public translate: TranslateService,
+    private _mservice: MasterService,
+    private _service: InvoiceService,
+    public datepipe: DatePipe) {
+    translate.setDefaultLang(environment.defaultLanguage);
 
-    this.status = [
-      {label: 'Due',value:'Due'},
-      {label:'Paid', value:'Paid'},
-      {label:'Over Due', value:'Over Due'},
-     
-  ];
- 
-    this.cols = [
-      { field: 'invoiceNo', header: 'Invoice No' },
-      { field: 'name', header: 'Student Name' },
-      { field: 'phone', header: 'Contact Number' },
-      { field: 'email', header: 'Contact Email' },
-      { field: 'date', header: 'Invoice Date' },
-      { field: 'Amount', header: 'Amount' },
-      { field: 'status', header: 'Status' }
-      // { field: 'actions', header: 'Actions' }
-    ];
-    this.getStudentsList();
-   }
-   getStudentsList(){
-    this.students = [
-      {invoiceNo:'MIS0001', name:'Anil', phone:'9789456556', email:'Anil@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0002',name:'Prasad', phone:'7774564556', email:'Prasad@gmail.com', date:'26-02-2020', Amount:'₹ 5,000',status:'Invoiced',actions:''},
-      {invoiceNo:'MIS0003',name:'Naresh', phone:'7894555556', email:'Naresh@gmail.com', date:'24-02-2020', Amount:'₹ 2,000',status:'Due',actions:''},
-      {invoiceNo:'MIS0004',name:'Swetha', phone:'7894444556', email:'Swetha@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0005',name:'Raji', phone:'7894563336', email:'Raji@gmail.com', date:'22-02-2020', Amount:'₹ 3,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0006',name:'Ramakrishna', phone:'6878564556', email:'Ramakrishna@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Due',actions:''},
-      {invoiceNo:'MIS0007',name:'Phani', phone:'6664564556', email:'Phani@gmail.com', date:'27-02-2020', Amount:'₹ 4,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0008',name:'Raja', phone:'7894564556', email:'Raja@gmail.com', date:'25-02-2020', Amount:'₹ 3,000',status:'Invoiced',actions:''},
-      {invoiceNo:'MIS0009',name:'Mohan', phone:'7895641556', email:'Mohan@gmail.com', date:'26-02-2020', Amount:'₹ 5,000',status:'Over Due',actions:''},
-      {invoiceNo:'MIS0010',name:'Rakesh', phone:'7811111556', email:'Rakesh@gmail.com', date:'25-02-2020', Amount:'₹ 2,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0011',name:'Latha', phone:'7894500000', email:'Latha@gmail.com', date:'27-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MIS0012',name:'Rani', phone:'7890010006', email:'Rani@gmail.com', date:'26-02-2020', Amount:'₹ 3,000',status:'Due',actions:''},
-      
-    ];
   }
 
   isEmptyTable() {
-    return (this.students.length == 0 ? true : false);
+    return (this.invoicelist == 0 ? true : false);
   }
   ngOnInit(): void {
+    this.getMasterDropdown('invoice_status');
   }
-  onChange2(event){
-    this.getStudentsList();
-    // this.getStudentsList();
-    console.log('***', event.value.value);
-    if(event.value !=null){
-      console.log('list ---', this.students.filter(t=>t.franchise == event.value.value).length);
-      if(this.students.filter(t=>t.franchise == event.value.value).length>0)
-        this.students = this.students.filter(t=>t.franchise == event.value.value);
-    }
-    else this.getStudentsList();
+  getMasterDropdown(masterKey): any {
+    var params = new HttpParams()
+      .set('master_key', masterKey)
+      .set('dropdown', "true")
+    return this._mservice.getMasterChilds(params).subscribe(res => {
+      if (res.status) {
+        if (masterKey == 'invoice_status')
+          this.invoiceStatus = res.data.data;
+
+      }
+    });
   }
 
-  viewStudents(data:any){
-    this.router.navigate(['view/'+data.name+'/'+btoa(data.issueId)], {relativeTo: this._route});
+  viewStudents(data: any) {
+    console.log('data info', data);
+    this.router.navigate(['view/' + data.student_name + '/' + btoa(data.student_invoice_id)], { relativeTo: this._route });
+    //this.router.navigate(['view/'+data.student_name+'/'+btoa(data.student_invoice_id)+'/'+data.student_id],{relativeTo: this._route});
+  }
+  loadStudentsInvoiceLazy(event: LazyLoadEvent) {
+    console.log('event info', event);
+    var sortOrder = (event.sortOrder == 1) ? "ASC" : "DESC";
+    var params = new HttpParams()
+      .set('start', event.first + '')
+      .set('number', event.rows + '');
+    if (event.sortField) {
+      params = params.set('sort', event.sortField);
+      params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+      params = params.set('search_key', event.globalFilter);
+    }
+    if (event.filters['status_id']) {
+      params = params.set('status_id', event.filters['status_id'].value.value);
+    }
+    if (event.filters['to_date']) {
+      //params =params.set('to_date',this.datepipe.transform(event.filters['to_date'].value, 'yyyy/MM/dd'));
+      params = params.set('to_date', event.filters['to_date'].value);
+    }
+    if (event.filters['from_date']) {
+      //params =params.set('from_date',this.datepipe.transform(event.filters['from_date'].value, 'yyyy/MM/dd'));
+      params = params.set('from_date', event.filters['from_date'].value);
+    }
+    this._service.getstudentInvoice(params).subscribe(res => {
+      if (res.status) {
+        this.cols = res.data.table_headers;
+        this.invoicelist = res.data.data;
+        this.invoiceCount = res.data.invoices_count;
+        this.totalInvoiceAmount = res.data.total_invoices_amount;
+        this.invoiceCollectedAmount = res.data.total_collected_amount;
+        this.dueAmount = res.data.due_amount;
+        this.totalRecords = res.data.total_records;
+        var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        this.month = monthNames[(new Date()).getMonth()];
+        this.year = new Date().getFullYear();
+      }
+    });
   }
 }

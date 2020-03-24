@@ -28,6 +28,7 @@ export class ViewTicketComponent implements OnInit {
   fileTypes = ["image/jpeg","image/png"];
   maxSize = environment.maxUploadSize; 
   previewFile:boolean =false;
+  isClosed:boolean =false;
   preview:any;
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
@@ -79,6 +80,11 @@ export class ViewTicketComponent implements OnInit {
     this._tService.getTicketInfo(params).subscribe(res => {
       if(res.status){
         this.ticketObj = res.data.ticket_data;
+        if(this.ticketObj.status=='Close'){
+          this.isClosed = true;
+          this.ticketObj.status_display = {label: "Re Open",value: 49};
+        }else this.isClosed = false;
+        console.log('isClosed', this.isClosed);
         this.documents =res.data.ticket_data.documents; 
         this.chatHistory = res.data.chat_history;  
         console.log('this.status', this.status);        
@@ -116,11 +122,11 @@ export class ViewTicketComponent implements OnInit {
           this._toast.show('error',JSON.parse(res.error));
         }
       });
-  }
-  else
-  {
-    this._toast.show('warning','Please enter mandatory fields.');
-  }
+    }
+    else
+    {
+      this._toast.show('warning','Please enter mandatory fields.');
+    }
   }
   onFileSelect(event){
     if (event.target.files.length > 0) {

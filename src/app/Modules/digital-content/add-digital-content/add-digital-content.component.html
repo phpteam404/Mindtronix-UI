@@ -4,7 +4,7 @@
         <div class="custom-form-content">
             <form [formGroup]="digitalForm" (ngSubmit)="submit()">
                 <div class="row">
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-12 col-12">
                         <div class="form-group">
                             <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
                             <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" formControlName="name" name="name" type="text" required>
@@ -14,7 +14,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-8 col-12">
+                    <div class="col-md-12 col-12">
                         <div class="form-group">
                             <label>{{'digitalContent.add.contentDescription'|translate}}</label>
                             <textarea pInputTextarea placeholder="{{'digitalContent.add.contentDescription'|translate}}" formControlName="description" name="Content Description"></textarea>

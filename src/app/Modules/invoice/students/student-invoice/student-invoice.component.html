@@ -14,17 +14,17 @@
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.list.#invoiceAmount'|translate}}
-                        <span>₹ {{totalInvoiceAmount}}</span>
+                        <span>₹ {{totalInvoiceAmount | number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.list.collectedAmount'|translate}}
-                        <span>₹ {{invoiceCollectedAmount}}</span>
+                        <span>₹ {{invoiceCollectedAmount | number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="payment-text">{{'invoices.list.due'|translate}}
-                        <span>₹ {{dueAmount}}</span>
+                        <span>₹ {{dueAmount | number}}</span>
                     </div>
                 </div>
             </div>
@@ -41,20 +41,19 @@
                                 (onSelect)="dt.filter($event.value,'from_date' ,'contains')" dateFormat="yy/mm/dd"
                                 [maxDate]="maxDate" placeholder="{{'placeholder.invoiceFromDate'|translate}}">
                             </p-calendar>
-
                         </div>
                         <div class="col-md-4 p-0 filter-form ml-2">
                             <p-calendar name="to_date" [showIcon]="true"
                                 (onSelect)="dt.filter($event.value,'to_date' ,'contains')" dateFormat="yy/mm/dd"
                                 [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}">
                             </p-calendar>
-
                         </div>
                         <div class="input-dropdown ml-2">
                             <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}"
                                 styleClass="ui-column-filter"
                                 (onChange)="dt.filter($event.value,'status_id' ,'contains')" [showClear]="true"
-                                optionLabel="label" filter="true"></p-dropdown>
+                                optionLabel="label" filter="true">
+                            </p-dropdown>
                         </div>
                     </div>
                     <div class="d-flex">
@@ -84,7 +83,7 @@
                         <span *ngIf="i!=6 && i!=7 && i==4" title="{{rowData[col.field] |date:'dd MMM yyy'}}"
                             x-ms-format-detection="none">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
                         <span *ngIf="i!=6 && i!=7 && i==5" title="{{rowData[col.field]}}" x-ms-format-detection="none">
-                            ₹ {{rowData[col.field]}}</span>
+                            ₹ {{rowData[col.field] |number}}</span>
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
                                     (rowData[col.field]==='OverDue')? 'bg-gold' : '',
@@ -100,7 +99,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                     <tr>
                         <td [attr.colspan]="columns.length" class="text-center">
-                            No records found
+                            {{'general.noRecords' | translate}}
                         </td>
                     </tr>
                 </ng-container>

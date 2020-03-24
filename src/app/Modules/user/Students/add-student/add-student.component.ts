@@ -149,7 +149,7 @@ export class AddStudentComponent implements OnInit {
           this._uService.saveUser(params).subscribe(res => {
             if (res.status) {
               this.submitted = true;
-              this.goToList();
+              this.goToInvoice(res.data.data);
             }
           });
       }else{
@@ -161,6 +161,9 @@ export class AddStudentComponent implements OnInit {
     }
   }
   goToList(){
+    this._router.navigate(['users/students']);
+  }
+  goToInvoice(id:any){
     this._router.navigate(['users/students']);
   }
 }

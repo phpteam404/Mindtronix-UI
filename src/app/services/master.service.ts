@@ -11,7 +11,7 @@ export class MasterService {
     return this.clientHttp.get('Master/masterList');
   }
   getMasterChilds (params) {
-    return this.clientHttp.get('Master/getMsaterData', params);
+    return this.clientHttp.get('Master/getMasterData', params);
   }
   postMasterChild (params) {
     return this.clientHttp.post('Master/addMasterChild', params);
