@@ -71,28 +71,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-12">
-                        <h4>{{'student.add.feeStructure'|translate}} </h4>
-                    </div>
-                    <div class="col-12">
-                        <div class="row form-bg">
-                            <div class="col-md-4 col-12">
-                                <div class="form-group">
-                                    <label>{{'student.add.feeStructure'|translate}}<span>*</span></label>
-                                    <p-dropdown [options]="feeTerm" formControlName="fee_structure" filter="true"
-                                        placeholder="{{'placeholder.feeStructure'|translate}}" itemSize="30"
-                                        optionLabel="label" name="fee_structure" required></p-dropdown>
-                                    <div class="invalid-feedback"
-                                        *ngIf="studentForm.controls.fee_structure.invalid && submitted!=null && !submitted "
-                                        [ngClass]=" 'error'">{{'errorMessages.feeStructure'|translate}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                </div>                
                 <div class="row">
                     <div class="col-12">
                         <h4>{{'student.parentInfo'|translate}}</h4>
@@ -251,7 +230,27 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-12">
+                        <h4>{{'student.add.feeStructure'|translate}} </h4>
+                    </div>
+                    <div class="col-12">
+                        <div class="row form-bg">
+                            <div class="col-md-4 col-12">
+                                <div class="form-group">
+                                    <label>{{'student.add.feeStructure'|translate}}<span>*</span></label>
+                                    <p-dropdown [options]="feeTerm" formControlName="fee_structure" filter="true"
+                                        placeholder="{{'placeholder.feeStructure'|translate}}" itemSize="30"
+                                        optionLabel="label" name="fee_structure" required></p-dropdown>
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.fee_structure.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">{{'errorMessages.feeStructure'|translate}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <h4>{{'student.currentStatus'|translate}}</h4>

@@ -81,7 +81,8 @@
                      
                         <ng-template pTemplate="header" let-columns>
                             <tr>
-                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+                                [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                                     {{col.header}}
                                     <!-- <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon> -->
                                 </th>
@@ -89,18 +90,17 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
-                                <td *ngFor="let col of columns ; let i = index">
+                                <td *ngFor="let col of columns ; let i = index" [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                                     <span *ngIf="i!=3 && i!=4 && i!=1 && i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                     <span *ngIf="i!=3 && i!=4 && i==1" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
-                                    <span *ngIf="i!=3 && i!=4 && i==2" title="{{rowData[col.field] | number}}">{{rowData[col.field] |number}}</span>
+                                    <span *ngIf="i!=3 && i!=4 && i==2" title="{{rowData[col.field] | number}}">₹ {{rowData[col.field] |number}}</span>
                                     <span *ngIf="i == 3">
                                         <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
                                         (rowData[col.field]==='Over Due')? 'bg-gold' : '',
                                         (rowData[col.field]==='Due')? 'bg-orange' : '',
                                         (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
                                         class='list-status'>{{rowData[col.field]}}</span>
-                                    </span>
-                                  
+                                    </span>                                  
                                 </td>
                             </tr>
                         </ng-template>
@@ -142,13 +142,10 @@
                     <textarea pInputTextarea placeholder="Comment.." formControlName="comments" name="comments"></textarea>
                 </div>
             </div>
-        </div>
-      
+        </div>      
         <div class="col-12 p-0 text-right mb-2">
             <button type="submit" pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}"></button>
             <button type="submit" pButton class="btn-default"  (click)="showBasicDialog(false)" label="{{'buttons.cancel'|translate}}"></button>
-        </div>
-       
+        </div>       
    </form>
-
 </p-dialog>

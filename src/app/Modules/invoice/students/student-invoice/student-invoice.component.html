@@ -30,7 +30,6 @@
             </div>
         </div>
     </div>
-
     <!-- For Form starts-->
     <form [formGroup]="filtersForm" (ngSubmit)="submit()">
         <div class="custom-search justify-content-between">
@@ -67,8 +66,6 @@
             </div>
         </div>
     </form>
-   
-  
     <!-- for form ends-->
     <div class="custom-table custon-idlist  custom-lastchild-list custom-row-select student-invoice-list">
         <p-table #dt [columns]="cols" [value]="invoicelist" (onLazyLoad)="loadStudentsInvoiceLazy($event)"
@@ -77,7 +74,8 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+                        [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
                     </th>
@@ -85,7 +83,8 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index" (click)="viewStudents(rowData)">
+                    <td *ngFor="let col of columns ; let i = index" (click)="viewStudents(rowData)" 
+                    [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                         <span *ngIf="i!=6 && i!=7 && i!=4 && i!=5" title="{{rowData[col.field]}}"
                             x-ms-format-detection="none"> {{rowData[col.field]}}</span>
                         <span *ngIf="i!=6 && i!=7 && i==4" title="{{rowData[col.field] |date:'dd MMM yyy'}}"
