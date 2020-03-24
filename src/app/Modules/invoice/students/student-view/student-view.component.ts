@@ -27,6 +27,8 @@ export class StudentViewComponent implements OnInit {
   studentId:any;
   studentInvoiceObj:any=[];
   loading:boolean;
+  paidDate:any;
+  submitted =null;
   constructor(private _ar: ActivatedRoute,
               private _router: Router,
               private _mservice:MasterService,
@@ -41,11 +43,10 @@ export class StudentViewComponent implements OnInit {
       { field: 'status', header: 'Status' }
     ];
   }
-  showBasicDialog() {
-    this.displayBasic = true;
-  }
-  hideBasicDialog(){
-    this.displayBasic =false;
+  showBasicDialog(flag) {
+    this.displayBasic = flag;
+    this.submitted=null;
+    this.updateForm.reset();
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -60,8 +61,8 @@ export class StudentViewComponent implements OnInit {
 
   updateForm  = new FormGroup({
     status: new FormControl('', [Validators.required]),
-    type: new FormControl('', [Validators.required]),
-    commnets:new FormControl('')
+    payment_type: new FormControl('', [Validators.required]),
+    comments:new FormControl('')
   });
 
   getMasterDropdown(masterKey): any{
@@ -84,6 +85,7 @@ export class StudentViewComponent implements OnInit {
       if(res.status){
         this.studentInvoiceObj = res.data.data[0];
         this.dueDate = res.data.due_date;
+        this.paidDate =res.data.paid_date;
         this.studentId = res.data.data[0].student_id;
         console.log('tudentid---',this.studentId);
         this.getPreviousInvoiceList(this.studentId);
@@ -91,26 +93,6 @@ export class StudentViewComponent implements OnInit {
     });
   }
 
-  // loadStudentspreviousInvoiceLazy(event: LazyLoadEvent) {
-  //   console.log('event info',event);
-  //   this.loading = true;
-  //   var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
-  //   var params = new HttpParams()
-  //        .set('start', event.first+'')
-  //        .set('number', event.rows+'');
-  //   if (event.sortField) {
-  //       params = params.set('sort', event.sortField);
-  //       params = params.set('order', sortOrder);
-  //   }
-  //   params =params.set('student_id',this.studentId);     
-  //   this._Service.getPreviousinvoices(params).subscribe(res=>{
-  //     if(res.status){
-  //       this.cols = res.data.table_headers;
-  //       this.previouslist = res.data.data;
-  //       this.loading = false;
-  //     }
-  //   });
-  // } 
 
    getPreviousInvoiceList(id:any){
     var params = new HttpParams().set('student_id',id);
@@ -120,5 +102,23 @@ export class StudentViewComponent implements OnInit {
         this.previouslist = res.data.data;
        }
     });
+   }
+
+   updateStatus():any{
+     this.submitted =false;
+     if(this.updateForm.valid){
+       console.log('')
+        var params={};
+        params['student_invoice_id'] = this.StudentInvoiceId;
+        params['status'] =this.updateForm.value.status.value;
+        params['payment_type']= this.updateForm.value.payment_type.value;
+        params['comments'] =this.updateForm.value.comments;
+        this._Service.updateInvoiceStatus(params).subscribe(res=>{
+          if(res.status){
+            this.submitted = true;
+            this.updateForm.reset();
+          }
+        });
+     }
    }
 }

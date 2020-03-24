@@ -10,7 +10,7 @@
                 </div>
                 <div class="custom-view-div franchise-name">
                     <div class="pl-2">{{'invoices.view.amount'|translate}}
-                        <span>₹ {{studentInvoiceObj.amount}}</span>
+                        <span>₹ {{studentInvoiceObj.amount |number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
@@ -18,14 +18,25 @@
                         <span>{{studentInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
-                <div class="custom-view-div">
+                <div class="custom-view-div" *ngIf="!paidDate">
                     <div class="schools-text">{{'invoices.view.dueBy'|translate}}
                         <span>{{dueDate |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
+                <div class="custom-view-div" *ngIf="paidDate">
+                    <div class="schools-text">paid By
+                        <span>{{paidDate |date: 'dd MMM yyyy'}}</span>
+                    </div>
+                </div>
                 <div class="custom-view-div">
                     <div class="payment-text">{{'invoices.view.status'|translate}}
-                        <span class="bg-brown">{{studentInvoiceObj.status}}</span>
+                        <!-- <span class="bg-brown">{{studentInvoiceObj.status}}</span> -->
+                        <span [ngClass]="[(studentInvoiceObj.status==='Paid') ? 'bg-brown' : '',
+                                    (studentInvoiceObj.status==='OverDue')? 'bg-gold' : '',
+                                    (studentInvoiceObj.status==='Due')? 'bg-orange' : '',
+                                    (studentInvoiceObj.status==='Invoiced')? 'bg-darkblue' : '']">
+                             {{studentInvoiceObj.status}}
+                        </span>
                     </div>
                 </div>
             </div>
@@ -57,8 +68,7 @@
         <div class="col-md-4 col-12 pl-0">
           
             <div class="custom-static-view text-center">
-                <button pButton type="submit"  *ngIf="studentInvoiceObj.status !=='paid'" class="btn-warning" (click)="showBasicDialog()" label="Update Status"></button>
-                <!-- <button pButton type="submit" class="btn-warning" (click)="showBasicDialog()" label="Update Status"></button> -->
+                <button pButton type="submit"  *ngIf="studentInvoiceObj.status !=='Paid'" class="btn-warning" (click)="showBasicDialog(true)" label="Update Status"></button>
                 <div class="text-center mt-2 invoice-download">
                    <a href="javascript:;">Invoice Download<i class="icon icon-download-1"></i></a>
                 </div>
@@ -109,27 +119,34 @@
                     <label>Status <span>*</span></label>
                     <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                     name="status" optionLabel="label" formControlName="status" [showClear]="true" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'"> Status required!!
+                   </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
                 <div class="form-group">
                     <label>Payment Type <span>*</span></label>
                     <p-dropdown [options]="type" placeholder="Select Payment Type" itemSize="30"
-                    name="type" optionLabel="label" formControlName="type" required></p-dropdown>
+                    name="type" optionLabel="label" formControlName="payment_type" required></p-dropdown>
+                    <div class="invalid-feedback"
+                         *ngIf="updateForm.controls.payment_type.invalid && submitted!=null && !submitted"
+                         [ngClass]=" 'error'"> Payment Type required!!
+                    </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
                     <label>Comment</label>
-                    <textarea pInputTextarea placeholder="Comment" formControlName="commnets" name="commnets"></textarea>
+                    <textarea pInputTextarea placeholder="comments" formControlName="comments" name="comments"></textarea>
                 </div>
             </div>
-        
         </div>
       
         <div class="col-12 p-0 text-right mb-2">
-            <button type="button" pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}"></button>
-            <button type="button" pButton class="btn-default"  (click)="hideBasicDialog()" label="{{'buttons.cancel'|translate}}"></button>
+            <button type="submit" pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}"></button>
+            <button type="submit" pButton class="btn-default"  (click)="showBasicDialog(false)" label="{{'buttons.cancel'|translate}}"></button>
         </div>
        
    </form>

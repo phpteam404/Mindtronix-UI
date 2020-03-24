@@ -265,7 +265,8 @@
                                                 </ng-template> -->
                                                 <ng-template pTemplate="header" let-columns>
                                                     <tr>
-                                                        <th *ngFor="let col of columns; let i = index">
+                                                        <th *ngFor="let col of columns; let i = index"
+                                                          [ngClass]="[(columns.length-2===i) ? 'text-right' : '',(columns.length-4===i) ? 'text-right' : '']">
                                                             {{col.header}}
                                                             <!-- <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon> -->
                                                         </th>
@@ -273,8 +274,10 @@
                                                 </ng-template>
                                                 <ng-template pTemplate="body" let-rowData let-columns="columns">
                                                     <tr>
-                                                        <td *ngFor="let col of columns ; let i = index">
-                                                            <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                                        <td *ngFor="let col of columns ; let i = index" 
+                                                             [ngClass]="[(columns.length-2===i) ? 'text-right' : '',(columns.length-4===i) ? 'text-right' : '']">
+                                                            <span *ngIf="i != 4 && i!=1" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                                            <span *ngIf="i != 4 && i==1" title="{{rowData[col.field]}}">{{rowData[col.field] |number}}</span>
                                                             <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
                                                                 <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
                                                                     <span class="icon icon-delete" title="{{'title.delete'|translate}}"></span>

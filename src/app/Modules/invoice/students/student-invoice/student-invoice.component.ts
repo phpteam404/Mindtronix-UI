@@ -7,6 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { MasterService } from 'src/app/services/master.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 interface Filter {
@@ -30,6 +31,11 @@ export class StudentInvoiceComponent implements OnInit {
   month: any;
   year: any;
   dueAmount: any;
+  fromDate: any;
+  toDate: any;
+  submitted = null;
+  status_id: any;
+  listParamRef: LazyLoadEvent;
   constructor(private router: Router,
     private _route: ActivatedRoute,
     public translate: TranslateService,
@@ -39,6 +45,12 @@ export class StudentInvoiceComponent implements OnInit {
     translate.setDefaultLang(environment.defaultLanguage);
 
   }
+
+  filtersForm = new FormGroup({
+    from_date: new FormControl(''),
+    to_date: new FormControl(''),
+    status_id: new FormControl(''),
+  });
 
   isEmptyTable() {
     return (this.invoicelist == 0 ? true : false);
@@ -60,9 +72,7 @@ export class StudentInvoiceComponent implements OnInit {
   }
 
   viewStudents(data: any) {
-    console.log('data info', data);
     this.router.navigate(['view/' + data.student_name + '/' + btoa(data.student_invoice_id)], { relativeTo: this._route });
-    //this.router.navigate(['view/'+data.student_name+'/'+btoa(data.student_invoice_id)+'/'+data.student_id],{relativeTo: this._route});
   }
   loadStudentsInvoiceLazy(event: LazyLoadEvent) {
     console.log('event info', event);
@@ -77,17 +87,13 @@ export class StudentInvoiceComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    if (event.filters['status_id']) {
-      params = params.set('status_id', event.filters['status_id'].value.value);
-    }
-    if (event.filters['to_date']) {
-      //params =params.set('to_date',this.datepipe.transform(event.filters['to_date'].value, 'yyyy/MM/dd'));
-      params = params.set('to_date', event.filters['to_date'].value);
-    }
-    if (event.filters['from_date']) {
-      //params =params.set('from_date',this.datepipe.transform(event.filters['from_date'].value, 'yyyy/MM/dd'));
-      params = params.set('from_date', event.filters['from_date'].value);
-    }
+    this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy/MM/dd');
+    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy/MM/dd');
+    this.status_id = this.filtersForm.value.status_id.value;
+    if(this.fromDate) params = params.set('from_date', this.fromDate);
+    if (this.toDate) params = params.set('to_date', this.toDate);
+    if (this.status_id) params = params.set('status_id', this.status_id);
+    this.listParamRef = event;
     this._service.getstudentInvoice(params).subscribe(res => {
       if (res.status) {
         this.cols = res.data.table_headers;
@@ -102,5 +108,12 @@ export class StudentInvoiceComponent implements OnInit {
         this.year = new Date().getFullYear();
       }
     });
+  }
+
+  submit(): any {
+    this.submitted = false;
+    if (this.filtersForm.valid) {
+      this.loadStudentsInvoiceLazy(this.listParamRef);
+    }
   }
 }

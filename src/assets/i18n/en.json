@@ -219,7 +219,7 @@
         "list":{
              "month":"Month",
              "#invoice":"# Invoice",
-             "#invoiceAmount":"# Invoice Amount",
+             "#invoiceAmount":"# Invoiced Amount",
              "collectedAmount":"Collected Amount",
              "due":"Due"
          },

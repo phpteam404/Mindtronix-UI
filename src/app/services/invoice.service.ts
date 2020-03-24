@@ -17,4 +17,7 @@ export class InvoiceService {
   getPreviousinvoices(params) {
     return this.clientHttp.get('Invoice/getPreviousStudentInvoices', params);
   }
+  updateInvoiceStatus(params){
+    return this.clientHttp.post('Invoice/updateStudentInvoicePayment',params);
+  }
 }

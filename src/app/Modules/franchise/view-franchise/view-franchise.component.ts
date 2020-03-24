@@ -72,8 +72,8 @@ export class ViewFranchiseComponent implements OnInit {
     ];
     
     this.FeeStructureCols = [
-      { field: 'fee_title', header: 'Fee Title' },
-      { field: 'amount', header: 'Fee Amount (₹)' },
+      { field: 'fee_title', header: 'Title' },
+      { field: 'amount', header: 'Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
       {field: 'actions', header: 'Actions'}
