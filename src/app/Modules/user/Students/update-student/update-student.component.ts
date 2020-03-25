@@ -31,6 +31,8 @@ export class UpdateStudentComponent implements OnInit {
   schools:any;
   grade:any;
   studentForm: FormGroup;
+  franchiseId: any;
+  schoolId:any;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _ar: ActivatedRoute,
@@ -108,6 +110,14 @@ export class UpdateStudentComponent implements OnInit {
         blood_group: new FormControl(''),
         history_of_illness: new FormControl(''),
         status: new FormControl('', [Validators.required])
+    });
+    this._ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
+      if(params.school_id){
+        this.schoolId = atob(params.school_id);
+      }
     });
   }
 
@@ -188,6 +198,15 @@ export class UpdateStudentComponent implements OnInit {
     }
   }
   goToList(){
-    this._router.navigate(['users/students']);
+    // this._router.navigate(['users/students']);
+    console.log("----",this.schoolId,'***', this.franchiseId);
+    if(this.schoolId && this.franchiseId==undefined)
+      this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId)}});
+    else if(this.schoolId==undefined && this.franchiseId)
+      this._router.navigate(['users/students'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else if(this.schoolId && this.franchiseId)
+      this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId),'franchise_id':btoa(this.franchiseId)}});
+    else
+      this._router.navigate(['users/students']);
   }
 }

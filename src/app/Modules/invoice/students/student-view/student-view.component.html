@@ -110,8 +110,7 @@
         </div>
     </div>
 </div>
-<p-dialog header="Update Status"[modal]="true" [draggable]="false" [resizable]="false"  appendTo="body"  [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
-    
+<p-dialog header="Update Status" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="1">
      <form [formGroup]="updateForm" (ngSubmit)="updateStatus()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
@@ -121,7 +120,7 @@
                     name="status" optionLabel="label" formControlName="status" [showClear]="true" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
-                        [ngClass]=" 'error'"> Status required!!
+                        [ngClass]=" 'error'"> Status is required
                    </div>
                 </div>
             </div>
@@ -132,7 +131,7 @@
                     name="type" optionLabel="label" formControlName="payment_type" required></p-dropdown>
                     <div class="invalid-feedback"
                          *ngIf="updateForm.controls.payment_type.invalid && submitted!=null && !submitted"
-                         [ngClass]=" 'error'"> Payment Type required!!
+                         [ngClass]=" 'error'"> Payment Type required
                     </div>
                 </div>
             </div>

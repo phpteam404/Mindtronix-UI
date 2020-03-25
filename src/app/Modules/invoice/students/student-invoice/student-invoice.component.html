@@ -35,13 +35,13 @@
         <div class="custom-search justify-content-between">
             <div class="d-flex custom-form">
                 <div class="col-md-4 p-0 filter-form">
-                    <p-calendar name="from_date" [showIcon]="true"  formControlName="from_date" dateFormat="yy/mm/dd"
-                       [maxDate]="maxDate" placeholder="{{'placeholder.invoiceFromDate'|translate}}">
+                    <p-calendar name="from_date" [showIcon]="true"  formControlName="from_date" dateFormat="dd/mm/yy"
+                       [maxDate]="maxDate" showButtonBar="true" [clear]= 'Clear' placeholder="{{'placeholder.invoiceFromDate'|translate}}">
                 </p-calendar>
                 </div>
                 <div class="col-md-4 p-0 filter-form ml-2">
                     <p-calendar name="to_date" [showIcon]="true" formControlName="to_date"
-                         dateFormat="yy/mm/dd"
+                         dateFormat="dd/mm/yy" showButtonBar="true" [clear]= 'Clear'
                         [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}">
                     </p-calendar>
                 </div>

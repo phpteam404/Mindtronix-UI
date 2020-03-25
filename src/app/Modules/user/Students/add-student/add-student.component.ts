@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { MasterService } from 'src/app/services/master.service';
@@ -30,8 +30,11 @@ export class AddStudentComponent implements OnInit {
   blood_group:any;
   schools:any;
   isUpdate:boolean=false;
+  franchiseId: any;
+  schoolId:any;
 
   constructor(private _router: Router,
+              private _ar : ActivatedRoute,
               private _toast: ToasterService,
               private _mService:MasterService,
               private _sService:SchoolService,
@@ -79,6 +82,14 @@ export class AddStudentComponent implements OnInit {
     this.getMasterDropdown('blood_group');
     this.getschoolsDropdown();
     this.getFeeStructureDropDown();
+    this._ar.queryParams.subscribe(params => {
+      if(params.franchise_id){
+        this.franchiseId = atob(params.franchise_id);
+      }
+      if(params.school_id){
+        this.schoolId = atob(params.school_id);
+      }
+    });
   }
 
   getMasterDropdown(masterKey): any{
@@ -162,7 +173,16 @@ export class AddStudentComponent implements OnInit {
     }
   }
   goToList(){
-    this._router.navigate(['users/students']);
+    // this._router.navigate(['users/students']);
+    if(this.schoolId && this.franchiseId=='')
+      this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId)}});
+    else if(this.schoolId=='' && this.franchiseId)
+      this._router.navigate(['users/students'],{queryParams:{'franchise_id':btoa(this.franchiseId)}});
+    else if(this.schoolId && this.franchiseId)
+      this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId),'franchise_id':btoa(this.franchiseId)}});
+    else
+      this._router.navigate(['users/students']);
+ 
   }
   goToView(name:any,id:any){
     this._router.navigate(['/users/students/view',name,btoa(id)]);
