@@ -57,6 +57,7 @@ export class StudentInvoiceComponent implements OnInit {
   }
   ngOnInit(): void {
     this.getMasterDropdown('invoice_status');
+    this.filtersForm.reset();
   }
   getMasterDropdown(masterKey): any {
     var params = new HttpParams()
@@ -87,11 +88,15 @@ export class StudentInvoiceComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
+    console.log("this.filtersForm.value",this.filtersForm.value);
     /*this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy/MM/dd');
     this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy/MM/dd');*/
     this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy-MM-dd');
     this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy-MM-dd');
-    this.status_id = this.filtersForm.value.status_id.value;
+    if(this.filtersForm.value.status_id && this.filtersForm.value.status_id.value){
+      this.status_id = this.filtersForm.value.status_id.value;
+    }else this.status_id=null;
+    
     if(this.fromDate) params = params.set('from_date', this.fromDate);
     if (this.toDate) params = params.set('to_date', this.toDate);
     if (this.status_id) params = params.set('status_id', this.status_id);

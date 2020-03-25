@@ -20,4 +20,7 @@ export class InvoiceService {
   updateInvoiceStatus(params){
     return this.clientHttp.post('Invoice/updateStudentInvoicePayment',params);
   }
+  generateStudentInvoice(params){
+    return this.clientHttp.get('Invoice/generateStudentInvoice',params);
+  }
 }

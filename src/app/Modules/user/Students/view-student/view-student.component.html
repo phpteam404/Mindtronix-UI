@@ -117,9 +117,23 @@
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="students-text">{{'student.view.lastInvoiceAmount'|translate}}
-                        <span>₹{{studentObj.last_invoice_amount }}</span>
+                    <div class="students-text" *ngIf="studentObj.last_invoice_amount">{{'student.view.lastInvoiceAmount'|translate}}
+                        <span>₹{{studentObj.last_invoice_amount}}</span>
                     </div>
+                    <div class="students-text"
+                        *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
+                        >{{'student.view.lastInvoiceAmount'|translate}}
+                    </div>
+                    <button pButton type="button" style="height: 25px;
+                                                            top: 8px;
+                                                            margin-left: 20px;
+                                                            line-height: 5px;
+                                                            padding-bottom: 32px;"
+                        *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
+                        label="Generate Invoice" class="btn-warning" 
+                        (click)="generateInvoice(studentObj)">
+                    </button>
+                    
                 </div>
                 <div class="custom-view-div">
                     <div class="trainers-text">{{'student.view.lastLogin'|translate}}
@@ -245,12 +259,10 @@
                 </p-tabView>
             </div>
         </div>
-        <div class="col-md-3 col-12 pl-0">
-          
+        <div class="col-md-3 col-12 pl-0">          
             <div class="custom-static-view custom-minheight">
                 <h4>{{'student.view.studentHistory'|translate}}</h4>
-               
-            </div>
+            </div>        
         </div>
     </div>
 </div>

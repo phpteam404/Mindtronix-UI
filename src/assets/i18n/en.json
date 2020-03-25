@@ -227,7 +227,7 @@
              "invoice":"Invoice",
              "amount":"Amount",
              "invoiceGeneratedDate":"Invoice Generated Date",
-             "dueBy":"Due By",
+             "dueBy":"Due by",
              "status":"Status",
              "contactNumber":"Contact Number",
              "memberSince":"Member Since"

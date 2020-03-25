@@ -37,7 +37,7 @@ export class StudentViewComponent implements OnInit {
      translate.setDefaultLang(environment.defaultLanguage);
    
     this.cols = [
-      { field: 'invoice_number', header: 'Invoice No' },
+      { field: 'invoice_number', header: 'Number' },
       { field: 'invoice_date', header: 'Date' },
       { field: 'amount', header: 'Amount' },
       { field: 'status', header: 'Status' }
@@ -107,7 +107,6 @@ export class StudentViewComponent implements OnInit {
    updateStatus():any{
      this.submitted =false;
      if(this.updateForm.valid){
-       console.log('')
         var params={};
         params['student_invoice_id'] = this.StudentInvoiceId;
         params['status'] =this.updateForm.value.status.value;
@@ -122,4 +121,15 @@ export class StudentViewComponent implements OnInit {
         });
      }
    }
+   viewPreviousInvoices(data:any){
+    // console.log('previous invoice data',data);
+    var params = new HttpParams().set('student_invoice_id',data.student_invoice_id);
+    this._Service.getStudentsView(params).subscribe(res => {
+     if(res.status){
+       this.studentInvoiceObj = res.data.data[0];
+       this.dueDate = res.data.due_date;
+       this.paidDate =res.data.paid_date;
+     }
+   });     
+  }
 }

@@ -57,7 +57,7 @@
             <!-- <button pButton type="submit" label="Go" class="btn-warning"></button> -->
             <div class="d-flex">
                 <div class="input-search">
-                    <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}"
+                    <input type="text" pInputText size="50" placeholder="Search by Number / Name / Contact / Email"
                         class="" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         style="width:auto;">
                     <i class="fa fa-search mr-2"></i>
@@ -67,7 +67,7 @@
         </div>
     </form>
     <!-- for form ends-->
-    <div class="custom-table custon-idlist  custom-lastchild-list custom-row-select student-invoice-list">
+    <div class="custom-table custon-idlist custom-lastchild-list custom-row-select student-invoice-list">
         <p-table #dt [columns]="cols" [value]="invoicelist" (onLazyLoad)="loadStudentsInvoiceLazy($event)"
             [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
@@ -75,7 +75,7 @@
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
-                        [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
+                        [ngClass]="[(columns.length-2===i) ? 'text-right' : '',(i==0)?'w300':'']">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
                     </th>

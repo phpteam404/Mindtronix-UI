@@ -24,7 +24,7 @@
                     </div>
                 </div>
                 <div class="custom-view-div" *ngIf="paidDate">
-                    <div class="schools-text">paid By
+                    <div class="schools-text">Paid by
                         <span>{{paidDate |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
             </div>
             <div class="custom-static-view mt-3">
                 <h4>Previous Invoices</h4>
-                <div class="custom-table custom-lastchild-list">
+                <div class="custom-table custom-lastchild-list custom-row-select">
                     <p-table #dt [columns]="cols" [value]="previouslist"  [totalRecords]="totalRecords"
                              [paginator]="true" [rows]="10">
                      
@@ -90,16 +90,17 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
-                                <td *ngFor="let col of columns ; let i = index" [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
+                                <td *ngFor="let col of columns ; let i = index"  (click)="viewPreviousInvoices(rowData)" 
+                                    [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                                     <span *ngIf="i!=3 && i!=4 && i!=1 && i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                     <span *ngIf="i!=3 && i!=4 && i==1" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
                                     <span *ngIf="i!=3 && i!=4 && i==2" title="{{rowData[col.field] | number}}">₹ {{rowData[col.field] |number}}</span>
                                     <span *ngIf="i == 3">
-                                        <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
-                                        (rowData[col.field]==='Over Due')? 'bg-gold' : '',
-                                        (rowData[col.field]==='Due')? 'bg-orange' : '',
-                                        (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
-                                        class='list-status'>{{rowData[col.field]}}</span>
+                                        <span [ngClass]="[(rowData[col.field]==='Paid' || rowData[col.field]==='paid') ? 'bg-brown' : '',
+                                        (rowData[col.field]==='overdue')? 'bg-gold' : '',
+                                        (rowData[col.field]==='due')? 'bg-orange' : '',
+                                        (rowData[col.field]==='Invoiced' || rowData[col.field]==='invoiced')? 'bg-darkblue' : '']"
+                                        class='list-status'>{{rowData[col.field] | titlecase}}</span>
                                     </span>                                  
                                 </td>
                             </tr>

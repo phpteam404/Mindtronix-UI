@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
+import { InvoiceService } from 'src/app/services/invoice.service';
 
 @Component({
   selector: 'app-view-student',
@@ -14,7 +15,9 @@ export class ViewStudentComponent implements OnInit {
 
   studentObj:any={};
   constructor(private _ar: ActivatedRoute, 
+              private _router : Router,
               private _service: UserService,
+              private _iservice: InvoiceService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
   }
@@ -36,6 +39,14 @@ export class ViewStudentComponent implements OnInit {
         this.studentObj['student_history'] = res.data.student_history;
       }
     })
+  }
+  generateInvoice(data:any) {
+    var params = new HttpParams().set('student_id', data.student_id);
+    this._iservice.generateStudentInvoice(params).subscribe(res => {
+      if (res.status) {
+        this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(res.data.data)]);
+      }
+    });
   }
 
 }
