@@ -5,6 +5,7 @@ import { HttpParams } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { InvoiceService } from 'src/app/services/invoice.service';
+import { ConfirmationService} from 'primeng/api';
 
 @Component({
   selector: 'app-view-student',
@@ -17,6 +18,7 @@ export class ViewStudentComponent implements OnInit {
   constructor(private _ar: ActivatedRoute, 
               private _router : Router,
               private _service: UserService,
+              private _confirm: ConfirmationService,
               private _iservice: InvoiceService,
               public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
@@ -40,12 +42,18 @@ export class ViewStudentComponent implements OnInit {
       }
     })
   }
+  
   generateInvoice(data:any) {
-    var params = new HttpParams().set('student_id', data.student_id);
-    this._iservice.generateStudentInvoice(params).subscribe(res => {
-      if (res.status) {
-        this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(res.data.data)]);
-      }
+    this._confirm.confirm({
+      accept: () => {
+        var params = new HttpParams().set('student_id', data.student_id);  
+        this._iservice.generateStudentInvoice(params).subscribe(res=>{
+          if(res.status){
+            this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(res.data.data)]);
+          }
+        });
+      },
+      reject: () => {}
     });
   }
 

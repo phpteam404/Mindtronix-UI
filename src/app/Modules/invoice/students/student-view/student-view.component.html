@@ -2,32 +2,36 @@
     <div class="row view-page">
 
         <div class="col-md-8 col-12">
-            <div class="custom-view-list student-view-list">
-                <div class="custom-view-div franchise-name">
-                    <div>{{'invoices.view.invoice'|translate}}
-                        <span>{{studentInvoiceObj.invoice_number}}</span>
+            <div class="custom-view-list">
+                <div class="student-view-list">
+                    <div class="custom-view-div franchise-name custom-block">
+                        <div>{{'invoices.view.invoice'|translate}}
+                            <span>{{studentInvoiceObj.invoice_number}}</span>
+                        </div>
                     </div>
                 </div>
+                <div class="student-view-list mt-2">
                 <div class="custom-view-div franchise-name">
-                    <div class="pl-2">{{'invoices.view.amount'|translate}}
+                    <div class="">{{'invoices.view.amount'|translate}}
                         <span>₹ {{studentInvoiceObj.amount |number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text"> {{'invoices.view.invoiceGeneratedDate'|translate}}
+                    <div class="schools-text">{{'invoices.view.invoiceDate'|translate}}
                         <span>{{studentInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
                 <div class="custom-view-div" *ngIf="!paidDate">
-                    <div class="schools-text">{{'invoices.view.dueBy'|translate}}
+                    <div class="schools-text"> {{'invoices.view.dueDate'|translate}}
                         <span>{{dueDate |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div" *ngIf="paidDate">
-                    <div class="schools-text">Paid by
+                    <div class="schools-text">{{'invoices.view.paidDate'|translate}}
                         <span>{{paidDate |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
+
                 <div class="custom-view-div">
                     <div class="payment-text">{{'invoices.view.status'|translate}}
                         <!-- <span class="bg-brown">{{studentInvoiceObj.status}}</span> -->
@@ -39,6 +43,7 @@
                         </span>
                     </div>
                 </div>
+            </div>
             </div>
             <div class="custom-view ticket-view-content">
                 <div class="row">
@@ -82,7 +87,7 @@
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
-                                [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
+                                [ngClass]="(columns.length-2===i) ? 'custom-right-text' : ''">
                                     {{col.header}}
                                     <!-- <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon> -->
                                 </th>
@@ -91,7 +96,7 @@
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
                                 <td *ngFor="let col of columns ; let i = index"  (click)="viewPreviousInvoices(rowData)" 
-                                    [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
+                                    [ngClass]="(columns.length-2===i) ? 'custom-right-text' : ''">
                                     <span *ngIf="i!=3 && i!=4 && i!=1 && i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                     <span *ngIf="i!=3 && i!=4 && i==1" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
                                     <span *ngIf="i!=3 && i!=4 && i==2" title="{{rowData[col.field] | number}}">₹ {{rowData[col.field] |number}}</span>
@@ -116,23 +121,23 @@
         <div class="row custom-form">
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Status <span>*</span></label>
+                    <label>{{'franchise.add.status'|translate}} <span>*</span></label>
                     <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                     name="status" optionLabel="label" formControlName="status" [showClear]="true" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
-                        [ngClass]=" 'error'"> Status is required
+                        [ngClass]=" 'error'"> {{'errorMessages.status'|translate}}
                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Payment Type <span>*</span></label>
+                    <label>{{'invoices.view.paymentType'|translate}} <span>*</span></label>
                     <p-dropdown [options]="type" placeholder="Select Payment Type" itemSize="30"
                     name="type" optionLabel="label" formControlName="payment_type" required></p-dropdown>
                     <div class="invalid-feedback"
                          *ngIf="updateForm.controls.payment_type.invalid && submitted!=null && !submitted"
-                         [ngClass]=" 'error'"> Payment Type required
+                         [ngClass]=" 'error'"> {{'errorMessages.paymentTypeReq'|translate}}
                     </div>
                 </div>
             </div>

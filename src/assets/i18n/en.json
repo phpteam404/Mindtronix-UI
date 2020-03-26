@@ -224,13 +224,18 @@
              "due":"Due"
          },
          "view":{
-             "invoice":"Invoice",
+             "invoice":"Invoice #",
              "amount":"Amount",
-             "invoiceGeneratedDate":"Invoice Generated Date",
-             "dueBy":"Due by",
+             "invoiceDate":"Invoice Date",
+             "dueDate":"Due Date",
+             "paidDate":"Paid Date",
              "status":"Status",
              "contactNumber":"Contact Number",
-             "memberSince":"Member Since"
+             "memberSince":"Member Since",
+             "previousInvoices":"Previous Invoices",
+             "updateStatus":"Update Status",
+             "paymentType":"Payment Mode",
+             "comments":"Comments"
          }
      },
     "buttons":{
@@ -291,6 +296,7 @@
         "status":"Status is Required",
         "comments":"Comments is Required",
         "designation":"Designation Required",
+        "paymentTypeReq":"Payment Mode Required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",
         "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs) files"
     },
@@ -306,7 +312,9 @@
          "noRecords":"No records found",
          "search": "Search...",
          "deleteHeader":"Delete Confirmation",
+         "confirmation":"Confirmation",
          "confirmDelete":"Are you sure that you want to delete?",
+         "generateInvoiceConfirm":"Are you sure you want to generate Invoice?",
          "acceptLabel": "Yes",
          "rejectLabel": "No",
          "noAttachments":"No Attachments found"

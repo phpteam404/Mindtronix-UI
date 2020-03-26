@@ -28,6 +28,7 @@ export class StudentViewComponent implements OnInit {
   studentInvoiceObj:any=[];
   loading:boolean;
   paidDate:any;
+  invoiceId:any;
   submitted =null;
   constructor(private _ar: ActivatedRoute,
               private _router: Router,
@@ -87,15 +88,19 @@ export class StudentViewComponent implements OnInit {
         this.dueDate = res.data.due_date;
         this.paidDate =res.data.paid_date;
         this.studentId = res.data.data[0].student_id;
+        this.invoiceId= res.data.data[0].student_invoice_id;
         console.log('studentid---',this.studentId);
-        this.getPreviousInvoiceList(this.studentId);
+        this.getPreviousInvoiceList(this.studentId,this.invoiceId);
+        //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
   }
 
 
-   getPreviousInvoiceList(id:any){
-    var params = new HttpParams().set('student_id',id);
+   getPreviousInvoiceList(data:any,id:any){
+    var params = new HttpParams()
+               .set('student_id',data)
+               .set('student_invoice_id',id); 
     this._Service.getPreviousinvoices(params).subscribe(res=>{
        if(res.status){
         //this.cols = res.data.table_headers;
@@ -122,13 +127,14 @@ export class StudentViewComponent implements OnInit {
      }
    }
    viewPreviousInvoices(data:any){
-    // console.log('previous invoice data',data);
+     console.log('previous invoice  info',data);
     var params = new HttpParams().set('student_invoice_id',data.student_invoice_id);
     this._Service.getStudentsView(params).subscribe(res => {
      if(res.status){
        this.studentInvoiceObj = res.data.data[0];
        this.dueDate = res.data.due_date;
        this.paidDate =res.data.paid_date;
+       //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
      }
    });     
   }

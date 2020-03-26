@@ -32,7 +32,8 @@ export class AddStudentComponent implements OnInit {
   isUpdate:boolean=false;
   franchiseId: any;
   schoolId:any;
-
+  enableField:boolean;
+  feeAmount:any;
   constructor(private _router: Router,
               private _ar : ActivatedRoute,
               private _toast: ToasterService,
@@ -139,6 +140,7 @@ export class AddStudentComponent implements OnInit {
   getGrade(){ return this.studentForm.value.grade.value;}
   getBloodGroup(){ return this.studentForm.value.blood_group.value;}
   getStatus(){ return this.studentForm.value.status.value;}
+  getamount() { return this.studentForm.value.fee_structure.amount;}
   submit(): any{
     this.submitted = false;
     if (this.studentForm.valid) {
@@ -186,5 +188,14 @@ export class AddStudentComponent implements OnInit {
   }
   goToView(name:any,id:any){
     this._router.navigate(['/users/students/view',name,btoa(id)]);
+  }
+
+  getFeeAmount(){
+    this.feeAmount =this.studentForm.value.fee_structure.amount;
+    console.log('fee amount info--',this.feeAmount);
+    if(this.feeAmount)
+      this.enableField = true;
+    else 
+      this.enableField = false;
   }
 }

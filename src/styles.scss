@@ -73,6 +73,7 @@
       padding: 1px 8px;
       font-size: 14px !important;
       width: 100% !important;
+      min-width: 100%;
       &:hover{
         border-color: #ccc !important;
       }
@@ -1263,4 +1264,17 @@ input{
 }
 .file-size{
   min-width: 60px;
+}
+.custom-refresh{
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+  a{
+    font-size: 22px;
+    color: #aaaaaa;
+    &:hover,
+    &:focus{
+      color: #e87a26;
+    }
+  }
 }

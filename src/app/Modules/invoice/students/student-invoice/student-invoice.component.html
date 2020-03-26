@@ -4,7 +4,9 @@
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
                     <div>{{'invoices.list.month'|translate}}
-                        <span>{{month}} {{year}}</span>
+                        <p-dropdown [options]="lastSixMonths" (onChange) ="monthSelected($event)"
+                            styleClass="ui-column-filter" optionLabel="label">
+                       </p-dropdown>
                     </div>
                 </div>
                 <div class="custom-view-div">
@@ -34,18 +36,18 @@
     <form [formGroup]="filtersForm" (ngSubmit)="submit()">
         <div class="custom-search justify-content-between">
             <div class="d-flex custom-form">
-                <div class="col-md-4 p-0 filter-form">
+                <div class="col-md-3 p-0 filter-form">
                     <p-calendar name="from_date" [showIcon]="true"  formControlName="from_date" dateFormat="dd/mm/yy"
                        [maxDate]="maxDate" showButtonBar="true" [clear]= 'Clear' placeholder="{{'placeholder.invoiceFromDate'|translate}}">
                 </p-calendar>
                 </div>
-                <div class="col-md-4 p-0 filter-form ml-2">
+                <div class="col-md-3 p-0 filter-form ml-2">
                     <p-calendar name="to_date" [showIcon]="true" formControlName="to_date"
                          dateFormat="dd/mm/yy" showButtonBar="true" [clear]= 'Clear'
                         [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}">
                     </p-calendar>
                 </div>
-                <div class="input-dropdown ml-2">
+                <div class="col-md-2 p-0 input-dropdown ml-2">
                     <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}"
                         styleClass="ui-column-filter"
                          [showClear]="true" formControlName ="status_id"
@@ -53,6 +55,9 @@
                     </p-dropdown>
                 </div>
                 <button pButton type="submit" label="Go" class="btn-warning ml-2 p-0"></button>
+                <div class="custom-refresh">
+                    <a href="javascript:;" class="icon icon-refresh-1" (click)="resetFilters()"></a>
+                </div>
             </div>
             <!-- <button pButton type="submit" label="Go" class="btn-warning"></button> -->
             <div class="d-flex">

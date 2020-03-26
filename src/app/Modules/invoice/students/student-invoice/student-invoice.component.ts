@@ -8,7 +8,7 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 import { MasterService } from 'src/app/services/master.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+import { ToasterService } from 'src/app/utils/toaster.service';
 
 interface Filter {
   label: string,
@@ -35,12 +35,15 @@ export class StudentInvoiceComponent implements OnInit {
   toDate: any;
   submitted = null;
   status_id: any;
+  lastSixMonths:any;
+  selectedMonth:any;
   listParamRef: LazyLoadEvent;
   constructor(private router: Router,
     private _route: ActivatedRoute,
     public translate: TranslateService,
     private _mservice: MasterService,
     private _service: InvoiceService,
+    private _toast: ToasterService,
     public datepipe: DatePipe) {
     translate.setDefaultLang(environment.defaultLanguage);
 
@@ -88,9 +91,6 @@ export class StudentInvoiceComponent implements OnInit {
     if (event.globalFilter) {
       params = params.set('search_key', event.globalFilter);
     }
-    console.log("this.filtersForm.value",this.filtersForm.value);
-    /*this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy/MM/dd');
-    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy/MM/dd');*/
     this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy-MM-dd');
     this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy-MM-dd');
     if(this.filtersForm.value.status_id && this.filtersForm.value.status_id.value){
@@ -100,6 +100,7 @@ export class StudentInvoiceComponent implements OnInit {
     if(this.fromDate) params = params.set('from_date', this.fromDate);
     if (this.toDate) params = params.set('to_date', this.toDate);
     if (this.status_id) params = params.set('status_id', this.status_id);
+    if(this.selectedMonth) params= params.set('month',this.selectedMonth);
     this.listParamRef = event;
     this._service.getstudentInvoice(params).subscribe(res => {
       if (res.status) {
@@ -109,6 +110,7 @@ export class StudentInvoiceComponent implements OnInit {
         this.totalInvoiceAmount = res.data.total_invoices_amount;
         this.invoiceCollectedAmount = res.data.total_collected_amount;
         this.dueAmount = res.data.due_amount;
+        this.lastSixMonths = res.data.last_six_months;
         this.totalRecords = res.data.total_records;
         var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         this.month = monthNames[(new Date()).getMonth()];
@@ -119,8 +121,25 @@ export class StudentInvoiceComponent implements OnInit {
 
   submit(): any {
     this.submitted = false;
+    let fromDateSelected = this.filtersForm.get('from_date').value;
+    let toDateSelected = this.filtersForm.get('to_date').value;
+    if(fromDateSelected != null && toDateSelected == null)
+    {
+      this._toast.show('warning','Please Select To Date');
+      return false;
+    }
     if (this.filtersForm.valid) {
       this.loadStudentsInvoiceLazy(this.listParamRef);
     }
+  }
+  resetFilters(){
+    this.filtersForm.reset();
+    this.loadStudentsInvoiceLazy(this.listParamRef);
+  }
+
+  monthSelected(event:any){
+    console.log('event info ***',event);
+    this.selectedMonth = event.value.value;
+    this.loadStudentsInvoiceLazy(this.listParamRef);
   }
 }

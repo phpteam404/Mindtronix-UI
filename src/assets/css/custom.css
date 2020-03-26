@@ -3742,6 +3742,16 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .custom-table.custon-idlist p-table .ui-table .ui-table-thead th:first-child{
   width: 200px;
 }
+.custom-right-text{
+  text-align: right;
+  padding-right: 30px !important;
+}
+.generated-btn span{
+  padding: 2px 6px !important;
+}
+.generated-btn{
+  margin-left: 10px !important;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {
