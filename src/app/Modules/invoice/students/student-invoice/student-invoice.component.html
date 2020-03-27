@@ -48,7 +48,7 @@
                     </p-calendar>
                 </div>
                 <div class="col-md-2 p-0 input-dropdown ml-2">
-                    <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}"
+                    <p-dropdown [options]="invoiceStatus" placeholder="status"
                         styleClass="ui-column-filter"
                          [showClear]="true" formControlName ="status_id"
                         optionLabel="label" filter="true">
@@ -56,13 +56,13 @@
                 </div>
                 <button pButton type="submit" label="Go" class="btn-warning ml-2 p-0"></button>
                 <div class="custom-refresh">
-                    <a href="javascript:;" class="icon icon-refresh-1" (click)="resetFilters()"></a>
+                    <a href="javascript:;" class="icon icon-refresh-1" title ="Reset" (click)="resetFilters()"></a>
                 </div>
             </div>
             <!-- <button pButton type="submit" label="Go" class="btn-warning"></button> -->
             <div class="d-flex">
                 <div class="input-search">
-                    <input type="text" pInputText size="50" placeholder="Search by Number / Name / Contact / Email"
+                    <input type="text" pInputText size="50" placeholder="Search by Invoice # / Name / Contact / Email"
                         class="" (input)="dt.filterGlobal($event.target.value, 'contains')"
                         style="width:auto;">
                     <i class="fa fa-search mr-2"></i>
@@ -89,7 +89,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                     <td *ngFor="let col of columns ; let i = index" (click)="viewStudents(rowData)" 
-                    [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
+                    [ngClass]="(columns.length-2===i) ? 'custom-right-text' : ''">
                         <span *ngIf="i!=6 && i!=7 && i!=4 && i!=5" title="{{rowData[col.field]}}"
                             x-ms-format-detection="none"> {{rowData[col.field]}}</span>
                         <span *ngIf="i!=6 && i!=7 && i==4" title="{{rowData[col.field] |date:'dd MMM yyy'}}"

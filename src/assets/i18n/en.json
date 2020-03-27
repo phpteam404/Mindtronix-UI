@@ -315,6 +315,7 @@
          "confirmation":"Confirmation",
          "confirmDelete":"Are you sure that you want to delete?",
          "generateInvoiceConfirm":"Are you sure you want to generate Invoice?",
+         "changeToggleStatus":"Are you sure you want to change status?",
          "acceptLabel": "Yes",
          "rejectLabel": "No",
          "noAttachments":"No Attachments found"
@@ -361,8 +362,8 @@
         "titleTicket":" Ticket Title",
         "issueType":"Select Issue Type",
         "description":"Description",
-        "invoiceFromDate":"Invoice From Date",
-        "invoiceToDate":" Invoice To Date"
+        "invoiceFromDate":"From Date",
+        "invoiceToDate":"To Date"
     },
     "title":{
         "edit":"Edit",

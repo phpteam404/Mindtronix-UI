@@ -23,7 +23,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index" [ngClass]="[(columns.length-3===i) ? 'text-right' : '']"
+                    <td *ngFor="let col of columns ; let i = index" [ngClass]="[(columns.length-3===i) ? 'custom-right-text' : '']"
                         (click)="(i != (columns.length-1)) && viewContent(rowData)">
                         <span *ngIf="(i != (columns.length-2) && i != (columns.length-1))" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>                      
                         <!-- <span *ngIf="i == 5" title="{{rowData[col.field]}}" class="d-flex action-color overlay">

@@ -128,6 +128,11 @@ export class StudentInvoiceComponent implements OnInit {
       this._toast.show('warning','Please Select To Date');
       return false;
     }
+    if(toDateSelected !=null && fromDateSelected ==null)
+     {
+        this._toast.show('warning','Please Select From Date');
+        return false;
+     }
     if (this.filtersForm.valid) {
       this.loadStudentsInvoiceLazy(this.listParamRef);
     }
@@ -138,7 +143,6 @@ export class StudentInvoiceComponent implements OnInit {
   }
 
   monthSelected(event:any){
-    console.log('event info ***',event);
     this.selectedMonth = event.value.value;
     this.loadStudentsInvoiceLazy(this.listParamRef);
   }
