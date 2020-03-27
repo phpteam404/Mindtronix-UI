@@ -62,7 +62,7 @@ export class StudentViewComponent implements OnInit {
 
   updateForm  = new FormGroup({
     status: new FormControl('', [Validators.required]),
-    payment_type: new FormControl(''),
+    payment_type: new FormControl('',),
     comments:new FormControl('')
   });
 
