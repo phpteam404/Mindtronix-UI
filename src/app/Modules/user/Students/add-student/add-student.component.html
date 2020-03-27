@@ -240,7 +240,7 @@
                                 <div class="form-group">
                                     <label>{{'student.add.feeStructure'|translate}}<span>*</span></label>
                                     <p-dropdown [options]="feeTerm" formControlName="fee_structure" 
-                                         filter="true"  (onChange) ="getFeeAmount()"
+                                         filter="true"  (onChange) ="getSelectedFeeInfo()"
                                         placeholder="{{'placeholder.feeStructure'|translate}}" itemSize="30"
                                         optionLabel="label" name="fee_structure" required></p-dropdown>
                                     <div class="invalid-feedback"
@@ -250,10 +250,10 @@
                                 </div>
                             </div>
                             <!-- For Amount-->
-                            <div class="col-md-8 col-12" *ngIf="enableField">
+                            <div class="col-md-8 col-12" *ngIf="selectedFeeData">
                                 <div class="form-group">
-                                    <label>Selected Fee Amount</label>
-                                    <span>{{feeAmount}}</span>
+                                    <label>Selected Fee Structure</label>
+                                    <span>Term: {{selectedFeeData.label}}, Amount: {{selectedFeeData.amount | number}}, Tax: {{selectedFeeData.tax}}%, Discount: {{selectedFeeData.discount}}%</span>
                                 </div>
                             </div>
                         </div>

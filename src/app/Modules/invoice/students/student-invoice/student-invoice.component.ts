@@ -24,29 +24,26 @@ export class StudentInvoiceComponent implements OnInit {
   cols: any;
   totalRecords: number;
   invoicelist: any;
-  invoiceStatus: any;
-  invoiceCount: any;
-  totalInvoiceAmount: number;
-  invoiceCollectedAmount: number;
+  invoiceStatusList: any;
+  invoiceData: any={};
   month: any;
   year: any;
-  dueAmount: any;
   fromDate: any;
   toDate: any;
   submitted = null;
   status_id: any;
   lastSixMonths:any;
   selectedMonth:any;
+  loading:boolean;
   listParamRef: LazyLoadEvent;
   constructor(private router: Router,
-    private _route: ActivatedRoute,
-    public translate: TranslateService,
-    private _mservice: MasterService,
-    private _service: InvoiceService,
-    private _toast: ToasterService,
-    public datepipe: DatePipe) {
+              private _route: ActivatedRoute,
+              public translate: TranslateService,
+              private _mservice: MasterService,
+              private _service: InvoiceService,
+              private _toast: ToasterService,
+              public datepipe: DatePipe) {
     translate.setDefaultLang(environment.defaultLanguage);
-
   }
 
   filtersForm = new FormGroup({
@@ -69,7 +66,7 @@ export class StudentInvoiceComponent implements OnInit {
     return this._mservice.getMasterChilds(params).subscribe(res => {
       if (res.status) {
         if (masterKey == 'invoice_status')
-          this.invoiceStatus = res.data.data;
+          this.invoiceStatusList = res.data.data;
 
       }
     });
@@ -79,7 +76,7 @@ export class StudentInvoiceComponent implements OnInit {
     this.router.navigate(['view/' + data.student_name + '/' + btoa(data.student_invoice_id)], { relativeTo: this._route });
   }
   loadStudentsInvoiceLazy(event: LazyLoadEvent) {
-    console.log('event info', event);
+    this.loading=true;
     var sortOrder = (event.sortOrder == 1) ? "ASC" : "DESC";
     var params = new HttpParams()
       .set('start', event.first + '')
@@ -106,15 +103,13 @@ export class StudentInvoiceComponent implements OnInit {
       if (res.status) {
         this.cols = res.data.table_headers;
         this.invoicelist = res.data.data;
-        this.invoiceCount = res.data.invoices_count;
-        this.totalInvoiceAmount = res.data.total_invoices_amount;
-        this.invoiceCollectedAmount = res.data.total_collected_amount;
-        this.dueAmount = res.data.due_amount;
+        this.invoiceData = res.data;
         this.lastSixMonths = res.data.last_six_months;
         this.totalRecords = res.data.total_records;
-        var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        /*var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         this.month = monthNames[(new Date()).getMonth()];
-        this.year = new Date().getFullYear();
+        this.year = new Date().getFullYear();*/
+        this.loading=false;
       }
     });
   }
@@ -139,9 +134,9 @@ export class StudentInvoiceComponent implements OnInit {
   }
   resetFilters(){
     this.filtersForm.reset();
+    this.loading=true;
     this.loadStudentsInvoiceLazy(this.listParamRef);
   }
-
   monthSelected(event:any){
     this.selectedMonth = event.value.value;
     this.loadStudentsInvoiceLazy(this.listParamRef);

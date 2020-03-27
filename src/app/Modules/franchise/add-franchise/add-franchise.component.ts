@@ -39,7 +39,7 @@ export class AddFranchiseComponent implements OnInit {
   submitted3 = null;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
-  
+  structure:any;
   state:any=[];
   city:any=[];
   country:any=[];
@@ -58,8 +58,8 @@ export class AddFranchiseComponent implements OnInit {
     translate.setDefaultLang(environment.defaultLanguage);
 
     this.FeeStructureCols = [
-      { field: 'name', header: 'Fee Title' },
-      { field: 'amount', header: 'Fee Amount (₹)' },
+      { field: 'name', header: 'Title' },
+      { field: 'amount', header: 'Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
       { field: 'action', header: 'Actions' }
@@ -237,4 +237,7 @@ export class AddFranchiseComponent implements OnInit {
       });
     }    
   }
+  getStructure(){
+    this.structure = this.stepThreeForm.value.fee_structure;
+   }
 }

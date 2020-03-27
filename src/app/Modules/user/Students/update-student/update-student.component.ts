@@ -33,6 +33,7 @@ export class UpdateStudentComponent implements OnInit {
   studentForm: FormGroup;
   franchiseId: any;
   schoolId:any;
+  selectedFeeData:any;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _ar: ActivatedRoute,
@@ -75,6 +76,7 @@ export class UpdateStudentComponent implements OnInit {
             status : this.studentObj.status,
             history_of_illness : this.studentObj.history_of_illness
           });
+          this.getSelectedFeeInfo();
         }
       });
     });
@@ -208,5 +210,8 @@ export class UpdateStudentComponent implements OnInit {
       this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId),'franchise_id':btoa(this.franchiseId)}});
     else
       this._router.navigate(['users/students']);
+  }
+  getSelectedFeeInfo(){
+    this.selectedFeeData = this.studentForm.value.fee_structure;
   }
 }

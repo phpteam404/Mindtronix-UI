@@ -32,8 +32,7 @@ export class AddStudentComponent implements OnInit {
   isUpdate:boolean=false;
   franchiseId: any;
   schoolId:any;
-  enableField:boolean;
-  feeAmount:any;
+  selectedFeeData:any;
   constructor(private _router: Router,
               private _ar : ActivatedRoute,
               private _toast: ToasterService,
@@ -190,12 +189,7 @@ export class AddStudentComponent implements OnInit {
     this._router.navigate(['/users/students/view',name,btoa(id)]);
   }
 
-  getFeeAmount(){
-    this.feeAmount =this.studentForm.value.fee_structure.amount;
-    console.log('fee amount info--',this.feeAmount);
-    if(this.feeAmount)
-      this.enableField = true;
-    else 
-      this.enableField = false;
+  getSelectedFeeInfo(){
+    this.selectedFeeData = this.studentForm.value.fee_structure;
   }
 }

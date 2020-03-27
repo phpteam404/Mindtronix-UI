@@ -80,7 +80,7 @@
                         <div class="col-md-4 col-12">
                             <div class="form-group">
                                 <label>{{'franchise.add.franchiseCode' |translate}} <span>*</span></label>
-                                <input pinputtext type="text" placeholder="{{'franchise.add.franchiseCode' |translate}}" name="code" formControlName="code" required>
+                                <input pInputText pKeyFilter="alphanum" type="text" placeholder="{{'franchise.add.franchiseCode' |translate}}" name="code" formControlName="code" required>
                                 <div class="invalid-feedback"
                                      *ngIf="stepOneForm.controls.code.invalid && submitted1!=null && !submitted1"
                                     [ngClass]=" 'error'">{{'errorMessages.franchiseCode' |translate}}
@@ -287,15 +287,19 @@
                     <div class="row">
                         <div class="col-md-4 col-12 mb-5">
                             <label>{{'franchise.add.feeStructure'|translate}}<span>*</span></label>
-                            <p-multiSelect [options]="FeeStructureList" formControlName="fee_structure" optionLabel="name" 
+                            <p-multiSelect [options]="FeeStructureList" formControlName="fee_structure" optionLabel="name" (onChange)="getStructure()"
                                 name="fee_structure" defaultLabel="{{'placeholder.feeStructure'|translate}}" required></p-multiSelect>
                             <div class="invalid-feedback"
                                 *ngIf="stepThreeForm.controls.fee_structure.invalid && submitted3!=null && !submitted3"
                                 [ngClass]=" 'error'">{{'errorMessages.feeStructure'|translate}}</div>
-                        </div>
+                        </div>                        
                         <div class="col-md-1 col-12 mb-5 mt-4">
                             <button  class="btn-warning add-icon-btn" type="submit" title="{{'title.add'|translate}}">+</button>
-                        </div>                        
+                        </div>
+                        <div class="col-md-12 col-12" *ngIf="structure">
+                            <label>Selected Fee Structures</label>
+                            <p *ngFor="let col of structure"> Name : {{col.name}}, Amount : {{col.amount|number}} ,Tax : {{col.tax}}%, Discount : {{col.discount}} %</p>
+                        </div>
                     </div>
                     <!-- <div class="text-center">
                         <button matStepperPrevious class="btn-default mr-2" type="reset">Back</button>

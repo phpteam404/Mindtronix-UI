@@ -3,10 +3,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from 'src/app/services/master.service';
-import { InvoiceService} from 'src/app/services/invoice.service';
+import { InvoiceService } from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-student-view',
@@ -16,27 +16,27 @@ import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
 export class StudentViewComponent implements OnInit {
   status1: any;
   displayBasic: boolean;
-  type:any;
-  students:any;
-  cols:any;
-  previouslist:any;
-  dueDate:any;
-  invoiceStatus:any;
-  StudentInvoiceId:any;
-  studentName:any;
-  studentId:any;
-  studentInvoiceObj:any=[];
-  loading:boolean;
-  paidDate:any;
-  invoiceId:any;
-  submitted =null;
+  type: any;
+  students: any;
+  cols: any;
+  previouslist: any;
+  dueDate: any;
+  invoiceStatus: any;
+  StudentInvoiceId: any;
+  studentName: any;
+  studentId: any;
+  studentInvoiceObj: any = [];
+  loading: boolean;
+  paidDate: any;
+  invoiceId: any;
+  submitted = null;
   constructor(private _ar: ActivatedRoute,
-              private _router: Router,
-              private _mservice:MasterService,
-              private _Service:InvoiceService,
-              public translate: TranslateService) { 
-     translate.setDefaultLang(environment.defaultLanguage);
-   
+    private _router: Router,
+    private _mservice: MasterService,
+    private _Service: InvoiceService,
+    public translate: TranslateService) {
+    translate.setDefaultLang(environment.defaultLanguage);
+
     this.cols = [
       { field: 'invoice_number', header: 'Number' },
       { field: 'invoice_date', header: 'Date' },
@@ -46,7 +46,7 @@ export class StudentViewComponent implements OnInit {
   }
   showBasicDialog(flag) {
     this.displayBasic = flag;
-    this.submitted=null;
+    this.submitted = null;
     this.updateForm.reset();
   }
   ngOnInit(): void {
@@ -58,89 +58,92 @@ export class StudentViewComponent implements OnInit {
     this.getMasterDropdown('invoice_status');
     this.getMasterDropdown('invoice_payment_mode');
   }
-  
 
-  updateForm  = new FormGroup({
+
+  updateForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
-    payment_type: new FormControl('',),
-    comments:new FormControl('')
+    payment_type: new FormControl(''),
+    comments: new FormControl('')
   });
 
-  getMasterDropdown(masterKey): any{
+  getMasterDropdown(masterKey): any {
     var params = new HttpParams()
-                  .set('master_key',masterKey)
-                  .set('dropdown',"true")
-    return this._mservice.getMasterChilds(params).subscribe(res=>{
-      if(res.status){
-        if(masterKey == 'invoice_status')
-           this.invoiceStatus =  res.data.data;
-        if(masterKey =='invoice_payment_mode')
-          this.type =res.data.data;
+      .set('master_key', masterKey)
+      .set('dropdown', "true")
+    return this._mservice.getMasterChilds(params).subscribe(res => {
+      if (res.status) {
+        if (masterKey == 'invoice_status')
+          this.invoiceStatus = res.data.data;
+        if (masterKey == 'invoice_payment_mode')
+          this.type = res.data.data;
       }
     });
   }
-  
-  getStudentInvoiceData(StudentInvoiceId){
-    var params = new HttpParams().set('student_invoice_id',StudentInvoiceId);
+
+  getStudentInvoiceData(StudentInvoiceId) {
+    var params = new HttpParams().set('student_invoice_id', StudentInvoiceId);
     this._Service.getStudentsView(params).subscribe(res => {
-      if(res.status){
+      if (res.status) {
         this.studentInvoiceObj = res.data.data[0];
         this.dueDate = res.data.due_date;
-        this.paidDate =res.data.paid_date;
+        this.paidDate = res.data.paid_date;
         this.studentId = res.data.data[0].student_id;
-        this.invoiceId= res.data.data[0].student_invoice_id;
-        console.log('studentid---',this.studentId);
-        this.getPreviousInvoiceList(this.studentId,this.invoiceId);
+        this.invoiceId = res.data.data[0].student_invoice_id;
+        console.log('studentid---', this.studentId);
+        this.getPreviousInvoiceList(this.studentId, this.invoiceId);
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
   }
 
-
-   getPreviousInvoiceList(data:any,id:any){
+  getPreviousInvoiceList(data: any, id: any) {
     var params = new HttpParams()
-               .set('student_id',data)
-               .set('student_invoice_id',id); 
-    this._Service.getPreviousinvoices(params).subscribe(res=>{
-       if(res.status){
+      .set('student_id', data)
+      .set('student_invoice_id', id);
+    this._Service.getPreviousinvoices(params).subscribe(res => {
+      if (res.status) {
         //this.cols = res.data.table_headers;
         this.previouslist = res.data.data;
-       }
+      }
     });
-   }
+  }
 
-   getStatus() { return this.updateForm.value.status.value;}
-   getPaymentType() { return this.updateForm.value.payment_type.value;}
+  getStatus() { return this.updateForm.value.status.value; }
+  getPaymentType() { 
+    if(this.updateForm.value.payment_type)
+      return this.updateForm.value.payment_type.value;
+    else null;
+  }
 
-
-   updateStatus():any{
-     this.submitted =false;
-     if(this.updateForm.valid){
-        var params={};
-        params['student_invoice_id'] = this.StudentInvoiceId;
-        params['status'] =this.getStatus();
-        params['payment_type']= this.getPaymentType();
-        params['comments'] =this.updateForm.value.comments;
-        this._Service.updateInvoiceStatus(params).subscribe(res=>{
-          if(res.status){
-            this.submitted = true;
-            this.updateForm.reset();
-            this.showBasicDialog(false);
-            this.getStudentInvoiceData(this.StudentInvoiceId);
-          }
-        });
-     }
-   }
-   viewPreviousInvoices(data:any){
-     console.log('previous invoice  info',data);
-    var params = new HttpParams().set('student_invoice_id',data.student_invoice_id);
+  updateStatus(): any {
+    this.submitted = false;
+    if (this.updateForm.valid) {
+      console.log('update from value', this.updateForm.value);
+      var params = {};
+      params['student_invoice_id'] = this.StudentInvoiceId;
+      params['status'] = this.getStatus();
+      params['payment_type'] = this.getPaymentType();
+      params['comments'] = this.updateForm.value.comments;
+      this._Service.updateInvoiceStatus(params).subscribe(res => {
+        if (res.status) {
+          this.submitted = true;
+          this.updateForm.reset();
+          this.showBasicDialog(false);
+          this.getStudentInvoiceData(this.StudentInvoiceId);
+        }
+      });
+    }
+  }
+  viewPreviousInvoices(data: any) {
+    console.log('previous invoice  info', data);
+    var params = new HttpParams().set('student_invoice_id', data.student_invoice_id);
     this._Service.getStudentsView(params).subscribe(res => {
-     if(res.status){
-       this.studentInvoiceObj = res.data.data[0];
-       this.dueDate = res.data.due_date;
-       this.paidDate =res.data.paid_date;
-       //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
-     }
-   });     
+      if (res.status) {
+        this.studentInvoiceObj = res.data.data[0];
+        this.dueDate = res.data.due_date;
+        this.paidDate = res.data.paid_date;
+        //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
+      }
+    });
   }
 }

@@ -11,22 +11,22 @@
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.list.#invoice'|translate}}
-                        <span>{{invoiceCount}}</span>
+                        <span>{{invoiceData.invoices_count}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.list.#invoiceAmount'|translate}}
-                        <span>₹ {{totalInvoiceAmount | number}}</span>
+                        <span>₹ {{invoiceData.total_invoices_amount | number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.list.collectedAmount'|translate}}
-                        <span>₹ {{invoiceCollectedAmount | number}}</span>
+                        <span>₹ {{invoiceData.total_collected_amount | number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
                     <div class="payment-text">{{'invoices.list.due'|translate}}
-                        <span>₹ {{dueAmount | number}}</span>
+                        <span>₹ {{invoiceData.due_amount | number}}</span>
                     </div>
                 </div>
             </div>
@@ -38,19 +38,19 @@
             <div class="d-flex custom-form">
                 <div class="col-md-3 p-0 filter-form">
                     <p-calendar name="from_date" [showIcon]="true"  formControlName="from_date" dateFormat="dd/mm/yy"
-                       [maxDate]="maxDate" showButtonBar="true" [clear]= 'Clear' placeholder="{{'placeholder.invoiceFromDate'|translate}}">
+                       [maxDate]="maxDate" placeholder="{{'placeholder.invoiceFromDate'|translate}}">
                 </p-calendar>
                 </div>
                 <div class="col-md-3 p-0 filter-form ml-2">
                     <p-calendar name="to_date" [showIcon]="true" formControlName="to_date"
-                         dateFormat="dd/mm/yy" showButtonBar="true" [clear]= 'Clear'
+                         dateFormat="dd/mm/yy" 
                         [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}">
                     </p-calendar>
                 </div>
                 <div class="col-md-2 p-0 input-dropdown ml-2">
-                    <p-dropdown [options]="invoiceStatus" placeholder="status"
+                    <p-dropdown [options]="invoiceStatusList" placeholder="status"
                         styleClass="ui-column-filter"
-                         [showClear]="true" formControlName ="status_id"
+                        [showClear]="true" formControlName ="status_id"
                         optionLabel="label" filter="true">
                     </p-dropdown>
                 </div>
@@ -74,7 +74,7 @@
     <!-- for form ends-->
     <div class="custom-table custon-idlist custom-lastchild-list custom-row-select student-invoice-list">
         <p-table #dt [columns]="cols" [value]="invoicelist" (onLazyLoad)="loadStudentsInvoiceLazy($event)"
-            [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords">
+            [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords"  [loading]="loading">
             <ng-template pTemplate="caption">
             </ng-template>
             <ng-template pTemplate="header" let-columns>

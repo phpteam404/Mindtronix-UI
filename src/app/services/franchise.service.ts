@@ -28,4 +28,7 @@ export class FranchiseService {
   updateFranchiseFee(params){
     return this.clientHttp.post('Franchise/addFranchiseFeeMaster',params);
   }
+  updateFeeStatus(params){
+    return this.clientHttp.post('Franchise/updateFranchiseStatus',params);
+  }
 }
