@@ -62,7 +62,7 @@ export class StudentViewComponent implements OnInit {
 
   updateForm  = new FormGroup({
     status: new FormControl('', [Validators.required]),
-    payment_type: new FormControl('', [Validators.required]),
+    payment_type: new FormControl(''),
     comments:new FormControl('')
   });
 
@@ -109,19 +109,24 @@ export class StudentViewComponent implements OnInit {
     });
    }
 
+   getStatus() { return this.updateForm.value.status.value;}
+   getPaymentType() { return this.updateForm.value.payment_type.value;}
+
+
    updateStatus():any{
      this.submitted =false;
      if(this.updateForm.valid){
         var params={};
         params['student_invoice_id'] = this.StudentInvoiceId;
-        params['status'] =this.updateForm.value.status.value;
-        params['payment_type']= this.updateForm.value.payment_type.value;
+        params['status'] =this.getStatus();
+        params['payment_type']= this.getPaymentType();
         params['comments'] =this.updateForm.value.comments;
         this._Service.updateInvoiceStatus(params).subscribe(res=>{
           if(res.status){
             this.submitted = true;
             this.updateForm.reset();
             this.showBasicDialog(false);
+            this.getStudentInvoiceData(this.StudentInvoiceId);
           }
         });
      }
