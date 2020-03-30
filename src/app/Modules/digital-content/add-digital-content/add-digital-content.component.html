@@ -44,9 +44,9 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>{{'digitalContent.add.grade'|translate}} <span>*</span></label>
+                            <label>{{'digitalContent.add.grade'|translate}}</label>
                             <p-dropdown [options]="grade" placeholder="{{'placeholder.grade'|translate}}" formControlName="grade" itemSize="30"
-                                name="grade" optionLabel="label" filter ="true" required></p-dropdown>
+                                name="grade" optionLabel="label" filter ="true"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="digitalForm.controls.grade.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.grade'|translate}}
@@ -55,9 +55,9 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>{{'digitalContent.add.contentLevel'|translate}} <span>*</span></label>
+                            <label>{{'digitalContent.add.contentLevel'|translate}} </label>
                             <p-dropdown [options]="content_level" formControlName="content_level" placeholder="{{'placeholder.contentLevel'|translate}}" itemSize="30"
-                                name="content_level" optionLabel="label" filter ="true" required></p-dropdown>
+                                name="content_level" optionLabel="label" filter ="true"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="digitalForm.controls.content_level.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.contentLevel'|translate}}

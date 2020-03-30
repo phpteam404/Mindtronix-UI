@@ -55,6 +55,8 @@
         "feeAmount":"Fee Amount",
         "term":"Term",
         "discount":"Discount",
+        "tax":"Tax",
+        "dueDays":"Due Days",
         "discountDetails":"Discount Details",
         "status":"Status",
         "search":"Search by Fee Title / Term / Discount"

@@ -331,6 +331,7 @@ export class ViewFranchiseComponent implements OnInit {
         if (res.status) {
           this.submitted3 = true;
           this.getFranchiseInfo(this.franchiseId);
+          this.getFeeStructureDropdown();
           this.hideBasicDialog();
         }
       })

@@ -49,6 +49,17 @@
                         <input pinputtext type="text" placeholder="{{'fee.discountDetails'|translate}}" formControlName="discount_details" name="discount_details">
                     </div>
                     <div class="col-md-4 col-12">
+                        <label>{{'fee.tax'|translate}} (%)</label>
+                        <div class="ui-inputgroup">
+                            <input pinputtext type="text" pKeyFilter="money"  [maxlength]="3" [minlength]="1" placeholder="{{'fee.tax'|translate}}" formControlName="tax" name="tax">
+                            <span class="ui-inputgroup-addon">%</span> 
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>{{'fee.dueDays'|translate}}</label>
+                        <input pinputtext type="text" placeholder="{{'fee.dueDays'|translate}}" [maxlength]="3" formControlName="dueDays" name="dueDays">
+                    </div>
+                    <div class="col-md-4 col-12">
                         <label>{{'fee.status'|translate}} <span>*</span></label>
                         <p-dropdown [options]="status" formControlName="status" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
                             name="status" optionLabel="label" required></p-dropdown>

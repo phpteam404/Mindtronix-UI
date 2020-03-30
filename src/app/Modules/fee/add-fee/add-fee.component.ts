@@ -32,7 +32,9 @@ export class AddFeeComponent implements OnInit {
     amount: new FormControl('', [Validators.required]),
     term: new FormControl('', [Validators.required]),
     discount: new FormControl(''),
-    discount_details: new FormControl(''),  
+    discount_details: new FormControl(''),
+    tax:new FormControl(''),
+    dueDays:new FormControl(''),  
     status: new FormControl('', [Validators.required]),  
   });
 
