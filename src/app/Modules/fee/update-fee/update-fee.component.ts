@@ -43,7 +43,7 @@ export class UpdateFeeComponent implements OnInit {
             discount: this.formObj.discount,
             discount_details: this.formObj.discount_details,
             tax: this.formObj.tax,
-            dueDays: this.formObj.due_days,
+            due_days: this.formObj.due_days,
             status: this.formObj.status, 
           });          
         }
@@ -60,7 +60,7 @@ export class UpdateFeeComponent implements OnInit {
       discount: new FormControl(''),
       discount_details: new FormControl(''),
       tax:new FormControl(''),
-      dueDays:new FormControl(''),
+      due_days:new FormControl(''),
       status: new FormControl('', [Validators.required]),  
     });
     this.getMasterData('fee_term');
