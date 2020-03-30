@@ -40,7 +40,7 @@ export class UpdateFeeComponent implements OnInit {
             name: this.formObj.name,
             amount: Number(this.formObj.amount),
             term: this.formObj.term,
-            discount: this.formObj.discount,
+            discount: Number(this.formObj.discount),
             discount_details: this.formObj.discount_details,
             tax: this.formObj.tax,
             due_days: this.formObj.due_days,

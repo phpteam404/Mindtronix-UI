@@ -32,6 +32,7 @@ export class AddStudentComponent implements OnInit {
   isUpdate:boolean=false;
   franchiseId: any;
   schoolId:any;
+  schoolName:any;
   selectedFeeData:any;
   constructor(private _router: Router,
               private _ar : ActivatedRoute,
@@ -47,26 +48,28 @@ export class AddStudentComponent implements OnInit {
   }
   studentForm = new FormGroup({
     student_name: new FormControl('', [Validators.required]),
-    date_of_birth: new FormControl('', [Validators.required]),
+    date_of_birth: new FormControl(''),
     nationality: new FormControl('', [Validators.required]),
-    password: new FormControl('',[ Validators.required,Validators.minLength(8),
+    password: new FormControl('',[Validators.minLength(8),
                                   Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
-    cpassword: new FormControl('',[ Validators.required, Validators.minLength(8),
+    cpassword: new FormControl('',[Validators.minLength(8),
                                     Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
     place_of_birth: new FormControl(''),
     mother_tongue: new FormControl(''),
     address: new FormControl(''),
-    parent_name: new FormControl('', [Validators.required]),
-    fee_structure: new FormControl('', [Validators.required]),
+    parent_name: new FormControl(''),
+    fee_structure: new FormControl(''),
     phone_no: new FormControl('',[Validators.minLength(10)]),
     relation: new FormControl(''),
-    email: new FormControl('',[Validators.required,Validators.email]),
+    email: new FormControl('',[Validators.email]),
     occupation: new FormControl(''),
-    mobile_phone1: new FormControl('', [Validators.required,Validators.minLength(10)]),
+    mobile_phone1: new FormControl('', [Validators.minLength(10)]),
     mobile_phone2: new FormControl('',[Validators.minLength(10)]),
-    school_id: new FormControl('',[Validators.required]),
+    school_id: new FormControl(''),
+    school_name:new FormControl(''),
+    lead_source:new FormControl('',[Validators.required]),
     grade: new FormControl(''),
     blood_group: new FormControl(''),
     history_of_illness: new FormControl(''),

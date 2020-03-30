@@ -19,7 +19,7 @@ export class AddFeeComponent implements OnInit {
   term:any =[];
   status:any =[];
   isUpdate:boolean = false;
-
+  ccRegex: RegExp  = /^\d*\.?\d{0,2}$/g; 
   constructor(private _router: Router, 
               private _toast: ToasterService, 
               private _mService: MasterService, 
@@ -47,6 +47,7 @@ export class AddFeeComponent implements OnInit {
   getTerm(){ return this.feeForm.value.term.value; }
 
   submit(): any {
+    console.log(this.feeForm.value);
     this.submitted = false;
     if (this.feeForm.valid) {
       var params={};

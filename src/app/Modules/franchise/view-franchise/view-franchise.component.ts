@@ -77,6 +77,7 @@ export class ViewFranchiseComponent implements OnInit {
       { field: 'amount', header: 'Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
+      { field: 'tax', header: 'Tax (%)' },
       { field: 'status', header: 'Status' }
     ];
     this.revenueMonth = [

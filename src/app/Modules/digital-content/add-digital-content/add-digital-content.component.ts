@@ -51,7 +51,10 @@ export class AddDigitalContentComponent implements OnInit {
     grade: new FormControl(''),
     content_level: new FormControl(''),
     tags: new FormControl('', [Validators.required]),
-    expiry_date: new FormControl(''),  
+    expiry_date: new FormControl(''),
+    preUrl:new FormControl(''),
+    postUrl:new FormControl(''),
+    externalUrl:new FormControl(''),
     status: new FormControl('', [Validators.required]),  
     files: new FormControl()
   });
@@ -89,14 +92,24 @@ export class AddDigitalContentComponent implements OnInit {
 
   getCategory() { return this.digitalForm.value.category.value;}
   getSubCategory() { return this.digitalForm.value.sub_category.value;}
-  getContentLevel() { return this.digitalForm.value.content_level.value;}
-  getGrade() { return this.digitalForm.value.grade.value;}
+  getContentLevel() { 
+    if(this.digitalForm.value.content_level)
+      return this.digitalForm.value.content_level.value;
+    else return null;
+  }
+  getGrade() {
+    if(this.digitalForm.value.grade)
+      return this.digitalForm.value.grade.value;
+    else return null; 
+  }
   getTags() { return this.digitalForm.value.tags;}
   getDate() { return this.digitalForm.value.expiry_date;}
   getStatus() { return this.digitalForm.value.status.value;}
   getName() { return this.digitalForm.value.name;}
   getDesc() { return this.digitalForm.value.description;}
-
+  getPreUrl() { return this.digitalForm.value.preUrl;}
+  getPostUrl() { return this.digitalForm.value.postUrl;}
+  getExternalUrl() { return this.digitalForm.value.externalUrl;}
 
   submit(){
     this.submitted=false;
@@ -111,6 +124,9 @@ export class AddDigitalContentComponent implements OnInit {
         formData.append('tags', this.getTags());
         formData.append('grade', this.getGrade());
         formData.append('content_level', this.getContentLevel());
+        formData.append('pre_url',this.getPreUrl());
+        formData.append('post_url',this.getPostUrl());
+        formData.append('external_urls',this.getExternalUrl());
         if(Number(this.getUploadedFilesSize()) > Number(this.maxSize)){
           this._toast.show('warning','Maximum File upload size is 20 MB!');
           this.digitalForm.patchValue({

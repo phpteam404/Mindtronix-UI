@@ -62,6 +62,7 @@ export class AddFranchiseComponent implements OnInit {
       { field: 'amount', header: 'Amount (₹)' },
       { field: 'term', header: 'Term' },
       { field: 'discount', header: 'Discount (%)' },
+      { field: 'tax', header: 'Tax (%)' },
       { field: 'action', header: 'Actions' }
     ];
 
@@ -184,6 +185,7 @@ export class AddFranchiseComponent implements OnInit {
     this.submitted3 = false;
     if (this.stepThreeForm.valid) {
       this.FeeList = this.stepThreeForm.value.fee_structure;
+      console.log(this.FeeList);
       this.fullObject['3'] = this.FeeList;
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
@@ -193,11 +195,15 @@ export class AddFranchiseComponent implements OnInit {
     this._router.navigate(['franchise']);
   }
   deleteContact(ind){
-    this.contactsList.pop(ind);
+    var index: number = this.FeeList.indexOf(ind);
+    if (index !== -1)
+      this.contactsList.splice(index, 1);
     this.fullObject['2'] = this.contactsList;
   }
   deleteFee(ind){
-    this.FeeList.pop(ind);
+    var index: number = this.FeeList.indexOf(ind);
+    if (index !== -1)
+      this.FeeList.splice(index, 1);
     this.fullObject['3'] = this.FeeList;
     this.stepThreeForm.controls.fee_structure.setValue(this.FeeList);
   }

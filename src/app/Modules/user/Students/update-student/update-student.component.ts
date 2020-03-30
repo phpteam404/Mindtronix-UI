@@ -69,6 +69,8 @@ export class UpdateStudentComponent implements OnInit {
             blood_group: this.studentObj.blood_group,
             fee_structure: this.studentObj.fee_structure,
             school_id: this.studentObj.school_id,
+            school_name: this.studentObj.school_name ? this.studentObj.school_name : '',
+            lead_source:this.studentObj.lead_source ? this.studentObj.lead_source : '',
             address : this.studentObj.address,
             mobile_phone1 : this.studentObj.mobile_phone,
             phone_no:this.studentObj.home_phone_no,
@@ -94,20 +96,22 @@ export class UpdateStudentComponent implements OnInit {
     this.studentForm = new FormGroup({
         user_id: new FormControl(''),
         student_name: new FormControl('', [Validators.required]),
-        date_of_birth: new FormControl('', [Validators.required]),
+        date_of_birth: new FormControl(''),
         nationality: new FormControl('', [Validators.required]),
         place_of_birth: new FormControl(''),
         mother_tongue: new FormControl(''),
         address: new FormControl(''),
-        parent_name: new FormControl('', [Validators.required]),
-        fee_structure: new FormControl('', [Validators.required]),
-        phone_no: new FormControl('',[Validators.minLength(10) ]),
+        parent_name: new FormControl(''),
+        fee_structure: new FormControl(''),
+        phone_no: new FormControl('',[Validators.minLength(10)]),
         relation: new FormControl(''),
-        email: new FormControl('',[Validators.required,Validators.email]),
+        email: new FormControl(''),
         occupation: new FormControl(''),
-        mobile_phone1: new FormControl('', [Validators.required,Validators.minLength(10) ]),
+        mobile_phone1: new FormControl('', [Validators.minLength(10) ]),
         mobile_phone2: new FormControl('',[Validators.minLength(10)]),
         school_id: new FormControl(''),
+        school_name:new FormControl(''),
+        lead_source:new FormControl('',[Validators.required]),
         grade: new FormControl(''),
         blood_group: new FormControl(''),
         history_of_illness: new FormControl(''),
@@ -176,7 +180,6 @@ export class UpdateStudentComponent implements OnInit {
     this.submitted = false;
     console.log('student edit info',this.studentForm.value);
     if (this.studentForm.valid) {
-    
       var params={};
       params = this.studentForm.value;
       params['user_role_id'] =4;
@@ -201,7 +204,6 @@ export class UpdateStudentComponent implements OnInit {
   }
   goToList(){
     // this._router.navigate(['users/students']);
-    console.log("----",this.schoolId,'***', this.franchiseId);
     if(this.schoolId && this.franchiseId==undefined)
       this._router.navigate(['users/students'],{queryParams:{'school_id':btoa(this.schoolId)}});
     else if(this.schoolId==undefined && this.franchiseId)

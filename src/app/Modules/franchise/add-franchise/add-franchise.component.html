@@ -261,7 +261,7 @@
                                 <td *ngFor="let col of columns ; let i = index">
                                     <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                     <span *ngIf="i == 4" class="text-right">
-                                        <a href="javascript:;" (click)="deleteContact(i)">
+                                        <a href="javascript:;" (click)="deleteContact(rowData)">
                                             <span class="icon icon-delete" title="Delete"></span>
                                         </a>
                                     </span>
@@ -298,7 +298,7 @@
                         </div>
                         <div class="col-md-12 col-12" *ngIf="structure">
                             <label>Selected Fee Structures</label>
-                            <p *ngFor="let col of structure"> Name : {{col.name}}, Amount : {{col.amount|number}} ,Tax : {{col.tax}}%, Discount : {{col.discount}} %</p>
+                            <p *ngFor="let col of structure"> Term : {{col.name}}, Amount : {{col.amount|number}} ,Tax : {{col.tax}}%, Discount : {{col.discount}} %</p>
                         </div>
                     </div>
                     <!-- <div class="text-center">
@@ -310,18 +310,25 @@
                     <p-table #dt [columns]="FeeStructureCols" [value]="FeeList" [paginator]="false" [rows]="10">                       
                         <ng-template pTemplate="header" let-columns>
                             <tr>
-                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                                <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field" 
+                                    [ngClass]="[(columns.length-3===i) ? 'text-right' : '',
+                                            (columns.length-5===i) ? 'text-right' : '',
+                                            (columns.length-2===i) ? 'text-right' : '']">
                                     {{col.header}}
-                                    <p-sortIcon *ngIf="i != 4" [field]="col.field"></p-sortIcon>
+                                    <p-sortIcon *ngIf="i != 5" [field]="col.field"></p-sortIcon>
                                 </th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
-                                <td *ngFor="let col of columns ; let i = index">
-                                    <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                                    <span *ngIf="i == 4" class="text-right">
-                                        <a href="javascript:;" (click)="deleteFee(i)">
+                                <td *ngFor="let col of columns ; let i = index" 
+                                    [ngClass]="[(columns.length-3===i) ? 'custom-right-text' : '',
+                                            (columns.length-5===i) ? 'custom-right-text' : '',
+                                            (columns.length-2===i) ? 'custom-right-text' : '']">
+                                    <span *ngIf="i != 5 && i != 1" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i == 1" title="{{rowData[col.field]}}">{{rowData[col.field] | number}}</span>
+                                    <span *ngIf="i == 5" class="text-right">
+                                        <a href="javascript:;" (click)="deleteFee(rowData)">
                                             <span class="icon icon-delete" title="Delete"></span>
                                         </a>
                                     </span>

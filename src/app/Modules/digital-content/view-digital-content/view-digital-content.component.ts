@@ -98,6 +98,9 @@ export class ViewDigitalContentComponent implements OnInit {
       content_level: new FormControl(''),
       tags: new FormControl('', [Validators.required]),
       expiry_date: new FormControl(''),  
+      preUrl:new FormControl(''),
+      postUrl:new FormControl(''),
+      externalUrl:new FormControl(''),
       status: new FormControl('', [Validators.required])
     });
     this.AttachmentForm = new FormGroup({
@@ -213,6 +216,9 @@ export class ViewDigitalContentComponent implements OnInit {
   getStatus() { return this.digitalForm.value.status.value;}
   getName() { return this.digitalForm.value.name;}
   getDesc() { return this.digitalForm.value.description;}
+  getPreUrl() { return this.digitalForm.value.preUrl;}
+  getPostUrl() { return this.digitalForm.value.postUrl;}
+  getExternalUrl() { return this.digitalForm.value.externalUrl;}
 
   submit(){
     this.submitted=false;
@@ -227,6 +233,9 @@ export class ViewDigitalContentComponent implements OnInit {
       formData.append('status', this.getStatus());
       formData.append('tags', this.getTags());
       formData.append('grade', this.getGrade());
+      formData.append('pre_url',this.getPreUrl());
+      formData.append('post_url',this.getPostUrl());
+      formData.append('external_urls',this.getExternalUrl());
       formData.append('content_level', this.getContentLevel());      
       this._service.addDigitalContent(formData).subscribe(res=>{
         if(res.status){
@@ -263,6 +272,9 @@ export class ViewDigitalContentComponent implements OnInit {
             description : this.digitalContent.description ? this.digitalContent.description :'',
             grade : this.digitalContent.grade,
             content_level : this.digitalContent.content_level,
+            preUrl:this.digitalContent.preUrl ? this.digitalContent.preUrl :'',
+            postUrl:this.digitalContent.postUrl ? this.digitalContent.postUrl : '',
+            externalUrl:this.digitalContent.externalUrl ? this.digitalContent.externalUrl :'',
             tags: (this.digitalContent.tags)?this.digitalContent.tags.split(","):[],
             expiry_date : (this.digitalContent.expiry_date != '0000-00-00')?new Date(this.digitalContent.expiry_date):'',
             status : this.digitalContent.status
@@ -304,6 +316,7 @@ export class ViewDigitalContentComponent implements OnInit {
     }
   }
   previewAttachment(data:any){
+    console.log('attachments info',data);
     this.previewFile =true;
     this.previewUrl =data.document_url;
     this.format = data.type.toString().toLowerCase();
