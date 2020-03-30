@@ -107,6 +107,8 @@
               "relation":"Relation",
               "occupation":"Occupation",
               "schoolName":"Name of the school",
+              "inSchoolProgram":"In School Program",
+              "leadSource":"Lead Source",
               "class":"Class/Grade",
               "bloodGroup":"Blood Group",
               "historyOfIllness":"History of any Illness",
@@ -192,7 +194,10 @@
             "category":"Category",
             "contentDescription":"Content Description",
             "fileUpload":"File Upload",
-            "fileSelected":"Files Selected"
+            "fileSelected":"Files Selected",
+            "preurl":"Pre Url",
+            "postUrl":"Post Url",
+            "externalurl":"External URL's"
         },
         "view":{
             "noOfViews":"No.of Views",
@@ -257,7 +262,7 @@
         "contactNumber":"Contact number should be minimum 10 digits",
         "contactEmail":"Email should be valid!",
         "franchiseName":"Franchise Name is required",
-        "franchiseCode":"Franchise Code is required",
+        "franchiseCode":"Franchise Code is required and must be alphaNumeric",
         "franchiseOwner":"Owner Name is required",
         "contactTitle":"Contact Title is required",
         "contactName" :"Contact Name is required",
@@ -297,6 +302,8 @@
         "grade":"Grade is Required",
         "status":"Status is Required",
         "comments":"Comments is Required",
+        "inSchoolProgram":"In School Program Required",
+        "leadSourceReq":"Lead Source Required",
         "designation":"Designation Required",
         "paymentTypeReq":"Payment Mode Required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",

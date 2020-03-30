@@ -32,7 +32,18 @@ import { environment } from 'src/environments/environment';
 import { TooltipModule } from 'primeng/tooltip';
 import { UiSwitchModule } from 'ngx-ui-switch';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
-
+import { NgxCurrencyModule } from "ngx-currency";
+export const customCurrencyMaskConfig = {
+  align: "left",
+  allowNegative: false,
+  allowZero: true,
+  decimal: ".",
+  precision: 2,
+  prefix: "",
+  suffix: "",
+  thousands: ",",
+  nullable: false
+};
 const BasicModuleImports = [
     CommonModule,
     ReactiveFormsModule,
@@ -61,6 +72,7 @@ const BasicModuleImports = [
     KeyFilterModule,
     ConfirmDialogModule,
     UiSwitchModule,
+    NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

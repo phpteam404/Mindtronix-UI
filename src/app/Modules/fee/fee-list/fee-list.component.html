@@ -29,10 +29,10 @@
                         [ngClass]="[(columns.length-3===i) ? 'custom-right-text' : '',
                         (columns.length-6===i) ? 'custom-right-text' : '',
                         (columns.length-4===i) ? 'custom-right-text':'']">
-                        <span *ngIf="i != 5 && i != 4 && i != 1 && i != 3" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
-                        <span *ngIf="i != 5 && i != 4 && i == 1 && i != 3" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number}}</span>
-                        <span *ngIf="i != 5 && i != 4 && i != 1  && i == 3" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number}}</span>
-                        <span *ngIf="i != 5 && i == 4 && i != 1  && i != 3" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number}}</span>
+                        <span *ngIf="i == 0 || i == 2" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
+                        <span *ngIf="i == 1" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number}}</span>
+                        <span *ngIf="i == 3" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number}}</span>
+                        <span *ngIf="i == 4" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field] | number:'1.0-2'}}</span>
                         <span *ngIf="i == 5">
                             <span [ngClass]="[(rowData[col.field]==='Active') ? 'bg-brown' : '',
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"

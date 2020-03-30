@@ -267,11 +267,11 @@
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{'digitalContent.add.contentName'|translate}} <span>*</span></label>
-                    <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" disabled formControlName ="name" name="name" type="text" required>
-                    <div class="invalid-feedback"
+                    <input pinputtext placeholder="{{'digitalContent.add.contentName'|translate}}" disabled formControlName ="name" name="name" type="text">
+                    <!-- <div class="invalid-feedback"
                             *ngIf="digitalForm.controls.name.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'"> {{'errorMessages.contentName'|translate}}
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div class="col-md-8 col-12">
@@ -340,6 +340,20 @@
                     <p-calendar name="expiry_date" formControlName="expiry_date" dateFormat="dd/mm/yy" [showIcon]="true" [minDate]="minDate"></p-calendar>
                 </div>
             </div>
+            <div class="col-md-4 col-12" style="margin-top: 16px;">
+                <label>{{'digitalContent.add.preurl'|translate}} </label>
+                <input pinputtext placeholder="{{'digitalContent.add.preurl'|translate}}" formControlName="preUrl" name="preUrl" type="text"> 
+            </div>
+    
+            <div class="col-md-4 col-12" style="margin-top: 16px;">
+                <label>{{'digitalContent.add.postUrl'|translate}} </label>
+                <input pinputtext placeholder="{{'digitalContent.add.postUrl'|translate}}" formControlName="postUrl" name="postUrl" type="text"> 
+            </div>
+    
+            <div class="col-md-4 col-12" style="margin-top: 16px;">
+                <label>{{'digitalContent.add.externalurl'|translate}} </label>
+                <textarea pInputTextarea placeholder="{{'digitalContent.add.externalurl'|translate}}" formControlName="externalUrl" name="externalUrl"></textarea>
+            </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
                     <label>{{'digitalContent.add.status'|translate}} <span>*</span></label>
@@ -367,6 +381,7 @@
                    </div>
                </div>
            </div>
+           
            <div class="col-md-6 col-12 mt-10" *ngIf="fileArr.length>0">
                 <div class="form-group">
                     <label>{{'digitalContent.add.fileSelected'|translate}} </label>
