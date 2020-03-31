@@ -103,6 +103,10 @@
                                     <label> {{'student.add.password'|translate}}</label>
                                     <input pPassword placeholder="{{'placeholder.password'|translate}}"
                                         formControlName="password" name="password" type="password" >
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.password.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12 mt-3" *ngIf="!isUpdate">

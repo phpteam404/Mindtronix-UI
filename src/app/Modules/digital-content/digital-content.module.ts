@@ -14,7 +14,6 @@ import { DialogModule } from 'primeng/dialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ChipsModule } from 'primeng/chips';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
-
 @NgModule({
   declarations: [
     DigitalContentListComponent,

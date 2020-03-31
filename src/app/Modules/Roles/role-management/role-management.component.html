@@ -5,9 +5,26 @@
         </div>
         <div class="tabs-heading-rightblock">
            <h4>Module Access</h4>
-           <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button>
+           <!-- <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button> -->
+        </div>
+        <div class="tabs-heading-rightblock">
+            <h4>Create</h4>
+            <!-- <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button> -->
+        </div>
+        <div class="tabs-heading-rightblock">
+            <h4>Edit</h4>
+            <!-- <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button> -->
+        </div>
+        <div class="tabs-heading-rightblock">
+             <h4>View</h4>
+             <!-- <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button> -->
+        </div>
+        <div class="tabs-heading-rightblock">
+             <h4>Delete</h4>
+             <button pButton type="button" (click)="submitRoleAccess()" label="Save" class="btn-warning"></button>
         </div>
     </div>
+    
     <div class="roll-tabs">
         <p-tabView (onChange)="onRoleChange($event)">
             <p-tabPanel leftIcon="pi pi-caret-right" *ngFor="let role of roles;let i=index;"
@@ -15,10 +32,23 @@
                 <div class="roletab-content" *ngFor="let mod of modules;let m=index;">
                     <h4>{{mod.module_name}}</h4>
                     <div>
-                        <p-checkbox name="checkbox"
-                            [value]="mod.is_access_status" [(ngModel)]="mod.is_access_status"
-                            [attr.checked]="mod.is_access_status == '1' ? true : false" 
-                            binary="true">
+                        <p-checkbox name="checkbox" [value]="mod.create" [(ngModel)]="mod.create"
+                                    [attr.checked]="mod.create == '1' ? true : false" binary="true">
+                        </p-checkbox>
+                    </div>
+                    <div>
+                        <p-checkbox name="checkbox" [value]="mod.edit" [(ngModel)]="mod.edit"
+                                    [attr.checked]="mod.edit == '1' ? true : false" binary="true">
+                        </p-checkbox>
+                    </div>
+                    <div>
+                        <p-checkbox name="checkbox" [value]="mod.view" [(ngModel)]="mod.view"
+                                     [attr.checked]="mod.view == '1' ? true : false" binary="true">
+                        </p-checkbox>
+                    </div>
+                    <div>
+                        <p-checkbox name="checkbox" [value]="mod.delete" [(ngModel)]="mod.delete"
+                                  [attr.checked]="mod.delete == '1' ? true : false" binary="true">
                         </p-checkbox>
                     </div>
                 </div>

@@ -315,12 +315,130 @@ export class ViewDigitalContentComponent implements OnInit {
       this._toast.show('warning','Choose atleast one file!');
     }
   }
-  previewAttachment(data:any){
+  YT : any;
+  video : any;
+  player : any;
+  reframed : Boolean = false;
+  previewAttachment(data:any){  
     console.log('attachments info',data);
     this.previewFile =true;
     this.previewUrl =data.document_url;
-    this.format = data.type.toString().toLowerCase();
+    if(data.module_type == 'url'){
+      var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
+      var matches = regex.exec(data.document_name);
+      var videoId = matches[1]; // kJ9g_-p3dLA
+      this.previewUrl = videoId;
+      this.format = data.module_type.toString().toLowerCase();
+      this.video = '';
+      this.video = this.previewUrl;
+      console.log(this.video);
+      if(window['YT']){
+        console.log(this.player);
+        if(this.player.loadVideoById)
+          this.player.loadVideoById(this.video, 0, "default");
+        else this.loadPlayerWithId();
+        this.startVideo(this.video);
+      }else this.loadPlayerWithId();
+      
+      // document.body.appendChild(tag);
+    }     
+    else this.format = data.type.toString().toLowerCase();
+  } 
+  /* youtube plyer code starts*/
+  loadPlayerWithId(){
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    window['onYouTubeIframeAPIReady'] = () => {
+      this.YT = window['YT'];
+      this.reframed = false;
+      this.player = new window['YT'].Player('player', {
+        videoId: this.previewUrl,
+        playerVars: {
+          autoplay:0,
+        },
+        events: {
+          'onStateChange': this.onPlayerStateChange.bind(this),
+          'onError': this.onPlayerError.bind(this),
+          'onReady': (e) => {
+            if (!this.reframed) {
+              this.reframed = true;
+              e.target.loadVideoById(this.previewUrl,0,'default');
+             // reframe(e.target.a);
+            }
+          }
+        }
+      });
+    };
+    //window['onYouTubeIframeAPIReady'] = () => this.startVideo(null);
   }
+  startVideo(val){
+    this.YT = window['YT'];
+    this.reframed = false;
+    this.player = new window['YT'].Player('player', {
+      videoId: (val)?this.previewUrl:this.video,
+      playerVars: {
+        autoplay:0,
+        modestbranding: 1,
+        controls: 1,
+        disablekb: 1,
+        rel: 0,
+        showinfo: 0,
+        fs: 0,
+        playsinline: 1
+      },
+      events:{
+        'onStateChange': this.onPlayerStateChange.bind(this),
+        'onError': this.onPlayerError.bind(this),
+        'onReady': (e) => {
+          if (!this.reframed) {
+            this.reframed = true;
+            e.target.loadVideoById(this.previewUrl,0,'default');
+          }
+        }
+        // 'onReady' : this.onPlayerReady.bind(this),
+      }
+    });
+  }
+  onPlayerReady(event){
+    event.target.playVideo();
+  }
+  onPlayerStateChange(event) {
+    console.log(event)
+    /*switch (event.data) {
+      case window['YT'].PlayerState.PLAYING:
+        if (this.cleanTime() == 0) {
+          console.log('started ' + this.cleanTime());
+        } else {
+          console.log('playing ' + this.cleanTime())
+        };
+        break;
+      case window['YT'].PlayerState.PAUSED:
+        if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
+          console.log('paused' + ' @ ' + this.cleanTime());
+        };
+        break;
+      case window['YT'].PlayerState.ENDED:
+        console.log('ended ');
+        break;
+    };*/
+  };
+  cleanTime(){
+    return Math.round(this.player.getCurrentTime());
+  }
+  onPlayerError(event){
+    switch(event.data){
+      case 2:
+        console.log('', this.video);
+      break;
+      case 100:
+        break;
+      case 150 || 101:
+        break;
+    }
+  }
+  /* youtube plyer code ends*/
   getUploadedFilesSize(){
     var size=0;
     this.fileArr.forEach(item => { 

@@ -206,6 +206,7 @@ export class AddFranchiseComponent implements OnInit {
       this.FeeList.splice(index, 1);
     this.fullObject['3'] = this.FeeList;
     this.stepThreeForm.controls.fee_structure.setValue(this.FeeList);
+    this.getStructure();
   }
   overAllSave(){
     // if(this.stepOneForm.valid && this.stepTwoForm.valid && this.stepThreeForm.valid){
