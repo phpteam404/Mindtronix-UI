@@ -124,11 +124,11 @@
                         *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
                         >{{'student.view.lastInvoiceAmount'|translate}}
                     </div>
-                    <button pButton type="button"
+                    <!-- <button pButton type="button"
                         *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
                         label="Generate Invoice" class="btn-warning generated-btn" 
                         (click)="generateInvoice(studentObj)">
-                    </button>
+                    </button> -->
                     <button pButton type="button"
                         *ngIf="(studentObj.last_invoice_amount=='' || 
                                 studentObj.last_invoice_amount==null || 
