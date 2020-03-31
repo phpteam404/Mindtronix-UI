@@ -3679,7 +3679,8 @@ body .ui-inputtext:enabled:focus:not(.ui-state-error){
   box-shadow: none !important;
 }
 body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
-  height: 420px;
+  /* height: 420px; */
+  max-height: calc( 100vh - 240px );
   overflow-y: auto;
   position: relative;
   overflow-x: hidden;

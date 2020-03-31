@@ -280,12 +280,9 @@
                                                             [ngClass]="[(columns.length-2===i) ? 'custom-right-text' : '',
                                                                         (columns.length-3===i) ? 'custom-right-text' : '',
                                                                         (columns.length-5===i) ? 'custom-right-text' : '']">
-                                                            <span *ngIf="i != 5 && (i!=1 && i!=4)"
+                                                            <span *ngIf="(i != 5) && (i != 1)"
                                                                 title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
-                                                            <span *ngIf="i==1"
-                                                                title="{{rowData[col.field]}}">{{rowData[col.field] | number}}</span>
-                                                            <span *ngIf="i==4"
-                                                                title="{{rowData[col.field]}}">{{rowData[col.field] | number:'1.0-2'}}</span>
+                                                            <span *ngIf="i==1" title="{{rowData[col.field]}}">{{rowData[col.field] | number}}</span>                                                           
                                                             <span *ngIf="i == 5 && isEnabled()" class="d-flex action-color">
                                                                 <!-- <a href="javascript:;" (click)="deleteFranchiseFee(rowData)">
                                                                         <span class="icon icon-delete" title="{{'title.delete'|translate}}"></span>
