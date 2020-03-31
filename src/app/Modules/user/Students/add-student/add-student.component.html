@@ -3,7 +3,7 @@
         <h4 class="custom-form-heading" *ngIf="isUpdate">{{'student.updateStudent' |translate}}</h4>
         <h4 class="custom-form-heading" *ngIf="!isUpdate">{{'student.createStudent' |translate}}</h4>
         <div class="custom-form-content">
-            <form [formGroup]="studentForm" (ngSubmit)="submit()">
+            <form [formGroup]="studentForm" (ngSubmit)="submit()" autocomplete="off">
                 <div class="row">
                     <div class="col-12">
                         <h4>{{'student.studentInfo'|translate}}</h4>
@@ -95,14 +95,15 @@
                                 <div class="form-group">
                                     <label>{{'student.add.studentContactEmail'|translate}}</label>
                                     <input pinputtext placeholder="{{'placeholder.parentEmail'|translate}}"
-                                        formControlName="email" name="email" type="email" >
+                                        autocomplete="off" id="studentContactEmail" 
+                                        formControlName="email" name="studentContactEmail" type="email" >
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" *ngIf="!isUpdate">
                                 <div class="form-group">
                                     <label> {{'student.add.password'|translate}}</label>
-                                    <input pPassword placeholder="{{'placeholder.password'|translate}}"
-                                        formControlName="password" name="password" type="password" >
+                                    <input pPassword placeholder="{{'placeholder.password'|translate}}" id="StudentPassword" autocomplete="new-password"
+                                        formControlName="password" name="StudentPassword" type="password" >
                                     <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.password.invalid && submitted!=null && !submitted "
                                         [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
@@ -114,6 +115,10 @@
                                     <label>{{'student.add.confirmPassword'|translate}}</label>
                                     <input pPassword placeholder="{{'placeholder.confirmPassword'|translate}}"
                                         formControlName="cpassword" name="cpassword" type="password">
+                                    <div class="invalid-feedback"
+                                        *ngIf="studentForm.controls.cpassword.invalid && submitted!=null && !submitted "
+                                        [ngClass]=" 'error'">{{'errorMessages.confirmPassword'|translate}}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12 mt-3">

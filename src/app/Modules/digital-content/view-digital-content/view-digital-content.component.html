@@ -172,10 +172,17 @@
                                 <p>{{digitalContentObj.expiry_date | date: 'dd MMM,yyyy'}}</p>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
+                                <label>{{'digitalContent.add.preurl'|translate}}</label>
+                                <p>{{digitalContentObj.pre_url}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
+                                <label>{{'digitalContent.add.postUrl'|translate}}</label>
+                                <p>{{digitalContentObj.post_url}}</p>
+                            </div>
+                            <div class="col-md-4 col-12 mt-3">
                                 <label>{{'digitalContent.add.status'|translate}}</label>
                                 <p>{{digitalContentObj.status}}</p>
                             </div>
-                            
                         </div>
                     </div>
                 </div>
@@ -235,6 +242,82 @@
                     </p-table>
                 </div>
             </div>
+            <!-- For Mapping-->
+            <!-- <div class="attachements-list">
+                <h4>Mapping</h4>
+                <div class="custom-table">
+                    <form [formGroup]="MappingForm" (ngSubmit)="ifSubmit()">
+                        <div class ="row">
+                             <div class="col-md-6 col-12">
+                                    <p-checkbox name="lcCheck" #something id="showLinkedRisksOnlyChk" [ngModelOptions]="{standalone: true}" binary="true" (click)="lcChecked($event, something)" [ngModel]="showlc"></p-checkbox>
+                                    <label>Allow All Learning centeres</label>
+                             </div>
+                             <div class="col-md-6 col-12">
+                                  <p-checkbox name="schoolCheck" #something id="showLinkedRisksOnlyChkBx" [ngModelOptions]="{standalone: true}" binary="true" (click)="schoolChecked($event, something)" [ngModel]="showschools"></p-checkbox>
+                                   <label>Allow All Schools</label>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label>Exclude Learning Centers</label>
+                                <p-multiSelect [options]="franchise" formControlName="exclude_lc" optionLabel="label"
+                                name="exclude_lc" defaultLabel="{{'placeholder.feeStructure'|translate}}"></p-multiSelect>
+                            </div>
+                            <div class="col-md-6 col-12">
+                                <label>Exclude schools</label>
+                                <p-multiSelect [options]="schools" formControlName="exclude_school" optionLabel="label"
+                                   name="exclude_school" defaultLabel="{{'placeholder.schoolName'|translate}}"></p-multiSelect>
+                            </div>
+                            <div class="col-12 custom-btn-plus">
+                                <button type="submit"  class="btn"><i class="icon icon-plus"></i></button>
+                            </div>
+                        </div>
+                        </form>
+                         <p-table #dt [columns]="cols" [value]="documents" [lazy]="true" [totalRecords]="totalRecords">
+                                <ng-template pTemplate="header" let-columns>
+                                    <tr>
+                                        <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias">
+                                            {{col.header}}
+                                            <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
+                                        </th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                                    <tr>
+                                        <td *ngFor="let col of columns ; let i = index" (click)="rowData['type']!='pdf' && i!=2 && previewAttachment(rowData)">
+                                            <span *ngIf="i == 0"  class="d-flex action-color attache-img">
+                                                <img *ngIf="rowData['type'] == 'pdf'" src="{{prdAssetPath}}/assets/img/attachement-imgs/pdf-file.png" alt=""> 
+                                                <img *ngIf="(rowData['type'] == 'mp4')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mp4-file.png" alt=""> 
+                                                <img *ngIf="(rowData['type'] == 'mov')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mov-file.png" alt=""> 
+                                                <img *ngIf="(rowData['type'] == 'jpeg') || (rowData['type'] == 'jpg') || (rowData['type'] == 'png')"
+                                                     src="{{rowData['document_url']}}" alt=""> 
+                                            </span>
+                                            <a *ngIf="i == 1 && rowData['type']=='pdf'" title="{{rowData[col.field]}}" 
+                                                href="javascript:;" (click)="downloadPdf(rowData['document_url'],rowData[col.field])">
+                                                {{rowData[col.field]}}
+                                            </a>
+                                            <span *ngIf="i == 1 && rowData['type']!='pdf'" title="{{rowData[col.field]}}">
+                                               {{rowData[col.field]}}
+                                            </span>
+                                            <span *ngIf="i == 2"  class="d-flex action-color">
+                                                <a href="javascript:;" *ngIf="digitalContentObj.status != 'Inactive'"
+                                                    (click)="DeleteAttachments(rowData)" title="Delete">
+                                                    <span class="icon icon-delete wd-30"></span>
+                                                </a>
+                                            </span>
+                                       </td>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="footer" let-columns>
+                                    <ng-container *ngIf="isEmptyTable()">
+                                        <tr>
+                                            <td [attr.colspan]="columns.length" class="text-center">
+                                                {{'general.noAttachments'|translate}}
+                                            </td>
+                                        </tr>
+                                    </ng-container>
+                                </ng-template>
+                        </p-table> 
+                    </div>
+                </div> -->
         </div>
         <p-confirmDialog header="{{'general.deleteHeader' | translate}}" 
             acceptLabel="{{'general.acceptLabel' | translate}}"
@@ -340,19 +423,21 @@
                     <p-calendar name="expiry_date" formControlName="expiry_date" dateFormat="dd/mm/yy" [showIcon]="true" [minDate]="minDate"></p-calendar>
                 </div>
             </div>
-            <div class="col-md-4 col-12" style="margin-top: 16px;">
-                <label>{{'digitalContent.add.preurl'|translate}} </label>
-                <input pinputtext placeholder="{{'digitalContent.add.preurl'|translate}}" formControlName="preUrl" name="preUrl" type="text"> 
+            <div class="col-md-4 col-12" >
+                <div class="form-group">
+                    <label>{{'digitalContent.add.preurl'|translate}} </label>
+                    <input pinputtext placeholder="{{'digitalContent.add.preurl'|translate}}" formControlName="preUrl" name="preUrl" type="text"> 
+                </div>
             </div>
-    
-            <div class="col-md-4 col-12" style="margin-top: 16px;">
+            <div class="col-md-4 col-12" >
                 <label>{{'digitalContent.add.postUrl'|translate}} </label>
                 <input pinputtext placeholder="{{'digitalContent.add.postUrl'|translate}}" formControlName="postUrl" name="postUrl" type="text"> 
             </div>
-    
-            <div class="col-md-4 col-12" style="margin-top: 16px;">
-                <label>{{'digitalContent.add.externalurl'|translate}} </label>
-                <textarea pInputTextarea placeholder="{{'digitalContent.add.externalurl'|translate}}" formControlName="externalUrl" name="externalUrl"></textarea>
+            <div class="col-md-12 col-12" >
+                <div class="form-group">
+                    <label>{{'digitalContent.add.externalurl'|translate}} </label>
+                    <textarea pInputTextarea placeholder="{{'digitalContent.add.externalurl'|translate}}" formControlName="externalUrl" name="externalUrl"></textarea>
+                </div>
             </div>
             <div class="col-md-4 col-12">
                 <div class="form-group">
@@ -416,5 +501,3 @@
        </div>
     </div>
 </p-dialog> 
-
-

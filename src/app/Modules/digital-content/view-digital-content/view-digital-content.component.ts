@@ -272,9 +272,9 @@ export class ViewDigitalContentComponent implements OnInit {
             description : this.digitalContent.description ? this.digitalContent.description :'',
             grade : this.digitalContent.grade,
             content_level : this.digitalContent.content_level,
-            preUrl:this.digitalContent.preUrl ? this.digitalContent.preUrl :'',
-            postUrl:this.digitalContent.postUrl ? this.digitalContent.postUrl : '',
-            externalUrl:this.digitalContent.externalUrl ? this.digitalContent.externalUrl :'',
+            preUrl:this.digitalContent.pre_url ? this.digitalContent.pre_url :'',
+            postUrl:this.digitalContent.post_url ? this.digitalContent.post_url : '',
+            externalUrl : '',
             tags: (this.digitalContent.tags)?this.digitalContent.tags.split(","):[],
             expiry_date : (this.digitalContent.expiry_date != '0000-00-00')?new Date(this.digitalContent.expiry_date):'',
             status : this.digitalContent.status
