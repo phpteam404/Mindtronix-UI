@@ -11,6 +11,8 @@ import { LazyLoadEvent,ConfirmationService } from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { DatePipe} from '@angular/common';
 import { environment } from 'src/environments/environment';
+import { SchoolService } from 'src/app/services/school.service';
+import { FranchiseService } from 'src/app/services/franchise.service';
 declare var require:any;
 const FileSaver = require('file-saver');
 
@@ -33,17 +35,23 @@ export class ViewDigitalContentComponent implements OnInit {
   minDate: Date = new Date();
   digitalForm:FormGroup;
   AttachmentForm:FormGroup;
-
+  MappingForm:FormGroup;
+  excludeList:any;
   editModal: boolean=false;
+  viewModal:boolean =false;
   uploadAttachments:boolean=false;
   previewFile:boolean=false;
   cols:any;
-  
+  schoolCheck:boolean;
+  lcCheck:boolean;
   digitalContentId:any;
   digitalContentObj:any={};
   digitalContent:any={};
   documents:any=[];
-
+  franchise:any;
+  schools:any;
+  schoolchecked:any;
+  lcCheckInfo:any;
   previewUrl:any;
   format:any;
   maxSize = environment.maxUploadSize;
@@ -58,6 +66,8 @@ export class ViewDigitalContentComponent implements OnInit {
               private _toast: ToasterService,
               private _service:ContentService,
               public datepipe: DatePipe,
+              private _schoolService:SchoolService,
+              private _fService:FranchiseService,
               private _confirm: ConfirmationService,
               private _mservice:MasterService,
               private _cService: CommonService,
@@ -74,6 +84,14 @@ export class ViewDigitalContentComponent implements OnInit {
     if(this.editModal){
       this.digitalForm.reset();
       this.getDigitalContentInfo('edit');
+    }
+  }
+  updateMappingModel(flag){
+    this.viewModal = flag;
+    if(this.viewModal){
+      this.lcCheckInfo =false;
+      this.schoolchecked=false;
+      this.MappingForm.reset();
     }
   }
   uploadAttachmentModal(flag) {
@@ -106,12 +124,20 @@ export class ViewDigitalContentComponent implements OnInit {
     this.AttachmentForm = new FormGroup({
       files:new FormControl(''),
     });
+    this.MappingForm = new FormGroup({
+      allow_lc:new FormControl(''),
+      allow_school:new FormControl(''),
+      exclude_lc:new FormControl(''),
+      exclude_school:new FormControl('')
+    });
 
     this.getMasterDropdown('categories');
     this.getMasterDropdown('sub_categories');
     this.getMasterDropdown('grade');
     this.getMasterDropdown('content_level');
     this.getMasterDropdown('status');
+    this.getFranchiseList();
+    this.getSchoolsList();
   }
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
@@ -132,6 +158,20 @@ export class ViewDigitalContentComponent implements OnInit {
         }
       }else{
         this._toast.show('error',res.error);
+      }
+    });
+  }
+  getFranchiseList(){
+    this._fService.getFranchiseDropDowns({}).subscribe(res=>{
+      if(res.status){
+        this.franchise = res.data.data;
+      }
+    });
+  }
+  getSchoolsList() {
+    this._schoolService.getSchoolsDropDowns({}).subscribe(res=>{
+      if(res.status){
+        this.schools = res.data.data;
       }
     });
   }
@@ -261,7 +301,12 @@ export class ViewDigitalContentComponent implements OnInit {
           this.digitalContentObj.expiry_date = (this.digitalContentObj.expiry_date != '0000-00-00')?this.digitalContentObj.expiry_date:'';
           this.documents = res.data.data[0].documents;
           this.documents.forEach(item => {
-            item.type = item.document_name.split('.').pop().toString().toLowerCase();
+            if(item.module_type=='url'){
+              item.type = 'url';
+              var vId = this.getVideoId(item.document_name);
+              item.img = 'https://img.youtube.com/vi/'+vId+'/3.jpg';
+            }
+            else item.type = item.document_name.split('.').pop().toString().toLowerCase();
           });
         }else{
           this.digitalContent = res.data.data[0];
@@ -274,7 +319,7 @@ export class ViewDigitalContentComponent implements OnInit {
             content_level : this.digitalContent.content_level,
             preUrl:this.digitalContent.pre_url ? this.digitalContent.pre_url :'',
             postUrl:this.digitalContent.post_url ? this.digitalContent.post_url : '',
-            externalUrl : '',
+            externalUrl : this.digitalContent.externalUrl ? this.digitalContent.externalUrl :'',
             tags: (this.digitalContent.tags)?this.digitalContent.tags.split(","):[],
             expiry_date : (this.digitalContent.expiry_date != '0000-00-00')?new Date(this.digitalContent.expiry_date):'',
             status : this.digitalContent.status
@@ -319,19 +364,23 @@ export class ViewDigitalContentComponent implements OnInit {
   video : any;
   player : any;
   reframed : Boolean = false;
+  getVideoId(url){
+    var regex = new RegExp(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
+    var matches = regex.exec(url);
+    console.log(matches);
+    var videoId = matches[5];
+    return videoId;
+  }
   previewAttachment(data:any){  
     console.log('attachments info',data);
     this.previewFile =true;
     this.previewUrl =data.document_url;
     if(data.module_type == 'url'){
-      var regex = new RegExp(/(?:\?v=)([^&]+)(?:\&)*/);
-      var matches = regex.exec(data.document_name);
-      var videoId = matches[1]; // kJ9g_-p3dLA
+      var videoId = this.getVideoId(data.document_name); // kJ9g_-p3dLA
       this.previewUrl = videoId;
       this.format = data.module_type.toString().toLowerCase();
       this.video = '';
       this.video = this.previewUrl;
-      console.log(this.video);
       if(window['YT']){
         console.log(this.player);
         if(this.player.loadVideoById)
@@ -461,4 +510,42 @@ export class ViewDigitalContentComponent implements OnInit {
       files:''
     })
   }
+
+  submitMapping() {
+    this.submitted = false;
+    if (this.MappingForm.valid) {
+      //console.log('mapping info',this.MappingForm.value);
+      var params ={};
+      var lc = [];
+      var school =[];
+      if(this.MappingForm.value.exclude_lc){
+        this.MappingForm.value.exclude_lc.forEach(item => {
+          lc.push(item.value);
+        });
+      }
+      if(this.MappingForm.value.exclude_school){
+        this.MappingForm.value.exclude_school.forEach(item => {
+          school.push(item.value);
+        });
+      }
+      params['allow_lc'] =this.lcCheckInfo;
+      params['allow_school']=this.schoolchecked;
+      params['exclude_lc'] = lc.toString();
+      params['exclude_school'] =school.toString();
+      console.log('params info',params);
+    } 
+  }
+
+  schoolChecked(event, control) {
+   if(control.checked ==true)
+    this.schoolchecked =1;
+    else
+    this.schoolchecked=0;
+ }
+ lcChecked(event,control){
+   if(control.checked ==true)
+    this.lcCheckInfo = 1;
+  else
+   this.lcCheckInfo=0;
+ }
 }

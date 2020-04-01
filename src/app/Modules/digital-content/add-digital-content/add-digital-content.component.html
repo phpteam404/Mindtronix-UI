@@ -46,7 +46,7 @@
                         <div class="form-group">
                             <label>{{'digitalContent.add.grade'|translate}}</label>
                             <p-dropdown [options]="grade" placeholder="{{'placeholder.grade'|translate}}" formControlName="grade" itemSize="30"
-                                name="grade" optionLabel="label" filter ="true"></p-dropdown>
+                                [showClear]="true" name="grade" optionLabel="label" filter ="true"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="digitalForm.controls.grade.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.grade'|translate}}
@@ -87,13 +87,13 @@
                             [ngClass]=" 'error'">{{'errorMessages.contentTags'|translate}}
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-6 col-12">
                         <div class="form-group">
                             <label>{{'digitalContent.add.preurl'|translate}} </label>
                             <input pinputtext placeholder="{{'digitalContent.add.preurl'|translate}}" formControlName="preUrl" name="preUrl" type="text"> 
                         </div>
                     </div>
-                    <div class="col-md-4 col-12">
+                    <div class="col-md-6 col-12">
                         <label>{{'digitalContent.add.postUrl'|translate}} </label>
                         <input pinputtext placeholder="{{'digitalContent.add.postUrl'|translate}}" formControlName="postUrl" name="postUrl" type="text"> 
                     </div>

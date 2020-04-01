@@ -120,7 +120,8 @@
              "lastInvoiceAmount":"Last Invoice Amount",
              "lastLogin":"Last Login",
              "studentHistory":"Student History",
-             "status":"Status"
+             "status":"Status",
+             "inSchoolName":"In School Name"
          }
     },
     "schools":{
@@ -201,7 +202,12 @@
         },
         "view":{
             "noOfViews":"No.of Views",
-            "contentAttachments":"Add Attachments"
+            "contentAttachments":"Add Attachments",
+            "mapping":"Mapping",
+            "allowLc":"Allow All Learning Centres",
+            "allowSchools":"Allow All Schools",
+            "excludelc":"Exclude Learning Center",
+            "excludeSchools":"Exclude Schoools"
         }
     },
     "roles":{
@@ -372,7 +378,8 @@
         "issueType":"Select Issue Type",
         "description":"Description",
         "invoiceFromDate":"From Date",
-        "invoiceToDate":"To Date"
+        "invoiceToDate":"To Date",
+        "learningCenters":" Select Learning Centres"
     },
     "title":{
         "edit":"Edit",

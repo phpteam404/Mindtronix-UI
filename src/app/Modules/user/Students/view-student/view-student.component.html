@@ -124,11 +124,6 @@
                         *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
                         >{{'student.view.lastInvoiceAmount'|translate}}
                     </div>
-                    <!-- <button pButton type="button"
-                        *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
-                        label="Generate Invoice" class="btn-warning generated-btn" 
-                        (click)="generateInvoice(studentObj)">
-                    </button> -->
                     <button pButton type="button"
                         *ngIf="(studentObj.last_invoice_amount=='' || 
                                 studentObj.last_invoice_amount==null || 
@@ -136,9 +131,12 @@
                                 (studentObj.school_id == '0' && studentObj.franchise_fee_id != '0')"
                         label="Generate Invoice" class="btn-warning generated-btn" 
                         (click)="generateInvoice(studentObj)">
-                </button>
-
-                    
+                 </button>
+                 <!-- <button pButton type="button"
+                        *ngIf="(studentObj.school_id==0 && studentObj.last_invoice_amount==0 && studentObj.franchise_fee_id !=0)"
+                        label="Generate Invoice" class="btn-warning generated-btn"
+                        (click)="generateInvoice(studentObj)">
+                </button>                     -->
                 </div>
                 <div class="custom-view-div">
                     <div class="trainers-text">{{'student.view.lastLogin'|translate}}
@@ -172,6 +170,10 @@
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>{{'student.add.motherTongue'|translate}}</label>
                                         <p>{{studentObj.mother_tongue}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'student.add.leadSource'|translate}}</label>
+                                        <p>{{studentObj.lead_source}}</p>
                                     </div>
                                     <div class="col-md-4 col-12 mt-3">
                                         <label>{{'student.add.feeStructure'|translate}}</label>
@@ -227,7 +229,11 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                    
-                                    <div class="col-md-4 col-12">
+                                    <div class="col-md-4 col-12" *ngIf="studentObj.school_id !=0">
+                                        <label>{{'student.view.inSchoolName'|translate}}</label>
+                                        <p>{{studentObj.school_name}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12" *ngIf="studentObj.school_id==0">
                                         <label>{{'student.add.schoolName'|translate}}</label>
                                         <p>{{studentObj.school_name}}</p>
                                     </div>

@@ -3753,6 +3753,9 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .generated-btn{
   margin-left: 10px !important;
 }
+.ui-dialog-resizable .ui-dialog-content{
+  overflow-x: hidden !important;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

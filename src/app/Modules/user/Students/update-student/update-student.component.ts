@@ -59,7 +59,7 @@ export class UpdateStudentComponent implements OnInit {
             student_name : this.studentObj.student_name,
             email : this.studentObj.contact_email,
             place_of_birth: this.studentObj.place_of_birth,
-            date_of_birth : new Date(this.studentObj.date_of_birth),
+            date_of_birth : this.studentObj.date_of_birth ?new Date(this.studentObj.date_of_birth):'',
             grade: this.studentObj.grade,
             parent_name : this.studentObj.parent_name,
             occupation : this.studentObj.occupation,
