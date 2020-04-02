@@ -12,6 +12,7 @@ import { SELECT_ITEM_HEIGHT_EM } from '@angular/material/select';
 })
 export class RoleManagementComponent implements OnInit {
   roles:any=[];
+  rolesDropDown:any=[];
   modules:any=[];
   currentRole:any=0;
   constructor(private _service: RoleService,
@@ -20,10 +21,18 @@ export class RoleManagementComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRolesList();
+    var params=new HttpParams().set("dropdown","true");
+    this._service.getRolesList(params).subscribe(res=>{
+      if(res.status){
+        this.rolesDropDown = res.data.user_roles;
+        this.getRolesList({'id':res.data.user_roles[0].value});
+      }
+    });
+    
   }
 
   getRolesList(data?: any){
+    console.log(data);
     var params = new HttpParams()
         .set('user_role_id',(data)?data.id:1);
   this._service.getRolesList(params).subscribe(res=>{
