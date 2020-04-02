@@ -593,10 +593,10 @@ export class ViewDigitalContentComponent implements OnInit {
         }
       })
       this.MappingForm.setValue({
-        all_schools: this.mappingobj.all_schools,
-        all_franchise: this.mappingobj.all_franchise,
-        exclude_franchise:franchiseArr,
-        exclude_school: schoolArr
+        all_schools: (this.mappingobj.all_schools ==1)? true:false,
+        all_franchise: (this.mappingobj.all_franchise ==1)? true:false,
+        exclude_franchise : franchiseArr,
+        exclude_school : schoolArr
       });
     })
   }

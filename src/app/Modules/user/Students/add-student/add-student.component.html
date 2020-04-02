@@ -125,11 +125,19 @@
                                 <label> {{'student.add.studentHomePhone'|translate}}</label>
                                 <input type="text" placeholder="{{'placeholder.homePhone'|translate}}" pKeyFilter="pint"
                                     formControlName="phone_no" name="phone_no">
+                                <div class="invalid-feedback"
+                                    *ngIf="studentForm.controls.phone_no.invalid && submitted!=null && !submitted "
+                                    [ngClass]=" 'error'">{{'errorMessages.homePhone'|translate}}
+                                </div>
                             </div>
                             <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <label>{{'student.add.studentMobilePhone1'|translate}}</label>
                                 <input type="text" placeholder="{{'placeholder.mobilePhone1'|translate}}"
                                     pKeyFilter="pint" formControlName="mobile_phone1" name="mobile_phone1">
+                                <div class="invalid-feedback"
+                                    *ngIf="studentForm.controls.mobile_phone1.invalid && submitted!=null && !submitted "
+                                    [ngClass]=" 'error'">{{'errorMessages.mobilePhone1'|translate}}
+                                </div>
                             </div>
                             <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <div class="form-group">
@@ -151,9 +159,11 @@
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
-                                <label>{{'student.add.occupation'|translate}}</label>
-                                <input pinputtext type="text" placeholder="{{'placeholder.occupation'|translate}}"
-                                    formControlName="occupation" name="occupation">
+                                <div class="form-group">
+                                    <label>{{'student.add.occupation'|translate}}</label>
+                                    <input pinputtext type="text" placeholder="{{'placeholder.occupation'|translate}}"
+                                        formControlName="occupation" name="occupation">
+                                </div>
                             </div>
                         </div>
                     </div>
