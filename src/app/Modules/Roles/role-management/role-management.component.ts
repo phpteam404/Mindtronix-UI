@@ -28,11 +28,9 @@ export class RoleManagementComponent implements OnInit {
         this.getRolesList({'id':res.data.user_roles[0].value});
       }
     });
-    
   }
 
   getRolesList(data?: any){
-    console.log(data);
     var params = new HttpParams()
         .set('user_role_id',(data)?data.id:1);
   this._service.getRolesList(params).subscribe(res=>{

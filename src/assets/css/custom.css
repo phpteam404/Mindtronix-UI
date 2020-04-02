@@ -3756,6 +3756,9 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .ui-dialog-resizable .ui-dialog-content{
   overflow-x: hidden !important;
 }
+.student-dropdown .ui-dropdown{
+  width: 200px;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

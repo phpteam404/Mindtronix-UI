@@ -4,15 +4,15 @@
            [paginator]="true" [(first)]="first" (onLazyLoad)="loadStudentsLazy($event)" [rows]="10">
             <ng-template pTemplate="caption">
                 <div class="custom-search justify-content-between">
-                    <div class="d-flex">
-                        <div class="input-dropdown">
+                    <div class="d-flex student-dropdown">
+                        <div class="input-dropdown d-flex align-items-center">
                             <label>{{'student.school' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="schools" placeholder="{{'placeholder.schoolName'|translate}}" [showClear]="true"
                                 [(ngModel)]="schoolFilter"
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'school_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
-                        <div class="input-dropdown ml-2">
+                        <div class="input-dropdown ml-2 d-flex align-items-center">
                             <label>{{'student.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchise" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseFilter"
