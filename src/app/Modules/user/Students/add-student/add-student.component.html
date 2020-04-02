@@ -121,17 +121,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-12 mt-3">
+                            <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <label> {{'student.add.studentHomePhone'|translate}}</label>
                                 <input type="text" placeholder="{{'placeholder.homePhone'|translate}}" pKeyFilter="pint"
                                     formControlName="phone_no" name="phone_no">
                             </div>
-                            <div class="col-md-4 col-12 mt-3">
+                            <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <label>{{'student.add.studentMobilePhone1'|translate}}</label>
                                 <input type="text" placeholder="{{'placeholder.mobilePhone1'|translate}}"
                                     pKeyFilter="pint" formControlName="mobile_phone1" name="mobile_phone1">
                             </div>
-                            <div class="col-md-4 col-12 mt-3">
+                            <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <div class="form-group">
                                     <label>{{'student.add.studentMobilePhone2'|translate}}</label>
                                     <input type="text" placeholder="{{'placeholder.mobilePhone2'|translate}}"
@@ -142,7 +142,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-12 mt-3">
+                            <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <div class="form-group">
                                     <label>{{'student.add.relation'|translate}}</label>
                                     <p-dropdown [options]="relation" [showClear]="true" formControlName="relation"
@@ -150,7 +150,7 @@
                                         optionLabel="label" name="relation"></p-dropdown>
                                 </div>
                             </div>
-                            <div class="col-md-4 col-12 mt-3">
+                            <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">
                                 <label>{{'student.add.occupation'|translate}}</label>
                                 <input pinputtext type="text" placeholder="{{'placeholder.occupation'|translate}}"
                                     formControlName="occupation" name="occupation">

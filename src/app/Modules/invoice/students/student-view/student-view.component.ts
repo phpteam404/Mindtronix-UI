@@ -82,7 +82,7 @@ export class StudentViewComponent implements OnInit {
 
   getStudentInvoiceData(StudentInvoiceId) {
     var params = new HttpParams().set('student_invoice_id', StudentInvoiceId);
-    this._service.getSchoolInvoiceInfo(params).subscribe(res => {
+    this._service.getStudentsView(params).subscribe(res => {
       if (res.status) {
         this.studentInvoiceObj = res.data.data[0];
         this.dueDate = res.data.due_date;

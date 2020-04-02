@@ -171,7 +171,11 @@ export class UpdateStudentComponent implements OnInit {
   getMotherTongue(){ return this.studentForm.value.mother_tongue.value;}
   getFeeStructure(){ return this.studentForm.value.fee_structure.value;}
   getRelation(){ return this.studentForm.value.relation.value;}
-  getSchool(){ return this.studentForm.value.school_id.value;}
+  getSchool() { 
+    if(this.studentForm.value.school_id)
+      return this.studentForm.value.school_id.value;
+    else null;
+  }
   getGrade(){ return this.studentForm.value.grade.value;}
   getBloodGroup(){ return this.studentForm.value.blood_group.value;}
   getStatus(){ return this.studentForm.value.status.value;}
