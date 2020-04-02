@@ -20,4 +20,11 @@ export class ContentService {
   getDocuments(params){
     return this.clientHttp.post('Digitalcontent/addDigitalContentDocuments',params);
   }
+  MapDigitalContent(params){
+    return this.clientHttp.post('Digitalcontent/mapContentToFranchise',params);
+  }
+
+  viewDigitalContentMapping(params){
+    return this.clientHttp.get('Digitalcontent/mapContentToFranchise',params);
+  }
 }

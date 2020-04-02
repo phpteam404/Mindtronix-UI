@@ -441,17 +441,18 @@
     <form [formGroup]="MappingForm" (ngSubmit)="submitMapping()">
         <div class ="row">
              <div class="col-md-6 col-12 form-group">
-                 <p-checkbox name="lcCheck" #lc id="lcenter" [ngModelOptions]="{standalone: true}" binary="true" (click)="lcChecked($event, lc)" [ngModel]="showlc"></p-checkbox>
-                 <label class="pl-2">{{'digitalContent.view.allowLc'|translate}}</label>
+                <p-checkbox  binary="true" formControlName="all_franchise" 
+                [attr.checked]="all_franchise== '1' ? true : false"></p-checkbox>
+                <label class="pl-2">{{'digitalContent.view.allowLc'|translate}}</label>
              </div>
              <div class="col-md-6 col-12 form-group">
-                  <p-checkbox name="schoolCheck" #shl id="school" [ngModelOptions]="{standalone: true}" binary="true" (click)="schoolChecked($event, shl)" [ngModel]="showschools"></p-checkbox>
-                  <label class="pl-2">{{'digitalContent.view.allowSchools'|translate}}</label>
+                <p-checkbox  binary="true" formControlName="all_schools" [attr.checked]="all_schools== '1' ? true : false" name=""></p-checkbox>
+                <label class="pl-2">{{'digitalContent.view.allowSchools'|translate}}</label>
             </div>
             <div class="col-md-6 col-12 form-group">
                 <label>{{'digitalContent.view.excludelc'|translate}}</label>
-                <p-multiSelect [options]="franchise" formControlName="exclude_lc" optionLabel="label"
-                name="exclude_lc" defaultLabel="{{'placeholder.learningCenters'|translate}}"></p-multiSelect>
+                <p-multiSelect [options]="franchise" formControlName="exclude_franchise" optionLabel="label"
+                name="exclude_franchise" defaultLabel="{{'placeholder.learningCenters'|translate}}"></p-multiSelect>
             </div>
             <div class="col-md-6 col-12 form-group">
                 <label>{{'digitalContent.view.excludeSchools'|translate}}</label>

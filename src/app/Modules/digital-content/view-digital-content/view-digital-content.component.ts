@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute } from '@angular/router';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators,FormBuilder } from '@angular/forms';
 import { Chart } from 'angular-highcharts';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { HttpParams } from '@angular/common/http';
@@ -42,18 +42,17 @@ export class ViewDigitalContentComponent implements OnInit {
   uploadAttachments:boolean=false;
   previewFile:boolean=false;
   cols:any;
-  schoolCheck:boolean;
-  lcCheck:boolean;
   digitalContentId:any;
   digitalContentObj:any={};
   digitalContent:any={};
   documents:any=[];
   franchise:any;
   schools:any;
-  schoolchecked:any;
-  lcCheckInfo:any;
   previewUrl:any;
   format:any;
+  franchiseStatus:any;
+  schoolStatus:any;
+  mappingobj:any;
   maxSize = environment.maxUploadSize;
   prdAssetPath:string = environment.prdAssetPath;
   fileTypes = ["image/jpeg",
@@ -66,6 +65,7 @@ export class ViewDigitalContentComponent implements OnInit {
               private _toast: ToasterService,
               private _service:ContentService,
               public datepipe: DatePipe,
+              private fb: FormBuilder,
               private _schoolService:SchoolService,
               private _fService:FranchiseService,
               private _confirm: ConfirmationService,
@@ -86,12 +86,15 @@ export class ViewDigitalContentComponent implements OnInit {
       this.getDigitalContentInfo('edit');
     }
   }
+
   updateMappingModel(flag){
     this.viewModal = flag;
     if(this.viewModal){
-      this.lcCheckInfo =false;
-      this.schoolchecked=false;
-      this.MappingForm.reset();
+      this.getDigitalContentMappingInfo();
+     /* if(this.mappingobj.all_franchise ==1)
+         this.MappingForm.value.franchise == true
+      else
+        this.MappingForm.value.franchise ==false;*/
     }
   }
   uploadAttachmentModal(flag) {
@@ -124,11 +127,11 @@ export class ViewDigitalContentComponent implements OnInit {
     this.AttachmentForm = new FormGroup({
       files:new FormControl(''),
     });
-    this.MappingForm = new FormGroup({
-      allow_lc:new FormControl(''),
-      allow_school:new FormControl(''),
-      exclude_lc:new FormControl(''),
-      exclude_school:new FormControl('')
+    this.MappingForm = this.fb.group({
+      all_franchise: '',
+      all_schools:'',
+      exclude_franchise:new FormControl(''),
+      exclude_school:new FormControl()
     });
 
     this.getMasterDropdown('categories');
@@ -368,12 +371,10 @@ export class ViewDigitalContentComponent implements OnInit {
   getVideoId(url){
     var regex = new RegExp(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
     var matches = regex.exec(url);
-    // console.log(matches);
     var videoId = matches[5];
     return videoId;
   }
   closePreview(){
-    console.log("******closed");
     //window['onYouTubeIframeAPIReady'] = () => {};
     //window['ÝT'] = undefined;
     this.onPlayerStateChange({'target': 'Y', 'data': 2});
@@ -382,7 +383,6 @@ export class ViewDigitalContentComponent implements OnInit {
      ele.remove();
   }
   previewAttachment(data:any){
-    console.log('attachments info',data);
     this.previewFile =true;
     this.previewUrl =data.document_url;
     if(data.module_type == 'url'){
@@ -545,12 +545,11 @@ export class ViewDigitalContentComponent implements OnInit {
   submitMapping() {
     this.submitted = false;
     if (this.MappingForm.valid) {
-      //console.log('mapping info',this.MappingForm.value);
       var params ={};
       var lc = [];
       var school =[];
-      if(this.MappingForm.value.exclude_lc){
-        this.MappingForm.value.exclude_lc.forEach(item => {
+      if(this.MappingForm.value.exclude_franchise){
+        this.MappingForm.value.exclude_franchise.forEach(item => {
           lc.push(item.value);
         });
       }
@@ -558,25 +557,47 @@ export class ViewDigitalContentComponent implements OnInit {
         this.MappingForm.value.exclude_school.forEach(item => {
           school.push(item.value);
         });
-      }
-      params['allow_lc'] =this.lcCheckInfo;
-      params['allow_school']=this.schoolchecked;
-      params['exclude_lc'] = lc.toString();
+      } 
+      params['content_id'] =Number(this.digitalContentId);
+      params['all_franchise'] =(this.MappingForm.value.all_franchise)?1:0;
+      params['all_schools']=(this.MappingForm.value.all_schools)?1:0;
+      params['exclude_franchise'] = lc.toString();
       params['exclude_school'] =school.toString();
-      console.log('params info',params);
+      this._service.MapDigitalContent(params).subscribe(res =>{
+        if(res.status){
+           this.updateMappingModel(false);
+           this.getDigitalContentMappingInfo();
+        }
+      });
     } 
   }
 
-  schoolChecked(event, control) {
-   if(control.checked ==true)
-    this.schoolchecked =1;
-    else
-    this.schoolchecked=0;
- }
- lcChecked(event,control){
-   if(control.checked ==true)
-    this.lcCheckInfo = 1;
-  else
-   this.lcCheckInfo=0;
- }
+  getDigitalContentMappingInfo(){
+    var params =new HttpParams()
+                .set('content_id',this.digitalContentId);
+    this._service.viewDigitalContentMapping(params).subscribe(res =>{
+      this.mappingobj = res.data[0];
+      var schoolArr=[],franchiseArr=[];
+      var selectedFranchise = [];
+      selectedFranchise = (this.mappingobj.exclude_franchise)? this.mappingobj.exclude_franchise.split(',') : '';
+      var selectedSchool = [];
+      selectedSchool = (this.mappingobj.exclude_school)? this.mappingobj.exclude_school.split(',') : '';
+      this.franchise.forEach(item=>{
+        if(selectedFranchise.includes(item.value.toString())){
+          franchiseArr.push(item);
+        }
+      })
+      this.schools.forEach(item =>{
+        if(selectedSchool.includes(item.value.toString())){
+          schoolArr.push(item);
+        }
+      })
+      this.MappingForm.setValue({
+        all_schools: this.mappingobj.all_schools,
+        all_franchise: this.mappingobj.all_franchise,
+        exclude_franchise:franchiseArr,
+        exclude_school: schoolArr
+      });
+    })
+  }
 }

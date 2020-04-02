@@ -24,11 +24,12 @@ export class SchoolViewComponent implements OnInit {
   invoiceStatus: any;
   SchoolInvoiceId: any;
   schoolName: any;
-  studentId: any;
+  schoolId: any;
   schoolInvoiceObj: any = [];
   loading: boolean;
   paidDate: any;
   invoiceId: any;
+  schoolsInvoiceId:any;
   submitted = null;
   constructor(private _ar: ActivatedRoute,
     private _router: Router,
@@ -86,26 +87,25 @@ export class SchoolViewComponent implements OnInit {
       console.log('result info',res);
       if (res.status) {
         this.schoolInvoiceObj = res.data.data[0];
-        //this.studentId = res.data.data[0].student_id;
-        //this.invoiceId = res.data.data[0].student_invoice_id;
-        //console.log('studentid---', this.studentId);
-        //this.getPreviousInvoiceList(this.studentId, this.invoiceId);
+        this.schoolId = res.data.data[0].school_id;
+        this.schoolsInvoiceId = res.data.data[0].school_invoice_id;
+        this.getPreviousInvoiceList(this.schoolId,this.schoolsInvoiceId);
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
   }
 
-  // getPreviousInvoiceList(data: any, id: any) {
-  //   var params = new HttpParams()
-  //     .set('student_id', data)
-  //     .set('student_invoice_id', id);
-  //   this._Service.getPreviousinvoices(params).subscribe(res => {
-  //     if (res.status) {
-  //       //this.cols = res.data.table_headers;
-  //       this.previouslist = res.data.data;
-  //     }
-  //   });
-  // }
+  getPreviousInvoiceList(data: any,id:any) {
+    var params = new HttpParams()
+      .set('school_id', data)
+      .set('school_invoice_id',id);
+    this._Service.getPreviousinvoices(params).subscribe(res => {
+      console.log('previous invoice info',res);
+      if (res.status) {
+        this.previouslist = res.data.data;
+      }
+    });
+  }
 
   getStatus() { return this.updateForm.value.status.value; }
   getPaymentType() { 
@@ -137,13 +137,11 @@ export class SchoolViewComponent implements OnInit {
 
   viewPreviousInvoices(data: any) {
     console.log('previous invoice  info', data);
-    var params = new HttpParams().set('student_invoice_id', data.student_invoice_id);
-    this._Service.getStudentsView(params).subscribe(res => {
+    var params = new HttpParams().set('school_invoice_id', data.school_invoice_id);
+    this._Service.getSchoolInvoiceInfo(params).subscribe(res => {
       if (res.status) {
         this.schoolInvoiceObj = res.data.data[0];
-        this.dueDate = res.data.due_date;
-        this.paidDate = res.data.paid_date;
-        //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
+        //this._router.navigate(['invoices/school_invoice/view',data.student_name,btoa(data.school_invoice_id)]);
       }
     });
   }
