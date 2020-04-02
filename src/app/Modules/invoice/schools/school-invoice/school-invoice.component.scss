@@ -1,0 +1,47 @@
+.custom-search .input-search i {
+    right: 15px;
+}
+.custom-form{
+    border: none;
+    background: transparent;
+}
+.franchise-name {
+    width: 1% !important;
+}
+.payment-text{
+    padding-left: 10px;
+    span{
+        font-size: 20px;
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+    }
+}
+.w300{
+    width: 300px !important;
+}
+
+@media (max-width: 1199px){
+    .schools-text span,
+    .payment-text span {
+        font-size: 16px !important;
+    }
+    .filter-form p-calendar .ui-button {
+        padding: 0px 2px 3px !important;
+    }
+    .input-search input{
+         width: 200px !important;
+    }
+    .show-menu .input-search input{
+         width: 240px !important;
+    }
+    .student-invoice-list th:nth-child(3){
+        width: 130px;
+    }
+    .student-invoice-list th:nth-child(6){
+        width: 80px;
+    }
+    .student-invoice-list th:last-child{
+        width: 70px !important;
+    }    
+}

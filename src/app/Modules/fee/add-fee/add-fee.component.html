@@ -39,8 +39,8 @@
                         <div class="form-group">
                             <label>{{'fee.discount'|translate}} (%)</label>
                             <div class="ui-inputgroup">
-                                <input pinputtext type="text" pKeyFilter="pint" [maxlength]="2" placeholder="{{'fee.discount'|translate}}" formControlName="discount" name="discount">
-                                <span class="ui-inputgroup-addon">%</span> 
+                                <input pinputtext type="text" pKeyFilter="num" currencyMask  [maxlength]="5" placeholder="{{'fee.discount'|translate}}" formControlName="discount" name="discount">
+                                <span class="ui-inputgroup-addon">%</span>
                             </div>
                         </div>
                     </div>

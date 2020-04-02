@@ -1,0 +1,120 @@
+<div class="main-content">
+        <div class="row view-page">
+            <div class="col-12">
+                <div class="custom-view-list student-view-list">
+                    <div class="custom-view-div franchise-name">
+                        <div>{{'invoices.list.month'|translate}}
+                            <p-dropdown [options]="lastSixMonths" (onChange) ="monthSelected($event)"
+                                styleClass="ui-column-filter" optionLabel="label">
+                           </p-dropdown>
+                        </div>
+                    </div>
+                    <div class="custom-view-div">
+                        <div class="schools-text">{{'invoices.list.#invoice'|translate}}
+                            <span>{{schoolnvoiceData.invoices_count}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-view-div">
+                        <div class="schools-text">{{'invoices.list.#invoiceAmount'|translate}}
+                            <span>₹ {{schoolnvoiceData.total_invoices_amount | number}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-view-div">
+                        <div class="schools-text">{{'invoices.list.collectedAmount'|translate}}
+                            <span>₹ {{schoolnvoiceData.total_collected_amount | number}}</span>
+                        </div>
+                    </div>
+                    <div class="custom-view-div">
+                        <div class="payment-text">{{'invoices.list.due'|translate}}
+                            <span>₹ {{schoolnvoiceData.due_amount | number}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- For Form starts-->
+        <form [formGroup]="filtersForm" (ngSubmit)="submit()">
+            <div class="custom-search justify-content-between">
+                <div class="d-flex custom-form">
+                    <div class="col-md-3 p-0 filter-form">
+                        <p-calendar name="from_date" [showIcon]="true"  formControlName="from_date" dateFormat="dd/mm/yy"
+                           [maxDate]="maxDate" placeholder="{{'placeholder.invoiceFromDate'|translate}}">
+                    </p-calendar>
+                    </div>
+                    <div class="col-md-3 p-0 filter-form ml-2">
+                        <p-calendar name="to_date" [showIcon]="true" formControlName="to_date"
+                             dateFormat="dd/mm/yy" 
+                            [maxDate]="maxDate" placeholder="{{'placeholder.invoiceToDate'|translate}}">
+                        </p-calendar>
+                    </div>
+                    <div class="col-md-2 p-0 input-dropdown ml-2">
+                        <p-dropdown [options]="invoiceStatusList" placeholder="Status"
+                            styleClass="ui-column-filter"
+                            [showClear]="true" formControlName ="status_id"
+                            optionLabel="label" filter="true">
+                        </p-dropdown>
+                    </div>
+                    <button pButton type="submit" label="Go" class="btn-warning ml-2 p-0"></button>
+                    <div class="custom-refresh">
+                        <a href="javascript:;" class="icon icon-refresh-1" title ="Reset" (click)="resetFilters()"></a>
+                    </div>
+                </div>
+                <div class="d-flex">
+                    <div class="input-search">
+                        <input type="text" pInputText size="50" placeholder="Search by Invoice # / Name / Contact / Email"
+                            class="" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                            style="width:auto;">
+                        <i class="fa fa-search mr-2"></i>
+                    </div>
+                    <button pButton type="button" label="Create Invoice" class="btn-warning pl-2" (click)="createSchool($event)"></button>
+                </div>
+            </div>
+        </form>
+        <!-- for form ends-->
+        <div class="custom-table custon-idlist custom-lastchild-list custom-row-select student-invoice-list">
+            <p-table #dt [columns]="cols" [value]="schoolInvoicelist" (onLazyLoad)="loadSchoolsInvoiceListLazy($event)"
+                [paginator]="true" [rows]="10" [lazy]="true" [totalRecords]="totalRecords"  [loading]="loading">
+                <ng-template pTemplate="caption">
+                </ng-template>
+                <ng-template pTemplate="header" let-columns>
+                    <tr>
+                        <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+                            [ngClass]="[(columns.length-2===i) ? 'text-right' : '',(i==0)?'w300':'']">
+                            {{col.header}}
+                            <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-columns="columns">
+                    <tr>
+                        <td *ngFor="let col of columns ; let i = index" (click)="viewStudents(rowData)" 
+                        [ngClass]="(columns.length-2===i) ? 'custom-right-text' : ''">
+                            <span *ngIf="i!=5 && i!=4 && i!=3" title="{{rowData[col.field]}}"
+                                x-ms-format-detection="none"> {{rowData[col.field]}}</span>
+                            <span *ngIf="i!=5 && i!=4 && i==3" title="{{rowData[col.field] |date:'dd MMM yyy'}}"
+                                x-ms-format-detection="none">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
+                            <span *ngIf="i!=5 && i!=3 && i==4" title="{{rowData[col.field]}}" x-ms-format-detection="none">
+                                ₹ {{rowData[col.field] |number}}</span>
+                            <span *ngIf="i == 5">
+                                <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
+                                        (rowData[col.field]==='OverDue')? 'bg-gold' : '',
+                                        (rowData[col.field]==='Due')? 'bg-orange' : '',
+                                        (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
+                                    class='list-status'>{{rowData[col.field]}}
+                                </span>
+                            </span>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="footer" let-columns>
+                    <ng-container *ngIf="isEmptyTable()">
+                        <tr>
+                            <td [attr.colspan]="columns.length" class="text-center">
+                                {{'general.noRecords' | translate}}
+                            </td>
+                        </tr>
+                    </ng-container>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>

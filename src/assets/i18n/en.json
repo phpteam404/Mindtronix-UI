@@ -204,10 +204,11 @@
             "noOfViews":"No.of Views",
             "contentAttachments":"Add Attachments",
             "mapping":"Mapping",
-            "allowLc":"Allow All Learning Centres",
-            "allowSchools":"Allow All Schools",
-            "excludelc":"Exclude Learning Center",
-            "excludeSchools":"Exclude Schoools"
+            "allowLc":"Allow all learning centres",
+            "allowSchools":"Allow all schools",
+            "excludelc":"Exclude learning center",
+            "excludeSchools":"Exclude schoools",
+            "contentPermission":"Content permissions"
         }
     },
     "roles":{
@@ -248,7 +249,8 @@
              "previousInvoices":"Previous Invoices",
              "updateStatus":"Update Status",
              "paymentType":"Payment Mode",
-             "comments":"Comments"
+             "comments":"Comments",
+             "schoolInvoiceId":"School Invoice Id"
          }
      },
     "buttons":{
@@ -313,7 +315,8 @@
         "designation":"Designation Required",
         "paymentTypeReq":"Payment Mode Required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",
-        "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs) files"
+        "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs) files",
+        "amountReq":"Amount required"
     },
     "dropdown":{
         "country":"Country is required",
@@ -379,7 +382,8 @@
         "description":"Description",
         "invoiceFromDate":"From Date",
         "invoiceToDate":"To Date",
-        "learningCenters":" Select Learning Centres"
+        "learningCenters":" Select Learning Centres",
+        "amount":"Amount"
     },
     "title":{
         "edit":"Edit",

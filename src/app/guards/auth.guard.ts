@@ -34,27 +34,40 @@ export class AuthGuard implements CanActivate {
      if (this.ls.getItem('user')) {
         var url = next['_routerState'].url.toString();
         url = url.split('?')[0];
+        var reqAction = '';
         /*console.log('next====', next['_routerState']);
         console.log('add==', url.includes('add'));
         console.log('view==', url.includes('view'));
         console.log('update==', url.includes('update'));
         console.log('module_url-*-*-*',url);*/
-        if(url.includes('add')){
-          var str = url.split('add');
-          url = str[0].slice(0, -1);// str[0]+'add';
+        if(url.includes('add') || url.includes('view') || url.includes('update')){
+          if(url.includes('add')){
+            var str = url.split('add');
+            url = str[0].slice(0, -1);// str[0]+'add';
+            reqAction = 'create';
+          }
+          if(url.includes('view')){
+            var str = url.split('view');
+            url = str[0].slice(0, -1);//str[0]+'view';
+            reqAction = 'view';
+          }
+          if(url.includes('update')){
+            var str = url.split('update');
+            url = str[0].slice(0, -1);//str[0]+'update';
+            reqAction = 'edit';
+          }
+        }else{
+          reqAction = 'view';
         }
-        if(url.includes('view')){
-          var str = url.split('view');
-          url = str[0].slice(0, -1);//str[0]+'view';
-        }
-        if(url.includes('update')){
-          var str = url.split('update');
-          url = str[0].slice(0, -1);//str[0]+'update';
-        }
+        
         this.service.isTokenExpired({'module_url':url,'user_role_id': JSON.parse(this.ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
           if(res.status){
-            if(res.data.access)
+            if(res.data.access){
+              if(res.data.role_access.view>0){
+                
+              }
               return true;
+            }              
             else {
               this.router.navigate(['/404']);
             }

@@ -9,11 +9,11 @@ import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 
 @Component({
-  selector: 'app-student-view',
-  templateUrl: './student-view.component.html',
-  styleUrls: ['./student-view.component.scss']
+  selector: 'app-school-view',
+  templateUrl: './school-view.component.html',
+  styleUrls: ['./school-view.component.scss']
 })
-export class StudentViewComponent implements OnInit {
+export class SchoolViewComponent implements OnInit {
   status1: any;
   displayBasic: boolean;
   type: any;
@@ -22,10 +22,10 @@ export class StudentViewComponent implements OnInit {
   previouslist: any;
   dueDate: any;
   invoiceStatus: any;
-  StudentInvoiceId: any;
-  studentName: any;
+  SchoolInvoiceId: any;
+  schoolName: any;
   studentId: any;
-  studentInvoiceObj: any = [];
+  schoolInvoiceObj: any = [];
   loading: boolean;
   paidDate: any;
   invoiceId: any;
@@ -33,7 +33,7 @@ export class StudentViewComponent implements OnInit {
   constructor(private _ar: ActivatedRoute,
     private _router: Router,
     private _mservice: MasterService,
-    private _service: InvoiceService,
+    private _Service: InvoiceService,
     public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
 
@@ -51,20 +51,20 @@ export class StudentViewComponent implements OnInit {
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
-      this.StudentInvoiceId = atob(params['params'].id);
-      this.studentName = (params['params'].name);
-      this.getStudentInvoiceData(this.StudentInvoiceId);
+      this.SchoolInvoiceId = atob(params['params'].id);
+      this.schoolName = (params['params'].name);
+      this.getSchoolsInvoiceData(this.SchoolInvoiceId);
     });
     this.getMasterDropdown('invoice_status');
     this.getMasterDropdown('invoice_payment_mode');
   }
-
 
   updateForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
     payment_type: new FormControl(''),
     comments: new FormControl('')
   });
+
 
   getMasterDropdown(masterKey): any {
     var params = new HttpParams()
@@ -80,33 +80,32 @@ export class StudentViewComponent implements OnInit {
     });
   }
 
-  getStudentInvoiceData(StudentInvoiceId) {
-    var params = new HttpParams().set('student_invoice_id', StudentInvoiceId);
-    this._service.getSchoolInvoiceInfo(params).subscribe(res => {
+  getSchoolsInvoiceData(SchoolInvoiceId) {
+    var params = new HttpParams().set('school_invoice_id', SchoolInvoiceId);
+    this._Service.getSchoolInvoiceInfo(params).subscribe(res => {
+      console.log('result info',res);
       if (res.status) {
-        this.studentInvoiceObj = res.data.data[0];
-        this.dueDate = res.data.due_date;
-        this.paidDate = res.data.paid_date;
-        this.studentId = res.data.data[0].student_id;
-        this.invoiceId = res.data.data[0].student_invoice_id;
-        console.log('studentid---', this.studentId);
-        this.getPreviousInvoiceList(this.studentId, this.invoiceId);
+        this.schoolInvoiceObj = res.data.data[0];
+        //this.studentId = res.data.data[0].student_id;
+        //this.invoiceId = res.data.data[0].student_invoice_id;
+        //console.log('studentid---', this.studentId);
+        //this.getPreviousInvoiceList(this.studentId, this.invoiceId);
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
   }
 
-  getPreviousInvoiceList(data: any, id: any) {
-    var params = new HttpParams()
-      .set('student_id', data)
-      .set('student_invoice_id', id);
-    this._service.getPreviousinvoices(params).subscribe(res => {
-      if (res.status) {
-        //this.cols = res.data.table_headers;
-        this.previouslist = res.data.data;
-      }
-    });
-  }
+  // getPreviousInvoiceList(data: any, id: any) {
+  //   var params = new HttpParams()
+  //     .set('student_id', data)
+  //     .set('student_invoice_id', id);
+  //   this._Service.getPreviousinvoices(params).subscribe(res => {
+  //     if (res.status) {
+  //       //this.cols = res.data.table_headers;
+  //       this.previouslist = res.data.data;
+  //     }
+  //   });
+  // }
 
   getStatus() { return this.updateForm.value.status.value; }
   getPaymentType() { 
@@ -115,31 +114,33 @@ export class StudentViewComponent implements OnInit {
     else null;
   }
 
+
   updateStatus(): any {
     this.submitted = false;
     if (this.updateForm.valid) {
       console.log('update from value', this.updateForm.value);
       var params = {};
-      params['student_invoice_id'] = this.StudentInvoiceId;
+      params['school_invoice_id'] = Number(this.SchoolInvoiceId);
       params['status'] = this.getStatus();
       params['payment_type'] = this.getPaymentType();
       params['comments'] = this.updateForm.value.comments;
-      this._service.updateInvoiceStatus(params).subscribe(res => {
+      this._Service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
           this.updateForm.reset();
           this.showBasicDialog(false);
-          this.getStudentInvoiceData(this.StudentInvoiceId);
+          this.getSchoolsInvoiceData(this.SchoolInvoiceId);
         }
       });
     }
   }
+
   viewPreviousInvoices(data: any) {
     console.log('previous invoice  info', data);
     var params = new HttpParams().set('student_invoice_id', data.student_invoice_id);
-    this._service.getStudentsView(params).subscribe(res => {
+    this._Service.getStudentsView(params).subscribe(res => {
       if (res.status) {
-        this.studentInvoiceObj = res.data.data[0];
+        this.schoolInvoiceObj = res.data.data[0];
         this.dueDate = res.data.due_date;
         this.paidDate = res.data.paid_date;
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);

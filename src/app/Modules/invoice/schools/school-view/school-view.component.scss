@@ -1,0 +1,205 @@
+.student-view-list{
+    .trainers-text span {
+        font-size: 14px;
+        font-weight: 400;
+        color: #303030;
+        line-height: 22px;
+    }
+ .schools-text span {
+        font-size: 14px;
+        font-weight: 400;
+        color: #303030;
+        line-height: 22px;
+    }
+   .students-text span {
+        font-size: 17px;
+    }
+}
+.franchise-name{
+    width: 1% !important;
+    span {
+        font-weight: bold;
+        color: #e87a26;
+        line-height: 22px;
+        font-size: 14px;
+    }
+}
+.status-edit{
+    display: flex;
+    align-items: center;
+    button{
+        color: #e87a26;
+        border: none;
+        background: no-repeat;
+        font-size: 18px;
+        line-height: 16px;
+        margin-left: 5px;
+        &:focus{
+            outline: none;
+        }
+    }
+} 
+.status-greentext{
+    background: #048e1b;
+    color: #fff !important;
+    padding: 0px 5px;
+    width: 55px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 13px !important;
+}
+.status-redtext{
+    background: #ff0000;
+    color: #fff !important;
+    padding: 0px 5px;
+    width: 60px;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 13px !important;
+}
+.ticket-view-content{
+    margin-top: 15px;
+    border: 1px solid #cccccc;
+    background-color: #ffffff;
+    padding: 15px 15px;
+    clear: both;
+}
+.history-view{
+    list-style: none;
+    display: flex;
+    padding: 0;
+    .lastseen-date{
+        &:after{
+            content: '';
+            position: absolute;
+            background: #f39751;
+            height: 100%;
+            width: 2px;
+            top: 0;
+            left: 44px;
+        }
+        div{
+            background-color: #f39751;
+            color: #ffffff;
+            padding: 5px;
+            width: 60px;
+            font-size: 14px;
+            text-align: center;
+            border-radius: 4px;
+            z-index: 1;
+            position: relative;
+        
+        }
+      
+    }
+    .history-list{
+        list-style: none;
+        padding-left: 20px;
+        width: 100%;
+        li{
+            background-color: #eeeeee;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    }
+    .name-highlight{
+        font-style: italic;
+    }
+}
+.ticket-history{
+    margin-top: 15px;
+}
+.ticket-heading{
+    margin: 0px 15px 10px;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    font-size: 15px;
+    padding-top: 5px;
+    font-weight: 500;
+}
+.attachment-img{
+    display: flex;
+    align-items: center;
+    div{
+        width: 60px;
+        height: 60px;
+        margin: 5px;
+        border: 1px solid #ccc;
+        padding: 5px;
+        border-radius: 4px;
+        img{
+            width: 100%;
+        }
+    }
+}
+.normal-text{
+    color: #303030 !important;
+    font-size: 14px !important;
+    font-weight: 400 !important;
+}
+.green-text{
+    color: #048e1b;
+    font-size: 14px;
+
+}
+.red-text{
+    color: #ff0000;
+    font-size: 14px;
+}
+.history-attachment-img{
+    display: flex;
+    align-items: center;
+    div{
+        width: 30px;
+        height: 30px;
+        margin: 2px;
+        border: 1px solid #ccc;
+        padding: 3px;
+        border-radius: 4px;
+        img{
+            width: 100%;
+        }
+    }
+}
+.status-div{
+   width: 0.4% !important;
+}
+.franchise-name {
+    width: 15% !important;
+}
+.payment-text{
+    padding-left: 10px;
+    // span{
+    //     font-size: 20px;
+    //     font-weight: bold;
+    //     color: #e87a26;
+    //     line-height: 22px;
+    // }
+}
+.invoice-download{
+    a{
+        color: #303030;
+        &:hover{
+          color: #e87a26;
+        }
+        i{
+            top: 3px;
+            position: relative;
+            padding-left: 5px;
+        }
+    }
+   
+}
+// .view-page .custom-view-list .custom-view-div {
+//     width: 0%;
+//     padding-right: 15px;
+// }
+.custom-block{
+    width: 100% !important; 
+    border-right: none !important;
+}
+.franchise-name{
+    width: 1% !important;
+}

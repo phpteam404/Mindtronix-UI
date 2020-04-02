@@ -1,0 +1,71 @@
+<div class="main-content">
+    <div class="custom-form">
+        <h4 class="custom-form-heading">Generate Invoice</h4>
+        <div class="custom-form-content">
+            <form [formGroup]="createForm" (ngSubmit)="submit()">
+                <div class="row">
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'schools.schoolName'|translate}} <span>*</span></label>
+                            <p-dropdown [options]="schools" formControlName="school_id" filter="true" placeholder="{{'placeholder.schoolName'|translate}}" itemSize="30"
+                                name="name" optionLabel="label" required></p-dropdown>
+                            <div class="invalid-feedback"
+                                *ngIf="createForm.controls.school_id.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.schoolName'|translate}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label> {{'placeholder.description'|translate}} </label>
+                            <input pinputtext placeholder="{{'placeholder.description'|translate}}" 
+                                formControlName="school_invoice_description" name="school_invoice_description" type="text">
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'invoices.view.schoolInvoiceId'|translate}} </label>
+                            <input pinputtext placeholder="{{'placeholder.description'|translate}}" 
+                                formControlName="school_manual_invoice_id" name="school_manual_invoice_id" type="text">
+                            </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label> {{'invoices.view.amount'|translate}} <span>*</span></label>
+                            <input pinputtext placeholder="{{'placeholder.amount'|translate}}" 
+                                    formControlName="amount" name="amount" type="text" required>
+                            <div class="invalid-feedback"
+                                    *ngIf="createForm.controls.amount.invalid && submitted!=null && !submitted"
+                                    [ngClass]=" 'error'">{{'errorMessages.amountReq'|translate}}
+                            </div> 
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'fee.tax'|translate}} (%)</label>
+                            <div class="ui-inputgroup">
+                                <input pinputtext type="text" pKeyFilter="num" currencyMask 
+                                        [maxlength]="5" placeholder="{{'fee.tax'|translate}}" formControlName="tax" name="tax">
+                                <span class="ui-inputgroup-addon">%</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <div class="form-group">
+                            <label>{{'fee.discount'|translate}} (%)</label>
+                            <div class="ui-inputgroup">
+                                <input pinputtext type="text" pKeyFilter="num" currencyMask 
+                                        [maxlength]="5" placeholder="{{'fee.discount'|translate}}" formControlName="discount" name="discount">
+                                <span class="ui-inputgroup-addon">%</span> 
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 text-right custom-btn">
+                        <button pButton type="submit" label="Generate"  class="btn-warning mr-2"></button> 
+                        <button pButton type="button" label="{{'buttons.cancel'|translate}}" (click)="goToList()" class="btn-default"></button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

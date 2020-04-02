@@ -364,14 +364,24 @@ export class ViewDigitalContentComponent implements OnInit {
   video : any;
   player : any;
   reframed : Boolean = false;
+  loadVideo : boolean = false;
   getVideoId(url){
     var regex = new RegExp(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
     var matches = regex.exec(url);
-    console.log(matches);
+    // console.log(matches);
     var videoId = matches[5];
     return videoId;
   }
-  previewAttachment(data:any){  
+  closePreview(){
+    console.log("******closed");
+    //window['onYouTubeIframeAPIReady'] = () => {};
+    //window['ÝT'] = undefined;
+    this.onPlayerStateChange({'target': 'Y', 'data': 2});
+    //document.getElementById( 'player' ).innerHTML='';
+     var ele = document.getElementById('player');
+     ele.remove();
+  }
+  previewAttachment(data:any){
     console.log('attachments info',data);
     this.previewFile =true;
     this.previewUrl =data.document_url;
@@ -381,13 +391,22 @@ export class ViewDigitalContentComponent implements OnInit {
       this.format = data.module_type.toString().toLowerCase();
       this.video = '';
       this.video = this.previewUrl;
-      if(window['YT']){
-        console.log(this.player);
-        if(this.player.loadVideoById)
+     /* if(window['YT']){
+        console.log('---1---');
+        if(this.player.loadVideoById){
           this.player.loadVideoById(this.video, 0, "default");
-        else this.loadPlayerWithId();
-        this.startVideo(this.video);
-      }else this.loadPlayerWithId();
+          this.startVideo(this.video);
+          console.log('---12---');
+        } else {
+          this.loadPlayerWithId();
+          this.startVideo(this.video);
+          console.log('---22---');
+        }
+        console.log('---2---');
+      }else */{
+        console.log('---3---');
+        this.loadPlayerWithId();
+      }
       
       // document.body.appendChild(tag);
     }     
@@ -395,65 +414,76 @@ export class ViewDigitalContentComponent implements OnInit {
   } 
   /* youtube plyer code starts*/
   loadPlayerWithId(){
-    var tag = document.createElement('script');
-    tag.src = "https://www.youtube.com/iframe_api";
-    var firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-    window['onYouTubeIframeAPIReady'] = () => {
+    setTimeout (() => {
+      this.loadVideo = true;
+      var tag = document.createElement('script');
+      tag.id = "tube";
+      tag.src = "https://www.youtube.com/iframe_api";
+      var firstScriptTag = document.getElementsByTagName('script')[0];
+      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+      console.log('---4---');
+      window['onYouTubeIframeAPIReady'] = () => {
+        this.YT = window['YT'];
+        this.reframed = false;
+        this.player = new window['YT'].Player('player', {
+          videoId: this.previewUrl,
+          playerVars: {
+            autoplay:0,
+          },
+          events: {
+            'onError': this.onPlayerError.bind(this),
+            'onReady': (e) => {
+              if (!this.reframed) {
+                console.log('---5---');
+                this.reframed = true;                
+                e.target.loadVideoById(this.previewUrl,0,'default');
+                this.startVideo(this.previewUrl);
+              // reframe(e.target.a);
+              }
+            }
+          }
+        });
+      };
+    },100);
+    //window['onYouTubeIframeAPIReady'] = () => this.startVideo(null);
+  }
+  startVideo(val){
+    setTimeout (() => {
+      console.log('---6---');
       this.YT = window['YT'];
       this.reframed = false;
       this.player = new window['YT'].Player('player', {
-        videoId: this.previewUrl,
+        videoId: (val)?this.previewUrl:this.video,
         playerVars: {
           autoplay:0,
+          modestbranding: 0,
+          controls: 0,
+          disablekb: 0,
+          rel: 0,
+          showinfo: 0,
+          fs: 0,
+          playsinline: 1
         },
-        events: {
+        events:{
           'onStateChange': this.onPlayerStateChange.bind(this),
           'onError': this.onPlayerError.bind(this),
           'onReady': (e) => {
             if (!this.reframed) {
               this.reframed = true;
               e.target.loadVideoById(this.previewUrl,0,'default');
-             // reframe(e.target.a);
             }
           }
+          // 'onReady' : this.onPlayerReady.bind(this),
         }
       });
-    };
-    //window['onYouTubeIframeAPIReady'] = () => this.startVideo(null);
-  }
-  startVideo(val){
-    this.YT = window['YT'];
-    this.reframed = false;
-    this.player = new window['YT'].Player('player', {
-      videoId: (val)?this.previewUrl:this.video,
-      playerVars: {
-        autoplay:0,
-        modestbranding: 1,
-        controls: 1,
-        disablekb: 1,
-        rel: 0,
-        showinfo: 0,
-        fs: 0,
-        playsinline: 1
-      },
-      events:{
-        'onStateChange': this.onPlayerStateChange.bind(this),
-        'onError': this.onPlayerError.bind(this),
-        'onReady': (e) => {
-          if (!this.reframed) {
-            this.reframed = true;
-            e.target.loadVideoById(this.previewUrl,0,'default');
-          }
-        }
-        // 'onReady' : this.onPlayerReady.bind(this),
-      }
-    });
+    },500);
   }
   onPlayerReady(event){
+    console.log('---7---');
     event.target.playVideo();
   }
   onPlayerStateChange(event) {
+    console.log('---8---');
     console.log(event)
     /*switch (event.data) {
       case window['YT'].PlayerState.PLAYING:
@@ -474,6 +504,7 @@ export class ViewDigitalContentComponent implements OnInit {
     };*/
   };
   cleanTime(){
+    console.log('---9---');
     return Math.round(this.player.getCurrentTime());
   }
   onPlayerError(event){

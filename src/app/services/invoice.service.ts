@@ -23,4 +23,13 @@ export class InvoiceService {
   generateStudentInvoice(params){
     return this.clientHttp.get('Invoice/generateStudentInvoice',params);
   }
+  generateSchoolInvoice(params){
+    return this.clientHttp.post('Invoice/generateSchoolInvoice',params);
+  }
+  schoolsInvoiceList(params){
+    return this.clientHttp.get('Invoice/schoolInvoiceList',params);
+  }
+  getSchoolInvoiceInfo(params){
+    return this.clientHttp.get('Invoice/schoolInvoiceList',params);
+  }
 }

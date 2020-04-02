@@ -67,6 +67,14 @@ const routes: Routes = [
         data: {
           breadcrumb: 'Online Users Invoice'
         }
+      },
+      {
+        path:'school_invoice',
+        loadChildren: () =>import ('../../Modules/invoice/schools/school.module').then(m=>m.SchoolModule),
+        canActivate:[AuthGuard],
+        data:{
+          breadcrumb:'School Invoice'
+        }
       }
   ];
 
