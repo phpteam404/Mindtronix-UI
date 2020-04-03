@@ -141,6 +141,10 @@ export class ViewDigitalContentComponent implements OnInit {
     this.getMasterDropdown('status');
     this.getFranchiseList();
     this.getSchoolsList();
+    const tag = document.createElement('script');
+   // this.playVideo("XqZsoesa55w");
+    tag.src = "https://www.youtube.com/iframe_api";
+    document.body.appendChild(tag);
   }
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
@@ -377,13 +381,13 @@ export class ViewDigitalContentComponent implements OnInit {
   closePreview(){
     //window['onYouTubeIframeAPIReady'] = () => {};
     //window['ÝT'] = undefined;
-    this.onPlayerStateChange({'target': 'Y', 'data': 2});
+    // this.onPlayerStateChange({'target': 'Y', 'data': 2});
     //document.getElementById( 'player' ).innerHTML='';
-     var ele = document.getElementById('player');
-     ele.remove();
+    //  var ele = document.getElementById('player');
+    //  ele.remove();
   }
   previewAttachment(data:any){
-    this.previewFile =true;
+    
     this.previewUrl =data.document_url;
     if(data.module_type == 'url'){
       var videoId = this.getVideoId(data.document_name); // kJ9g_-p3dLA
@@ -391,26 +395,13 @@ export class ViewDigitalContentComponent implements OnInit {
       this.format = data.module_type.toString().toLowerCase();
       this.video = '';
       this.video = this.previewUrl;
-     /* if(window['YT']){
-        console.log('---1---');
-        if(this.player.loadVideoById){
-          this.player.loadVideoById(this.video, 0, "default");
-          this.startVideo(this.video);
-          console.log('---12---');
-        } else {
-          this.loadPlayerWithId();
-          this.startVideo(this.video);
-          console.log('---22---');
-        }
-        console.log('---2---');
-      }else */{
-        console.log('---3---');
-        this.loadPlayerWithId();
-      }
-      
-      // document.body.appendChild(tag);
-    }     
-    else this.format = data.type.toString().toLowerCase();
+      this.previewFile = false;
+     // this._router.navigate(['/orders'],{queryParams:{'id':this.video}});
+    } 
+    else{
+      this.previewFile =true;
+      this.format = data.type.toString().toLowerCase();
+    } 
   } 
   /* youtube plyer code starts*/
   loadPlayerWithId(){

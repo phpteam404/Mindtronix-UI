@@ -31,7 +31,7 @@
                     <div class="payment-text">{{'invoices.view.status'|translate}}
                         <!-- <span class="bg-brown">{{schoolInvoiceObj.status}}</span>  -->
                          <span [ngClass]="[(schoolInvoiceObj.status==='Paid') ? 'bg-brown' : '',
-                                    (schoolInvoiceObj.status==='OverDue')? 'bg-gold' : '',
+                                    (schoolInvoiceObj.status==='Overdue')? 'bg-gold' : '',
                                     (schoolInvoiceObj.status==='Due')? 'bg-orange' : '',
                                     (schoolInvoiceObj.status==='Invoiced')? 'bg-darkblue' : '']">
                              {{schoolInvoiceObj.status}}
@@ -117,22 +117,23 @@
                 <div class="form-group">
                     <label>{{'franchise.add.status'|translate}} <span>*</span></label>
                     <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
-                    name="status" optionLabel="label" formControlName="status" [showClear]="true" required></p-dropdown>
+                    name="status" optionLabel="label" formControlName="status" [showClear]="true" 
+                    (onChange)="getFields()" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
                         [ngClass]=" 'error'"> {{'errorMessages.status'|translate}}
                    </div>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12" *ngIf="enableField">
                 <div class="form-group">
                     <label>{{'invoices.view.paymentType'|translate}} </label>
                     <p-dropdown [options]="type" formControlName="payment_type" placeholder="Select Payment Type" itemSize="30"
-                        optionLabel="label" [showclear]="true" name="payment_type">
+                        optionLabel="label" [showclear]="true"  name="payment_type">
                     </p-dropdown>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12" *ngIf="enableField">
                 <div class="form-group">
                     <label>{{'invoices.view.paidAmount'|translate}} </label>
                     <div class="ui-inputgroup">

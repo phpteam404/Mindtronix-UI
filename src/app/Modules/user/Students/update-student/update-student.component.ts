@@ -168,16 +168,42 @@ export class UpdateStudentComponent implements OnInit {
   }
 
   getNationality(){ return this.studentForm.value.nationality.value;}
-  getMotherTongue(){ return this.studentForm.value.mother_tongue.value;}
-  getFeeStructure(){ return this.studentForm.value.fee_structure.value;}
-  getRelation(){ return this.studentForm.value.relation.value;}
-  getSchool() { 
+  getMotherTongue()
+  { 
+    if(this.studentForm.value.mother_tongue)
+       return this.studentForm.value.mother_tongue.value;
+    else return null;
+  }
+  getFeeStructure()
+  { 
+     if(this.studentForm.value.fee_structure)
+        return this.studentForm.value.fee_structure.value;
+     else return null;
+  }
+  getRelation()
+  { 
+    if(this.studentForm.value.relation)
+      return this.studentForm.value.relation.value;
+    else return null;
+  }
+  getSchool() 
+  { 
     if(this.studentForm.value.school_id)
       return this.studentForm.value.school_id.value;
-    else null;
+    else return null;
   }
-  getGrade(){ return this.studentForm.value.grade.value;}
-  getBloodGroup(){ return this.studentForm.value.blood_group.value;}
+  getGrade()
+  { 
+    if(this.studentForm.value.grade)
+      return this.studentForm.value.grade.value;
+    else return null;
+  }
+  getBloodGroup()
+  { 
+    if(this.studentForm.value.blood_group)
+       return this.studentForm.value.blood_group.value;
+    else return null;
+  }
   getStatus(){ return this.studentForm.value.status.value;}
 
   submit(): any {

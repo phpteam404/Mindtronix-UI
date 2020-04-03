@@ -14,6 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { MatFileUploadModule } from 'mat-file-upload';
 import { ViewTicketComponent } from './view-ticket/view-ticket.component';
 import { DialogModule } from 'primeng/dialog';
+import { GrantModule } from '../grant/grant/grant.module';
 @NgModule({
   declarations: [
     TicketListComponent,
@@ -33,7 +34,8 @@ import { DialogModule } from 'primeng/dialog';
     MatFileUploadModule,
     FormsModule,
     BasicModule.forRoot(),
-    DialogModule
+    DialogModule,
+    GrantModule
   ],
   providers: [DatePipe]
 })

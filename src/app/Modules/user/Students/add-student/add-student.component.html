@@ -179,7 +179,7 @@
                                     <label>{{'student.add.inSchoolProgram'|translate}} </label>
                                     <p-dropdown [options]="schools" formControlName="school_id" filter="true"
                                         placeholder="{{'placeholder.schoolName'|translate}}" itemSize="30"
-                                        optionLabel="label" name="school_id"></p-dropdown>
+                                        optionLabel="label" name="school_id" [showClear]="true"></p-dropdown>
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" >
@@ -209,7 +209,7 @@
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
                                     <label>{{'student.add.bloodGroup'|translate}} </label>
-                                    <p-dropdown [options]="blood_group" formControlName="blood_group"
+                                    <p-dropdown [options]="blood_group" formControlName="blood_group"[showClear]="true"
                                         placeholder="{{'placeholder.bloodGroup'|translate}}" itemSize="30"
                                         optionLabel="label" name="blood_group"></p-dropdown>
                                 </div>
@@ -234,7 +234,7 @@
                                 <div class="form-group">
                                     <label>{{'student.add.feeStructure'|translate}}</label>
                                     <p-dropdown [options]="feeTerm" formControlName="fee_structure" 
-                                         filter="true"  (onChange) ="getSelectedFeeInfo()"
+                                         filter="true"  (onChange) ="getSelectedFeeInfo()" [showClear]="true"
                                         placeholder="{{'placeholder.feeStructure'|translate}}" itemSize="30"
                                         optionLabel="label" name="fee_structure" ></p-dropdown>
                                 </div>

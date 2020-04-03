@@ -7,6 +7,8 @@ import { AddUserComponent } from './add-user/add-user.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { BasicModule } from '../../basic/basic.module';
 import { ReactiveFormsModule } from '@angular/forms';
+import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
+import { GrantModule } from '../../grant/grant/grant.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     AllUsersRoutingModule,
     ReactiveFormsModule,
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    GrantModule
   ]
 })
 export class AllUsersModule { }

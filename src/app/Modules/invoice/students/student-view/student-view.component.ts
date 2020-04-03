@@ -29,6 +29,9 @@ export class StudentViewComponent implements OnInit {
   loading: boolean;
   paidDate: any;
   invoiceId: any;
+  amountMode:any;
+  enableField:boolean;
+  statusUpdate:any;
   submitted = null;
   constructor(private _ar: ActivatedRoute,
     private _router: Router,
@@ -47,7 +50,8 @@ export class StudentViewComponent implements OnInit {
   showBasicDialog(flag) {
     this.displayBasic = flag;
     this.submitted = null;
-    this.updateForm.reset();
+    if(!flag)
+      this.updateForm.reset();
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -57,6 +61,7 @@ export class StudentViewComponent implements OnInit {
     });
     this.getMasterDropdown('invoice_status');
     this.getMasterDropdown('invoice_payment_mode');
+    this.getMasterDropdown('invoice_update');
   }
 
 
@@ -71,6 +76,7 @@ export class StudentViewComponent implements OnInit {
     var params = new HttpParams()
       .set('master_key', masterKey)
       .set('dropdown', "true")
+      .set('invoice_update' ,"true");
     return this._mservice.getMasterChilds(params).subscribe(res => {
       if (res.status) {
         if (masterKey == 'invoice_status')
@@ -113,8 +119,14 @@ export class StudentViewComponent implements OnInit {
   getPaymentType() { 
     if(this.updateForm.value.payment_type)
       return this.updateForm.value.payment_type.value;
-    else null;
+    else return null;
   }
+  getAmount() { 
+    if(this.updateForm.value.amount)
+      return this.updateForm.value.amount;
+    else return null;
+  }
+
 
   updateStatus(): any {
     this.submitted = false;
@@ -123,8 +135,10 @@ export class StudentViewComponent implements OnInit {
       var params = {};
       params['student_invoice_id'] = this.StudentInvoiceId;
       params['status'] = this.getStatus();
-      params['payment_type'] = this.getPaymentType();
-      params['paid_amount'] =this.updateForm.value.amount;
+      if(this.getPaymentType())
+        params['payment_type'] = this.getPaymentType();
+      if(this.getAmount())
+        params['paid_amount'] = this.getAmount();
       params['comments'] = this.updateForm.value.comments;
       this._service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
@@ -147,5 +161,20 @@ export class StudentViewComponent implements OnInit {
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
+  }
+
+  getPaidAmount(){
+    this.updateForm.controls['amount'].setValue(this.studentInvoiceObj.amount);
+  }
+
+  getFields(){
+    this.amountMode =this.updateForm.value.status.value;
+    if(this.amountMode =='97'){
+      this.getPaidAmount();
+      this.enableField = true;
+    }
+    else{
+      this.enableField =false;
+    }
   }
 }

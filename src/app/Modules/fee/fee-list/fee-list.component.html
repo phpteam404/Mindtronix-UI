@@ -9,7 +9,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="{{'fee.createfee'|translate}}" class="btn-warning" (click)="addNewFee($event)"></button>
+                    <button *appIsGranted="'create'" pButton type="button" label="{{'fee.createfee'|translate}}" class="btn-warning" (click)="addNewFee($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -39,7 +39,7 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 6"  class="d-flex action-color">
-                            <a href="javascript:;" (click)="updateFee(rowData)" title="{{'title.edit'|translate}}">
+                            <a *appIsGranted="'edit'" href="javascript:;" (click)="updateFee(rowData)" title="{{'title.edit'|translate}}">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a>
                             <!-- <a href="javascript:;" (click)="deleteFee(rowData)" title="Delete">

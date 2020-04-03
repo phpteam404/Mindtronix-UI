@@ -103,7 +103,6 @@
         </div>
     </div> -->
     <div class="row view-page">
-
         <div class="col-md-9 col-12">
             <div class="custom-view-list student-view-list">
                 <div class="custom-view-div franchise-name">
@@ -124,19 +123,20 @@
                         *ngIf="studentObj.last_invoice_amount=='' || studentObj.last_invoice_amount==null || studentObj.last_invoice_amount==0"
                         >{{'student.view.lastInvoiceAmount'|translate}}
                     </div>
-                    <button pButton type="button"
-                        *ngIf="(studentObj.last_invoice_amount=='' || 
-                                studentObj.last_invoice_amount==null || 
-                                studentObj.last_invoice_amount==0) && 
-                                (studentObj.school_id == '0' && studentObj.franchise_fee_id != '0')"
-                        label="Generate Invoice" class="btn-warning generated-btn" 
-                        (click)="generateInvoice(studentObj)">
-                 </button>
-                 <!-- <button pButton type="button"
+                    <span *ngIf="(studentObj.last_invoice_amount=='' || 
+                                    studentObj.last_invoice_amount==null || 
+                                    studentObj.last_invoice_amount==0) && 
+                                    (studentObj.school_id == '0' && studentObj.franchise_fee_id != '0')">
+                        <button pButton type="button" *appIsGranted="'edit'"
+                                label="Generate Invoice" class="btn-warning generated-btn" 
+                            (click)="generateInvoice(studentObj)">
+                        </button>
+                    </span>                    
+                <!-- <button pButton type="button"
                         *ngIf="(studentObj.school_id==0 && studentObj.last_invoice_amount==0 && studentObj.franchise_fee_id !=0)"
                         label="Generate Invoice" class="btn-warning generated-btn"
                         (click)="generateInvoice(studentObj)">
-                </button>                     -->
+                    </button>-->
                 </div>
                 <div class="custom-view-div">
                     <div class="trainers-text">{{'student.view.lastLogin'|translate}}
@@ -150,7 +150,6 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                   
                                     <div class="col-md-4 col-12">
                                         <label>{{'student.view.studentName'|translate}}</label>
                                         <p>{{studentObj.student_name}}</p>
@@ -191,7 +190,6 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                   
                                     <div class="col-md-4 col-12">
                                         <label>{{'student.add.parentName'|translate}}</label>
                                         <p>{{studentObj.name_of_parent}}</p>
@@ -228,7 +226,6 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                   
                                     <div class="col-md-4 col-12" *ngIf="studentObj.school_id !=0">
                                         <label>{{'student.view.inSchoolName'|translate}}</label>
                                         <p>{{studentObj.school_name}}</p>
@@ -249,7 +246,6 @@
                         <div class="custom-view">
                             <div class="custom-view-content">
                                 <div class="row">
-                                   
                                     <div class="col-md-4 col-12">
                                         <label>{{'student.add.bloodGroup'|translate}}</label>
                                         <p>{{studentObj.blood_group}}</p>

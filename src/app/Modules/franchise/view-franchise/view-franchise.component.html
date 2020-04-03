@@ -130,7 +130,7 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 btn-edit">
-                                        <a href="javascript:;" class="btn" title="{{'title.edit'|translate}}" (click)="showBasicDialog()">
+                                        <a *appIsGranted="'edit'" href="javascript:;" class="btn" title="{{'title.edit'|translate}}" (click)="showBasicDialog()">
                                             <i class="icon icon-edit-pencil"></i>
                                         </a>
                                     </div>
@@ -195,7 +195,7 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" title="{{'title.addContact'|translate}}" class="btn" (click)="showBasicDialog1(true)">
+                                        <button *appIsGranted="'edit'" type="button" title="{{'title.addContact'|translate}}" class="btn" (click)="showBasicDialog1(true)">
                                             <i class="icon icon-plus"></i>
                                         </button>
                                     </div>
@@ -215,10 +215,10 @@
                                                         <td *ngFor="let col of columns ; let i = index">
                                                             <span *ngIf="i != 4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                                                             <span *ngIf="i == 4 && isEnabled()"  class="d-flex action-color">
-                                                                <a class="mr-2" href="javascript:;" (click)="editContact(rowData)">
+                                                                <a *appIsGranted="'edit'" class="mr-2" href="javascript:;" (click)="editContact(rowData)">
                                                                     <span class="icon icon-edit-pencil" title="Edit"></span>
                                                                 </a>
-                                                                <a href="javascript:;" (click)="deleteFranchiseContact(rowData)">
+                                                                <a *appIsGranted="'delete'" href="javascript:;" (click)="deleteFranchiseContact(rowData)">
                                                                     <span class="icon icon-delete" title="Delete"></span>
                                                                 </a>
                                                             </span>
@@ -247,7 +247,7 @@
                             <div class="custom-view-content">
                                 <div class="row">
                                     <div class="col-12 custom-btn-edit" *ngIf="isEnabled()">
-                                        <button type="button" class="btn" title="{{'title.addFeeStructure'|translate}}" (click)="showBasicDialog2()">
+                                        <button *appIsGranted="'edit'" type="button" class="btn" title="{{'title.addFeeStructure'|translate}}" (click)="showBasicDialog2()">
                                             <i class="icon icon-plus"></i>
                                         </button>
                                     </div>
@@ -288,7 +288,7 @@
                                                                         <span class="icon icon-delete" title="{{'title.delete'|translate}}"></span>
                                                                     </a> -->
                                                                 <ui-switch uncheckedLabel="No" checkedLabel="Yes" size="small" 
-                                                                    [checked]="(rowData['status']==1)?1:0"
+                                                                    [checked]="(rowData['status']==1)?1:0" *appIsGranted="'edit'"
                                                                     [(ngModel)]="rowData['status']"
                                                                     (change)="updateFeeStatus(rowData)">
                                                                 </ui-switch>

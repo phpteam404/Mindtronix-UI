@@ -17,7 +17,16 @@
                     <div class="col-md-12 col-12">
                         <div class="form-group">
                             <label>{{'digitalContent.add.contentDescription'|translate}}</label>
-                            <textarea pInputTextarea placeholder="{{'digitalContent.add.contentDescription'|translate}}" formControlName="description" name="Content Description"></textarea>
+                            <p-editor formControlName="description" [style]="{'height':'120px'}">
+                                <!-- <p-header>
+                                    <span class="ql-formats">
+                                        <button class="ql-bold" aria-label="Bold"></button>
+                                        <button class="ql-italic" aria-label="Italic"></button>
+                                        <button class="ql-underline" aria-label="Underline"></button>
+                                    </span>
+                                </p-header> -->
+                            </p-editor>
+                            <!-- <textarea pInputTextarea placeholder="{{'digitalContent.add.contentDescription'|translate}}" formControlName="description" name="Content Description"></textarea> -->
                         </div>
                     </div>
                     <div class="col-md-4 col-12">

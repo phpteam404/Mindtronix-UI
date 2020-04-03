@@ -33,6 +33,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { UiSwitchModule } from 'ngx-ui-switch';
 // import { DatexPipe } from 'src/app/customPipesDirectives/_pipe/datex.pipe';
 import { NgxCurrencyModule } from "ngx-currency";
+import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
 export const customCurrencyMaskConfig = {
   align: "left",
   allowNegative: false,

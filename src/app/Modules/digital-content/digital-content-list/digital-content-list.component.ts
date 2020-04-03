@@ -44,6 +44,7 @@ export class DigitalContentListComponent implements OnInit {
     var sortOrder= (event.sortOrder==1) ? "ASC" : "DESC";
     var params = new HttpParams()
       .set('start', event.first+'')
+      //.set('search_key','Demo')
       .set('number', event.rows+'');
     if (event.sortField) {
       params = params.set('sort', event.sortField);

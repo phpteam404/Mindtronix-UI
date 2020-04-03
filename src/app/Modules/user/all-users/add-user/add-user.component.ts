@@ -140,7 +140,7 @@ export class AddUserComponent implements OnInit {
   }
   roleBasedFranchise(){
     var roleId =this.getuserRole();
-    if(Number(roleId)==5) {
+    if(Number(roleId)==10 || Number(roleId)==11 ||Number(roleId)==12) {
       this.addUserForm.get('franchise_id').clearValidators();      
       this.addUserForm.controls['franchise_id'].updateValueAndValidity();
       this.enableFranchise=false;

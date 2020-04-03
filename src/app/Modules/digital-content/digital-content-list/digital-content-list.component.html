@@ -9,7 +9,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="{{'digitalContent.createContent' | translate}}" class="btn-warning" (click)="addNewContent($event)"></button>
+                    <button pButton *appIsGranted="'create'" type="button" label="{{'digitalContent.createContent' | translate}}" class="btn-warning" (click)="addNewContent($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>
@@ -39,12 +39,12 @@
                                               (rowData[col.field]==='Inactive')? 'bg-gold' : '']"
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
-                        <span *ngIf="i == (columns.length-1)"  class="d-flex action-color">
+                        <span *ngIf="i == (columns.length-1) && rowData['status'] != 'Inactive'" class="d-flex action-color" id="$index">
                             <!-- <a href="javascript:;" (click)="viewContent(rowData)" title="{{'title.edit'|translate}}">
                                 <span class="icon icon-edit-pencil wd-30"></span>
                             </a> -->
-                            <a href="javascript:;" (click)="DeleteDigitalContent(rowData)" 
-                                *ngIf="rowData['status'] != 'Inactive'" title="{{'title.delete'|translate}}">
+                            <a *appIsGranted="'delete'" href="javascript:;" (click)="DeleteDigitalContent(rowData)"
+                                 title="{{'title.delete'|translate}}">
                                 <span class="icon icon-delete wd-30"></span>
                             </a>
                         </span>

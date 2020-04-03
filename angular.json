@@ -40,9 +40,11 @@
               "node_modules/primeng/resources/primeng.min.css",
               "node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/assets/css/demo.css",
-              "src/assets/css/custom.css"
+              "src/assets/css/custom.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/quill/dist/quill.js"]
           },
           "configurations": {
             "production": {
@@ -117,9 +119,11 @@
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/ngx-ui-switch/ui-switch.component.css",
               "src/assets/css/demo.css",
-              "src/assets/css/custom.css"
+              "src/assets/css/custom.css",
+              "node_modules/quill/dist/quill.core.css",
+              "node_modules/quill/dist/quill.snow.css"
             ],
-            "scripts": []
+            "scripts": ["node_modules/quill/dist/quill.js"]
           }
         },
         "lint": {

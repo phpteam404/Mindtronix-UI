@@ -14,6 +14,9 @@ import { DialogModule } from 'primeng/dialog';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ChipsModule } from 'primeng/chips';
 import { OverlayPanelModule } from 'primeng/overlaypanel';
+import { EditorModule } from 'primeng/editor';
+import { GrantModule } from '../grant/grant/grant.module';
+import {YouTubePlayerModule} from '@angular/youtube-player';
 @NgModule({
   declarations: [
     DigitalContentListComponent,
@@ -32,7 +35,10 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
     DialogModule,
     MultiSelectModule,
     ChipsModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    EditorModule,
+    GrantModule,
+    YouTubePlayerModule
   ]
 })
 export class DigitalContentModule { }

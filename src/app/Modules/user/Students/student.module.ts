@@ -18,6 +18,7 @@ import { BasicModule } from '../../basic/basic.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { ViewStudentComponent } from './view-student/view-student.component';
 import { TabViewModule } from 'primeng/tabview';
+import { GrantModule } from '../../grant/grant/grant.module';
 
 @NgModule({
   declarations: [
@@ -40,7 +41,8 @@ import { TabViewModule } from 'primeng/tabview';
     BasicModule.forRoot(),
     ReactiveFormsModule,
     DropdownModule,
-    TabViewModule
+    TabViewModule,
+    GrantModule
   ],
   providers: [DatePipe]
 })

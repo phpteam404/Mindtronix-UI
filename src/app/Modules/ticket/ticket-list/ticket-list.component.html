@@ -10,7 +10,7 @@
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="{{'ticket.createTicket'|translate}}" class="btn-warning" (click)="AddNewTicket($event)"></button>
+                    <button *appIsGranted="'create'" pButton type="button" label="{{'ticket.createTicket'|translate}}" class="btn-warning" (click)="AddNewTicket($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>

@@ -219,7 +219,7 @@
             </div>
         </div>
         <div class="col-md-3 col-12 pl-0">
-            <div class="custom-static-view custom-minheight text-center">
+            <div class="custom-static-view custom-minheight text-center" *appIsGranted="'edit'">
                 <button *ngIf="isClosed" pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Reopen"></button>
                 <button *ngIf="!isClosed" pButton type="submit" class="btn-warning" (click)="updateTicketModal(true)" label="Update Ticket"></button>
             </div>

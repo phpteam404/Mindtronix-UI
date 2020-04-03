@@ -48,7 +48,7 @@
                             class="mr-2" style="width:auto;">
                         <i class="fa fa-search"></i> 
                     </div>
-                    <button pButton type="button" label="{{'franchise.create' | translate}}" class="btn-warning" (click)="AddNewFranchise($event)"></button>
+                    <button *appIsGranted="'create'" pButton type="button" label="{{'franchise.create' | translate}}" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div>
             </ng-template>
             <ng-template pTemplate="header" let-columns>

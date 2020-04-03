@@ -77,7 +77,8 @@ export class RoleManagementComponent implements OnInit {
        params['modules']=this.modules;
        this._service.updateRoleAccess(params).subscribe(res=>{
           if(res.status){
-        }
+           // location.reload();
+          }
        });
   }
   

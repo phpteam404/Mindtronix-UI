@@ -24,6 +24,7 @@ import {MultiSelectModule} from 'primeng/multiselect';
 import { TabViewModule } from 'primeng/tabview';
 import { ChartModule } from 'angular-highcharts';
 import { DialogModule } from 'primeng/dialog';
+import { GrantModule } from '../grant/grant/grant.module';
 @NgModule({
   declarations: [
     FranchiseListComponent,
@@ -50,7 +51,8 @@ import { DialogModule } from 'primeng/dialog';
     MultiSelectModule,
     TabViewModule,
     DialogModule,
-    ChartModule
+    ChartModule,
+    GrantModule
   ]
 })
 export class FranchiseModule { }

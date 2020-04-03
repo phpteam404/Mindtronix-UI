@@ -63,17 +63,12 @@
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <!-- <label>{{'users.add.password' |translate}} <span>*</span><i class="icon icon-info-circle" pTooltip="Enter your username Enter your username Enter your username Enter your username Enter your username"></i></label> -->
-                            <label>{{'users.add.password' |translate}}</label>
+                            <label>{{'users.add.password' |translate}} <span>*</span></label>
                             <input pPassword  placeholder="{{'users.add.password' |translate}}" formControlName="password" autocomplete="off" name="password" type="password" required>
-
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
                             </div>
-                            <!-- <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
-                                <div *ngIf="f.password.errors.required">Password is required</div>
-                                <div *ngIf="f.password.errors.Invalid">Password is Invalid</div>
-                            </div> -->
                         </div>
                     </div>
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">

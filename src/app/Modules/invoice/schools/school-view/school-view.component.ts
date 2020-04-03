@@ -30,6 +30,9 @@ export class SchoolViewComponent implements OnInit {
   paidDate: any;
   invoiceId: any;
   schoolsInvoiceId:any;
+  amountMode:any;
+  enableField:boolean;
+  paidAmount:any;
   submitted = null;
   constructor(private _ar: ActivatedRoute,
     private _router: Router,
@@ -48,7 +51,8 @@ export class SchoolViewComponent implements OnInit {
   showBasicDialog(flag) {
     this.displayBasic = flag;
     this.submitted = null;
-    this.updateForm.reset();
+    if(!flag)
+      this.updateForm.reset();
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -57,7 +61,7 @@ export class SchoolViewComponent implements OnInit {
       this.getSchoolsInvoiceData(this.SchoolInvoiceId);
     });
     this.getMasterDropdown('invoice_status');
-    this.getMasterDropdown('invoice_payment_mode');
+    this.getMasterDropdown('invoice_payment_mode'); 
   }
 
   updateForm = new FormGroup({
@@ -72,6 +76,7 @@ export class SchoolViewComponent implements OnInit {
     var params = new HttpParams()
       .set('master_key', masterKey)
       .set('dropdown', "true")
+      .set('invoice_update' ,"true");
     return this._mservice.getMasterChilds(params).subscribe(res => {
       if (res.status) {
         if (masterKey == 'invoice_status')
@@ -115,19 +120,25 @@ export class SchoolViewComponent implements OnInit {
   getPaymentType() { 
     if(this.updateForm.value.payment_type)
       return this.updateForm.value.payment_type.value;
-    else null;
+    else return null;
   }
-
+  getAmount (){
+    if(this.updateForm.value.amount)
+       return this.updateForm.value.amount
+    else
+      return null;
+    }
 
   updateStatus(): any {
     this.submitted = false;
     if (this.updateForm.valid) {
-      console.log('update from value', this.updateForm.value);
       var params = {};
       params['school_invoice_id'] = Number(this.SchoolInvoiceId);
       params['status'] = this.getStatus();
-      params['payment_type'] = this.getPaymentType();
-      params['paid_amount'] =this.updateForm.value.amount;
+      if(this.getAmount())
+        params['paid_amount'] = this.getAmount();
+      if(this.getPaymentType())
+        params['payment_type'] = this.getPaymentType();
       params['comments'] = this.updateForm.value.comments;
       this._Service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
@@ -149,5 +160,22 @@ export class SchoolViewComponent implements OnInit {
         //this._router.navigate(['invoices/school_invoice/view',data.student_name,btoa(data.school_invoice_id)]);
       }
     });
+  }
+
+  getPaidAmount(){
+    this.updateForm.controls['amount'].setValue(this.schoolInvoiceObj.amount);
+  }
+  
+
+  getFields(){
+    this.amountMode =this.updateForm.value.status.value;
+    if(this.amountMode =='97')
+    {
+       this.getPaidAmount();
+       this.enableField = true;
+    }
+    else{
+        this.enableField =false;
+    }
   }
 }

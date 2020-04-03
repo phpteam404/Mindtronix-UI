@@ -41,6 +41,7 @@ import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/stu
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
+import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-f
     DashboardComponent,
     OnlineSubscriptionComponent,
     StudentDashboardComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    // IsGrantedDirective
   ]
 })
 

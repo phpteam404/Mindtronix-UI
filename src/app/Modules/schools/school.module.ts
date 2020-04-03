@@ -12,6 +12,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { BasicModule } from '../basic/basic.module';
+import { GrantModule } from '../grant/grant/grant.module';
 
 @NgModule({
   declarations: [
@@ -31,6 +32,7 @@ import { BasicModule } from '../basic/basic.module';
     InputTextModule,
     InputTextareaModule,
     BasicModule.forRoot(),
+    GrantModule
   ]
 })
 export class SchoolModule { }

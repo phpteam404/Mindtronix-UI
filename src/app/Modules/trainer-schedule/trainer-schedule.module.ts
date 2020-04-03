@@ -13,6 +13,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
 import { ReactiveFormsModule } from '@angular/forms';
+import { GrantModule } from '../grant/grant/grant.module';
 @NgModule({
   declarations: [AddTrainerComponent, TrainerListComponent, UpdateTrainerComponent],
   imports: [
@@ -25,7 +26,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     InputTextareaModule,
     DropdownModule,
     KeyFilterModule,
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    GrantModule
   ],
   providers: [DatePipe]
 })

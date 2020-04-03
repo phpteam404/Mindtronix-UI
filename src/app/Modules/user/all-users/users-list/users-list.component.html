@@ -27,7 +27,7 @@
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <i class="fa fa-search"></i> 
                         </div>
-                        <button pButton type="button" label="{{'users.userCreate'|translate}}" class="btn-warning" (click)="AddNewUser($event)"></button>
+                        <button pButton *appIsGranted="'create'" type="button" label="{{'users.userCreate'|translate}}" class="btn-warning" (click)="AddNewUser($event)"></button>
                     </div>                  
                 </div>
             </ng-template>
@@ -49,8 +49,8 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 6" class="d-flex action-color">
-                            <a href="javascript:;" (click)="editUser(rowData)" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}"></span></a>
-                            <a href="javascript:;" (click)="deleteUser(rowData)"><span class="icon icon-delete" title="{{'title.delete'|translate}}"></span></a>
+                            <a href="javascript:;" (click)="editUser(rowData)" *appIsGranted="'edit'" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}"></span></a>
+                            <a href="javascript:;" (click)="deleteUser(rowData)" *appIsGranted="'delete'"><span class="icon icon-delete" title="{{'title.delete'|translate}}"></span></a>
                         </span>
                     </td>
                 </tr>

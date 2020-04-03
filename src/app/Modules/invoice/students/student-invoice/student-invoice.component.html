@@ -98,7 +98,7 @@
                             ₹ {{rowData[col.field] |number}}</span>
                         <span *ngIf="i == 6">
                             <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
-                                    (rowData[col.field]==='OverDue')? 'bg-gold' : '',
+                                    (rowData[col.field]==='Overdue')? 'bg-gold' : '',
                                     (rowData[col.field]==='Due')? 'bg-orange' : '',
                                     (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
                                 class='list-status'>{{rowData[col.field]}}
