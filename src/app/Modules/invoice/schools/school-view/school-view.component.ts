@@ -20,7 +20,7 @@ export class SchoolViewComponent implements OnInit {
   students: any;
   cols: any;
   previouslist: any;
-  dueDate: any;
+  date: any;
   invoiceStatus: any;
   SchoolInvoiceId: any;
   schoolName: any;
@@ -63,6 +63,7 @@ export class SchoolViewComponent implements OnInit {
   updateForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
     payment_type: new FormControl(''),
+    amount:new FormControl(''),
     comments: new FormControl('')
   });
 
@@ -90,6 +91,9 @@ export class SchoolViewComponent implements OnInit {
         this.schoolId = res.data.data[0].school_id;
         this.schoolsInvoiceId = res.data.data[0].school_invoice_id;
         this.getPreviousInvoiceList(this.schoolId,this.schoolsInvoiceId);
+        if(this.schoolInvoiceObj.paid_date !='0000-00-00 00:00:00'){
+              this.date = this.schoolInvoiceObj.paid_date;
+        }
         //this._router.navigate(['invoices/students_invoice/view',data.student_name,btoa(data.student_invoice_id)]);
       }
     });
@@ -123,6 +127,7 @@ export class SchoolViewComponent implements OnInit {
       params['school_invoice_id'] = Number(this.SchoolInvoiceId);
       params['status'] = this.getStatus();
       params['payment_type'] = this.getPaymentType();
+      params['paid_amount'] =this.updateForm.value.amount;
       params['comments'] = this.updateForm.value.comments;
       this._Service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {

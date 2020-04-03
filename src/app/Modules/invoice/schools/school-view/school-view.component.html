@@ -23,7 +23,7 @@
                 </div>
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.view.paidDate'|translate}}
-                        <span>{{schoolInvoiceObj.paid_date |date: 'dd MMM yyyy'}}</span>
+                       <span >{{date |date:'dd MMM yyy':''}}</span> 
                     </div>
                 </div>
 
@@ -128,8 +128,17 @@
                 <div class="form-group">
                     <label>{{'invoices.view.paymentType'|translate}} </label>
                     <p-dropdown [options]="type" formControlName="payment_type" placeholder="Select Payment Type" itemSize="30"
-                                optionLabel="label" name="payment_type">
+                        optionLabel="label" [showclear]="true" name="payment_type">
                     </p-dropdown>
+                </div>
+            </div>
+            <div class="col-md-6 col-12">
+                <div class="form-group">
+                    <label>{{'invoices.view.paidAmount'|translate}} </label>
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">₹</span>
+                        <input type="text" placeholder="{{'placeholder.amount'|translate}}" pKeyFilter="pint" formControlName="amount" name="amount">
+                    </div>
                 </div>
             </div>
             <div class="col-12">

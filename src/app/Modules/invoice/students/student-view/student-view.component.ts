@@ -63,6 +63,7 @@ export class StudentViewComponent implements OnInit {
   updateForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
     payment_type: new FormControl(''),
+    amount:new FormControl(''),
     comments: new FormControl('')
   });
 
@@ -123,6 +124,7 @@ export class StudentViewComponent implements OnInit {
       params['student_invoice_id'] = this.StudentInvoiceId;
       params['status'] = this.getStatus();
       params['payment_type'] = this.getPaymentType();
+      params['paid_amount'] =this.updateForm.value.amount;
       params['comments'] = this.updateForm.value.comments;
       this._service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {

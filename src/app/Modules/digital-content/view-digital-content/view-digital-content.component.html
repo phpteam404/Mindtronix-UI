@@ -452,12 +452,12 @@
             <div class="col-md-6 col-12 form-group">
                 <label>{{'digitalContent.view.excludelc'|translate}}</label>
                 <p-multiSelect [options]="franchise" formControlName="exclude_franchise" optionLabel="label"
-                name="exclude_franchise" defaultLabel="{{'placeholder.learningCenters'|translate}}"></p-multiSelect>
+                name="exclude_franchise" selectedItemsLabel="{0} franchise selected" defaultLabel="{{'placeholder.learningCenters'|translate}}"></p-multiSelect>
             </div>
             <div class="col-md-6 col-12 form-group">
                 <label>{{'digitalContent.view.excludeSchools'|translate}}</label>
                 <p-multiSelect [options]="schools" formControlName="exclude_school" optionLabel="label"
-                   name="exclude_school" defaultLabel="{{'placeholder.schoolName'|translate}}"></p-multiSelect>
+                   name="exclude_school" selectedItemsLabel="{0} schools selected" defaultLabel="{{'placeholder.schoolName'|translate}}"></p-multiSelect>
             </div>
         </div>
         <div class="text-center mb-2">

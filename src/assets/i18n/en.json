@@ -250,7 +250,8 @@
              "updateStatus":"Update Status",
              "paymentType":"Payment Mode",
              "comments":"Comments",
-             "schoolInvoiceId":"School Invoice Id"
+             "schoolInvoiceId":"School Invoice Id",
+             "paidAmount":"Paid Amount"
          }
      },
     "buttons":{

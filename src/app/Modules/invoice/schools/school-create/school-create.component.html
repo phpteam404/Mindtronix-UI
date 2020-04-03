@@ -17,15 +17,8 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label> {{'placeholder.description'|translate}} </label>
-                            <input pinputtext placeholder="{{'placeholder.description'|translate}}" 
-                                formControlName="school_invoice_description" name="school_invoice_description" type="text">
-                        </div>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <div class="form-group">
                             <label>{{'invoices.view.schoolInvoiceId'|translate}} </label>
-                            <input pinputtext placeholder="{{'placeholder.description'|translate}}" 
+                            <input pinputtext placeholder="{{'invoices.view.schoolInvoiceId'|translate}} " 
                                 formControlName="school_manual_invoice_id" name="school_manual_invoice_id" type="text">
                             </div>
                     </div>
@@ -58,6 +51,13 @@
                                         [maxlength]="5" placeholder="{{'fee.discount'|translate}}" formControlName="discount" name="discount">
                                 <span class="ui-inputgroup-addon">%</span> 
                             </div>
+                        </div>
+                    </div>
+                     <div class="col-md-12 col-12">
+                        <div class="form-group">
+                            <label> {{'placeholder.description'|translate}} </label>
+                            <textarea pInputTextarea placeholder="{{'placeholder.description'|translate}}"
+                                formControlName="school_invoice_description" name="school_invoice_description"></textarea>
                         </div>
                     </div>
                     <div class="col-12 text-right custom-btn">
