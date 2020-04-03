@@ -46,7 +46,7 @@
                         <input type="text" pInputText size="50" placeholder="{{'franchise.search'|translate}}" 
                             (input)="dt.filterGlobal($event.target.value, 'contains')"
                             class="mr-2" style="width:auto;">
-                        <i class="fa fa-search"></i> 
+                        <!-- <i class="fa fa-search"></i>  -->
                     </div>
                     <button *appIsGranted="'create'" pButton type="button" label="{{'franchise.create' | translate}}" class="btn-warning" (click)="AddNewFranchise($event)"></button>
                 </div>

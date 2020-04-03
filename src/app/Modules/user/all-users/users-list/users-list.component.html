@@ -25,7 +25,7 @@
                         <div class="input-search">
                             <input type="text" pInputText size="50" placeholder="{{'users.search'|translate}}" class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                            <i class="fa fa-search"></i> 
+                            <!-- <i class="fa fa-search"></i>  -->
                         </div>
                         <button pButton *appIsGranted="'create'" type="button" label="{{'users.userCreate'|translate}}" class="btn-warning" (click)="AddNewUser($event)"></button>
                     </div>                  

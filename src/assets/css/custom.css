@@ -3759,6 +3759,18 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .student-dropdown .ui-dropdown{
   width: 200px;
 }
+.custom-search .input-search:after {
+  content: "\f002";
+  font: normal normal normal 14px/1 FontAwesome;
+  right: 18px;
+  position: absolute;
+  z-index: 99;
+  display: block;
+  top: 10px;
+}
+.custom-search .input-search {
+  position: relative;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

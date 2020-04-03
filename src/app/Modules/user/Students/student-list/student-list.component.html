@@ -24,7 +24,7 @@
                         <div class="input-search">
                             <input type="text" pInputText size="50" placeholder="{{'student.search'|translate}}" class="mr-2"
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
-                            <i class="fa fa-search"></i> 
+                            <!-- <i class="fa fa-search"></i>  -->
                         </div>
                         <button *appIsGranted="'create'" pButton type="button" label="{{'student.createStudent'|translate}}" class="btn-warning" (click)="AddNewStudent($event)"></button>
                     </div>                  

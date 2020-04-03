@@ -51,8 +51,9 @@ export class SchoolViewComponent implements OnInit {
   showBasicDialog(flag) {
     this.displayBasic = flag;
     this.submitted = null;
-    if(!flag)
+    if(!flag){
       this.updateForm.reset();
+    }      
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -168,13 +169,16 @@ export class SchoolViewComponent implements OnInit {
   
 
   getFields(){
-    this.amountMode =this.updateForm.value.status.value;
+    if(this.updateForm.value.status)
+      this.amountMode = this.updateForm.value.status.value;
+    else this.amountMode=null;
     if(this.amountMode =='97')
     {
        this.getPaidAmount();
        this.enableField = true;
     }
     else{
+        this.updateForm.controls['amount'].setValue(null);
         this.enableField =false;
     }
   }
