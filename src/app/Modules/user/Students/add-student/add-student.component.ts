@@ -53,9 +53,7 @@ export class AddStudentComponent implements OnInit {
     password: new FormControl('',[Validators.minLength(8),
                                   Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
-    cpassword: new FormControl('',[Validators.minLength(8),
-                                    Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
-    ]),
+    cpassword: new FormControl(''),
     place_of_birth: new FormControl(''),
     mother_tongue: new FormControl(''),
     address: new FormControl(''),

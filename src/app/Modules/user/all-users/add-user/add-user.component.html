@@ -54,7 +54,7 @@
                     <div class="col-md-4 col-12">
                         <label>{{'users.add.contactNumber'|translate}} <span>*</span></label>
                         <input type="text" placeholder="{{'users.add.contactNumber'|translate}}" pKeyFilter="pint" autocomplete="contact_phone" formControlName="phone_no"
-                            name="contact_phone" required>
+                            name="contact_phone" required autocomplete="off" id="userContactNumber" >
                         <div class="invalid-feedback"
                             *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
                             [ngClass]=" 'error'">{{'errorMessages.contactNumber'|translate}}
@@ -64,7 +64,8 @@
                         <div class="form-group">
                             <!-- <label>{{'users.add.password' |translate}} <span>*</span><i class="icon icon-info-circle" pTooltip="Enter your username Enter your username Enter your username Enter your username Enter your username"></i></label> -->
                             <label>{{'users.add.password' |translate}} <span>*</span></label>
-                            <input pPassword  placeholder="{{'users.add.password' |translate}}" formControlName="password" autocomplete="off" name="password" type="password" required>
+                            <input pPassword  placeholder="{{'users.add.password' |translate}}" formControlName="password" 
+                                id="userPassword" autocomplete="new-password" name="UserPassword" type="password" required>
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.password.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.password'|translate}}
@@ -73,12 +74,12 @@
                     </div>
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
-                            <label>{{'users.add.confirmPassword'|translate}} <span>*</span></label>
-                            <input pPassword  placeholder="{{'users.add.confirmPassword'|translate}}" autocomplete="off" formControlName="cpassword" name="cpassword" type="password" required>
-                            <div class="invalid-feedback"
+                            <label>{{'users.add.confirmPassword'|translate}}</label>
+                            <input pPassword  placeholder="{{'users.add.confirmPassword'|translate}}" autocomplete="off" formControlName="cpassword" name="cpassword" type="password">
+                            <!-- <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.cpassword.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.confirmPassword'|translate}}
-                            </div>
+                            </div> -->
                             <!-- <div *ngIf="submitted && f.cpassword.errors" class="invalid-feedback">
                                 <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>
                                 <div *ngIf="f.cpassword.errors.Invalid">Confirm Password is Invalid</div>

@@ -64,7 +64,6 @@ export class StudentViewComponent implements OnInit {
     this.getMasterDropdown('invoice_update');
   }
 
-
   updateForm = new FormGroup({
     status: new FormControl('', [Validators.required]),
     payment_type: new FormControl(''),
@@ -168,12 +167,15 @@ export class StudentViewComponent implements OnInit {
   }
 
   getFields(){
-    this.amountMode =this.updateForm.value.status.value;
+    if(this.updateForm.value.status)
+      this.amountMode = this.updateForm.value.status.value;
+      else this.amountMode = null;
     if(this.amountMode =='97'){
       this.getPaidAmount();
       this.enableField = true;
     }
     else{
+      this.updateForm.controls['amount'].setValue(null);
       this.enableField =false;
     }
   }

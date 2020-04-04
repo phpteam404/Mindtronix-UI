@@ -115,10 +115,10 @@
                                     <label>{{'student.add.confirmPassword'|translate}}</label>
                                     <input pPassword placeholder="{{'placeholder.confirmPassword'|translate}}"
                                         formControlName="cpassword" name="cpassword" type="password">
-                                    <div class="invalid-feedback"
+                                    <!-- <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.cpassword.invalid && submitted!=null && !submitted "
                                         [ngClass]=" 'error'">{{'errorMessages.confirmPassword'|translate}}
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-4 col-12" [ngClass]="[isUpdate ? '' : 'mt-3']">

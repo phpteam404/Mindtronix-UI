@@ -53,7 +53,7 @@ export class SchoolViewComponent implements OnInit {
     this.submitted = null;
     if(!flag){
       this.updateForm.reset();
-    }      
+    }
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {

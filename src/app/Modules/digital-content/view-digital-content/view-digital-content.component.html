@@ -144,9 +144,13 @@
                                 <p>{{digitalContentObj.content_name}}</p>
                             </div>
                             <div class="col-md-12 col-12 mt-3">
-                                <label>{{'digitalContent.add.contentDescription'|translate}}</label>
+                                <!-- <label>{{'digitalContent.add.contentDescription'|translate}}</label> -->
                                 <!-- <p>{{digitalContentObj.description}}</p> -->
-                                <p-editor [(ngModel)]="digitalContentObj.description" [readonly]="true"  ></p-editor>
+                                <p-editor [(ngModel)]="digitalContentObj.description" [readonly]="true">
+                                    <p-header >
+                                        <label>{{'digitalContent.add.contentDescription'|translate}}</label>
+                                      </p-header>
+                                </p-editor>
                             </div>
                             <div class="col-md-4 col-12 mt-3">
                                 <label>{{'digitalContent.add.category'|translate}}</label>
@@ -468,5 +472,3 @@
         </div>
   </form>
 </p-dialog>
-
-

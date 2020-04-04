@@ -117,7 +117,7 @@
                 <div class="form-group">
                     <label>{{'franchise.add.status'|translate}} <span>*</span></label>
                     <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
-                    name="status" optionLabel="label" formControlName="status" [showClear]="true" 
+                    name="status" optionLabel="label" formControlName="status"
                     (onChange)="getFields()" required></p-dropdown>
                     <div class="invalid-feedback"
                         *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"

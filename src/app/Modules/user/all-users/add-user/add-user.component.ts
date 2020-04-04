@@ -25,7 +25,7 @@ export class AddUserComponent implements OnInit {
   status: any;
   isUpdate:boolean=false;
   enableFranchise:boolean=true;
-
+  excludeRoles:any = [ "Mindtronix Content","Mindtronix Sales","Mindtronix Accounts"];
   formObj: any = {};
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
@@ -63,9 +63,7 @@ export class AddUserComponent implements OnInit {
       password: new FormControl('',[Validators.required, Validators.minLength(8),
                                     Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
       ]),
-      cpassword: new FormControl('',[ Validators.required, Validators.minLength(8),
-                                      Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
-      ])
+      cpassword: new FormControl('')
     });
     this._ar.queryParams.subscribe(params => {
       if(params.franchise_id){
@@ -75,9 +73,14 @@ export class AddUserComponent implements OnInit {
   }
   
   getStatus(){return this.addUserForm.controls.status.value.value;}
-  getfranchise(){return this.addUserForm.controls.franchise_id.value.value;}
+  getfranchise()
+  {
+    if(this.addUserForm.controls.franchise_id)
+         return this.addUserForm.controls.franchise_id.value.value;
+    else return null;
+  }
   getuserRole(){return this.addUserForm.controls.user_role_id.value.value;}
-
+  getuserRoleName(){return this.addUserForm.controls.user_role_id.value.label;}
   submit(): any{
     this.submitted = false;
     if (this.addUserForm.valid) {
@@ -90,7 +93,9 @@ export class AddUserComponent implements OnInit {
       var params={};
       params = this.addUserForm.value;
       params['status'] = this.getStatus();
-      params['franchise_id'] = this.getfranchise();
+      if(this.addUserForm.controls.franchise_id.value!=null){
+        params['franchise_id'] = this.addUserForm.controls.franchise_id.value.value;
+      }else delete params['franchise_id'];
       params['user_role_id'] = this.getuserRole();
       this._service.saveUser(params).subscribe(res => {
         if (res.status) {
@@ -139,10 +144,13 @@ export class AddUserComponent implements OnInit {
     else this._router.navigate(['users/all-users']);
   }
   roleBasedFranchise(){
-    var roleId =this.getuserRole();
-    if(Number(roleId)==10 || Number(roleId)==11 ||Number(roleId)==12) {
+    var roleId = this.getuserRole();
+    var roleName = this.getuserRoleName();
+    if(this.excludeRoles.includes(roleName)){
+    // if(Number(roleId)==10 || Number(roleId)==11 ||Number(roleId)==12) {
       this.addUserForm.get('franchise_id').clearValidators();      
       this.addUserForm.controls['franchise_id'].updateValueAndValidity();
+     this.addUserForm.controls['franchise_id'].setValue(null);
       this.enableFranchise=false;
     } else {
       this.addUserForm.controls['franchise_id'].setValidators([Validators.required]);
