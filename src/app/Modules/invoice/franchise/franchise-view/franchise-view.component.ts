@@ -109,7 +109,11 @@ export class FranchiseViewComponent implements OnInit {
     });
   }
 
-  getStatus() { return this.updateForm.value.status.value; }
+  getStatus() { 
+    if(this.updateForm.value.status)
+      return this.updateForm.value.status.value;
+    else return null;
+  }
   getPaymentType() { 
     if(this.updateForm.value.payment_type)
       return this.updateForm.value.payment_type.value;
@@ -133,6 +137,7 @@ export class FranchiseViewComponent implements OnInit {
       if(this.getAmount())
         params['paid_amount'] = this.getAmount();
       params['comments'] = this.updateForm.value.comments;
+      console.log(params);
       this._service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
@@ -155,17 +160,34 @@ export class FranchiseViewComponent implements OnInit {
   getPaidAmount(){
     this.updateForm.controls['amount'].setValue(Number(this.franchiseInvoiceObj.amount));
   }
-  
-  getFields(){
+  getStatusLabel(){
     if(this.updateForm.value.status)
-      this.amountMode = this.updateForm.value.status.value;
-      else this.amountMode = null;
-    if(this.amountMode =='97'){
+      return this.updateForm.value.status.label.toLowerCase();
+    else return null;
+  }
+  statusType:any = ["paid"];
+  getFields(){
+
+    if(this.statusType.includes(this.getStatusLabel())){
+
+      this.updateForm.controls['amount'].setValidators([Validators.required]);
+      this.updateForm.controls['amount'].updateValueAndValidity();
+
+      this.updateForm.controls['payment_type'].setValidators([Validators.required]);
+      this.updateForm.controls['payment_type'].updateValueAndValidity();
+
       this.getPaidAmount();
       this.enableField = true;
     }
     else{
+      this.updateForm.get('payment_type').clearValidators();      
+      this.updateForm.controls['payment_type'].updateValueAndValidity();
+      this.updateForm.controls['payment_type'].setValue(null);
+
+      this.updateForm.get('amount').clearValidators();      
+      this.updateForm.controls['amount'].updateValueAndValidity();
       this.updateForm.controls['amount'].setValue(null);
+
       this.enableField =false;
     }
   }

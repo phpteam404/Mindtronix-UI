@@ -118,18 +118,26 @@
             </div>
             <div class="col-md-6 col-12" *ngIf="enableField">
                 <div class="form-group">
-                    <label>{{'invoices.view.paymentType'|translate}} </label>
+                    <label>{{'invoices.view.paymentType'|translate}} <span>*</span></label>
                     <p-dropdown [options]="type" formControlName="payment_type" placeholder="Select Payment Type" itemSize="30"
-                                optionLabel="label" [showClear]="date" name="payment_type">
+                                optionLabel="label" [showClear]="clear" name="payment_type" required>
                     </p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.payment_type.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.paymentTypeReq'|translate}}
+                    </div>
                 </div>
             </div>
             <div class="col-md-6 col-12" *ngIf="enableField">
                 <div class="form-group">
-                    <label>{{'invoices.view.paidAmount'|translate}} </label>
+                    <label>{{'invoices.view.paidAmount'|translate}} <span>*</span></label>
                     <div class="ui-inputgroup">
                         <span class="ui-inputgroup-addon">₹</span>
-                        <input type="text" placeholder="{{'placeholder.amount'|translate}}" pKeyFilter="pint" formControlName="amount" name="amount">
+                        <input type="text" placeholder="{{'placeholder.amount'|translate}}" pKeyFilter="pint" formControlName="amount" name="amount" required>
+                    </div>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.amount.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.amountReq'|translate}}
                     </div>
                 </div>
             </div>

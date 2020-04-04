@@ -30,7 +30,6 @@ export class SchoolViewComponent implements OnInit {
   paidDate: any;
   invoiceId: any;
   schoolsInvoiceId:any;
-  amountMode:any;
   enableField:boolean;
   paidAmount:any;
   submitted = null;
@@ -118,7 +117,11 @@ export class SchoolViewComponent implements OnInit {
     });
   }
 
-  getStatus() { return this.updateForm.value.status.value; }
+  getStatus() { 
+    if(this.updateForm.value.status)
+      return this.updateForm.value.status.value;
+    else return null;
+  }
   getPaymentType() { 
     if(this.updateForm.value.payment_type)
       return this.updateForm.value.payment_type.value;
@@ -142,6 +145,7 @@ export class SchoolViewComponent implements OnInit {
       if(this.getPaymentType())
         params['payment_type'] = this.getPaymentType();
       params['comments'] = this.updateForm.value.comments;
+      console.log(params);
       this._Service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
@@ -167,20 +171,35 @@ export class SchoolViewComponent implements OnInit {
   getPaidAmount(){
     this.updateForm.controls['amount'].setValue(Number(this.schoolInvoiceObj.amount));
   }
-  
-
-  getFields(){
+  getStatusLabel(){
     if(this.updateForm.value.status)
-      this.amountMode = this.updateForm.value.status.value;
-    else this.amountMode=null;
-    if(this.amountMode =='97')
-    {
-       this.getPaidAmount();
-       this.enableField = true;
+      return this.updateForm.value.status.label.toLowerCase();
+    else return null;
+  }
+  statusType:any = ["paid"];
+  getFields(){
+
+    if(this.statusType.includes(this.getStatusLabel())){
+
+      this.updateForm.controls['amount'].setValidators([Validators.required]);
+      this.updateForm.controls['amount'].updateValueAndValidity();
+
+      this.updateForm.controls['payment_type'].setValidators([Validators.required]);
+      this.updateForm.controls['payment_type'].updateValueAndValidity();
+
+      this.getPaidAmount();
+      this.enableField = true;
     }
     else{
-        this.updateForm.controls['amount'].setValue(null);
-        this.enableField =false;
+      this.updateForm.get('payment_type').clearValidators();      
+      this.updateForm.controls['payment_type'].updateValueAndValidity();
+      this.updateForm.controls['payment_type'].setValue(null);
+
+      this.updateForm.get('amount').clearValidators();      
+      this.updateForm.controls['amount'].updateValueAndValidity();
+      this.updateForm.controls['amount'].setValue(null);
+
+      this.enableField =false;
     }
   }
 }

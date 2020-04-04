@@ -144,7 +144,7 @@ export class AddUserComponent implements OnInit {
     else this._router.navigate(['users/all-users']);
   }
   roleBasedFranchise(){
-    var roleId = this.getuserRole();
+    // var roleId = this.getuserRole();
     var roleName = this.getuserRoleName();
     if(this.excludeRoles.includes(roleName)){
     // if(Number(roleId)==10 || Number(roleId)==11 ||Number(roleId)==12) {

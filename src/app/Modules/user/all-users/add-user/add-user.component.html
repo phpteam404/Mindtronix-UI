@@ -24,23 +24,13 @@
                         <div class="form-group">
                             <label>{{'users.add.role'|translate}} <span>*</span></label>
                                 
-                           <p-dropdown [options]="roles" formControlName="user_role_id" placeholder="{{'placeholder.role'|translate}}" itemSize="30"
+                            <p-dropdown [options]="roles" formControlName="user_role_id" placeholder="{{'placeholder.role'|translate}}" itemSize="30"
                                 name="role" optionLabel="label" required (onChange) ="roleBasedFranchise()"></p-dropdown>
                             <div class="invalid-feedback"
                                 *ngIf="addUserForm.controls.user_role_id.invalid && submitted!=null && !submitted "
                                 [ngClass]=" 'error'">{{'errorMessages.userRole'|translate}}</div>
                         </div>
-                    </div>
-                    <div class="col-md-4 col-12" *ngIf="enableFranchise">
-                        <div class="form-group">
-                            <label>{{'users.add.franchise' |translate}} <span>*</span></label>
-                            <p-dropdown [options]="franchise" formControlName="franchise_id" placeholder="{{'placeholder.franchise'|translate}}" itemSize="30"
-                                name="franchise" optionLabel="label" filter="true" required></p-dropdown>
-                            <div class="invalid-feedback"
-                                *ngIf="addUserForm.controls.franchise_id.invalid && submitted!=null && !submitted "
-                                [ngClass]=" 'error'">{{'errorMessages.franchiseUser'|translate}}</div>
-                        </div>
-                    </div>
+                    </div>                    
                     <div class="col-md-4 col-12">
                         <div class="form-group">
                             <label>{{'users.add.contactEmail'|translate}} <span>*</span></label>
@@ -50,16 +40,7 @@
                                     [ngClass]=" 'error'"> {{'errorMessages.contactEmail'|translate}}
                                 </div>
                         </div>
-                    </div>                    
-                    <div class="col-md-4 col-12">
-                        <label>{{'users.add.contactNumber'|translate}} <span>*</span></label>
-                        <input type="text" placeholder="{{'users.add.contactNumber'|translate}}" pKeyFilter="pint" autocomplete="contact_phone" formControlName="phone_no"
-                            name="contact_phone" required autocomplete="off" id="userContactNumber" >
-                        <div class="invalid-feedback"
-                            *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
-                            [ngClass]=" 'error'">{{'errorMessages.contactNumber'|translate}}
-                        </div>
-                    </div>                    
+                    </div>                                      
                     <div class="col-md-4 col-12" *ngIf="!isUpdate">
                         <div class="form-group">
                             <!-- <label>{{'users.add.password' |translate}} <span>*</span><i class="icon icon-info-circle" pTooltip="Enter your username Enter your username Enter your username Enter your username Enter your username"></i></label> -->
@@ -84,6 +65,25 @@
                                 <div *ngIf="f.cpassword.errors.required">Confirm Password is required</div>
                                 <div *ngIf="f.cpassword.errors.Invalid">Confirm Password is Invalid</div>
                             </div> -->
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                        <label>{{'users.add.contactNumber'|translate}} <span>*</span></label>
+                        <input type="text" placeholder="{{'users.add.contactNumber'|translate}}" pKeyFilter="pint" autocomplete="contact_phone" formControlName="phone_no"
+                            name="contact_phone" required autocomplete="off" id="userContactNumber" >
+                        <div class="invalid-feedback"
+                            *ngIf="addUserForm.controls.phone_no.invalid && submitted!=null && !submitted"
+                            [ngClass]=" 'error'">{{'errorMessages.contactNumber'|translate}}
+                        </div>
+                    </div>
+                    <div class="col-md-4 col-12" *ngIf="enableFranchise">
+                        <div class="form-group">
+                            <label>{{'users.add.franchise' |translate}} <span>*</span></label>
+                            <p-dropdown [options]="franchise" formControlName="franchise_id" placeholder="{{'placeholder.franchise'|translate}}" itemSize="30"
+                                name="franchise" optionLabel="label" filter="true" required></p-dropdown>
+                            <div class="invalid-feedback"
+                                *ngIf="addUserForm.controls.franchise_id.invalid && submitted!=null && !submitted "
+                                [ngClass]=" 'error'">{{'errorMessages.franchiseUser'|translate}}</div>
                         </div>
                     </div>
                     <div class="col-md-4 col-12">
