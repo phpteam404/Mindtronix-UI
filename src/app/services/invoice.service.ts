@@ -32,4 +32,10 @@ export class InvoiceService {
   getSchoolInvoiceInfo(params){
     return this.clientHttp.get('Invoice/schoolInvoiceList',params);
   }
+  getFranchiseInvoiceList(params){
+    return this.clientHttp.get('Invoice/FrachiseInvoiceList',params);
+  }
+  getFranchiseView(params){
+    return this.clientHttp.get('Invoice/FrachiseInvoiceList',params);
+  }
 }

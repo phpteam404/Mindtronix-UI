@@ -44,7 +44,7 @@ export class SchoolViewComponent implements OnInit {
     this.cols = [
       { field: 'invoice_number', header: 'Number' },
       { field: 'invoice_date', header: 'Date' },
-      { field: 'amount', header: 'Amount' },
+      { field: 'total_amount', header: 'Amount' },
       { field: 'status', header: 'Status' }
     ];
   }
@@ -53,6 +53,7 @@ export class SchoolViewComponent implements OnInit {
     this.submitted = null;
     if(!flag){
       this.updateForm.reset();
+      this.getFields();
     }
   }
   ngOnInit(): void {

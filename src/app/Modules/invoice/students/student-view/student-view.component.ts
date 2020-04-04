@@ -34,16 +34,16 @@ export class StudentViewComponent implements OnInit {
   statusUpdate:any;
   submitted = null;
   constructor(private _ar: ActivatedRoute,
-    private _router: Router,
-    private _mservice: MasterService,
-    private _service: InvoiceService,
-    public translate: TranslateService) {
+              private _router: Router,
+              private _mservice: MasterService,
+              private _service: InvoiceService,
+              public translate: TranslateService) {
     translate.setDefaultLang(environment.defaultLanguage);
 
     this.cols = [
       { field: 'invoice_number', header: 'Number' },
       { field: 'invoice_date', header: 'Date' },
-      { field: 'amount', header: 'Amount' },
+      { field: 'total_amount', header: 'Amount' },
       { field: 'status', header: 'Status' }
     ];
   }
@@ -51,7 +51,8 @@ export class StudentViewComponent implements OnInit {
     this.displayBasic = flag;
     this.submitted = null;
     if(!flag)
-      this.updateForm.reset();
+    this.updateForm.reset();
+    this.getFields();
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
@@ -169,7 +170,7 @@ export class StudentViewComponent implements OnInit {
   getFields(){
     if(this.updateForm.value.status)
       this.amountMode = this.updateForm.value.status.value;
-      else this.amountMode = null;
+    else this.amountMode = null;
     if(this.amountMode =='97'){
       this.getPaidAmount();
       this.enableField = true;

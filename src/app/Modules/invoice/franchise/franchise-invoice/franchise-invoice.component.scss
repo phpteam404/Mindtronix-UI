@@ -17,6 +17,10 @@
         line-height: 22px;
     }
 }
+.w300{
+    width: 300px !important;
+}
+
 @media (max-width: 1199px){
     .schools-text span,
     .payment-text span {
@@ -38,6 +42,6 @@
         width: 80px;
     }
     .student-invoice-list th:last-child{
-        width: 70px !important; 
+        width: 70px !important;
     }
 }
