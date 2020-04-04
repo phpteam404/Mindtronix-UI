@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
           this.ls.setItem('user', res.data, true);
           this.submitted=true;
           if(res.menu){
-            if(res.menu[0].sub_menus){
+            if(res.menu[0].sub_menus.length>0){
               this.router.navigate([res.menu[0].sub_menus[0].module_url]);
             }else this.router.navigate([res.menu[0].module_url]);
           }else this.router.navigate(['/404']);
