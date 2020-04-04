@@ -40,21 +40,26 @@ export class IsGrantedDirective {
     }else{
       reqAction = 'view';
     }
-    if(this._ls.getItem('user',true).data.grant.url == url){
-      this.isGrantedByLs(permission);
+    if(this._ls.getItem('user',true).data.grant == undefined){
+      this.isGranted(permission);
     }else{
-      this._aService.isTokenExpired({'module_url':url,'user_role_id': JSON.parse(this._ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
-        if(res.status){
-          var roleAccessObj = res.data.role_access;
-          roleAccessObj['url'] = url;
-          var obj={};
-          obj = this._ls.getItem('user',true);
-          obj['data']['grant'] = roleAccessObj;
-          this._ls.setItem('user',obj,true);
-          this.isGrantedByLs(permission);
-        }
-      });
+      if(this._ls.getItem('user',true).data.grant.url == url){
+        this.isGrantedByLs(permission);
+      }else{
+        this._aService.isTokenExpired({'module_url':url,'user_role_id': JSON.parse(this._ls.getItem('user')).data['user_role_id']}).subscribe(res=>{
+          if(res.status){
+            var roleAccessObj = res.data.role_access;
+            roleAccessObj['url'] = url;
+            var obj={};
+            obj = this._ls.getItem('user',true);
+            obj['data']['grant'] = roleAccessObj;
+            this._ls.setItem('user',obj,true);
+            this.isGrantedByLs(permission);
+          }
+        });
+      }
     }
+    
     //console.log(this._ls.getItem('user',true).data.grant,"----grant----", url);
    // this.isGrantedByLs(permission);
    //this.isGranted(permission);
@@ -63,7 +68,8 @@ export class IsGrantedDirective {
   private isGranted(permission: string) {
     this.service.getAccess(permission).subscribe(item => {
       if (item[permission]>0) {
-         this.viewContainer.createEmbeddedView(this.templateRef);
+        if (this._ls.getItem('user',true).data.grant != undefined){}
+         else this.viewContainer.createEmbeddedView(this.templateRef);
       } else {
         this.viewContainer.clear();
       }
@@ -71,7 +77,7 @@ export class IsGrantedDirective {
   }
   // this is by local storage
   private isGrantedByLs(permission: string) {
-    console.log(this._ls.getItem('user',true).data.grant[permission],"grant===>>>>", permission);
+    // console.log(this._ls.getItem('user',true).data.grant[permission],"grant===>>>>", permission);
       if (this._ls.getItem('user',true).data.grant[permission]>0) {        
          this.viewContainer.createEmbeddedView(this.templateRef);
       } else {

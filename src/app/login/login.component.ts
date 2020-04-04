@@ -46,7 +46,12 @@ export class LoginComponent implements OnInit {
           res.data.menu = res.menu;
           this.ls.setItem('user', res.data, true);
           this.submitted=true;
-          this.router.navigate([res.menu[0].module_url]);
+          if(res.menu){
+            if(res.menu[0].sub_menus){
+              this.router.navigate([res.menu[0].sub_menus[0].module_url]);
+            }else this.router.navigate([res.menu[0].module_url]);
+          }else this.router.navigate(['/404']);
+          
         }
       });
     }else{

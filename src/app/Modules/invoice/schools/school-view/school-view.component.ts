@@ -164,7 +164,7 @@ export class SchoolViewComponent implements OnInit {
   }
 
   getPaidAmount(){
-    this.updateForm.controls['amount'].setValue(this.schoolInvoiceObj.amount);
+    this.updateForm.controls['amount'].setValue(Number(this.schoolInvoiceObj.amount));
   }
   
 

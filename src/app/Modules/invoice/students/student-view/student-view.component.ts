@@ -163,7 +163,7 @@ export class StudentViewComponent implements OnInit {
   }
 
   getPaidAmount(){
-    this.updateForm.controls['amount'].setValue(this.studentInvoiceObj.amount);
+    this.updateForm.controls['amount'].setValue(Number(this.studentInvoiceObj.amount));
   }
 
   getFields(){

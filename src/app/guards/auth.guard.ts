@@ -66,7 +66,7 @@ export class AuthGuard implements CanActivate {
         if(res.status){
           this.roleAccessObj = res.data.role_access;
           this.roleAccessObj['url'] = url;
-
+          this._ss.setAccess(this.roleAccessObj);
             var obj={};
             obj = this._ls.getItem('user',true);
             obj['data']['grant'] = this.roleAccessObj;
