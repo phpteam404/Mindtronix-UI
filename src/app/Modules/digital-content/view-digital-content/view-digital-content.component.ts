@@ -7,7 +7,7 @@ import { HttpParams } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
 import { MasterService } from 'src/app/services/master.service';
 import { ContentService } from 'src/app/services/content.service';
-import { LazyLoadEvent,ConfirmationService } from 'primeng/api';
+import { ConfirmationService } from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { DatePipe} from '@angular/common';
 import { environment } from 'src/environments/environment';
@@ -41,6 +41,7 @@ export class ViewDigitalContentComponent implements OnInit {
   viewModal:boolean =false;
   uploadAttachments:boolean=false;
   previewFile:boolean=false;
+  previewURL:boolean=false;
   cols:any;
   digitalContentId:any;
   digitalContentObj:any={};
@@ -141,10 +142,10 @@ export class ViewDigitalContentComponent implements OnInit {
     this.getMasterDropdown('status');
     this.getFranchiseList();
     this.getSchoolsList();
-    const tag = document.createElement('script');
+    // const tag = document.createElement('script');
    // this.playVideo("XqZsoesa55w");
-    tag.src = "https://www.youtube.com/iframe_api";
-    document.body.appendChild(tag);
+    // tag.src = "https://www.youtube.com/iframe_api";
+    // document.body.appendChild(tag);
   }
   getMasterDropdown(masterKey): any{
     var params = new HttpParams()
@@ -368,10 +369,8 @@ export class ViewDigitalContentComponent implements OnInit {
     }
   }
   YT : any;
-  video : any;
-  player : any;
+  public player : any;
   reframed : Boolean = false;
-  loadVideo : boolean = false;
   getVideoId(url){
     var regex = new RegExp(/(youtu\.be\/|youtube\.com\/(watch\?(.*&)?v=|(embed|v)\/))([^\?&"'>]+)/);
     var matches = regex.exec(url);
@@ -379,120 +378,109 @@ export class ViewDigitalContentComponent implements OnInit {
     return videoId;
   }
   closePreview(){
-    //window['onYouTubeIframeAPIReady'] = () => {};
-    //window['ÝT'] = undefined;
-    // this.onPlayerStateChange({'target': 'Y', 'data': 2});
-    //document.getElementById( 'player' ).innerHTML='';
-    //  var ele = document.getElementById('player');
-    //  ele.remove();
+    var ele = document.getElementById("tube");
+    var ele2 = document.getElementById("tube1");
+    if(ele2) ele2.remove();
+    if(ele) ele.remove();
   }
-  previewAttachment(data:any){
-    
-    this.previewUrl =data.document_url;
+  previewAttachment(data:any){    
     if(data.module_type == 'url'){
       var videoId = this.getVideoId(data.document_name); // kJ9g_-p3dLA
+      this.previewUrl = '';
       this.previewUrl = videoId;
       this.format = data.module_type.toString().toLowerCase();
-      this.video = '';
-      this.video = this.previewUrl;
-      this.previewFile = false;
-     // this._router.navigate(['/orders'],{queryParams:{'id':this.video}});
-    } 
+      this.previewURL = true;
+      this.loadPlayerWithId();
+    }
     else{
-      this.previewFile =true;
+      this.previewUrl = data.document_url;
+      this.previewFile = true;
       this.format = data.type.toString().toLowerCase();
     } 
   } 
   /* youtube plyer code starts*/
   loadPlayerWithId(){
-    setTimeout (() => {
-      this.loadVideo = true;
-      var tag = document.createElement('script');
+    var tag;
+    var ele = document.getElementById("tube");
+    var ele2 = document.getElementById("tube1");
+    if(ele2) ele2.remove();
+    if(ele) ele.remove();
+    else{
+      tag = document.createElement('script');
       tag.id = "tube";
       tag.src = "https://www.youtube.com/iframe_api";
-      var firstScriptTag = document.getElementsByTagName('script')[0];
-      firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-      console.log('---4---');
-      window['onYouTubeIframeAPIReady'] = () => {
-        this.YT = window['YT'];
-        this.reframed = false;
-        this.player = new window['YT'].Player('player', {
-          videoId: this.previewUrl,
-          playerVars: {
-            autoplay:0,
-          },
-          events: {
-            'onError': this.onPlayerError.bind(this),
-            'onReady': (e) => {
-              if (!this.reframed) {
-                console.log('---5---');
-                this.reframed = true;                
-                e.target.loadVideoById(this.previewUrl,0,'default');
-                this.startVideo(this.previewUrl);
-              // reframe(e.target.a);
-              }
-            }
-          }
-        });
-      };
-    },100);
-    //window['onYouTubeIframeAPIReady'] = () => this.startVideo(null);
-  }
-  startVideo(val){
-    setTimeout (() => {
-      console.log('---6---');
+    } 
+    if(tag == undefined){       
+      tag = document.createElement('script');
+      tag.id = "tube1";
+      tag.src = "https://www.youtube.com/iframe_api";
+    }
+    document.body.append(tag);
+    window['onYouTubeIframeAPIReady'] = () => {
       this.YT = window['YT'];
       this.reframed = false;
       this.player = new window['YT'].Player('player', {
-        videoId: (val)?this.previewUrl:this.video,
+        videoId: this.previewUrl,
         playerVars: {
           autoplay:0,
-          modestbranding: 0,
-          controls: 0,
+          modestbranding: 1,
+          controls: 1,
+          start: 0,
           disablekb: 0,
-          rel: 0,
+          rel : 0,
           showinfo: 0,
           fs: 0,
           playsinline: 1
         },
-        events:{
-          'onStateChange': this.onPlayerStateChange.bind(this),
+        events: {
           'onError': this.onPlayerError.bind(this),
           'onReady': (e) => {
             if (!this.reframed) {
+              console.log('---5---',e);
               this.reframed = true;
               e.target.loadVideoById(this.previewUrl,0,'default');
+              setTimeout (() => {
+                this.startVideo(this.previewUrl);
+              },100);
             }
           }
-          // 'onReady' : this.onPlayerReady.bind(this),
         }
       });
-    },500);
+    };
+  }
+  startVideo(val){
+    this.YT = window['YT'];
+    this.reframed = false;
+    this.player = new window['YT'].Player('player', {
+      videoId: this.previewUrl,
+      playerVars: {
+        autoplay:0,
+        modestbranding: 1,
+        controls: 0,
+        disablekb: 0,
+        rel : 0,
+        showinfo: 0,
+        fs: 0,
+        playsinline: 1
+      },
+      events:{
+        'onStateChange': this.onPlayerStateChange.bind(this),
+        'onError': this.onPlayerError.bind(this),
+        'onReady': (e) => {
+          if (!this.reframed) {
+            this.reframed = true;
+            e.target.loadVideoById(this.previewUrl,0,'default');
+          }
+        }
+        // 'onReady' : this.onPlayerReady.bind(this),
+      }
+    });
   }
   onPlayerReady(event){
-    console.log('---7---');
     event.target.playVideo();
   }
   onPlayerStateChange(event) {
-    console.log('---8---');
-    console.log(event)
-    /*switch (event.data) {
-      case window['YT'].PlayerState.PLAYING:
-        if (this.cleanTime() == 0) {
-          console.log('started ' + this.cleanTime());
-        } else {
-          console.log('playing ' + this.cleanTime())
-        };
-        break;
-      case window['YT'].PlayerState.PAUSED:
-        if (this.player.getDuration() - this.player.getCurrentTime() != 0) {
-          console.log('paused' + ' @ ' + this.cleanTime());
-        };
-        break;
-      case window['YT'].PlayerState.ENDED:
-        console.log('ended ');
-        break;
-    };*/
+    console.log('---8---',event);    
   };
   cleanTime(){
     console.log('---9---');
@@ -501,7 +489,7 @@ export class ViewDigitalContentComponent implements OnInit {
   onPlayerError(event){
     switch(event.data){
       case 2:
-        console.log('', this.video);
+        console.log('', this.previewURL);
       break;
       case 100:
         break;

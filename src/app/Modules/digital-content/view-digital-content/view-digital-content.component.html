@@ -426,20 +426,23 @@
        </div>
    </form>
 </p-dialog>
-<p-dialog (onHide)="closePreview()" header="View Attachment" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="previewFile" [style]="{width: '50vw'}" [baseZIndex]="10000">
+<p-dialog header="View Attachment" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="previewFile" [style]="{width: '50vw'}" [baseZIndex]="10000">
     <div style="font-size:16px;text-align:center;padding:20px">
         <div class="row m-0">
             <div class="col-12" style="text-align:center" *ngIf="format != 'url'">
                 <img  src="{{previewUrl}}" *ngIf="(format != 'mp4' && format != 'mov')" height="400" style="width: 100%;height: 100%;">
                 <video src="{{previewUrl}}" *ngIf="(format == 'mp4' || format == 'mov')" height="300" controls style="width: 100%;height: 100%;"></video>
             </div>
-            <div class="col-12" style="text-align:center" *ngIf="format == 'url'">
-                <!-- <youtube-player videoId="{{video}}"></youtube-player>  -->
-            </div>
        </div>
     </div>
 </p-dialog> 
-
+<p-dialog header="Preview External URL" (onHide)="closePreview()" [modal]="true" [draggable]="false" [resizable]="false" [(visible)]="previewURL" [style]="{width: '50vw'}" [baseZIndex]="10000">
+    <div style="font-size:16px;text-align:center;padding:20px">
+        <div class="row m-0">            
+            <div class="col-12" style="text-align:center" id="player"></div>
+       </div>
+    </div>
+</p-dialog> 
 <!-- For Mapping popup Details-->
 <p-dialog header="{{digitalContentObj.content_name}} - {{'digitalContent.view.contentPermission'|translate}}" 
     [modal]="true" [draggable]="false" [resizable]="false" 
