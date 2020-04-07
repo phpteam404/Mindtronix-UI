@@ -7,6 +7,7 @@ import { OnlineUsersViewComponent } from './online-users-view/online-users-view.
 import { BasicModule } from '../../basic/basic.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { GrantModule } from '../../grant/grant/grant.module';
 @NgModule({
   declarations: [OnlineUsersInvoiceComponent,OnlineUsersViewComponent],
   imports: [
@@ -14,7 +15,8 @@ import { DialogModule } from 'primeng/dialog';
     OnlineRoutingModule,
       ReactiveFormsModule,
       DialogModule,
-      BasicModule.forRoot()
+      BasicModule.forRoot(),
+      GrantModule
   ]
 })
 export class OnlineModule { }

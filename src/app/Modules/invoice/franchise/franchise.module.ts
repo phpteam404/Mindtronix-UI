@@ -7,6 +7,7 @@ import { FranchiseViewComponent } from './franchise-view/franchise-view.componen
 import { BasicModule } from '../../basic/basic.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { GrantModule } from '../../grant/grant/grant.module';
 
 @NgModule({
   declarations: [FranchiseInvoiceComponent,FranchiseViewComponent],
@@ -15,7 +16,8 @@ import { DialogModule } from 'primeng/dialog';
     FranchiseRoutingModule,
     ReactiveFormsModule,
     DialogModule,
-    BasicModule.forRoot()
+    BasicModule.forRoot(),
+    GrantModule
   ]
 })
 export class FranchiseModule { }

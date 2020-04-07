@@ -42,6 +42,7 @@ import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
 import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
+import { GrantModule } from 'src/app/Modules/grant/grant/grant.module';
 
 @NgModule({
   imports: [
@@ -75,6 +76,7 @@ import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
     MatIconModule,
     BasicModule.forRoot(),
     BsDropdownModule.forRoot(),
+    GrantModule
     // BreadcrumbsModule.forRoot()
   ],
   providers:[ConfirmationService],

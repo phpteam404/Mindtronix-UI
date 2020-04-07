@@ -34,10 +34,9 @@
                     <div class="col-12">
                         <div class="form-group">
                             <label>{{'ticket.add.attachIssue'|translate}}</label>
-                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .exs" (change)="onFileSelect($event)" style="height: 45px;" />
-                            <div class="invalid-feedback"
-                                  [ngClass]=" 'error'">{{'errorMessages.allowedImageTypes'|translate}}
-                            </div>
+                            <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov, .exs"
+                                (change)="onFileSelect($event)" style="height: 45px;" />
+                            <div class="invalid-feedback" [ngClass]=" 'error'">{{'errorMessages.allowedImageTypes'|translate}}</div>
                         </div>
                     </div> 
                     <div class="col-md-12 col-12 mt-10" *ngIf="fileArr.length>0">

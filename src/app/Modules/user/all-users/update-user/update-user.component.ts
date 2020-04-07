@@ -57,7 +57,7 @@ export class UpdateUserComponent implements OnInit {
             phone_no: this.formObj.phone_no,
             status: this.formObj.status, 
           });
-          if(this.formObj.user_role_id==5){
+          if(this.excludeRoles.includes(this.formObj.user_role_name)){
             this.enableFranchise=false;
           }
         }

@@ -25,11 +25,12 @@ export class ViewTicketComponent implements OnInit {
   chatHistory:any;
   prdAssetPath:string = environment.prdAssetPath;
   submitted=null;
-  fileTypes = ["image/jpeg","image/png"];
+  fileTypes = ["image/jpeg","image/png","video/mp4","video/quicktime"];
   maxSize = environment.maxUploadSize; 
   previewFile:boolean =false;
   isClosed:boolean =false;
   preview:any;
+  format:any;
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               public _toast: ToasterService,
@@ -84,10 +85,19 @@ export class ViewTicketComponent implements OnInit {
           this.isClosed = true;
           this.ticketObj.status_display = {label: "Re Open",value: 49};
         }else this.isClosed = false;
-        console.log('isClosed', this.isClosed);
-        this.documents =res.data.ticket_data.documents; 
-        this.chatHistory = res.data.chat_history;  
-        console.log('this.status', this.status);        
+        this.documents =res.data.ticket_data.documents;
+        this.documents.forEach(item=>{
+          item.type = item.document_name.split('.').pop().toString().toLowerCase();
+        });
+        this.chatHistory = res.data.chat_history;
+        this.chatHistory.forEach(item=>{
+          item.forEach(chat=>{
+            if(chat.documents)
+              chat.documents.forEach(doc=>{
+                doc.type = doc.document_url.split('.').pop().toString().toLowerCase();
+              });
+          });
+        });
       }
     });
   }
@@ -168,6 +178,7 @@ export class ViewTicketComponent implements OnInit {
   }
   previewAttachment(data:any){
     this.previewFile =true;
-    this.preview =data.document_url;
+    this.preview = data.document_url;
+    this.format = data.type.toString().toLowerCase();
   }
 }

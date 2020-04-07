@@ -7,6 +7,7 @@ import { SchoolCreateComponent} from './school-create/school-create.component';
 import { BasicModule } from '../../basic/basic.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { GrantModule } from '../../grant/grant/grant.module';
 @NgModule({
     declarations: [SchoolViewComponent, SchoolInvoiceComponent,SchoolCreateComponent],
     imports: [
@@ -14,7 +15,8 @@ import { DialogModule } from 'primeng/dialog';
       SchoolRoutingModule,
       ReactiveFormsModule,
       DialogModule,
-      BasicModule.forRoot()
+      BasicModule.forRoot(),
+      GrantModule
      
     ],
     providers: [DatePipe]

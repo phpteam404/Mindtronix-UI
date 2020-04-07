@@ -168,7 +168,11 @@
                         <label>{{'ticket.view.attachments'|translate}}</label>
                         <div class="attachment-img">
                             <div *ngFor="let row of documents" (click)="previewAttachment(row)" style="cursor: pointer;">
-                                <img src="{{row.document_url}}" alt="">
+                               <!-- <img src="{{row.document_url}}" alt=""> -->
+                               <img *ngIf="(row.type == 'mp4')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mp4-file.png" alt=""> 
+                                <img *ngIf="(row.type == 'mov')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mov-file.png" alt=""> 
+                                <img *ngIf="(row.type == 'jpeg') || (row.type == 'jpg') || (row.type == 'png')"
+                                        src="{{row.document_url}}" alt="">
                             </div>
                         </div>
                         <p *ngIf="documents==''" >
@@ -208,7 +212,11 @@
                                     <div>{{col.message}}</div>
                                     <div class="history-attachment-img">
                                         <div *ngFor="let file of col.documents" (click)="previewAttachment(file)" style="cursor: pointer;">
-                                            <img src="{{file.document_url}}" alt="">
+                                            <!-- <img src="{{file.document_url}}" alt=""> -->
+                                            <img *ngIf="(file.type == 'mp4')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mp4-file.png" alt=""> 
+                                            <img *ngIf="(file.type == 'mov')" src="{{prdAssetPath}}/assets/img/attachement-imgs/mov-file.png" alt=""> 
+                                            <img *ngIf="(file.type == 'jpeg') || (file.type == 'jpg') || (file.type == 'png')"
+                                                    src="{{file.document_url}}" alt="">
                                         </div>                                       
                                     </div>
                                 </li>
@@ -254,7 +262,7 @@
             <div class="col-12">
                 <div class="form-group">
                     <label>Attach issue screenshot</label>
-                    <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .exs"
+                    <input type="file" name="files" multiple formControlName="files" accept=".jpg, .jpeg, .png, .mp4, .mov ,.exs"
                         (change)="onFileSelect($event)" style="height: 45px;" />
                     <div class="invalid-feedback"
                         [ngClass]=" 'error'">{{'errorMessages.allowedImageTypes'|translate}}
@@ -302,7 +310,8 @@
     <div style="font-size:16px;text-align:center;padding:20px">
         <div class="row m-0">
             <div class="col-12" style="text-align:center">
-                <img src="{{preview}}" height="300" style="width:100%;height:100%;">
+                <img src="{{preview}}" height="300"  *ngIf="(format != 'mp4' && format != 'mov')" style="width:100%;height:100%;">
+                <video src="{{preview}}" height="300" *ngIf="(format == 'mp4' || format == 'mov')" controls style="width:100%;height:100%"></video> 
            </div>
        </div>
     </div>

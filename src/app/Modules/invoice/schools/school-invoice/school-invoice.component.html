@@ -66,7 +66,7 @@
                         style="width:auto;">
                     <!-- <i class="fa fa-search mr-2"></i> -->
                 </div>
-                <button pButton type="button" label="Create Invoice" class="btn-warning ml-2 p-0" (click)="createSchool($event)"></button>
+                <button *appIsGranted="'create'" pButton type="button" label="Create Invoice" class="btn-warning ml-2 p-0" (click)="createSchool($event)"></button>
             </div>
         </div>
     </form>

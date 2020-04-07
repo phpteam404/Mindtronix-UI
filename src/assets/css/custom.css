@@ -3771,6 +3771,14 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .custom-search .input-search {
   position: relative;
 }
+.custom-editor .ui-editor-container .ui-editor-toolbar{
+  border: 0px solid #c8c8c8;
+  background: none;
+}
+.custom-editor .ui-editor-container .ui-editor-content {
+  border-top: 1px solid #c8c8c8 !important;
+}
+
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

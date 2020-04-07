@@ -30,7 +30,7 @@
                             (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                             <!-- <i class="fa fa-search"></i>  -->
                         </div>
-                        <button pButton type="button" label="{{'masters.create' | translate}}" class="btn-warning" (click)="showBasicDialog({},true)"></button>
+                        <button *appIsGranted="'create'" pButton type="button" label="{{'masters.create' | translate}}" class="btn-warning" (click)="showBasicDialog({},true)"></button>
                     </div>                  
                 </div>
             </ng-template>
@@ -47,8 +47,8 @@
                     <td *ngFor="let col of columns ; let i = index">
                         <span *ngIf="i!=2" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 2" class="d-flex action-color">
-                            <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="{{'title.edit'|translate}}"></span></a>
-                            <a href="javascript:;" ><span class="icon icon-delete" title="{{'title.delete'|translate}}" (click)="deleteMasterChild(rowData)"></span></a>
+                            <a href="javascript:;" *appIsGranted="'edit'"><span class="icon icon-edit-pencil mr-2" (click)="showBasicDialog(rowData,false)" title="{{'title.edit'|translate}}"></span></a>
+                            <a href="javascript:;"  *appIsGranted="'delete'"><span class="icon icon-delete" title="{{'title.delete'|translate}}" (click)="deleteMasterChild(rowData)"></span></a>
                         </span>
                     </td>
                 </tr>

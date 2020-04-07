@@ -19,7 +19,7 @@ export class TicketInfoComponent implements OnInit {
   ticketIssue:any;
   submitted=null;
   maxSize = environment.maxUploadSize;
-  fileTypes = ["image/jpeg","image/png"];
+  fileTypes = ["image/jpeg","image/png","video/mp4","video/quicktime"];
   constructor(private _router: Router, 
               private _toast: ToasterService,
               private _tService:TicketService,
@@ -56,27 +56,28 @@ export class TicketInfoComponent implements OnInit {
 
   submit(){
     this.submitted=false;
-    if(this.ticketForm.valid){        
-      const formData = new FormData();
-      formData.append('title', this.getTitle());
-      formData.append('description', this.getDescription());
-      formData.append('issue', this.getIssueType());
-      if(Number(this.getUploadedFilesSize()) > Number(this.maxSize)){
-        this._toast.show('warning','Maximum File upload size is 20 MB!');
-        this.ticketForm.patchValue({
-          files:''
-        })
-        return false;
-      }
-      for (var i = 0; i < this.fileArr.length; i++) { 
-        formData.append("files["+i+"]", this.fileArr[i]);
-      }
-      this._tService.addTicket(formData).subscribe(res =>{
-        if(res.status){
-            this.submitted=true;
-            this.goToList();
+    if(this.ticketForm.valid){   
+      console.log('ticket info',this.ticketForm.value);
+        const formData = new FormData();
+        formData.append('title', this.getTitle());
+        formData.append('description', this.getDescription());
+        formData.append('issue', this.getIssueType());
+        if(Number(this.getUploadedFilesSize()) > Number(this.maxSize)){
+          this._toast.show('warning','Maximum File upload size is 20 MB!');
+          this.ticketForm.patchValue({
+            files:''
+          })
+          return false;
         }
-      });
+        for (var i = 0; i < this.fileArr.length; i++) { 
+          formData.append("files["+i+"]", this.fileArr[i]);
+        }
+        this._tService.addTicket(formData).subscribe(res =>{
+          if(res.status){
+              this.submitted=true;
+              this.goToList();
+          }
+        });
     }else{
       this._toast.show('warning','Please enter mandatory fields.');
     }
