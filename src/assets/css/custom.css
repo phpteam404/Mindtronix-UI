@@ -3764,7 +3764,7 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
   font: normal normal normal 14px/1 FontAwesome;
   right: 18px;
   position: absolute;
-  z-index: 99;
+  z-index: 8;
   display: block;
   top: 10px;
 }
@@ -3778,7 +3778,27 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
 .custom-editor .ui-editor-container .ui-editor-content {
   border-top: 1px solid #c8c8c8 !important;
 }
-
+.all-notifications {
+  color: #e87a26 !important;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+.all-notifications:hover{
+  text-decoration: underline !important;
+}
+.custom-access-names span{
+  display: block;
+  font-size: 14px;
+}
+.custom-access-names{
+  background: #ececec;
+    padding: 5px 15px;
+    color: #000000;
+}
+.header-right-block li a i{
+  font-size: 18px;
+  color: #e87a26;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

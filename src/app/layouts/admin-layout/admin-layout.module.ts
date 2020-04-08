@@ -43,6 +43,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
 import { IsGrantedDirective } from 'src/app/utils/is-granted.directive';
 import { GrantModule } from 'src/app/Modules/grant/grant/grant.module';
+import { NotificationComponent } from 'src/app/Modules/notification/notification.component';
 
 @NgModule({
   imports: [
@@ -89,6 +90,7 @@ import { GrantModule } from 'src/app/Modules/grant/grant/grant.module';
     OnlineSubscriptionComponent,
     StudentDashboardComponent,
     PageNotFoundComponent,
+    NotificationComponent
     // IsGrantedDirective
   ]
 })

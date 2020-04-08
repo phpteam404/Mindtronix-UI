@@ -8,6 +8,7 @@ import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription
 import { DashboardComponent } from 'src/app/Modules/dashboard/dashboard.component';
 import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/student-dashboard.component';
 import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
+import { NotificationComponent } from 'src/app/Modules/notification/notification.component';
 
 
 export const AdminLayoutRoutes: Routes = [
@@ -145,6 +146,14 @@ export const AdminLayoutRoutes: Routes = [
         canActivate: [AuthGuard],
         data: {
             breadcrumb: 'Email Templates'
+        }
+    },
+    { 
+        path: 'notifications',
+        component: NotificationComponent,
+        canActivate: [AuthGuard],
+        data: {
+            breadcrumb: 'Notifications'
         }
     },
     { 
