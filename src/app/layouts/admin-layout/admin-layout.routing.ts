@@ -57,7 +57,7 @@ export const AdminLayoutRoutes: Routes = [
         loadChildren: () => import('../../Modules/franchise/franchise.module').then(m => m.FranchiseModule),
         canActivate: [AuthGuard],
         data: {
-            breadcrumb: 'Franchise'
+            breadcrumb: 'Learning Center'
         }
     },
     {

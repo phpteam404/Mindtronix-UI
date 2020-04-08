@@ -3799,6 +3799,44 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
   font-size: 18px;
   color: #e87a26;
 }
+.notifations-tabs-list .ui-tabview .ui-tabview-panels .ui-tabview-panel {
+  /* height: 420px; */
+  max-height: inherit;
+}
+.notifations-tabs-list .custom-table p-table .ui-table .ui-table-tbody tr.view-notification:nth-child(even) {
+  background-color: #ececec;
+}
+.notifations-tabs-list tr.view-notification {
+  background-color: #ececec;
+}
+.notifations-tabs-list .custom-table p-table .ui-table .ui-table-tbody tr{
+  background-color: #f7f7f8;
+  border-bottom: 5px solid #ffffff;
+}
+.notifations-tabs-list .custom-table p-table .ui-table .ui-table-tbody tr:first-child {
+  border-top: 0px solid #ccc;
+}
+.notification-global-search:after{
+  content: "\f002";
+  font: normal normal normal 14px/1 FontAwesome;
+  right: 18px;
+  position: absolute;
+  z-index: 8;
+  display: block;
+  top: 10px;
+}
+.notification-global-search{
+  position: absolute;
+    float: right;
+    right: 15px;
+}
+.notification-global-search input{
+  min-width: 300px;
+  border-color: #cccccc;
+}
+.notification-global-search input::placeholder{
+  color: #aaaaaa;
+}
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

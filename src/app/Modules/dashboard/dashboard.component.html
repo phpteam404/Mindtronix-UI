@@ -178,7 +178,7 @@
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
                    
-                    <td *ngFor="let col of columns ; let i = index" (click)="viewTicketInfo(rowData)">
+                    <td *ngFor="let col of columns ; let i = index" style="cursor: pointer;" (click)="viewTicketInfo(rowData)">
                         <span *ngIf="i!=5 && i!=7 && i!=4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i!=5 && i!=7 && i==4" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyy'}}</span>
                     <span *ngIf="i == 5">

@@ -9,17 +9,17 @@
         "forgotPassword": "Forgot Password"
     },
     "franchise":{
-        "create": "Create Franchise",
-        "franchiseDetails": "Franchise Details",
+        "create": "Create Learning Center",
+        "franchiseDetails": "Learning Center Details",
         "contactInfo": "Contact Information",
         "feeManagement": "Fee Management",
         "createFeeStructure":"Create Fee Structure",
         "createContactInformation":"Create Contact Information",
-        "editFranchiseDetails":"Edit Franchise Details",
+        "editFranchiseDetails":"Edit Learning center Details",
         "search":"Search by Code / Name / Email / Contact / City",
         "add":{
-            "franchiseName":"Franchise Name",
-            "franchiseCode":"Franchise Code",
+            "franchiseName":"Learning Center Name",
+            "franchiseCode":"Learning Center Code",
             "ownerName":"Owner Name",
             "contactNumber":"Contact Number",
             "contactEmail":"Contact Email",
@@ -65,12 +65,12 @@
     "users":{
         "userCreate":"Create User",
         "userUpdate":"Update User",
-        "search":"Search by Name / Email / Contact / Franchise",
+        "search":"Search by Name / Email / Contact / Learning Center",
         "add":{
             "firstName":"First Name",
             "lastName":"Last Name",
             "role": "Role",
-            "franchise":"Franchise",
+            "franchise":"Learning Center",
             "contactEmail":"Contact Email",
             "contactNumber":"Contact Number",
             "password":"Password",
@@ -87,8 +87,8 @@
          "medicalInfo":"Medical Information",
          "currentStatus":"Current Status",
          "school":"School",
-         "franchise":"Franchise",
-         "search":"Search by Name / School / Email / Contact / Franchise",
+         "franchise":"Learning Center",
+         "search":"Search by Name / School / Email / Contact / Learning Center",
          "add":{
               "name":"Student Name",
               "dateOfBirth":"Date of Birth",
@@ -131,7 +131,7 @@
         "pincode":"PinCode",
         "city":"City",
         "state":"State",
-        "franchise":"Franchise",
+        "franchise":"Learning Center",
         "contactEmail":"Contact Email",
         "contactNumber":"Contact Number",
         "contactPerson":"Contact Person"
@@ -267,7 +267,7 @@
         "studentsInvoice":"Students Invoice",
         "amount":"Amount",
         "collected":"Collected",
-        "franchiseInvoice":"Franchise Invoice",
+        "franchiseInvoice":"Learning Center Invoice",
         "schoolInvoice":"School Invoice"
      },
     "buttons":{
@@ -286,8 +286,8 @@
     "errorMessages":{
         "contactNumber":"Contact number should be minimum 10 digits",
         "contactEmail":"Email should be valid!",
-        "franchiseName":"Franchise Name is required",
-        "franchiseCode":"Franchise Code is required and must be alphaNumeric",
+        "franchiseName":"Learning center name is required",
+        "franchiseCode":"Learning center Code is required and must be alphaNumeric",
         "franchiseOwner":"Owner Name is required",
         "contactTitle":"Contact Title is required",
         "contactName" :"Contact Name is required",
@@ -333,7 +333,9 @@
         "paymentTypeReq":"Payment mode is required",
         "allowedFileTypes": "NOTE: choose only (.jpg, .jpeg, .png, .mp4, .mov , .pdf, .exs) files",
         "allowedImageTypes": "NOTE: choose only (.jpg, .jpeg, .png, .exs,.mp4,.mov) files",
-        "amountReq":"Amount is required"
+        "amountReq":"Amount is required",
+        "issueDescription":"Issue description is required",
+        "contactMailInfo":"NOTE:School Admin Account will be created with this email"
     },
     "dropdown":{
         "country":"Country is required",
@@ -379,7 +381,7 @@
         "schoolName":"Select School",
         "grade":"Select Grade",
         "historyOfIllness":"History of any Illness If any",
-        "franchise":"Select Franchise",
+        "franchise":"Select Learning Center",
         "search":"Search...",
         "firstName":"First Name",
         "lastName":"Last Name",

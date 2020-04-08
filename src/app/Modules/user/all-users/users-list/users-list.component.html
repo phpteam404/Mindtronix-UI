@@ -49,7 +49,9 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 6" class="d-flex action-color">
-                            <a href="javascript:;" (click)="editUser(rowData)" *appIsGranted="'edit'" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}"></span></a>
+                            <a href="javascript:;" (click)="editUser(rowData)" *appIsGranted="'edit'">
+                                <span *ngIf="rowData['user_role'] !='School Admin'" class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}"></span>
+                            </a>
                             <a href="javascript:;" (click)="deleteUser(rowData)" *appIsGranted="'delete'"><span class="icon icon-delete" title="{{'title.delete'|translate}}"></span></a>
                         </span>
                     </td>

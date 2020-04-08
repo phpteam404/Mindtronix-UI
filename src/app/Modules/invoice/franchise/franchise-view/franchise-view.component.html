@@ -20,6 +20,13 @@
                         <span>{{franchiseInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
+                 <!-- For paid amount-->
+                 <div class="custom-view-div franchise-name">
+                    <div class="pl-2">{{'invoices.view.paidAmount'|translate}}
+                         <span> ₹ {{franchiseInvoiceObj.paid_amount |number}}</span>
+                    </div>
+                </div>
+                   <!-- For paid amount close-->
                 <div class="custom-view-div">
                     <div class="schools-text">{{'invoices.view.paidDate'|translate}}
                         <span>{{franchiseInvoiceObj.paid_date |date: 'dd MMM yyyy'}}</span>
@@ -41,7 +48,7 @@
             <div class="custom-view ticket-view-content">
                 <div class="row">
                   <div class="col-md-4 col-12">
-                        <label>Franchise Name</label>
+                        <label>{{'franchise.add.franchiseName'|translate}}</label>
                         <p>{{franchiseInvoiceObj.franchise_name}}</p>
                   </div>
                   <div class="col-md-4 col-12">

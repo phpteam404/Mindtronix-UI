@@ -22,7 +22,7 @@ const routes: Routes = [
     component: UpdateFranchiseComponent,
     data: {
       breadcrumbs: 'Update',
-      title: 'Franchise'
+      title: 'Learning Center'
     }
   },
   {
@@ -30,7 +30,7 @@ const routes: Routes = [
     component: ViewFranchiseComponent,
     data: {
       breadcrumbs: 'View',
-      title: 'Franchise'
+      title: 'Learning Center'
     }
   }
 ];

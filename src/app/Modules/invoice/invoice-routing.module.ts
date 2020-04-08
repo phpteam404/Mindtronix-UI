@@ -57,7 +57,7 @@ const routes: Routes = [
         loadChildren: () => import('../../Modules/invoice/franchise/franchise.module').then(m => m.FranchiseModule),
         canActivate: [AuthGuard],
         data: {
-          breadcrumb: 'Franchise Invoice'
+          breadcrumb: 'Learning Center Invoice'
         }
       }, 
       {

@@ -13,7 +13,7 @@ const routes: Routes = [
     component: FranchiseViewComponent,
     data: {
       breadcrumbs: 'View',
-      title: 'Franchise invoice details',
+      title: 'Learning Center invoice details',
       superParentPath: 'invoices'
     }
   }

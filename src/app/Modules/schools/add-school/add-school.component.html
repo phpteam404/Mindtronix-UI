@@ -46,7 +46,7 @@
                     </div>
                     <div class="col-md-4 col-12">
                         <div class="form-group">
-                            <label>{{'schools.contactEmail'|translate}} <span>*</span></label>
+                            <label>{{'schools.contactEmail'|translate}}<span>*</span> (School Admin created by this email)</label>
                             <input pinputtext placeholder="{{'schools.contactEmail'|translate}}" formControlName="email" name="email" type="email" required>
                             <div class="invalid-feedback"
                                  *ngIf="schoolForm.controls.email.invalid && submitted!=null && !submitted"

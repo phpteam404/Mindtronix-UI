@@ -21,6 +21,11 @@
                         <span>{{studentInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
+                <div class="custom-view-div franchise-name">
+                    <div class="pl-2">{{'invoices.view.paidAmount'|translate}}
+                        <span> ₹ {{studentInvoiceObj.paid_amount |number}}</span>
+                    </div>
+                </div>
                 <div class="custom-view-div" *ngIf="!paidDate">
                     <div class="schools-text"> {{'invoices.view.dueDate'|translate}}
                         <span>{{dueDate |date: 'dd MMM yyyy'}}</span>
