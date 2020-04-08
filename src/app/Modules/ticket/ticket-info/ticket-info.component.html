@@ -27,8 +27,12 @@
                     </div>
                     <div class="col-12">
                         <div class="form-group">
-                            <label>{{'ticket.add.issueDescription'|translate}}</label>
-                            <textarea pInputTextarea placeholder="{{'placeholder.description'|translate}}" formControlName="description"  name="description"></textarea>
+                            <label>{{'ticket.add.issueDescription'|translate}} <span>*</span></label>
+                            <textarea pInputTextarea placeholder="{{'placeholder.description'|translate}}" formControlName="description" name="description" required></textarea>
+                            <div class="invalid-feedback"
+                                *ngIf="ticketForm.controls.description.invalid && submitted!=null && !submitted"
+                                [ngClass]=" 'error'">{{'errorMessages.issueDescription'|translate}}
+                            </div> 
                         </div>
                     </div>
                     <div class="col-12">

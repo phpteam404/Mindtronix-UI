@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-
+import { UserService} from 'src/app/services/user.service';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
+import { TranslateService } from '@ngx-translate/core';
+import { TestBed } from '@angular/core/testing';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -10,12 +14,26 @@ export class DashboardComponent implements OnInit {
   cities: any;
   cars: any;
   ordercols:any;
-  ticket:any;
   cols:any;
   revenueMonth:any;
+  ticketsInfo:any ={};
+  ordersInfo:any={};
+  studentsCount:any={};
+  lcInvoice:any={};
+  ticketList:any ;
+  studentInvoice:any ={};
+  schoolInvoice:any={};
+  enableOrders:boolean;
+  enableStudents:boolean;
+  enableSchoolInvoice:boolean;
   prdAssetPath:string = environment.prdAssetPath;
 
-  constructor() {
+  constructor(private _router: Router,
+              private _ar: ActivatedRoute,
+              public translate: TranslateService,
+              private _ls: LocalStorageService,
+              private _service:UserService) {
+                translate.setDefaultLang(environment.defaultLanguage);
     this.cities = [
         {label:'Select City', value:null},
         {label:'New York', value:{id:1, name: 'New York', code: 'NY'}},
@@ -42,32 +60,62 @@ export class DashboardComponent implements OnInit {
       { field: 'date', header: 'Date' },
       { field: 'status', header: 'Status' }
     ];
-    this.ticket = [
-      {issueId:'#MI000001', type:'Kit Related', date:'01-02-2020', title:'Kit Not Working', created_by:'Sanjay', status:'Open',last_update:'01-02-2020'},
-      {issueId:'#MI000002', type:'Software Related', date:'07-02-2020', title:'User Manual Missing', created_by:'Krish', status:'Open',last_update:'07-02-2020'},
-      {issueId:'#MI000003', type:'Kit Related', date:'02-02-2020', title:'Missing Components', created_by:'Arjun', status:'Pending',last_update:'02-02-2020'},
-      {issueId:'#MI000004', type:'Kit Related', date:'04-02-2020', title:'Want to Return', created_by:'Darma', status:'Open',last_update:'04-02-2020'},
-      {issueId:'#MI000005', type:'Kit Related', date:'05-02-2020', title:'Need an Exchange', created_by:'Nikil', status:'Pending',last_update:'05-02-2020'}
-     
-    ];
-    this.cols = [
-      
-      { field: 'issueId', header: 'Issue ID' },
-      { field: 'title', header: 'Issue Title' },
-      { field: 'type', header: 'Issue Type' },
-      { field: 'created_by', header: 'Created By' },
-      { field: 'date', header: 'Created Date' },
-      { field: 'status', header: 'Status' }
-    ];
-    this.revenueMonth = [
-      {label:'Feb 2020', value:'Feb 2020'},
-      {label:'Jan 2020', value:'Jan 2020'},
-      {label:'Dec 2019', value:'Dec 2019'},
-    ];
+    // this.revenueMonth = [
+    //   {label:'Feb 2020', value:'Feb 2020'},
+    //   {label:'Jan 2020', value:'Jan 2020'},
+    //   {label:'Dec 2019', value:'Dec 2019'},
+    // ];
   }
   ngOnInit(): void {
-  
+    this.getDashboard();
+    this.roleBasedOrders();
+    this.roleBasedInvoice();
+  }
+  isEmptyTable() {
+    return (this.ticketList == 0 ? true : false);
   }
 
- 
+  getDashboard(){
+    this._service.adminDashboard().subscribe(res =>{
+      if(res.status){
+         this.ticketsInfo =res.data.ticket;
+         this.studentInvoice = res.data.student_invoice;
+         this.ordersInfo = res.data.orders;
+         this.studentsCount = res.data.students;
+         this.lcInvoice = res.data.lc_invoice;
+         this.schoolInvoice = res.data.school_invoice;
+         this.ticketList = res.data.ticket_list;
+         this.cols= res.table_headers;
+      }
+    });
+  }
+
+  PreviousList(){
+    this._router.navigate(['/ticket'], {relativeTo: this._ar});
+  }
+
+  viewTicketInfo(data:any){
+    this._router.navigate(['/ticket/view/'+data.issue_title+'/'+btoa(data.ticket_id)], {relativeTo: this._ar});
+  }
+  roleBasedOrders(){
+    var roleName = this._ls.getItem('user',true).data.user_role_name;
+    if(roleName=="LC Owner" || roleName=="Learning Center Head" || roleName=="School Admin") {
+      this.enableOrders=false;
+      this.enableStudents= true;
+    } 
+    else {
+       this.enableOrders=true;
+       this.enableStudents=false;
+    }
+  }
+  
+  roleBasedInvoice(){
+    var schoolAdmin = this._ls.getItem('user',true).data.user_role_name;
+    if(schoolAdmin=="School Admin"){
+      this.enableSchoolInvoice=true;
+    }
+    else{
+      this.enableSchoolInvoice=false;
+    }
+  }
 }

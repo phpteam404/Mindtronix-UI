@@ -59,4 +59,7 @@ export class UserService {
   deleteTrainer(params){
       return this.clientHttp.delete('User/Delete', params);
   }
+  adminDashboard(){
+    return this.clientHttp.get('User/adminDashboard');
+  }
 }

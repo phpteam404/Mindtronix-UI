@@ -27,6 +27,7 @@ export class AddUserComponent implements OnInit {
   enableFranchise:boolean=true;
   excludeRoles:any = [ "Mindtronix Content","Mindtronix Sales","Mindtronix Accounts"];
   formObj: any = {};
+  hideField:boolean=false;
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               private _toast: ToasterService,

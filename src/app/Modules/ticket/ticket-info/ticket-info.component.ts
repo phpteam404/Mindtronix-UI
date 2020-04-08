@@ -33,7 +33,7 @@ export class TicketInfoComponent implements OnInit {
   }
   ticketForm  = new FormGroup({
     title: new FormControl('', [Validators.required]),
-    description: new FormControl(''),
+    description: new FormControl('',[Validators.required]),
     files:new FormControl(''),
     issue_type: new FormControl('',[Validators.required])
   });

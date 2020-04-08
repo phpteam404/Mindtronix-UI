@@ -27,6 +27,7 @@ export class UpdateUserComponent implements OnInit {
   formObj: any = {};
   excludeRoles:any = [ "Mindtronix Content","Mindtronix Sales","Mindtronix Accounts"];
   enableFranchise:boolean=true;
+  hideField:boolean;
   constructor(private _router: Router,
               private _toast: ToasterService,
               private _service: UserService,
@@ -59,6 +60,9 @@ export class UpdateUserComponent implements OnInit {
           });
           if(this.excludeRoles.includes(this.formObj.user_role_name)){
             this.enableFranchise=false;
+          }
+          if(this.formObj.user_role_name=="School Admin"){
+             this.hideField=true;
           }
         }
       });
