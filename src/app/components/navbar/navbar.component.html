@@ -85,9 +85,9 @@
                        </div>
                     </a>
                     <ul *dropdownMenu class="dropdown-menu" role="menu">
-                        <li class="custom-access-names">
-                            <span>Learning center name</span>
-                            <span>Role name</span>
+                        <li class="custom-access-names" *ngIf="curUser.lc_name || curUser.school_name">
+                            <span *ngIf="curUser.lc_name">{{curUser.lc_name | titlecase}}</span>
+                            <span *ngIf="curUser.school_name">{{curUser.school_name | titlecase}}</span>
                         </li>
                         <li><a href="javascript:void(0);" (click)="profile()">Profile</a></li>
                         <li><a href="javascript:void(0);" (click)="logout()" class="d-flex align-items-center">Logout<i class="fa fa-sign-out pl-2"></i></a></li>

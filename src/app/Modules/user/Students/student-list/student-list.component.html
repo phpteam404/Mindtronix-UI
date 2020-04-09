@@ -40,7 +40,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index">
+                    <td *ngFor="let col of columns ; let i = index" (click)="i != 8 && viewStudent(rowData)">
                         <span *ngIf="i != 8 && i != 7 && i != 6" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i != 8 && i != 7 && i == 6" title="{{rowData[col.field] | date: 'dd MMM yyyy hh:mm a'}}" x-ms-format-detection="none">{{rowData[col.field] | date: 'dd MMM yyyy hh:mm a'}}</span>
                         <span *ngIf="i == 7">
@@ -49,7 +49,7 @@
                                 class='list-status'>{{rowData[col.field]}}</span>
                         </span>
                         <span *ngIf="i == 8" class="d-flex action-color">
-                            <a href="javascript:;" (click)="viewStudent(rowData)"><span class="icon icon-eye-2 mr-2" title="View" *appIsGranted="'view'"></span> </a> 
+                            <!-- <a href="javascript:;" (click)="viewStudent(rowData)"><span class="icon icon-eye-2 mr-2" title="View" *appIsGranted="'view'"></span> </a>  -->
                             <a href="javascript:;" ><span class="icon icon-edit-pencil mr-2" title="Edit" (click)="EditStudent(rowData)" *appIsGranted="'edit'"></span></a>
                             <!-- <a href="javascript:;"><span class="icon icon-delete" title="Delete" (click)="DeleteStudent(rowData)"></span></a> -->
                         </span>

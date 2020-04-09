@@ -3791,9 +3791,11 @@ body .ui-tabview .ui-tabview-panels .ui-tabview-panel{
   font-size: 14px;
 }
 .custom-access-names{
-  background: #ececec;
-    padding: 5px 15px;
-    color: #000000;
+  background: #e87a26ba;
+  padding: 5px 15px;
+  color: #f1efef;
+  font-style: italic;
+  font-size: 10px;
 }
 .header-right-block li a i{
   font-size: 18px;
