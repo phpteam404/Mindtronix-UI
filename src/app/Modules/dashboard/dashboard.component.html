@@ -5,7 +5,7 @@
     </div>
  <div class="custom-dashboard">
      <div class="row">
-         <div class="col-md-3" *ngIf="enableOrders">
+         <div class="col-md-3" *ngIf="showOrders">
             <div class="custom-dashboard-block" >
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="custom-iconblock">
@@ -18,15 +18,15 @@
                         <label>{{'dashboard.allOrders'|translate}}</label>
                         <h4>{{ordersInfo.all_orders}}</h4>
                     </div>
-                 <div>
-                    <label>{{'dashboard.pendingOrders'|translate}}</label>
-                    <h4 class="bg-red">{{ordersInfo.collected_amount}}</h4>
-                 </div>
+                    <div>
+                        <label>{{'dashboard.pendingOrders'|translate}}</label>
+                        <h4 class="bg-red">{{ordersInfo.collected_amount}}</h4>
+                    </div>
                 </div>
             </div> 
          </div>
          <!-- For Schools-->
-         <div class="col-md-3" *ngIf= "enableStudents">
+         <div class="col-md-3" *ngIf= "showStudents">
             <div class="custom-dashboard-block" >
                 <div class="d-flex align-items-center justify-content-center">
                     <div class="custom-iconblock">
@@ -39,96 +39,96 @@
                         <label>{{'dashboard.totalStudents'|translate}}</label>
                         <h4 class="bg-red">{{studentsCount.all_students}}</h4>
                     </div>
-                 <div>
-                    <label>{{'dashboard.activeStudents'|translate}}</label>
-                    <h4 class="bg-red">{{studentsCount.active_students}}</h4>
-                 </div>
+                    <div>
+                        <label>{{'dashboard.activeStudents'|translate}}</label>
+                        <h4 class="bg-red">{{studentsCount.active_students}}</h4>
+                    </div>
                 </div>
             </div> 
          </div>
          <div class="col-md-3">
            <div class="custom-dashboard-block">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="custom-iconblock">
-                     <!-- <i class="icon icon-ticket-star icon-f36"></i> -->
-                    <img src="{{prdAssetPath}}/assets/img/tickets.svg" alt="" style="width: 100%;height: 100%;">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="custom-iconblock">
+                        <!-- <i class="icon icon-ticket-star icon-f36"></i> -->
+                        <img src="{{prdAssetPath}}/assets/img/tickets.svg" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <label class="heading-label">{{'dashboard.tickets'|translate}}</label>
                 </div>
-                <label class="heading-label">{{'dashboard.tickets'|translate}}</label>
-            </div>
-            <div class="dashboard-boxtext d-flex justify-content-around">
-                <div>
-                    <label>{{'dashboard.allTickets'|translate}}</label>
-                    <h4>{{ticketsInfo.all_tickets}}</h4>
+                <div class="dashboard-boxtext d-flex justify-content-around">
+                    <div>
+                        <label>{{'dashboard.allTickets'|translate}}</label>
+                        <h4>{{ticketsInfo.all_tickets}}</h4>
+                    </div>
+                    <div>
+                        <label>{{'dashboard.pendingTickets'|translate}}</label>
+                        <h4 class="bg-red">{{ticketsInfo.pending_tickets}}</h4>
+                    </div>
                 </div>
-                <div>
-                    <label>{{'dashboard.pendingTickets'|translate}}</label>
-                    <h4 class="bg-red">{{ticketsInfo.pending_tickets}}</h4>
-                </div>
-            </div>
+           </div>
         </div>
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-3" *ngIf= "showStudentInvoice">
            <div class="custom-dashboard-block">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="custom-iconblock">
-                    <img src="{{prdAssetPath}}/assets/img/student-invoice.svg" alt="" style="width: 100%;height: 100%;">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="custom-iconblock">
+                        <img src="{{prdAssetPath}}/assets/img/student-invoice.svg" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <label class="heading-label">{{'dashboard.studentsInvoice'|translate}} </label>
                 </div>
-                <label class="heading-label">{{'dashboard.studentsInvoice'|translate}} </label>
-            </div>
-            <div class="dashboard-boxtext d-flex justify-content-around">
-                <div>
-                    <label>{{'dashboard.amount'|translate}}</label>
-                    <h4>₹ {{studentInvoice.total_amount |number}}</h4>
+                <div class="dashboard-boxtext d-flex justify-content-around">
+                    <div>
+                        <label>{{'dashboard.amount'|translate}}</label>
+                        <h4>{{studentInvoice.total_amount | currency:'₹ '}}</h4>
+                    </div>
+                    <div>
+                        <label>{{'dashboard.collected'|translate}}</label>
+                        <h4 class="bg-brown">{{studentInvoice.collected_amount | currency:'₹ '}}</h4>
+                    </div>
                 </div>
-             <div>
-                <label>{{'dashboard.collected'|translate}}</label>
-                <h4 class="bg-brown">₹ {{studentInvoice.collected_amount |number}}</h4>
-             </div>
             </div>
         </div>
-        </div>
-        <div class="col-md-3" *ngIf="!enableSchoolInvoice">
+        <div class="col-md-3" *ngIf="showLCInvoice">
            <div class="custom-dashboard-block">
-            <div class="d-flex align-items-center justify-content-center">
-                <div class="custom-iconblock">
-                    <img src="{{prdAssetPath}}/assets/img/franchise-invoice.svg" alt="" style="width: 100%;height: 100%;">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="custom-iconblock">
+                        <img src="{{prdAssetPath}}/assets/img/franchise-invoice.svg" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <label class="heading-label">{{'dashboard.franchiseInvoice'|translate}}</label>
                 </div>
-                <label class="heading-label">{{'dashboard.franchiseInvoice'|translate}}</label>
-            </div>
-            <div class="dashboard-boxtext d-flex justify-content-around">
-                <div>
-                    <label>{{'dashboard.amount'|translate}}</label>
-                    <h4>₹ {{lcInvoice.total_amount |number}}</h4>
+                <div class="dashboard-boxtext d-flex justify-content-around">
+                    <div>
+                        <label>{{'dashboard.amount'|translate}}</label>
+                        <h4>{{lcInvoice.total_amount | currency:'₹ '}}</h4>
+                    </div>
+                    <div>
+                        <label>{{'dashboard.collected'|translate}}</label>
+                        <h4 class="bg-brown">{{lcInvoice.collected_amount | currency:'₹ '}}</h4>
+                    </div>
                 </div>
-             <div>
-                <label>{{'dashboard.collected'|translate}}</label>
-                  <h4 class="bg-brown">₹ {{lcInvoice.collected_amount |number}}</h4>
-             </div>
             </div>
         </div>
-     </div>
-     <!-- For Schools Invoice-->
-     <div class="col-md-3" *ngIf="enableSchoolInvoice">
-        <div class="custom-dashboard-block">
-         <div class="d-flex align-items-center justify-content-center">
-             <div class="custom-iconblock">
-                 <img src="{{prdAssetPath}}/assets/img/franchise-invoice.svg" alt="" style="width: 100%;height: 100%;">
-             </div>
-             <label class="heading-label">{{'dashboard.schoolInvoice' |translate}}</label>
-         </div>
-         <div class="dashboard-boxtext d-flex justify-content-around">
-             <div>
-                 <label>{{'dashboard.amount'|translate}}</label>
-                 <h4>₹ {{schoolInvoice.total_amount |number}}</h4>
-             </div>
-          <div>
-             <label>{{'dashboard.collected'|translate}}</label>
-               <h4 class="bg-brown">₹ {{schoolInvoice.collected_amount |number}}</h4>
-          </div>
-         </div>
-     </div>
-  </div>
-     <!-- For Schools Invoice close-->
+        <!-- For Schools Invoice-->
+        <div class="col-md-3" *ngIf="showSchoolInvoice">
+            <div class="custom-dashboard-block">
+                <div class="d-flex align-items-center justify-content-center">
+                    <div class="custom-iconblock">
+                        <img src="{{prdAssetPath}}/assets/img/franchise-invoice.svg" alt="" style="width: 100%;height: 100%;">
+                    </div>
+                    <label class="heading-label">{{'dashboard.schoolInvoice' |translate}}</label>
+                </div>
+                <div class="dashboard-boxtext d-flex justify-content-around">
+                    <div>
+                        <label>{{'dashboard.amount'|translate}}</label>
+                        <h4>₹ {{schoolInvoice.total_amount |number}}</h4>
+                    </div>
+                    <div>
+                        <label>{{'dashboard.collected'|translate}}</label>
+                        <h4 class="bg-brown">₹ {{schoolInvoice.collected_amount |number}}</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- For Schools Invoice close-->
      </div>
  </div>
  <!-- for orders list open-->
@@ -165,39 +165,36 @@
 <!-- For orders list close-->
     <div class="custom-table mt-3 dashboard-list">
         <h4>Ticket List <span>( New Tickets )</span></h4>
-        <p-table #dt [columns]="cols" [value]="ticketList" [rows]="5">
-           
+        <p-table #dt [columns]="cols" [value]="ticketList" [rows]="5">           
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index">
-                        {{col.header}}
-                     
+                        {{col.header}}                     
                     </th>
                 </tr>
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                   
-                    <td *ngFor="let col of columns ; let i = index" style="cursor: pointer;" (click)="viewTicketInfo(rowData)">
+                    <td *ngFor="let col of columns ; let i = index" (click)="viewTicketInfo(rowData)">
                         <span *ngIf="i!=5 && i!=7 && i!=4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
                         <span *ngIf="i!=5 && i!=7 && i==4" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyy'}}</span>
-                    <span *ngIf="i == 5">
-                        <span [ngClass]="[(rowData[col.field]==='New') ? 'bg-blue' : '',
-                            (rowData[col.field]==='In Progress')? 'bg-orange' : '',
-                            (rowData[col.field]==='Re Open')? 'bg-orange':'',
-                            (rowData[col.field]==='Close')? 'bg-brown' : '']"
-                        class='list-status'>{{rowData[col.field]}}</span>
-                    </span>
+                        <span *ngIf="i == 5">
+                            <span [ngClass]="[(rowData[col.field]==='New') ? 'bg-blue' : '',
+                                (rowData[col.field]==='In Progress')? 'bg-orange' : '',
+                                (rowData[col.field]==='Re Open')? 'bg-orange':'',
+                                (rowData[col.field]==='Close')? 'bg-brown' : '']"
+                            class='list-status'>{{rowData[col.field]}}</span>
+                        </span>
                     </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="footer" let-columns>
                 <ng-container *ngIf="isEmptyTable()">
-                <tr>
-                  <td [attr.colspan]="columns.length" class="text-center">
-                    {{'general.noRecords'|translate}}
-                  </td>
-                </tr>
+                    <tr>
+                    <td [attr.colspan]="columns.length" class="text-center">
+                        {{'general.noRecords'|translate}}
+                    </td>
+                    </tr>
                 </ng-container>
             </ng-template>
         </p-table>

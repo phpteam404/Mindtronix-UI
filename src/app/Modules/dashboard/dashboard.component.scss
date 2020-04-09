@@ -4,6 +4,9 @@
     z-index: 2;
     right: 16px;
 }
+.dashboard-list td{
+    cursor: pointer;
+}
 @media (max-width: 1199px) {
     .month-wise-dropdown{
         top: 71px;

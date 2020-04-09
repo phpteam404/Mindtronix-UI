@@ -78,6 +78,7 @@
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+                        [ngStyle]="{'width': (col.field == 'franchise_name')?'13%':''}"    
                         [ngClass]="[(columns.length-2===i) ? 'text-right' : '',(i==0)?'w300':'']">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 7" [field]="col.field"></p-sortIcon>

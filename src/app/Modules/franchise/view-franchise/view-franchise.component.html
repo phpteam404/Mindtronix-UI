@@ -325,16 +325,16 @@
         <div class="col-md-3 col-12 pl-0">
             <div class="custom-veiw-rightside">
                 <div class="revenue-text revenue-month-dropdown">{{'franchise.view.revenue'|translate}}
-                    <p-dropdown [options]="revenueMonth" placeholder="Feb 2020" itemSize="30" name="contact_title" optionLabel="label" required></p-dropdown>
+                    <p-dropdown [options]="revenueMonth" (onChange)="selectedMonth($event)" itemSize="30" name="contact_title" optionLabel="label" required></p-dropdown>
                 </div>
                 <div class="student-text">{{'franchise.view.forStudents'|translate}}
                     <div class="custom-flex">
                         <span> {{'franchise.view.invoiced'|translate}}
-                            <a href="javascript:;" class="green-text">₹ 10,000</a>
+                            <a href="javascript:;" class="green-text">₹ {{franchiseExtraInfo.student_invoice_amount}}</a>
                         </span>
                         <span>{{'franchise.view.collected'|translate}}
-                            <a href="javascript:;" class="green-text text-right">₹5,000</a>
-                            <a href="javascript:;" class="red-text text-right">- ₹5,000</a>
+                            <a href="javascript:;" class="green-text text-right">₹{{franchiseExtraInfo.student_collected_amount}}</a>
+                            <a href="javascript:;" class="red-text text-right">- ₹{{franchiseExtraInfo.student_due_amount}}</a>
                             <span class="due-text">Due</span>
                         </span>
                     </div>
@@ -342,10 +342,26 @@
                 <div class="student-text">{{'franchise.view.forMindtronix'|translate}}
                     <div class="custom-flex">
                         <span>{{'franchise.view.invoiced'|translate}}
-                            <a href="javascript:;" class="green-text">₹ 10,000</a>
+                            <a href="javascript:;" class="green-text">₹ {{franchiseExtraInfo.mindtronix_invoice_amount}}</a>
                         </span>
-                        <span>{{'franchise.view.paid'|translate}}
-                            <a href="javascript:;" class="red-text text-right">₹ 5,000</a>
+                        <span>{{'franchise.view.collected'|translate}}
+                            <a href="javascript:;" class="green-text text-right">₹{{franchiseExtraInfo.mindtronix_collected_amount}}</a>
+                            <a href="javascript:;" class="red-text text-right">- ₹{{franchiseExtraInfo.mindtronix_due_amount}}</a>
+                            <span class="due-text">Due</span>
+                        </span>
+                        <!-- <span class="due-text">Due</span> -->
+                    </div>
+                </div>
+                <!-- For schools-->
+                <div class="student-text">{{'franchise.view.forSchools'|translate}}
+                    <div class="custom-flex">
+                        <span>{{'franchise.view.invoiced'|translate}}
+                            <a href="javascript:;" class="green-text">₹ {{franchiseExtraInfo.school_invoice_amount}}</a>
+                        </span>
+                        <span>{{'franchise.view.collected'|translate}}
+                            <a href="javascript:;" class="green-text text-right">₹{{franchiseExtraInfo.school_collected_amount}}</a>
+                            <a href="javascript:;" class="red-text text-right">- ₹{{franchiseExtraInfo.school_due_amount}}</a>
+                            <span class="due-text">Due</span>
                         </span>
                         <!-- <span class="due-text">Due</span> -->
                     </div>

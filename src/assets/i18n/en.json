@@ -42,9 +42,11 @@
             "revenue":"Revenue",
             "forStudents":"For Students",
             "forMindtronix":"For Mindtronix",
+            "forSchools":"For Schools",
             "invoiced":"Invoiced",
             "paid":"Paid",
             "collected":"Collected",
+            "due":"Due",
             "statistics":"Statistics"
         }       
     },

@@ -52,7 +52,9 @@ export class ViewFranchiseComponent implements OnInit {
   franchiseName: any;
   structure:any;
   secondFormCreate: boolean;
-
+  graphMonths:any;
+  franchiseGraphSeries:any;
+  monthSelected:any;
   constructor(private _ar: ActivatedRoute,
     private _router: Router,
     private _service: FranchiseService,
@@ -79,11 +81,6 @@ export class ViewFranchiseComponent implements OnInit {
       { field: 'discount', header: 'Discount (%)' },
       { field: 'tax', header: 'Tax (%)' },
       { field: 'status', header: 'Status' }
-    ];
-    this.revenueMonth = [
-      { label: 'Feb 2020', value: 'Feb 2020' },
-      { label: 'Jan 2020', value: 'Jan 2020' },
-      { label: 'Dec 2019', value: 'Dec 2019' },
     ];
   }
 
@@ -124,7 +121,6 @@ export class ViewFranchiseComponent implements OnInit {
       this.getFranchiseInfo(this.franchiseId);
       this.getFranchiseData();
     });
-    this.loadStatisticsChart();
 
     this.firstForm = new FormGroup({
       name: new FormControl('', [Validators.required]),
@@ -167,13 +163,8 @@ export class ViewFranchiseComponent implements OnInit {
       title: {
         text: null
       },
-
       xAxis: {
-        categories: [
-          'Dec 2019',
-          'Jan 2020',
-          'Feb 2020',
-        ],
+        categories:this.graphMonths,
         crosshair: true
       },
       yAxis: {
@@ -191,16 +182,8 @@ export class ViewFranchiseComponent implements OnInit {
       colors: ['#30ad07', '#ff0000'],
       series: []
     });
-
     chart['options']['series'] = [];
-    chart['options']['series'][0] = {
-      name: 'Invoiced Amount',
-      data: [83.6, 78.8, 106.4]
-    };
-    chart['options']['series'][1] = {
-      name: 'Collected Amount',
-      data: [49.9, 71.5, 98.5]
-    };
+    chart['options']['series']=this.franchiseGraphSeries;
     this.chart = chart;
   }
   getMasterDropdown(masterKey): any {
@@ -233,11 +216,16 @@ export class ViewFranchiseComponent implements OnInit {
   }
   getFranchiseInfo(franchiseId) {
     var params = new HttpParams().set('franchise_id', franchiseId);
+    if(this.monthSelected) params= params.set('month',this.monthSelected);
     this._service.getFranchiseInfo(params).subscribe(res => {
       if (res.status) {
         this.franchiseObj = res.data.data[0];
         this.contacts = res.data.data[0].franchise_contacts_information;
         this.FeeList = res.data.data[0].fee_detalis;
+        this.graphMonths = res.data.statistics_graph_months;
+        this.revenueMonth =res.data.drop_down_months;
+        this.franchiseGraphSeries = res.data.statistics_graph;
+        this.loadStatisticsChart();
         this.FeeList.forEach(item=>{
           if(item.status!='1') item.status=0;
           if(item.status=='1') item.status=1;
@@ -245,6 +233,10 @@ export class ViewFranchiseComponent implements OnInit {
         this.franchiseExtraInfo = res.data;
       }
     });
+  }
+  selectedMonth(event:any){
+    this.monthSelected = event.value.value;
+    this.getFranchiseInfo(this.franchiseId);
   }
   getFranchiseData() {
     var param = new HttpParams().set('franchise_id', this.franchiseId);
