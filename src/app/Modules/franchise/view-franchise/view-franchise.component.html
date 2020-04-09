@@ -339,19 +339,6 @@
                         </span>
                     </div>
                 </div>
-                <div class="student-text">{{'franchise.view.forMindtronix'|translate}}
-                    <div class="custom-flex">
-                        <span>{{'franchise.view.invoiced'|translate}}
-                            <a href="javascript:;" class="green-text">₹ {{franchiseExtraInfo.mindtronix_invoice_amount}}</a>
-                        </span>
-                        <span>{{'franchise.view.collected'|translate}}
-                            <a href="javascript:;" class="green-text text-right">₹{{franchiseExtraInfo.mindtronix_collected_amount}}</a>
-                            <a href="javascript:;" class="red-text text-right">- ₹{{franchiseExtraInfo.mindtronix_due_amount}}</a>
-                            <span class="due-text">Due</span>
-                        </span>
-                        <!-- <span class="due-text">Due</span> -->
-                    </div>
-                </div>
                 <!-- For schools-->
                 <div class="student-text">{{'franchise.view.forSchools'|translate}}
                     <div class="custom-flex">
@@ -364,6 +351,20 @@
                             <span class="due-text">Due</span>
                         </span>
                         <!-- <span class="due-text">Due</span> -->
+                    </div>
+                </div>
+                <!-- For Mindtronix-->
+                <div class="student-text">{{'franchise.view.forMindtronix'|translate}}
+                     <div class="custom-flex">
+                          <span>{{'franchise.view.invoiced'|translate}}
+                                <a href="javascript:;" class="green-text">₹ {{franchiseExtraInfo.mindtronix_invoice_amount}}</a>
+                           </span>
+                           <span>{{'franchise.view.collected'|translate}}
+                             <a href="javascript:;" class="green-text text-right">₹{{franchiseExtraInfo.mindtronix_collected_amount}}</a>
+                              <a href="javascript:;" class="red-text text-right">- ₹{{franchiseExtraInfo.mindtronix_due_amount}}</a>
+                               <span class="due-text">Due</span>
+                            </span>
+                            <!-- <span class="due-text">Due</span> -->
                     </div>
                 </div>
             </div>

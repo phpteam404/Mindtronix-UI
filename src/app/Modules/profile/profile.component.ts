@@ -131,7 +131,10 @@ export class ProfileComponent implements OnInit {
       this._cService.addProfile(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;
-          this._router.navigate([this._ls.getItem('user',true).menu[0].module_url]);
+          if(this._ls.getItem('user',true).menu[0].sub_menus.length>0){
+            this._router.navigate([this._ls.getItem('user',true).menu[0].sub_menus[0].module_url]);
+          }else this._router.navigate([this._ls.getItem('user',true).menu[0].module_url]);
+          //this._router.navigate([this._ls.getItem('user',true).menu[0].module_url]);
         }
       });
     }else{

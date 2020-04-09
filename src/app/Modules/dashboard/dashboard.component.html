@@ -16,11 +16,11 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.allOrders'|translate}}</label>
-                        <h4>{{ordersInfo.all_orders}}</h4>
+                        <h4>{{ordersInfo.all_orders ?  (ordersInfo.all_orders | number) : 0}}</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.pendingOrders'|translate}}</label>
-                        <h4 class="bg-red">{{ordersInfo.collected_amount}}</h4>
+                        <h4 class="bg-red">{{ordersInfo.collected_amount ?  (ordersInfo.collected_amount | number) : 0}}</h4>
                     </div>
                 </div>
             </div> 
@@ -37,11 +37,11 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.totalStudents'|translate}}</label>
-                        <h4 class="bg-red">{{studentsCount.all_students}}</h4>
+                        <h4 class="bg-red">{{studentsCount.all_students ?  (studentsCount.all_students | number) : 0}}</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.activeStudents'|translate}}</label>
-                        <h4 class="bg-red">{{studentsCount.active_students}}</h4>
+                        <h4 class="bg-red">{{studentsCount.active_students ?  (studentsCount.active_students | number) : 0}}</h4>
                     </div>
                 </div>
             </div> 
@@ -58,11 +58,13 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.allTickets'|translate}}</label>
-                        <h4>{{ticketsInfo.all_tickets}}</h4>
+                        <h4 *ngIf="ticketsInfo">{{ticketsInfo.all_tickets ? (ticketsInfo.all_tickets | number) : 0}}</h4>
+                        <h4  *ngIf="!ticketsInfo">0</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.pendingTickets'|translate}}</label>
-                        <h4 class="bg-red">{{ticketsInfo.pending_tickets}}</h4>
+                        <h4 class="bg-red" *ngIf="ticketsInfo">{{ticketsInfo.pending_tickets ? (ticketsInfo.pending_tickets | number) : 0}}</h4>
+                        <h4 class="bg-red" *ngIf="!ticketsInfo">0</h4>
                     </div>
                 </div>
            </div>
@@ -78,11 +80,11 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.amount'|translate}}</label>
-                        <h4>{{studentInvoice.total_amount | currency:'₹ '}}</h4>
+                        <h4>{{studentInvoice.total_amount ? (studentInvoice.total_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.collected'|translate}}</label>
-                        <h4 class="bg-brown">{{studentInvoice.collected_amount | currency:'₹ '}}</h4>
+                        <h4 class="bg-brown">{{studentInvoice.collected_amount ? (studentInvoice.collected_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                 </div>
             </div>
@@ -98,11 +100,11 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.amount'|translate}}</label>
-                        <h4>{{lcInvoice.total_amount | currency:'₹ '}}</h4>
+                        <h4>{{lcInvoice.total_amount ? (lcInvoice.total_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.collected'|translate}}</label>
-                        <h4 class="bg-brown">{{lcInvoice.collected_amount | currency:'₹ '}}</h4>
+                        <h4 class="bg-brown">{{lcInvoice.collected_amount ? (lcInvoice.collected_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                 </div>
             </div>
@@ -119,11 +121,11 @@
                 <div class="dashboard-boxtext d-flex justify-content-around">
                     <div>
                         <label>{{'dashboard.amount'|translate}}</label>
-                        <h4>₹ {{schoolInvoice.total_amount |number}}</h4>
+                        <h4>{{schoolInvoice.total_amount ? (schoolInvoice.total_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                     <div>
                         <label>{{'dashboard.collected'|translate}}</label>
-                        <h4 class="bg-brown">₹ {{schoolInvoice.collected_amount |number}}</h4>
+                        <h4 class="bg-brown">{{schoolInvoice.collected_amount ? (schoolInvoice.collected_amount | currency:'':'₹ ':'1.0-2') : '₹ 0'}}</h4>
                     </div>
                 </div>
             </div>
@@ -165,7 +167,7 @@
 <!-- For orders list close-->
     <div class="custom-table mt-3 dashboard-list">
         <h4>Ticket List <span>( New Tickets )</span></h4>
-        <p-table #dt [columns]="cols" [value]="ticketList" [rows]="5">           
+        <p-table #dt [columns]="cols" [value]="ticketList" [rows]="5" *ngIf="cols">           
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index">
@@ -191,14 +193,33 @@
             <ng-template pTemplate="footer" let-columns>
                 <ng-container *ngIf="isEmptyTable()">
                     <tr>
-                    <td [attr.colspan]="columns.length" class="text-center">
-                        {{'general.noRecords'|translate}}
-                    </td>
+                        <td [attr.colspan]="columns.length" class="text-center">
+                            {{'general.noRecords'|translate}}
+                        </td>
                     </tr>
                 </ng-container>
             </ng-template>
         </p-table>
-        <h5><a href="javascript:;" (click)="PreviousList()">View More</a></h5>
+        <p-table *ngIf="!cols">
+            <ng-template pTemplate="header" >
+                <tr>
+                    <th>Id</th>
+                    <th>Title</th>
+                    <th>Type</th>
+                    <th>Created By</th>
+                    <th>Created date</th>
+                    <th>Status</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-rowData>
+                <tr>
+                    <td [attr.colspan]="6" class="text-center">
+                        {{'general.noRecords'|translate}}
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <h5><a href="javascript:;" (click)="viewMoreTickets()">View More</a></h5>
     </div> 
     <!--For View More -->
     <!-- <div class="custom-table mt-3 dashboard-list" *ngIf="viewMore">

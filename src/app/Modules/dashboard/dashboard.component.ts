@@ -80,8 +80,8 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
-  PreviousList(){
-    this._router.navigate(['/ticket'], {relativeTo: this._ar});
+  viewMoreTickets(){
+    this._router.navigate(['/ticket']);
   }
   viewTicketInfo(data:any){
     this._router.navigate(['/ticket/view/'+data.issue_title+'/'+btoa(data.ticket_id)]);
