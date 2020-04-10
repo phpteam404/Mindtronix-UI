@@ -8,6 +8,7 @@ export class SharedService {
 
   @Output() user: EventEmitter<any> = new EventEmitter();
   @Output() roleAccess : EventEmitter<any> = new EventEmitter();
+  @Output() notification : EventEmitter<any> = new EventEmitter();
    constructor(private _ls:LocalStorageService) {}
 
   change() {
@@ -20,15 +21,12 @@ export class SharedService {
     this.roleAccess.emit(data);
   }
   getAccess(type:any){
-   /* var obj:any={};
-    if(this.roleAccess[type]>0){
-      obj['access']=true;
-    }
-    else {
-      obj['access']=false;
-    }
-    return obj;*/
-    //console.log(type,'====',this.roleAccess);
     return this.roleAccess;
+  }
+  setNotification(data:any) {
+    this.notification.emit(data);
+  }
+  getNotification(){
+    return this.notification;
   }
 }

@@ -5,6 +5,7 @@ import { LocalStorageService } from '../utils/local-storage.service';
 import { AuthenticationService } from '../services/authentication.service';
 import { ToasterService } from '../utils/toaster.service';
 import { SharedService } from '../services/shared.service';
+import { HttpParams } from '@angular/common/http';
 @Injectable({
   providedIn: 'root'
 })
@@ -71,7 +72,16 @@ export class AuthGuard implements CanActivate {
             obj = this._ls.getItem('user',true);
             obj['data']['grant'] = this.roleAccessObj;
             this._ls.setItem('user',obj,true);
-
+            /*service for notifications */
+            var parmas = new HttpParams()
+                  .set("notification_status","unread")
+                  .set("start",0+'')
+                  .set("number",3+'');
+            this.service.getNotifications(parmas).subscribe(res=>{
+              if(res.status){
+                this._ss.setNotification(res.data);
+              }
+            });
           if(res.data.role_access.view>0){
             
             this._ss.setAccess(this.roleAccessObj);             

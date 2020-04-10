@@ -25,6 +25,9 @@ export class AuthenticationService {
     forgotPassword(params){
       return this.http.post('Signup/forgetPassword',params);
     }
+    getNotifications(params){
+      return this.http.get('User/notification',params);
+    }
     logout() {
       // remove user from local storage to log user out
       this.ls.removeItem('user');

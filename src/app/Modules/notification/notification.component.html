@@ -1,109 +1,32 @@
 <div class="main-content custom-lastchild-list order-list">
-    <div class="notification-global-search">
-     <input type="text" pInputText placeholder="Search Notifications"/>
+    <div class="custom-table notification-table">
+        <p-table #dt [columns]="cols" [value]="list">
+            <ng-template pTemplate="header" let-columns>
+                <tr>
+                    <th *ngFor="let col of columns; let i = index"
+                        [ngStyle]="{'width': (col.field == 'created_date_time')?'13%':''}">
+                        {{col.header}}
+                    </th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-rowData let-columns="columns">
+                <tr>
+                    <td *ngFor="let col of columns ; let i = index">
+                        <span *ngIf="i!=0" [innerHTML]="rowData[col.field]"></span>
+                        <span *ngIf="i == 0" title="{{rowData[col.field] | date: 'dd MMM yyyy'}}">{{rowData[col.field] | date: 'dd MMM yyyy'}}</span>                      
+                    </td>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="footer" let-columns>
+                <ng-container *ngIf="isEmptyTable()">
+                <tr>
+                  <td [attr.colspan]="columns.length" class="text-center">
+                    No records found
+                  </td>
+                </tr>
+                </ng-container>
+            </ng-template>
+        </p-table>
     </div>
-     <div class="custom-tabs notifations-tabs-list clearfix">
-         <p-tabView>
-            
-             <p-tabPanel header="All (10)">
-                 <div class="custom-view">
-                     <div class="custom-view-content">
-                         <div class="row">                            
-                             <div class="col-12">
-                                 <div class="custom-table">
-                                     <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
-                                         <!-- <ng-template pTemplate="header" let-columns>
-                                             <tr>
-                                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
-                                                     {{col.header}}
-                                                     <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
-                                                 </th>
-                                             </tr>
-                                         </ng-template> -->
-                                         <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                             <tr>                   
-                                                 <td *ngFor="let col of columns ; let i = index">
-                                                     <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
-                                                     <span *ngIf="i == 6">
-                                                         <span [ngClass]="[(rowData[col.field]==='Open') ? 'bg-gold' : '',
-                                                         (rowData[col.field]==='Pending')? 'bg-orange' : '',
-                                                         (rowData[col.field]==='Closed')? 'bg-brown' : '']"
-                                                         class='list-status'>{{rowData[col.field]}}</span>
-                                                     </span>
-                                                     <!-- <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
-                                                         <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>
-                                                         
-                                                     </span> -->
-                                                   
-                                                 </td>
-                                             </tr>
-                                         </ng-template>
-                                         <ng-template pTemplate="footer" let-columns>
-                                             <ng-container *ngIf="isEmptyTable()">
-                                             <tr>
-                                               <td [attr.colspan]="columns.length" class="text-center">
-                                                 No records found
-                                               </td>
-                                             </tr>
-                                             </ng-container>
-                                         </ng-template>
-                                     </p-table>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </p-tabPanel>
-             <p-tabPanel header="New (03)">
-                 <div class="custom-view">
-                     <div class="custom-view-content">
-                         <div class="row">                           
-                             <div class="col-12">
-                                 <div class="custom-table">
-                                     <p-table #dt [columns]="cols" [value]="cars" [paginator]="true" [rows]="10">
-                                       
-                                         <!-- <ng-template pTemplate="header" let-columns>
-                                             <tr>
-                                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
-                                                     {{col.header}}
-                                                     <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
-                                                 </th>
-                                             </tr>
-                                         </ng-template> -->
-                                         <ng-template pTemplate="body" let-rowData let-columns="columns">
-                                             <tr>                   
-                                                 <td *ngFor="let col of columns ; let i = index">
-                                                     <span *ngIf="i!=6 && i!=7" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
-                                                     <span *ngIf="i == 6">
-                                                         <span [ngClass]="[(rowData[col.field]==='Open') ? 'bg-gold' : '',
-                                                         (rowData[col.field]==='Pending')? 'bg-orange' : '',
-                                                         (rowData[col.field]==='Closed')? 'bg-brown' : '']"
-                                                         class='list-status'>{{rowData[col.field]}}</span>
-                                                     </span>
-                                                     <!-- <span *ngIf="i == 6" class="d-flex action-color justify-content-center">
-                                                         <a href="javascript:;" ><span class="icon icon-eye-2 mr-1" title="View"></span></a>
-                                                         
-                                                     </span> -->
-                                                   
-                                                 </td>
-                                             </tr>
-                                         </ng-template>
-                                         <ng-template pTemplate="footer" let-columns>
-                                             <ng-container *ngIf="isEmptyTable()">
-                                             <tr>
-                                               <td [attr.colspan]="columns.length" class="text-center">
-                                                 No records found
-                                               </td>
-                                             </tr>
-                                             </ng-container>
-                                         </ng-template>
-                                     </p-table>
-                                 </div>
-                             </div>
-                         </div>
-                     </div>
-                 </div>
-             </p-tabPanel>
-         </p-tabView>
-     </div>
- </div>
+   
+</div>

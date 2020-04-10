@@ -7,6 +7,7 @@ import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { environment } from 'src/environments/environment';
 import { SharedService } from 'src/app/services/shared.service';
+import { HttpParams } from '@angular/common/http';
 @Component({
     // moduleId: module.id,
     selector: 'navbar-cmp',
@@ -21,6 +22,8 @@ export class NavbarComponent implements OnInit{
     ly: SidebarComponent;
     private sidebarVisible: boolean;
     curUser:any;
+    notificationCount:number=0;
+    notifications:any;
     constructor(location: Location,
                private element: ElementRef,
                private router:Router,
@@ -33,6 +36,10 @@ export class NavbarComponent implements OnInit{
       this._ss.getEmittedValue().subscribe(item => {
         this.curUser=ls.getItem('user',true).data;
       });
+      this._ss.getNotification().subscribe(item => {
+        this.notificationCount = item.total_records;
+        this.notifications = item.data;
+      });
       this.curUser = ls.getItem('user',true).data;
     }
 
@@ -40,6 +47,7 @@ export class NavbarComponent implements OnInit{
      // this.listTitles = ROUTES.filter(listTitle => listTitle);
       const navbar: HTMLElement = this.element.nativeElement;
       this.toggleButton = navbar.getElementsByClassName('navbar-toggle')[0];
+      this.getNotifications();
     }
     sidebarOpen() {
         const toggleButton = this.toggleButton;
@@ -105,5 +113,18 @@ export class NavbarComponent implements OnInit{
     }
     profile(){
       this.router.navigate(['/profile']);
+    }    
+    getNotifications() {
+      var parmas = new HttpParams()
+                    .set("notification_status","unread")
+                    .set("start",0+'')
+                    .set("number",3+'');
+      this.authService.getNotifications(parmas).subscribe(res => {
+        if(res.status){
+          console.log("Notifications ===", res);
+          this.notificationCount = res.data.total_records?res.data.total_records:0;
+          this.notifications = res.data.data;
+        }
+      });
     }
 }
