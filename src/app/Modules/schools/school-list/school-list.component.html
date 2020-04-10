@@ -27,7 +27,7 @@
                 </div> -->
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
-                        <div class="input-dropdown">
+                        <div class="input-dropdown" *ngIf="hideField">
                             <label>{{'schools.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchiseList" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseId"
@@ -48,6 +48,7 @@
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias"
+                        [ngStyle]="{'width': (col.field == 'franchise_name')?'25%':''}"
                         [ngClass]="[(columns.length-2===i) ? 'text-right' : '']">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 6" [field]="col.field"></p-sortIcon>
@@ -56,7 +57,7 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index" [ngClass]="[(columns.length-2===i) ? 'text-right' : '']">
+                    <td *ngFor="let col of columns ; let i = index" [ngClass]="[(columns.length-2===i) ? 'custom-right-text' : '']">
                         <span *ngIf="i!=6" title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
                         <span *ngIf="i == 6" class="d-flex action-color">
                             <a href="javascript:;" *appIsGranted="'edit'" ><span class="icon icon-edit-pencil mr-2" title="{{'title.edit'|translate}}" (click)="EditSchool(rowData)"></span></a>

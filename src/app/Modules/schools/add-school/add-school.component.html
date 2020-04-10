@@ -54,11 +54,11 @@
                             </div> 
                         </div>
                     </div>
-                    <div class="col-md-4 col-12" *ngIf="!hideFranchise">
+                    <div class="col-md-4 col-12" *ngIf="hideFranchise">
                         <div class="form-group">
                             <label>{{'schools.franchise'|translate}} <span>*</span></label>
                             <p-dropdown [options]="franchise" formControlName="franchise_id" filter="true" placeholder="{{'placeholder.franchise'|translate}}" itemSize="30"
-                            name="franchise_id" optionLabel="label" required></p-dropdown>
+                                name="franchise_id" optionLabel="label" required></p-dropdown>
                             <div class="invalid-feedback"
                                  *ngIf="schoolForm.controls.franchise_id.invalid && submitted!=null && !submitted"
                                 [ngClass]=" 'error'">{{'errorMessages.franchiseUser'|translate}}

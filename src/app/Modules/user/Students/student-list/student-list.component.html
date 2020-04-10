@@ -12,7 +12,7 @@
                                 styleClass="ui-column-filter" (onChange)="dt.filter($event.value,'school_id' ,'contains')"
                                 optionLabel="label" filter="true"></p-dropdown>
                         </div>
-                        <div class="input-dropdown ml-2 d-flex align-items-center">
+                        <div class="input-dropdown ml-2 d-flex align-items-center" *ngIf="hideField">
                             <label>{{'student.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchise" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseFilter"

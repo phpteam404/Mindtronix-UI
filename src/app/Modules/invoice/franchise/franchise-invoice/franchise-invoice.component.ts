@@ -9,6 +9,7 @@ import { MasterService } from 'src/app/services/master.service';
 import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
 interface Filter {
   label: string,
   value: string
@@ -36,15 +37,21 @@ export class FranchiseInvoiceComponent implements OnInit {
   selectedMonth:any;
   loading:boolean;
   listParamRef: LazyLoadEvent;
+  showFilters:boolean;  
+  filterRoles = ["1","6","8","7"];
   constructor(private router: Router,
               private _route: ActivatedRoute,
               public translate: TranslateService,
               private _mservice: MasterService,
+              private _ls: LocalStorageService,
               private _service: InvoiceService,
               private _toast: ToasterService,
               public datepipe: DatePipe) {
-                translate.setDefaultLang(environment.defaultLanguage);
-   }
+    translate.setDefaultLang(environment.defaultLanguage);
+    var curRoleId = this._ls.getItem('user',true).data.user_role_id.toString();
+    if(this.filterRoles.includes(curRoleId)) this.showFilters=true;
+    else this.showFilters=false;
+  }
 
    filtersForm = new FormGroup({
     from_date: new FormControl(''),

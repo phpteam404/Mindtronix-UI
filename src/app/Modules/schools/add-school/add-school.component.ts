@@ -23,9 +23,10 @@ export class AddSchoolComponent implements OnInit {
   state:any=[];
   city:any=[];
   country:any=[];
-  hideFranchise:boolean;
   franchiseId:any;
-
+  userRole:any;
+  hideFranchise:boolean;
+  franchiseRoles = ["1","6","7","8"];
   constructor(private _router: Router,
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
@@ -34,8 +35,8 @@ export class AddSchoolComponent implements OnInit {
               private franchiseService:FranchiseService,
               public translate: TranslateService, 
               private masterService:MasterService) { 
-                translate.setDefaultLang(environment.defaultLanguage);
-              }
+    translate.setDefaultLang(environment.defaultLanguage);
+  }
   schoolForm = new FormGroup({
     name: new FormControl('', [Validators.required]),
     code: new FormControl('', [Validators.required]),
@@ -121,15 +122,15 @@ export class AddSchoolComponent implements OnInit {
   }
 
   conditionalValidation(){
-    var userRole = this._ls.getItem('user',true).data.user_role_id;
-    console.log('userRole---', userRole);
-    if(Number(userRole)==2) {
+    this.userRole = this._ls.getItem('user',true).data.user_role_id;
+    if(this.franchiseRoles.includes( this.userRole))
+    {
       this.schoolForm.get('franchise_id').clearValidators();
       this.hideFranchise=true;
-    } else {
+    }
+    else {
       this.schoolForm.get('franchise_id').setValidators(Validators.required);
       this.hideFranchise=false;
     }
   }
-
 }

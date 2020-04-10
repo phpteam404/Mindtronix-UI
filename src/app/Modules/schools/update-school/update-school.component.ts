@@ -30,6 +30,7 @@ export class UpdateSchoolComponent implements OnInit {
   schoolForm:FormGroup;
   hideFranchise:boolean;
   franchiseId:any;
+  franchiseRoles = ["1","6","7","8"];
   constructor(private _router: Router,
               private _toast: ToasterService,
               private schoolService: SchoolService, 
@@ -60,7 +61,8 @@ export class UpdateSchoolComponent implements OnInit {
             state:this.schoolObj.state,
             city:this.schoolObj.city,
             pincode:this.schoolObj.pincode
-          });          
+          });   
+          this.conditionalValidation();
         }
       });
     });
@@ -88,7 +90,6 @@ export class UpdateSchoolComponent implements OnInit {
     this.getMasterDropdown('state');
     this.getMasterDropdown('city');
     this.getMasterDropdown('country');
-    this.conditionalValidation();
   }
   getFranchiseDropdown(){ // this function is for displaying the agency names in dropdown while creating schools
     this.franchiseService.getFranchiseDropDowns({}).subscribe(res=>{
@@ -145,14 +146,15 @@ export class UpdateSchoolComponent implements OnInit {
     else this._router.navigate(['schools_management']);
   }
   conditionalValidation(){
-    var userRole = this._ls.getItem('user',true).data.user_role_id;
-    console.log('userRole---', userRole);
-    if(Number(userRole)==2) {
+    var userRole = this._ls.getItem('user',true).data.user_role_id.toString();
+    if(this.franchiseRoles.includes(userRole))
+    {
       this.schoolForm.get('franchise_id').clearValidators();
       this.hideFranchise=true;
-    } else {
-      this.schoolForm.get('franchise_id').setValidators(Validators.required)
+    }
+    else {
+      this.schoolForm.get('franchise_id').setValidators(Validators.required);
       this.hideFranchise=false;
     }
-  }  
+  }
 }

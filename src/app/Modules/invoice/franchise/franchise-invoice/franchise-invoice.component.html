@@ -2,7 +2,7 @@
     <div class="row view-page">
         <div class="col-12">
             <div class="custom-view-list student-view-list">
-                <div class="custom-view-div franchise-name">
+                <div class="custom-view-div franchise-name"  *ngIf="showFilters">
                     <div>{{'invoices.list.month'|translate}}
                         <p-dropdown [options]="lastSixMonths" (onChange) ="monthSelected($event)"
                             styleClass="ui-column-filter" optionLabel="label">
@@ -33,7 +33,7 @@
         </div>
     </div>
     <!-- For Form starts-->
-    <form [formGroup]="filtersForm" (ngSubmit)="submit()">
+    <form [formGroup]="filtersForm" (ngSubmit)="submit()" *ngIf="showFilters">
         <div class="custom-search justify-content-between">
             <div class="d-flex custom-form">
                 <div class="col-md-3 p-0 filter-form">

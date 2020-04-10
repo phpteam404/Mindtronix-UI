@@ -13,7 +13,7 @@
                 </div> -->
                 <div class="custom-search justify-content-between">
                     <div class="d-flex">
-                        <div class="input-dropdown">
+                        <div class="input-dropdown" *ngIf="hideField">
                             <label>{{'users.add.franchise' |translate}} : &nbsp;</label>
                             <p-dropdown [options]="franchiseList" placeholder="{{'placeholder.franchise'|translate}}" [showClear]="true"
                                 [(ngModel)]="franchiseId"

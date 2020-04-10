@@ -5,6 +5,7 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { HttpParams } from '@angular/common/http';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { FranchiseService } from 'src/app/services/franchise.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
@@ -24,14 +25,17 @@ export class UsersListComponent implements OnInit {
   allUsersList: any;
   totalRecords:number;
   loading: boolean;
-  franchiseList: any[];
+  franchiseList: any;
   cols: any[];
   first:number=0;
   listParamsRef:LazyLoadEvent;
   franchiseFilter:any='';
+  hideField:boolean;
+  lcRoles:any = ["2","5"];
   constructor(private router: Router,
               private _service:UserService,
               private _cService: CommonService,
+              private _ls: LocalStorageService,
               private _fService: FranchiseService, 
               private _route: ActivatedRoute,
               private _confirm: ConfirmationService,
@@ -47,19 +51,20 @@ export class UsersListComponent implements OnInit {
       }else this.loading = true;
     });
     this.getFranchiseDropdown();
+    this.disablelearningcenter();
   }
   
   @ViewChild('dt') dt: Table;
   getFranchiseDropdown(){
     this._fService.getFranchiseDropDowns({}).subscribe(res=>{
       if(res.status){
-            this.franchiseList = res.data.data;
-            this.franchiseList.forEach(item => {
-              if(item.value == this.id){
-                this.dt.filter(item,'franchise_id','contains');
-                this.franchiseId=item;
-              }
-            });
+        this.franchiseList = res.data.data;
+        this.franchiseList.forEach(item => {
+          if(item.value == this.id){
+            this.dt.filter(item,'franchise_id','contains');
+            this.franchiseId=item;
+          }
+        });
       }
     });
   }
@@ -139,5 +144,11 @@ export class UsersListComponent implements OnInit {
     this.first = this.listParamsRef.first;
     console.log('this.listParamsRef--', this.listParamsRef);
     this.loadUserssLazy(this.listParamsRef);
+  }
+
+  disablelearningcenter(){
+    var roleId = this._ls.getItem('user',true).data.user_role_id.toString();
+    if(this.lcRoles.includes(roleId)) this.hideField= false;
+    else this.hideField=true;
   }
 }

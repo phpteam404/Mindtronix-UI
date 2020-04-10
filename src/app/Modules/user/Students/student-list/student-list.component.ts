@@ -8,6 +8,7 @@ import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent, ConfirmationService} from 'primeng/api';
 import { CommonService } from 'src/app/services/common.service';
 import { Table } from 'primeng/table';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
 import { TranslateService } from '@ngx-translate/core';
 import { environment } from 'src/environments/environment';
 
@@ -35,11 +36,14 @@ export class StudentListComponent implements OnInit {
   listParamsRef:LazyLoadEvent;
   schoolFilterId:any='';
   franchiseFilterId:any='';
+  hideField:boolean;
+  lcRoles = ["2","5","10"];
   constructor(private _router: Router, 
               private _ar: ActivatedRoute,
               private _toast: ToasterService,
               private _cService: CommonService,
               private _service:UserService,
+              private _ls: LocalStorageService,
               private _schoolService:SchoolService,
               private _fService:FranchiseService,
               private _confirm: ConfirmationService,
@@ -84,6 +88,7 @@ export class StudentListComponent implements OnInit {
  
   ngOnInit(): void {
     this.getFranchiseList();
+    this.disablelearningcenter();
     this._ar.queryParams.subscribe(params => {
       if(params['school_id'] || params['franchise_id']){
         if(params['school_id']){
@@ -218,11 +223,10 @@ export class StudentListComponent implements OnInit {
   getList(){
     this.first = this.listParamsRef.first;
     this.loadStudentsLazy(this.listParamsRef);
-    /*this._service.getStudentsList(this.listParamsRef).subscribe(res=>{
-      if(res.status){
-        this.studentsList = res.data.data;
-        this.totalRecords = res.data.total_records;
-      }
-    });*/
+  }
+  disablelearningcenter(){
+    var roleId = this._ls.getItem('user',true).data.user_role_id.toString();
+    if(this.lcRoles.includes(roleId)) this.hideField= false;
+    else this.hideField=true;
   }  
 }

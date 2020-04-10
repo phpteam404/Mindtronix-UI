@@ -173,7 +173,7 @@ export class ViewFranchiseComponent implements OnInit {
           text: 'Amount'
         },
         labels: {
-          format: '{value} k'
+          overflow: 'justify'
         }
       },
       credits: {
