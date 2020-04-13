@@ -33,7 +33,7 @@
             <ng-template pTemplate="header" let-columns>
                 <tr>
                     <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.alias"
-                        [ngStyle]="{'width': (col.field == 'franchise_name')?'13%':''}">
+                        [ngStyle]="{'width': (col.field == 'franchise_name')?'20%':''}">
                         {{col.header}}
                         <p-sortIcon *ngIf="i != 8" [field]="col.field"></p-sortIcon>
                     </th>

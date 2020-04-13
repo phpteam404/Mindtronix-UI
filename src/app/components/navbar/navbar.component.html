@@ -18,10 +18,10 @@
                     <i class="icon icon-bars"></i>
                 </a>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4" *ngIf="notificationCount>0">
                 <div class="alert alert-warning">
                     <!-- <button type="button" aria-hidden="true" class="close">×</button> -->
-                    <span class="text-center">Welcome to Mindtronix, You have {{notificationCount}} Notification(s) !</span>
+                    <span class="text-center">Welcome to Mindtronix, You have new Notification(s) !</span>
                 </div>
                 <!-- <a class="navbar-brand" href="javascript:;">{{getTitle()}}</a> -->
             </div>            
@@ -33,7 +33,7 @@
                     </a>
                 </li> -->
                 <li dropdown class="header-left-block">
-                    <a href="javascript:;" dropdownToggle>
+                    <a href="javascript:;" dropdownToggle *ngIf="notificationCount>0">
                         <i class="icon icon-bell-o"></i>
                         <!-- <b class="caret"></b> -->
                         <span class="notification hidden-sm hidden-xs">{{notificationCount}}</span>
@@ -41,7 +41,11 @@
                             5 Notifications
                             <b class="caret"></b>
                         </p> -->
-                    </a>                 
+                    </a>
+                    <a href="javascript:;" [routerLink]="['/notifications']" *ngIf="notificationCount==0">
+                        <i class="icon icon-bell-o"></i>
+                        <span class="notification hidden-sm hidden-xs">{{notificationCount}}</span>
+                    </a>
                     <ul *dropdownMenu class="dropdown-menu notification-list" role="menu">
                         <li role="menuitem" *ngFor="let not of notifications">
                             <div class="dropdown-item">
