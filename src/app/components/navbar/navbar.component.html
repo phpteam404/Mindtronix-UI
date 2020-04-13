@@ -49,7 +49,7 @@
                     <ul *dropdownMenu class="dropdown-menu notification-list" role="menu">
                         <li role="menuitem" *ngFor="let not of notifications">
                             <div class="dropdown-item">
-                               <span><a href="javascript:;" [routerLink]="['/notifications']">{{not.notification_comments}} </a> - </span>
+                               <span><a href="javascript:;" [routerLink]="['/notifications']" [innerHTML]="not.notification_comments"> </a> - </span>
                                <!-- <span><a href="javascript:;">#MI00001</a></span> -->
                                <span>Created On : {{not.created_date_time | date:'dd MMM yyyy'}}</span>
                             </div>
