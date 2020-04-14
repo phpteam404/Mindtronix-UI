@@ -3855,9 +3855,9 @@ a.sky-blue:hover{
 .custom-table.notification-table p-table .ui-table .ui-table-tbody td:last-child a.sky-blue {
   color: #e87a26 !important;
 }
-.custom-table.notification-table p-table .ui-table .ui-table-tbody tr:nth-child(even) a.sky-blue{
+/* .custom-table.notification-table p-table .ui-table .ui-table-tbody tr:nth-child(even) a.sky-blue{
   color: #26af1d !important;
-}
+} */
 @media (max-width: 1199px) {
   .custom-side-menu .mat-list-base .nav-link p,
   .view-page .custom-view-list .trainers-text span  {

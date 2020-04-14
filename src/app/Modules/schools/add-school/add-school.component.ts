@@ -125,11 +125,11 @@ export class AddSchoolComponent implements OnInit {
     this.userRole = this._ls.getItem('user',true).data.user_role_id;
     if(this.franchiseRoles.includes( this.userRole))
     {
-      this.schoolForm.get('franchise_id').clearValidators();
+      this.schoolForm.get('franchise_id').setValidators(Validators.required);
       this.hideFranchise=true;
     }
     else {
-      //this.schoolForm.get('franchise_id').setValidators(Validators.required);
+      this.schoolForm.get('franchise_id').clearValidators();
       this.hideFranchise=false;
     }
   }

@@ -149,11 +149,11 @@ export class UpdateSchoolComponent implements OnInit {
     var userRole = this._ls.getItem('user',true).data.user_role_id.toString();
     if(this.franchiseRoles.includes(userRole))
     {
-      this.schoolForm.get('franchise_id').clearValidators();
+      this.schoolForm.get('franchise_id').setValidators(Validators.required);
       this.hideFranchise=true;
     }
     else {
-      //this.schoolForm.get('franchise_id').setValidators(Validators.required);
+      this.schoolForm.get('franchise_id').clearValidators();
       this.hideFranchise=false;
     }
   }
