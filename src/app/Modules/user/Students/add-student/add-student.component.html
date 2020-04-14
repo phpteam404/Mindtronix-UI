@@ -31,14 +31,14 @@
                             </div>
                             <div class="col-md-4 col-12">
                                 <div class="form-group">
-                                    <label>{{'student.add.nationality'|translate}} <span>*</span></label>
+                                    <label>{{'student.add.nationality'|translate}} </label>
                                     <p-dropdown [options]="nationality" formControlName="nationality" filter="true"
                                         placeholder="{{'placeholder.nationality'|translate}}" itemSize="30"
-                                        optionLabel="label" required name="nationality"></p-dropdown>
-                                    <div class="invalid-feedback"
+                                        optionLabel="label" name="nationality"></p-dropdown>
+                                    <!-- <div class="invalid-feedback"
                                         *ngIf="studentForm.controls.nationality.invalid && submitted!=null && !submitted "
                                         [ngClass]=" 'error'">{{'dropdown.nationality'|translate}}
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <div class="col-md-4 col-12">

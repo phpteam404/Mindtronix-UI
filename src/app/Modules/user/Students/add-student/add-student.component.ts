@@ -49,7 +49,7 @@ export class AddStudentComponent implements OnInit {
   studentForm = new FormGroup({
     student_name: new FormControl('', [Validators.required]),
     date_of_birth: new FormControl(''),
-    nationality: new FormControl('', [Validators.required]),
+    nationality: new FormControl(''),
     password: new FormControl('',[Validators.minLength(8),
                                   Validators.pattern('((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$@!%*#?&().-_=+]).{8,20})')
     ]),
@@ -132,7 +132,11 @@ export class AddStudentComponent implements OnInit {
       }
     });
   }
-  getNationality(){ return this.studentForm.value.nationality.value;}
+  getNationality(){ 
+    if(this.studentForm.value.nationality)
+      return this.studentForm.value.nationality.value;
+    else return null;
+  }
   getMotherTongue()
   { 
     if(this.studentForm.value.mother_tongue)

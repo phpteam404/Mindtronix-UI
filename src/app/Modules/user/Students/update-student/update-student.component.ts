@@ -97,7 +97,7 @@ export class UpdateStudentComponent implements OnInit {
         user_id: new FormControl(''),
         student_name: new FormControl('', [Validators.required]),
         date_of_birth: new FormControl(''),
-        nationality: new FormControl('', [Validators.required]),
+        nationality: new FormControl(''),
         place_of_birth: new FormControl(''),
         mother_tongue: new FormControl(''),
         address: new FormControl(''),
@@ -167,7 +167,11 @@ export class UpdateStudentComponent implements OnInit {
     });
   }
 
-  getNationality(){ return this.studentForm.value.nationality.value;}
+  getNationality(){
+    if(this.studentForm.value.nationality)
+      return this.studentForm.value.nationality.value;
+    else return null;
+  }
   getMotherTongue()
   { 
     if(this.studentForm.value.mother_tongue)

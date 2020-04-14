@@ -129,7 +129,7 @@ export class AddSchoolComponent implements OnInit {
       this.hideFranchise=true;
     }
     else {
-      this.schoolForm.get('franchise_id').setValidators(Validators.required);
+      //this.schoolForm.get('franchise_id').setValidators(Validators.required);
       this.hideFranchise=false;
     }
   }
