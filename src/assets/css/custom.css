@@ -3850,7 +3850,7 @@ a.sky-blue:hover{
   text-decoration: underline;
 }
 .custom-table.notification-table p-table .ui-table .ui-table-tbody tr:nth-child(even) {
-  background-color: #e8e8e8;
+  background-color: #ffffff;
 }
 .custom-table.notification-table p-table .ui-table .ui-table-tbody td:last-child a.sky-blue {
   color: #e87a26 !important;
