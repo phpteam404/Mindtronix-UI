@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OnlineSubscriptionComponent } from './online-subscription.component';
+import { OnlineUsersViewComponent } from './online-users-view.component';
 
-describe('OnlineSubscriptionComponent', () => {
-  let component: OnlineSubscriptionComponent;
-  let fixture: ComponentFixture<OnlineSubscriptionComponent>;
+describe('OnlineUsersViewComponent', () => {
+  let component: OnlineUsersViewComponent;
+  let fixture: ComponentFixture<OnlineUsersViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ OnlineSubscriptionComponent ]
+      declarations: [ OnlineUsersViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OnlineSubscriptionComponent);
+    fixture = TestBed.createComponent(OnlineUsersViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

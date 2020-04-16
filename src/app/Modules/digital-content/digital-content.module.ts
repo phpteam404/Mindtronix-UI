@@ -17,6 +17,7 @@ import { OverlayPanelModule } from 'primeng/overlaypanel';
 import { EditorModule } from 'primeng/editor';
 import { GrantModule } from '../grant/grant/grant.module';
 import {YouTubePlayerModule} from '@angular/youtube-player';
+import {ClipboardModule} from '@angular/cdk/clipboard';
 @NgModule({
   declarations: [
     DigitalContentListComponent,
@@ -38,7 +39,8 @@ import {YouTubePlayerModule} from '@angular/youtube-player';
     OverlayPanelModule,
     EditorModule,
     GrantModule,
-    YouTubePlayerModule
+    YouTubePlayerModule,
+    ClipboardModule
   ]
 })
 export class DigitalContentModule { }

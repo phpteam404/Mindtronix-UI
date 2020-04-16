@@ -167,7 +167,7 @@
    width: 0.4% !important;
 }
 .franchise-name {
-    width: 1% !important;
+    width: 15% !important;
 }
 .payment-text{
     padding-left: 10px;
@@ -190,4 +190,16 @@
             padding-left: 5px;
         }
     }
+   
+}
+// .view-page .custom-view-list .custom-view-div {
+//     width: 0%;
+//     padding-right: 15px;
+// }
+.custom-block{
+    width: 100% !important; 
+    border-right: none !important;
+}
+.franchise-name{
+    width: 1% !important;
 }

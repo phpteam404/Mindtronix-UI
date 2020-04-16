@@ -1,6 +1,9 @@
 .custom-search .input-search i{
     right: 15px;
 }
+.onlineSubscriber-list td{
+    cursor: pointer;
+}
 .onlineSubscriber-list{
     th{
         &:nth-child(4){

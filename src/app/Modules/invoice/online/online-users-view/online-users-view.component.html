@@ -1,73 +1,85 @@
 <div class="main-content custom-maincontent-top">
     <div class="row view-page">
-
         <div class="col-md-8 col-12">
-            <div class="custom-view-list student-view-list">
+            <div class="custom-view-list">
+                <div class="student-view-list">
+                    <div class="custom-view-div franchise-name custom-block">
+                        <div>{{'invoices.view.invoice'|translate}}
+                            <span>{{onlineUserInvoiceObj.invoice_number}}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-view-list mt-2">
                 <div class="custom-view-div franchise-name">
-                    <div>Invoice
-                        <span>MII0001</span>
-                    </div>
-                </div>
-               
-                <div class="custom-view-div franchise-name">
-                    <div class="pl-2">Amount
-                        <span>₹ 10,000</span>
-                    </div>
-                </div>
-               
-                
-                <div class="custom-view-div">
-                    <div class="schools-text">Date
-                        <span>25/02/2020</span>
+                    <div class="">{{'invoices.view.amount'|translate}}
+                        <span>₹ {{onlineUserInvoiceObj.amount |number}}</span>
                     </div>
                 </div>
                 <div class="custom-view-div">
-                    <div class="schools-text">Due By
-                        <span>Ramakrishna</span>
+                    <div class="schools-text">{{'invoices.view.invoiceDate'|translate}}
+                        <span>{{onlineUserInvoiceObj.invoice_date |date:'dd MMM yyyy' }}</span>
                     </div>
                 </div>
+                 <!-- For paid amount-->
+                 <div class="custom-view-div franchise-name">
+                    <div class="pl-2">{{'invoices.view.paidAmount'|translate}}
+                         <span> ₹ {{onlineUserInvoiceObj.paid_amount |number}}</span>
+                    </div>
+                </div>
+                   <!-- For paid amount close-->
                 <div class="custom-view-div">
-                    <div class="payment-text">Status
-                        <span class="bg-brown">Paid</span>
+                    <div class="schools-text">{{'invoices.view.paidDate'|translate}}
+                        <span>{{date |date:'dd MMM yyy':''}}</span>
                     </div>
                 </div>
-                
+
+                <div class="custom-view-div">
+                    <div class="payment-text">{{'invoices.view.status'|translate}}
+                        <span [ngClass]="[(onlineUserInvoiceObj.status==='Paid') ? 'bg-brown' : '',
+                                    (onlineUserInvoiceObj.status==='Overdue')? 'bg-gold' : '',
+                                    (onlineUserInvoiceObj.status==='Due')? 'bg-orange' : '',
+                                    (onlineUserInvoiceObj.status==='Invoiced')? 'bg-darkblue' : '']">
+                                {{onlineUserInvoiceObj.status}}
+                        </span>
+                    </div>
+                </div>
+            </div>
             </div>
             <div class="custom-view ticket-view-content">
                 <div class="row">
-                  
-                    <div class="col-md-4 col-12">
-                        <label>User Name</label>
-                        <p>Prasad</p>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Contact Email</label>
-                        <p>Prasad@gmail.com</p>
-                    </div>
-                    <div class="col-md-4 col-12">
-                        <label>Contact Number</label>
-                        <p>9977534219</p>
-                    </div>
-                    <!-- <div class="col-12">
-                        <h4>Plan Details</h4>
-                    </div> -->
-                    <div class="col-md-4 col-12 mt-2">
-                        <label>Fee Structure</label>
-                        <p>Monthly</p>
-                    </div>
-                    <div class="col-md-4 col-12 mt-2">
-                    <label>Member Since</label>
-                    <p>26-02-2019</p>
+                  <div class="col-md-4 col-12">
+                        <label>{{'student.add.name'|translate}}</label>
+                        <p>{{onlineUserInvoiceObj.user_name}}</p>
+                  </div>
+                  <div class="col-md-4 col-12">
+                        <label>{{'student.add.studentContactEmail'|translate}}</label>
+                        <p>{{onlineUserInvoiceObj.email}}</p>
+                  </div>
+                  <div class="col-md-4 col-12">
+                       <label>{{'invoices.view.contactNumber'|translate}}</label>
+                       <p>{{onlineUserInvoiceObj.phone_no}}</p>
+                  </div>
+                  <div class="col-md-4 col-12 mt-3">
+                    <label>Fee Structure</label>
+                    <p>{{onlineUserInvoiceObj.fee_structure}}</p>
+                 </div>
+                 <div class="col-md-4 col-12 mt-3">
+                    <label>Member since</label>
+                    <p>{{onlineUserInvoiceObj.member_since|date:'dd MMM yyyy'}}</p>
+                 </div>
+                 <div class="col-md-4 col-12 mt-3">
+                    <label>Next Invoice Date</label>
+                    <p>{{onlineUserInvoiceObj.next_invoice_date|date:'dd MMM yyyy'}}</p>
+                 </div>
                 </div>
-                </div>
-             
             </div>
-          
         </div>
         <div class="col-md-4 col-12 pl-0">
           
             <div class="custom-static-view text-center">
-                <button pButton type="submit" class="btn-warning" (click)="showBasicDialog()" label="Update Status"></button>
+                <span *appIsGranted="'edit'">
+                    <button pButton type="submit" class="btn-warning" *ngIf="onlineUserInvoiceObj.status!='Paid'"(click)="showBasicDialog(true)" label="Update Status"></button>
+                </span>
                 <div class="text-center mt-2 invoice-download">
                    <a href="javascript:;">Invoice Download<i class="icon icon-download-1"></i></a>
                    
@@ -76,7 +88,7 @@
             <div class="custom-static-view mt-3">
                 <h4>Previous Invoices</h4>
                 <div class="custom-table custom-lastchild-list">
-                    <p-table #dt [columns]="cols" [value]="students" [paginator]="true" [rows]="10">
+                    <p-table #dt [columns]="cols" [value]="previouslist" [paginator]="true" [rows]="10">
                      
                         <ng-template pTemplate="header" let-columns>
                             <tr>
@@ -88,14 +100,15 @@
                         </ng-template>
                         <ng-template pTemplate="body" let-rowData let-columns="columns">
                             <tr>
-                                <td *ngFor="let col of columns ; let i = index">
-                                    <!-- <span *ngIf="i != 7" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span> -->
-                                    <span *ngIf="i!=3 && i!=4" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                <td *ngFor="let col of columns ; let i = index" (click)="viewPreviousInvoices(rowData)">
+                                    <span *ngIf="i!=3 && i!=4 && i!=1 && i!=2" title="{{rowData[col.field]}}">{{rowData[col.field]}}</span>
+                                    <span *ngIf="i!=3 && i!=4 && i==1" title="{{rowData[col.field] |date:'dd MMM yyyy'}}">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
+                                    <span *ngIf="i!=3 && i!=4 && i==2" title="{{rowData[col.field] | number}}">₹ {{rowData[col.field] |number}}</span>
                                     <span *ngIf="i == 3">
-                                        <span [ngClass]="[(rowData[col.field]==='Paid') ? 'bg-brown' : '',
-                                        (rowData[col.field]==='Over Due')? 'bg-gold' : '',
-                                        (rowData[col.field]==='Due')? 'bg-orange' : '',
-                                        (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
+                                        <span [ngClass]="[(rowData[col.field]==='paid') ? 'bg-brown' : '',
+                                                (rowData[col.field]==='Overdue')? 'bg-gold' : '',
+                                                (rowData[col.field]==='due')? 'bg-orange' : '',
+                                                (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
                                         class='list-status'>{{rowData[col.field]}}</span>
                                     </span>
                                   
@@ -108,38 +121,58 @@
         </div>
     </div>
 </div>
-<p-dialog header="Update Status" [modal]="true" [draggable]="false" [resizable]="false"    [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
+<p-dialog header="Update Status"  [modal]="true" [draggable]="false" [resizable]="false"    [(visible)]="displayBasic" [style]="{width: '45vw'}" [baseZIndex]="10000">
     
-    <!-- <form [formGroup]="stepOneForm" (ngSubmit)="stepOneFormSubmit()"></form> -->
+    <form [formGroup]="updateForm" (ngSubmit)="updateStatus()">
         <div class="row custom-form">
             <div class="col-md-6 col-12">
                 <div class="form-group">
-                    <label>Status <span>*</span></label>
-                    <p-dropdown [options]="status1" placeholder="Select Status" itemSize="30"
-                    name="status" optionLabel="label" required></p-dropdown>
+                    <label>{{'franchise.add.status'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="invoiceStatus" placeholder="{{'placeholder.status'|translate}}" itemSize="30"
+                    name="status" optionLabel="label" formControlName="status" [showClear]="true" 
+                    (onChange)="getFields()" required></p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.status.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'"> {{'errorMessages.status'|translate}}
+                   </div>
                 </div>
             </div>
-            <div class="col-md-6 col-12">
+            <div class="col-md-6 col-12" *ngIf="enableField">
                 <div class="form-group">
-                    <label>Payment Type <span>*</span></label>
-                    <p-dropdown [options]="type" placeholder="Select Payment Type" itemSize="30"
-                    name="type" optionLabel="label" required></p-dropdown>
+                    <label>{{'invoices.view.paymentType'|translate}} <span>*</span></label>
+                    <p-dropdown [options]="type" formControlName="payment_type" placeholder="Select Payment Type" itemSize="30"
+                                optionLabel="label" [showClear]="clear" name="payment_type" required>
+                    </p-dropdown>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.payment_type.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.paymentTypeReq'|translate}}
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-12" *ngIf="enableField">
+                <div class="form-group">
+                    <label>{{'invoices.view.paidAmount'|translate}} <span>*</span></label>
+                    <div class="ui-inputgroup">
+                        <span class="ui-inputgroup-addon">₹</span>
+                        <input type="text" placeholder="{{'placeholder.amount'|translate}}" pKeyFilter="pint" formControlName="amount" name="amount" required>
+                    </div>
+                    <div class="invalid-feedback"
+                        *ngIf="updateForm.controls.amount.invalid && submitted!=null && !submitted"
+                        [ngClass]=" 'error'">{{'errorMessages.amountReq'|translate}}
+                    </div>
                 </div>
             </div>
             <div class="col-12">
                 <div class="form-group">
                     <label>Comment</label>
-                    <textarea pInputTextarea placeholder="Comment" name="description"></textarea>
+                    <textarea pInputTextarea placeholder="Comment.." formControlName="comments" name="comments"></textarea>
                 </div>
             </div>
-        
-        </div>
-      
+        </div>      
         <div class="col-12 p-0 text-right mb-2">
-            <button type="button" pButton class="btn-warning mr-2" label="Update"></button>
-            <button type="button" pButton class="btn-default" label="Cancel"></button>
-        </div>
-       
-    <!-- </form> -->
+            <button type="submit" pButton class="btn-warning mr-2" label="{{'buttons.update'|translate}}"></button>
+            <button type="submit" pButton class="btn-default"  (click)="showBasicDialog(false)" label="{{'buttons.cancel'|translate}}"></button>
+        </div>       
+   </form>
 
 </p-dialog>

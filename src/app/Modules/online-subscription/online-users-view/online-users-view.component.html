@@ -1,0 +1,89 @@
+<div class="main-content custom-maincontent-top">
+    <div class="row view-page">
+        <div class="col-md-9 col-12">
+            <div class="custom-view-list student-view-list">
+                <div class="custom-view-div franchise-name">
+                    <div>{{'student.view.studentName'|translate}}
+                        <span>{{onlineusersinfo.user_name}}</span>
+                    </div>
+                </div>
+                <div class="custom-view-div">
+                    <div class="schools-text">{{'student.view.feeStructure'|translate}}
+                        <span>{{onlineusersinfo.plan}}</span>
+                    </div>
+                </div>
+                <div class="custom-view-div">
+                    <div class="trainers-text">{{'student.view.lastLogin'|translate}}
+                         <span>{{onlineusersinfo.last_login  | date:'dd MMM yyyy hh:mm a'}}</span> 
+                    </div>
+                </div>
+            </div>
+            <div class="custom-tabs clearfix">
+                <p-tabView>
+                    <p-tabPanel header="{{'student.studentInfo'|translate}}">
+                        <div class="custom-view">
+                            <div class="custom-view-content">
+                                <div class="row">
+                                    <div class="col-md-4 col-12">
+                                        <label>{{'student.view.studentName'|translate}}</label>
+                                        <p>{{onlineusersinfo.user_name}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 ">
+                                        <label>{{'franchise.add.contactNumber'|translate}}</label>
+                                        <p>{{onlineusersinfo.phone_no}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 ">
+                                        <label>{{'student.add.studentContactEmail'|translate}}</label>
+                                        <p>{{onlineusersinfo.email}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'student.add.class'|translate}}</label>
+                                        <p>{{onlineusersinfo.grade}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'student.add.leadSource'|translate}}</label>
+                                        <p>{{onlineusersinfo.lead_source}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'onlineUsers.dateofRegistration'|translate}}</label>
+                                        <p>{{onlineusersinfo.date_of_registration | date:'dd MMM yyyy'}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'onlineUsers.planAmount'|translate}}</label>
+                                        <p>{{onlineusersinfo.plan_amount|number}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 mt-3">
+                                        <label>{{'onlineUsers.nextPaymentDate'|translate}}</label>
+                                        <p>{{onlineusersinfo.plan_expiry_date |date:'dd MMM yyyy'}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+                    <p-tabPanel header="{{'student.parentInfo'|translate}}">
+                        <div class="custom-view">
+                            <div class="custom-view-content">
+                                <div class="row">
+                                    <div class="col-md-4 col-12">
+                                        <label>{{'student.add.parentName'|translate}}</label>
+                                        <p>{{onlineusersinfo.parent}}</p>
+                                    </div>
+                                    <div class="col-md-4 col-12 ">
+                                        <label>{{'student.add.relation'|translate}}</label>
+                                        <p>{{onlineusersinfo.relation}}</p>
+                                    </div>                                  
+                                </div>
+                            </div>
+                        </div>
+                    </p-tabPanel>
+                </p-tabView>
+            </div>
+        </div>
+        <div class="col-md-3 col-12 pl-0">          
+            <div class="custom-static-view custom-minheight">
+                <h4>{{'student.view.studentHistory'|translate}}</h4>
+            </div>        
+        </div>
+    </div>
+</div>
+  

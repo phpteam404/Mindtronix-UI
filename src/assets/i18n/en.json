@@ -255,7 +255,12 @@
              "schoolInvoiceId":"School Invoice Id",
              "paidAmount":"Paid Amount"
          }
-     },
+    },
+    "onlineUsers":{
+        "dateofRegistration":"Date of registration",
+        "planAmount":"Plan Amount",
+        "nextPaymentDate":"Next Payment Date"
+    },
      "dashboard":{
         "orders":"Orders",
         "allOrders":"All Orders",

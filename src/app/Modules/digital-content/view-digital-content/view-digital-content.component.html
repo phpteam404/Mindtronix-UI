@@ -264,10 +264,10 @@
                         <img src="{{digitalContentObj.qr_code}}">
                     </div>
                     <div class="text-center">
-                    <button class="btn-warning download-btn mt-2"><i class="icon icon-download-1 pr-2"></i>Download</button>
+                    <button class="btn-warning download-btn mt-2" (click)="donwloadQrCode()"><i class="icon icon-download-1 pr-2"></i>Download</button>
                     </div>
-                    <div class="text-center url-text">http://bit.ly/2uwV5jv
-                        <a href="javascript:;" class="icon icon-files-group"></a>
+                    <div class="text-center url-text">{{digitalContentObj.short_url}}
+                        <a href="javascript:;" title="Copy" class="icon icon-files-group" [cdkCopyToClipboard]="digitalContentObj.short_url"></a>
                     </div>
                 </div>
                 <div [chart]="chart" width="200%" height="auto" class="mt-4"></div>

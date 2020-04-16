@@ -36,7 +36,6 @@ import { MatIconModule } from '@angular/material/icon';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
 import { DashboardComponent } from 'src/app/Modules/dashboard/dashboard.component';
-import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/student-dashboard.component';
 import { ConfirmationService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
@@ -87,7 +86,6 @@ import { NotificationComponent } from 'src/app/Modules/notification/notification
     MasterComponent,
     ProfileComponent,
     DashboardComponent,
-    OnlineSubscriptionComponent,
     StudentDashboardComponent,
     PageNotFoundComponent,
     NotificationComponent

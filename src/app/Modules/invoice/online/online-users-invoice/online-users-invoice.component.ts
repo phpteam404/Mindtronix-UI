@@ -2,7 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TranslateService } from '@ngx-translate/core';
-
+import { MasterService } from 'src/app/services/master.service';
+import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
+import { LocalStorageService } from 'src/app/utils/local-storage.service';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { InvoiceService } from 'src/app/services/invoice.service';
+import { HttpParams } from '@angular/common/http';
+import { ToasterService } from 'src/app/utils/toaster.service';
+import { DatePipe, formatDate } from '@angular/common';
 interface Filter {
   label: string,
   value: string
@@ -13,71 +20,130 @@ interface Filter {
   styleUrls: ['./online-users-invoice.component.scss']
 })
 export class OnlineUsersInvoiceComponent implements OnInit {
-
-  students: any;
+  submitted = null;
+  month: any;
+  year: any;
+  fromDate: any;
+  toDate: any;
   cols:any;
+  status_id: any;
+  lastSixMonths:any;
+  selectedMonth:any;
   totalRecords:number;
-  status:Filter[];
-  selectedStatus:Filter[];
+  loading:boolean;
+  onlineusersInvoiceList:any
+  invoiceStatusList:any;
+  invoiceData:any={};
+  listParamRef: LazyLoadEvent;
+  showFilters:boolean;  
+  filterRoles = ["1","6","8","7"];
   constructor(private router: Router, 
               private _route: ActivatedRoute,
-              public translate: TranslateService) {
+              private _ls: LocalStorageService,
+              private _mservice: MasterService,
+              private _service: InvoiceService,
+              private _toast: ToasterService,
+              public translate: TranslateService,
+              public datepipe: DatePipe) {
         translate.setDefaultLang(environment.defaultLanguage);
-    this.status = [
-      {label: 'Due',value:'Due'},
-      {label:'Paid', value:'Paid'},
-      {label:'Over Due', value:'Over Due'},
-     
-  ];
- 
-    this.cols = [
-      { field: 'invoiceNo', header: 'Invoice No' },
-      { field: 'name', header: 'Online User Name' },
-      { field: 'phone', header: 'Contact Number' },
-      { field: 'email', header: 'Contact Email' },
-      { field: 'date', header: 'Invoice Date' },
-      { field: 'Amount', header: 'Amount' },
-      { field: 'status', header: 'Status' }
-      // { field: 'actions', header: 'Actions' }
-    ];
-    this.getStudentsList();
+        var curRoleId = this._ls.getItem('user',true).data.user_role_id.toString();
+        if(this.filterRoles.includes(curRoleId)) this.showFilters=true;
+        else this.showFilters=false;
    }
-   getStudentsList(){
-    this.students = [
-      {invoiceNo:'MII0001', name:'Anil', phone:'9789456556', email:'Anil@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0002',name:'Prasad', phone:'7774564556', email:'Prasad@gmail.com', date:'26-02-2020', Amount:'₹ 5,000',status:'Invoiced',actions:''},
-      {invoiceNo:'MII0003',name:'Naresh', phone:'7894555556', email:'Naresh@gmail.com', date:'24-02-2020', Amount:'₹ 2,000',status:'Due',actions:''},
-      {invoiceNo:'MII0004',name:'Swetha', phone:'7894444556', email:'Swetha@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0005',name:'Raji', phone:'7894563336', email:'Raji@gmail.com', date:'22-02-2020', Amount:'₹ 3,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0006',name:'Ramakrishna', phone:'6878564556', email:'Ramakrishna@gmail.com', date:'25-02-2020', Amount:'₹ 1,000',status:'Due',actions:''},
-      {invoiceNo:'MII0007',name:'Phani', phone:'6664564556', email:'Phani@gmail.com', date:'27-02-2020', Amount:'₹ 4,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0008',name:'Raja', phone:'7894564556', email:'Raja@gmail.com', date:'25-02-2020', Amount:'₹ 3,000',status:'Invoiced',actions:''},
-      {invoiceNo:'MII0009',name:'Mohan', phone:'7895641556', email:'Mohan@gmail.com', date:'26-02-2020', Amount:'₹ 5,000',status:'Over Due',actions:''},
-      {invoiceNo:'MII0010',name:'Rakesh', phone:'7811111556', email:'Rakesh@gmail.com', date:'25-02-2020', Amount:'₹ 2,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0011',name:'Latha', phone:'7894500000', email:'Latha@gmail.com', date:'27-02-2020', Amount:'₹ 1,000',status:'Paid',actions:''},
-      {invoiceNo:'MII0012',name:'Rani', phone:'7890010006', email:'Rani@gmail.com', date:'26-02-2020', Amount:'₹ 3,000',status:'Due',actions:''},
-      
-    ];
-  }
+
+   filtersForm = new FormGroup({
+    from_date: new FormControl(''),
+    to_date: new FormControl(''),
+    status_id: new FormControl(''),
+  });
+
+  
 
   isEmptyTable() {
-    return (this.students.length == 0 ? true : false);
+    return (this.onlineusersInvoiceList== 0 ? true : false);
   }
   ngOnInit(): void {
+    this.getMasterDropdown('invoice_status');
+    this.filtersForm.reset();
   }
-  onChange2(event){
-    this.getStudentsList();
-    // this.getStudentsList();
-    console.log('***', event.value.value);
-    if(event.value !=null){
-      console.log('list ---', this.students.filter(t=>t.franchise == event.value.value).length);
-      if(this.students.filter(t=>t.franchise == event.value.value).length>0)
-        this.students = this.students.filter(t=>t.franchise == event.value.value);
-    }
-    else this.getStudentsList();
-  }
+  getMasterDropdown(masterKey): any {
+    var params = new HttpParams()
+      .set('master_key', masterKey)
+      .set('dropdown', "true")
+    return this._mservice.getMasterChilds(params).subscribe(res => {
+      if (res.status) {
+        if (masterKey == 'invoice_status')
+          this.invoiceStatusList = res.data.data;
 
-  viewUsers(data:any){
-    this.router.navigate(['view/'+data.name+'/'+btoa(data.issueId)], {relativeTo: this._route});
+      }
+    });
+  }
+  
+  loadOnlineUsersInvoiceLazy(event: LazyLoadEvent) {
+    this.loading=true;
+    var sortOrder = (event.sortOrder == 1) ? "ASC" : "DESC";
+    var params = new HttpParams()
+      .set('start', event.first + '')
+      .set('number', event.rows + '');
+    if (event.sortField) {
+      params = params.set('sort', event.sortField);
+      params = params.set('order', sortOrder);
+    }
+    if (event.globalFilter) {
+      params = params.set('search_key', event.globalFilter);
+    }
+    this.fromDate = this.datepipe.transform(this.filtersForm.value.from_date, 'yyyy-MM-dd');
+    this.toDate = this.datepipe.transform(this.filtersForm.value.to_date, 'yyyy-MM-dd');
+    if(this.filtersForm.value.status_id && this.filtersForm.value.status_id.value){
+      this.status_id = this.filtersForm.value.status_id.value;
+    }else this.status_id=null;
+    
+    if(this.fromDate) params = params.set('from_date', this.fromDate);
+    if (this.toDate) params = params.set('to_date', this.toDate);
+    if (this.status_id) params = params.set('status_id', this.status_id);
+    if(this.selectedMonth) params= params.set('month',this.selectedMonth);
+    this.listParamRef = event;
+    this._service.getOnlineUsersInvoiceList(params).subscribe(res => {
+      if (res.status) {
+        this.cols = res.data.table_headers;
+        this.onlineusersInvoiceList = res.data.data;
+        this.invoiceData = res.data;
+        this.lastSixMonths = res.data.last_six_months;
+        this.totalRecords = res.data.total_records;
+        this.loading=false;
+      }
+    });
+  }
+ 
+  
+  submit(): any {
+    this.submitted = false;
+    let fromDateSelected = this.filtersForm.get('from_date').value;
+    let toDateSelected = this.filtersForm.get('to_date').value;
+    if(fromDateSelected != null && toDateSelected == null)
+    {
+      this._toast.show('warning','Please Select To Date');
+      return false;
+    }
+    if(toDateSelected !=null && fromDateSelected ==null)
+     {
+        this._toast.show('warning','Please Select From Date');
+        return false;
+     }
+    if (this.filtersForm.valid) {
+      this.loadOnlineUsersInvoiceLazy(this.listParamRef);
+    }
+  }
+  resetFilters(){
+    this.filtersForm.reset();
+    this.loading=true;
+    this.loadOnlineUsersInvoiceLazy(this.listParamRef);
+  }
+  monthSelected(event:any){
+    this.selectedMonth = event.value.value;
+    this.loadOnlineUsersInvoiceLazy(this.listParamRef);
+  }
+  viewonlineusers(data:any){
+    this.router.navigate(['view/'+data.user_name+'/'+btoa(data.onlineuser_invoice_id)], {relativeTo: this._route});
   }
 }

@@ -4,7 +4,6 @@ import { AuthGuard } from 'src/app/guards/auth.guard';
 import { RoleManagementComponent } from 'src/app/Modules/Roles/role-management/role-management.component';
 import { MasterComponent } from 'src/app/Modules/Masters/master.component';
 import { ProfileComponent } from 'src/app/Modules/profile/profile.component';
-import { OnlineSubscriptionComponent } from 'src/app/Modules/online-subscription/online-subscription.component';
 import { DashboardComponent } from 'src/app/Modules/dashboard/dashboard.component';
 import { StudentDashboardComponent } from 'src/app/Modules/student-dashboard/student-dashboard.component';
 import { PageNotFoundComponent } from 'src/app/Modules/page-not-found/page-not-found.component';
@@ -116,12 +115,12 @@ export const AdminLayoutRoutes: Routes = [
             breadcrumb: 'Digital Content'
         }
     },
-    { 
+    {
         path: 'online-subscription',
-        component: OnlineSubscriptionComponent,
-        canActivate: [AuthGuard],
-        data: {
-            breadcrumb: 'Online Subscription'
+        loadChildren:() =>import('../../Modules/online-subscription/online-users.module').then(m=>m.OnlineUserModule),
+        canActivate:[AuthGuard],
+        data:{
+            breadcrumb:'Online Subscription'
         }
     },
     {

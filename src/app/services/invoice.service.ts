@@ -38,4 +38,7 @@ export class InvoiceService {
   getFranchiseView(params){
     return this.clientHttp.get('Invoice/FrachiseInvoiceList',params);
   }
+  getOnlineUsersInvoiceList(params){
+    return this.clientHttp.get('Invoice/onlineUserInvoiceList',params);
+  }
 }

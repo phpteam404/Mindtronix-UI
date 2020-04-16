@@ -1,10 +1,11 @@
 <div class="main-content">
     <div class="custom-table custom-lastchild-list onlineSubscriber-list">
-        <p-table #dt [columns]="cols" [value]="list" [paginator]="true" [rows]="10">
+        <p-table #dt [columns]="cols" [value]="userlist"  [lazy]="true" [rows]="10"
+                [paginator]="true"  (onLazyLoad)="loadonlineusersLazy($event)"  [totalRecords]="totalRecords">
             <ng-template pTemplate="caption">
                 <div class="custom-search">
                     <div class="input-search">
-                        <input type="text" pInputText size="50" placeholder="{{'general.search' | translate}}" class="mr-2"
+                        <input type="text" pInputText size="50" placeholder="Search by Name/Email" class="mr-2"
                         (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto;">
                         <!-- <i class="fa fa-search"></i>  -->
                     </div>
@@ -13,7 +14,8 @@
             </ng-template>
             <ng-template pTemplate="header" let-columns>
                 <tr>
-                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
+                    <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field"
+                         [ngClass]="(columns.length-2===i) ? 'text-right' : ''">
                         {{col.header}}
                         <p-sortIcon [field]="col.field"></p-sortIcon>
                     </th>
@@ -21,9 +23,12 @@
             </ng-template>
             <ng-template pTemplate="body" let-rowData let-columns="columns">
                 <tr>
-                    <td *ngFor="let col of columns ; let i = index">
-                        <span title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
-                        
+                    <td *ngFor="let col of columns ; let i = index" (click)="viewonlineusers(rowData)"
+                        [ngClass]="(columns.length-2===i) ? 'custom-right-text' : ''">
+                        <span *ngIf="i!=3 && i!=6 && i!=5"title="{{rowData[col.field]}}" x-ms-format-detection="none">{{rowData[col.field]}}</span>
+                        <span *ngIf="i==3 && i!=6"title="{{rowData[col.field] |date:'dd MMM yyyy'}}" x-ms-format-detection="none">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
+                        <span *ngIf="i!=3 && i==6"title="{{rowData[col.field] |date:'dd MMM yyyy'}}" x-ms-format-detection="none">{{rowData[col.field] |date:'dd MMM yyyy'}}</span>
+                        <span *ngIf="i!=3 && i!=6 && i==5" title="{{rowData[col.field] |number}}" x-ms-format-detection="none"> ₹ {{rowData[col.field] |number}}</span>
                         <!-- <span *ngIf="i == 4"  class="d-flex action-color">
                             <a href="javascript:;"  (click)="EditSchedule(rowData)" title="Edit">
                                 <span class="icon icon-edit-pencil wd-30"></span>
@@ -39,7 +44,7 @@
                 <ng-container *ngIf="isEmptyTable()">
                 <tr>
                   <td [attr.colspan]="columns.length" class="text-center">
-                    No records found
+                   {{'general.noRecords'|translate}}
                   </td>
                 </tr>
                 </ng-container>

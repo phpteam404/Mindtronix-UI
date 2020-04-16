@@ -579,4 +579,8 @@ export class ViewDigitalContentComponent implements OnInit {
       });
     })
   }
+
+  donwloadQrCode(){
+    FileSaver.saveAs(this.digitalContentObj.qr_code, this.digitalContentObj.content_name);
+  }
 }
