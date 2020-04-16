@@ -50,7 +50,7 @@ export class OnlineUsersViewComponent implements OnInit {
   }
 
   isEmptyTable() {
-    return (this.previouslist == 0 ? true : false);
+    return (this.previouslist.length == 0 ? true : false);
   }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {

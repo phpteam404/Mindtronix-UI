@@ -64,8 +64,6 @@ export class TrainerListComponent implements OnInit {
     });
   }
  
-
- 
   isEmptyTable() {
     return (this.totalRecords == 0 ? true : false);
   }

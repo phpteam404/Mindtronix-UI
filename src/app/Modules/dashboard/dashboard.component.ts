@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
     this.getDashboard();
   }
   isEmptyTable() {
-    return (this.ticketList == 0 ? true : false);
+    return (this.ticketList.length == 0 ? true : false);
   }
   getDashboard(){
     this._service.adminDashboard().subscribe(res =>{

@@ -124,7 +124,9 @@ export class FranchiseViewComponent implements OnInit {
       return this.updateForm.value.amount;
     else return null;
   }
-
+  isEmptyTable() {
+    return (this.previouslist.length == 0 ? true : false);
+  }
   updateStatus(): any {
     this.submitted = false;
     if (this.updateForm.valid) {

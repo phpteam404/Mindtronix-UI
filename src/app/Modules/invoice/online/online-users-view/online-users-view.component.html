@@ -115,11 +115,11 @@
                         </ng-template>
                         <ng-template pTemplate="footer" let-columns>
                             <ng-container *ngIf="isEmptyTable()">
-                            <tr>
-                              <td [attr.colspan]="columns.length" class="text-center">
-                                {{'general.noRecords'|translate}}
-                              </td>
-                            </tr>
+                                <tr>
+                                    <td [attr.colspan]="columns.length" class="text-center">
+                                        {{'general.noRecords'|translate}}
+                                    </td>
+                                </tr>
                             </ng-container>
                         </ng-template>
                     </p-table>

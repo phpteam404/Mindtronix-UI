@@ -10,10 +10,6 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
 
-interface Filter {
-  label: string,
-  value: string
-}
 @Component({
   selector: 'app-student-invoice',
   templateUrl: './student-invoice.component.html',
@@ -53,7 +49,7 @@ export class StudentInvoiceComponent implements OnInit {
   });
 
   isEmptyTable() {
-    return (this.invoicelist == 0 ? true : false);
+    return (this.invoicelist.length == 0 ? true : false);
   }
   ngOnInit(): void {
     this.getMasterDropdown('invoice_status');

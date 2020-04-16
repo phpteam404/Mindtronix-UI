@@ -10,10 +10,7 @@ import { InvoiceService } from 'src/app/services/invoice.service';
 import { HttpParams } from '@angular/common/http';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { DatePipe, formatDate } from '@angular/common';
-interface Filter {
-  label: string,
-  value: string
-}
+
 @Component({
   selector: 'app-online-users-invoice',
   templateUrl: './online-users-invoice.component.html',
@@ -56,12 +53,10 @@ export class OnlineUsersInvoiceComponent implements OnInit {
     from_date: new FormControl(''),
     to_date: new FormControl(''),
     status_id: new FormControl(''),
-  });
-
-  
+  }); 
 
   isEmptyTable() {
-    return (this.onlineusersInvoiceList== 0 ? true : false);
+    return (this.onlineusersInvoiceList.length == 0 ? true : false);
   }
   ngOnInit(): void {
     this.getMasterDropdown('invoice_status');
@@ -75,7 +70,6 @@ export class OnlineUsersInvoiceComponent implements OnInit {
       if (res.status) {
         if (masterKey == 'invoice_status')
           this.invoiceStatusList = res.data.data;
-
       }
     });
   }

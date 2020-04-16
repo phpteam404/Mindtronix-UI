@@ -25,7 +25,7 @@ export class OnlineUsersListComponent implements OnInit {
     
    }
    isEmptyTable() {
-    return (this.userlist== 0 ? true : false);
+    return (this.totalRecords == 0 ? true : false);
   } 
 
   ngOnInit(): void {

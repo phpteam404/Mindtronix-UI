@@ -32,7 +32,6 @@
                         <span>{{franchiseInvoiceObj.paid_date |date: 'dd MMM yyyy'}}</span>
                     </div>
                 </div>
-
                 <div class="custom-view-div">
                     <div class="payment-text">{{'invoices.view.status'|translate}}
                         <span [ngClass]="[(franchiseInvoiceObj.status==='paid') ? 'bg-brown' : '',
@@ -63,21 +62,18 @@
             </div>
         </div>
         <div class="col-md-4 col-12 pl-0">
-          
             <div class="custom-static-view text-center">
                 <span *appIsGranted="'edit'">
                     <button pButton type="submit" class="btn-warning"  *ngIf="franchiseInvoiceObj.status!='paid'" (click)="showBasicDialog(true)" label="Update Status"></button>
                 </span>
                 <div class="text-center mt-2 invoice-download">
                    <a href="javascript:;">Invoice Download<i class="icon icon-download-1"></i></a>
-                   
                 </div>
             </div>
             <div class="custom-static-view mt-3">
                 <h4>Previous Invoices</h4>
                 <div class="custom-table custom-lastchild-list">
                     <p-table #dt [columns]="cols" [value]="previouslist" [paginator]="true" [rows]="10">
-                     
                         <ng-template pTemplate="header" let-columns>
                             <tr>
                                 <th *ngFor="let col of columns; let i = index" [pSortableColumn]="col.field">
@@ -97,11 +93,19 @@
                                                 (rowData[col.field]==='Overdue')? 'bg-gold' : '',
                                                 (rowData[col.field]==='due')? 'bg-orange' : '',
                                                 (rowData[col.field]==='Invoiced')? 'bg-darkblue' : '']"
-                                        class='list-status'>{{rowData[col.field]}}</span>
+                                            class='list-status'>{{rowData[col.field]}}</span>
                                     </span>
-                                  
                                 </td>
                             </tr>
+                        </ng-template>
+                        <ng-template pTemplate="footer" let-columns>
+                            <ng-container *ngIf="isEmptyTable()">
+                                <tr>
+                                    <td [attr.colspan]="columns.length" class="text-center">
+                                        {{'general.noRecords'|translate}}
+                                    </td>
+                                </tr>
+                            </ng-container>
                         </ng-template>
                     </p-table>
                 </div>

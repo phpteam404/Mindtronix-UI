@@ -71,7 +71,10 @@ export class SchoolViewComponent implements OnInit {
     amount:new FormControl(''),
     comments: new FormControl('')
   });
-
+  
+  isEmptyTable() {
+    return (this.previouslist.length == 0 ? true : false);
+  }
 
   getMasterDropdown(masterKey): any {
     var params = new HttpParams()

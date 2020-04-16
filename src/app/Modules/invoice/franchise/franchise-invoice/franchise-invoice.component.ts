@@ -10,10 +10,7 @@ import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ToasterService } from 'src/app/utils/toaster.service';
 import { LocalStorageService } from 'src/app/utils/local-storage.service';
-interface Filter {
-  label: string,
-  value: string
-}
+
 @Component({
   selector: 'app-franchise-invoice',
   templateUrl: './franchise-invoice.component.html',
@@ -61,7 +58,7 @@ export class FranchiseInvoiceComponent implements OnInit {
 
    
   isEmptyTable() {
-    return (this.franchiseinvoicelist == 0 ? true : false);
+    return (this.totalRecords == 0 ? true : false);
   }
   
   ngOnInit(): void {
