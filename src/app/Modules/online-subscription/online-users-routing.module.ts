@@ -14,7 +14,7 @@ const routes: Routes = [
       canActivate:[AuthGuard],
       data: {
         breadcrumbs: 'View',
-        title:'Online Subscription'
+        title:'Online User'
       }
     }
   ];

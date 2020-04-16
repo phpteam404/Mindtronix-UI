@@ -36,6 +36,7 @@ export class OnlineUsersInvoiceComponent implements OnInit {
   invoiceData:any={};
   listParamRef: LazyLoadEvent;
   showFilters:boolean;  
+  currentMonth:any;
   filterRoles = ["1","6","8","7"];
   constructor(private router: Router, 
               private _route: ActivatedRoute,
@@ -101,7 +102,13 @@ export class OnlineUsersInvoiceComponent implements OnInit {
     if(this.fromDate) params = params.set('from_date', this.fromDate);
     if (this.toDate) params = params.set('to_date', this.toDate);
     if (this.status_id) params = params.set('status_id', this.status_id);
-    if(this.selectedMonth) params= params.set('month',this.selectedMonth);
+    if(this.selectedMonth)
+      params =params.set('month',this.selectedMonth);
+    else
+    {
+      this.currentMonth=new Date().getFullYear().toString() +'-'+'0'+(new Date().getMonth()+1).toString().slice(-2);
+      params =params.set('month',this.currentMonth);
+    }
     this.listParamRef = event;
     this._service.getOnlineUsersInvoiceList(params).subscribe(res => {
       if (res.status) {

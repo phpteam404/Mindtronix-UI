@@ -6,7 +6,6 @@ import { MasterService } from 'src/app/services/master.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-online-users-view',
@@ -49,6 +48,10 @@ export class OnlineUsersViewComponent implements OnInit {
       this.updateForm.reset();
       this.getFields();
   }
+
+  isEmptyTable() {
+    return (this.previouslist == 0 ? true : false);
+  }
   ngOnInit(): void {
     this._ar.paramMap.subscribe(params => {
       this.onlineUserInvoiceId = atob(params['params'].id);
@@ -86,7 +89,6 @@ export class OnlineUsersViewComponent implements OnInit {
   getOnlineUserInvoiceData(onlineUserInvoiceId) {
     var params = new HttpParams().set('onlineuser_invoice_id', onlineUserInvoiceId);
     this._service.getOnlineUsersInvoiceList(params).subscribe(res => {
-      console.log('res info',res);
       if (res.status) {
         this.onlineUserInvoiceObj = res.data.data[0];
         if(this.onlineUserInvoiceObj.paid_date !='0000-00-00 00:00:00'){
@@ -105,7 +107,6 @@ export class OnlineUsersViewComponent implements OnInit {
       .set('online_user_id', data)
       .set('onlineuser_invoice_id', id);
     this._service.getPreviousinvoices(params).subscribe(res => {
-      console.log('previous invoices info',res);
       if (res.status) {
         this.previouslist = res.data.data;
       }
@@ -113,8 +114,7 @@ export class OnlineUsersViewComponent implements OnInit {
   }
 
   viewPreviousInvoices(data: any) {
-    console.log('saleem **',data);
-    var params = new HttpParams().set('online_user_invoice_id', data.onlineuser_invoice_id);
+    var params = new HttpParams().set('onlineuser_invoice_id', data.onlineuser_invoice_id);
     this._service.getOnlineUsersInvoiceList(params).subscribe(res => {
       if (res.status) {
         this.onlineUserInvoiceObj = res.data.data[0];
@@ -193,9 +193,7 @@ export class OnlineUsersViewComponent implements OnInit {
       this.updateForm.get('amount').clearValidators();      
       this.updateForm.controls['amount'].updateValueAndValidity();
       this.updateForm.controls['amount'].setValue(null);
-
       this.enableField =false;
     }
   }
-
 }

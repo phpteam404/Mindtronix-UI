@@ -13,7 +13,7 @@ const routes: Routes = [
     component: OnlineUsersViewComponent,
     data: {
       breadcrumbs: 'View',
-      title: 'Online Users invoice details',
+      title: 'Online User invoice details',
       superParentPath: 'invoices'
     }
   }
