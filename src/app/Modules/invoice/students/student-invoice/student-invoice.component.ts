@@ -49,7 +49,7 @@ export class StudentInvoiceComponent implements OnInit {
   });
 
   isEmptyTable() {
-    return (this.invoicelist.length == 0 ? true : false);
+    return (this.totalRecords == 0 ? true : false);
   }
   ngOnInit(): void {
     this.getMasterDropdown('invoice_status');

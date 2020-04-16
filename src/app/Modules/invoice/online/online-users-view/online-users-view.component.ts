@@ -25,7 +25,7 @@ export class OnlineUsersViewComponent implements OnInit {
   onlineUserName:any;
   date:any;
   onlineUserInvoiceObj:any =[];
-  previouslist:any;
+  previouslist: any=[];
   onlineuserId:any;
   onlineInvoiceId:any;
   constructor(private _ar: ActivatedRoute,
@@ -100,8 +100,6 @@ export class OnlineUsersViewComponent implements OnInit {
       }
     });
   }
-
-
   getPreviousInvoiceList(data: any, id: any) {
     var params = new HttpParams()
       .set('online_user_id', data)
@@ -143,7 +141,6 @@ export class OnlineUsersViewComponent implements OnInit {
   updateStatus(): any {
     this.submitted = false;
     if (this.updateForm.valid) {
-      console.log('update from value', this.updateForm.value);
       var params = {};
       params['onlineuser_invoice_id'] = this.onlineUserInvoiceId;
       params['status'] = this.getStatus();
@@ -152,7 +149,6 @@ export class OnlineUsersViewComponent implements OnInit {
       if(this.getAmount())
         params['paid_amount'] = this.getAmount();
       params['comments'] = this.updateForm.value.comments;
-      console.log(params);
       this._service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

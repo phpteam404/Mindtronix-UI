@@ -18,7 +18,7 @@ export class FranchiseViewComponent implements OnInit {
   displayBasic: boolean;
   type: any;
   cols: any;
-  previouslist: any;
+  previouslist: any=[];
   dueDate: any;
   invoiceStatus: any;
   franchiseInvoiceId: any;
@@ -89,7 +89,6 @@ export class FranchiseViewComponent implements OnInit {
   getFranchiseInvoiceData(franchiseInvoiceId) {
     var params = new HttpParams().set('franchise_invoice_id', franchiseInvoiceId);
     this._service.getFranchiseView(params).subscribe(res => {
-      console.log('res info',res);
       if (res.status) {
         this.franchiseInvoiceObj = res.data.data[0];
         this.franchiseId = res.data.data[0].franchise_id;
@@ -130,7 +129,6 @@ export class FranchiseViewComponent implements OnInit {
   updateStatus(): any {
     this.submitted = false;
     if (this.updateForm.valid) {
-      console.log('update from value', this.updateForm.value);
       var params = {};
       params['franchise_invoice_id'] = this.franchiseInvoiceId;
       params['status'] = this.getStatus();
@@ -139,7 +137,6 @@ export class FranchiseViewComponent implements OnInit {
       if(this.getAmount())
         params['paid_amount'] = this.getAmount();
       params['comments'] = this.updateForm.value.comments;
-      console.log(params);
       this._service.updateInvoiceStatus(params).subscribe(res => {
         if (res.status) {
           this.submitted = true;

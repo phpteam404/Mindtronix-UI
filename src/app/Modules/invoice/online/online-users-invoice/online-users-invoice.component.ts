@@ -56,7 +56,7 @@ export class OnlineUsersInvoiceComponent implements OnInit {
   }); 
 
   isEmptyTable() {
-    return (this.onlineusersInvoiceList.length == 0 ? true : false);
+    return (this.totalRecords == 0 ? true : false);
   }
   ngOnInit(): void {
     this.getMasterDropdown('invoice_status');

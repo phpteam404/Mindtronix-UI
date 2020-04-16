@@ -49,7 +49,7 @@ export class SchoolInvoiceComponent implements OnInit {
     });
 
     isEmptyTable() {
-      return (this.schoolInvoicelist.length == 0 ? true : false);
+      return (this.totalRecords == 0 ? true : false);
     }
 
   ngOnInit(): void {
@@ -99,7 +99,6 @@ export class SchoolInvoiceComponent implements OnInit {
     if(this.selectedMonth) params= params.set('month',this.selectedMonth);
     this.listParamRef = event;
     this._service.schoolsInvoiceList(params).subscribe(res => {
-      console.log('result info',res);
       if (res.status) {
         this.cols = res.data.table_headers;
         this.schoolInvoicelist = res.data.data;
@@ -113,7 +112,6 @@ export class SchoolInvoiceComponent implements OnInit {
 
   submit(): any {
     this.submitted = false;
-    console.log('info--',this.filtersForm.value);
     let fromDateSelected = this.filtersForm.get('from_date').value;
     let toDateSelected = this.filtersForm.get('to_date').value;
     if(fromDateSelected != null && toDateSelected == null)

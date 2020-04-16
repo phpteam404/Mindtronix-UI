@@ -19,7 +19,7 @@ export class StudentViewComponent implements OnInit {
   type: any;
   students: any;
   cols: any;
-  previouslist: any;
+  previouslist: any=[];
   dueDate: any;
   invoiceStatus: any;
   StudentInvoiceId: any;
