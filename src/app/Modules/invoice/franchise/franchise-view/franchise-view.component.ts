@@ -6,8 +6,8 @@ import { MasterService } from 'src/app/services/master.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
-
+declare var require:any;
+const FileSaver = require('file-saver');
 @Component({
   selector: 'app-franchise-view',
   templateUrl: './franchise-view.component.html',
@@ -189,6 +189,14 @@ export class FranchiseViewComponent implements OnInit {
 
       this.enableField =false;
     }
+  }
+  downloadPdf(){
+    var params =new HttpParams().set('franchise_invoice_id',this.franchiseInvoiceId);
+    this._service.generateInvoicePdf(params).subscribe(res =>{
+      if(res.status){
+        FileSaver.saveAs(res.data.file_url, res.data.filename); 
+      }
+    })
   }
 
 }

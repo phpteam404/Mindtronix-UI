@@ -82,7 +82,7 @@
                     <button pButton type="submit"  *ngIf="studentInvoiceObj.status !=='Paid'" class="btn-warning" (click)="showBasicDialog(true)" label="Update Status"></button>
                 </span>                
                 <div class="text-center mt-2 invoice-download">
-                   <a href="javascript:;">Invoice Download<i class="icon icon-download-1"></i></a>
+                    <a href="javascript:;" (click)="downloadPDF()">Invoice Download<i class="icon icon-download-1"></i></a>
                 </div>
             </div>
             <div class="custom-static-view mt-3">

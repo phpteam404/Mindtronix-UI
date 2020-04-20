@@ -6,8 +6,8 @@ import { MasterService } from 'src/app/services/master.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-import { LazyLoadEvent, ConfirmationService } from 'primeng/api';
-
+declare var require:any;
+const FileSaver = require('file-saver');
 @Component({
   selector: 'app-student-view',
   templateUrl: './student-view.component.html',
@@ -203,5 +203,13 @@ export class StudentViewComponent implements OnInit {
 
       this.enableField =false;
     }
+  }
+  downloadPDF(){
+    var params = new HttpParams().set('student_invoice_id',this.StudentInvoiceId);
+    this._service.generateInvoicePdf(params).subscribe(res=>{
+      if(res.status){
+        FileSaver.saveAs(res.data.file_url, res.data.filename);
+      }
+    })
   }
 }

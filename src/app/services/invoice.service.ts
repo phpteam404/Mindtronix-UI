@@ -41,4 +41,7 @@ export class InvoiceService {
   getOnlineUsersInvoiceList(params){
     return this.clientHttp.get('Invoice/onlineUserInvoiceList',params);
   }
+  generateInvoicePdf(params){
+    return this.clientHttp.get('GeneratePdfController/generateinvoicepdf',params);
+  }
 }

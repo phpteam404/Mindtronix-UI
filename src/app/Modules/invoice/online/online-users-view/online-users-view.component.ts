@@ -6,7 +6,8 @@ import { MasterService } from 'src/app/services/master.service';
 import { InvoiceService } from 'src/app/services/invoice.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpParams } from '@angular/common/http';
-
+declare var require:any;
+const FileSaver = require('file-saver');
 @Component({
   selector: 'app-online-users-view',
   templateUrl: './online-users-view.component.html',
@@ -191,5 +192,13 @@ export class OnlineUsersViewComponent implements OnInit {
       this.updateForm.controls['amount'].setValue(null);
       this.enableField =false;
     }
+  }
+  downloadPdf(){
+    var params =new HttpParams().set('online_user_invoice_id',this.onlineUserInvoiceId);
+    this._service.generateInvoicePdf(params).subscribe(res =>{
+       if(res.status){
+        FileSaver.saveAs(res.data.file_url, res.data.filename);
+       }
+    })
   }
 }
