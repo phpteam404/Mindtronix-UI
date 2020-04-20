@@ -190,7 +190,7 @@ export class ProfileComponent implements OnInit {
 
    conditionalValidation(){
     var userRole = this._ls.getItem('user',true).data.user_role_id;
-    if(Number(userRole)==1 || Number(userRole)==2 || Number(userRole)==3) {
+    if(Number(userRole)==4 || Number(userRole)==9) {
       this.hideothers=true;
     } else {
       this.hideothers=false;

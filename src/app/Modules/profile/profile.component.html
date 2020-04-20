@@ -104,7 +104,7 @@
                             </div>
                         </div>
                     </p-tabPanel>
-                    <p-tabPanel header="{{'profile.others'|translate}}" *ngIf="!hideothers">
+                    <p-tabPanel header="{{'profile.others'|translate}}" *ngIf="hideothers">
                         <div class="custom-form">
                             <div class="custom-view-content">
                                 <form [formGroup]="othersForm" (ngSubmit)="ifSubmit()">
